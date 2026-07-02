@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "perspective-engine"
+version = "0.1.0"
+description = "LangGraph-orchestrated pipeline for AI-generated narrative perspective-shift videos"
+requires-python = ">=3.13"
+dependencies = [
+    "langgraph>=1.2.7",
+    "langgraph-checkpoint-sqlite>=3.1.0",
+    "pydantic>=2.13.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["graph", "adapters"]
