@@ -9,12 +9,15 @@ Disposable adapter — swap model or provider without touching graph/.
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 import re
 
 import anthropic
+import httpx
 
+from adapters import _cache
 from adapters.llm.base import (
     LLMAdapter,
     QualityCheckResult,
@@ -25,6 +28,11 @@ from adapters.llm.base import (
 DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 _VIDEO_MODEL_SLUG = "bytedance/seedance-2.0/fast/image-to-video"
 
+# Bounded timeout for fetching media ourselves, so Anthropic never has to do a
+# (frequently slow / timing-out) server-side download of fal.ai URLs.
+_IMAGE_FETCH_TIMEOUT_S = 20.0
+_SUPPORTED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/gif", "image/webp"}
+
 
 def _extract_json(text: str) -> str:
     """Strip markdown code fences from Claude's response if present."""
@@ -32,6 +40,37 @@ def _extract_json(text: str) -> str:
     if match:
         return match.group(1)
     return text.strip()
+
+
+async def _fetch_image_block(url: str) -> dict | None:
+    """
+    Download an image and return a base64 Anthropic image content block.
+
+    Returns None if the URL is not fetchable or is not a supported image type
+    (e.g. a video clip URL), so the caller can degrade to a text-only check
+    rather than failing the whole run.
+    """
+    if not url.startswith("https://"):
+        return None
+    try:
+        async with httpx.AsyncClient(timeout=_IMAGE_FETCH_TIMEOUT_S) as client:
+            resp = await client.get(url, follow_redirects=True)
+            resp.raise_for_status()
+    except (httpx.HTTPError, httpx.TimeoutException):
+        return None
+
+    media_type = resp.headers.get("content-type", "").split(";")[0].strip().lower()
+    if media_type not in _SUPPORTED_IMAGE_TYPES:
+        return None
+
+    return {
+        "type": "image",
+        "source": {
+            "type": "base64",
+            "media_type": media_type,
+            "data": base64.standard_b64encode(resp.content).decode("ascii"),
+        },
+    }
 
 
 class AnthropicLLMAdapter(LLMAdapter):
@@ -58,6 +97,12 @@ class AnthropicLLMAdapter(LLMAdapter):
             "Return ONLY valid JSON in exactly this format (no extra text):\n"
             '{"beats": ["beat0_hook", "beat1", "beat2", "beat3", "beat4"]}'
         )
+        cache_key = _cache.make_key(
+            {"role": "write_script", "model": self._model, "topic": topic, "brief": brief}
+        )
+        cached = _cache.load("anthropic_script", cache_key)
+        if cached is not None:
+            return ScriptResult(beats=cached["beats"])
         try:
             response = await self._client.messages.create(
                 model=self._model,
@@ -69,6 +114,7 @@ class AnthropicLLMAdapter(LLMAdapter):
             beats: list[str] = data["beats"]
             if not beats:
                 raise ValueError("Anthropic returned empty beats list.")
+            _cache.store("anthropic_script", cache_key, {"beats": beats})
             return ScriptResult(beats=beats)
         except (anthropic.APIError, anthropic.APIConnectionError) as exc:
             raise RuntimeError(f"Anthropic write_script API error: {exc}") from exc
@@ -93,6 +139,21 @@ class AnthropicLLMAdapter(LLMAdapter):
             '{"shots": [{"id": "shot_000", "prompt": "...", "duration_seconds": 5.0, '
             '"mode": "motion", "assigned_model": "..."}, ...]}'
         )
+        cache_key = _cache.make_key(
+            {
+                "role": "breakdown_shots",
+                "model": self._model,
+                "script": script,
+                "character_descriptor": character_descriptor,
+            }
+        )
+        cached = _cache.load("anthropic_shots", cache_key)
+        if cached is not None:
+            return ShotBreakdownResult(
+                shots=[
+                    ShotBreakdownResult.ShotSpec(**s) for s in cached["shots"]
+                ]
+            )
         try:
             response = await self._client.messages.create(
                 model=self._model,
@@ -120,6 +181,22 @@ class AnthropicLLMAdapter(LLMAdapter):
                     mode="motion",
                     assigned_model=_VIDEO_MODEL_SLUG,
                 )
+            _cache.store(
+                "anthropic_shots",
+                cache_key,
+                {
+                    "shots": [
+                        {
+                            "id": s.id,
+                            "prompt": s.prompt,
+                            "duration_seconds": s.duration_seconds,
+                            "mode": s.mode,
+                            "assigned_model": s.assigned_model,
+                        }
+                        for s in shots
+                    ]
+                },
+            )
             return ShotBreakdownResult(shots=shots)
         except (anthropic.APIError, anthropic.APIConnectionError) as exc:
             raise RuntimeError(f"Anthropic breakdown_shots API error: {exc}") from exc
@@ -134,22 +211,18 @@ class AnthropicLLMAdapter(LLMAdapter):
         style_descriptor: str,
         sheet_image_urls: list[str],
     ) -> QualityCheckResult:
-        # Build the vision-capable message if we have HTTPS still URLs.
+        # Build the vision-capable message by fetching images ourselves and
+        # sending them as base64. Passing URLs would make Anthropic's servers
+        # fetch the (slow / large) fal.ai media, which times out. Video clip
+        # URLs and unfetchable URLs are simply skipped (text-only fallback).
         content: list[dict] = []
-        if still_url.startswith("https://"):
-            content.append(
-                {
-                    "type": "image",
-                    "source": {"type": "url", "url": still_url},
-                }
-            )
-        if sheet_image_urls and sheet_image_urls[0].startswith("https://"):
-            content.append(
-                {
-                    "type": "image",
-                    "source": {"type": "url", "url": sheet_image_urls[0]},
-                }
-            )
+        still_block = await _fetch_image_block(still_url)
+        if still_block is not None:
+            content.append(still_block)
+        if sheet_image_urls:
+            sheet_block = await _fetch_image_block(sheet_image_urls[0])
+            if sheet_block is not None:
+                content.append(sheet_block)
 
         text_part = (
             f"Quality-check shot '{shot_id}'.\n"

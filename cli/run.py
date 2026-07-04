@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import sys
 from typing import Any
 
@@ -124,7 +125,15 @@ def _prompt_resume(iv: dict) -> dict:
 # ── Main pipeline runner ────────────────────────────────────────────────────
 
 
-async def main(topic: str) -> None:
+async def main(topic: str, use_cache: bool = True) -> None:
+    # Adapters read ADAPTER_CACHE from the environment at call time, so setting
+    # it here (before the graph runs) is enough to toggle the disk cache.
+    if not use_cache:
+        os.environ["ADAPTER_CACHE"] = "0"
+        print("Adapter cache DISABLED — every provider call will spend credits.")
+    else:
+        os.environ.setdefault("ADAPTER_CACHE", "1")
+
     print(f"\nPerspective Engine — topic: {topic!r}")
     print("Building adapters and compiling graph …")
 
@@ -175,7 +184,7 @@ async def main(topic: str) -> None:
 # ── CLI argument parsing ────────────────────────────────────────────────────
 
 
-def _parse_args() -> str:
+def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog="python -m cli.run",
         description="Perspective Engine — produce a perspective-shift video from a topic.",
@@ -191,12 +200,21 @@ def _parse_args() -> str:
         metavar="TOPIC",
         help="Topic for the video (named flag).",
     )
+    parser.add_argument(
+        "--no-cache",
+        action="store_true",
+        help=(
+            "Bypass the adapter disk cache and make fresh (paid) provider "
+            "calls. By default cached results are reused to avoid re-spending."
+        ),
+    )
     args = parser.parse_args()
-    topic = args.topic or args.topic_flag
-    if not topic:
+    args.topic = args.topic or args.topic_flag
+    if not args.topic:
         parser.error("topic is required — pass it positionally or via --topic.")
-    return topic
+    return args
 
 
 if __name__ == "__main__":
-    asyncio.run(main(_parse_args()))
+    _args = _parse_args()
+    asyncio.run(main(_args.topic, use_cache=not _args.no_cache))

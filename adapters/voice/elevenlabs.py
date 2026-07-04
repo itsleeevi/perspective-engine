@@ -15,6 +15,7 @@ import os
 
 from elevenlabs.client import AsyncElevenLabs
 
+from adapters import _cache
 from adapters.voice.base import VoiceAdapter, VoiceoverResult
 from graph.assets import save_asset
 
@@ -58,18 +59,33 @@ class ElevenLabsVoiceAdapter(VoiceAdapter):
         resolved_voice_id = (
             self._default_voice_id if voice_id == "default" else voice_id
         )
+        total_duration = sum(shot_durations) if shot_durations else 30.0
+
+        cache_key = _cache.make_key(
+            {
+                "model": _DEFAULT_MODEL,
+                "voice_id": resolved_voice_id,
+                "output_format": _OUTPUT_FORMAT,
+                "narration": narration,
+            }
+        )
+        cached = _cache.load("elevenlabs_voiceover", cache_key)
+        if cached is not None:
+            return VoiceoverResult(
+                audio_url=cached["audio_url"],
+                duration_seconds=cached.get("duration_seconds", total_duration),
+            )
 
         try:
-            audio_response = await self._client.text_to_speech.convert(
+            # convert() on AsyncElevenLabs is an async generator — do not await it,
+            # iterate it directly to collect byte chunks.
+            chunks: list[bytes] = []
+            async for chunk in self._client.text_to_speech.convert(
                 text=narration,
                 voice_id=resolved_voice_id,
                 model_id=_DEFAULT_MODEL,
                 output_format=_OUTPUT_FORMAT,
-            )
-
-            # The async client returns an async iterator of byte chunks.
-            chunks: list[bytes] = []
-            async for chunk in audio_response:
+            ):
                 if isinstance(chunk, bytes) and chunk:
                     chunks.append(chunk)
             audio_bytes = b"".join(chunks)
@@ -77,6 +93,12 @@ class ElevenLabsVoiceAdapter(VoiceAdapter):
         except Exception as exc:
             raise RuntimeError(f"ElevenLabs TTS failed: {exc}") from exc
 
-        audio_url = save_asset("audio/voiceover.mp3", audio_bytes)
-        total_duration = sum(shot_durations) if shot_durations else 30.0
+        # Content-addressed filename so a cached entry maps to a file that
+        # still exists on disk across re-runs.
+        audio_url = save_asset(f"audio/voiceover_{cache_key[:16]}.mp3", audio_bytes)
+        _cache.store(
+            "elevenlabs_voiceover",
+            cache_key,
+            {"audio_url": audio_url, "duration_seconds": total_duration},
+        )
         return VoiceoverResult(audio_url=audio_url, duration_seconds=total_duration)

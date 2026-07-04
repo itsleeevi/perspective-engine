@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import fal_client
 
+from adapters import _cache
 from adapters.video_gen.base import VideoGenAdapter, VideoGenResult
 
 _DEFAULT_MODEL = "bytedance/seedance-2.0/fast/image-to-video"
@@ -70,6 +71,25 @@ class FalVideoGenAdapter(VideoGenAdapter):
             if model and model.startswith("bytedance/")
             else _DEFAULT_MODEL
         )
+        duration = _duration_str(duration_seconds)
+
+        # Cache on the exact request params. This is the most expensive call in
+        # the pipeline, so a cache hit here is where the real savings are.
+        cache_key = _cache.make_key(
+            {
+                "endpoint": endpoint,
+                "prompt": prompt,
+                "source_still_url": source_still_url,
+                "duration": duration,
+                "resolution": "720p",
+            }
+        )
+        cached = _cache.load("seedance_clip", cache_key)
+        if cached is not None:
+            return VideoGenResult(
+                clip_url=cached["clip_url"],
+                duration_seconds=cached["duration_seconds"],
+            )
 
         try:
             result = await fal_client.subscribe_async(
@@ -77,7 +97,7 @@ class FalVideoGenAdapter(VideoGenAdapter):
                 arguments={
                     "prompt": prompt,
                     "image_url": source_still_url,
-                    "duration": _duration_str(duration_seconds),
+                    "duration": duration,
                     "resolution": "720p",
                     "generate_audio": False,
                 },
@@ -88,4 +108,9 @@ class FalVideoGenAdapter(VideoGenAdapter):
                 f"fal.ai Seedance video generation failed: {exc}"
             ) from exc
 
+        _cache.store(
+            "seedance_clip",
+            cache_key,
+            {"clip_url": clip_url, "duration_seconds": duration_seconds},
+        )
         return VideoGenResult(clip_url=clip_url, duration_seconds=duration_seconds)
