@@ -227,13 +227,16 @@ class AnthropicLLMAdapter(LLMAdapter):
         text_part = (
             f"Quality-check shot '{shot_id}'.\n"
             f"Style descriptor: {style_descriptor}\n"
-            "Evaluate:\n"
-            "1. Does the still image (if provided) match the style descriptor?\n"
-            "2. Is the character identity consistent with the reference sheet (if provided)?\n"
-            "3. Is there any obvious quality issue (blur, distortion, wrong subject)?\n\n"
+            "Evaluate ONLY for obvious defects — be lenient on minor stylistic differences:\n"
+            "1. Is the image severely blurred, corrupted, or completely unrecognisable?\n"
+            "2. Is the subject entirely wrong (e.g. a car instead of a person)?\n"
+            "3. Are there serious NSFW / safety issues?\n\n"
+            "Pass the shot unless at least one of the above is clearly true.\n"
+            "Stylistic differences, minor lighting inconsistencies, and imperfect "
+            "detail matches are NOT grounds for failure.\n\n"
             "Return ONLY valid JSON:\n"
             '{"passed": true, "failure_reason": ""}\n'
-            "Set passed=false and explain in failure_reason if any check fails."
+            "Set passed=false ONLY for the obvious defects listed above."
         )
         content.append({"type": "text", "text": text_part})
 

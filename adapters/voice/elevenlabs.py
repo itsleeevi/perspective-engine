@@ -19,8 +19,9 @@ from adapters import _cache
 from adapters.voice.base import VoiceAdapter, VoiceoverResult
 from graph.assets import save_asset
 
-# Rachel's voice ID — a well-known ElevenLabs default voice.
-_FALLBACK_VOICE_ID = "21m00Tcm4TlvDq8ikWAM"
+# George — Warm, Captivating Storyteller (verified 2026-07-04).
+# Override via ELEVENLABS_VOICE_ID in .env.
+_FALLBACK_VOICE_ID = "JBFqnCBsd6RMkjVDRZzb"
 _DEFAULT_MODEL = "eleven_multilingual_v2"
 _OUTPUT_FORMAT = "mp3_44100_128"
 

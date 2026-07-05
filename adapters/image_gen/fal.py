@@ -98,7 +98,6 @@ class FalImageGenAdapter(ImageGenAdapter):
 
         style_descriptor = (
             f"{character_description.strip()}. "
-            "Distinctive detail: glowing amber left eye. "
             "Consistent across all angles and lighting conditions."
         )
         _cache.store(
