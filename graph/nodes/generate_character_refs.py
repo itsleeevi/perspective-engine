@@ -16,11 +16,26 @@ from adapters.image_gen.base import ImageGenAdapter
 from graph.state import CharacterRefs, CostEntry, PipelineState
 
 
-_CHARACTER_DESCRIPTION_TEMPLATE = (
-    "Fictional composite character for the story: '{topic}'. "
-    "Not based on any real, named, identifiable person. "
-    "Expressive, distinctive, memorable."
-)
+def _character_description(topic: str) -> str:
+    """
+    Derive a visually grounded character description from the topic.
+
+    The description is used to generate a reference sheet that anchors
+    every shot's visual identity. It must be:
+    - Visually concrete (something FLUX can render as a portrait)
+    - Fictional / composite — no real, named, identifiable people
+    - Specific enough that all shots feel like the same "character"
+
+    For abstract or non-human topics (a photon, a river, gravity) we
+    personify the subject as a stylised humanoid figure whose appearance
+    metaphorically reflects the topic.
+    """
+    return (
+        f"A fictional, visually distinctive protagonist embodying the concept of '{topic}'. "
+        "Stylised humanoid figure. Not based on any real person. "
+        "Expressive face, otherworldly quality, memorable silhouette. "
+        "Consistent appearance across all angles and lighting conditions."
+    )
 
 
 async def generate_character_refs(
@@ -31,7 +46,7 @@ async def generate_character_refs(
 
     Returns a partial state update: ``character_refs``, ``cost_log``.
     """
-    description = _CHARACTER_DESCRIPTION_TEMPLATE.format(topic=state.topic)
+    description = _character_description(state.topic)
     result = await image_gen.generate_reference_sheet(description)
 
     character_refs = CharacterRefs(

@@ -91,9 +91,16 @@ class AnthropicLLMAdapter(LLMAdapter):
             f"Write a 5-beat narrative script for a short video about: {topic}\n\n"
             f"Brief: {brief}\n\n"
             "Rules:\n"
-            "- beats[0] MUST be a punchy hook that grabs attention immediately.\n"
-            "- Make each beat vivid, cinematic, and narration-ready.\n"
-            "- The character is fictional/composite — no real, named, identifiable people.\n\n"
+            "- The entire script is told in FIRST PERSON from the perspective of the "
+            "main subject/hero of the story (e.g. if the topic is 'a photon's journey' "
+            "the narrator IS the photon — 'I was born in the sun's core…').\n"
+            "- beats[0] MUST be a punchy first-person hook that immediately drops the "
+            "viewer inside the hero's experience.\n"
+            "- Each beat advances the hero's journey: origin → challenge → transformation "
+            "→ climax → resolution.\n"
+            "- Write as vivid, visceral narration — what the hero SEES, FEELS, experiences "
+            "moment to moment. Cinematic and sensory.\n"
+            "- The hero is a fictional/composite entity — no real, named, identifiable people.\n\n"
             "Return ONLY valid JSON in exactly this format (no extra text):\n"
             '{"beats": ["beat0_hook", "beat1", "beat2", "beat3", "beat4"]}'
         )
@@ -126,13 +133,19 @@ class AnthropicLLMAdapter(LLMAdapter):
     ) -> ShotBreakdownResult:
         beats_text = "\n".join(f"  [{i}] {b}" for i, b in enumerate(script))
         prompt = (
-            "You are a shot breakdown director. Convert these script beats into a shot list.\n\n"
+            "You are a cinematographer turning a first-person narrative script into "
+            "a shot list for an AI video generator.\n\n"
             f"Script beats:\n{beats_text}\n\n"
             f"Character descriptor: {character_descriptor}\n\n"
             "Rules:\n"
-            f"- shots[0] MUST have mode='motion' and assigned_model='{_VIDEO_MODEL_SLUG}'.\n"
-            "- All other shots MUST have mode='static_pan' and assigned_model='fal-ai/flux/dev'.\n"
-            "- Each prompt must reference the character descriptor for consistency.\n"
+            f"- ALL shots MUST have mode='motion' and assigned_model='{_VIDEO_MODEL_SLUG}'.\n"
+            "- Every shot prompt must be written as an IMMERSIVE FIRST-PERSON POV shot: "
+            "the camera IS the hero's eyes. Use language like 'POV:', 'first-person view:', "
+            "'seen through the hero's eyes:', 'the hero's perspective looking at…'.\n"
+            "- Each prompt must include the character descriptor so visual identity stays "
+            "consistent across shots.\n"
+            "- Prompts must be vivid and specific: describe what the hero sees, the motion, "
+            "the lighting, the environment — NOT what the hero is doing to themselves.\n"
             "- duration_seconds: 5.0 for all shots.\n"
             "- id format: 'shot_000', 'shot_001', etc.\n\n"
             "Return ONLY valid JSON in exactly this format:\n"
@@ -172,15 +185,17 @@ class AnthropicLLMAdapter(LLMAdapter):
                 )
                 for s in data["shots"]
             ]
-            # Enforce: first shot must be motion.
-            if shots and shots[0].mode != "motion":
-                shots[0] = ShotBreakdownResult.ShotSpec(
-                    id=shots[0].id,
-                    prompt=shots[0].prompt,
-                    duration_seconds=shots[0].duration_seconds,
+            # Enforce: all shots must be motion (prompt instructs this; guard against drift).
+            shots = [
+                ShotBreakdownResult.ShotSpec(
+                    id=s.id,
+                    prompt=s.prompt,
+                    duration_seconds=s.duration_seconds,
                     mode="motion",
                     assigned_model=_VIDEO_MODEL_SLUG,
                 )
+                for s in shots
+            ]
             _cache.store(
                 "anthropic_shots",
                 cache_key,
