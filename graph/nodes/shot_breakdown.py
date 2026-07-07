@@ -44,4 +44,8 @@ async def shot_breakdown(state: PipelineState, llm: LLMAdapter) -> dict:
     if not shots:
         raise ValueError("shot_breakdown produced an empty shot list.")
 
+    # Honour the optional shot cap (e.g. --shots 1 for cheap smoke tests).
+    if state.max_shots is not None and state.max_shots > 0:
+        shots = shots[: state.max_shots]
+
     return {"shot_list": shots}

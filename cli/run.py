@@ -37,9 +37,13 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
 
 from adapters.image_gen.fal import FalImageGenAdapter
+from adapters.image_gen.mock import MockImageGenAdapter
 from adapters.llm.anthropic import AnthropicLLMAdapter
+from adapters.llm.mock import MockLLMAdapter
 from adapters.video_gen.fal import FalVideoGenAdapter
+from adapters.video_gen.mock import MockVideoGenAdapter
 from adapters.voice.elevenlabs import ElevenLabsVoiceAdapter
+from adapters.voice.mock import MockVoiceAdapter
 from graph.graph import build_graph
 
 
@@ -125,22 +129,39 @@ def _prompt_resume(iv: dict) -> dict:
 # ── Main pipeline runner ────────────────────────────────────────────────────
 
 
-async def main(topic: str, use_cache: bool = True) -> None:
+async def main(
+    topic: str,
+    use_cache: bool = True,
+    mock: bool = False,
+    max_shots: int | None = None,
+) -> None:
     # Adapters read ADAPTER_CACHE from the environment at call time, so setting
     # it here (before the graph runs) is enough to toggle the disk cache.
-    if not use_cache:
+    if mock:
+        os.environ["ADAPTER_CACHE"] = "0"  # mocks are instant; cache is irrelevant
+    elif not use_cache:
         os.environ["ADAPTER_CACHE"] = "0"
         print("Adapter cache DISABLED — every provider call will spend credits.")
     else:
         os.environ.setdefault("ADAPTER_CACHE", "1")
 
     print(f"\nPerspective Engine — topic: {topic!r}")
-    print("Building adapters and compiling graph …")
 
-    llm = AnthropicLLMAdapter()
-    image_gen = FalImageGenAdapter()
-    video_gen = FalVideoGenAdapter()
-    voice = ElevenLabsVoiceAdapter()
+    if mock:
+        print("Mode: MOCK (no API calls, $0, instant)")
+        llm: Any = MockLLMAdapter()
+        image_gen: Any = MockImageGenAdapter()
+        video_gen: Any = MockVideoGenAdapter()
+        voice: Any = MockVoiceAdapter()
+    else:
+        shots_note = f", limiting to {max_shots} shot(s)" if max_shots else ""
+        print(f"Mode: REAL (live API calls, ~${(max_shots or 5) * 1.2:.2f} est{shots_note})")
+        llm = AnthropicLLMAdapter()
+        image_gen = FalImageGenAdapter()
+        video_gen = FalVideoGenAdapter()
+        voice = ElevenLabsVoiceAdapter()
+
+    print("Building adapters and compiling graph …")
 
     checkpointer = MemorySaver()
     graph = build_graph(
@@ -154,7 +175,10 @@ async def main(topic: str, use_cache: bool = True) -> None:
     config: dict = {"configurable": {"thread_id": "cli-run-main"}}
 
     print("Running pipeline …\n")
-    result = await graph.ainvoke({"topic": topic}, config)
+    initial: dict = {"topic": topic}
+    if max_shots is not None:
+        initial["max_shots"] = max_shots
+    result = await graph.ainvoke(initial, config)
 
     # Interrupt loop — handles both human-review gates.
     while result.get("__interrupt__"):
@@ -208,6 +232,25 @@ def _parse_args() -> argparse.Namespace:
             "calls. By default cached results are reused to avoid re-spending."
         ),
     )
+    parser.add_argument(
+        "--mock",
+        action="store_true",
+        help=(
+            "Use mock adapters — no API calls, no cost, completes in seconds. "
+            "Exercises the full graph including interrupts and assembly. "
+            "Use this for all development and debugging."
+        ),
+    )
+    parser.add_argument(
+        "--shots",
+        type=int,
+        metavar="N",
+        dest="max_shots",
+        help=(
+            "Limit the pipeline to N shots (default: all 5). "
+            "Useful for cheap real-money smoke tests — 1 shot ≈ $1.20."
+        ),
+    )
     args = parser.parse_args()
     args.topic = args.topic or args.topic_flag
     if not args.topic:
@@ -217,4 +260,11 @@ def _parse_args() -> argparse.Namespace:
 
 if __name__ == "__main__":
     _args = _parse_args()
-    asyncio.run(main(_args.topic, use_cache=not _args.no_cache))
+    asyncio.run(
+        main(
+            _args.topic,
+            use_cache=not _args.no_cache,
+            mock=_args.mock,
+            max_shots=_args.max_shots,
+        )
+    )

@@ -138,6 +138,9 @@ class PipelineState(BaseModel):
     # ── Inputs ────────────────────────────────────────────────────────────────
     topic: str = ""
     brief: str = ""
+    # Optional shot count cap. None = use all shots from breakdown.
+    # Set to a small number (e.g. 1) for cheap smoke tests.
+    max_shots: int | None = None
 
     # ── Script ────────────────────────────────────────────────────────────────
     # List of scene beats. First beat is always the hook.
