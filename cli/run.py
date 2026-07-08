@@ -134,6 +134,7 @@ async def main(
     use_cache: bool = True,
     mock: bool = False,
     max_shots: int | None = None,
+    static_only: bool = False,
 ) -> None:
     # Adapters read ADAPTER_CACHE from the environment at call time, so setting
     # it here (before the graph runs) is enough to toggle the disk cache.
@@ -154,8 +155,13 @@ async def main(
         video_gen: Any = MockVideoGenAdapter()
         voice: Any = MockVoiceAdapter()
     else:
-        shots_note = f", limiting to {max_shots} shot(s)" if max_shots else ""
-        print(f"Mode: REAL (live API calls, ~${(max_shots or 5) * 1.2:.2f} est{shots_note})")
+        n = max_shots or 5
+        if static_only:
+            est = f"~${n * 0.03:.2f} (no video, FLUX stills only)"
+        else:
+            est = f"~${n * 1.20:.2f}"
+        shots_note = f", {n} shot(s)" if max_shots else ""
+        print(f"Mode: REAL (live API calls, {est}{shots_note})")
         llm = AnthropicLLMAdapter()
         image_gen = FalImageGenAdapter()
         video_gen = FalVideoGenAdapter()
@@ -178,6 +184,8 @@ async def main(
     initial: dict = {"topic": topic}
     if max_shots is not None:
         initial["max_shots"] = max_shots
+    if static_only:
+        initial["static_only"] = True
     result = await graph.ainvoke(initial, config)
 
     # Interrupt loop — handles both human-review gates.
@@ -251,6 +259,16 @@ def _parse_args() -> argparse.Namespace:
             "Useful for cheap real-money smoke tests — 1 shot ≈ $1.20."
         ),
     )
+    parser.add_argument(
+        "--static",
+        action="store_true",
+        dest="static_only",
+        help=(
+            "Force all shots to static_pan — skips Seedance video generation entirely. "
+            "Uses only FLUX stills + Claude + ElevenLabs. "
+            "With --shots 1: ~$0.10 first run, ~$0.05 on cached re-runs."
+        ),
+    )
     args = parser.parse_args()
     args.topic = args.topic or args.topic_flag
     if not args.topic:
@@ -266,5 +284,6 @@ if __name__ == "__main__":
             use_cache=not _args.no_cache,
             mock=_args.mock,
             max_shots=_args.max_shots,
+            static_only=_args.static_only,
         )
     )

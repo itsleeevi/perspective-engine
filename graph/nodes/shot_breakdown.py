@@ -48,4 +48,12 @@ async def shot_breakdown(state: PipelineState, llm: LLMAdapter) -> dict:
     if state.max_shots is not None and state.max_shots > 0:
         shots = shots[: state.max_shots]
 
+    # --static mode: override all shots to static_pan so no video-gen calls
+    # are made. Costs only FLUX stills + Claude + ElevenLabs (~$0.05/run).
+    if state.static_only:
+        shots = [
+            s.model_copy(update={"mode": ShotMode.static_pan, "assigned_model": "fal-ai/flux/dev"})
+            for s in shots
+        ]
+
     return {"shot_list": shots}

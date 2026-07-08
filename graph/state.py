@@ -141,6 +141,9 @@ class PipelineState(BaseModel):
     # Optional shot count cap. None = use all shots from breakdown.
     # Set to a small number (e.g. 1) for cheap smoke tests.
     max_shots: int | None = None
+    # Force all shots to static_pan (no Seedance video calls).
+    # Combined with max_shots=1: ~$0.05/run after the first run.
+    static_only: bool = False
 
     # ── Script ────────────────────────────────────────────────────────────────
     # List of scene beats. First beat is always the hook.
