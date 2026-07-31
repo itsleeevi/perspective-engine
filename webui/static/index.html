@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Perspective Engine — Review</title>
+<style>
+  :root { color-scheme: dark; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0e0e12; color: #e8e8ec; margin: 0; padding: 2rem;
+    max-width: 780px; margin-inline: auto;
+  }
+  h1 { font-size: 1.3rem; margin-bottom: 0.25rem; }
+  .sub { color: #8a8a95; font-size: 0.85rem; margin-bottom: 1.5rem; }
+  .card {
+    background: #17171d; border: 1px solid #2a2a33; border-radius: 10px;
+    padding: 1.25rem; margin-bottom: 1rem;
+  }
+  .row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  input[type=text] {
+    flex: 1; min-width: 220px; padding: 0.6rem 0.8rem; border-radius: 6px;
+    border: 1px solid #333; background: #0e0e12; color: #e8e8ec; font-size: 0.9rem;
+  }
+  label.opt { display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; color: #b0b0b8; }
+  button {
+    padding: 0.6rem 1.1rem; border-radius: 6px; border: none; font-size: 0.9rem;
+    cursor: pointer; font-weight: 600;
+  }
+  button.primary { background: #4c7cf0; color: white; }
+  button.primary:hover { background: #6390f4; }
+  button.approve { background: #2ea043; color: white; }
+  button.approve:hover { background: #3fb856; }
+  button.reject { background: #d1483c; color: white; }
+  button.reject:hover { background: #e0574a; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .status-pill {
+    display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+  }
+  .status-idle { background: #333; color: #ccc; }
+  .status-running { background: #4c7cf033; color: #8fb2ff; }
+  .status-waiting_review { background: #f0b74c33; color: #ffcf7d; }
+  .status-done { background: #2ea04333; color: #7be89a; }
+  .status-error, .status-aborted { background: #d1483c33; color: #ff9d92; }
+  .beat { margin: 0.4rem 0; padding-left: 0.6rem; border-left: 2px solid #2a2a33; font-size: 0.9rem; line-height: 1.4; }
+  .shot { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #23232b; font-size: 0.85rem; }
+  .shot:last-child { border-bottom: none; }
+  .mono { font-family: ui-monospace, monospace; font-size: 0.8rem; color: #8a8a95; }
+  .actions { display: flex; gap: 0.6rem; margin-top: 1rem; }
+  .hint { color: #6a6a75; font-size: 0.8rem; margin-top: 1rem; }
+  a { color: #8fb2ff; }
+  .empty { color: #6a6a75; font-size: 0.9rem; padding: 1rem 0; text-align: center; }
+</style>
+</head>
+<body>
+  <h1>Perspective Engine — Review</h1>
+  <div class="sub">Browser front-end for the two human-review interrupt gates. Same graph, same adapters as the CLI.</div>
+
+  <div class="card" id="start-card">
+    <div class="row">
+      <input type="text" id="topic" placeholder="Topic, e.g. a photon's journey from the sun" />
+    </div>
+    <div class="row">
+      <label class="opt"><input type="checkbox" id="mock" checked /> mock ($0, instant)</label>
+      <label class="opt"><input type="checkbox" id="static_only" /> static only (skip video-gen)</label>
+      <label class="opt"><input type="checkbox" id="no_cache" /> bypass cache</label>
+      <input type="text" id="max_shots" placeholder="max shots (optional)" style="max-width:140px;" />
+    </div>
+    <div class="row">
+      <button class="primary" id="start-btn">Start run</button>
+      <span id="status-pill" class="status-pill status-idle">idle</span>
+    </div>
+  </div>
+
+  <div class="card" id="review-card" style="display:none;">
+    <div id="review-body"></div>
+    <div class="actions" id="review-actions"></div>
+  </div>
+
+  <div class="card" id="result-card" style="display:none;">
+    <div id="result-body"></div>
+  </div>
+
+  <div class="hint">Polls <span class="mono">/api/state</span> every 1.5s. One run at a time.</div>
+
+<script>
+const pill = document.getElementById('status-pill');
+const reviewCard = document.getElementById('review-card');
+const reviewBody = document.getElementById('review-body');
+const reviewActions = document.getElementById('review-actions');
+const resultCard = document.getElementById('result-card');
+const resultBody = document.getElementById('result-body');
+const startBtn = document.getElementById('start-btn');
+
+function setPill(status) {
+  pill.textContent = status;
+  pill.className = 'status-pill status-' + status;
+}
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderInterrupt(iv) {
+  let html = `<div style="margin-bottom:0.75rem;"><strong>${escapeHtml(iv.gate)}</strong></div>`;
+  html += `<div class="sub" style="margin-bottom:1rem;">${escapeHtml(iv.message)}</div>`;
+
+  if (iv.script) {
+    html += '<div><strong>Script beats</strong></div>';
+    iv.script.forEach((beat, i) => {
+      html += `<div class="beat">[${i}] ${escapeHtml(beat)}</div>`;
+    });
+  }
+  if (iv.shot_list) {
+    html += '<div style="margin-top:0.75rem;"><strong>Shot list</strong></div>';
+    iv.shot_list.forEach(s => {
+      html += `<div class="shot"><span class="mono">${escapeHtml(s.id)} (${escapeHtml(s.mode)})</span><span>${escapeHtml((s.prompt||'').slice(0,70))}</span></div>`;
+    });
+  }
+  if (iv.final_video_path) {
+    html += `<div style="margin-top:0.75rem;"><strong>Final video</strong>: <span class="mono">${escapeHtml(iv.final_video_path)}</span></div>`;
+  }
+  if (iv.metadata) {
+    html += `<div style="margin-top:0.5rem;"><strong>Title</strong>: ${escapeHtml(iv.metadata.title)}</div>`;
+    html += `<div><strong>Description</strong>: ${escapeHtml((iv.metadata.description||'').slice(0,160))}</div>`;
+  }
+  if (iv.shot_summary) {
+    html += '<div style="margin-top:0.75rem;"><strong>Shot summary</strong></div>';
+    iv.shot_summary.forEach(s => {
+      html += `<div class="shot"><span class="mono">${escapeHtml(s.id)}</span><span>${escapeHtml(s.status)} · retries=${s.retries}</span></div>`;
+    });
+  }
+  reviewBody.innerHTML = html;
+  reviewActions.innerHTML = `
+    <button class="approve" id="approve-btn">Approve</button>
+    <button class="reject" id="reject-btn">Reject</button>
+  `;
+  document.getElementById('approve-btn').onclick = () => resume(true);
+  document.getElementById('reject-btn').onclick = () => resume(false);
+}
+
+async function resume(approved) {
+  reviewActions.querySelectorAll('button').forEach(b => b.disabled = true);
+  await fetch('/api/resume', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({approved, edits: []}),
+  });
+}
+
+async function poll() {
+  const res = await fetch('/api/state');
+  const s = await res.json();
+  setPill(s.status);
+
+  if (s.status === 'waiting_review' && s.interrupt) {
+    reviewCard.style.display = 'block';
+    renderInterrupt(s.interrupt);
+  } else {
+    reviewCard.style.display = 'none';
+  }
+
+  if (s.status === 'done' && s.result) {
+    resultCard.style.display = 'block';
+    resultBody.innerHTML = `
+      <div><strong>Pipeline complete</strong></div>
+      <div class="mono" style="margin-top:0.5rem;">Final video: ${escapeHtml(s.result.final_video_path)}</div>
+      <div class="mono">Published at: ${escapeHtml(s.result.last_published_at)}</div>
+    `;
+  } else if (s.status === 'error') {
+    resultCard.style.display = 'block';
+    resultBody.innerHTML = `<div style="color:#ff9d92;"><strong>Error</strong>: ${escapeHtml(s.error)}</div>`;
+  } else if (s.status === 'aborted') {
+    resultCard.style.display = 'block';
+    resultBody.innerHTML = `<div class="empty">Pipeline aborted by reviewer.</div>`;
+  } else {
+    resultCard.style.display = 'none';
+  }
+
+  startBtn.disabled = (s.status === 'running' || s.status === 'waiting_review');
+}
+
+startBtn.onclick = async () => {
+  const topic = document.getElementById('topic').value.trim();
+  if (!topic) { alert('Enter a topic first.'); return; }
+  const maxShotsRaw = document.getElementById('max_shots').value.trim();
+  const body = {
+    topic,
+    mock: document.getElementById('mock').checked,
+    static_only: document.getElementById('static_only').checked,
+    no_cache: document.getElementById('no_cache').checked,
+    max_shots: maxShotsRaw ? parseInt(maxShotsRaw, 10) : null,
+  };
+  const res = await fetch('/api/start', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    alert(err.detail || 'Failed to start run.');
+  }
+};
+
+setInterval(poll, 1500);
+poll();
+</script>
+</body>
+</html>

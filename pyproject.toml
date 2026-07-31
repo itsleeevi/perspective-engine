@@ -15,6 +15,8 @@ dependencies = [
     "anthropic>=0.40.0",
     "elevenlabs>=1.0.0",
     "python-dotenv>=1.0.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
 ]
 
 [project.optional-dependencies]
@@ -28,4 +30,4 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["graph", "adapters", "cli"]
+packages = ["graph", "adapters", "cli", "webui"]
