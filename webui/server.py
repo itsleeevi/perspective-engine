@@ -2,7 +2,7 @@
 Minimal FastAPI review UI for the Perspective Engine pipeline.
 
 Replaces the terminal y/n prompts in ``cli/run.py`` with a browser page.
-Runs the same graph, same adapters, same invariants — this module only
+Runs the same graph, same adapters, same invariants; this module only
 adds a web front-end around the two human-review interrupt gates.
 
 Usage:
@@ -13,7 +13,7 @@ Design:
     A single in-process run at a time (module-level state). The pipeline
     runs in a background asyncio task; when it hits an interrupt(), the
     task blocks on an asyncio.Queue until the browser POSTs a resume
-    decision. This keeps the graph/adapters code completely untouched —
+    decision. This keeps the graph/adapters code completely untouched;
     this module only orchestrates the same ``graph.ainvoke`` /
     ``Command(resume=...)`` calls cli/run.py already makes.
 """
@@ -53,7 +53,7 @@ from graph.graph import build_graph
 
 _STATIC_DIR = Path(__file__).parent / "static"
 
-app = FastAPI(title="Perspective Engine — Review UI")
+app = FastAPI(title="Perspective Engine: Review UI")
 app.mount("/static", StaticFiles(directory=_STATIC_DIR), name="static")
 
 
@@ -198,7 +198,7 @@ async def _run_pipeline(
             "last_published_at": result.get("last_published_at", ""),
         }
         state.status = "done"
-    except Exception as exc:  # noqa: BLE001 — surface any failure to the browser
+    except Exception as exc:  # noqa: BLE001 (surface any failure to the browser)
         state.error = str(exc)
         state.status = "error"
 

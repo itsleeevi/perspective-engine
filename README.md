@@ -1,127 +1,187 @@
 # Perspective Engine
 
-An agentic pipeline that produces short narrative "perspective-shift" videos using AI video generation, orchestrated as a stateful graph with human review checkpoints built into the architecture.
+[![CI](https://github.com/itsleeevi/perspective-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/itsleeevi/perspective-engine/actions/workflows/ci.yml)
 
-The videos take a single viewpoint that is hard to film conventionally (for example "a day in the life of a bee," "a photon's journey from the sun to your eye," "the same morning across two very different lives") and render it as a short narrated piece. The system targets two formats: short-form vertical clips (30-60s) and long-form pieces (8-12 min).
+A stateful AI video orchestration pipeline built with LangGraph.
 
-This repository is the orchestration system, not the rendered media. It is designed as a system rather than a script for two reasons: the work is genuinely graph-shaped (parallel generation, conditional retries, human-in-the-loop gates), and treating it that way keeps each part independently testable and swappable.
+Perspective Engine turns a topic (for example, "a photon's journey from the sun to your eye" or "a day in the life of a bee") into a narrated video through script generation, human approval, character-reference creation, parallel per-shot generation, automated quality checks, bounded retries, voice generation, and final video assembly.
 
-## Design principles
+> **Current status: local prototype.** The complete workflow runs end-to-end with mock adapters ($0, no API calls) and also supports real Anthropic, fal.ai, and ElevenLabs integrations. Video assembly runs on local FFmpeg. Durable cloud infrastructure, a full review dashboard, and Remotion rendering are planned. See [Roadmap](#roadmap).
 
-- **Best tool for the role.** Each dependency is chosen for fit, with a stated reason. If a better-fit option appears, it should replace the incumbent.
-- **Human review is part of the architecture, not an add-on.** Two approval gates pause execution before and after generation. They cannot be bypassed in code.
-- **Identity is generated once and referenced everywhere.** Character consistency across independently generated clips is the hardest problem in AI video storytelling. The pipeline solves it structurally (see Character consistency below), not by hoping per-shot prompts converge.
-- **Cost is a first-class concern.** Most shots default to a cheap rendering path; the expensive path is opt-in per shot and logged.
-- **Provider independence.** Video and language models sit behind adapters so any one of them can be replaced without touching orchestration logic.
+## Highlights
 
-## Tech stack and rationale
+- Stateful LangGraph workflow with checkpointed, resumable execution
+- Two non-bypassable human-approval gates (script and final review)
+- Parallel per-shot generation via LangGraph `Send` fan-out with a fixed-edge fan-in barrier
+- Character-reference workflow that derives every shot from a locked identity sheet, never from a text prompt alone
+- Per-shot quality gate with capped retries that escalate to human review instead of looping forever
+- Provider-independent adapters for LLM, image, video, and voice generation
+- Mock mode for deterministic, free development and testing
+- Real MP4 assembly with FFmpeg (downloads assets, freezes stills into segments, concatenates, mixes narration)
+- 84 automated tests covering control flow, invariants, and state, run on every push via GitHub Actions
 
-The deciding requirements for orchestration are durable checkpointing, human-in-the-loop approval gates, and conditional branching with retries. The stack is chosen against those requirements.
+## Demo
 
-- **Orchestration: LangGraph (Python).** Selected because durable checkpointing, HITL interrupts, and conditional retry/branching are first-class primitives rather than add-ons. Role-based frameworks prototype faster but trade away the execution control and observability this pipeline depends on; single-vendor agent SDKs would lock model choice, which conflicts with per-shot model routing.
-- **Observability: LangSmith.** Model- and framework-agnostic tracing of every node call, retry, and interrupt. A multi-node graph with parallel branches is impractical to debug blind.
-- **Backend: FastAPI.** Async-native, integrates cleanly with the graph.
-- **Compute: Modal.** Serverless functions per stage, suited to bursty parallel generation.
-- **State / persistence: Neon (serverless Postgres).** Application state and the LangGraph checkpointer.
-- **Object storage: Cloudflare R2.** S3-compatible, no egress fees, for generated media. State stores asset URLs, not binaries.
-- **Video generation: fal.ai (model router).** A single API surface over multiple current video models, so per-shot model selection is a parameter rather than a separate integration per vendor. Image-to-video capability is a hard requirement for any model wired here (see Character consistency).
-- **Reference images: Flux, with an A/B against an alternate image model for the character-consistency step,** where identity stability across edits matters most. This choice is empirical: the model that best holds a locked identity across pose and scene changes wins the role.
-- **Voice: ElevenLabs.** Narration quality and multilingual support.
-- **Script / shot-breakdown LLM: provider-agnostic via an adapter** (Claude or GPT-class). The quality gap for structured script generation is small; the adapter keeps it swappable.
-- **Quality gate: a vision-capable LLM call** checking both technical quality and character identity against the reference sheet, rather than a bespoke CV model.
-- **Assembly: Remotion.** Programmatic video composition (clips, voiceover, captions, pans over stills).
-- **Publishing: YouTube Data API v3.**
-- **Review UI: Next.js** (minimal approval surface for the two gates).
-- **CI: GitHub Actions.**
+Recorded against the browser review UI in mock mode: no API calls, no cost.
 
-Model and provider names move quickly. Verify current model identifiers and pricing before wiring any adapter.
+![Perspective Engine workflow demo](./docs/images/perspective-engine-demo.gif)
 
-## Character consistency
+## Quick Start
 
-A story is only composite if the character is recognizably the same across every shot. Nothing in current video models guarantees this from text prompts alone, so the pipeline enforces it in four layers:
+Requires Python 3.13+ and `ffmpeg` on `PATH`.
 
-1. **Character reference sheet.** Before any video generation, `generate_character_refs` produces a model sheet: the character from multiple angles, expressions, and lighting conditions, generated as a consistent set (the same technique traditional animation uses to keep characters on-model). The sheet is human-approved and stored in state as the identity anchor for the entire run.
-2. **Image-to-video, never text-to-video.** Shots are not generated from text descriptions of the character. For each shot, a per-shot still of the locked character in the required pose/setting is first derived from the reference sheet (via the image model's reference/edit capability), then the clip is animated from that still. The pattern is `locked identity -> per-shot still -> clip`, with a still as the consistency bridge at every step. The video model animates motion; it never reinvents the character.
-3. **Identity check in the quality gate.** `quality_gate` compares each generated clip against the reference sheet using a vision-capable LLM: same character, or drift? Off-model shots fail the gate and route through the capped retry path, then escalate to human review. Consistency becomes a measured, logged property of each run, not an eyeball judgment at the end.
-4. **Persistent style descriptor.** `character_refs` carries a fixed text descriptor alongside the images, including one deliberately distinctive identifying detail, appended to every shot prompt. Images anchor identity; the descriptor stops prompts drifting, and the distinctive detail gives both the model and the identity check a concrete feature to hold.
+```bash
+git clone https://github.com/itsleeevi/perspective-engine.git
+cd perspective-engine
 
-Residual drift is expected with current models; the design goal is that it is caught automatically, retried, and escalated before assembly rather than discovered in the final export.
+python -m venv .venv
+source .venv/bin/activate
 
-## Architecture
+pip install -e ".[dev]"
 
-State is a single typed object (Pydantic) threaded through the graph:
+python -m cli.run --mock "a photon's journey from the sun to your eye"
+```
 
-- `topic`, `brief`
-- `script`: scene beats, with the opening beat tagged as the hook
-- `shot_list`: per shot, an id, prompt, duration, `mode` (`motion` = real video generation, `static_pan` = animated still, the primary cost lever), assigned model, status, retry count, asset URL
-- `character_refs`: reference sheet image URLs, per-shot derived stills, and the persistent style descriptor
-- `voiceover_url`, `music_url`, `final_video_path`
-- `metadata`: title, description, tags, thumbnail, and a synthetic-content disclosure flag (always set)
-- `cost_log`: running spend per node
-- `human_edits_log`: changes made at each review gate (quality control and audit trail)
+Mock mode runs the complete workflow (script, review gates, parallel shot generation, quality gates, assembly) without any API calls or provider cost, approving both gates from the terminal.
 
-Nodes, in order:
+Prefer a browser? The same graph and adapters are also exposed through a lightweight review UI:
 
-1. `ideate`: select or propose a topic. Validates that the subject is not a real, named, identifiable person.
-2. `write_script`: generates the script, hook line first.
-3. `shot_breakdown`: turns the script into the shot list, tags each shot's render mode, assigns a model.
-4. `human_review_script`: **interrupt.** Pauses for approval/edit before any paid generation. Not auto-approvable.
-5. `generate_character_refs`: generates the character reference sheet and style descriptor; the identity anchor for the run.
-6. `generate_shots`: fan-out. For each shot: derive a per-shot still from the reference sheet, then animate the clip from that still with the shot's assigned model.
-7. `quality_gate`: per-shot check covering technical quality and identity match against the reference sheet. Pass continues; fail retries (capped); repeated failure escalates to human. No infinite loops.
-8. fan-in once all shots clear.
-9. `generate_voiceover`: TTS aligned to shot timings.
-10. `assemble`: composes clips, stills, audio, and captions into the final cut.
-11. `generate_metadata`: title, description, tags, thumbnail; sets the disclosure flag.
-12. `human_review_final`: **interrupt.** Final approval before publish.
-13. `publish`: uploads, respecting a hard-coded cadence cap.
+```bash
+python -m webui.server
+# open http://localhost:8765
+```
 
-Persistence uses the LangGraph checkpointer backed by Postgres, so a run can pause at a review gate and resume later without re-running already-completed steps.
+Run the test suite:
 
-## Invariants
+```bash
+pytest tests/ -v
+```
 
-These are enforced in code, not just documented:
+## Workflow
 
-- No real, named, identifiable people as video subjects, validated at `ideate`.
-- The synthetic-content disclosure flag is always set at publish.
-- Every shot is tagged `motion` or `static_pan`, defaulting to `static_pan`.
-- Every `motion` shot is generated from a derived still, never directly from text.
-- Per-shot retries are capped, then escalate to human review.
-- Publish cadence is rate-limited in code.
-- Both human-review interrupts are non-bypassable by any code path.
+```mermaid
+flowchart LR
+    A[Topic] --> B[Write Script]
+    B --> C[Shot Breakdown]
+    C --> D{Human Review}
+    D --> E[Character References]
 
-## Repository layout
+    E --> F1[Process Shot 1]
+    E --> F2[Process Shot 2]
+    E --> F3[Process Shot N]
+
+    F1 --> G[Fan In]
+    F2 --> G
+    F3 --> G
+
+    G --> H[Voiceover]
+    H --> I[Assemble Video]
+    I --> J[Generate Metadata]
+    J --> K{Final Review}
+    K --> L[Publish]
+```
+
+Each shot is processed independently: derive a still anchored to the character reference sheet, generate or animate the shot, check quality and identity, retry failures up to a fixed cap, and escalate repeated failures for human review. `process_shot` is dispatched once per shot via LangGraph's `Send` primitive; a fixed (non-conditional) edge back to `generate_voiceover` acts as the fan-in barrier, so voiceover generation only starts once every shot has finished, regardless of completion order.
+
+For the full node list, state schema, and the reasoning behind the fan-out/fan-in and still-first design, see [`docs/architecture.md`](docs/architecture.md).
+
+## Implemented Today
+
+| Area | Current implementation |
+|---|---|
+| Orchestration | LangGraph state graph (fan-out/fan-in, conditional routing, interrupts) |
+| State | Typed Pydantic models (`graph/state.py`), single source of truth threaded through every node |
+| Checkpointing | In-memory (tests) and local SQLite (`graph/checkpointer.py`) |
+| LLM | Anthropic Claude (Haiku 4.5) and mock adapters |
+| Image | fal.ai FLUX.1 [dev] (reference sheet + per-shot stills) and mock adapters |
+| Video | fal.ai Seedance 2.0 Fast, image-to-video only, and mock adapters |
+| Voice | ElevenLabs (multilingual v2) and mock adapters |
+| Review | CLI prompts (`cli/run.py`) and a browser UI (`webui/`); same graph, same adapters |
+| Assembly | Local FFmpeg composition: downloads assets, freezes stills, concatenates, mixes narration |
+| Testing | Pytest, 84 tests, run on Python 3.13 via GitHub Actions on every push |
+
+## Roadmap
+
+- Postgres-backed durable checkpoints (Neon)
+- Cloudflare R2 asset storage (state stores URLs, not binaries)
+- LangSmith tracing across nodes, retries, and interrupts
+- Serverless execution per stage (Modal)
+- Remotion rendering (captions, transitions, motion graphics) replacing the current FFmpeg assembly
+- Full Next.js review dashboard replacing the lightweight browser UI
+- Rate-limited YouTube publishing via the Data API v3
+
+The current `assemble` node already does the real work; it isn't a stub. It downloads every fal.ai-hosted asset, turns static-pan stills into video segments, concatenates all shots in order, and mixes in the ElevenLabs narration, all via FFmpeg. Remotion is the planned upgrade for captions and motion graphics, not a replacement for missing functionality. Full provider-by-provider rationale for each roadmap item lives in [`docs/provider-decisions.md`](docs/provider-decisions.md).
+
+## Character Consistency
+
+Generating each shot independently causes a character's appearance to drift: video and image models are stateless, so identical prompts still produce different-looking "same" characters across clips.
+
+Perspective Engine avoids this structurally rather than by writing better prompts:
+
+1. Generate and human-approve one character reference sheet (`generate_character_refs`), the identity anchor for the whole run.
+2. Derive each shot's starting image from that reference sheet, never from a raw prompt.
+3. Generate video from the derived still (image-to-video only), never directly from text.
+4. Compare each generated shot against the reference sheet during the quality gate.
+5. Retry failures up to a fixed cap, then escalate repeated identity drift for human review.
+
+The still-first rule is enforced in code at two layers (`graph/validation.py` and the video adapter contract), not just documented. See [`docs/architecture.md`](docs/architecture.md#character-consistency-in-depth) for the full four-layer breakdown and [`docs/decisions/0001-core-architecture.md`](docs/decisions/0001-core-architecture.md) for why prompt-based consistency doesn't work.
+
+## Testing
+
+The test suite verifies orchestration logic without requiring paid model calls: everything runs against mock adapters and an in-memory checkpointer.
+
+Coverage includes:
+
+- Full mocked execution from `ideate` to `publish` through both review gates (`test_graph_e2e.py`)
+- Both human-review interrupt gates, including pause/resume and rejection (`test_interrupts.py`)
+- Parallel shot fan-out and fan-in correctness, order-independence (`test_fanout.py`)
+- Retry caps and escalation to human review (`test_retry_cap.py`)
+- The still-first invariant: a motion shot without a derived still is rejected before any video call (`test_still_first.py`)
+- Real-person subject rejection and synthetic-content disclosure enforcement (`test_invariants.py`)
+- Typed state defaults, validation, and the shot-list merge reducer (`test_state.py`)
+
+## What I Built
+
+- A typed Pydantic state model shared across the entire workflow, with a custom reducer for merging parallel shot updates
+- A LangGraph pipeline with `Send`-based parallel fan-out and a deterministic fan-in barrier
+- Two resumable human-in-the-loop interrupts that no code path can bypass, skip, or auto-approve
+- Provider-independent adapter interfaces for LLM, image, video, and voice generation, each with a real and a mock implementation
+- A character-reference and identity-quality workflow designed to structurally prevent drift across independently generated clips
+- Bounded per-shot retry logic that escalates to human review instead of looping indefinitely
+- CLI and browser interfaces for approving interrupted runs against the same graph and adapters
+- Real local video composition with FFmpeg: asset download, still-to-video conversion, concatenation, and audio mixing
+- 84 tests covering control flow, safety invariants, retries, and state behavior, enforced in CI
+
+## Repository Layout
 
 ```
 perspective-engine/
-├── graph/              # LangGraph: state schema, nodes, edges
-│   ├── state.py
-│   ├── nodes/
-│   └── graph.py
-├── adapters/           # provider clients (video, image, voice, llm) behind common interfaces
-│   ├── video_gen/
-│   ├── image_gen/
-│   ├── voice/
-│   └── llm/
-├── assembly/           # Remotion composition project
-├── api/                # FastAPI service
-├── dashboard/          # Next.js review UI
-├── tests/
-├── .github/workflows/
-├── .env.example
-├── AGENTS.md
-└── README.md           # this file
+├── graph/               # durable code: state schema, nodes, edges, control flow
+│   ├── state.py         # PipelineState, single source of truth
+│   ├── validation.py    # hard invariants (still-first, real-person guard, disclosure)
+│   ├── config.py        # retry caps, publish cadence
+│   ├── checkpointer.py  # memory / SQLite checkpointer factories
+│   ├── graph.py         # build_graph(): wires nodes, edges, fan-out/fan-in, interrupts
+│   └── nodes/           # one module per graph node
+├── adapters/            # disposable code: provider clients behind common interfaces
+│   ├── llm/             # Anthropic + mock
+│   ├── image_gen/       # fal.ai FLUX + mock
+│   ├── video_gen/       # fal.ai Seedance + mock
+│   └── voice/           # ElevenLabs + mock
+├── cli/                 # terminal entrypoint, handles both review gates via prompts
+├── webui/               # FastAPI + static browser front-end for the same gates
+├── tests/               # control-flow, invariant, and state tests (pytest)
+├── docs/                # architecture, provider rationale, roadmap, decision records
+├── assets/              # local asset store (refs, stills, clips, audio, output)
+├── .github/workflows/   # CI
+├── AGENTS.md            # working contract for AI coding agents on this repo
+└── README.md
 ```
 
-## Development phases
+## Further Reading
 
-The build is sequenced to defer paid infrastructure until the core loop is proven.
-
-- **Phase 1, local only.** Full state schema, node logic, and control flow (fan-out, retry, interrupts), run locally with an in-memory/SQLite checkpointer, local-filesystem assets, and mocked model calls. The goal is correct control flow, covered by tests. No external services.
-- **Phase 2, one real video, still local.** Real but inexpensive providers behind the adapters; the full graph triggered from the CLI to produce a single end-to-end video, with the two gates approved from the terminal. Includes the empirical image-model A/B for the character-consistency role.
-- **Phase 3, durable infrastructure.** Migrate the checkpointer to Postgres and assets to object storage, add the review UI, move compute to serverless functions, and enable tracing.
-- **Phase 4, scheduling.** Automated triggers for the steps suitable for automation, within the cadence cap.
-
-## Working with AI coding agents
-
-This README is the spec; `AGENTS.md` holds the working constraints loaded each session. `graph/` is durable code and is tested and reviewed carefully; `adapters/` is intentionally swappable. Plan before implementing changes to orchestration logic.
+- [`docs/architecture.md`](docs/architecture.md): full node list, state schema, invariants
+- [`docs/provider-decisions.md`](docs/provider-decisions.md): why each provider was chosen, with alternatives considered
+- [`docs/roadmap.md`](docs/roadmap.md): the phased build plan from local prototype to durable infrastructure
+- [`docs/decisions/0001-core-architecture.md`](docs/decisions/0001-core-architecture.md): ADR covering LangGraph vs. alternatives, the still-first rule, and structural identity consistency
+- [`AGENTS.md`](AGENTS.md): the operational contract this repo is built against, read by AI coding agents at the start of every session

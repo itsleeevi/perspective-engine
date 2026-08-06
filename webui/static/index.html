@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Perspective Engine — Review</title>
+<title>Perspective Engine: Review</title>
 <style>
   :root { color-scheme: dark; }
   body {
@@ -16,7 +16,7 @@
     background: #17171d; border: 1px solid #2a2a33; border-radius: 10px;
     padding: 1.25rem; margin-bottom: 1rem;
   }
-  .row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  .row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
   input[type=text] {
     flex: 1; min-width: 220px; padding: 0.6rem 0.8rem; border-radius: 6px;
     border: 1px solid #333; background: #0e0e12; color: #e8e8ec; font-size: 0.9rem;
@@ -34,7 +34,11 @@
   button.reject:hover { background: #e0574a; }
   button:disabled { opacity: 0.5; cursor: not-allowed; }
   .status-pill {
-    display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px;
+    display: inline-flex; align-items: center; justify-content: center;
+    /* letter-spacing adds a trailing gap after the last glyph; the extra
+       left padding compensates so the label reads as optically centred. */
+    padding: 0.3rem 0.6rem 0.3rem calc(0.6rem + 0.03em);
+    border-radius: 999px; line-height: 1;
     font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
   }
   .status-idle { background: #333; color: #ccc; }
@@ -53,7 +57,7 @@
 </style>
 </head>
 <body>
-  <h1>Perspective Engine — Review</h1>
+  <h1>Perspective Engine: Review</h1>
   <div class="sub">Browser front-end for the two human-review interrupt gates. Same graph, same adapters as the CLI.</div>
 
   <div class="card" id="start-card">
