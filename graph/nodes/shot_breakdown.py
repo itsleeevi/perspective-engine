@@ -9,14 +9,14 @@ only shots explicitly tagged 'motion' incur video-generation costs.
 from __future__ import annotations
 
 from adapters.llm.base import LLMAdapter
-from graph.state import PipelineState, Shot, ShotMode
+from graph.state import CostEntry, PipelineState, Shot, ShotMode
 
 
 async def shot_breakdown(state: PipelineState, llm: LLMAdapter) -> dict:
     """
     Build the shot list from the script.
 
-    Returns a partial state update: ``shot_list``.
+    Returns a partial state update: ``shot_list``, ``cost_log``.
     """
     result = await llm.breakdown_shots(
         script=state.script,
@@ -56,4 +56,5 @@ async def shot_breakdown(state: PipelineState, llm: LLMAdapter) -> dict:
             for s in shots
         ]
 
-    return {"shot_list": shots}
+    cost = CostEntry(node="shot_breakdown", provider="llm", amount_usd=result.cost_usd)
+    return {"shot_list": shots, "cost_log": [cost]}

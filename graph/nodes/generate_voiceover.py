@@ -28,5 +28,5 @@ async def generate_voiceover(state: PipelineState, voice: VoiceAdapter) -> dict:
         script_beats=state.script,
         shot_durations=durations,
     )
-    cost = CostEntry(node="generate_voiceover", provider="voice", amount_usd=0.0)
+    cost = CostEntry(node="generate_voiceover", provider="voice", amount_usd=result.cost_usd)
     return {"voiceover_url": result.audio_url, "cost_log": [cost]}

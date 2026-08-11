@@ -54,5 +54,7 @@ async def generate_character_refs(
         style_descriptor=result.style_descriptor,
     )
 
-    cost = CostEntry(node="generate_character_refs", provider="image_gen", amount_usd=0.0)
+    cost = CostEntry(
+        node="generate_character_refs", provider="image_gen", amount_usd=result.cost_usd
+    )
     return {"character_refs": character_refs, "cost_log": [cost]}

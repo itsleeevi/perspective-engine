@@ -93,7 +93,7 @@ async def quality_gate(state, llm: LLMAdapter) -> dict:
                 }
             )
 
-    cost = CostEntry(node="quality_gate", provider="llm", amount_usd=0.0)
+    cost = CostEntry(node="quality_gate", provider="llm", amount_usd=result.cost_usd)
     return {"shot_list": [shot], "cost_log": [cost]}
 
 

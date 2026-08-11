@@ -193,9 +193,15 @@ async def _run_pipeline(
 
             result = await graph.ainvoke(Command(resume=resume_payload), config)
 
+        cost_log = result.get("cost_log", [])
+        total_cost = sum(
+            entry.get("amount_usd", 0.0) if isinstance(entry, dict) else entry.amount_usd
+            for entry in cost_log
+        )
         state.result = {
             "final_video_path": result.get("final_video_path", ""),
             "last_published_at": result.get("last_published_at", ""),
+            "total_cost_usd": round(total_cost, 4),
         }
         state.status = "done"
     except Exception as exc:  # noqa: BLE001 (surface any failure to the browser)

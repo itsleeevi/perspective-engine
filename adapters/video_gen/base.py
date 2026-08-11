@@ -19,6 +19,8 @@ class VideoGenResult:
     clip_url: str
     """URL of the generated video clip."""
     duration_seconds: float
+    cost_usd: float = 0.0
+    """Real provider spend for this call. 0.0 for mocks and cache hits."""
 
 
 class VideoGenAdapter(ABC):

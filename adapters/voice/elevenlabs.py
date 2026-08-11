@@ -15,7 +15,7 @@ import os
 
 from elevenlabs.client import AsyncElevenLabs
 
-from adapters import _cache
+from adapters import _cache, pricing
 from adapters.voice.base import VoiceAdapter, VoiceoverResult
 from graph.assets import save_asset
 
@@ -72,9 +72,11 @@ class ElevenLabsVoiceAdapter(VoiceAdapter):
         )
         cached = _cache.load("elevenlabs_voiceover", cache_key)
         if cached is not None:
+            # A cache hit makes no new API call, so this run spends $0 here.
             return VoiceoverResult(
                 audio_url=cached["audio_url"],
                 duration_seconds=cached.get("duration_seconds", total_duration),
+                cost_usd=0.0,
             )
 
         try:
@@ -102,4 +104,7 @@ class ElevenLabsVoiceAdapter(VoiceAdapter):
             cache_key,
             {"audio_url": audio_url, "duration_seconds": total_duration},
         )
-        return VoiceoverResult(audio_url=audio_url, duration_seconds=total_duration)
+        cost_usd = pricing.elevenlabs_tts_cost(len(narration))
+        return VoiceoverResult(
+            audio_url=audio_url, duration_seconds=total_duration, cost_usd=cost_usd
+        )

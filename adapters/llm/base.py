@@ -18,6 +18,8 @@ class ScriptResult:
 
     beats: list[str]
     """Scene beats in order. beats[0] is always the hook."""
+    cost_usd: float = 0.0
+    """Real provider spend for this call. 0.0 for mocks and cache hits."""
 
 
 @dataclass
@@ -33,6 +35,8 @@ class ShotBreakdownResult:
         assigned_model: str
 
     shots: list[ShotSpec]
+    cost_usd: float = 0.0
+    """Real provider spend for this call. 0.0 for mocks and cache hits."""
 
 
 @dataclass
@@ -41,6 +45,8 @@ class QualityCheckResult:
 
     passed: bool
     failure_reason: str = ""
+    cost_usd: float = 0.0
+    """Real provider spend for this call. 0.0 for mocks and cache hits."""
 
 
 class LLMAdapter(ABC):

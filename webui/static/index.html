@@ -170,6 +170,7 @@ async function poll() {
       <div><strong>Pipeline complete</strong></div>
       <div class="mono" style="margin-top:0.5rem;">Final video: ${escapeHtml(s.result.final_video_path)}</div>
       <div class="mono">Published at: ${escapeHtml(s.result.last_published_at)}</div>
+      <div class="mono">Total cost: $${Number(s.result.total_cost_usd || 0).toFixed(4)}</div>
     `;
   } else if (s.status === 'error') {
     resultCard.style.display = 'block';

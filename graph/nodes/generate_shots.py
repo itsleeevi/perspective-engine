@@ -105,7 +105,11 @@ async def process_shot(
         )
         shot = shot.model_copy(update={"still_url": still_result.still_url})
         cost_entries.append(
-            CostEntry(node="process_shot:still", provider="image_gen", amount_usd=0.0)
+            CostEntry(
+                node="process_shot:still",
+                provider="image_gen",
+                amount_usd=still_result.cost_usd,
+            )
         )
 
         # 2. For motion shots: enforce still-first, then animate.
@@ -119,7 +123,11 @@ async def process_shot(
             )
             shot = shot.model_copy(update={"clip_url": clip_result.clip_url})
             cost_entries.append(
-                CostEntry(node="process_shot:clip", provider="video_gen", amount_usd=0.0)
+                CostEntry(
+                    node="process_shot:clip",
+                    provider="video_gen",
+                    amount_usd=clip_result.cost_usd,
+                )
             )
 
         # 3. Quality check.
@@ -129,7 +137,11 @@ async def process_shot(
             llm=llm,
         )
         cost_entries.append(
-            CostEntry(node="process_shot:quality", provider="llm", amount_usd=0.0)
+            CostEntry(
+                node="process_shot:quality",
+                provider="llm",
+                amount_usd=qc_result.cost_usd,
+            )
         )
 
         if qc_result.passed:

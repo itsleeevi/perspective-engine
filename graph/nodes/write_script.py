@@ -7,7 +7,7 @@ The first beat in the returned script is always the hook (opening line).
 from __future__ import annotations
 
 from adapters.llm.base import LLMAdapter
-from graph.state import PipelineState
+from graph.state import CostEntry, PipelineState
 
 
 async def write_script(state: PipelineState, llm: LLMAdapter) -> dict:
@@ -16,10 +16,11 @@ async def write_script(state: PipelineState, llm: LLMAdapter) -> dict:
 
     beats[0] is always the hook.
 
-    Returns a partial state update: ``script``.
+    Returns a partial state update: ``script``, ``cost_log``.
     """
     result = await llm.write_script(topic=state.topic, brief=state.brief)
     beats = result.beats
     if not beats:
         raise ValueError("LLM returned an empty script; at least a hook line is required.")
-    return {"script": beats}
+    cost = CostEntry(node="write_script", provider="llm", amount_usd=result.cost_usd)
+    return {"script": beats, "cost_log": [cost]}

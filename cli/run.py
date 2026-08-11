@@ -205,11 +205,17 @@ async def main(
         result = await graph.ainvoke(Command(resume=resume_payload), config)
 
     # Final output.
+    cost_log = result.get("cost_log", [])
+    total_cost = sum(
+        entry.get("amount_usd", 0.0) if isinstance(entry, dict) else entry.amount_usd
+        for entry in cost_log
+    )
     print()
     print("=" * 64)
     print("  Pipeline complete!")
     print(f"  Final video:  {result.get('final_video_path', 'N/A')}")
     print(f"  Published at: {result.get('last_published_at', 'N/A')}")
+    print(f"  Total cost:   ${total_cost:.4f} ({len(cost_log)} billed calls)")
     print("=" * 64)
 
 

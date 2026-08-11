@@ -25,6 +25,8 @@ class ReferenceSheetResult:
     Persistent text descriptor.  Includes at least one deliberately
     distinctive identifying detail for use in all subsequent prompts.
     """
+    cost_usd: float = 0.0
+    """Real provider spend for this call. 0.0 for mocks and cache hits."""
 
 
 @dataclass
@@ -33,6 +35,8 @@ class DerivedStillResult:
 
     still_url: str
     """URL of the derived still, anchored to the reference sheet identity."""
+    cost_usd: float = 0.0
+    """Real provider spend for this call. 0.0 for mocks and cache hits."""
 
 
 class ImageGenAdapter(ABC):

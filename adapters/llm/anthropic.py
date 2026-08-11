@@ -17,7 +17,7 @@ import re
 import anthropic
 import httpx
 
-from adapters import _cache
+from adapters import _cache, pricing
 from adapters.llm.base import (
     LLMAdapter,
     QualityCheckResult,
@@ -109,12 +109,17 @@ class AnthropicLLMAdapter(LLMAdapter):
         )
         cached = _cache.load("anthropic_script", cache_key)
         if cached is not None:
-            return ScriptResult(beats=cached["beats"])
+            # A cache hit makes no new API call, so this run spends $0 here.
+            return ScriptResult(beats=cached["beats"], cost_usd=0.0)
         try:
             response = await self._client.messages.create(
                 model=self._model,
                 max_tokens=1024,
                 messages=[{"role": "user", "content": prompt}],
+            )
+            cost_usd = pricing.claude_haiku_cost(
+                input_tokens=response.usage.input_tokens,
+                output_tokens=response.usage.output_tokens,
             )
             raw = response.content[0].text
             data = json.loads(_extract_json(raw))
@@ -122,7 +127,7 @@ class AnthropicLLMAdapter(LLMAdapter):
             if not beats:
                 raise ValueError("Anthropic returned empty beats list.")
             _cache.store("anthropic_script", cache_key, {"beats": beats})
-            return ScriptResult(beats=beats)
+            return ScriptResult(beats=beats, cost_usd=cost_usd)
         except (anthropic.APIError, anthropic.APIConnectionError) as exc:
             raise RuntimeError(f"Anthropic write_script API error: {exc}") from exc
         except (json.JSONDecodeError, KeyError, ValueError) as exc:
@@ -162,16 +167,22 @@ class AnthropicLLMAdapter(LLMAdapter):
         )
         cached = _cache.load("anthropic_shots", cache_key)
         if cached is not None:
+            # A cache hit makes no new API call, so this run spends $0 here.
             return ShotBreakdownResult(
                 shots=[
                     ShotBreakdownResult.ShotSpec(**s) for s in cached["shots"]
-                ]
+                ],
+                cost_usd=0.0,
             )
         try:
             response = await self._client.messages.create(
                 model=self._model,
                 max_tokens=2048,
                 messages=[{"role": "user", "content": prompt}],
+            )
+            cost_usd = pricing.claude_haiku_cost(
+                input_tokens=response.usage.input_tokens,
+                output_tokens=response.usage.output_tokens,
             )
             raw = response.content[0].text
             data = json.loads(_extract_json(raw))
@@ -212,7 +223,7 @@ class AnthropicLLMAdapter(LLMAdapter):
                     ]
                 },
             )
-            return ShotBreakdownResult(shots=shots)
+            return ShotBreakdownResult(shots=shots, cost_usd=cost_usd)
         except (anthropic.APIError, anthropic.APIConnectionError) as exc:
             raise RuntimeError(f"Anthropic breakdown_shots API error: {exc}") from exc
         except (json.JSONDecodeError, KeyError, ValueError) as exc:
@@ -261,14 +272,23 @@ class AnthropicLLMAdapter(LLMAdapter):
                 max_tokens=512,
                 messages=[{"role": "user", "content": content}],
             )
+            cost_usd = pricing.claude_haiku_cost(
+                input_tokens=response.usage.input_tokens,
+                output_tokens=response.usage.output_tokens,
+            )
             raw = response.content[0].text
             data = json.loads(_extract_json(raw))
             return QualityCheckResult(
                 passed=bool(data.get("passed", True)),
                 failure_reason=data.get("failure_reason", ""),
+                cost_usd=cost_usd,
             )
         except (anthropic.APIError, anthropic.APIConnectionError) as exc:
             raise RuntimeError(f"Anthropic quality_check API error: {exc}") from exc
         except (json.JSONDecodeError, KeyError) as exc:
-            # Fail open on parse errors — let the graph continue.
-            return QualityCheckResult(passed=True, failure_reason="")
+            # Fail open on parse errors, but the call itself still spent money.
+            cost_usd = pricing.claude_haiku_cost(
+                input_tokens=response.usage.input_tokens,
+                output_tokens=response.usage.output_tokens,
+            )
+            return QualityCheckResult(passed=True, failure_reason="", cost_usd=cost_usd)

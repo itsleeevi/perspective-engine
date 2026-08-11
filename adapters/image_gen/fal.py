@@ -19,7 +19,7 @@ import os
 
 import fal_client
 
-from adapters import _cache
+from adapters import _cache, pricing
 from adapters.image_gen.base import (
     DerivedStillResult,
     ImageGenAdapter,
@@ -64,9 +64,11 @@ class FalImageGenAdapter(ImageGenAdapter):
         )
         cached = _cache.load("flux_reference_sheet", cache_key)
         if cached is not None:
+            # A cache hit makes no new API call, so this run spends $0 here.
             return ReferenceSheetResult(
                 image_urls=cached["image_urls"],
                 style_descriptor=cached["style_descriptor"],
+                cost_usd=0.0,
             )
 
         views = [
@@ -100,13 +102,16 @@ class FalImageGenAdapter(ImageGenAdapter):
             f"{character_description.strip()}. "
             "Consistent across all angles and lighting conditions."
         )
+        cost_usd = pricing.flux_image_cost(num_images=len(image_urls))
         _cache.store(
             "flux_reference_sheet",
             cache_key,
             {"image_urls": image_urls, "style_descriptor": style_descriptor},
         )
         return ReferenceSheetResult(
-            image_urls=image_urls, style_descriptor=style_descriptor
+            image_urls=image_urls,
+            style_descriptor=style_descriptor,
+            cost_usd=cost_usd,
         )
 
     async def derive_still(
@@ -139,7 +144,8 @@ class FalImageGenAdapter(ImageGenAdapter):
         )
         cached = _cache.load("flux_derive_still", cache_key)
         if cached is not None:
-            return DerivedStillResult(still_url=cached["still_url"])
+            # A cache hit makes no new API call, so this run spends $0 here.
+            return DerivedStillResult(still_url=cached["still_url"], cost_usd=0.0)
 
         try:
             result = await fal_client.subscribe_async(
@@ -162,4 +168,4 @@ class FalImageGenAdapter(ImageGenAdapter):
             ) from exc
 
         _cache.store("flux_derive_still", cache_key, {"still_url": still_url})
-        return DerivedStillResult(still_url=still_url)
+        return DerivedStillResult(still_url=still_url, cost_usd=pricing.flux_image_cost())

@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import fal_client
 
-from adapters import _cache
+from adapters import _cache, pricing
 from adapters.video_gen.base import VideoGenAdapter, VideoGenResult
 
 _DEFAULT_MODEL = "bytedance/seedance-2.0/fast/image-to-video"
@@ -86,9 +86,11 @@ class FalVideoGenAdapter(VideoGenAdapter):
         )
         cached = _cache.load("seedance_clip", cache_key)
         if cached is not None:
+            # A cache hit makes no new API call, so this run spends $0 here.
             return VideoGenResult(
                 clip_url=cached["clip_url"],
                 duration_seconds=cached["duration_seconds"],
+                cost_usd=0.0,
             )
 
         try:
@@ -113,4 +115,10 @@ class FalVideoGenAdapter(VideoGenAdapter):
             cache_key,
             {"clip_url": clip_url, "duration_seconds": duration_seconds},
         )
-        return VideoGenResult(clip_url=clip_url, duration_seconds=duration_seconds)
+        # Bill on the duration actually sent to the API, not the raw request
+        # value ("auto" falls back to the requested duration as an estimate).
+        billed_seconds = float(duration) if duration != "auto" else duration_seconds
+        cost_usd = pricing.seedance_video_cost(billed_seconds)
+        return VideoGenResult(
+            clip_url=clip_url, duration_seconds=duration_seconds, cost_usd=cost_usd
+        )
