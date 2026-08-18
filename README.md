@@ -6,7 +6,7 @@ A stateful AI video orchestration pipeline built with LangGraph.
 
 Perspective Engine turns a topic (for example, "a photon's journey from the sun to your eye" or "a day in the life of a bee") into a narrated video through script generation, human approval, character-reference creation, parallel per-shot generation, automated quality checks, bounded retries, voice generation, and final video assembly.
 
-> **Current status: local prototype.** The complete workflow runs end-to-end with mock adapters ($0, no API calls) and also supports real Anthropic, fal.ai, and ElevenLabs integrations. Video assembly runs on local FFmpeg. Durable cloud infrastructure, a full review dashboard, and Remotion rendering are planned. See [Roadmap](#roadmap).
+> **Current status: local prototype.** The complete workflow runs end-to-end with mock adapters ($0, no API calls) and also supports real OpenAI, Anthropic, fal.ai, Pollinations, Edge TTS, and ElevenLabs integrations. Video assembly runs on local FFmpeg. Durable cloud infrastructure, a full review dashboard, and Remotion rendering are planned. See [Roadmap](#roadmap).
 
 ## Highlights
 
@@ -18,7 +18,8 @@ Perspective Engine turns a topic (for example, "a photon's journey from the sun 
 - Provider-independent adapters for LLM, image, video, and voice generation
 - Mock mode for deterministic, free development and testing
 - Real MP4 assembly with FFmpeg (downloads assets, freezes stills into segments, concatenates, mixes narration)
-- 84 automated tests covering control flow, invariants, and state, run on every push via GitHub Actions
+- Script fixtures (`graph/script_fixture.py`) that let a reviewed JSON script skip the LLM entirely, plus locally rendered `[TITLE]` cards (`graph/title_cards.py`) for level/rank transitions — no image-model call for title beats
+- 148 automated tests covering control flow, invariants, and state, run on every push via GitHub Actions
 
 ## Demo
 
@@ -87,18 +88,18 @@ For the full node list, state schema, and the reasoning behind the fan-out/fan-i
 
 ## Implemented Today
 
-| Area | Current implementation |
-|---|---|
-| Orchestration | LangGraph state graph (fan-out/fan-in, conditional routing, interrupts) |
-| State | Typed Pydantic models (`graph/state.py`), single source of truth threaded through every node |
-| Checkpointing | In-memory (tests) and local SQLite (`graph/checkpointer.py`) |
-| LLM | Anthropic Claude (Haiku 4.5) and mock adapters |
-| Image | fal.ai FLUX.1 [dev] (reference sheet + per-shot stills) and mock adapters |
-| Video | fal.ai Seedance 2.0 Fast, image-to-video only, and mock adapters |
-| Voice | ElevenLabs (multilingual v2) and mock adapters |
-| Review | CLI prompts (`cli/run.py`) and a browser UI (`webui/`); same graph, same adapters |
-| Assembly | Local FFmpeg composition: downloads assets, freezes stills, concatenates, mixes narration |
-| Testing | Pytest, 84 tests, run on Python 3.13 via GitHub Actions on every push |
+| Area          | Current implementation                                                                       |
+| ------------- | -------------------------------------------------------------------------------------------- |
+| Orchestration | LangGraph state graph (fan-out/fan-in, conditional routing, interrupts)                      |
+| State         | Typed Pydantic models (`graph/state.py`), single source of truth threaded through every node |
+| Checkpointing | In-memory (tests) and local SQLite (`graph/checkpointer.py`)                                 |
+| LLM           | OpenAI (script + storyboard authoring) and Anthropic Claude Haiku (per-shot vision quality check), plus mock adapters |
+| Image         | OpenAI `gpt-image-*` (default stills, chosen for reliable in-scene text), fal.ai FLUX.1 [dev]/[schnell], free Pollinations, and mock adapters |
+| Video         | fal.ai Seedance 2.0 Fast, image-to-video only, and mock adapters                             |
+| Voice         | Free Edge TTS (default) and ElevenLabs (multilingual v2, opt-in), plus mock adapters         |
+| Review        | CLI prompts (`cli/run.py`) and a browser UI (`webui/`); same graph, same adapters            |
+| Assembly      | Local FFmpeg composition: downloads assets, freezes stills, concatenates, mixes narration    |
+| Testing       | Pytest, 148 tests, run on Python 3.13 via GitHub Actions on every push                        |
 
 ## Roadmap
 
@@ -164,10 +165,10 @@ perspective-engine/
 │   ├── graph.py         # build_graph(): wires nodes, edges, fan-out/fan-in, interrupts
 │   └── nodes/           # one module per graph node
 ├── adapters/            # disposable code: provider clients behind common interfaces
-│   ├── llm/             # Anthropic + mock
-│   ├── image_gen/       # fal.ai FLUX + mock
+│   ├── llm/             # OpenAI (authoring) + Anthropic (quality check) + mock
+│   ├── image_gen/       # OpenAI gpt-image-* + fal.ai FLUX + Pollinations + mock
 │   ├── video_gen/       # fal.ai Seedance + mock
-│   └── voice/           # ElevenLabs + mock
+│   └── voice/           # Edge TTS + ElevenLabs + mock
 ├── cli/                 # terminal entrypoint, handles both review gates via prompts
 ├── webui/               # FastAPI + static browser front-end for the same gates
 ├── tests/               # control-flow, invariant, and state tests (pytest)

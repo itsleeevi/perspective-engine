@@ -7,8 +7,9 @@ Deep-dive reference for the graph in `graph/`. For the high-level picture, see t
 `graph/state.py` defines `PipelineState`, a single typed Pydantic object threaded through every node. Nodes read the full state and return a partial update; there are no ad hoc dictionaries passed between nodes.
 
 - `topic`, `brief`: the run's subject and a one-sentence framing, set by `ideate`.
-- `script: list[str]`: scene beats; beat `[0]` is always the hook.
-- `shot_list: list[Shot]`: per shot, an `id`, `prompt`, `duration_seconds`, `mode` (`motion` or `static_pan`, the primary cost lever), `assigned_model`, `still_url`, `clip_url`, `status`, `retry_count`, `escalated`, `quality_failure_reason`. Uses a custom `_merge_shots` reducer so fan-out updates from parallel `process_shot` executions merge back into one list, keyed by shot `id`, order-preserving.
+- `max_shots`, `static_only` (default `True`), `script_fixture_path`, `max_levels`, `include_hook`, `target_minutes`, `hero_career_progression`, `output_height`: run-configuration inputs, all settable from the CLI. `static_only` defaults to `True` because the current format is a still slideshow, not motion video; `script_fixture_path` lets a reviewed JSON fixture (`graph/script_fixture.py`) replace the script LLM call entirely, either explicitly or auto-resolved from the topic.
+- `script: list[str]`: scene beats. On the LLM path beat `[0]` is the hook (unless `include_hook` is `False`); on the fixture path, beats are `[TITLE] Level N: Name` cards interleaved with narration paragraphs.
+- `shot_list: list[Shot]`: per shot, an `id`, `prompt`, `duration_seconds`, `mode` (`motion` or `static_pan`, the primary cost lever), `assigned_model`, `narration` (the beat it illustrates), `is_title_card`, `still_url`, `clip_url`, `status`, `retry_count`, `escalated`, `quality_failure_reason`. Uses a custom `_merge_shots` reducer so fan-out updates from parallel `process_shot` executions merge back into one list, keyed by shot `id`, order-preserving.
 - `character_refs: CharacterRefs`: `sheet_image_urls` (the reference sheet), `style_descriptor` (persistent text anchor with a distinctive identifying detail), `per_shot_stills` (derived still URLs keyed by shot id).
 - `voiceover_url`, `music_url`, `final_video_path`: final asset pointers.
 - `metadata: Metadata`: `title`, `description`, `tags`, `thumbnail_url`, and `synthetic_content_disclosure` (invariant: always `True` by the time `publish` runs).
@@ -19,8 +20,8 @@ Deep-dive reference for the graph in `graph/`. For the high-level picture, see t
 ## Nodes, in order
 
 1. **`ideate`**: validates the topic (rejects real, named, identifiable people via `assert_no_real_person`) and synthesizes a one-sentence brief.
-2. **`write_script`**: LLM call; produces the scene-beat script, hook first.
-3. **`shot_breakdown`**: LLM call; turns the script into the shot list, tags each shot's render mode, assigns a model.
+2. **`write_script`**: produces the scene-beat script. If `script_fixture_path` resolves (explicit or auto-detected from the topic), beats are loaded from the JSON fixture at `$0` cost instead of calling the LLM (`graph/script_fixture.py`).
+3. **`shot_breakdown`**: turns the script into the shot list and assigns a model per shot. A script carrying `[TITLE]` beats (i.e. any fixture-driven script) is broken down deterministically and locally, at `$0`; title beats become local title-card shots (`local-title-card`, rendered by `graph/title_cards.py`, no image-model call) and narration beats get durations derived from word count. Otherwise the LLM proposes the breakdown.
 4. **`human_review_script`**: **interrupt.** Pauses for approval or inline edits before any paid generation call. Raises if rejected; no auto-approve path exists.
 5. **`generate_character_refs`**: generates the reference sheet and style descriptor; the identity anchor for the run.
 6. **`dispatch_shots` → `process_shot` (×N, fan-out via `Send`)**: one sub-execution per shot. Each `process_shot` run derives a still from the reference sheet, animates it (motion shots only), runs the quality/identity check, and retries internally up to `MAX_SHOT_RETRIES` before marking the shot `approved` or `escalated`.

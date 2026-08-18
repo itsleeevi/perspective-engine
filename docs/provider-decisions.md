@@ -8,21 +8,21 @@ Design principle behind all of these: **best tool for the role**. Each dependenc
 
 Durable checkpointing, human-in-the-loop interrupts, and conditional retry/branching are first-class primitives here, not bolted on. Role-based frameworks (CrewAI) and conversation-centric frameworks (AutoGen) prototype faster but don't give the execution control this pipeline depends on; single-vendor agent SDKs would lock model choice, which conflicts with per-shot model routing (cheap model for static pans, best available for motion). Full comparison in [`decisions/0001-core-architecture.md`](decisions/0001-core-architecture.md).
 
-## Script / shot-breakdown / quality-check LLM: Anthropic Claude (currently Haiku 4.5)
+## Script / shot-breakdown LLM: OpenAI, with Anthropic Claude Haiku for the per-shot quality check
 
-Adapter-based (`adapters/llm/`), so swapping to GPT-class or another provider is a new adapter, not an orchestration change. The quality gap for structured script generation and JSON-schema shot breakdowns is small across current frontier/fast models; Haiku 4.5 was chosen for cost given it runs on every shot's quality/identity check, not just once per run.
+Adapter-based (`adapters/llm/`), so swapping providers is a new adapter, not an orchestration change. `OpenAILLMAdapter` handles the two authoring calls (script writing, storyboard visualization); the prompt content behind both is shared verbatim with the Anthropic adapter (`adapters/llm/_prompts.py`), so behavioral fixes for this format live in the prompt, not in provider-specific code. The vision-based quality check still delegates to `AnthropicLLMAdapter` — Claude Haiku is the cheap, adequate choice for a call that runs once per shot (tens of times per video), not once per run.
 
-## Image generation: fal.ai, FLUX.1 [dev]
+## Image generation: OpenAI `gpt-image-*` (default), fal.ai FLUX (alternate), Pollinations (free)
 
-Used for both the reference sheet (text-to-image) and every per-shot derived still (image-to-image, conditioned on the reference sheet at `strength=0.7` to preserve identity while adapting to the shot). FLUX.1 [dev]'s image-to-image endpoint is what makes the still-first rule practical. An alternate image model is worth an empirical A/B specifically on identity stability across pose/scene changes, since that's the property this pipeline depends on most.
+`OpenAIImageGenAdapter` is the default for both the reference sheet and per-shot derived stills: it was the only option measured to render in-scene text (title cards, on-screen labels) reliably. Quality defaults to `low` (~$0.0055/image) — `medium` (7.6x the cost) mostly bought storyboard-prompt fixes, not rendering fidelity, and `high` is not recommended at any budget because it drifts off the locked character design. `FalImageGenAdapter` (FLUX.1 [dev]/[schnell], image-to-image conditioned on the reference sheet) remains available via `--image-provider fal` and cannot reliably render text but is cheaper. `PollinationsImageGenAdapter` is a free fallback with weaker scene control. Swapping the default provider is empirical and expected to be revisited as image models improve at text rendering.
 
 ## Video generation: fal.ai, Seedance 2.0 Fast (image-to-video)
 
-fal.ai acts as a model router: one API surface over multiple current video models, so per-shot model selection is a parameter rather than a separate integration per vendor. Seedance 2.0 Fast was selected because it supports image-to-video with lower latency than the standard tier, and image-to-video support is a hard requirement for any model wired here. Text-to-video is never used for character shots (see [Character consistency](../README.md#character-consistency)).
+fal.ai acts as a model router: one API surface over multiple current video models, so per-shot model selection is a parameter rather than a separate integration per vendor. Seedance 2.0 Fast was selected because it supports image-to-video with lower latency than the standard tier, and image-to-video support is a hard requirement for any model wired here. Text-to-video is never used for character shots (see [Character consistency](../README.md#character-consistency)). Motion is off by default (`static_only=True`, `--allow-motion` to opt in) since the current format is a still slideshow.
 
-## Voice: ElevenLabs (eleven_multilingual_v2)
+## Voice: Edge TTS (free, default), ElevenLabs (opt-in)
 
-Narration quality and multilingual support, with a configurable voice ID (`ELEVENLABS_VOICE_ID`) so the default narrator voice is a config change, not a code change.
+`EdgeTTSVoiceAdapter` is the default narrator (`--voice NAME` to pick a voice, default `en-US-ChristopherNeural`) — free and good enough for narration-only slideshow videos, so it's the sane default rather than an opt-out. `ElevenLabsVoiceAdapter` (`eleven_multilingual_v2`) remains available via `--elevenlabs` for higher narration quality with a configurable voice ID (`ELEVENLABS_VOICE_ID`) when the cost (~$0.10/1,000 characters) is justified.
 
 ## Assembly: FFmpeg today, Remotion planned
 
