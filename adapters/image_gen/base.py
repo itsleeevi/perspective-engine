@@ -59,6 +59,7 @@ class ImageGenAdapter(ABC):
         shot_prompt: str,
         sheet_image_urls: list[str],
         style_descriptor: str,
+        attempt: int = 0,
     ) -> DerivedStillResult:
         """
         Derive a per-shot still from the reference sheet.
@@ -66,4 +67,9 @@ class ImageGenAdapter(ABC):
         The still must be anchored to the locked identity in the sheet.
         This is the required bridge between the reference sheet and any
         subsequent video-generation call for a motion shot.
+
+        ``attempt`` is the zero-based retry index. Implementations that seed
+        deterministically must fold it into the seed: a retry of a shot the
+        quality gate rejected has to produce a *different* image, or the retry
+        cannot change the verdict and only burns credits.
         """

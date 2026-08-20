@@ -11,8 +11,11 @@ from __future__ import annotations
 
 import pytest
 
+from adapters.image_gen.mock import MockImageGenAdapter
 from adapters.llm.mock import MockLLMAdapter
+from adapters.video_gen.mock import MockVideoGenAdapter
 from graph.config import MAX_SHOT_RETRIES
+from graph.nodes.generate_shots import process_shot
 from graph.nodes.quality_gate import quality_gate, quality_gate_router
 from graph.state import CharacterRefs, PipelineState, Shot, ShotMode, ShotStatus
 
@@ -73,6 +76,57 @@ class TestQualityGateRetryCap:
         result = await quality_gate(state, llm=llm)
         updated = result["shot_list"][0]
         assert updated.quality_failure_reason != ""
+
+
+class TestProcessShotGenerationFailure:
+    """
+    A failure raised by the image adapter itself (moderation block, exhausted
+    rate-limit backoff) must retry and escalate on the same footing as a
+    failed quality check, not propagate out of process_shot uncaught. A
+    single flagged shot in a long run previously took down every shot
+    dispatched after it.
+    """
+
+    @pytest.mark.asyncio
+    async def test_generation_error_retries_then_recovers(self):
+        shot = Shot(id="s1", prompt="p", mode=ShotMode.static_pan)
+        char_refs = CharacterRefs(
+            sheet_image_urls=["file:///refs/front.png"],
+            style_descriptor="distinctive amber eye",
+        )
+        state = PipelineState(shot_list=[shot], character_refs=char_refs)
+
+        result = await process_shot(
+            state,
+            image_gen=MockImageGenAdapter(fail_times=1),
+            video_gen=MockVideoGenAdapter(),
+            llm=MockLLMAdapter(),
+        )
+        updated = result["shot_list"][0]
+        assert updated.status == ShotStatus.approved
+        assert updated.retry_count == 1
+
+    @pytest.mark.asyncio
+    async def test_generation_error_persists_to_escalation(self):
+        """Never propagates past MAX_SHOT_RETRIES — escalates instead."""
+        shot = Shot(id="s1", prompt="p", mode=ShotMode.static_pan)
+        char_refs = CharacterRefs(
+            sheet_image_urls=["file:///refs/front.png"],
+            style_descriptor="distinctive amber eye",
+        )
+        state = PipelineState(shot_list=[shot], character_refs=char_refs)
+
+        result = await process_shot(
+            state,
+            image_gen=MockImageGenAdapter(fail_times=999),
+            video_gen=MockVideoGenAdapter(),
+            llm=MockLLMAdapter(),
+        )
+        updated = result["shot_list"][0]
+        assert updated.status == ShotStatus.escalated
+        assert updated.escalated is True
+        assert updated.retry_count == MAX_SHOT_RETRIES
+        assert "generation error" in updated.quality_failure_reason
 
 
 class TestQualityGateRouter:

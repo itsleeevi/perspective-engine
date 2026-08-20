@@ -34,7 +34,7 @@ Principle: best tool for the role. If a better-fit option for a role exists, pro
 - No real, named, identifiable people as video subjects. Validated at `ideate`. A topic implying a real person is fictionalized or made composite, not generated as-is.
 - The synthetic-content disclosure flag is always set at publish.
 - Every `motion` shot is animated from a derived still anchored to the approved reference sheet. Direct text-to-video for character shots is not permitted.
-- The two human-review interrupts are non-bypassable: no code path may auto-approve them, skip them, or run downstream nodes before they resolve.
+- The human-review interrupts (script, images, final) are non-bypassable: no code path may auto-approve them, skip them, or run downstream nodes before they resolve.
 - Per-shot retries are capped, then escalate to human review. No indefinite retries, no silent drops.
 - Publish cadence is rate-limited in code once the publish step exists.
 

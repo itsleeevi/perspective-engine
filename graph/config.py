@@ -7,6 +7,10 @@ requires deliberate review, not just a constant tweak.
 # Reaching this cap routes the shot to human review rather than looping.
 MAX_SHOT_RETRIES: int = 3
 
+# Maximum human-triggered still regenerations per shot at the image-review
+# gate. Distinct from MAX_SHOT_RETRIES (automatic quality-gate retries).
+MAX_MANUAL_REGENERATIONS: int = 5
+
 # Minimum wall-clock seconds between publish calls.
 # Enforced inside the publish node regardless of who invokes the graph.
 PUBLISH_CADENCE_SECONDS: int = 86_400  # 24 hours

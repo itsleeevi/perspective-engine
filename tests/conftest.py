@@ -82,4 +82,5 @@ def initial_state(topic: str = "a photon's journey from the sun to your eye") ->
 
 
 APPROVAL_SCRIPT = {"approved": True, "edits": []}
+APPROVAL_IMAGES = {"approved": True, "regenerate_shot_ids": []}
 APPROVAL_FINAL = {"approved": True, "edits": []}

@@ -35,6 +35,10 @@ class TestShotDefaults:
         shot = Shot(id="s1", prompt="test")
         assert shot.retry_count == 0
 
+    def test_manual_regen_count_defaults_to_zero(self):
+        shot = Shot(id="s1", prompt="test")
+        assert shot.manual_regen_count == 0
+
     def test_escalated_defaults_to_false(self):
         shot = Shot(id="s1", prompt="test")
         assert shot.escalated is False

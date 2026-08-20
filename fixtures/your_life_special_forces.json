@@ -1,0 +1,145 @@
+{
+  "title": "Your Life as Every Rank in Special Forces",
+  "hook": "It takes ten years, four selection courses, and one broken body to reach the top. Most men who start this path never finish it.",
+  "levels": [
+    {
+      "name": "The Recruit",
+      "beats": [
+        "You sign the papers at an office in a strip mall. The recruiter shakes your hand. He smiles like you just won something. You don't know what you won yet.",
+        "You're 19 years old. You played football in high school. You lifted weights in your garage. You watched every military movie ever made. You think you know what you're signing up for. You don't.",
+        "You fly to Fort Benning for basic training. They shave your head in the first hour. They take your clothes and give you a uniform that doesn't fit. They scream at you from the moment you step off the bus.",
+        "A drill sergeant is three inches from your face, telling you that you are nothing. You believe him. For 10 weeks, you do nothing but run, shoot, march, and suffer.",
+        "You learn how to hold a rifle. You learn how to throw a grenade. You learn how to survive a chemical attack. You graduate. Your mother cries at the ceremony. You feel proud for about an hour.",
+        "Then you report to airborne school. Three weeks of jumping out of airplanes. Your first jump, you are so scared you almost can't breathe. The jump master shoves you out the door.",
+        "You fall through 1,250 feet of empty air before your parachute opens. You land hard and you survive. You do it four more times. You earn your wings.",
+        "You report to Fort Bragg, North Carolina. You look at the men with the green berets walking around the base. They don't look at you. You don't exist to them yet. You have to earn the right to exist.",
+        "You spend your first year in a regular infantry unit. You clean rifles you'll never fire in combat. You stand in formation in the rain. You write the request for special forces selection 11 months into your enlistment. Your platoon sergeant tells you 90 percent of guys like you wash out in the first week."
+      ]
+    },
+    {
+      "name": "The Candidate",
+      "beats": [
+        "You volunteer for special forces assessment and selection. They call it SFAS. It's a three-week course designed to break you in ways you didn't know you could be broken.",
+        "400 men show up on day one and 150 will still be there at the end. You will either be one of them or you won't.",
+        "You spend the first week doing physical fitness tests. Push-ups, sit-ups, pull-ups, timed runs, a 12-mile ruck march with 45 pounds of gear. They don't tell you the standards and they don't tell you if you passed.",
+        "You spend the second week navigating through the pine forests of Camp Mackall. You have a map and a compass. You have a rucksack that weighs 65 pounds. You have a list of points you must reach before a deadline that is never announced.",
+        "You walk 20 miles through swamps and hills with no food breaks and no sleep. You fall and get up. You fall again and get up again. The instructors don't help you. They just write on clipboards.",
+        "Men quit every day. They walk up to the cadre and say the words, I quit. The cadre nods and a truck appears. The man who quit climbs in and the truck drives away. Nobody says anything. You keep walking.",
+        "Week three is team week. They divide you into small groups and give you impossible tasks. Move a telephone pole across a field. Carry a dummy patient through a swamp. Build a raft from barrels and rope.",
+        "The tasks don't matter. The cadre are watching how you work with strangers. Do you lead or do you follow? Do you complain or do you quit?",
+        "At the end of three weeks, they read names off a list. Your name is on it. You've been selected, but the hard part hasn't started yet."
+      ]
+    },
+    {
+      "name": "The Qualification Student",
+      "beats": [
+        "The Q course is the real thing. 18 months of training designed to turn a soldier into a Green Beret. You start with small unit tactics.",
+        "You learn how to move through terrain without being seen. You learn how to communicate with hand signals. You learn how to set up an ambush and how to survive one.",
+        "You live in the field for weeks at a time. You eat cold rations and sleep in the dirt. You never shower.",
+        "Then comes your specialty training. Weapons sergeant, engineer sergeant, medical sergeant, or communication sergeant. Each school is months long and has its own way of destroying you.",
+        "You become a weapons sergeant. You learn every firearm made in the last 100 years. American rifles, Russian rifles, Chinese rifles, Belgian rifles. You learn to operate them, repair them, and teach others to use them.",
+        "You fire thousands of rounds. Your shoulder bruises black and blue. Your ears ring constantly.",
+        "Then comes language school. You're assigned Arabic. Six months of intensive study, eight hours a day in a classroom, then eight more hours of homework. You memorize 5,000 vocabulary words.",
+        "Then comes Robin Sage, the final exercise. A month in the woods of North Carolina. You're dropped into a simulated country called Pineland. Your mission is to train and lead a guerrilla force of locals against an oppressive government.",
+        "You return to Fort Bragg. They put a green beret on your head in a small ceremony. Your family is there and your mother cries again. This time you cry too.",
+        "But the beret is just a piece of wool. What it represents is what matters. You swore an oath when they handed it to you. To free the oppressed. The mission is global."
+      ]
+    },
+    {
+      "name": "The Junior Engineer Sergeant",
+      "beats": [
+        "You're assigned to an operational detachment alpha, an ODA, a 12-man team. Two officers, 10 non-commissioned officers. Every man is a specialist. Every man can do every other man's job in an emergency.",
+        "You're the junior engineer sergeant, 18 Charlie. You build things and blow things up. Your team deploys to Iraq.",
+        "Your first mission is to train a platoon of Iraqi soldiers. You spend your days at a training camp outside Baghdad. You teach marksmanship, room clearing, first aid, and basic tactics.",
+        "The Iraqis are a mix of everything. Some are eager young men who want to serve their country. Some are older veterans who've survived three wars. Some are infiltrators working for insurgent groups. You don't know which is which. You train them anyway.",
+        "At night, you go on missions. You kick in doors. You move through dark rooms with flashlights mounted on your rifles. You find weapons caches buried in courtyards and IED factories in abandoned warehouses.",
+        "You find families who are terrified and innocent and you apologize and leave. You also find bad men. You capture some of them. Others don't want to be captured.",
+        "Your first firefight lasts 30 seconds. It feels like 30 minutes. Your team leader takes a round through his shoulder. You drag him behind cover. You treat the wound and call for a medevac helicopter. He survives.",
+        "The platoon you trained turns out to be half loyal. Three of them disappeared one night with their American weapons. They showed up a week later fighting for the other side. Your team sergeant told you this would happen.",
+        "You spend Christmas in a plywood hut on a forward operating base. Your mother sent a package of cookies that arrived smashed. You eat the crumbs anyway. You call her on a satellite phone for three minutes. She asks if you're safe. You tell her everything is fine."
+      ]
+    },
+    {
+      "name": "The Senior Weapons Sergeant",
+      "beats": [
+        "You're on your fourth deployment. Two to Iraq and two to Afghanistan. You're the senior weapons sergeant now, 18 Bravo. You're the team's expert on everything that shoots. You're 27 years old.",
+        "Your team is deployed to a province in eastern Afghanistan. You live among the locals in a small compound in a village at the end of a dirt road. The nearest American base is 40 miles away.",
+        "You and your 11 teammates are completely alone. Air support is 20 minutes out on a good day.",
+        "You drink tea with village elders every afternoon. You learn their names, their families, their grievances. The man on your left lost two sons to the Taliban. The man on your right lost his brother to an American air strike.",
+        "You train the local police force. You build a school. You bring in medical supplies. You pay for a new well. You do all of this while patrolling for Taliban fighters who own the mountains above the village.",
+        "Every night you hear them talking on the radio. They know your names. They threaten your families back home through intermediaries. You don't sleep well.",
+        "One night, a kid walks up to your gate with a letter from his father. The letter says the Taliban are moving weapons through a valley three miles north tomorrow. You plan an ambush. Your team sets up before dawn and waits eight hours in 110 degree heat.",
+        "Two weeks later, your junior medic steps on a pressure plate on a routine patrol. The explosion throws him 15 feet. You apply tourniquets that he brought for someone else. You ride in the helicopter with him holding his hand.",
+        "He loses both legs permanently. He survives. You visit him at Walter Reed six months later. He thanks you for saving his life. You don't know what to say to that."
+      ]
+    },
+    {
+      "name": "The Team Sergeant",
+      "beats": [
+        "You're 32 now. You've been doing this for 13 years. Your knees hurt every morning. Your shoulders pop when you reach for things. You have tinnitus from too many explosions. You've buried three teammates in national cemeteries across the country.",
+        "You're the team sergeant now, 18 Zulu, the senior enlisted man on an ODA and the backbone of the team. The officers come and go. They rotate through command positions for their careers. You stay.",
+        "You have a team leader, a captain who outranks you on paper, but he's 26 years old and this is his first team. You've been on five teams before this one. He listens to you. The good ones always do.",
+        "You manage the men. Your weapons sergeant is going through a divorce. You drink with him at the team room and listen to him talk about his wife. Your medic's father just died of cancer. You help him arrange emergency leave.",
+        "You deploy to Syria. You work with Kurdish forces against ISIS. You live in bombed out buildings. You move constantly. Enemy drones watch you from overhead.",
+        "You call in air strikes on targets a thousand meters from your position. Buildings disappear in flashes of light. You direct artillery. You coordinate with aircraft from six different countries.",
+        "You lose your weapons sergeant to a sniper round in Raqqa. He was 29 years old. He had a three-year-old daughter named Emma. You write the letter to his wife yourself.",
+        "You fly home for the funeral. You stand next to his grave in a cemetery in Ohio. You hand his daughter a folded American flag. She asks when daddy is coming home. Her mother can't answer. You can't either.",
+        "You sit in the team room with an empty locker staring at you. You pack his personal belongings into a box for shipment to his family. You find a photograph in his wallet, him and Emma at the beach. You close the lid. You sit in the dark for a long time."
+      ]
+    },
+    {
+      "name": "The Tier One Operator",
+      "beats": [
+        "Someone taps you on the shoulder. A man in civilian clothes with a beard and no insignia. He asks if you'd like to try out for a unit he can't name. You know which unit.",
+        "The selection process lasts a month. It takes place somewhere in the mountains of West Virginia. It makes SFAS look like summer camp. 200 candidates start, a dozen finish. You're one of them.",
+        "Then comes the operator training course. Six months of the most advanced close quarters combat training on the planet. You shoot thousands of rounds a day. You clear rooms until you can do it in your sleep.",
+        "You practice in shoot houses built inside airplanes, inside buses, inside embassy replicas. You learn to shoot from moving vehicles. You learn to shoot while hanging from a rope. You learn to shoot in total darkness.",
+        "Your first mission with the unit is classified. It will be classified for the rest of your life. You fly somewhere, you do something, and you come back. You can't tell your wife where you went or what you did. She stopped asking years ago.",
+        "Your missions are the ones that other special operations units can't or won't do. Hostage rescue deep inside hostile territory. Snatch and grab operations against high value targets. Counterterrorism raids in capital cities.",
+        "You kick in doors at 3:00 a.m. in neighborhoods where the enemy is waiting. Sometimes they shoot first, and sometimes you do. Your name never appears in any report that the public will ever see. You are a ghost in a world of ghosts.",
+        "You operate in countries most Americans can't locate on a map. You fly in on military transports painted to look civilian. You land at airfields that don't appear on commercial charts. You rendezvous with CIA officers who give you intelligence packages.",
+        "You take down a bomb maker in a villa outside Mogadishu. The operation lasts six minutes from breach to exfil. By the time the sun comes up, you're 400 miles away. Three weeks later, planned terrorist attacks fail to happen. You never find out about most of them."
+      ]
+    },
+    {
+      "name": "The Squadron Commander",
+      "beats": [
+        "You've been in special operations for 20 years. Your body is held together by cortisone shots and willpower. You've lost count of your deployments. You stop counting when you hit 15. Your wife has stopped asking when you'll be home. You are home for about 4 months a year.",
+        "You're a squadron commander now. You run a unit of 100 operators. You don't kick down doors anymore. You plan the operations that other men execute. You sit in a joint operation center watching live drone feeds. You make decisions that determine whether men live or die.",
+        "You authorize a strike on a building. You pray the intelligence is right. Sometimes it is and sometimes it isn't. You carry both outcomes with you. You brief generals and admirals. Sometimes you brief people even more senior than that in rooms where you can't carry your phone.",
+        "You manage the older operators on your team. Some of them have been through things that broke them in ways that don't show on the outside. You make sure they get help. You make sure the help is discreet.",
+        "You return from deployment. Your daughter is 14. You missed her entire middle school years. She's a stranger to you. Polite but distant. You try to connect. You take her to dinner and ask her about her life. She answers in short sentences. You don't blame her.",
+        "You lose a team in Niger. Four men killed in an ambush. They were escorting local forces on what was supposed to be a routine patrol. The intelligence was wrong. The enemy was waiting. The nearest reinforcements were 4 hours away.",
+        "You fly to Dover Air Force Base to meet the caskets. You stand on the tarmac at 2:00 a.m. in the pouring rain. You salute as the flag-draped coffins are carried off the transport. You meet the families afterward. You tell them their husbands and sons died as heroes.",
+        "A senator launches an investigation. You testify behind closed doors. You answer every question honestly. Some decisions get changed and some procedures get updated. Four men are still dead. Nothing brings them back. You write their names on a piece of paper in your office. You look at it every morning before you go to work."
+      ]
+    },
+    {
+      "name": "The General Officer",
+      "beats": [
+        "You're 48 years old. You've been promoted to Brigadier General. You command the Joint Special Operations Command, JSOC, the unit that coordinates all of America's most elite military forces. You run all of it. 4,000 operators spread across bases around the world.",
+        "You have an office at Fort Bragg. You have a house on base. You have a security detail. You have a schedule that is planned weeks in advance by staff officers. You brief the secretary of defense. You brief the chairman of the joint chiefs. You sometimes brief the president of the United States.",
+        "You are one of the most powerful military officers in the world. And most Americans have never heard your name. That is by design. Your operations happen in 80 countries. Some of those countries are allies and some are not. Some don't know you're there, and some know but pretend not to.",
+        "The operations you command prevent attacks that would have killed thousands. The operations you command also sometimes kill the wrong people. You make those decisions, too. You sign the papers. You take responsibility when things go wrong.",
+        "You sit at the table with the National Security Council. The conversation turns to a specific problem. A terrorist leader. A hostage. A weapons program. People turn to you. You present options. Some surgical. Some larger. You recommend one. Decisions are made. Orders are issued.",
+        "24 hours later, men on the other side of the world are moving toward targets because of words spoken in that room. You go home that night. You eat dinner with your wife. She asks how your day was. You say it was fine. You mean it was normal. Normal for you now involves the lives of hundreds of men. You don't know how to explain that to anyone. You don't try."
+      ]
+    },
+    {
+      "name": "The Retired Warrior",
+      "beats": [
+        "You retired last year. The ceremony was quiet. A small group in a conference room on base. Your family was there. A few officers you served with for decades attended. The Secretary of Defense sent a letter. You put it in a drawer.",
+        "You moved to a house in North Carolina. It has a porch. You sit on the porch in the mornings and drink coffee. The sun comes up. You watch it. You haven't watched a sunrise in peace in 30 years.",
+        "You're 55 years old. Your hands shake a little. Your back hurts. You walk with a slight limp from an injury you got in Mosul in 2004. You never got it fixed. There's always another deployment. There was always another deployment. Now there isn't. You don't know what to do with yourself.",
+        "Your wife suggested therapy. You went. The therapist is a good man, a former Marine. He understands what you've seen. You talk about some of it, not all of it. Some things you will take to your grave.",
+        "Your daughter is 29 now. She has her own daughter, a toddler. The little girl runs to you when you visit. She calls you granddad. You pick her up. You feel something unlock in your chest. You didn't know that feeling still existed.",
+        "You get calls from your former teammates, the ones who are still alive. There are fewer of them every year. Heart attacks, cancer, suicide, car accidents. The operators age faster than civilians. The body keeps the score.",
+        "You attend too many funerals. You sit in too many pews. You hand too many folded flags to too many widows. You buried your team sergeant from your first ODA last month. Lung cancer. He was 58. You gave the eulogy. You couldn't finish it.",
+        "You look at your medals sometimes. They're in a shadow box in your closet. Civilians see medals and think of glory. You see them and remember specific days, specific men, specific mistakes, specific miracles. Each one is a story you can't tell. Each one is a weight you carry alone.",
+        "You speak at a Green Beret graduation ceremony in the spring. They ask you to share wisdom with the new operators. You stand at the podium. You look at 150 young men in green berets. They look impossibly young. They look exactly like you looked 35 years ago.",
+        "You tell them the truth. You tell them the job will take more from them than they can imagine. You tell them the brotherhood is real and the cost is real. You tell them to hold on to their families. They listen politely. They don't believe you. You didn't believe your mentors either.",
+        "Somewhere in a strip mall right now, a 19-year-old is signing papers. His recruiter is smiling. The kid thinks he knows what he's signing up for. He doesn't. The cycle continues."
+      ]
+    }
+  ]
+}

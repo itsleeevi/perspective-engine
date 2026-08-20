@@ -1,0 +1,94 @@
+{
+  "title": "Your Life as Every CIA Black Ops Rank",
+  "hero_career_progression": true,
+  "hook": "By the time this ends, the CIA will officially deny you ever existed.",
+  "levels": [
+    {
+      "name": "The Applicant",
+      "beats": [
+        "You apply online like everyone else. There is a form on the CIA website. You fill in your name, your education, your work history. You click submit and wait.",
+        "Six months later they want to interview you. You fly to Virginia on your own dime. The building looks like any other government office. Fluorescent lights, bad coffee, a man in a gray suit. Four hours of questions.",
+        "Where did you grow up? What languages do you speak? Have you ever used drugs? The questions seem random. They are building a profile, looking for patterns, looking for lies.",
+        "Then the polygraph. A strap across your chest. Sensors on your fingers. A cuff on your arm until your hand starts to tingle. The room is small, white walls, no windows. The machine cannot actually detect lies. It measures stress. You do not know that yet, so you confess small things you had buried.",
+        "Three weeks later a letter arrives. You have been accepted into the clandestine service trainee program. Welcome to the CIA."
+      ]
+    },
+    {
+      "name": "The Trainee",
+      "beats": [
+        "They send you to Camp Perry, Virginia. The locals call it the Farm. Nine thousand acres of woods, swamps, and training facilities behind fences topped with razor wire. Officially a research facility. Unofficially, for the next eighteen months, this is home.",
+        "At five in the morning your feet hit the ground before your brain catches up. A five-mile run through Virginia fog, then breakfast that is fast, silent, and functional. Classrooms on foreign governments, terrorist groups, and tradecraft — the CIA's word for spy skills.",
+        "You learn how to spot surveillance. A car behind you for three turns. A woman with a newspaper who glanced twice. You learn how to disappear through a store, out a loading dock, into a waiting car. You learn lockpicking, and how to photograph a classified document in four seconds.",
+        "Then the part they skip in recruitment. You learn how to recruit assets — their word for convincing people to betray their countries. Money, ideology, coercion, ego. Everyone fits one of those. Practice operations in nearby cities. If they catch you, you fail. The washout rate is forty percent.",
+        "The ones who survive can do something terrible at nine in the morning and sit down to dinner at six. You graduate in the top fifteen percent of your class. They give you a badge and a cover identity."
+      ]
+    },
+    {
+      "name": "The Case Officer",
+      "beats": [
+        "Your first posting is an embassy in Eastern Europe. Officially you are a political attache. You attend diplomatic functions in uncomfortable suits. Unofficially you are a spy. Every handshake is an evaluation. Who has access. Who has weakness. Who can be turned.",
+        "Your first recruitment takes eight months. A mid-level bureaucrat in the foreign ministry. He has access to diplomatic cables. He has gambling debts. You approach him at a casino. You become his friend. You loan him money he cannot repay.",
+        "By month eight you ask for a favor. Just a few documents. Internal memos. Nothing important, or so you tell him. He agrees. He has been agreeing for months without recognizing it. You now have an asset inside the foreign ministry. You eat dinner at the embassy that night and feel nothing in particular."
+      ]
+    },
+    {
+      "name": "The NOC",
+      "beats": [
+        "Most CIA officers work under official cover, with badges and diplomatic immunity. If they get caught, they get expelled. Embarrassing, but not dangerous. You are offered something different. Non-official cover. NOC. No embassy to run to. If you get caught, the CIA will deny you exist.",
+        "You say yes. They build you a legend: a businessman at a consulting firm that does not actually consult. Real offices, real employees, real clients. None of them know who you really are. Your neighbors think you travel for work. Your parents think you quit the government years ago.",
+        "All communication goes through dead drops. A chalk mark on a wall. A package under a park bench. You sleep with a packed bag and a passport that is not yours under the mattress. You are operationally alone. If you die tonight, the truth of who you were dies with you."
+      ]
+    },
+    {
+      "name": "The Paramilitary Officer",
+      "beats": [
+        "They pull you out after your cover is almost blown in Beirut. Two men in a parked car that should not be there. They extract you, debrief you, and send you to the Special Activities Division. This is not deception anymore. This is direct action.",
+        "Six more months of training. Close quarters combat. Explosives. High-altitude jumps. Combat diving. Days in a box to teach you captivity before it is real. Most of your instructors are former Delta Force or SEAL Team Six. They care whether you can clear a room without getting your team killed.",
+        "Your first mission is in Afghanistan. Three months in a mud compound that does not appear on any official map. You grow a beard and wear local clothes. You locate targets. You watch missiles turn buildings into craters. Sometimes the intelligence is accurate. Sometimes a grid coordinate is off by two hundred meters.",
+        "They award you a medal that does not have a name. The ceremony has no official record. The mission it recognizes never officially occurred."
+      ]
+    },
+    {
+      "name": "The Team Leader",
+      "beats": [
+        "After five years you run your own unit of eight operators. You are responsible for the mission. You are responsible for their lives.",
+        "Libya, after the regime collapses. Militias occupy every city. Your mission is to locate chemical weapons before they fall into the wrong hands. Six weeks in a city that is burning. You operate at night. You sleep two hours at a time in safe houses that change every forty-eight hours.",
+        "You find caches the official reports said did not exist. You destroy them in place. On your last night an ambush hits the convoy. You carry one man half a mile to the extraction point. One survives. The other does not.",
+        "You write letters to their families using words like service and sacrifice. You do not mention Tripoli, the side street, or the half-mile carry. The letters are composed of omissions, and the families frame them."
+      ]
+    },
+    {
+      "name": "The Station Chief",
+      "beats": [
+        "Fifteen years in. A shoulder that dislocates. Knees that grind every morning. Permanent ringing in your left ear from an explosion in a country you are not permitted to name. You are forty-two and you feel sixty.",
+        "They make you chief of station. Every operation, every asset, every piece of intelligence in the country flows through you. You manage forty officers. You meet with the ambassador every morning. You approve work that could start an international incident. You kill work that carries too much risk.",
+        "Every success is classified. Every failure can end up on the front page. You sleep four hours a night. Your marriage ended during your second tour. Your kids are grown. They know the cover story. They know the person you pretend to be."
+      ]
+    },
+    {
+      "name": "The Black Site Commander",
+      "beats": [
+        "They need someone to run a facility that does not exist, in a country that will deny it is there. The prisoners are high-value detainees. Never formally arrested. No lawyers. As far as the world knows, they vanished.",
+        "Your job is to extract intelligence. Enhanced interrogation — a phrase designed by lawyers. Sleep deprivation. Stress positions held until muscles fail. Waterboarding. Some of it was legal when you started. Some of it was made legal afterward by memos written in offices with pleasant views and good coffee.",
+        "You tell yourself it is necessary. You tell yourself the information saves lives. On some nights you believe it. You run the site for two years. When you leave they give you a commendation that will never appear in any record."
+      ]
+    },
+    {
+      "name": "The Division Director",
+      "beats": [
+        "You are back at Langley, the building you first entered twenty-five years ago as a nervous applicant. You walk past the memorial wall every morning. Stars carved into white marble. No names beside them. Some belong to colleagues. Some belong to friends.",
+        "You run a division of the clandestine service. Hundreds of officers. Billions in black-budget funding that officially does not exist. You brief the president. You sit in the situation room. You recommend targets. You authorize operations in countries where the government is not officially operating.",
+        "You testify before congressional intelligence committees in closed sessions with no transcripts. You give answers that are technically true and carefully incomplete. The senators want plausible deniability. You give it to them. The machine runs on secrets, and you are one of the people who keeps it running."
+      ]
+    },
+    {
+      "name": "The Ghost",
+      "beats": [
+        "You retire after thirty years. A small ceremony in a conference room. Fifty people attend. You receive the Distinguished Intelligence Cross, the highest award the CIA can give. It will sit in a box in your closet because you cannot display it.",
+        "You sign more non-disclosure agreements. Everything you did is classified for the rest of your life. You move to a house in Virginia. You check the locks three times. You wake at three in the morning and walk the perimeter looking for threats that are not there.",
+        "Your pension is generous. Your healthcare is excellent. You are alone with memories of operations that went wrong. None of it officially happened. When you die there will be a star on a wall at Langley. No name. Just a star.",
+        "Somewhere, a young person is filling out an application on the CIA website, sitting in a college dorm, dreaming of adventure. They have no idea what they are signing up for. They will learn. They always do."
+      ]
+    }
+  ]
+}

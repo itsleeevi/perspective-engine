@@ -49,6 +49,22 @@
   .beat { margin: 0.4rem 0; padding-left: 0.6rem; border-left: 2px solid #2a2a33; font-size: 0.9rem; line-height: 1.4; }
   .shot { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #23232b; font-size: 0.85rem; }
   .shot:last-child { border-bottom: none; }
+  .still-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem; margin-top: 0.75rem;
+  }
+  .still-card {
+    background: #101016; border: 1px solid #2a2a33; border-radius: 8px;
+    padding: 0.6rem; display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .still-card img {
+    width: 100%; height: 140px; object-fit: cover; border-radius: 4px;
+    background: #0a0a0e;
+  }
+  .still-card label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; }
+  .still-card .prompt { font-size: 0.75rem; color: #b0b0b8; line-height: 1.3; }
+  button.regen { background: #c9a227; color: #1a1400; }
+  button.regen:hover { background: #e0b82e; }
   .mono { font-family: ui-monospace, monospace; font-size: 0.8rem; color: #8a8a95; }
   .actions { display: flex; gap: 0.6rem; margin-top: 1rem; }
   .hint { color: #6a6a75; font-size: 0.8rem; margin-top: 1rem; }
@@ -58,7 +74,7 @@
 </head>
 <body>
   <h1>Perspective Engine: Review</h1>
-  <div class="sub">Browser front-end for the two human-review interrupt gates. Same graph, same adapters as the CLI.</div>
+  <div class="sub">Browser front-end for the human-review interrupt gates. Same graph, same adapters as the CLI.</div>
 
   <div class="card" id="start-card">
     <div class="row">
@@ -95,6 +111,7 @@ const reviewActions = document.getElementById('review-actions');
 const resultCard = document.getElementById('result-card');
 const resultBody = document.getElementById('result-body');
 const startBtn = document.getElementById('start-btn');
+let lastInterruptKey = '';
 
 function setPill(status) {
   pill.textContent = status;
@@ -116,10 +133,33 @@ function renderInterrupt(iv) {
     });
   }
   if (iv.shot_list) {
-    html += '<div style="margin-top:0.75rem;"><strong>Shot list</strong></div>';
-    iv.shot_list.forEach(s => {
-      html += `<div class="shot"><span class="mono">${escapeHtml(s.id)} (${escapeHtml(s.mode)})</span><span>${escapeHtml((s.prompt||'').slice(0,70))}</span></div>`;
-    });
+    if (iv.gate === 'human_review_images') {
+      html += '<div style="margin-top:0.75rem;"><strong>Generated stills</strong> — check shots to redo</div>';
+      html += '<div class="still-grid">';
+      iv.shot_list.forEach(s => {
+        const disabled = s.is_title_card ? 'disabled' : '';
+        const titleNote = s.is_title_card ? ' (title card)' : '';
+        const regen = s.manual_regen_count ? ` · regen ${s.manual_regen_count}` : '';
+        const img = s.still_url
+          ? `<img src="${escapeHtml(s.still_url)}" alt="${escapeHtml(s.id)}" />`
+          : '<div class="empty">no still</div>';
+        html += `<div class="still-card">
+          ${img}
+          <label>
+            <input type="checkbox" class="regen-shot" value="${escapeHtml(s.id)}" ${disabled} />
+            <span class="mono">${escapeHtml(s.id)}${titleNote}</span>
+          </label>
+          <div class="mono">${escapeHtml(s.status)}${regen}</div>
+          <div class="prompt">${escapeHtml((s.prompt||'').slice(0,120))}</div>
+        </div>`;
+      });
+      html += '</div>';
+    } else {
+      html += '<div style="margin-top:0.75rem;"><strong>Shot list</strong></div>';
+      iv.shot_list.forEach(s => {
+        html += `<div class="shot"><span class="mono">${escapeHtml(s.id)} (${escapeHtml(s.mode)})</span><span>${escapeHtml((s.prompt||'').slice(0,70))}</span></div>`;
+      });
+    }
   }
   if (iv.final_video_path) {
     html += `<div style="margin-top:0.75rem;"><strong>Final video</strong>: <span class="mono">${escapeHtml(iv.final_video_path)}</span></div>`;
@@ -135,20 +175,35 @@ function renderInterrupt(iv) {
     });
   }
   reviewBody.innerHTML = html;
-  reviewActions.innerHTML = `
-    <button class="approve" id="approve-btn">Approve</button>
-    <button class="reject" id="reject-btn">Reject</button>
-  `;
-  document.getElementById('approve-btn').onclick = () => resume(true);
-  document.getElementById('reject-btn').onclick = () => resume(false);
+  if (iv.gate === 'human_review_images') {
+    reviewActions.innerHTML = `
+      <button class="approve" id="approve-btn">Approve all</button>
+      <button class="regen" id="regen-btn">Regenerate selected</button>
+      <button class="reject" id="reject-btn">Reject</button>
+    `;
+    document.getElementById('approve-btn').onclick = () => resume(true, []);
+    document.getElementById('regen-btn').onclick = () => {
+      const ids = [...document.querySelectorAll('.regen-shot:checked')].map(el => el.value);
+      if (!ids.length) { alert('Select at least one shot to regenerate.'); return; }
+      resume(true, ids);
+    };
+    document.getElementById('reject-btn').onclick = () => resume(false, []);
+  } else {
+    reviewActions.innerHTML = `
+      <button class="approve" id="approve-btn">Approve</button>
+      <button class="reject" id="reject-btn">Reject</button>
+    `;
+    document.getElementById('approve-btn').onclick = () => resume(true, []);
+    document.getElementById('reject-btn').onclick = () => resume(false, []);
+  }
 }
 
-async function resume(approved) {
+async function resume(approved, regenerateShotIds = []) {
   reviewActions.querySelectorAll('button').forEach(b => b.disabled = true);
   await fetch('/api/resume', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({approved, edits: []}),
+    body: JSON.stringify({approved, edits: [], regenerate_shot_ids: regenerateShotIds}),
   });
 }
 
@@ -158,9 +213,14 @@ async function poll() {
   setPill(s.status);
 
   if (s.status === 'waiting_review' && s.interrupt) {
-    reviewCard.style.display = 'block';
-    renderInterrupt(s.interrupt);
+    const key = JSON.stringify(s.interrupt);
+    if (key !== lastInterruptKey) {
+      lastInterruptKey = key;
+      reviewCard.style.display = 'block';
+      renderInterrupt(s.interrupt);
+    }
   } else {
+    lastInterruptKey = '';
     reviewCard.style.display = 'none';
   }
 

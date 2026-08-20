@@ -20,11 +20,13 @@ MAX_SHOT_RETRIES) → approved or escalated.  The retry loop is INTERNAL to
 ``process_shot``; it is NOT a graph edge.
 
 After every ``process_shot`` finishes, a FIXED edge routes to
-``generate_voiceover``.  This matches the canonical LangGraph map-reduce
+``human_review_images``.  This matches the canonical LangGraph map-reduce
 pattern (``add_edge("generate_joke", "best_joke")``): the barrier fires
 only after ALL dispatched tasks have completed because the edge count is
 deterministic.  Using a conditional edge (quality_gate → voiceover or
 generate_shot) would cause the barrier to fire after the FIRST completion.
+The image-review gate then interrupts for still inspection / regeneration
+before ``generate_voiceover`` runs.
 
 ``PipelineState.shot_list`` uses the ``_merge_shots`` reducer so all
 per-shot updates fan back into the main state automatically.
@@ -49,6 +51,7 @@ from graph.nodes.generate_metadata import generate_metadata
 from graph.nodes.generate_shots import dispatch_shots, process_shot
 from graph.nodes.generate_voiceover import generate_voiceover
 from graph.nodes.human_review_final import human_review_final
+from graph.nodes.human_review_images import human_review_images
 from graph.nodes.human_review_script import human_review_script
 from graph.nodes.ideate import ideate
 from graph.nodes.publish import publish
@@ -88,6 +91,7 @@ def build_graph(
     _shot_breakdown = functools.partial(shot_breakdown, llm=llm)
     _generate_character_refs = functools.partial(generate_character_refs, image_gen=image_gen)
     _process_shot = functools.partial(process_shot, image_gen=image_gen, video_gen=video_gen, llm=llm)
+    _human_review_images = functools.partial(human_review_images, image_gen=image_gen)
     _generate_voiceover = functools.partial(generate_voiceover, voice=voice)
 
     # ── Register nodes ─────────────────────────────────────────────────────
@@ -97,6 +101,7 @@ def build_graph(
     g.add_node("human_review_script", human_review_script)
     g.add_node("generate_character_refs", _generate_character_refs)
     g.add_node("process_shot", _process_shot)           # per-shot (via Send)
+    g.add_node("human_review_images", _human_review_images)
     g.add_node("generate_voiceover", _generate_voiceover)
     g.add_node("assemble", assemble)
     g.add_node("generate_metadata", generate_metadata)
@@ -119,10 +124,11 @@ def build_graph(
         ["process_shot"],
     )
 
-    # Fan-in: FIXED edge (not conditional) from process_shot → generate_voiceover.
+    # Fan-in: FIXED edge (not conditional) from process_shot → human_review_images.
     # LangGraph waits for ALL process_shot sub-executions before running
-    # generate_voiceover because the edge count equals the number of Sends.
-    g.add_edge("process_shot", "generate_voiceover")
+    # the image-review gate because the edge count equals the number of Sends.
+    g.add_edge("process_shot", "human_review_images")
+    g.add_edge("human_review_images", "generate_voiceover")
 
     # ── Linear (post fan-in) ───────────────────────────────────────────────
     g.add_edge("generate_voiceover", "assemble")

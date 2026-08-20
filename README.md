@@ -11,7 +11,7 @@ Perspective Engine turns a topic (for example, "a photon's journey from the sun 
 ## Highlights
 
 - Stateful LangGraph workflow with checkpointed, resumable execution
-- Two non-bypassable human-approval gates (script and final review)
+- Three non-bypassable human-approval gates (script, generated stills, and final review)
 - Parallel per-shot generation via LangGraph `Send` fan-out with a fixed-edge fan-in barrier
 - Character-reference workflow that derives every shot from a locked identity sheet, never from a text prompt alone
 - Per-shot quality gate with capped retries that escalate to human review instead of looping forever
@@ -75,14 +75,15 @@ flowchart LR
     F2 --> G
     F3 --> G
 
-    G --> H[Voiceover]
+    G --> R{Image Review}
+    R --> H[Voiceover]
     H --> I[Assemble Video]
     I --> J[Generate Metadata]
     J --> K{Final Review}
     K --> L[Publish]
 ```
 
-Each shot is processed independently: derive a still anchored to the character reference sheet, generate or animate the shot, check quality and identity, retry failures up to a fixed cap, and escalate repeated failures for human review. `process_shot` is dispatched once per shot via LangGraph's `Send` primitive; a fixed (non-conditional) edge back to `generate_voiceover` acts as the fan-in barrier, so voiceover generation only starts once every shot has finished, regardless of completion order.
+Each shot is processed independently: derive a still anchored to the character reference sheet, generate or animate the shot, check quality and identity, retry failures up to a fixed cap, and escalate repeated failures for human review. `process_shot` is dispatched once per shot via LangGraph's `Send` primitive; a fixed (non-conditional) edge back to `human_review_images` acts as the fan-in barrier, so still review (and then voiceover) only starts once every shot has finished, regardless of completion order.
 
 For the full node list, state schema, and the reasoning behind the fan-out/fan-in and still-first design, see [`docs/architecture.md`](docs/architecture.md).
 
@@ -133,8 +134,8 @@ The test suite verifies orchestration logic without requiring paid model calls: 
 
 Coverage includes:
 
-- Full mocked execution from `ideate` to `publish` through both review gates (`test_graph_e2e.py`)
-- Both human-review interrupt gates, including pause/resume and rejection (`test_interrupts.py`)
+- Full mocked execution from `ideate` to `publish` through all review gates (`test_graph_e2e.py`)
+- Human-review interrupt gates (script, images, final), including pause/resume, rejection, and still regeneration (`test_interrupts.py`, `test_human_review_images.py`)
 - Parallel shot fan-out and fan-in correctness, order-independence (`test_fanout.py`)
 - Retry caps and escalation to human review (`test_retry_cap.py`)
 - The still-first invariant: a motion shot without a derived still is rejected before any video call (`test_still_first.py`)
@@ -145,7 +146,7 @@ Coverage includes:
 
 - A typed Pydantic state model shared across the entire workflow, with a custom reducer for merging parallel shot updates
 - A LangGraph pipeline with `Send`-based parallel fan-out and a deterministic fan-in barrier
-- Two resumable human-in-the-loop interrupts that no code path can bypass, skip, or auto-approve
+- Three resumable human-in-the-loop interrupts that no code path can bypass, skip, or auto-approve
 - Provider-independent adapter interfaces for LLM, image, video, and voice generation, each with a real and a mock implementation
 - A character-reference and identity-quality workflow designed to structurally prevent drift across independently generated clips
 - Bounded per-shot retry logic that escalates to human review instead of looping indefinitely

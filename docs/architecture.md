@@ -9,7 +9,7 @@ Deep-dive reference for the graph in `graph/`. For the high-level picture, see t
 - `topic`, `brief`: the run's subject and a one-sentence framing, set by `ideate`.
 - `max_shots`, `static_only` (default `True`), `script_fixture_path`, `max_levels`, `include_hook`, `target_minutes`, `hero_career_progression`, `output_height`: run-configuration inputs, all settable from the CLI. `static_only` defaults to `True` because the current format is a still slideshow, not motion video; `script_fixture_path` lets a reviewed JSON fixture (`graph/script_fixture.py`) replace the script LLM call entirely, either explicitly or auto-resolved from the topic.
 - `script: list[str]`: scene beats. On the LLM path beat `[0]` is the hook (unless `include_hook` is `False`); on the fixture path, beats are `[TITLE] Level N: Name` cards interleaved with narration paragraphs.
-- `shot_list: list[Shot]`: per shot, an `id`, `prompt`, `duration_seconds`, `mode` (`motion` or `static_pan`, the primary cost lever), `assigned_model`, `narration` (the beat it illustrates), `is_title_card`, `still_url`, `clip_url`, `status`, `retry_count`, `escalated`, `quality_failure_reason`. Uses a custom `_merge_shots` reducer so fan-out updates from parallel `process_shot` executions merge back into one list, keyed by shot `id`, order-preserving.
+- `shot_list: list[Shot]`: per shot, an `id`, `prompt`, `duration_seconds`, `mode` (`motion` or `static_pan`, the primary cost lever), `assigned_model`, `narration` (the beat it illustrates), `is_title_card`, `still_url`, `clip_url`, `status`, `retry_count`, `manual_regen_count`, `escalated`, `quality_failure_reason`. Uses a custom `_merge_shots` reducer so fan-out updates from parallel `process_shot` executions merge back into one list, keyed by shot `id`, order-preserving.
 - `character_refs: CharacterRefs`: `sheet_image_urls` (the reference sheet), `style_descriptor` (persistent text anchor with a distinctive identifying detail), `per_shot_stills` (derived still URLs keyed by shot id).
 - `voiceover_url`, `music_url`, `final_video_path`: final asset pointers.
 - `metadata: Metadata`: `title`, `description`, `tags`, `thumbnail_url`, and `synthetic_content_disclosure` (invariant: always `True` by the time `publish` runs).
@@ -25,12 +25,13 @@ Deep-dive reference for the graph in `graph/`. For the high-level picture, see t
 4. **`human_review_script`**: **interrupt.** Pauses for approval or inline edits before any paid generation call. Raises if rejected; no auto-approve path exists.
 5. **`generate_character_refs`**: generates the reference sheet and style descriptor; the identity anchor for the run.
 6. **`dispatch_shots` → `process_shot` (×N, fan-out via `Send`)**: one sub-execution per shot. Each `process_shot` run derives a still from the reference sheet, animates it (motion shots only), runs the quality/identity check, and retries internally up to `MAX_SHOT_RETRIES` before marking the shot `approved` or `escalated`.
-7. **Fan-in**: a fixed (non-conditional) edge from `process_shot` to `generate_voiceover`. Because the edge count is deterministic (equal to the number of `Send`s dispatched), LangGraph's barrier semantics guarantee `generate_voiceover` runs exactly once, after every shot finishes, regardless of completion order.
-8. **`generate_voiceover`**: TTS narration aligned to the approved script.
-9. **`assemble`**: downloads shot assets, converts stills to video segments, concatenates in order, mixes in narration via FFmpeg. Writes `final_video_path` and a JSON manifest.
-10. **`generate_metadata`**: title, description, tags, thumbnail; sets the disclosure flag.
-11. **`human_review_final`**: **interrupt.** Final approval before publish; same non-bypassable contract as gate 1.
-12. **`publish`**: enforces the disclosure-flag invariant and the publish-cadence cap before recording `last_published_at`.
+7. **Fan-in**: a fixed (non-conditional) edge from `process_shot` to `human_review_images`. Because the edge count is deterministic (equal to the number of `Send`s dispatched), LangGraph's barrier semantics guarantee the image-review gate runs exactly once, after every shot finishes, regardless of completion order.
+8. **`human_review_images`**: **interrupt.** Reviewer inspects generated stills and may regenerate flagged shots (capped at `MAX_MANUAL_REGENERATIONS` per shot) before voiceover. Regeneration happens inside the node so the fan-in barrier is untouched. Raises if rejected; no auto-approve path exists.
+9. **`generate_voiceover`**: TTS narration aligned to the approved script.
+10. **`assemble`**: downloads shot assets, converts stills to video segments, concatenates in order, mixes in narration via FFmpeg. Writes `final_video_path` and a JSON manifest.
+11. **`generate_metadata`**: title, description, tags, thumbnail; sets the disclosure flag.
+12. **`human_review_final`**: **interrupt.** Final approval before publish; same non-bypassable contract as gate 1.
+13. **`publish`**: enforces the disclosure-flag invariant and the publish-cadence cap before recording `last_published_at`.
 
 ## Why the retry loop lives inside `process_shot`, not as a graph edge
 
@@ -55,4 +56,4 @@ Enforced in code (`graph/validation.py`, `graph/nodes/publish.py`), not just doc
 - Per-shot retries are capped at `MAX_SHOT_RETRIES` (`graph/config.py`), then escalate to human review: never an infinite loop, never a silent drop.
 - The synthetic-content disclosure flag must be `True` before `publish` runs.
 - Publish is rate-limited to once per `PUBLISH_CADENCE_SECONDS` (`graph/config.py`), enforced inside the `publish` node itself regardless of caller.
-- Both human-review interrupts (`human_review_script`, `human_review_final`) are non-bypassable: they use LangGraph's `interrupt()` primitive, which halts execution until an explicit `Command(resume=...)` is provided. No code path can auto-approve or skip them.
+- Human-review interrupts (`human_review_script`, `human_review_images`, `human_review_final`) are non-bypassable: they use LangGraph's `interrupt()` primitive, which halts execution until an explicit `Command(resume=...)` is provided. No code path can auto-approve or skip them.

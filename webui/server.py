@@ -3,7 +3,7 @@ Minimal FastAPI review UI for the Perspective Engine pipeline.
 
 Replaces the terminal y/n prompts in ``cli/run.py`` with a browser page.
 Runs the same graph, same adapters, same invariants; this module only
-adds a web front-end around the two human-review interrupt gates.
+adds a web front-end around the human-review interrupt gates.
 
 Usage:
     python -m webui.server
@@ -49,12 +49,14 @@ from adapters.video_gen.fal import FalVideoGenAdapter
 from adapters.video_gen.mock import MockVideoGenAdapter
 from adapters.voice.elevenlabs import ElevenLabsVoiceAdapter
 from adapters.voice.mock import MockVoiceAdapter
+from graph.assets import _assets_root
 from graph.graph import build_graph
 
 _STATIC_DIR = Path(__file__).parent / "static"
 
 app = FastAPI(title="Perspective Engine: Review UI")
 app.mount("/static", StaticFiles(directory=_STATIC_DIR), name="static")
+app.mount("/assets", StaticFiles(directory=_assets_root()), name="assets")
 
 
 # ── In-process run state (single run at a time) ───────────────────────────────
@@ -96,17 +98,48 @@ class StartRequest(BaseModel):
 class ResumeRequest(BaseModel):
     approved: bool
     edits: list[dict] = []
+    regenerate_shot_ids: list[str] = []
+
+
+def _still_web_path(file_url: str) -> str:
+    """Map a local file:// asset URL onto the /assets static mount."""
+    if not file_url:
+        return ""
+    if file_url.startswith("/assets/"):
+        return file_url
+    path = file_url.removeprefix("file://")
+    root = str(_assets_root())
+    if path.startswith(root):
+        rel = path[len(root) :].lstrip("/")
+        return f"/assets/{rel}"
+    return file_url
 
 
 def _serialize_shot(shot: Any) -> dict:
+    still_url = shot.get("still_url", "") if isinstance(shot, dict) else shot.still_url
     return {
         "id": shot["id"] if isinstance(shot, dict) else shot.id,
         "mode": str(shot["mode"] if isinstance(shot, dict) else shot.mode),
         "status": str(shot["status"] if isinstance(shot, dict) else shot.status),
         "prompt": shot["prompt"] if isinstance(shot, dict) else shot.prompt,
         "retry_count": shot.get("retry_count", 0) if isinstance(shot, dict) else shot.retry_count,
-        "still_url": shot.get("still_url", "") if isinstance(shot, dict) else shot.still_url,
+        "manual_regen_count": (
+            shot.get("manual_regen_count", 0)
+            if isinstance(shot, dict)
+            else shot.manual_regen_count
+        ),
+        "is_title_card": (
+            shot.get("is_title_card", False)
+            if isinstance(shot, dict)
+            else shot.is_title_card
+        ),
+        "still_url": _still_web_path(still_url),
         "clip_url": shot.get("clip_url", "") if isinstance(shot, dict) else shot.clip_url,
+        "quality_failure_reason": (
+            shot.get("quality_failure_reason", "")
+            if isinstance(shot, dict)
+            else shot.quality_failure_reason
+        ),
     }
 
 

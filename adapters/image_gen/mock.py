@@ -21,7 +21,17 @@ from graph.assets import local_asset_url
 class MockImageGenAdapter(ImageGenAdapter):
     """
     Stand-in image generator that returns deterministic placeholder URLs.
+
+    ``fail_times`` simulates an adapter-level failure (a moderation block, an
+    exhausted rate-limit backoff) rather than a quality-gate rejection: it
+    raises out of ``derive_still`` itself for the first N calls, so tests can
+    exercise the retry/escalate path ``process_shot`` takes around the
+    generation call, not just around ``check_quality``.
     """
+
+    def __init__(self, fail_times: int = 0) -> None:
+        self._fail_times = fail_times
+        self._calls = 0
 
     async def generate_reference_sheet(
         self, character_description: str
@@ -44,9 +54,14 @@ class MockImageGenAdapter(ImageGenAdapter):
         shot_prompt: str,
         sheet_image_urls: list[str],
         style_descriptor: str,
+        attempt: int = 0,
     ) -> DerivedStillResult:
+        self._calls += 1
+        if self._calls <= self._fail_times:
+            raise RuntimeError("mock generation failure (e.g. moderation_blocked)")
         slug = _slugify(shot_prompt)
-        url = local_asset_url(f"stills/{slug}_still.png")
+        suffix = "" if attempt == 0 else f"_r{attempt}"
+        url = local_asset_url(f"stills/{slug}_still{suffix}.png")
         return DerivedStillResult(still_url=url)
 
 

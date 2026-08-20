@@ -1,5 +1,5 @@
 """
-End-to-end test: full mocked run from ideate to publish through both gates.
+End-to-end test: full mocked run from ideate to publish through all gates.
 
 LangGraph 1.2.x notes:
 - ainvoke returns {"__interrupt__": [...]} when paused.
@@ -11,11 +11,23 @@ from __future__ import annotations
 import pytest
 from langgraph.types import Command
 
-from tests.conftest import APPROVAL_FINAL, APPROVAL_SCRIPT, initial_state, make_graph
+from tests.conftest import (
+    APPROVAL_FINAL,
+    APPROVAL_IMAGES,
+    APPROVAL_SCRIPT,
+    initial_state,
+    make_graph,
+)
 
 
 def _is_interrupted(result: dict) -> bool:
     return bool(result.get("__interrupt__"))
+
+
+async def _approve_script_and_images(graph, config) -> dict:
+    await graph.ainvoke(initial_state(), config)
+    await graph.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+    return await graph.ainvoke(Command(resume=APPROVAL_IMAGES), config)
 
 
 @pytest.fixture
@@ -31,6 +43,8 @@ class TestFullRunHappyPath:
         assert _is_interrupted(r1)
         r2 = await e2e_graph.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
         assert _is_interrupted(r2)
+        r3 = await e2e_graph.ainvoke(Command(resume=APPROVAL_IMAGES), config)
+        assert _is_interrupted(r3)
         result = await e2e_graph.ainvoke(Command(resume=APPROVAL_FINAL), config)
         assert result["last_published_at"] != ""
         assert not _is_interrupted(result)
@@ -41,8 +55,7 @@ class TestFullRunHappyPath:
         from graph.state import ShotStatus
 
         config = {"configurable": {"thread_id": "e2e-shots"}}
-        await e2e_graph.ainvoke(initial_state(), config)
-        await e2e_graph.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        await _approve_script_and_images(e2e_graph, config)
         result = await e2e_graph.ainvoke(Command(resume=APPROVAL_FINAL), config)
 
         terminal = {ShotStatus.approved, ShotStatus.escalated}
@@ -55,8 +68,7 @@ class TestFullRunHappyPath:
     @pytest.mark.asyncio
     async def test_e2e_disclosure_flag_set_in_final_state(self, e2e_graph):
         config = {"configurable": {"thread_id": "e2e-disclosure"}}
-        await e2e_graph.ainvoke(initial_state(), config)
-        await e2e_graph.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        await _approve_script_and_images(e2e_graph, config)
         result = await e2e_graph.ainvoke(Command(resume=APPROVAL_FINAL), config)
         meta = result["metadata"]
         flag = (
@@ -69,8 +81,7 @@ class TestFullRunHappyPath:
     @pytest.mark.asyncio
     async def test_e2e_voiceover_and_video_path_set(self, e2e_graph):
         config = {"configurable": {"thread_id": "e2e-assets"}}
-        await e2e_graph.ainvoke(initial_state(), config)
-        await e2e_graph.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        await _approve_script_and_images(e2e_graph, config)
         result = await e2e_graph.ainvoke(Command(resume=APPROVAL_FINAL), config)
         assert result["voiceover_url"] != ""
         assert result["final_video_path"] != ""
@@ -78,8 +89,7 @@ class TestFullRunHappyPath:
     @pytest.mark.asyncio
     async def test_e2e_cost_log_populated(self, e2e_graph):
         config = {"configurable": {"thread_id": "e2e-cost"}}
-        await e2e_graph.ainvoke(initial_state(), config)
-        await e2e_graph.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        await _approve_script_and_images(e2e_graph, config)
         result = await e2e_graph.ainvoke(Command(resume=APPROVAL_FINAL), config)
         assert len(result["cost_log"]) > 0
 
@@ -108,8 +118,7 @@ class TestRunWithRetries:
     async def test_e2e_with_one_retry_completes(self):
         g = make_graph(quality_fail_shot_ids=["shot_000"], fail_times=1)
         config = {"configurable": {"thread_id": "e2e-retry-pass"}}
-        await g.ainvoke(initial_state(), config)
-        await g.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        await _approve_script_and_images(g, config)
         result = await g.ainvoke(Command(resume=APPROVAL_FINAL), config)
         assert result["last_published_at"] != ""
 
@@ -123,8 +132,7 @@ class TestRunWithRetries:
             fail_times=MAX_SHOT_RETRIES + 5,
         )
         config = {"configurable": {"thread_id": "e2e-escalated"}}
-        await g.ainvoke(initial_state(), config)
-        await g.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        await _approve_script_and_images(g, config)
         result = await g.ainvoke(Command(resume=APPROVAL_FINAL), config)
 
         shot_000 = next(
@@ -167,8 +175,7 @@ class TestEditPayloadAtGates:
     @pytest.mark.asyncio
     async def test_metadata_edit_applied_at_final_gate(self, e2e_graph):
         config = {"configurable": {"thread_id": "e2e-edit-meta"}}
-        await e2e_graph.ainvoke(initial_state(), config)
-        await e2e_graph.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        await _approve_script_and_images(e2e_graph, config)
 
         resume_payload = {
             "approved": True,

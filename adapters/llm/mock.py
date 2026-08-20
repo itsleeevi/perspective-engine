@@ -15,7 +15,9 @@ from adapters.llm.base import (
     QualityCheckResult,
     ScriptResult,
     ShotBreakdownResult,
+    VisualBeatsResult,
 )
+from graph.script_fixture import fixture_to_beats, to_third_person
 
 
 class MockLLMAdapter(LLMAdapter):
@@ -42,15 +44,46 @@ class MockLLMAdapter(LLMAdapter):
         # Tracks how many times each shot id has been checked so far.
         self._check_counts: dict[str, int] = {}
 
-    async def write_script(self, topic: str, brief: str) -> ScriptResult:
-        return ScriptResult(
-            beats=[
-                f"[HOOK] The world has never seen {topic} from this angle.",
-                f"We begin at the very start of {topic}.",
-                "The middle unfolds in unexpected ways.",
-                "A turn that reframes everything before it.",
-                "The perspective completes its shift.",
-            ]
+    async def write_script(
+        self,
+        topic: str,
+        brief: str,
+        include_hook: bool = True,
+        target_minutes: float = 0.0,
+    ) -> ScriptResult:
+        # Mirrors the real adapter's fixture-shaped output (hook + named
+        # levels), so a mock run exercises the same title-card / chunking
+        # code paths a real LLM or fixture run would.
+        fixture = {
+            "hook": f"Nobody tells you what {topic} really costs.",
+            "levels": [
+                {
+                    "name": "The Beginning",
+                    "beats": [
+                        f"You start at the bottom of {topic}. It is nothing "
+                        "like you imagined it would be.",
+                    ],
+                },
+                {
+                    "name": "The Middle",
+                    "beats": [
+                        "The middle unfolds in unexpected ways. Every choice "
+                        "costs you something you didn't expect to lose.",
+                    ],
+                },
+            ],
+        }
+        return ScriptResult(beats=fixture_to_beats(fixture, include_hook=include_hook))
+
+    async def visualize_beats(
+        self, beats: list[str], topic: str = ""
+    ) -> VisualBeatsResult:
+        """
+        Stand in for the real rewrite with the local rule-based one, so mock
+        runs produce the same prompt shape a real run would.
+        """
+        return VisualBeatsResult(
+            descriptions=[to_third_person(beat) for beat in beats]
         )
 
     async def breakdown_shots(

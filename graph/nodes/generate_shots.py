@@ -8,8 +8,8 @@ Control-flow:
         derive still → generate clip (motion only) → quality check → retry if
         needed (up to MAX_SHOT_RETRIES) → mark approved or escalated.
     After every ``process_shot`` completes, a fixed edge routes to
-    ``generate_voiceover``.  LangGraph applies barrier semantics: the voiceover
-    node runs exactly once after ALL per-shot sub-executions reach it.
+    ``human_review_images``.  LangGraph applies barrier semantics: the image
+    review node runs exactly once after ALL per-shot sub-executions reach it.
 
 Design note:
     The retry loop lives inside ``process_shot`` (not as graph edges) so that
@@ -22,9 +22,12 @@ Invariants enforced here:
       called (assert_still_before_video).
     - static_pan shots receive a still but no video-gen call.
     - Per-shot retry count is capped at MAX_SHOT_RETRIES then escalated.
+    - Title-card shots never reach an image model or the quality gate.
 """
 
 from __future__ import annotations
+
+import asyncio
 
 from langgraph.types import Send
 
@@ -34,6 +37,7 @@ from adapters.video_gen.base import VideoGenAdapter
 from graph.config import MAX_SHOT_RETRIES
 from graph.nodes.quality_gate import check_quality
 from graph.state import CostEntry, PipelineState, Shot, ShotMode, ShotStatus
+from graph.title_cards import render_title_card
 from graph.validation import assert_still_before_video
 
 
@@ -58,7 +62,7 @@ def dispatch_shots(state: PipelineState) -> list[Send]:
 
     Each Send starts a process_shot sub-execution with a per-shot slice of
     state.  After process_shot completes, a fixed edge routes to
-    generate_voiceover so the barrier count equals the number of shots.
+    human_review_images so the barrier count equals the number of shots.
     """
     return [
         Send(
@@ -96,55 +100,87 @@ async def process_shot(
     char_refs = state.character_refs
     cost_entries: list[CostEntry] = []
 
-    for _attempt in range(MAX_SHOT_RETRIES + 1):
-        # 1. Derive a per-shot still anchored to the reference sheet.
-        still_result = await image_gen.derive_still(
-            shot_prompt=shot.prompt,
-            sheet_image_urls=char_refs.sheet_image_urls,
-            style_descriptor=char_refs.style_descriptor,
+    # Title cards are drawn locally from text: no image model, nothing for the
+    # quality gate to judge, no cost, and no way for them to fail.
+    if shot.is_title_card:
+        still_url = await asyncio.to_thread(render_title_card, shot.prompt)
+        shot = shot.model_copy(
+            update={"still_url": still_url, "status": ShotStatus.approved}
         )
-        shot = shot.model_copy(update={"still_url": still_result.still_url})
-        cost_entries.append(
-            CostEntry(
-                node="process_shot:still",
-                provider="image_gen",
-                amount_usd=still_result.cost_usd,
-            )
-        )
+        return {
+            "shot_list": [shot],
+            "cost_log": [
+                CostEntry(node="process_shot:title", provider="local", amount_usd=0.0)
+            ],
+        }
 
-        # 2. For motion shots: enforce still-first, then animate.
-        if shot.mode == ShotMode.motion:
-            assert_still_before_video(shot)
-            clip_result = await video_gen.generate_clip(
-                source_still_url=shot.still_url,
-                prompt=shot.prompt,
-                duration_seconds=shot.duration_seconds,
-                model=shot.assigned_model,
+    for attempt in range(MAX_SHOT_RETRIES + 1):
+        try:
+            # 1. Derive a per-shot still anchored to the reference sheet. The
+            # attempt index reaches the adapter so a retry redraws the shot
+            # rather than reproducing the frame the quality gate just
+            # rejected.
+            still_result = await image_gen.derive_still(
+                shot_prompt=shot.prompt,
+                sheet_image_urls=char_refs.sheet_image_urls,
+                style_descriptor=char_refs.style_descriptor,
+                attempt=attempt,
             )
-            shot = shot.model_copy(update={"clip_url": clip_result.clip_url})
+            shot = shot.model_copy(update={"still_url": still_result.still_url})
             cost_entries.append(
                 CostEntry(
-                    node="process_shot:clip",
-                    provider="video_gen",
-                    amount_usd=clip_result.cost_usd,
+                    node="process_shot:still",
+                    provider="image_gen",
+                    amount_usd=still_result.cost_usd,
                 )
             )
 
-        # 3. Quality check.
-        qc_result = await check_quality(
-            shot=shot,
-            char_refs=char_refs,
-            llm=llm,
-        )
-        cost_entries.append(
-            CostEntry(
-                node="process_shot:quality",
-                provider="llm",
-                amount_usd=qc_result.cost_usd,
-            )
-        )
+            # 2. For motion shots: enforce still-first, then animate.
+            if shot.mode == ShotMode.motion:
+                assert_still_before_video(shot)
+                clip_result = await video_gen.generate_clip(
+                    source_still_url=shot.still_url,
+                    prompt=shot.prompt,
+                    duration_seconds=shot.duration_seconds,
+                    model=shot.assigned_model,
+                )
+                shot = shot.model_copy(update={"clip_url": clip_result.clip_url})
+                cost_entries.append(
+                    CostEntry(
+                        node="process_shot:clip",
+                        provider="video_gen",
+                        amount_usd=clip_result.cost_usd,
+                    )
+                )
 
-        if qc_result.passed:
+            # 3. Quality check.
+            qc_result = await check_quality(
+                shot=shot,
+                char_refs=char_refs,
+                llm=llm,
+            )
+            cost_entries.append(
+                CostEntry(
+                    node="process_shot:quality",
+                    provider="llm",
+                    amount_usd=qc_result.cost_usd,
+                )
+            )
+            passed = qc_result.passed
+            failure_reason = qc_result.failure_reason
+        except RuntimeError as exc:
+            # A moderation block, an exhausted rate-limit backoff, or any
+            # other adapter-level failure is a failed attempt, not a crash.
+            # Left uncaught, one flagged shot in a ~150-shot run took down
+            # every shot after it — every image already paid for, thrown
+            # away, for a run whose length is exactly why AGENTS.md requires
+            # retries to be capped and then escalated rather than allowed to
+            # propagate. Escalating on the SAME footing as a failed quality
+            # check reuses that machinery instead of adding a second one.
+            passed = False
+            failure_reason = f"generation error: {exc}"
+
+        if passed:
             shot = shot.model_copy(update={"status": ShotStatus.approved})
             break
 
@@ -155,7 +191,7 @@ async def process_shot(
                     "retry_count": new_retry_count,
                     "status": ShotStatus.escalated,
                     "escalated": True,
-                    "quality_failure_reason": qc_result.failure_reason,
+                    "quality_failure_reason": failure_reason,
                 }
             )
             break
@@ -164,7 +200,7 @@ async def process_shot(
             update={
                 "retry_count": new_retry_count,
                 "status": ShotStatus.failed,
-                "quality_failure_reason": qc_result.failure_reason,
+                "quality_failure_reason": failure_reason,
             }
         )
         # Continue to next attempt.

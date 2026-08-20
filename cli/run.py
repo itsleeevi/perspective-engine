@@ -6,13 +6,15 @@ Usage:
     python -m cli.run --topic "the invention of language"
 
 Loads .env automatically, wires real adapters, runs the full graph, and
-handles the two human-review interrupt gates from the terminal.
+handles the three human-review interrupt gates from the terminal.
 
 Interrupt gates
 ---------------
 Gate 1 (human_review_script):  prints script and shot list; prompts for
     approval, rejection, or inline edits before character-ref generation.
-Gate 2 (human_review_final):   prints final video path and metadata; prompts
+Gate 2 (human_review_images):  prints each generated still path; prompts
+    to approve all or list shot ids to regenerate before voiceover.
+Gate 3 (human_review_final):   prints final video path and metadata; prompts
     for approval, rejection, or inline edits before publish.
 """
 
@@ -38,10 +40,12 @@ from langgraph.types import Command
 
 from adapters.image_gen.fal import FalImageGenAdapter
 from adapters.image_gen.mock import MockImageGenAdapter
-from adapters.llm.anthropic import AnthropicLLMAdapter
+from adapters.image_gen.openai_image import OpenAIImageGenAdapter
+from adapters.llm.openai_llm import OpenAILLMAdapter
 from adapters.llm.mock import MockLLMAdapter
 from adapters.video_gen.fal import FalVideoGenAdapter
 from adapters.video_gen.mock import MockVideoGenAdapter
+from adapters.voice.edge import EdgeTTSVoiceAdapter
 from adapters.voice.elevenlabs import ElevenLabsVoiceAdapter
 from adapters.voice.mock import MockVoiceAdapter
 from graph.graph import build_graph
@@ -65,13 +69,29 @@ def _print_interrupt(iv: dict) -> None:
             print(f"    [{i}] {beat}")
 
     if "shot_list" in iv:
-        print("\n  Shot list:")
-        for shot in iv["shot_list"]:
-            truncated = shot.get("prompt", "")[:70]
-            print(
-                f"    [{shot['id']}] mode={shot.get('mode', '?')}  "
-                f"prompt={truncated!r}"
-            )
+        if iv.get("gate") == "human_review_images":
+            print("\n  Generated stills:")
+            for shot in iv["shot_list"]:
+                if shot.get("is_title_card"):
+                    continue
+                still = shot.get("still_url", "")
+                if still.startswith("file://"):
+                    still = still[len("file://") :]
+                status = shot.get("status", "?")
+                regen = shot.get("manual_regen_count", 0)
+                regen_note = f"  regen={regen}" if regen else ""
+                print(
+                    f"    [{shot['id']}] status={status}{regen_note}\n"
+                    f"         still={still}"
+                )
+        else:
+            print("\n  Shot list:")
+            for shot in iv["shot_list"]:
+                truncated = shot.get("prompt", "")[:70]
+                print(
+                    f"    [{shot['id']}] mode={shot.get('mode', '?')}  "
+                    f"prompt={truncated!r}"
+                )
 
     if "final_video_path" in iv:
         print(f"\n  Final video: {iv['final_video_path']}")
@@ -113,6 +133,20 @@ def _prompt_resume(iv: dict) -> dict:
     _print_interrupt(iv)
     print()
 
+    if iv.get("gate") == "human_review_images":
+        while True:
+            raw = input(
+                "  Approve all? [y / n / shot ids to regenerate, space-separated]: "
+            ).strip()
+            if raw.lower() in ("y", "yes", ""):
+                return {"approved": True, "regenerate_shot_ids": []}
+            if raw.lower() in ("n", "no"):
+                return {"approved": False, "regenerate_shot_ids": []}
+            ids = raw.split()
+            if ids:
+                return {"approved": True, "regenerate_shot_ids": ids}
+            print("  Please enter 'y', 'n', or one or more shot ids.")
+
     while True:
         raw = input("  Approve? [y / n / edit]: ").strip().lower()
         if raw in ("y", "yes"):
@@ -134,7 +168,16 @@ async def main(
     use_cache: bool = True,
     mock: bool = False,
     max_shots: int | None = None,
-    static_only: bool = False,
+    static_only: bool = True,
+    script_fixture: str = "",
+    max_levels: int = 0,
+    target_minutes: float = 9.0,
+    output_height: int = 0,
+    voice_name: str = "",
+    paid_voice: bool = False,
+    image_provider: str = "gpt-image-2",
+    image_quality: str = "low",
+    include_hook: bool = False,
 ) -> None:
     # Adapters read ADAPTER_CACHE from the environment at call time, so setting
     # it here (before the graph runs) is enough to toggle the disk cache.
@@ -155,17 +198,31 @@ async def main(
         video_gen: Any = MockVideoGenAdapter()
         voice: Any = MockVoiceAdapter()
     else:
-        n = max_shots or 5
-        if static_only:
-            est = f"~${n * 0.03:.2f} (no video, FLUX stills only)"
-        else:
-            est = f"~${n * 1.20:.2f}"
-        shots_note = f", {n} shot(s)" if max_shots else ""
-        print(f"Mode: REAL (live API calls, {est}{shots_note})")
-        llm = AnthropicLLMAdapter()
-        image_gen = FalImageGenAdapter()
+        voice_label = "ElevenLabs" if paid_voice else "edge-TTS (free)"
+        image_label = (
+            "fal FLUX.1 [schnell]"
+            if image_provider == "fal"
+            else f"OpenAI {image_provider} ({image_quality})"
+        )
+        print(f"Mode: REAL — {image_label} stills + {voice_label}")
+        if not static_only:
+            print("Motion enabled: Seedance video calls cost ~$1.20 per shot.")
+        llm = OpenAILLMAdapter()
+        image_gen = (
+            OpenAIImageGenAdapter(model=image_provider, quality=image_quality)
+            if image_provider != "fal"
+            else FalImageGenAdapter()
+        )
         video_gen = FalVideoGenAdapter()
-        voice = ElevenLabsVoiceAdapter()
+        voice = (
+            ElevenLabsVoiceAdapter()
+            if paid_voice
+            else (
+                EdgeTTSVoiceAdapter(voice_name)
+                if voice_name
+                else EdgeTTSVoiceAdapter()
+            )
+        )
 
     print("Building adapters and compiling graph …")
 
@@ -181,14 +238,21 @@ async def main(
     config: dict = {"configurable": {"thread_id": "cli-run-main"}}
 
     print("Running pipeline …\n")
-    initial: dict = {"topic": topic}
+    initial: dict = {"topic": topic, "static_only": static_only}
     if max_shots is not None:
         initial["max_shots"] = max_shots
-    if static_only:
-        initial["static_only"] = True
+    if script_fixture:
+        initial["script_fixture_path"] = script_fixture
+    if max_levels:
+        initial["max_levels"] = max_levels
+    if target_minutes > 0:
+        initial["target_minutes"] = target_minutes
+    initial["include_hook"] = include_hook
+    if output_height:
+        initial["output_height"] = output_height
     result = await graph.ainvoke(initial, config)
 
-    # Interrupt loop — handles both human-review gates.
+    # Interrupt loop — handles all human-review gates.
     while result.get("__interrupt__"):
         interrupt_obj = result["__interrupt__"][0]
         iv: dict = (
@@ -261,18 +325,117 @@ def _parse_args() -> argparse.Namespace:
         metavar="N",
         dest="max_shots",
         help=(
-            "Limit the pipeline to N shots (default: all 5). "
-            "Useful for cheap real-money smoke tests — 1 shot ≈ $1.20."
+            "Limit the pipeline to the first N shots. Useful for cheap "
+            "smoke tests — one still is about $0.01."
         ),
     )
     parser.add_argument(
-        "--static",
+        "--allow-motion",
         action="store_true",
-        dest="static_only",
         help=(
-            "Force all shots to static_pan — skips Seedance video generation entirely. "
-            "Uses only FLUX stills + Claude + ElevenLabs. "
-            "With --shots 1: ~$0.10 first run, ~$0.05 on cached re-runs."
+            "Allow shots tagged 'motion' to be animated with Seedance "
+            "(~$1.20 per shot). Off by default: this format is a still "
+            "slideshow, so every shot renders as static_pan."
+        ),
+    )
+    parser.add_argument(
+        "--script-fixture",
+        metavar="PATH",
+        default="",
+        help=(
+            "Use a reviewed script fixture JSON instead of generating the "
+            "script with the LLM. Auto-detected for the demo topic."
+        ),
+    )
+    parser.add_argument(
+        "--levels",
+        type=int,
+        default=0,
+        metavar="N",
+        dest="max_levels",
+        help=(
+            "Render only the first N levels of the fixture. Use this to "
+            "preview the look before committing to a full-length render."
+        ),
+    )
+    parser.add_argument(
+        "--resolution",
+        type=int,
+        default=0,
+        choices=[720, 1080, 1440, 2160],
+        metavar="HEIGHT",
+        dest="output_height",
+        help="Output frame height at 16:9 (default 2160, i.e. 4K).",
+    )
+    parser.add_argument(
+        "--minutes",
+        type=float,
+        default=11.0,
+        metavar="N",
+        dest="target_minutes",
+        help=(
+            "Target spoken runtime in minutes (default 11, which measures "
+            "out at roughly 10). Treated as a hard word ceiling when the "
+            "script is written, so the full arc still lands inside it. "
+            "Ignored when --script-fixture supplies a pre-written script."
+        ),
+    )
+    parser.add_argument(
+        "--voice",
+        default="",
+        metavar="NAME",
+        dest="voice_name",
+        help="edge-tts voice name (default en-US-ChristopherNeural).",
+    )
+    parser.add_argument(
+        "--elevenlabs",
+        action="store_true",
+        dest="paid_voice",
+        help=(
+            "Narrate with ElevenLabs instead of free edge-tts "
+            "(~$0.10 per 1,000 characters)."
+        ),
+    )
+    parser.add_argument(
+        "--image-provider",
+        default="gpt-image-2",
+        choices=[
+            "fal",
+            "gpt-image-2",
+            "gpt-image-1.5",
+            "gpt-image-1",
+            "gpt-image-1-mini",
+        ],
+        dest="image_provider",
+        help=(
+            "Stills provider. Default 'gpt-image-2' (~$0.0055/image at low "
+            "quality, requires OPENAI_API_KEY): the only option measured to "
+            "render in-scene text reliably. 'fal' is FLUX.1 [schnell] "
+            "(~$0.003/image) and cannot spell. See --image-quality."
+        ),
+    )
+    parser.add_argument(
+        "--image-quality",
+        default="low",
+        choices=["low", "medium", "high"],
+        dest="image_quality",
+        help=(
+            "Quality tier for an OpenAI --image-provider (ignored for fal). "
+            "Default 'low' (~$0.0055/image) is the production default: most "
+            "of what medium (~$0.042, 7.6x the cost) used to buy turned out "
+            "to be storyboard-prompt fixes, not rendering fidelity. 'high' "
+            "is not recommended at any budget — it drifts off the locked "
+            "character design."
+        ),
+    )
+    parser.add_argument(
+        "--include-hook",
+        action="store_true",
+        dest="include_hook",
+        help=(
+            "Speak the fixture/LLM script's cold-open hook line before "
+            "Level One's title card (default: off — start directly on "
+            "Level One)."
         ),
     )
     args = parser.parse_args()
@@ -290,6 +453,15 @@ if __name__ == "__main__":
             use_cache=not _args.no_cache,
             mock=_args.mock,
             max_shots=_args.max_shots,
-            static_only=_args.static_only,
+            static_only=not _args.allow_motion,
+            script_fixture=_args.script_fixture,
+            max_levels=_args.max_levels,
+            target_minutes=_args.target_minutes,
+            output_height=_args.output_height,
+            voice_name=_args.voice_name,
+            paid_voice=_args.paid_voice,
+            image_provider=_args.image_provider,
+            image_quality=_args.image_quality,
+            include_hook=_args.include_hook,
         )
     )

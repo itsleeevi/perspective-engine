@@ -1,5 +1,5 @@
 """
-Tests for the two non-bypassable human-review interrupt gates.
+Tests for the non-bypassable human-review interrupt gates.
 
 LangGraph 1.2.x notes:
 - ``ainvoke`` returns ``{"__interrupt__": [...]}`` when paused (no exception).
@@ -13,7 +13,7 @@ from __future__ import annotations
 import pytest
 from langgraph.types import Command
 
-from tests.conftest import APPROVAL_FINAL, APPROVAL_SCRIPT, initial_state, make_graph
+from tests.conftest import APPROVAL_FINAL, APPROVAL_IMAGES, APPROVAL_SCRIPT, initial_state, make_graph
 
 
 THREAD_1 = {"configurable": {"thread_id": "test-interrupts-1"}}
@@ -83,7 +83,7 @@ class TestFirstInterrupt:
         g = make_graph()
         await g.ainvoke(initial_state(), THREAD_1)
         result2 = await g.ainvoke(Command(resume=APPROVAL_SCRIPT), THREAD_1)
-        assert _is_interrupted(result2), "Expected second interrupt at human_review_final"
+        assert _is_interrupted(result2), "Expected second interrupt at human_review_images"
         snap = g.get_state(THREAD_1)
         assert len(_sheet_urls(snap.values)) > 0
 
@@ -100,20 +100,21 @@ class TestFirstInterrupt:
 class TestSecondInterrupt:
     """human_review_final: pauses before publish."""
 
-    async def _run_to_second_interrupt(self, g, config) -> dict:
+    async def _run_to_final_interrupt(self, g, config) -> dict:
         await g.ainvoke(initial_state(), config)
-        return await g.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        await g.ainvoke(Command(resume=APPROVAL_SCRIPT), config)
+        return await g.ainvoke(Command(resume=APPROVAL_IMAGES), config)
 
     @pytest.mark.asyncio
     async def test_graph_pauses_at_second_gate(self):
         g = make_graph()
-        result2 = await self._run_to_second_interrupt(g, THREAD_2)
+        result2 = await self._run_to_final_interrupt(g, THREAD_2)
         assert _is_interrupted(result2)
 
     @pytest.mark.asyncio
     async def test_state_has_final_video_before_second_gate(self):
         g = make_graph()
-        result2 = await self._run_to_second_interrupt(g, THREAD_2)
+        result2 = await self._run_to_final_interrupt(g, THREAD_2)
         # final_video_path IS in the result (set by assemble before the interrupt)
         fvp = result2.get("final_video_path", "")
         if not fvp:
@@ -124,7 +125,7 @@ class TestSecondInterrupt:
     @pytest.mark.asyncio
     async def test_state_has_disclosure_set_before_second_gate(self):
         g = make_graph()
-        await self._run_to_second_interrupt(g, THREAD_2)
+        await self._run_to_final_interrupt(g, THREAD_2)
         snap = g.get_state(THREAD_2)
         meta = snap.values.get("metadata")
         flag = (
@@ -139,14 +140,14 @@ class TestSecondInterrupt:
     @pytest.mark.asyncio
     async def test_publish_not_run_before_approval(self):
         g = make_graph()
-        await self._run_to_second_interrupt(g, THREAD_2)
+        await self._run_to_final_interrupt(g, THREAD_2)
         snap = g.get_state(THREAD_2)
         assert snap.values.get("last_published_at", "") == ""
 
     @pytest.mark.asyncio
     async def test_resume_with_approval_completes_run(self):
         g = make_graph()
-        await self._run_to_second_interrupt(g, THREAD_2)
+        await self._run_to_final_interrupt(g, THREAD_2)
         result = await g.ainvoke(Command(resume=APPROVAL_FINAL), THREAD_2)
         assert result["last_published_at"] != ""
         assert not _is_interrupted(result)
@@ -154,7 +155,7 @@ class TestSecondInterrupt:
     @pytest.mark.asyncio
     async def test_second_gate_rejection_aborts(self):
         g = make_graph()
-        await self._run_to_second_interrupt(g, THREAD_3)
+        await self._run_to_final_interrupt(g, THREAD_3)
         with pytest.raises(ValueError, match="reject"):
             await g.ainvoke(
                 Command(resume={"approved": False, "edits": []}), THREAD_3
