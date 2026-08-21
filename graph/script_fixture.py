@@ -263,16 +263,20 @@ def fixture_to_beats(data: dict, include_hook: bool = True) -> list[str]:
     straight on the first level instead of a cold open.
 
     Each level becomes a ``[TITLE] Level N: Name`` beat followed by its
-    narration paragraphs (second-person VO lines).
+    narration paragraphs (second-person VO lines). Set
+    ``include_level_titles`` to false on the fixture to skip the cards and
+    play as a continuous scene.
     """
     beats: list[str] = []
     hook = str(data.get("hook", "")).strip()
     if hook and include_hook:
         beats.append(hook)
+    include_titles = bool(data.get("include_level_titles", True))
     for i, level in enumerate(data["levels"]):
         name = str(level.get("name", f"Level {i + 1}")).strip()
         word = _LEVEL_WORDS[i] if i < len(_LEVEL_WORDS) else str(i + 1)
-        beats.append(f"{TITLE_PREFIX} Level {word}: {name}")
+        if include_titles:
+            beats.append(f"{TITLE_PREFIX} Level {word}: {name}")
         for para in level.get("beats", []):
             text = str(para).strip()
             if not text:

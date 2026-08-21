@@ -1,0 +1,905 @@
+{
+  "style": "Cinematic 16:9 graphic-novel still, painterly and sharp, muted olive, cigarette-gold, cold fluorescent teal, film grain, dramatic lighting. Recurring stylized Russian president (graphic-novel Putin-like figure, NOT a photograph): short pale thinning hair, lined pale face, thin mouth, small cold unsmiling eyes, dark navy suit. Recurring fictional American man: late thirties, short brown hair, weary small eyes, slightly oversized round cartoon head, not a celebrity. No readable text, letters, numbers, logos, watermarks, or captions.",
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "putin_v2_000.png",
+      "line": "I do not hate you.",
+      "scene": "Extreme close-up of the stylized Russian president's cold eyes looking straight into the camera, lamp catching an iris, rain on glass behind him."
+    },
+    {
+      "id": "001",
+      "filename": "putin_v2_001.png",
+      "line": "Hate would mean you counted as a person.",
+      "scene": "He sits alone at a steel desk; across from him an empty chair where a person should be. The chair is weather, not a guest."
+    },
+    {
+      "id": "002",
+      "filename": "putin_v2_002.png",
+      "line": "You are weather. A climate that repeats.",
+      "scene": "A rain-lashed window, looping weather-radar circles on a glowing map, the president watching the same storm repeat."
+    },
+    {
+      "id": "003",
+      "filename": "putin_v2_003.png",
+      "line": "I have been waiting you out since you had a flip phone.",
+      "scene": "Younger Americans with flip phones in a 2000s mall, tiny in the rain-window reflection of the president who has been waiting."
+    },
+    {
+      "id": "004",
+      "filename": "putin_v2_004.png",
+      "line": "Weather is not an enemy. Weather is a calendar.",
+      "scene": "A wall calendar instead of a war map; the president's finger on a date, not a target. Weather as time."
+    },
+    {
+      "id": "005",
+      "filename": "putin_v2_005.png",
+      "line": "You know my name.",
+      "scene": "Americans on a phone screen mouthing his name; he does not look at the camera, he already knows."
+    },
+    {
+      "id": "006",
+      "filename": "putin_v2_006.png",
+      "line": "I have known your type longer than you have had a passport.",
+      "scene": "A pile of expired passports on his desk; he has been cataloguing this type since before the ink faded."
+    },
+    {
+      "id": "007",
+      "filename": "putin_v2_007.png",
+      "line": "The first American I ever met was not a person. It was a commercial.",
+      "scene": "A CRT television blasting a toothpaste-and-soda commercial; the president watching it like a briefing, not like TV."
+    },
+    {
+      "id": "008",
+      "filename": "putin_v2_008.png",
+      "line": "White teeth. A red cup the size of a head.",
+      "scene": "Giant white teeth and a huge sweating red cup filling the TV frame, grotesque, American, too bright."
+    },
+    {
+      "id": "009",
+      "filename": "putin_v2_009.png",
+      "line": "A family hugging in a kitchen so bright it has to be fake, because it is.",
+      "scene": "A too-bright fake kitchen, family frozen mid-hug under studio lights, cables on the linoleum, the president's silhouette in the doorway."
+    },
+    {
+      "id": "010",
+      "filename": "putin_v2_010.png",
+      "line": "That is not entertainment to me.",
+      "scene": "He turns away from the TV, unimpressed; the commercial is a document, not a joke."
+    },
+    {
+      "id": "011",
+      "filename": "putin_v2_011.png",
+      "line": "That is your self-portrait, sold back to you at scale.",
+      "scene": "Billboard of the American man's face sold back as a product, endless copies receding down a highway at night."
+    },
+    {
+      "id": "012",
+      "filename": "putin_v2_012.png",
+      "line": "You talk in restaurants like the room is empty.",
+      "scene": "Crowded diner, the American man shouting with both hands, other diners recoiling, the president observing from a dark booth."
+    },
+    {
+      "id": "013",
+      "filename": "putin_v2_013.png",
+      "line": "You ask a stranger their job before their name.",
+      "scene": "The American pumps a stranger's hand over a buffet, asking a job before a name, name-tag still face-down."
+    },
+    {
+      "id": "014",
+      "filename": "putin_v2_014.png",
+      "line": "You wear the logo on purpose.",
+      "scene": "Close on a hoodie chest with a huge unreadable brand mark worn like a uniform, on purpose."
+    },
+    {
+      "id": "015",
+      "filename": "putin_v2_015.png",
+      "line": "In the classroom they still draw you with a flag on the sleeve and no idea where Kaliningrad is.",
+      "scene": "A drab classroom chalkboard: stick-figure American with a sleeve flag, a world map with a blank hole where Kaliningrad should be."
+    },
+    {
+      "id": "016",
+      "filename": "putin_v2_016.png",
+      "line": "That drawing is not an insult. It is an operating assumption.",
+      "scene": "The president underlines the chalkboard drawing in a dossier. Not insult. Operating assumption. Red pencil."
+    },
+    {
+      "id": "017",
+      "filename": "putin_v2_017.png",
+      "line": "I log the smile.",
+      "scene": "His hand stamps a photocopied American smile onto an index card. Logging it."
+    },
+    {
+      "id": "018",
+      "filename": "putin_v2_018.png",
+      "line": "You smile at cameras, at cashiers, at people who have not earned it.",
+      "scene": "The American grinning at a cashier who does not smile back; cameras; unearned warmth. The president takes notes in shadow."
+    },
+    {
+      "id": "019",
+      "filename": "putin_v2_019.png",
+      "line": "In my notes a smile is a tell:",
+      "scene": "Dossier page: a smile circled, labelled in the president's mind as a tell. Close on the circle, not on letters."
+    },
+    {
+      "id": "020",
+      "filename": "putin_v2_020.png",
+      "line": "you want to be liked more than you want to win.",
+      "scene": "The American nodding too fast in a meeting, palms open, needing to be liked, losing."
+    },
+    {
+      "id": "021",
+      "filename": "putin_v2_021.png",
+      "line": "I watch your movies the way a surgeon watches an X-ray.",
+      "scene": "The president as a surgeon at an X-ray lightbox, but the film is a Hollywood still. Clinical. Cold."
+    },
+    {
+      "id": "022",
+      "filename": "putin_v2_022.png",
+      "line": "The hero who breaks the rules and is rewarded. The president who is secretly good.",
+      "scene": "Cinema screen: a rule-breaking hero rewarded under fireworks; a secretly-good president at a podium. Empty theatre, one watcher."
+    },
+    {
+      "id": "023",
+      "filename": "putin_v2_023.png",
+      "line": "The war that ends in a speech.",
+      "scene": "A wooden podium, a war ending in a speech, ticker-tape, no soldiers left on the stage. Hollow victory lighting."
+    },
+    {
+      "id": "024",
+      "filename": "putin_v2_024.png",
+      "line": "I do not believe the movies. I believe that you do.",
+      "scene": "Split: the president unmoved in the dark; the American in the front row, mouth open, believing every frame."
+    },
+    {
+      "id": "025",
+      "filename": "putin_v2_025.png",
+      "line": "By the time you walk into a real room,",
+      "scene": "The American in a rumpled jacket waiting in a panelled anteroom, about to enter, clock with no numbers."
+    },
+    {
+      "id": "026",
+      "filename": "putin_v2_026.png",
+      "line": "the cartoon is already sitting in the other chair.",
+      "scene": "He sits down. The other chair already holds a cardboard tourist in shorts. The cartoon arrived first."
+    },
+    {
+      "id": "027",
+      "filename": "putin_v2_027.png",
+      "line": "You will spend the first twenty minutes fighting a drawing of yourself.",
+      "scene": "The American jabbing a finger at the cardboard cutout, arguing with a drawing of himself, twenty minutes on the clock."
+    },
+    {
+      "id": "028",
+      "filename": "putin_v2_028.png",
+      "line": "Most of you never notice.",
+      "scene": "His shoe tapping under the table, unaware. The president watches through a barely open door."
+    },
+    {
+      "id": "029",
+      "filename": "putin_v2_029.png",
+      "line": "The second folder is thinner, and it cost more to build.",
+      "scene": "A thinner, more expensive folder placed on the desk beside the fat one. Gold clip. Cost."
+    },
+    {
+      "id": "030",
+      "filename": "putin_v2_030.png",
+      "line": "It is not about what you say. It is about what you buy.",
+      "scene": "Not a speech: a pile of receipts and a credit-card slip. What you buy. The president's hand on the receipts."
+    },
+    {
+      "id": "031",
+      "filename": "putin_v2_031.png",
+      "line": "You will sell a principle for a cheaper flight.",
+      "scene": "Airport kiosk, the American choosing the cheapest flight, a crumpled principle in the bin."
+    },
+    {
+      "id": "032",
+      "filename": "putin_v2_032.png",
+      "line": "You will sell a friendship for a better rate.",
+      "scene": "Cafe handshake, a better rate on a napkin, friendship cooling in two cups. The American taking it."
+    },
+    {
+      "id": "033",
+      "filename": "putin_v2_033.png",
+      "line": "You will sell a secret, I am certain, for a feeling:",
+      "scene": "A small card that only feels like a feeling, held over a closed wallet. The secret is not money yet."
+    },
+    {
+      "id": "034",
+      "filename": "putin_v2_034.png",
+      "line": "being the smartest man at a table of people who already know.",
+      "scene": "The American leaning in at a dinner table of men who already exchanged a look. He needs to be the cleverest."
+    },
+    {
+      "id": "035",
+      "filename": "putin_v2_035.png",
+      "line": "Money is the lazy tool. I do not lead with money.",
+      "scene": "A dusty closed cash box ignored; a velvet rope labelled access in the president's gesture, no letters."
+    },
+    {
+      "id": "036",
+      "filename": "putin_v2_036.png",
+      "line": "I lead with access.",
+      "scene": "The president opening a door marked only by light: access. The American stepping toward it, hungry."
+    },
+    {
+      "id": "037",
+      "filename": "putin_v2_037.png",
+      "line": "A conference in Vienna. A think-tank panel.",
+      "scene": "Vienna conference foyer, marble, think-tank banner with no readable words, the American clutching a programme."
+    },
+    {
+      "id": "038",
+      "filename": "putin_v2_038.png",
+      "line": "A private dinner where someone important remembered your paper.",
+      "scene": "Candlelit dinner, the American lighting up as an older host mentions his paper. Ego, wine, heavy drapes."
+    },
+    {
+      "id": "039",
+      "filename": "putin_v2_039.png",
+      "line": "Ego is cheaper than cash, and it does not show up on a bank statement.",
+      "scene": "Bank statement with nothing unusual; a dinner invite beside it. Ego cheaper than a wire. The president almost smiles."
+    },
+    {
+      "id": "040",
+      "filename": "putin_v2_040.png",
+      "line": "You think of yourself as a citizen. I think of you as a market.",
+      "scene": "Split street: voting booth vs market stall. The American as citizen on the left, as product on the right."
+    },
+    {
+      "id": "041",
+      "filename": "putin_v2_041.png",
+      "line": "Markets have seasons. Markets punish hesitation.",
+      "scene": "Market chalkboard of seasons, a gavel of hesitation. Prices changing. The president as the stall's shadow."
+    },
+    {
+      "id": "042",
+      "filename": "putin_v2_042.png",
+      "line": "Markets, above all,",
+      "scene": "Wide market, rain, the stall waiting. 'Above all' hanging in the air as weather."
+    },
+    {
+      "id": "043",
+      "filename": "putin_v2_043.png",
+      "line": "come back after they crash and ask for the same product with a new slogan.",
+      "scene": "A crashed toy cart glued back with a new slogan sticker. Same dented wheel. The American returning with a bag."
+    },
+    {
+      "id": "044",
+      "filename": "putin_v2_044.png",
+      "line": "That is the most useful sentence I have on you.",
+      "scene": "The president's finger on one underlined sentence in the folder. The useful sentence. Close."
+    },
+    {
+      "id": "045",
+      "filename": "putin_v2_045.png",
+      "line": "You come back.",
+      "scene": "The American walking back into the same shop, same product, new bag. The clerk unsurprised. The president already knew."
+    },
+    {
+      "id": "046",
+      "filename": "putin_v2_046.png",
+      "line": "I respect the hardware.",
+      "scene": "The president nodding once at scale models of carriers on a planning table. Respect, private, no smile."
+    },
+    {
+      "id": "047",
+      "filename": "putin_v2_047.png",
+      "line": "I will tell you that in private, and I am not lying.",
+      "scene": "Two men at a night window, one is the president, thermos, city grid, telling the truth about hardware."
+    },
+    {
+      "id": "048",
+      "filename": "putin_v2_048.png",
+      "line": "Carriers. Satellites. A budget that looks like a hallucination when you write it in rubles.",
+      "scene": "Carrier models, satellite dishes, a budget spilling off the page next to ruble notes. Hallucination of money."
+    },
+    {
+      "id": "049",
+      "filename": "putin_v2_049.png",
+      "line": "I do not respect the will.",
+      "scene": "A steel I-beam standing; a slack frayed rope beside it. Hardware vs will. The president looking at the rope."
+    },
+    {
+      "id": "050",
+      "filename": "putin_v2_050.png",
+      "line": "That is the split. Everything after it hangs on that split.",
+      "scene": "A dossier split down the middle, a crack in the table. Everything hanging on that crack."
+    },
+    {
+      "id": "051",
+      "filename": "putin_v2_051.png",
+      "line": "I counted the years in Afghanistan. I counted the years in Iraq.",
+      "scene": "Wall calendar with years X'd out, two country names as shapes not letters. Afghanistan, Iraq, counted."
+    },
+    {
+      "id": "052",
+      "filename": "putin_v2_052.png",
+      "line": "I counted how long a democracy argues with itself before the arguing becomes the mission.",
+      "scene": "A brightly lit parliament arguing while a mission clock runs. The arguing IS the mission. The president checking a stopwatch."
+    },
+    {
+      "id": "053",
+      "filename": "putin_v2_053.png",
+      "line": "I have a number for that. I have tested it.",
+      "scene": "Chalkboard with a single number underlined, then TESTED. Chalk dust on the president's sleeve."
+    },
+    {
+      "id": "054",
+      "filename": "putin_v2_054.png",
+      "line": "You will bomb a mountain. You will not occupy a winter.",
+      "scene": "Snow mountain, one smoke puff, no boots on the slope. Bomb yes, occupy winter no."
+    },
+    {
+      "id": "055",
+      "filename": "putin_v2_055.png",
+      "line": "You will announce a red line, and then hold a hearing about the announcement.",
+      "scene": "A red line drawn on a speech, then a hearing gavel in the next room through an open door. Announcement about the announcement."
+    },
+    {
+      "id": "056",
+      "filename": "putin_v2_056.png",
+      "line": "I do not need you weak. I need you busy.",
+      "scene": "The president at a window: he does not need the American weak. He needs him busy. Three TVs of crises behind him."
+    },
+    {
+      "id": "057",
+      "filename": "putin_v2_057.png",
+      "line": "A superpower with three crises and a midterm is, to me,",
+      "scene": "Situation room, three crisis screens plus a campaign poster on a fourth. Midterm. Planners sipping tea, unhurried."
+    },
+    {
+      "id": "058",
+      "filename": "putin_v2_058.png",
+      "line": "a superpower with no crises at all.",
+      "scene": "The same room emptied of urgency. A superpower with no crises at all, because it is busy. Tea steam."
+    },
+    {
+      "id": "059",
+      "filename": "putin_v2_059.png",
+      "line": "The soldier in my folder is not a coward.",
+      "scene": "A soldier in a file photo, standing still in kit, tired, not afraid, not a coward. The president holding the photo."
+    },
+    {
+      "id": "060",
+      "filename": "putin_v2_060.png",
+      "line": "He is a man whose country will bring him home the moment the pictures get bad.",
+      "scene": "Transport plane ramp, duffel already on, news photos of a bad street on a table. Home the moment pictures get bad."
+    },
+    {
+      "id": "061",
+      "filename": "putin_v2_061.png",
+      "line": "I plan around the pictures. I plan around the fact that you have evening news.",
+      "scene": "The president's finger on a TV bezel showing evening news. Plan around the pictures. Plan around the fact you have one."
+    },
+    {
+      "id": "062",
+      "filename": "putin_v2_062.png",
+      "line": "This is the page I underline.",
+      "scene": "A dossier page so underlined the paper fibres are fuzzy. This page. Red pencil broken."
+    },
+    {
+      "id": "063",
+      "filename": "putin_v2_063.png",
+      "line": "You replace the entire foreign policy of a nuclear state the way other countries replace a cabinet minister.",
+      "scene": "Movers swapping an entire wall of maps in a nuclear briefing room in one morning. Foreign policy as furniture."
+    },
+    {
+      "id": "064",
+      "filename": "putin_v2_064.png",
+      "line": "On a Tuesday. With a parade.",
+      "scene": "Tuesday parade, confetti, a treaty binder riding a float. Cabinet-minister replacement energy."
+    },
+    {
+      "id": "065",
+      "filename": "putin_v2_065.png",
+      "line": "A treaty is not a treaty. It is a mood.",
+      "scene": "Treaty binder with a sticky January expiry, gold seal loose. A mood, not a treaty."
+    },
+    {
+      "id": "066",
+      "filename": "putin_v2_066.png",
+      "line": "A mood that expires in January.",
+      "scene": "Wall calendar, JANUARY circled until the paper tears. The mood expires. The president already flipped the page."
+    },
+    {
+      "id": "067",
+      "filename": "putin_v2_067.png",
+      "line": "I do not take your word. I take your calendar.",
+      "scene": "Not a handshake: a calendar. The president taking the calendar, leaving the word on the table."
+    },
+    {
+      "id": "068",
+      "filename": "putin_v2_068.png",
+      "line": "How many months until your election. How many months until the other party's primary.",
+      "scene": "Three columns of months-until: election, primary, committee. The shortest starred. His pencil."
+    },
+    {
+      "id": "069",
+      "filename": "putin_v2_069.png",
+      "line": "How many months until the man who shook my hand is explaining himself to a committee.",
+      "scene": "Chandelier handshake, then the same man under fluorescent committee lights explaining. The president in the gallery shadow."
+    },
+    {
+      "id": "070",
+      "filename": "putin_v2_070.png",
+      "line": "You think consistency is a virtue.",
+      "scene": "A marble bust labelled consistency in the American's mind, a crack already down the cheek. He thinks it is a virtue."
+    },
+    {
+      "id": "071",
+      "filename": "putin_v2_071.png",
+      "line": "I think consistency is a problem I do not have to have with you.",
+      "scene": "The president shrugging at a chart of broken timelines, coffee, snow window. Consistency is not his problem with you."
+    },
+    {
+      "id": "072",
+      "filename": "putin_v2_072.png",
+      "line": "The useful move is not to convince you.",
+      "scene": "He waits. Clock. Empty chairs. Not convincing you \u2014 waiting. A spider patience."
+    },
+    {
+      "id": "073",
+      "filename": "putin_v2_073.png",
+      "line": "It is to wait until you convince yourselves of the opposite of whatever you said last year.",
+      "scene": "The American on TV arguing the opposite of last year's speech, old clip paused on a second screen. He convinces himself."
+    },
+    {
+      "id": "074",
+      "filename": "putin_v2_074.png",
+      "line": "You are very good at that. You call it a mandate.",
+      "scene": "Campaign button, wet glue, recycled slogan. Mandate. The American proud. The president unimpressed."
+    },
+    {
+      "id": "075",
+      "filename": "putin_v2_075.png",
+      "line": "Somewhere in a room with bad heating, a date gets written next to a name.",
+      "scene": "Shabby office, steam pipes, visible breath, bad heating. A date written next to a name. Gloved hand."
+    },
+    {
+      "id": "076",
+      "filename": "putin_v2_076.png",
+      "line": "The date is Inauguration Day. The name is whoever you just elected.",
+      "scene": "Inauguration bunting through a small window; on the desk the new name, same folder. Whoever you just elected."
+    },
+    {
+      "id": "077",
+      "filename": "putin_v2_077.png",
+      "line": "The folder does not change. Only the heading does.",
+      "scene": "Same fat folder, new paper title strip, old strip in the trash. Contents unchanged. Only the heading."
+    },
+    {
+      "id": "078",
+      "filename": "putin_v2_078.png",
+      "line": "I do not need to invent your arguments. You publish them. You fund them.",
+      "scene": "Op-eds and a donate-button laptop clipped into his folder. Your arguments, published, funded, his."
+    },
+    {
+      "id": "079",
+      "filename": "putin_v2_079.png",
+      "line": "You put them on the internet with a donate button.",
+      "scene": "A glowing donate button, the American clicking it, funding his own opposition research for free."
+    },
+    {
+      "id": "080",
+      "filename": "putin_v2_080.png",
+      "line": "A university panel about your own decline.",
+      "scene": "University panel, decline banner blank, nearly empty chairs, the American at the mic nodding along."
+    },
+    {
+      "id": "081",
+      "filename": "putin_v2_081.png",
+      "line": "A journalist who hates the Pentagon more than he hates the tanks.",
+      "scene": "Journalist at a messy desk, Pentagon badge in a drawer, tank photo face-down, cursor blinking with more hate for home."
+    },
+    {
+      "id": "082",
+      "filename": "putin_v2_082.png",
+      "line": "A celebrity reading a statement about a war they could not find on a map an hour ago.",
+      "scene": "Celebrity at a podium reading a statement, folded war map still in the assistant's bag. Cameras firing."
+    },
+    {
+      "id": "083",
+      "filename": "putin_v2_083.png",
+      "line": "The choir is not secret. The choir has a mailing list.",
+      "scene": "Mailing-list printout, rubber stamp SECRET crossed out. The choir is not secret. Names as grey bars."
+    },
+    {
+      "id": "084",
+      "filename": "putin_v2_084.png",
+      "line": "In the old building we used to plant stories. Now we retweet.",
+      "scene": "Old telegram spike next to a glowing phone with a retweet arrow. Same dusty office. Then and now."
+    },
+    {
+      "id": "085",
+      "filename": "putin_v2_085.png",
+      "line": "The skill is the same: find the American already angry at America,",
+      "scene": "An already-angry American; the president's unseen hand pushing a larger microphone toward him."
+    },
+    {
+      "id": "086",
+      "filename": "putin_v2_086.png",
+      "line": "and give him a bigger room.",
+      "scene": "The angry American in a huge hall, spotlight, bigger room, taking it. The president in the back row, small."
+    },
+    {
+      "id": "087",
+      "filename": "putin_v2_087.png",
+      "line": "You call this a marketplace of ideas. I call it a buffet.",
+      "scene": "Marketplace stall of idea-posters vs a buffet of the same posters with spoons. The American filling a plate."
+    },
+    {
+      "id": "088",
+      "filename": "putin_v2_088.png",
+      "line": "I do not have to be the chef.",
+      "scene": "Chef's hat on a hook, buffet lid open, no cook. The president is not the chef. He is a guest at the right hour."
+    },
+    {
+      "id": "089",
+      "filename": "putin_v2_089.png",
+      "line": "I only have to be hungry at the right hour.",
+      "scene": "Wall clock at a hungry hour, fork on a manifesto, crumbs. The president sitting down to eat."
+    },
+    {
+      "id": "090",
+      "filename": "putin_v2_090.png",
+      "line": "The most valuable American in the folder is not a spy.",
+      "scene": "Spy coat on a hanger, empty. A name tag that is not the valuable American. Not a spy."
+    },
+    {
+      "id": "091",
+      "filename": "putin_v2_091.png",
+      "line": "It is a sincere person.",
+      "scene": "Sincere American at a kitchen table, webcam light, no handler, believing every word. The most valuable."
+    },
+    {
+      "id": "092",
+      "filename": "putin_v2_092.png",
+      "line": "Sincere people do not need to be recruited. They need to be amplified.",
+      "scene": "The same sincere man amplified onto a huge public screen, still in kitchen clothes, night. Amplified, not recruited."
+    },
+    {
+      "id": "093",
+      "filename": "putin_v2_093.png",
+      "line": "They will do the rest on their own time, in their own voice,",
+      "scene": "He keeps talking in his own voice at his own table. The president's budget: zero. Timesheet empty."
+    },
+    {
+      "id": "094",
+      "filename": "putin_v2_094.png",
+      "line": "at no cost to my budget.",
+      "scene": "A cost of zero stamped on a closed folder. No envelope yet. The work is already free."
+    },
+    {
+      "id": "095",
+      "filename": "putin_v2_095.png",
+      "line": "If you are waiting for a villain in a dark coat to hand someone an envelope,",
+      "scene": "Park bench, frost, dark coat, sealed envelope unused. The villain you were waiting for. Empty."
+    },
+    {
+      "id": "096",
+      "filename": "putin_v2_096.png",
+      "line": "you have misunderstood the century.",
+      "scene": "A century misunderstood: the bench in daylight, the coat gone, only a quote left behind."
+    },
+    {
+      "id": "097",
+      "filename": "putin_v2_097.png",
+      "line": "The envelope is a quote. The quote is yours.",
+      "scene": "Envelope opened: a printed quote in the American's own type. The quote is yours. The president does not need to write it."
+    },
+    {
+      "id": "098",
+      "filename": "putin_v2_098.png",
+      "line": "The Americans I actually drink with are not the cartoon.",
+      "scene": "Mayfair hotel bar, quiet Americans in dark coats, no logos. The president drinking with them, not with the cartoon."
+    },
+    {
+      "id": "099",
+      "filename": "putin_v2_099.png",
+      "line": "They are the ones in Mayfair. In Geneva.",
+      "scene": "Geneva lakeside dusk, brass plaque, black car. Then the same coats. Quiet money."
+    },
+    {
+      "id": "100",
+      "filename": "putin_v2_100.png",
+      "line": "On a yacht registered nowhere and docked everywhere.",
+      "scene": "White yacht, blank stern, no flag, champagne, grey harbour. Registered nowhere, docked everywhere."
+    },
+    {
+      "id": "101",
+      "filename": "putin_v2_101.png",
+      "line": "They speak quietly. They know where the money sits when it is tired of flags.",
+      "scene": "Two men speaking softly over untouched whiskey; tired little paper flags in an ashtray. Money sitting still."
+    },
+    {
+      "id": "102",
+      "filename": "putin_v2_102.png",
+      "line": "They will lecture a camera about democracy at lunch.",
+      "scene": "The quiet American lecturing a camera about democracy at lunch, boom mic, perfect daylight, the president off-camera."
+    },
+    {
+      "id": "103",
+      "filename": "putin_v2_103.png",
+      "line": "And ask at dinner whether the sanction list has a loophole with a name on it.",
+      "scene": "Same man at dinner, candlelight, asking about a sanction loophole, a name inside a matchbook. The president listening."
+    },
+    {
+      "id": "104",
+      "filename": "putin_v2_104.png",
+      "line": "This is the most dangerous page, because it is the most intimate.",
+      "scene": "The folder's most dangerous page, dog-eared, a fingerprint, intimate. The president's hand flat on it."
+    },
+    {
+      "id": "105",
+      "filename": "putin_v2_105.png",
+      "line": "It says you are not a people. You are two countries sharing a language.",
+      "scene": "A torn page split down the middle, two columns, one language. Not a people. Two countries."
+    },
+    {
+      "id": "106",
+      "filename": "putin_v2_106.png",
+      "line": "One of them votes. One of them invoices.",
+      "scene": "Voting queue on one pavement, invoicing office on the other, same street, rain. Votes vs invoices."
+    },
+    {
+      "id": "107",
+      "filename": "putin_v2_107.png",
+      "line": "I have watched a senator's son sit at a table his father could not be seen at.",
+      "scene": "Young man at a private table his father could not be seen at, waiter blocking the view, heavy curtains. The president in the corner."
+    },
+    {
+      "id": "108",
+      "filename": "putin_v2_108.png",
+      "line": "I do not moralize about it. Moralizing is your hobby.",
+      "scene": "He does not lecture. Moralizing is a hobbyhorse in a playroom while the work happens through an office door."
+    },
+    {
+      "id": "109",
+      "filename": "putin_v2_109.png",
+      "line": "This American is not a hypocrite. Hypocrisy would require a standard.",
+      "scene": "Dictionary with hypocrite crossed out, professional written in, a standard missing from the page."
+    },
+    {
+      "id": "110",
+      "filename": "putin_v2_110.png",
+      "line": "This American is a professional. Professionals can be scheduled.",
+      "scene": "Diary, professionals in ink, fifteen-minute slots. Schedulable. The president's finger on a time."
+    },
+    {
+      "id": "111",
+      "filename": "putin_v2_111.png",
+      "line": "The cartoon is for television. This one is for the work.",
+      "scene": "TV studio still using the cartoon tourist; cut to the quiet suit at a real desk in rain. Television vs work."
+    },
+    {
+      "id": "112",
+      "filename": "putin_v2_112.png",
+      "line": "I have a cleaner word for your politics than you do.",
+      "scene": "The president at the window, finding a cleaner word. Not politics. Something mechanical. His breath on glass."
+    },
+    {
+      "id": "113",
+      "filename": "putin_v2_113.png",
+      "line": "I call it a machine.",
+      "scene": "A huge voting machine, jam lights, oil on the floor. He names it: machine."
+    },
+    {
+      "id": "114",
+      "filename": "putin_v2_114.png",
+      "line": "Machines have tolerances. Machines jam.",
+      "scene": "Tolerance marks scratched on the housing. Then a jam. Gears seizing. Same machine."
+    },
+    {
+      "id": "115",
+      "filename": "putin_v2_115.png",
+      "line": "Machines, if you study them long enough, make the same noise before they fail.",
+      "scene": "A needle gauge in the red, the same noise every time before failure. The president's ear close, eyes closed, studying."
+    },
+    {
+      "id": "116",
+      "filename": "putin_v2_116.png",
+      "line": "Fifty percent plus one. That is the whole religion.",
+      "scene": "Ballot boxed as religion: fifty percent plus one. Truth and competence crossed out as grey bars."
+    },
+    {
+      "id": "117",
+      "filename": "putin_v2_117.png",
+      "line": "Not truth. Not competence.",
+      "scene": "Two discarded idols: a small statue of truth, a small statue of competence, in the skip. Not the religion."
+    },
+    {
+      "id": "118",
+      "filename": "putin_v2_118.png",
+      "line": "Fifty percent plus one,",
+      "scene": "The stamp slamming: fifty percent plus one."
+    },
+    {
+      "id": "119",
+      "filename": "putin_v2_119.png",
+      "line": "and then four years of the winner pretending the loser was never real.",
+      "scene": "Winner at a podium pretending the loser never existed; loser's portrait already in a skip. Four-year banner. The president watching."
+    },
+    {
+      "id": "120",
+      "filename": "putin_v2_120.png",
+      "line": "I do not need to pick your president. I need to pick your argument.",
+      "scene": "Not a president's face on the board: an ARGUMENT circled. He does not pick your president. He picks the fight."
+    },
+    {
+      "id": "121",
+      "filename": "putin_v2_121.png",
+      "line": "An argument that lasts from August to November is a strategic pause I did not have to pay for.",
+      "scene": "Street of yard signs August to November, a parked van, unpaid pause. Strategic, free. The president in the van."
+    },
+    {
+      "id": "122",
+      "filename": "putin_v2_122.png",
+      "line": "You think I want you divided. That is too flattering.",
+      "scene": "The American accusing him of wanting division, flattered, finger out. The president almost amused."
+    },
+    {
+      "id": "123",
+      "filename": "putin_v2_123.png",
+      "line": "Division is a side effect.",
+      "scene": "A tiny side-effect label on a bottle, while the real drug is attention. Division in small type."
+    },
+    {
+      "id": "124",
+      "filename": "putin_v2_124.png",
+      "line": "What I want is your attention spent inward. On each other. On a clip.",
+      "scene": "Phone clip on loop, two faces arguing in the reflection, inward. The president wants that glow, not the border."
+    },
+    {
+      "id": "125",
+      "filename": "putin_v2_125.png",
+      "line": "On a man in a supermarket who said the wrong thing into a phone.",
+      "scene": "Supermarket aisle, ordinary man saying the wrong thing into a phone, camera already there, cereal. Hearing-room energy in grocery light."
+    },
+    {
+      "id": "126",
+      "filename": "putin_v2_126.png",
+      "line": "A country staring at itself cannot stare at a border.",
+      "scene": "A country as an eye staring into a bathroom mirror; a border fence out of focus behind the glass. Cannot stare at both."
+    },
+    {
+      "id": "127",
+      "filename": "putin_v2_127.png",
+      "line": "I have measured this. I will keep measuring it.",
+      "scene": "Ruler and notebook, tally marks, MEASURED, then again. The president's hand making another mark."
+    },
+    {
+      "id": "128",
+      "filename": "putin_v2_128.png",
+      "line": "Every time your news cycle eats a week, someone else's map gets a new road.",
+      "scene": "News-cycle week eating a wall calendar; another country's map gaining a new red road. Trade."
+    },
+    {
+      "id": "129",
+      "filename": "putin_v2_129.png",
+      "line": "The machine is not evil in the folder. Evil is a movie word.",
+      "scene": "Movie-marquee EVIL unplugged; a plainer lamp on the folder. Not evil. A movie word. The president prefers the lamp."
+    },
+    {
+      "id": "130",
+      "filename": "putin_v2_130.png",
+      "line": "The machine is predictable.",
+      "scene": "The machine, still, humming, predictable. Close on gears that always do this."
+    },
+    {
+      "id": "131",
+      "filename": "putin_v2_131.png",
+      "line": "Predictable is the highest compliment I give an enemy.",
+      "scene": "He stamps the enemy file with the highest compliment: predictable. No smile. Highest compliment."
+    },
+    {
+      "id": "132",
+      "filename": "putin_v2_132.png",
+      "line": "A new American walks onto a stage and talks about reset. About strength.",
+      "scene": "New American on a stage, reset, strength, teleprompter, fresh paint over old slogans. The president in the wings, unmoved."
+    },
+    {
+      "id": "133",
+      "filename": "putin_v2_133.png",
+      "line": "About a line that will not be crossed this time.",
+      "scene": "A red line on a speech page, THIS TIME, ink wet. The new man believes it. The president does not."
+    },
+    {
+      "id": "134",
+      "filename": "putin_v2_134.png",
+      "line": "I do not cheer. I do not panic. I open the same folder.",
+      "scene": "Bad-heating room, steam, sweaters, kettle. He does not cheer. He does not panic. He opens the same folder."
+    },
+    {
+      "id": "135",
+      "filename": "putin_v2_135.png",
+      "line": "The cartoon is still in it. The price tag. The soldier who goes home.",
+      "scene": "Tabs still there: cartoon, price, soldier. Photographs swapped. His hands. Same tabs."
+    },
+    {
+      "id": "136",
+      "filename": "putin_v2_136.png",
+      "line": "The headings have not moved in thirty years. Only the photographs have.",
+      "scene": "Wall of headings unmoved thirty years, only photos changed, dust on the rails. He walks the rail."
+    },
+    {
+      "id": "137",
+      "filename": "putin_v2_137.png",
+      "line": "I do not need you to be worse. I need you to be you.",
+      "scene": "He looks at the American as he is, not worse: loud coat, watch-check. I need you to be you."
+    },
+    {
+      "id": "138",
+      "filename": "putin_v2_138.png",
+      "line": "Loud. Rich. Impatient.",
+      "scene": "Luxury watch, loud zipper, tapping impatient finger. Loud. Rich. Impatient. Three close-ups, one man."
+    },
+    {
+      "id": "139",
+      "filename": "putin_v2_139.png",
+      "line": "Convinced that history is a sequel in which you still have the best effects budget.",
+      "scene": "History as a sequel poster, best effects budget, the American first in line, popcorn, believing the trailer."
+    },
+    {
+      "id": "140",
+      "filename": "putin_v2_140.png",
+      "line": "You will ask, at the end of a video like this, whether I am right.",
+      "scene": "The American at the end of a video, facing a dark screen, asking if the man in the folder is right. His own reflection."
+    },
+    {
+      "id": "141",
+      "filename": "putin_v2_141.png",
+      "line": "That question is also in the folder. Americans love a verdict.",
+      "scene": "That question already ticked in the folder. Americans love a verdict. Checkbox. The president does not look up."
+    },
+    {
+      "id": "142",
+      "filename": "putin_v2_142.png",
+      "line": "You love to put yourselves on the scale and argue with the reading.",
+      "scene": "Bathroom scale, the American arguing with the number. The folder uninterested in the reading."
+    },
+    {
+      "id": "143",
+      "filename": "putin_v2_143.png",
+      "line": "The folder does not care about the verdict.",
+      "scene": "The folder does not care about the verdict. Close on the closed cover, indifferent."
+    },
+    {
+      "id": "144",
+      "filename": "putin_v2_144.png",
+      "line": "It cares that you watched. That you felt seen, or insulted.",
+      "scene": "A tiny tick: you watched. Seen or insulted, both possible. A pencil hovering. Cooling mug."
+    },
+    {
+      "id": "145",
+      "filename": "putin_v2_145.png",
+      "line": "And that tomorrow you will argue about it with each other instead of looking up.",
+      "scene": "Tomorrow: comment-bright room, Americans arguing with each other, nobody looking up at the dark window. The president at the window."
+    },
+    {
+      "id": "146",
+      "filename": "putin_v2_146.png",
+      "line": "Someone new is already writing a speech about how this time will be different.",
+      "scene": "Someone new writing a speech, coffee, blank page already lying. This time will be different. The president does not need to watch."
+    },
+    {
+      "id": "147",
+      "filename": "putin_v2_147.png",
+      "line": "In the room with the bad heating, I sharpen a pencil.",
+      "scene": "Bad-heating room, he sharpens a pencil over a bin of shavings, same length as last time. His hands. His ritual."
+    },
+    {
+      "id": "148",
+      "filename": "putin_v2_148.png",
+      "line": "The cycle does not continue because I am brilliant.",
+      "scene": "Not brilliance: a well-worn shoe print in the same puddle. The cycle. He is not performing genius."
+    },
+    {
+      "id": "149",
+      "filename": "putin_v2_149.png",
+      "line": "It continues because you are familiar.",
+      "scene": "The familiar American walking the same looping street again. That is why it continues. The president already seated at the desk, waiting."
+    }
+  ]
+}
