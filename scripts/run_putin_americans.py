@@ -156,8 +156,8 @@ class ElevenLabsPreferringVoice(VoiceAdapter):
             print("Voice: ElevenLabs Liam", flush=True)
             return result
         except Exception as exc:
-            print(f"ElevenLabs failed ({exc}). Falling back to Edge TTS.", flush=True)
-            return await self._edge.synthesize(script_beats, shot_durations, voice_id)
+            print(f"ElevenLabs Liam failed ({exc}). Not falling back.", flush=True)
+            raise
 
 
 def _stills_module():
