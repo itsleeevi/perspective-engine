@@ -13,7 +13,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent.parent
-load_dotenv(ROOT / ".env")
+load_dotenv(ROOT / ".env", override=True)
 os.environ.setdefault("ADAPTER_CACHE", "1")
 
 from langgraph.checkpoint.memory import MemorySaver
@@ -48,13 +48,15 @@ from graph.style import STYLE_DESCRIPTOR
 
 TOPIC = "What Vladimir Putin Really Thinks About Americans"
 FIXTURE = ROOT / "fixtures" / "putin_americans.json"
-STILLS_DIR = ROOT / "assets" / "grok_putin_v2"
+STILLS_DIR = ROOT / "assets" / "grok_putin_v5"
 CURSOR_ASSETS = Path(
     "/home/levente/.cursor/projects/home-levente-perspective-engine/assets"
 )
 MAX_ELEVENLABS_CHARS = 10_000
 _STILL_TAG = re.compile(r"GROKSTILL:(\d{3})")
-N_STILLS = 150
+STILL_PREFIX = "putin_v5_"
+N_STILLS = 147
+LIAM_VOICE_ID = "TX3LPaxmHKxFdv7VOQHJ"
 
 
 class PrebuiltGrokStillAdapter(ImageGenAdapter):
@@ -66,8 +68,8 @@ class PrebuiltGrokStillAdapter(ImageGenAdapter):
     async def generate_reference_sheet(
         self, character_description: str
     ) -> ReferenceSheetResult:
-        hero = self._dir / "putin_v2_000.png"
-        url = save_asset("refs/grok_putin_v2_hero.png", hero.read_bytes())
+        hero = self._dir / f"{STILL_PREFIX}000.png"
+        url = save_asset("refs/grok_putin_v5_hero.png", hero.read_bytes())
         return ReferenceSheetResult(
             image_urls=[url], style_descriptor=STYLE_DESCRIPTOR, cost_usd=0.0
         )
@@ -83,19 +85,22 @@ class PrebuiltGrokStillAdapter(ImageGenAdapter):
         if not match:
             raise RuntimeError(f"No GROKSTILL tag in prompt: {shot_prompt[:120]!r}")
         still_id = match.group(1)
-        src = self._dir / f"putin_v2_{still_id}.png"
+        src = self._dir / f"{STILL_PREFIX}{still_id}.png"
         if not src.is_file():
             raise RuntimeError(f"Missing Grok still: {src}")
-        url = save_asset(f"stills/grok_putin_v2_{still_id}.png", src.read_bytes())
+        url = save_asset(f"stills/grok_putin_v5_{still_id}.png", src.read_bytes())
         return DerivedStillResult(still_url=url, cost_usd=0.0)
 
 
 class TaggedStoryboardLLM(LLMAdapter):
     """One GROKSTILL tag per chunk; quality checks auto-pass."""
 
-    def __init__(self, tags: list[str], descriptions: list[str]) -> None:
+    def __init__(
+        self, tags: list[str], descriptions: list[str], shot_types: list[str]
+    ) -> None:
         self._tags = tags
         self._descriptions = descriptions
+        self._shot_types = shot_types
         self._mock = MockLLMAdapter()
 
     async def write_script(self, topic, brief, include_hook=True, target_minutes=0.0):
@@ -115,7 +120,7 @@ class TaggedStoryboardLLM(LLMAdapter):
         ]
         return VisualBeatsResult(
             descriptions=descriptions,
-            shot_types=["medium shot"] * len(self._tags),
+            shot_types=list(self._shot_types),
             cost_usd=0.0,
         )
 
@@ -134,6 +139,7 @@ class ElevenLabsPreferringVoice(VoiceAdapter):
     """ElevenLabs first; Edge only if the account still refuses the call."""
 
     def __init__(self) -> None:
+        os.environ["ELEVENLABS_VOICE_ID"] = LIAM_VOICE_ID
         self._el = ElevenLabsVoiceAdapter()
         self._edge = EdgeTTSVoiceAdapter()
 
@@ -144,26 +150,30 @@ class ElevenLabsPreferringVoice(VoiceAdapter):
         voice_id: str = "default",
     ) -> VoiceoverResult:
         try:
-            result = await self._el.synthesize(script_beats, shot_durations, voice_id)
-            print("Voice: ElevenLabs", flush=True)
+            result = await self._el.synthesize(
+                script_beats, shot_durations, LIAM_VOICE_ID
+            )
+            print("Voice: ElevenLabs Liam", flush=True)
             return result
         except Exception as exc:
             print(f"ElevenLabs failed ({exc}). Falling back to Edge TTS.", flush=True)
             return await self._edge.synthesize(script_beats, shot_durations, voice_id)
 
 
-def _scenes() -> list[str]:
+def _stills_module():
     spec = importlib.util.spec_from_file_location(
         "putin_stills", ROOT / "fixtures" / "putin_americans_stills.py"
     )
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     spec.loader.exec_module(module)
-    return list(module.SCENES)
+    return module
 
 
-def _chunk_tags_and_copy() -> tuple[list[str], list[str], str]:
-    scenes = _scenes()
+def _chunk_tags_and_copy() -> tuple[list[str], list[str], list[str], str]:
+    stills = list(_stills_module().STILLS)
+    scenes = [s[2] for s in stills]
+    shot_types = [s[0] for s in stills]
     data = load_fixture(str(FIXTURE))
     beats = fixture_to_beats(data, include_hook=True)
     chunks: list[str] = []
@@ -178,7 +188,7 @@ def _chunk_tags_and_copy() -> tuple[list[str], list[str], str]:
     if len(chunks) != len(scenes):
         raise ValueError(f"Storyboard has {len(scenes)} scenes, script has {len(chunks)} chunks.")
     tags = [f"{i:03d}" for i in range(len(chunks))]
-    return tags, scenes, " ".join(spoken)
+    return tags, scenes, shot_types, " ".join(spoken)
 
 
 def gather_stills() -> list[Path]:
@@ -186,7 +196,7 @@ def gather_stills() -> list[Path]:
     STILLS_DIR.mkdir(parents=True, exist_ok=True)
     missing: list[Path] = []
     for i in range(N_STILLS):
-        name = f"putin_v2_{i:03d}.png"
+        name = f"{STILL_PREFIX}{i:03d}.png"
         dest = STILLS_DIR / name
         if dest.is_file() and dest.stat().st_size > 0:
             continue
@@ -204,12 +214,16 @@ def _gate(result: dict) -> dict:
 
 
 async def main() -> None:
-    tags, copy, spoken = _chunk_tags_and_copy()
+    tags, copy, shot_types, spoken = _chunk_tags_and_copy()
     n_chars = len(spoken)
     print(f"Topic: {TOPIC}", flush=True)
     print(f"Fixture: {FIXTURE}", flush=True)
     print(f"Spoken characters: {n_chars} / {MAX_ELEVENLABS_CHARS} ElevenLabs cap", flush=True)
     print(f"Unique Grok stills: {len(tags)} (one per chunk)", flush=True)
+    print(
+        f"Character-free inserts: {sum(1 for s in _stills_module().STILLS if s[1] == 'empty')}",
+        flush=True,
+    )
     if n_chars > MAX_ELEVENLABS_CHARS:
         print("Spoken text exceeds the 10k credit cap. Aborting.", flush=True)
         sys.exit(2)
@@ -220,13 +234,13 @@ async def main() -> None:
         sys.exit(2)
 
     graph = build_graph(
-        llm=TaggedStoryboardLLM(tags, copy),
+        llm=TaggedStoryboardLLM(tags, copy, shot_types),
         image_gen=PrebuiltGrokStillAdapter(STILLS_DIR),
         video_gen=FalVideoGenAdapter(),
         voice=ElevenLabsPreferringVoice(),
         checkpointer=MemorySaver(),
     )
-    config = {"configurable": {"thread_id": "putin-americans-v2"}}
+    config = {"configurable": {"thread_id": "putin-americans-v5"}}
     initial = {
         "topic": TOPIC,
         "static_only": True,

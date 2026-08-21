@@ -1,168 +1,218 @@
-"""One unique 16:9 Grok still per narration chunk (fixtures/putin_americans.json)."""
+"""v5 movie stills for putin_americans.json — one per chunk.
+
+No Ukrainian flags, no blue-and-yellow, no war-in-Ukraine imagery.
+Trump exists only as off-face rally energy (red hats from behind, a gold
+phone at 3am). Never a photoreal celebrity. Never a named politician's face.
+
+Locked leads:
+  HERO     — stylized graphic-novel Russian president
+  AMERICAN — cartoon everyman the VO is roasting
+  OTHER    — quiet rich American
+Hero is NOT in every frame.
+"""
 
 from __future__ import annotations
 
-STYLE = (
-    "Cinematic 16:9 graphic-novel still, painterly and sharp, muted olive, "
-    "cigarette-gold, cold fluorescent teal, film grain, dramatic lighting. "
-    "Recurring stylized Russian president (graphic-novel Putin-like figure, "
-    "NOT a photograph): short pale thinning hair, lined pale face, thin mouth, "
-    "small cold unsmiling eyes, dark navy suit. Recurring fictional American "
-    "man: late thirties, short brown hair, weary small eyes, slightly oversized "
-    "round cartoon head, not a celebrity. No readable text, letters, numbers, "
-    "logos, watermarks, or captions."
+HERO = (
+    "HERO (same man every time): stylized graphic-novel Russian president, "
+    "short pale thinning hair, lined pale face, thin unsmiling mouth, small cold "
+    "grey-blue eyes, compact athletic build, ALWAYS the same dark navy three-piece "
+    "suit and small gold watch, painterly, NOT a photograph, NOT photoreal."
 )
 
-# Index-aligned with shot_breakdown chunks. New picture every line.
-SCENES: list[str] = [
-    "Extreme close-up of the stylized Russian president's cold eyes looking straight into the camera, lamp catching an iris, rain on glass behind him.",
-    "He sits alone at a steel desk; across from him an empty chair where a person should be. The chair is weather, not a guest.",
-    "A rain-lashed window, looping weather-radar circles on a glowing map, the president watching the same storm repeat.",
-    "Younger Americans with flip phones in a 2000s mall, tiny in the rain-window reflection of the president who has been waiting.",
-    "A wall calendar instead of a war map; the president's finger on a date, not a target. Weather as time.",
-    "Americans on a phone screen mouthing his name; he does not look at the camera, he already knows.",
-    "A pile of expired passports on his desk; he has been cataloguing this type since before the ink faded.",
-    "A CRT television blasting a toothpaste-and-soda commercial; the president watching it like a briefing, not like TV.",
-    "Giant white teeth and a huge sweating red cup filling the TV frame, grotesque, American, too bright.",
-    "A too-bright fake kitchen, family frozen mid-hug under studio lights, cables on the linoleum, the president's silhouette in the doorway.",
-    "He turns away from the TV, unimpressed; the commercial is a document, not a joke.",
-    "Billboard of the American man's face sold back as a product, endless copies receding down a highway at night.",
-    "Crowded diner, the American man shouting with both hands, other diners recoiling, the president observing from a dark booth.",
-    "The American pumps a stranger's hand over a buffet, asking a job before a name, name-tag still face-down.",
-    "Close on a hoodie chest with a huge unreadable brand mark worn like a uniform, on purpose.",
-    "A drab classroom chalkboard: stick-figure American with a sleeve flag, a world map with a blank hole where Kaliningrad should be.",
-    "The president underlines the chalkboard drawing in a dossier. Not insult. Operating assumption. Red pencil.",
-    "His hand stamps a photocopied American smile onto an index card. Logging it.",
-    "The American grinning at a cashier who does not smile back; cameras; unearned warmth. The president takes notes in shadow.",
-    "Dossier page: a smile circled, labelled in the president's mind as a tell. Close on the circle, not on letters.",
-    "The American nodding too fast in a meeting, palms open, needing to be liked, losing.",
-    "The president as a surgeon at an X-ray lightbox, but the film is a Hollywood still. Clinical. Cold.",
-    "Cinema screen: a rule-breaking hero rewarded under fireworks; a secretly-good president at a podium. Empty theatre, one watcher.",
-    "A wooden podium, a war ending in a speech, ticker-tape, no soldiers left on the stage. Hollow victory lighting.",
-    "Split: the president unmoved in the dark; the American in the front row, mouth open, believing every frame.",
-    "The American in a rumpled jacket waiting in a panelled anteroom, about to enter, clock with no numbers.",
-    "He sits down. The other chair already holds a cardboard tourist in shorts. The cartoon arrived first.",
-    "The American jabbing a finger at the cardboard cutout, arguing with a drawing of himself, twenty minutes on the clock.",
-    "His shoe tapping under the table, unaware. The president watches through a barely open door.",
-    "A thinner, more expensive folder placed on the desk beside the fat one. Gold clip. Cost.",
-    "Not a speech: a pile of receipts and a credit-card slip. What you buy. The president's hand on the receipts.",
-    "Airport kiosk, the American choosing the cheapest flight, a crumpled principle in the bin.",
-    "Cafe handshake, a better rate on a napkin, friendship cooling in two cups. The American taking it.",
-    "A small card that only feels like a feeling, held over a closed wallet. The secret is not money yet.",
-    "The American leaning in at a dinner table of men who already exchanged a look. He needs to be the cleverest.",
-    "A dusty closed cash box ignored; a velvet rope labelled access in the president's gesture, no letters.",
-    "The president opening a door marked only by light: access. The American stepping toward it, hungry.",
-    "Vienna conference foyer, marble, think-tank banner with no readable words, the American clutching a programme.",
-    "Candlelit dinner, the American lighting up as an older host mentions his paper. Ego, wine, heavy drapes.",
-    "Bank statement with nothing unusual; a dinner invite beside it. Ego cheaper than a wire. The president almost smiles.",
-    "Split street: voting booth vs market stall. The American as citizen on the left, as product on the right.",
-    "Market chalkboard of seasons, a gavel of hesitation. Prices changing. The president as the stall's shadow.",
-    "Wide market, rain, the stall waiting. 'Above all' hanging in the air as weather.",
-    "A crashed toy cart glued back with a new slogan sticker. Same dented wheel. The American returning with a bag.",
-    "The president's finger on one underlined sentence in the folder. The useful sentence. Close.",
-    "The American walking back into the same shop, same product, new bag. The clerk unsurprised. The president already knew.",
-    "The president nodding once at scale models of carriers on a planning table. Respect, private, no smile.",
-    "Two men at a night window, one is the president, thermos, city grid, telling the truth about hardware.",
-    "Carrier models, satellite dishes, a budget spilling off the page next to ruble notes. Hallucination of money.",
-    "A steel I-beam standing; a slack frayed rope beside it. Hardware vs will. The president looking at the rope.",
-    "A dossier split down the middle, a crack in the table. Everything hanging on that crack.",
-    "Wall calendar with years X'd out, two country names as shapes not letters. Afghanistan, Iraq, counted.",
-    "A brightly lit parliament arguing while a mission clock runs. The arguing IS the mission. The president checking a stopwatch.",
-    "Chalkboard with a single number underlined, then TESTED. Chalk dust on the president's sleeve.",
-    "Snow mountain, one smoke puff, no boots on the slope. Bomb yes, occupy winter no.",
-    "A red line drawn on a speech, then a hearing gavel in the next room through an open door. Announcement about the announcement.",
-    "The president at a window: he does not need the American weak. He needs him busy. Three TVs of crises behind him.",
-    "Situation room, three crisis screens plus a campaign poster on a fourth. Midterm. Planners sipping tea, unhurried.",
-    "The same room emptied of urgency. A superpower with no crises at all, because it is busy. Tea steam.",
-    "A soldier in a file photo, standing still in kit, tired, not afraid, not a coward. The president holding the photo.",
-    "Transport plane ramp, duffel already on, news photos of a bad street on a table. Home the moment pictures get bad.",
-    "The president's finger on a TV bezel showing evening news. Plan around the pictures. Plan around the fact you have one.",
-    "A dossier page so underlined the paper fibres are fuzzy. This page. Red pencil broken.",
-    "Movers swapping an entire wall of maps in a nuclear briefing room in one morning. Foreign policy as furniture.",
-    "Tuesday parade, confetti, a treaty binder riding a float. Cabinet-minister replacement energy.",
-    "Treaty binder with a sticky January expiry, gold seal loose. A mood, not a treaty.",
-    "Wall calendar, JANUARY circled until the paper tears. The mood expires. The president already flipped the page.",
-    "Not a handshake: a calendar. The president taking the calendar, leaving the word on the table.",
-    "Three columns of months-until: election, primary, committee. The shortest starred. His pencil.",
-    "Chandelier handshake, then the same man under fluorescent committee lights explaining. The president in the gallery shadow.",
-    "A marble bust labelled consistency in the American's mind, a crack already down the cheek. He thinks it is a virtue.",
-    "The president shrugging at a chart of broken timelines, coffee, snow window. Consistency is not his problem with you.",
-    "He waits. Clock. Empty chairs. Not convincing you — waiting. A spider patience.",
-    "The American on TV arguing the opposite of last year's speech, old clip paused on a second screen. He convinces himself.",
-    "Campaign button, wet glue, recycled slogan. Mandate. The American proud. The president unimpressed.",
-    "Shabby office, steam pipes, visible breath, bad heating. A date written next to a name. Gloved hand.",
-    "Inauguration bunting through a small window; on the desk the new name, same folder. Whoever you just elected.",
-    "Same fat folder, new paper title strip, old strip in the trash. Contents unchanged. Only the heading.",
-    "Op-eds and a donate-button laptop clipped into his folder. Your arguments, published, funded, his.",
-    "A glowing donate button, the American clicking it, funding his own opposition research for free.",
-    "University panel, decline banner blank, nearly empty chairs, the American at the mic nodding along.",
-    "Journalist at a messy desk, Pentagon badge in a drawer, tank photo face-down, cursor blinking with more hate for home.",
-    "Celebrity at a podium reading a statement, folded war map still in the assistant's bag. Cameras firing.",
-    "Mailing-list printout, rubber stamp SECRET crossed out. The choir is not secret. Names as grey bars.",
-    "Old telegram spike next to a glowing phone with a retweet arrow. Same dusty office. Then and now.",
-    "An already-angry American; the president's unseen hand pushing a larger microphone toward him.",
-    "The angry American in a huge hall, spotlight, bigger room, taking it. The president in the back row, small.",
-    "Marketplace stall of idea-posters vs a buffet of the same posters with spoons. The American filling a plate.",
-    "Chef's hat on a hook, buffet lid open, no cook. The president is not the chef. He is a guest at the right hour.",
-    "Wall clock at a hungry hour, fork on a manifesto, crumbs. The president sitting down to eat.",
-    "Spy coat on a hanger, empty. A name tag that is not the valuable American. Not a spy.",
-    "Sincere American at a kitchen table, webcam light, no handler, believing every word. The most valuable.",
-    "The same sincere man amplified onto a huge public screen, still in kitchen clothes, night. Amplified, not recruited.",
-    "He keeps talking in his own voice at his own table. The president's budget: zero. Timesheet empty.",
-    "A cost of zero stamped on a closed folder. No envelope yet. The work is already free.",
-    "Park bench, frost, dark coat, sealed envelope unused. The villain you were waiting for. Empty.",
-    "A century misunderstood: the bench in daylight, the coat gone, only a quote left behind.",
-    "Envelope opened: a printed quote in the American's own type. The quote is yours. The president does not need to write it.",
-    "Mayfair hotel bar, quiet Americans in dark coats, no logos. The president drinking with them, not with the cartoon.",
-    "Geneva lakeside dusk, brass plaque, black car. Then the same coats. Quiet money.",
-    "White yacht, blank stern, no flag, champagne, grey harbour. Registered nowhere, docked everywhere.",
-    "Two men speaking softly over untouched whiskey; tired little paper flags in an ashtray. Money sitting still.",
-    "The quiet American lecturing a camera about democracy at lunch, boom mic, perfect daylight, the president off-camera.",
-    "Same man at dinner, candlelight, asking about a sanction loophole, a name inside a matchbook. The president listening.",
-    "The folder's most dangerous page, dog-eared, a fingerprint, intimate. The president's hand flat on it.",
-    "A torn page split down the middle, two columns, one language. Not a people. Two countries.",
-    "Voting queue on one pavement, invoicing office on the other, same street, rain. Votes vs invoices.",
-    "Young man at a private table his father could not be seen at, waiter blocking the view, heavy curtains. The president in the corner.",
-    "He does not lecture. Moralizing is a hobbyhorse in a playroom while the work happens through an office door.",
-    "Dictionary with hypocrite crossed out, professional written in, a standard missing from the page.",
-    "Diary, professionals in ink, fifteen-minute slots. Schedulable. The president's finger on a time.",
-    "TV studio still using the cartoon tourist; cut to the quiet suit at a real desk in rain. Television vs work.",
-    "The president at the window, finding a cleaner word. Not politics. Something mechanical. His breath on glass.",
-    "A huge voting machine, jam lights, oil on the floor. He names it: machine.",
-    "Tolerance marks scratched on the housing. Then a jam. Gears seizing. Same machine.",
-    "A needle gauge in the red, the same noise every time before failure. The president's ear close, eyes closed, studying.",
-    "Ballot boxed as religion: fifty percent plus one. Truth and competence crossed out as grey bars.",
-    "Two discarded idols: a small statue of truth, a small statue of competence, in the skip. Not the religion.",
-    "The stamp slamming: fifty percent plus one.",
-    "Winner at a podium pretending the loser never existed; loser's portrait already in a skip. Four-year banner. The president watching.",
-    "Not a president's face on the board: an ARGUMENT circled. He does not pick your president. He picks the fight.",
-    "Street of yard signs August to November, a parked van, unpaid pause. Strategic, free. The president in the van.",
-    "The American accusing him of wanting division, flattered, finger out. The president almost amused.",
-    "A tiny side-effect label on a bottle, while the real drug is attention. Division in small type.",
-    "Phone clip on loop, two faces arguing in the reflection, inward. The president wants that glow, not the border.",
-    "Supermarket aisle, ordinary man saying the wrong thing into a phone, camera already there, cereal. Hearing-room energy in grocery light.",
-    "A country as an eye staring into a bathroom mirror; a border fence out of focus behind the glass. Cannot stare at both.",
-    "Ruler and notebook, tally marks, MEASURED, then again. The president's hand making another mark.",
-    "News-cycle week eating a wall calendar; another country's map gaining a new red road. Trade.",
-    "Movie-marquee EVIL unplugged; a plainer lamp on the folder. Not evil. A movie word. The president prefers the lamp.",
-    "The machine, still, humming, predictable. Close on gears that always do this.",
-    "He stamps the enemy file with the highest compliment: predictable. No smile. Highest compliment.",
-    "New American on a stage, reset, strength, teleprompter, fresh paint over old slogans. The president in the wings, unmoved.",
-    "A red line on a speech page, THIS TIME, ink wet. The new man believes it. The president does not.",
-    "Bad-heating room, steam, sweaters, kettle. He does not cheer. He does not panic. He opens the same folder.",
-    "Tabs still there: cartoon, price, soldier. Photographs swapped. His hands. Same tabs.",
-    "Wall of headings unmoved thirty years, only photos changed, dust on the rails. He walks the rail.",
-    "He looks at the American as he is, not worse: loud coat, watch-check. I need you to be you.",
-    "Luxury watch, loud zipper, tapping impatient finger. Loud. Rich. Impatient. Three close-ups, one man.",
-    "History as a sequel poster, best effects budget, the American first in line, popcorn, believing the trailer.",
-    "The American at the end of a video, facing a dark screen, asking if the man in the folder is right. His own reflection.",
-    "That question already ticked in the folder. Americans love a verdict. Checkbox. The president does not look up.",
-    "Bathroom scale, the American arguing with the number. The folder uninterested in the reading.",
-    "The folder does not care about the verdict. Close on the closed cover, indifferent.",
-    "A tiny tick: you watched. Seen or insulted, both possible. A pencil hovering. Cooling mug.",
-    "Tomorrow: comment-bright room, Americans arguing with each other, nobody looking up at the dark window. The president at the window.",
-    "Someone new writing a speech, coffee, blank page already lying. This time will be different. The president does not need to watch.",
-    "Bad-heating room, he sharpens a pencil over a bin of shavings, same length as last time. His hands. His ritual.",
-    "Not brilliance: a well-worn shoe print in the same puddle. The cycle. He is not performing genius.",
-    "The familiar American walking the same looping street again. That is why it continues. The president already seated at the desk, waiting.",
+AMERICAN = (
+    "AMERICAN (same man every time): late-thirties everyman, short brown hair, "
+    "weary small dark eyes, slightly oversized round cartoon head that still sits "
+    "on his neck, average build, clothes change with the scene, not a celebrity."
+)
+
+OTHER = (
+    "OTHER AMERICAN (same man): silver-grey hair, expensive quiet dark coat, "
+    "no logos, thinner face, not a celebrity, not the everyman."
+)
+
+NO_FLAGS = (
+    "NO Ukrainian flag, NO blue-and-yellow flag, NO war footage, NO missiles, "
+    "NO celebrity politician faces, NO photoreal famous people. "
+)
+
+STYLE_PEOPLE = (
+    "Award-shot 16:9 anamorphic movie still, rich color, film grain, motivated "
+    "lighting, olive gold and cold teal, painterly graphic-novel, drop-dead "
+    "cinematic composition. No readable text, letters, numbers, logos, watermarks, "
+    "captions. "
+    + NO_FLAGS + HERO + " " + AMERICAN + " " + OTHER
+)
+
+STYLE_EMPTY = (
+    "Award-shot 16:9 anamorphic movie still, rich color, film grain, motivated "
+    "lighting, olive gold and cold teal, painterly graphic-novel, stunning "
+    "empty-frame composition. STRICTLY NO people, NO faces, NO hands, NO human "
+    "silhouettes. No readable text, letters, numbers, logos, watermarks, captions. "
+    + NO_FLAGS
+)
+
+# (shot_type, who, scene)
+STILLS: list[tuple[str, str, str]] = [
+    ("wide shot", "crowd", "Airplane cabin just after landing, passengers clapping like a theater, AMERICAN in the aisle seat clapping too, unimpressed flight attendant. STRICTLY NO HERO, no navy-suit president."),
+    ("medium shot", "hero", "HERO at a steel desk, holding a photo of that clapping cabin, folder open, rain window. Page one."),
+    ("top-down flatlay", "empty", "Page one of a thick folder, a small cabin photo clipped on, a cheap pencil. Funny first, then not. No people."),
+    ("medium shot", "hero", "HERO looks into camera, folder half-closed. The next pages are not a joke. Stay."),
+    ("medium shot", "hero", "HERO in the night office, not losing sleep, clock glowing. I do not hate you."),
+    ("symbolic graphic", "empty", "A wall calendar, Tuesday pinned, rain on the window, a credit-card hologram shimmer. Weather. No people."),
+    ("low angle", "hero", "HERO on a balcony above a tiny angry crowd with blank signs. They yell. He already knows the type."),
+    ("over-the-shoulder", "hero", "Over HERO's shoulder: a lineup of identical AMERICAN faces, one circled. Easy to guess."),
+    ("extreme close-up", "empty", "A row of dusty flip phones, years as objects. Waiting you out. No people."),
+    ("medium shot", "american", "AMERICAN on a couch, face lit by a CRT, junk living room, believing a commercial."),
+    ("extreme close-up", "empty", "A sandwich as big as a steering wheel, steam, ridiculous scale, white-tooth gleam at the edge. No people."),
+    ("extreme close-up", "empty", "Giant red soda cup, ice, condensation, big enough for a terrier. Macro. No people."),
+    ("wide shot", "american", "Too-bright fake kitchen, AMERICAN family frozen mid-hug under movie lights, cash and a clapper on the counter."),
+    ("POV", "american", "POV from the couch at the commercial, a house-shaped cookie tin, homesick empty living room."),
+    ("symbolic graphic", "empty", "Gold jingle sound-waves over a black confession-booth silhouette. That is you, with a song. No people."),
+    ("dutch angle", "american", "Packed diner canted, AMERICAN shouting over plates, neon, nobody else getting a word in."),
+    ("two-person shot", "american", "Waiter deadpan with a pad, AMERICAN leaning in with life-advice energy. Comedy."),
+    ("medium shot", "american", "AMERICAN in a huge unreadable chest mark walking a sidewalk as a human billboard."),
+    ("extreme close-up", "empty", "A logo-shaped blank patch of fabric filling the frame, stitching, walking-ad cloth. No people."),
+    ("wide shot", "crowd", "Same airplane cabin, passengers mid-clap, AMERICAN still clapping, attendant unimpressed. Callback. NO HERO."),
+    ("extreme close-up", "empty", "Two hands clapping in an airplane aisle, tray tables, no faces. You still clap. No identifiable people."),
+    ("wide shot", "american", "Drab classroom, AMERICAN at a desk, chalkboard stick-figure with a sleeve flag, a blank map with no country colors."),
+    ("top-down flatlay", "empty", "A stamped INSTRUCTIONS stencil on manila, coffee ring, chalk dust. Not an insult. No people."),
+    ("medium shot", "hero", "HERO stamping a photocopied smile onto an index card. Logging it. Clinical."),
+    ("medium shot", "american", "AMERICAN grinning at a cashier who does not smile, overcharge receipt in his hand."),
+    ("symbolic graphic", "empty", "A heart icon outweighing a chess king on a scale. Liked more than winning. No people."),
+    ("extreme close-up", "empty", "A like-button glow, cold, no face. Winning does not get a like. No people."),
+    ("medium shot", "hero", "HERO at an X-ray lightbox of a Hollywood still, butcher-clinical, cow-hook shadow."),
+    ("wide shot", "american", "Empty cinema, action-hero on screen kicking a door, AMERICAN in the front row, popcorn, mouth open."),
+    ("extreme close-up", "empty", "Gold sound rings around an empty podium, a fight ending as music. No people."),
+    ("medium shot", "hero", "HERO in the dark theater, AMERICAN glowing in the screen-light across the aisle. I believe that you do."),
+    ("wide shot", "american", "Panelled anteroom, AMERICAN about to enter, cardboard tourist already in the far chair with chips."),
+    ("two-person shot", "american", "AMERICAN arguing with the cardboard cutout. Chips. Clock. The cartoon arrived first."),
+    ("medium shot", "american", "Same argument, twenty minutes on the clock, AMERICAN jabbing a finger at cardboard."),
+    ("symbolic graphic", "empty", "A consistency meter stuck on CARTOON vs a jumping human needle. Personality. No people."),
+    ("top-down flatlay", "empty", "Thin expensive folder vs fat cheap one, gold clip vs rust. Cost. No people."),
+    ("top-down flatlay", "empty", "Receipts, boarding pass, red scoring marks, nobody watching. No people."),
+    ("wide shot", "american", "Airport kiosk, AMERICAN choosing the cheapest fare, a crumpled principle in the bin."),
+    ("medium shot", "american", "AMERICAN posting a sunset while sliding a rate napkin across a cafe table."),
+    ("wide shot", "american", "Dinner table of men who already exchanged a look; AMERICAN leaning in, hungry to be clever."),
+    ("top-down flatlay", "empty", "Clean bank statement beside a dusty closed cash box. Ego vs paper. No people."),
+    ("extreme close-up", "empty", "A conference lanyard and blank badge on marble, a velvet rope. Access. No people."),
+    ("two-person shot", "american", "Older host mentioning a name, AMERICAN lighting up; HERO in far bokeh, taking a note."),
+    ("high angle", "hero", "HERO looking down at an empty velvet theater seat with a tiny toy warhead on it. The joke about a good seat."),
+    ("medium shot", "hero", "HERO writing in a notebook, half-smile that is not kindness. Still taking notes."),
+    ("wide shot", "american", "AMERICAN proud in a voting-booth curtain, citizen posture, fireworks bloom in the parking lot beyond."),
+    ("symbolic graphic", "empty", "Crashed toy cart, new paint, same dented wheel. New color, same product. No people."),
+    ("medium shot", "hero", "HERO looking into camera, folder open, delivering the promised sentence. You come back."),
+    ("extreme close-up", "empty", "A coupon on steel, underlined twice, return-arrow stamp. Thirsty. No people."),
+    ("medium shot", "american", "AMERICAN screenshotting a line on his phone, proud, HERO's lamp in a tiny reflection."),
+    ("medium shot", "hero", "HERO already knowing, not looking up. I already knew you would."),
+    ("medium shot", "hero", "HERO at a night window, scale-model ship and satellite on the sill, no smile. Now the number."),
+    ("low angle", "hero", "Same HERO, low angle, huge window. I am not lying. Slightly threatening comedy."),
+    ("symbolic graphic", "empty", "Steel I-beam vs slack frayed rope. Receipt vs mood. No people."),
+    ("wide shot", "crowd", "Bright hearing room, people arguing, empty water glasses, a clock running, AMERICAN in the gallery filming."),
+    ("extreme close-up", "empty", "A chalkboard short red line, a stopwatch. The number. No people."),
+    ("wide shot", "american", "AMERICAN yelling at a TV, then on the couch bored with the remote, then walking out the door with a duffel."),
+    ("wide shot", "empty", "Monday-night football glow on an empty living room, pizza box, the long job left on a sticky note. No people."),
+    ("medium shot", "hero", "HERO calm with three crisis TVs and a tiny football game in the corner, tea. Busy."),
+    ("symbolic graphic", "empty", "Giant speaker with a mute glyph, city lights behind. Superpower on mute. No people."),
+    ("medium shot", "soldier", "Tired ordinary soldier in kit, still, file-photo light. Not a coward. Not HERO. Not AMERICAN cartoon head."),
+    ("wide shot", "soldier", "Transport-plane ramp, duffel, phones filming, red comment-dots in the night air. Home when pictures get bad."),
+    ("extreme close-up", "empty", "Stack of printed bad-news photos, TV bezel. Pictures. No identifiable faces."),
+    ("extreme close-up", "empty", "Evening-news glow on the SAME red cup of ice. Callback. No people."),
+    ("extreme close-up", "empty", "The red cup filling the frame again. You remember it. That is the point. No people."),
+    ("medium shot", "hero", "HERO underlining a page so hard the paper fuzzes, looking up. Sit up."),
+    ("wide shot", "crowd", "Movers carrying a kettle through a briefing room as maps of nowhere come down. Absurdist. No country flags."),
+    ("wide shot", "american", "Tuesday parade, confetti, a song, a binder on a float, AMERICAN waving from the curb. No blue-yellow flags."),
+    ("extreme close-up", "empty", "A gold seal peeling off a slack ribbon. A deal is not a deal. No people."),
+    ("top-down flatlay", "empty", "January calendar, expired gym card, a deal paper beside it. Mood dies. No people."),
+    ("extreme close-up", "empty", "A wall calendar filling the frame. Calendars do not give speeches. No people."),
+    ("symbolic graphic", "empty", "Two circus hats on an empty ringmaster stand, campaign bunting with no slogans. Different hats. No people."),
+    ("wide shot", "crowd", "Night rally from behind: a sea of red hats, faces turned away, stage lights, no identifiable politician, no celebrity face."),
+    ("extreme close-up", "empty", "A gold smartphone glowing 3:00 on a nightstand, rumpled hotel sheets. Three in the morning. No people."),
+    ("match cut", "empty", "Two presidential costumes on hangers swapping places, same empty oval office. Loud guy, other guy, loud guy again. No faces."),
+    ("medium shot", "hero", "HERO did not even change chairs, same tea, same window. Presidents are not his problem."),
+    ("wide shot", "hero", "HERO circling FIGHT on a chalkboard; a presidential costume on a hanger beside it."),
+    ("wide shot", "empty", "Empty campaign street August to November, yard signs with blank shapes, a parked van. Unpaid holiday. No people."),
+    ("extreme close-up", "empty", "Cracked marble bust of virtue. Consistency. No people."),
+    ("medium shot", "hero", "HERO shrugging at a broken timeline, coffee, snow window. Not his problem."),
+    ("medium shot", "hero", "HERO waiting, clock, empty chairs. Spider patience. Not talking you into anything."),
+    ("wide shot", "american", "AMERICAN on stage saying the opposite of last year, old clip frozen beside him."),
+    ("symbolic graphic", "empty", "Two identical movie tickets for the same sequel. Paid twice. No people."),
+    ("top-down flatlay", "empty", "Same fat folder, new title strip, old strip in the trash. New name on the tab. No faces."),
+    ("extreme close-up", "empty", "Ugly chewed cheap pencil, three notches in the paint. Three presidents. No people."),
+    ("extreme close-up", "empty", "The same chewed pencil even closer, splintered paint, cheap metal ferrule. Not nice. No people."),
+    ("top-down flatlay", "empty", "Stack of printed op-eds, funded. Fights you publish. No people."),
+    ("wide shot", "american", "University panel, sandwiches, blank decline banner, AMERICAN nodding in a nearly empty hall."),
+    ("wide shot", "crowd", "Celebrity-looking extra at a podium, folded map in a bag, cameras, excellent lighting. Not a real celebrity."),
+    ("extreme close-up", "empty", "Beauty-light ring, empty stool, excellent lighting, no speaker. No people."),
+    ("top-down flatlay", "empty", "Tote bag, podcast mic, mailing list as grey bars. Choir merch. No people."),
+    ("match cut", "empty", "Old telegram spike dissolving into a glowing heart-like button. Same muscle. No people."),
+    ("wide shot", "american", "AMERICAN already screaming, given a huge empty hall and a mic, spotlight of rage."),
+    ("low angle", "american", "Same AMERICAN from below swallowing the room, HERO a speck in the back row."),
+    ("wide shot", "american", "Buffet of idea-posters, spoons, AMERICAN filling a plate. Marketplace as food."),
+    ("extreme close-up", "empty", "Two spoons locked in a fight, chef hat on a hook, clock at a hungry hour. No people."),
+    ("symbolic graphic", "empty", "Empty spy coat, ignored cash bundle. Not a spy. No people."),
+    ("medium shot", "american", "Sincere AMERICAN at a kitchen webcam, unpaid, righteous, authenticity lighting."),
+    ("extreme close-up", "empty", "Webcam ring-light, a handwritten BEING REAL sticky note. No people."),
+    ("wide shot", "empty", "Frosted park bench, dark coat, sealed envelope unused. The villain you wanted. No people."),
+    ("extreme close-up", "empty", "Envelope opened: a printed quote page, type too small to read. The quote is yours. No people."),
+    ("medium shot", "hero", "HERO holding the quote page, not editing it. You wrote my dialogue."),
+    ("medium shot", "hero", "HERO turning from the cartoon TV to a darker doorway. Now the other American."),
+    ("wide shot", "american", "AMERICAN face-lit by a huge TV, alone, the cartoon. TV is for you."),
+    ("wide shot", "other", "Quiet London hotel bar, OTHER AMERICAN in a dark coat, low lamps, no logos, HERO drinking with him. Through the window a white boat, blank stern."),
+    ("medium shot", "other", "OTHER AMERICAN lecturing a camera about democracy at lunch, boom mic, perfect daylight."),
+    ("two-person shot", "other", "Same OTHER at dinner, matchbook, loophole question, HERO listening, candles."),
+    ("symbolic graphic", "empty", "Street split: ballot box vs invoice stamp, torn page of one language. Two countries. No people."),
+    ("extreme close-up", "empty", "A ledger, the invoice column circled. Guess which number. No people."),
+    ("wide shot", "other", "Heavy curtains, young man at a private table, waiter blocking a photograph, HERO checking a watch."),
+    ("extreme close-up", "empty", "A wristwatch face. No gasp. Just time. Insert. No people."),
+    ("extreme close-up", "empty", "Gears, oil, jam light. Machine. Macro. No people."),
+    ("extreme close-up", "empty", "Needle in the red, repeating waveform. Same noise before they fail. No people."),
+    ("wide shot", "crowd", "Crowd filming a smoking machine with phones, pointing at each other not the gears. AMERICAN in the front. Coin flipping over fireworks in a mural behind."),
+    ("symbolic graphic", "empty", "Coin in mid-air over fireworks. Fifty percent plus one. No people."),
+    ("medium shot", "both", "AMERICAN accusing HERO of wanting division, cute finger out; HERO almost amused. Cute."),
+    ("extreme close-up", "empty", "Car engine vs exhaust pipe. Attention vs division. No people."),
+    ("dutch angle", "american", "Supermarket aisle, cereal, AMERICAN saying the wrong three words into a phone, camera already there."),
+    ("symbolic graphic", "empty", "Giant eye in a bathroom mirror, a window behind the viewer left unused. Cannot stare out. No people."),
+    ("aerial", "empty", "News-week eating a calendar; the world beyond the TV glow keeps moving. God's-eye. No people. No flags."),
+    ("wide shot", "american", "Three years later, AMERICAN watching a sad-piano documentary on a laptop."),
+    ("extreme close-up", "empty", "The commercial sandwich again beside the laptop pause bar. Callback. No people."),
+    ("medium shot", "hero", "HERO placing the sandwich photo back into the folder. I told you I would bring it back."),
+    ("symbolic graphic", "empty", "Unplugged movie-marquee bulbs spelling nothing. Evil is a movie word. No people."),
+    ("medium shot", "hero", "HERO almost nodding, a cold red check on the enemy file. Nicest thing I say."),
+    ("medium shot", "hero", "HERO looking at camera. Congratulations. You earned it."),
+    ("wide shot", "american", "New AMERICAN on a political stage, teleprompter, reset, children's merch in the wings. Not a celebrity likeness."),
+    ("extreme close-up", "empty", "Wet-ink line on a speech page, a smear of THIS TIME, tiny brand tags in a kid's bag. No people."),
+    ("medium shot", "hero", "HERO does not cheer, skipping-rope unused (panic is cardio), opens the same folder, kettle steam."),
+    ("top-down flatlay", "empty", "Cartoon tab, coupon, soldier photo face-down. Same guts. No readable names."),
+    ("extreme close-up", "empty", "Phone comments as a red storm over a duffel, a red hat on a hanger in bokeh. Mean comments. Loud guy as an object. No faces."),
+    ("match cut", "empty", "Two costumes swapping on the hanger again. Other guy. Loud guy again. No faces."),
+    ("tracking", "empty", "Dolly along a wall of unmoved headings, photographs changing in frames, dust, empty corridor. No people. No flags."),
+    ("extreme close-up", "empty", "A file that does not wrinkle beside a mirror that does. You age. The file does not. No people."),
+    ("medium shot", "both", "HERO looking at AMERICAN as he is: loud coat, watch, impatient. I need you you."),
+    ("wide shot", "american", "AMERICAN first in line for a sequel poster with ridiculous explosions, popcorn, believing the trailer."),
+    ("POV", "american", "POV of the watcher at the end of a video, dark screen, asking if he is right, faint reflection of AMERICAN."),
+    ("wide shot", "crowd", "Comment-bright room, AMERICANS fighting genius vs cartoon, nobody at the dark window."),
+    ("extreme close-up", "empty", "Last page of the folder, a checked box under a coupon. I predicted that too. No people."),
+    ("medium shot", "american", "Someone new as AMERICAN writing the old sentence, coffee, slogans in the trash."),
+    ("extreme close-up", "empty", "Three dead slogan buttons in a drawer, older than the new speech. No people."),
+    ("medium shot", "hero", "HERO in a cold room, sharpening a pencil, steam, not dramatic. Maintenance."),
+    ("symbolic graphic", "empty", "Gold trophy left on a hook, unearned. Not a genius. No people."),
+    ("extreme close-up", "empty", "A sticky-note compliment covering a CHANGE switch left off. No people."),
+    ("wide shot", "both", "AMERICAN walking the same looping wet street; HERO already seated at the desk, waiting. Familiar."),
+    ("aerial", "empty", "God's-eye of the looping street and the same puddle. The most expensive free thing. No people visible."),
+    ("medium shot", "hero", "HERO looking into camera, dry toast: send this to someone who clapped. They will not thank you. I will."),
 ]
+
+
+def prompt_for(who: str, scene: str) -> str:
+    if who == "empty":
+        return f"{STYLE_EMPTY} SCENE: {scene}"
+    extras = {
+        "hero": "Only HERO on camera unless the scene names someone else in bokeh. Same navy three-piece every time.",
+        "american": "AMERICAN is the lead. HERO is absent unless the scene names him.",
+        "both": "HERO and AMERICAN both visible, locked faces, same wardrobe rules.",
+        "other": "OTHER AMERICAN is the lead. HERO only if named. The cartoon everyman is absent unless named.",
+        "soldier": "Tired ordinary soldier, not a celebrity, not HERO, not the cartoon AMERICAN.",
+        "crowd": "Generic extras, not celebrities. Recurring leads only if named. NO politician faces.",
+    }
+    return f"{STYLE_PEOPLE} {extras.get(who, '')} SCENE: {scene}"
