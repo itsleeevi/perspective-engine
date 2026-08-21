@@ -28,8 +28,10 @@ SHOT_TYPES = (
 
 # Beats per visualize_beats call. Large enough to keep the call count (and so
 # the cost) low, small enough that the model does not start truncating or
-# losing track of the ordering.
-VISUALIZE_BATCH = 12
+# losing track of the ordering. 16 is safe once reasoning is disabled: the
+# completion budget is spent on JSON, not hidden thinking tokens that used
+# to truncate the last scenes of a batch.
+VISUALIZE_BATCH = 16
 
 # Beats of preceding narration each batch sees as read-only context, so the
 # first shot of a batch knows what room the story is standing in.
@@ -38,49 +40,19 @@ VISUALIZE_LEAD_IN = 3
 # Bumped whenever either prompt's required structure or instructions change
 # meaningfully, so a prompt fix (or a provider swap) doesn't silently keep
 # serving a stale cached result written under the old wording.
-WRITE_SCRIPT_PROMPT_VERSION = 6
-VISUALIZE_BEATS_PROMPT_VERSION = 10
+WRITE_SCRIPT_PROMPT_VERSION = 7
+VISUALIZE_BEATS_PROMPT_VERSION = 11
 
 
-def write_script_prompt(topic: str, brief: str, target_minutes: float) -> str:
+def write_script_system_prompt() -> str:
     """
-    Prompt for a "your life as every level of X" script from a title alone.
-
-    ``target_minutes`` sizes the whole script to a runtime by converting it
-    into a word budget at the measured narration rate. Length has to be
-    controlled *here*, at the writing step: capping levels afterwards would
-    drop the final level, and the final level is the one that closes the
-    loop back to the beginning.
+    Static format rules for the career-ladder script. Kept as its own string
+    so the OpenAI adapter can send it as a system message (models weight
+    that more reliably than burying the same rules under the topic).
     """
-    length_rule = ""
-    if target_minutes > 0:
-        budget = round(target_minutes * NARRATION_WPM)
-        # The total word ceiling is what actually controls runtime; the
-        # level count only decides how the same words are divided up. Asked
-        # for 10 levels instead of 8 at the same ceiling, the model wrote the
-        # same ~1280 words spread thinner (and threw in an eleventh level),
-        # so 8 meatier levels is the better structure at any length this
-        # format is used for.
-        levels = 8
-        per_level = round(budget / levels)
-        length_rule = (
-            f"LENGTH — this script is spoken at {NARRATION_WPM:.0f} words "
-            f"per minute and must not run past {target_minutes:.0f} "
-            f"minutes, so {budget} words of narration is a HARD CEILING "
-            "for the whole script, not a target to drift past. Use "
-            f"exactly {levels} levels of AT MOST {per_level} words each; "
-            "count as you go and cut the weakest sentence whenever a "
-            "level runs over. Stay inside the ceiling by making each "
-            "level tighter and more selective, NOT by dropping levels or "
-            "ending the story early — the full arc, including the "
-            "closing loop back to the beginning, still has to fit.\n\n"
-        )
     return (
-        "Write a narrated, second-person 'career ladder' video script for "
-        f'the YouTube video titled: "{topic}"\n\n'
-        f"Additional brief (may be blank): {brief}\n\n"
-        + length_rule
-        + "FORMAT — every video in this series follows the same structure:\n"
+        "You write narrated, second-person 'career ladder' video scripts.\n\n"
+        "FORMAT — every video in this series follows the same structure:\n"
         "- Premise: 'your life as every level/rank of X'. The viewer is cast "
         "as the hero, addressed as 'you', living through 8 to 10 escalating "
         "stages of the career, role, or hierarchy the title implies.\n"
@@ -113,38 +85,79 @@ def write_script_prompt(topic: str, brief: str, target_minutes: float) -> str:
         "actually be said aloud: 'five in the morning', '5 a.m.', 'ten at "
         "night'. The same goes for any other number a reader would normally "
         "sound out as a unit (phone extensions, serial-style codes) rather "
-        "than read digit by digit.\n\n"
+        "than read digit by digit.\n"
+        "- After drafting, silently count the narration words per level and "
+        "cut the weakest sentence in any level that overruns its cap. Never "
+        "drop a level or end the story early to make the count fit.\n\n"
         "Return ONLY valid JSON in exactly this format (no extra text):\n"
         '{"hook": "...", "levels": [{"name": "The Applicant", "beats": '
         '["paragraph one of narration", "paragraph two", "..."]}, "..."]}\n\n'
         "Each level's \"beats\" list should have 2 to 5 paragraphs, each "
         "paragraph 2 to 5 sentences: long enough to sustain the level, "
         "short enough to keep momentum."
-        + ("" if length_rule else " 8 to 10 levels total.")
     )
 
 
-def visualize_chunk_prompt(
-    beats: list[str], topic: str = "", lead_in: list[str] | None = None
-) -> str:
-    """
-    Prompt to storyboard one batch of narration fragments.
-
-    ``shot_type`` is asked for as its own JSON field rather than left
-    implicit in the prose because it decides whether the hero description is
-    appended to the image prompt at all (see ``graph.style.scene_prompt``).
-    """
-    beats_text = "\n".join(f"  [{i}] {b}" for i, b in enumerate(beats))
-    shot_types = ", ".join(f"'{t}'" for t in SHOT_TYPES)
-    topic_line = f'The video is titled "{topic.strip()}".\n\n' if topic.strip() else ""
-    lead_in_text = ""
-    if lead_in:
-        preceding = "\n".join(f"  {line}" for line in lead_in)
-        lead_in_text = (
-            "Narration immediately before these fragments, for continuity "
-            "only — do NOT write briefs for these lines:\n"
-            f"{preceding}\n\n"
+def write_script_user_prompt(topic: str, brief: str, target_minutes: float) -> str:
+    """Per-run topic, brief, and word-budget instructions."""
+    length_rule = ""
+    if target_minutes > 0:
+        budget = round(target_minutes * NARRATION_WPM)
+        # The total word ceiling is what actually controls runtime; the
+        # level count only decides how the same words are divided up. Asked
+        # for 10 levels instead of 8 at the same ceiling, the model wrote the
+        # same ~1280 words spread thinner (and threw in an eleventh level),
+        # so 8 meatier levels is the better structure at any length this
+        # format is used for.
+        levels = 8
+        per_level = round(budget / levels)
+        length_rule = (
+            f"LENGTH — this script is spoken at {NARRATION_WPM:.0f} words "
+            f"per minute and must not run past {target_minutes:.0f} "
+            f"minutes, so {budget} words of narration is a HARD CEILING "
+            "for the whole script, not a target to drift past. Use "
+            f"exactly {levels} levels of AT MOST {per_level} words each; "
+            "count as you go and cut the weakest sentence whenever a "
+            "level runs over. Stay inside the ceiling by making each "
+            "level tighter and more selective, NOT by dropping levels or "
+            "ending the story early — the full arc, including the "
+            "closing loop back to the beginning, still has to fit.\n\n"
         )
+    extra = "" if length_rule else " Use 8 to 10 levels total.\n\n"
+    return (
+        "Write a narrated, second-person 'career ladder' video script for "
+        f'the YouTube video titled: "{topic}"\n\n'
+        f"Additional brief (may be blank): {brief}\n\n"
+        + length_rule
+        + extra
+        + "Follow the format rules exactly."
+    )
+
+
+def write_script_prompt(topic: str, brief: str, target_minutes: float) -> str:
+    """
+    Combined script prompt for providers that send a single user message.
+
+    ``target_minutes`` sizes the whole script to a runtime by converting it
+    into a word budget at the measured narration rate. Length has to be
+    controlled *here*, at the writing step: capping levels afterwards would
+    drop the final level, and the final level is the one that closes the
+    loop back to the beginning.
+    """
+    return (
+        write_script_system_prompt()
+        + "\n\n"
+        + write_script_user_prompt(topic, brief, target_minutes)
+    )
+
+
+def visualize_system_prompt() -> str:
+    """
+    Static storyboard rules. Identical across every batch of a run so the
+    OpenAI adapter can cache them (the rules alone are well over the
+    1,024-token cache-prefix minimum).
+    """
+    shot_types = ", ".join(f"'{t}'" for t in SHOT_TYPES)
     return (
         "You are the storyboard artist for a narrated 'Your Life As Every "
         "Rank/Level of X' explainer channel (think faceless YouTube "
@@ -152,12 +165,8 @@ def visualize_chunk_prompt(
         "a detailed graphic-novel style — a folding table with a visible "
         "price sticker, a laptop with dust in its fan vents, a roommate's "
         "comic-book 'SNORT! ZZZ!' sound effects). Each numbered fragment "
-        "below is a 3-4 second slice of narration that will be spoken "
-        "over ONE illustration. Write the illustration brief for each "
-        "fragment.\n\n"
-        f"{topic_line}"
-        f"{lead_in_text}"
-        f"Fragments:\n{beats_text}\n\n"
+        "is a 3-4 second slice of narration that will be spoken over ONE "
+        "illustration. Write the illustration brief for each fragment.\n\n"
         "Rules:\n"
         "- Write in THIRD PERSON as an outside observer: 'a young man signs "
         "papers at a desk…'. Never use 'you' or 'your'.\n"
@@ -287,11 +296,49 @@ def visualize_chunk_prompt(
         "setting. One to two sentences, under 45 words. No camera jargon, no "
         "art-style or lighting words — those are added separately.\n"
         "- Do not name real people, agencies, or places that would identify a "
-        "real individual; keep it a fictional composite.\n"
-        f"- Return exactly one entry for every fragment 0 to {len(beats) - 1}, "
-        "each tagged with its fragment number.\n\n"
+        "real individual; keep it a fictional composite.\n\n"
         "Return ONLY valid JSON in exactly this format:\n"
         '{"scenes": [{"beat": 0, "shot_type": "medium shot", '
         '"description": "..."}, {"beat": 1, "shot_type": '
         '"extreme close-up", "description": "..."}]}'
+    )
+
+
+def visualize_user_prompt(
+    beats: list[str], topic: str = "", lead_in: list[str] | None = None
+) -> str:
+    """Per-batch fragments, topic, and continuity lead-in."""
+    beats_text = "\n".join(f"  [{i}] {b}" for i, b in enumerate(beats))
+    topic_line = f'The video is titled "{topic.strip()}".\n\n' if topic.strip() else ""
+    lead_in_text = ""
+    if lead_in:
+        preceding = "\n".join(f"  {line}" for line in lead_in)
+        lead_in_text = (
+            "Narration immediately before these fragments, for continuity "
+            "only — do NOT write briefs for these lines:\n"
+            f"{preceding}\n\n"
+        )
+    return (
+        f"{topic_line}"
+        f"{lead_in_text}"
+        f"Fragments:\n{beats_text}\n\n"
+        f"Return exactly one entry for every fragment 0 to {len(beats) - 1}, "
+        "each tagged with its fragment number."
+    )
+
+
+def visualize_chunk_prompt(
+    beats: list[str], topic: str = "", lead_in: list[str] | None = None
+) -> str:
+    """
+    Combined storyboard prompt for providers that send a single user message.
+
+    ``shot_type`` is asked for as its own JSON field rather than left
+    implicit in the prose because it decides whether the hero description is
+    appended to the image prompt at all (see ``graph.style.scene_prompt``).
+    """
+    return (
+        visualize_system_prompt()
+        + "\n\n"
+        + visualize_user_prompt(beats, topic, lead_in)
     )

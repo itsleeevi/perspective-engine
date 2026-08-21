@@ -36,8 +36,10 @@ Verified 2026-08-16 (later same day, for the OpenAI authoring cutover):
       https://openai.com/api/pricing (per provider listings; see
       adapters/llm/openai_llm.py's AUTHORING_MODEL for the tier chosen).
       Sol/GPT-5.5 (flagship, $5/$30 per MTok), Terra ($2/$12, Sonnet's
-      analogue — the default here), Luna ($0.20/$1.20, Haiku's analogue,
-      not yet probed against Terra for this format's prompts).
+      analogue — the default here), Luna ($0.20/$1.20, Haiku's analogue).
+      GPT-5.6 defaults to medium reasoning; those tokens bill at the
+      output rate. Cache reads are 0.1× input, cache writes 1.25× input
+      (https://developers.openai.com/api/docs/guides/prompt-caching).
 
 Verified 2026-08-16:
   Anthropic Claude Haiku 4.5 / Sonnet 5 / Sonnet 4.6 / Opus 5
@@ -80,6 +82,11 @@ _OPENAI_CHAT_RATES = {
     "gpt-5.6-luna": (0.20 / 1_000_000, 1.20 / 1_000_000),
 }
 
+# GPT-5.6 prompt-cache multipliers on the uncached input rate.
+# Verified against developers.openai.com/api/docs/guides/prompt-caching.
+_OPENAI_CACHE_READ = 0.10
+_OPENAI_CACHE_WRITE = 1.25
+
 # fal.ai FLUX.1 [dev], USD per image at <=1 megapixel.
 _FLUX_PER_IMAGE = 0.025
 
@@ -118,18 +125,33 @@ def claude_haiku_cost(input_tokens: int, output_tokens: int) -> float:
     return claude_cost(_CLAUDE_HAIKU, input_tokens, output_tokens)
 
 
-def openai_chat_cost(model: str, input_tokens: int, output_tokens: int) -> float:
+def openai_chat_cost(
+    model: str,
+    input_tokens: int,
+    output_tokens: int,
+    cached_tokens: int = 0,
+    cache_write_tokens: int = 0,
+) -> float:
     """
     USD cost of one OpenAI chat-completions authoring call.
 
-    An unknown model is billed at the priciest known rate (Sol/GPT-5.5)
-    rather than $0, same rationale as ``claude_cost``: an over-reported cost
-    is the safer error for a model this table hasn't been updated for yet.
+    ``input_tokens`` is the full prompt size (cached + written + plain).
+    Cache reads bill at 0.1× the input rate; cache writes at 1.25×; the
+    remainder at the uncached input rate. An unknown model is billed at
+    the priciest known rate (Sol/GPT-5.5) rather than $0.
     """
     input_rate, output_rate = _OPENAI_CHAT_RATES.get(
         model, _OPENAI_CHAT_RATES["gpt-5.6-sol"]
     )
-    return input_tokens * input_rate + output_tokens * output_rate
+    cached = max(0, cached_tokens)
+    written = max(0, cache_write_tokens)
+    plain = max(0, input_tokens - cached - written)
+    return (
+        plain * input_rate
+        + cached * input_rate * _OPENAI_CACHE_READ
+        + written * input_rate * _OPENAI_CACHE_WRITE
+        + output_tokens * output_rate
+    )
 
 
 def flux_image_cost(num_images: int = 1) -> float:

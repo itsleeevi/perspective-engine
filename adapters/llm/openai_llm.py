@@ -7,6 +7,22 @@ Prompt content for both is shared verbatim with the Anthropic adapter (see
 vs. clock, cast consistency, flag avoidance, ...) live in the prompt, not in
 provider-specific code, so they apply no matter which provider is configured.
 
+GPT-5.6 Terra defaults to medium reasoning, billed at the output rate. That
+is what made a 9-minute storyboard cost ~$5: a dozen batches each thinking
+for thousands of tokens before writing the JSON. These jobs already have
+the thinking done in the prompt (same finding as Anthropic's ``_NO_THINKING``
+on Sonnet), so the adapter sets ``reasoning_effort`` explicitly:
+
+- ``write_script`` uses ``low`` — one call, and a little planning helps the
+  8-level arc and word budget land.
+- ``visualize_beats`` uses ``none`` — many calls of structured JSON against
+  a long explicit rule list; reasoning here only burns tokens and used to
+  truncate the last scenes of a batch.
+
+The storyboard rule block is sent as a cached system message so batches 2..N
+of a run pay the 0.1× cache-read rate instead of re-billing the same ~2k
+tokens at full input price.
+
 The vision-based quality check and the (unused) generic shot-breakdown call
 are delegated to an internal ``AnthropicLLMAdapter`` rather than reimplemented
 here: they were never the thing being swapped, and Anthropic's Claude Haiku
@@ -43,12 +59,23 @@ from adapters.llm.base import (
 from graph.script_fixture import fixture_to_beats
 
 # GPT-5.6 Terra: OpenAI's mid tier, priced at $2/$12 per MTok — the closest
-# analogue to Claude Sonnet's tier ($2/$10), and the safer first choice for a
-# cutover to a provider this codebase hadn't used for authoring before. Luna
-# ($0.20/$1.20, Haiku's analogue) is worth probing the same way Haiku was
-# probed against Sonnet 5 once there is a render's worth of Terra output to
-# compare it against; nothing here should be read as ruling that out.
+# analogue to Claude Sonnet's tier ($2/$10). Luna ($0.20/$1.20) is the
+# high-volume analogue of Haiku; storyboard quality on this format is
+# prompt-bound, not tier-bound (see adapters/llm/anthropic.py), but Terra
+# stays the authoring model so a cheaper swap can be measured against a
+# known-good baseline rather than guessed.
 AUTHORING_MODEL = "gpt-5.6-terra"
+
+# Script writing is one call per video; a little reasoning helps the arc.
+# Storyboard is ~10 calls of "follow these rules, emit JSON" — reasoning
+# off, matching Anthropic's finding that thinking tokens did not fix
+# duration/location bugs the prompt already covers.
+_SCRIPT_REASONING = "low"
+_STORYBOARD_REASONING = "none"
+
+_VISUALIZE_CACHE_KEY = (
+    f"perspective-engine:visualize-beats:v{_prompts.VISUALIZE_BEATS_PROMPT_VERSION}"
+)
 
 # Backoff for the transient failures of a many-call run (mirrors
 # adapters.llm.anthropic._create_with_backoff and
@@ -70,6 +97,33 @@ async def _create_with_backoff(client: AsyncOpenAI, **kwargs):
             await asyncio.sleep(delay + random.uniform(0, 1.0))
             delay = min(delay * 2, _RETRY_MAX_SECONDS)
     raise RuntimeError("unreachable")
+
+
+def _cached_system_message(text: str) -> dict:
+    """System message with an explicit cache breakpoint on the rule block."""
+    return {
+        "role": "system",
+        "content": [
+            {
+                "type": "text",
+                "text": text,
+                "prompt_cache_breakpoint": {"mode": "explicit"},
+            }
+        ],
+    }
+
+
+def _usage_cost(model: str, usage) -> float:
+    details = getattr(usage, "prompt_tokens_details", None)
+    cached = int(getattr(details, "cached_tokens", 0) or 0) if details else 0
+    written = int(getattr(details, "cache_write_tokens", 0) or 0) if details else 0
+    return pricing.openai_chat_cost(
+        model,
+        input_tokens=usage.prompt_tokens,
+        output_tokens=usage.completion_tokens,
+        cached_tokens=cached,
+        cache_write_tokens=written,
+    )
 
 
 def _extract_json(text: str) -> str:
@@ -99,7 +153,6 @@ class OpenAILLMAdapter(LLMAdapter):
         include_hook: bool = True,
         target_minutes: float = 0.0,
     ) -> ScriptResult:
-        prompt = _prompts.write_script_prompt(topic, brief, target_minutes)
         cache_key = _cache.make_key(
             {
                 "role": "write_script",
@@ -120,15 +173,22 @@ class OpenAILLMAdapter(LLMAdapter):
                 self._client,
                 model=self._model,
                 max_completion_tokens=8192,
+                reasoning_effort=_SCRIPT_REASONING,
                 response_format={"type": "json_object"},
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {
+                        "role": "system",
+                        "content": _prompts.write_script_system_prompt(),
+                    },
+                    {
+                        "role": "user",
+                        "content": _prompts.write_script_user_prompt(
+                            topic, brief, target_minutes
+                        ),
+                    },
+                ],
             )
-            usage = response.usage
-            cost_usd = pricing.openai_chat_cost(
-                self._model,
-                input_tokens=usage.prompt_tokens,
-                output_tokens=usage.completion_tokens,
-            )
+            cost_usd = _usage_cost(self._model, response.usage)
             raw = response.choices[0].message.content or ""
             data = json.loads(_extract_json(raw))
             hook = str(data.get("hook", "")).strip()
@@ -203,21 +263,26 @@ class OpenAILLMAdapter(LLMAdapter):
     async def _visualize_chunk(
         self, beats: list[str], topic: str = "", lead_in: list[str] | None = None
     ) -> tuple[dict[int, tuple[str, str]], float]:
-        prompt = _prompts.visualize_chunk_prompt(beats, topic, lead_in)
         try:
             response = await _create_with_backoff(
                 self._client,
                 model=self._model,
                 max_completion_tokens=4096,
+                reasoning_effort=_STORYBOARD_REASONING,
+                prompt_cache_key=_VISUALIZE_CACHE_KEY,
+                prompt_cache_options={"mode": "explicit"},
                 response_format={"type": "json_object"},
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    _cached_system_message(_prompts.visualize_system_prompt()),
+                    {
+                        "role": "user",
+                        "content": _prompts.visualize_user_prompt(
+                            beats, topic, lead_in
+                        ),
+                    },
+                ],
             )
-            usage = response.usage
-            cost_usd = pricing.openai_chat_cost(
-                self._model,
-                input_tokens=usage.prompt_tokens,
-                output_tokens=usage.completion_tokens,
-            )
+            cost_usd = _usage_cost(self._model, response.usage)
             raw = response.choices[0].message.content or ""
             data = json.loads(_extract_json(raw))
             scenes: dict[int, tuple[str, str]] = {}
