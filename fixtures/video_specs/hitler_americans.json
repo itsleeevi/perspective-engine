@@ -1,0 +1,17 @@
+{
+  "topic": "What Hitler Really Thought About Americans",
+  "fixture": "fixtures/hitler_americans.json",
+  "stills_module": "fixtures/hitler_americans_stills.py",
+  "still_prefix": "hitler_v4_",
+  "stills_dir": "assets/grok_hitler_v4",
+  "thread_id": "hitler-americans-v4",
+  "voice": "chatterbox",
+  "narration_wpm": 175,
+  "short": {
+    "fixture": "fixtures/hitler_americans_short.json",
+    "stills_module": "fixtures/hitler_americans_short_stills.py",
+    "still_prefix": "hitler_short_",
+    "stills_dir": "assets/grok_hitler_short",
+    "output": "assets/output/hitler_americans_short.mp4"
+  }
+}

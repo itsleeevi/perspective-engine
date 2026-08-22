@@ -4,9 +4,10 @@ shot_breakdown node — turn the script into a structured shot list.
 For the level-POV slideshow format the mapping is deterministic and needs no
 LLM to decide shot count or timing: one shot per narration chunk, in order.
 
-  - A ``[TITLE]`` beat becomes one locally rendered title card whose level
-    name is narrated over it, so a level break is a story beat rather than
-    dead air.
+  - A ``[TITLE]`` beat becomes one locally rendered title card. Rank-show
+    cards have their level name narrated over them. Silent chapter cards
+    (``[TITLE] (silent) …``) hold ~2.5s of black with no VO, so the heading is
+    a visual breath instead of a GPS readout.
   - A narration beat is split into ~3-4 second speaking chunks that begin and
     end on sentence or clause boundaries
     (``script_fixture.split_beat_into_chunks``), so the picture changes

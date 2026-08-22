@@ -40,9 +40,9 @@ Principle: best tool for the role. If a better-fit option for a role exists, pro
 
 ## Custom YouTube cuts (Putin / Hitler / next title)
 
-These are fixture-driven slideshows, not the default graph topic flow. **Read `docs/custom-videos.md` before generating a new one.** After a cut ships, update `docs/videos/` so the next agent does not copy the last storyline.
+These are fixture-driven short films of still images, not the default graph topic flow. **`docs/custom-videos.md` is the production system — read it and follow its execution checklist.** One video = three data files (fixture, stills module, spec in `fixtures/video_specs/`) run through `scripts/lint_storyboard.py` → `scripts/make_image_jobs.py` → `scripts/run_custom_video.py`. After a cut ships, update `docs/videos/` so the next agent does not copy the last storyline.
 
-Non-negotiable for that path: unique story per title, third-person narrator, Kokoro `am_liam` (not ElevenLabs, not Edge), fill-frame 16:9 (cover-crop Grok 3:2), YouTube thumbs as 1280×720 JPEG, locked props/sets for scene-to-scene continuity, cuts on narration pauses.
+Non-negotiable for that path: unique story per title, **perspective first** (inside the hero’s mental model, teach through dramatic irony), **explain the thought as if the watcher were five** (one child-repeatable `the_thought` sentence in the fixture and in the VO — `lint_story.py` checks), third-person narrator, Hollywood story written *before* stills, spoken English (no telegram fragments, no numbered lectures), Kokoro `am_michael` at speed 0.90 (Chatterbox-Turbo when clone works — never Edge or ElevenLabs), whisper-forced-aligned sync, prop economy (signature prop ≤ 6 scenes, enforced by the linter), silent black chapter cards, fill-frame 16:9, YouTube thumbs as 1280×720 JPEG.
 
 ## Out of scope for the current phase
 

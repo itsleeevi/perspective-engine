@@ -1,0 +1,21 @@
+{
+  "topic": "What Stalin Really Thought About Hitler",
+  "fixture": "fixtures/stalin_hitler.json",
+  "stills_module": "fixtures/stalin_hitler_stills.py",
+  "still_prefix": "stalin_v4_",
+  "stills_dir": "assets/grok_stalin_v4",
+  "thread_id": "stalin-hitler-v4",
+  "voice": "kokoro",
+  "kokoro_voice": "am_michael",
+  "kokoro_speed": 1.05,
+  "kokoro_sentence_pause": 0.16,
+  "kokoro_clause_pause": 0.06,
+  "narration_wpm": 165,
+  "short": {
+    "fixture": "fixtures/stalin_hitler_short.json",
+    "stills_module": "fixtures/stalin_hitler_short_stills.py",
+    "still_prefix": "stalin_short_v4_",
+    "stills_dir": "assets/grok_stalin_short_v4",
+    "output": "assets/output/stalin_hitler_short.mp4"
+  }
+}

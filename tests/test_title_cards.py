@@ -15,6 +15,11 @@ from urllib.request import url2pathname
 from PIL import Image
 
 from graph.title_cards import render_title_card
+from graph.script_fixture import (
+    fixture_to_beats,
+    title_card_lines,
+    title_card_narration,
+)
 
 
 def _path_for(url: str) -> str:
@@ -45,3 +50,27 @@ class TestRenderTitleCard:
         path = _path_for(url)
         with Image.open(path) as img:
             assert img.size == (320, 180)
+
+    def test_silent_chapter_card_has_no_vo_and_keeps_the_name(self):
+        beat = "[TITLE] (silent) The Drawer"
+        assert title_card_lines(beat) == ("The Drawer", "")
+        assert title_card_narration(beat) == ""
+        url = render_title_card(beat, width=320, height=180)
+        path = _path_for(url)
+        with Image.open(path) as img:
+            assert img.size == (320, 180)
+
+    def test_chapter_style_fixture_emits_silent_title_beats(self):
+        beats = fixture_to_beats(
+            {
+                "include_level_titles": True,
+                "title_style": "chapter",
+                "speak_title_cards": False,
+                "hook": "They kicked a door.",
+                "levels": [{"name": "The Drawer", "beats": ["And they found a book."]}],
+            }
+        )
+        assert beats[0] == "They kicked a door."
+        assert beats[1] == "[TITLE] (silent) The Drawer"
+        assert title_card_narration(beats[1]) == ""
+        assert beats[2] == "And they found a book."

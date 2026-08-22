@@ -1,28 +1,48 @@
 {
   "title": "What Hitler Really Thought About Americans",
   "hero_career_progression": false,
-  "include_level_titles": false,
-  "hook": "They expected maps.",
+  "include_level_titles": true,
+  "title_style": "chapter",
+  "speak_title_cards": false,
+  "hook": "They kicked a door in Berlin looking for maps.",
   "levels": [
     {
-      "name": "The Book",
+      "name": "The Drawer",
       "beats": [
-        "They found a cowboy novel. Soft cover. German. A boy's book, sitting on a war desk. Stay. I am going to count the fakes. There are five. Then the real country walks in, and the book has no ending for that.",
-        "First, the hole everything sits on. He never went. No New York sidewalk. No diner. No factory floor. He never smelled America. He never heard it without a speaker. Every opinion in this story is built on that hole. Say it again. He never went.",
-        "Fake number one. The book. As a boy he did not read America. He read a German writer who invented a West that never existed. Horses. Honor. Empty land. A hero who always kept his word. He kept that paperback in his head like a religion. Forty years later the boy is gone. The book is not.",
-        "Watch him in the office. Same man. Same suit. Same rain on the window. He still talks about the United States as if it is a campfire story with a flag on it. That is not a quirk. That is fake number one, still open on the desk.",
-        "Fake number two. Hollywood. Newsreels. Skyscrapers like movie sets. Chorus lines. A giant ape on a building. He watched America the way a man watches a zoo. From the safe side of the glass. Sure the animals cannot get out. Jazz was not music to him. It was proof the country could not sit still. Gum. Football. A movie kiss. He wrote it all down as intelligence. It was entertainment. He never learned the difference.",
-        "Here is the trick that made fake two dangerous. He thought a movie was a scouting report. If the hero showed up late, America was late. If the crowd clapped, America was soft. He ran a war on film logic. Remember the glass. Remember the book. They are the same lie in two costumes.",
-        "Fake number three. Detroit. Not a cowboy. A factory. Cars pouring out like a river. He had never smelled the plant. He had the brochure. He collected it like other men collect saints. He told himself America was not a people. It was a method. Methods can be copied. People cannot. He liked that math. The math was a lie.",
-        "Fake number four. The radio. A flyer. A hero voice saying stay out, stay home, this is not your war. He filed that voice as the real United States. The other voice, the fireside talks, he filed as a glitch. You do not beat a country by declaring half of it fake. Four fakes so far. Book. Movie. Factory. Radio. One more.",
-        "Fake number five. The ocean. He drew the Atlantic like a castle moat. Wide. Final. Europe was the board. America was the audience. Audiences do not climb onto the stage. That was the whole foreign policy. A lock on a door. A navy he underestimated on purpose. Five fakes. None of them were the country.",
-        "Now the crack. 1936. The country he had never visited walked into his stadium. Not as a cowboy. As a team. A Black sprinter took the gold. The crowd made a sound he could not put in the novel. He smiled for cameras. In the box, the western broke. He refused to hear it. He chose the book. Every time.",
-        "Then December. A Sunday in the Pacific that was not in the paperback. Smoke. A flag. A country that had been chewing gum on a sofa stood up so fast the newsreel could not keep up. He did not go to America. America came into the story without asking him.",
-        "Four days later he declared war on the United States as if he were cancelling a subscription. Listen to the madness of that. He had never seen the street. He had seen the ape. He had seen the brochure. He had heard the flyer. And he said yes. Them too. Plot is a drug. He took it until the ships were already moving.",
-        "Then fake five died. The audience climbed onto the stage. Not as a cowboy. As a million ordinary men with gum in their pockets and a factory behind them. He had written Americans as extras. They arrived as the ending. The paperback had no chapter for that.",
-        "So what did he really think about Americans. Not a speech. Five substitutes. A boy's western. A zoo glass. A car saint. A radio hero. A moat. He thought they were a movie that would not leave the theater. He bet the world on that.",
-        "Last shot. Same drawer. Same cowboy book. Pages soft. Spine broken from being believed too long. He died having never seen the country he thought he had already conquered in his head. That is not a small error. That is the whole war, hiding in a paperback.",
-        "If you want a monster, you already have one. If you want the mechanism, here it is. He fell in love with a fake America. Then he attacked the real one for refusing to stay fake. Send this to someone who still thinks history is a western. The book always ends. The country does not."
+        "The war-kind. Arrows, pencils, the whole mess of a lost army. And on the desk, under a lamp that was still warm, they found a cowboy novel. Soft cover. A German boy's western, horse painted on the front, sitting there like it had been waiting for them.",
+        "That is a true thing. Sit with it. The man who declared war on the United States kept a child's western in his drawer. He had never been. Not to New York. Not to a diner. Not to a factory floor that came up through your shoes. America, to him, was not a country. It was a smell of paper, a voice on a speaker. A picture he drew when he was small, and then refused to update.",
+        "So what did he actually think Americans were? Not a toast. Not a speech they teach in school. A cartoon he liked better than the real thing, because a cartoon cannot surprise you. And once a man like that decides a country is a story he already finished, he will bet the world on the last page."
+      ]
+    },
+    {
+      "name": "The Paper West",
+      "beats": [
+        "As a boy he did not read America. He read a German who invented a West that never existed. Horses, honor, empty land. A hero who always kept his word, and never had to buy a ticket. He kept that paperback in his head like a religion. Forty years later the boy is gone. Watch him in the office. Same rain on the window. Same charcoal suit. He still talks about the United States as if it is a campfire story, with a flag pinned to it.",
+        "That is not a quirk. That is a grown man running a country on a novel. To him, Americans were extras in that novel. Simple. Loud. Late to their own plot. Useful on a horse. Useless in a real room. He liked them better that way. A cowboy is easy to hate and easy to copy, and he needed them to be both."
+      ]
+    },
+    {
+      "name": "The Glass",
+      "beats": [
+        "Then the movies arrived, and he treated them like reconnaissance. Skyscrapers. Chorus lines. A giant ape climbing a tower. Jazz that would not sit still. Gum. Football. A kiss on a screen he wrote down as intelligence. He watched America the way a man watches a zoo. From the safe side of the glass. Sure the animals cannot get out.",
+        "If the hero showed up late, America was late. If the crowd clapped, America was soft. He ran a war on film logic. Detroit he never smelled. He had a brochure. Cars pouring out like a river. He told himself America was not a people. It was a method. Methods can be copied. People cannot. He liked that math, because the math made them small.",
+        "And the radio. A famous flyer saying stay out, stay home, this is not your war. He filed that voice as the real United States. The other voice, the fireside talks, he filed as a glitch. You do not beat a country by declaring half of it fake. But he did. Then he drew the Atlantic like a castle moat. Europe was the board. America was the audience. And audiences, he was sure, do not climb onto the stage."
+      ]
+    },
+    {
+      "name": "The Stadium",
+      "beats": [
+        "Nineteen thirty-six. The country he had never visited walked into his stadium. Not as a cowboy. As a team. A Black sprinter took the gold, and the crowd made a sound that did not fit in the novel. He smiled for the cameras. In the box, the western broke. He heard it. You can watch a man hear the truth and put it back in the drawer.",
+        "He refused it. He chose the book. He always chose the book, and that is the tell. A man who will not update the picture will bet the world on the old one. Remember that, because December is coming, and December does not care what you filed as a glitch."
+      ]
+    },
+    {
+      "name": "December",
+      "beats": [
+        "A Sunday in the Pacific that was not in the paperback. Smoke, and a flag. A country that had been chewing gum on a sofa stood up. So fast the newsreel could not keep up. He did not go to America. America came into the story without asking him. Four days later he declared war on the United States as if he were cancelling a subscription.",
+        "Listen to the madness of that. He had never seen the street. He had seen the ape. He had seen the brochure. He had heard the flyer. And he said yes. Them too. Then the audience climbed onto the stage. Not as cowboys but as a million ordinary men with gum in their pockets and a factory behind them. He had written Americans as extras. They arrived as the ending. The paperback had no chapter for that.",
+        "Last shot. Same drawer. Same cowboy book. Pages soft. Spine broken from being believed too long. He died having never seen the country he thought he had already conquered in his head. That is not a small error. That is the whole war, hiding in a story he liked better than the truth.",
+        "If you want a monster, you already have one. If you want the mechanism, here it is. He fell in love with a fake America. Then he attacked the real one for refusing to stay fake. What he really thought about Americans is almost too small to hold a war. He thought they were his. They weren't."
       ]
     }
   ]

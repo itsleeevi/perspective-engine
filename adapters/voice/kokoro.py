@@ -1,15 +1,18 @@
 """
 Free local Kokoro-82M TTS (ONNX, Apache 2.0) — Liam-class punch without a paid API.
 
-Consecutive narrated shots are synthesised in ~80-word packs so phoneme
-timings stay aligned. Empty beats get real silence. Phoneme-word starts are
-fit onto ``str.split()`` (interpolated if the counts differ by a few);
-durations still sum to the pack length, so picture cannot drift from audio.
+Consecutive narrated shots are synthesised in ~50-word packs so phoneme
+timings stay aligned and the melody does not flatten into a robot. Empty
+beats get real silence. Phoneme-word starts are fit onto ``str.split()``
+(interpolated if the counts differ by a few); durations still sum to the
+pack length, so picture cannot drift from audio.
 
 Requires ``pip install kokoro-onnx soundfile espeakng-loader`` and the two
 model files under ``assets/models/kokoro/`` (gitignored with the rest of
 ``assets/``). Override voice with ``KOKORO_VOICE`` (default ``am_liam``,
-speed 1.0, ~205 wpm long-form — set ``NARRATION_WPM=205`` when chunking).
+speed 0.80, ~175 wpm on spoken prose — set ``NARRATION_WPM=175`` when
+chunking). Speed 1.0 was a newsreader; 0.80 plus longer pauses is closer
+to someone telling a story.
 """
 
 from __future__ import annotations
@@ -29,13 +32,15 @@ from graph.assets import save_asset
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _DEFAULT_MODEL_DIR = _REPO_ROOT / "assets" / "models" / "kokoro"
 _DEFAULT_VOICE = "am_liam"
-_SPEED = 1.0
+_SPEED = float(os.environ.get("KOKORO_SPEED", "0.80"))
 _LANG = "en-us"
 _SAMPLE_RATE = 24000
-# Long-form packs keep phoneme-word alignment stable. One giant utterance
-# drifted (~210–250 wpm, offset counts off by a few words) and the picture
-# cut in the middle of the breath.
-_PACK_WORDS = 80
+# Long-form packs keep phoneme-word alignment stable. Giant utterances
+# flatten Kokoro's melody into a robot. ~50-word packs keep a thought-shaped
+# contour and still give phoneme timings enough words to lock to.
+_PACK_WORDS = 50
+_SENTENCE_PAUSE = float(os.environ.get("KOKORO_SENTENCE_PAUSE", "0.42"))
+_CLAUSE_PAUSE = float(os.environ.get("KOKORO_CLAUSE_PAUSE", "0.18"))
 
 _engine = None
 
@@ -161,8 +166,8 @@ def _synthesize_text(text: str, voice: str) -> tuple[bytes, list[float] | None]:
         speed=_SPEED,
         lang=_LANG,
         trim=True,
-        sentence_pause=0.22,
-        clause_pause=0.10,
+        sentence_pause=_SENTENCE_PAUSE,
+        clause_pause=_CLAUSE_PAUSE,
     )
     offsets = _word_offsets_from_timings(spoken)
     with tempfile.TemporaryDirectory(prefix="pe_kokoro_") as tmp:
@@ -195,6 +200,8 @@ class KokoroVoiceAdapter(VoiceAdapter):
                 "voice": resolved_voice,
                 "speed": _SPEED,
                 "pack_words": _PACK_WORDS,
+                "sentence_pause": _SENTENCE_PAUSE,
+                "clause_pause": _CLAUSE_PAUSE,
                 "lang": _LANG,
                 "beats": list(script_beats),
                 "silences": [

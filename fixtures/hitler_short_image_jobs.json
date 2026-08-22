@@ -1,0 +1,103 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "hitler_short_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "In 1945, soldiers kicked open a door in Berlin, hunting for maps.",
+      "scene": "1945 Berlin office door kicked inward and splintered, rain blowing in, war maps and overturned chairs beyond, torchlight beams. Urgent. No people visible.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: 1945 Berlin office door kicked inward and splintered, rain blowing in, war maps and overturned chairs beyond, torchlight beams. Urgent. No people visible."
+    },
+    {
+      "id": "001",
+      "filename": "hitler_short_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "They found a cowboy novel instead.",
+      "scene": "THE BOOK lying on top of scattered war maps under a brass lamp, arrows and pencils around it \u2014 a cowboy paperback where the battle plans should be. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: THE BOOK lying on top of scattered war maps under a brass lamp, arrows and pencils around it \u2014 a cowboy paperback where the battle plans should be. No people."
+    },
+    {
+      "id": "002",
+      "filename": "hitler_short_002.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "A child's western, in the desk of the man who had declared war on America.",
+      "scene": "THE BOOK huge in frame, half inside an open steel desk drawer, painted rearing horse cover, worn spine, lamp glow. A child's toy in a war machine. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: THE BOOK huge in frame, half inside an open steel desk drawer, painted rearing horse cover, worn spine, lamp glow. A child's toy in a war machine. No people."
+    },
+    {
+      "id": "003",
+      "filename": "hitler_short_003.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "He'd never seen the country. Not once.",
+      "scene": "Empty New York street canyon at dawn seen from the ground looking up, wet asphalt, towering buildings vanishing into mist, a closed diner window. Nobody. He never stood here. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: Empty New York street canyon at dawn seen from the ground looking up, wet asphalt, towering buildings vanishing into mist, a closed diner window. Nobody. He never stood here. No people."
+    },
+    {
+      "id": "004",
+      "filename": "hitler_short_004.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "medium shot",
+      "chunk": "Everything he knew came from that paperback, from Hollywood movies, and from one shiny car brochure.",
+      "scene": "Desk-level cinematic shot, shallow depth: THE BOOK propped upright, a film reel unspooling beside it, a glossy 1930s car brochure leaning against the lamp, projector light flickering across them. His entire knowledge of a continent. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: Desk-level cinematic shot, shallow depth: THE BOOK propped upright, a film reel unspooling beside it, a glossy 1930s car brochure leaning against the lamp, projector light flickering across them. His entire knowledge of a continent. No people."
+    },
+    {
+      "id": "005",
+      "filename": "hitler_short_005.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "So when the real America walked into his war,",
+      "scene": "A vast dark ocean map, and from the far side an enormous tide of light shaped like a wave crossing toward a small marked capital. Something real is coming. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: A vast dark ocean map, and from the far side an enormous tide of light shaped like a wave crossing toward a small marked capital. Something real is coming. No people."
+    },
+    {
+      "id": "006",
+      "filename": "hitler_short_006.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "he was certain he'd already read the ending. He hadn't.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  HERO at the rain window at night holding THE BOOK closed in both hands, calm and certain, lamp behind him. He thinks he has read this ending.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  HERO at the rain window at night holding THE BOOK closed in both hands, calm and certain, lamp behind him. He thinks he has read this ending."
+    },
+    {
+      "id": "007",
+      "filename": "hitler_short_007.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "And that mistake is almost too big to believe.",
+      "scene": "THE BOOK face-down on a dark desk, spine cracked and broken, pages splayed, cold morning light. The story failed. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: THE BOOK face-down on a dark desk, spine cracked and broken, pages splayed, cold morning light. The story failed. No people."
+    },
+    {
+      "id": "008",
+      "filename": "hitler_short_008.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "The full story is on this channel.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  Seen from outside a rain-streaked window: HERO a small dark silhouette in the vast dark office, brass lamp lighting an open drawer with THE BOOK inside. An unfinished story, waiting.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME edge to edge, no letterbox, no black bars, main subject large and centered in the upper two thirds. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp.  Seen from outside a rain-streaked window: HERO a small dark silhouette in the vast dark office, brass lamp lighting an open drawer with THE BOOK inside. An unfinished story, waiting."
+    }
+  ]
+}

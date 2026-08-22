@@ -31,6 +31,9 @@ _LEVEL_WORDS = (
 )
 
 TITLE_PREFIX = "[TITLE]"
+# Inserted after the tag so ``is_title_beat`` still matches ``[TITLE]``.
+# ``[TITLE] (silent) The Drawer`` is a black chapter card with no VO.
+_SILENT_TOKEN = "(silent)"
 
 _FIXTURES_DIR = Path(__file__).resolve().parent.parent / "fixtures"
 
@@ -50,15 +53,28 @@ def is_title_beat(text: str) -> bool:
     return text.strip().upper().startswith(TITLE_PREFIX)
 
 
+def _title_payload(title_beat: str) -> tuple[str, bool]:
+    """Return ``(text after the marker, silent)``.
+
+    ``[TITLE] (silent) The Drawer`` is a black chapter card with no VO.
+    ``[TITLE] Level One: The Recruit`` is the default spoken rank card.
+    """
+    raw = title_beat.strip()
+    if raw.upper().startswith(TITLE_PREFIX):
+        raw = raw[len(TITLE_PREFIX) :].strip()
+    silent = raw.lower().startswith(_SILENT_TOKEN)
+    if silent:
+        raw = raw[len(_SILENT_TOKEN) :].strip()
+    return raw, silent
+
+
 def title_card_lines(title_beat: str) -> tuple[str, str]:
     """
     Parse ``[TITLE] Level One: The Recruit`` into (line1, line2).
 
     Returns (full text, "") if no colon separator is found.
     """
-    raw = title_beat.strip()
-    if raw.upper().startswith(TITLE_PREFIX):
-        raw = raw[len(TITLE_PREFIX) :].strip()
+    raw, _silent = _title_payload(title_beat)
     if ":" in raw:
         left, right = raw.split(":", 1)
         return f"{left.strip()}:", right.strip()
@@ -70,9 +86,12 @@ def title_card_narration(title_beat: str) -> str:
     Spoken form of a title card: ``[TITLE] Level One: The Recruit`` becomes
     ``Level One. The Recruit.``
 
-    The level name is narrated over its card so a transition is a beat in the
-    story rather than dead air.
+    Silent chapter cards (``[TITLE] (silent) …``) return an empty string so the
+    card is a breath in the story, not a GPS voice reading the heading.
     """
+    _raw, silent = _title_payload(title_beat)
+    if silent:
+        return ""
     line1, line2 = title_card_lines(title_beat)
     left = line1.rstrip(":").strip()
     if not line2:
@@ -100,8 +119,8 @@ def narration_duration_seconds(text: str, words_per_minute: float = 150.0) -> fl
 # estimate) to set each shot's exact on-screen duration, so an off wpm here
 # only shifts which words land on which image, never the audio/video sync.
 # Override with NARRATION_WPM in the environment when the production voice
-# is not ElevenLabs Liam. Kokoro ``am_liam`` at speed 1.0 measures ~205 wpm
-# on long-form prose (short samples look slower because pauses dominate).
+# is not ElevenLabs Liam. Kokoro ``am_liam`` at speed 0.80 with story pauses
+# measures ~175 wpm on spoken prose. Speed 1.0 was ~205 and sounded rushed.
 def _narration_wpm() -> float:
     raw = os.environ.get("NARRATION_WPM")
     if raw:
@@ -273,21 +292,36 @@ def fixture_to_beats(data: dict, include_hook: bool = True) -> list[str]:
     directly on Level One's title card, matching reference videos that open
     straight on the first level instead of a cold open.
 
-    Each level becomes a ``[TITLE] Level N: Name`` beat followed by its
-    narration paragraphs (second-person VO lines). Set
-    ``include_level_titles`` to false on the fixture to skip the cards and
-    play as a continuous scene.
+    Each level becomes a title-card beat followed by its narration
+    paragraphs. Defaults are the rank-show cards
+    (``[TITLE] Level N: Name``). Set ``include_level_titles`` to false to
+    skip cards. Set ``title_style`` to ``chapter`` for a single-line name
+    (``The Drawer``). Set ``speak_title_cards`` to false for a silent black
+    card — the picture is the chapter, the voice keeps telling the story.
     """
     beats: list[str] = []
     hook = str(data.get("hook", "")).strip()
     if hook and include_hook:
         beats.append(hook)
     include_titles = bool(data.get("include_level_titles", True))
+    title_style = str(data.get("title_style", "level")).strip().lower()
+    speak_titles = str(data.get("speak_title_cards", True)).strip().lower() not in {
+        "0",
+        "false",
+        "no",
+    }
     for i, level in enumerate(data["levels"]):
         name = str(level.get("name", f"Level {i + 1}")).strip()
         word = _LEVEL_WORDS[i] if i < len(_LEVEL_WORDS) else str(i + 1)
         if include_titles:
-            beats.append(f"{TITLE_PREFIX} Level {word}: {name}")
+            if title_style == "chapter":
+                body = name
+            else:
+                body = f"Level {word}: {name}"
+            if speak_titles:
+                beats.append(f"{TITLE_PREFIX} {body}")
+            else:
+                beats.append(f"{TITLE_PREFIX} {_SILENT_TOKEN} {body}")
         for para in level.get("beats", []):
             text = str(para).strip()
             if not text:

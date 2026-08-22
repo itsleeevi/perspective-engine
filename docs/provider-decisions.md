@@ -20,9 +20,9 @@ Adapter-based (`adapters/llm/`), so swapping providers is a new adapter, not an 
 
 fal.ai acts as a model router: one API surface over multiple current video models, so per-shot model selection is a parameter rather than a separate integration per vendor. Seedance 2.0 Fast was selected because it supports image-to-video with lower latency than the standard tier, and image-to-video support is a hard requirement for any model wired here. Text-to-video is never used for character shots (see [Character consistency](../README.md#character-consistency)). Motion is off by default (`static_only=True`, `--allow-motion` to opt in) since the current format is a still slideshow.
 
-## Voice: Kokoro `am_liam` (custom YouTube cuts), Edge TTS (CLI default), ElevenLabs (opt-in)
+## Voice: Chatterbox-Turbo (custom YouTube cuts), Kokoro fallback, Edge TTS (CLI default), ElevenLabs (opt-in)
 
-Custom narrative cuts (`scripts/run_*_americans.py`) use local **Kokoro-82M** (`adapters/voice/kokoro.py`, voice `am_liam`, speed 1.0). It is free, punchier than Edge, and does not hit ElevenLabs caps. Long-form measures ~205 wpm — set `NARRATION_WPM=205` so shot chunking matches. CLI default remains `EdgeTTSVoiceAdapter`; ElevenLabs Liam stays available via `--elevenlabs` at 166 wpm.
+Custom narrative cuts (`scripts/run_custom_video.py`) use local **Chatterbox-Turbo** (MIT, Resemble AI; `adapters/voice/chatterbox.py`). It wins blind listening tests against paid APIs, clones a narrator from a 5–10s clip, and costs $0. It is torch-based, so it lives in an isolated `.venv-tts` and is driven through a subprocess worker (`scripts/tts_worker.py`) — CPU-only synthesis is roughly real-time, fine for offline rendering. Word timing comes from **faster-whisper forced alignment** of the rendered audio, which makes picture/narration sync independent of the TTS engine. **Kokoro-82M** (`am_liam`, speed 0.80, ~175 wpm) remains the fallback when the TTS venv is unavailable. CLI default remains `EdgeTTSVoiceAdapter`; ElevenLabs Liam stays available via `--elevenlabs` at 166 wpm.
 
 ## Assembly: FFmpeg today, Remotion planned
 

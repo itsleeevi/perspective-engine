@@ -1,13 +1,18 @@
 ---
-description: Rules for fixture-driven YouTube cuts (new title = new story, Kokoro, fill-frame, update video logs)
+description: Rules for fixture-driven YouTube cuts (perspective story, explain-like-five, spec runner)
 alwaysApply: true
 ---
 
 # Custom narrative videos
 
-Before generating or rewriting a YouTube cut, read `docs/custom-videos.md` and the matching page under `docs/videos/`.
+`docs/custom-videos.md` is the production system. Read it and the matching page under `docs/videos/` before generating or rewriting a cut, then follow its execution checklist exactly.
 
-- New title → completely new storyline. Never clone the last video’s beat sheet.
-- Third-person narrator. Kokoro `am_liam`, not ElevenLabs, not Edge. `NARRATION_WPM=205` for Kokoro.
-- Scenes follow each other: locked hero, locked props, match cuts. Fill-frame 16:9. Thumbs are 1280×720 JPEG.
+- The point is the **hero’s perspective**: inhabit the mental model, teach through dramatic irony. Not a Wikipedia list, not a numbered lecture.
+- **Explain the thought as if the watcher were five.** One sentence a child could repeat (`the_thought` in the fixture, said in the VO). Say it, show it in every chapter, say it again on the button. One simple metaphor. Do not hide the idea behind clever wording. Assume the viewer does not already know the history.
+- New title → completely new storyline. Write the film first (logline → beat sheet → scene list), then chunk / stills / VO.
+- One video = fixture + stills module + `fixtures/video_specs/<slug>.json`, run through `scripts/lint_story.py` → `scripts/lint_storyboard.py` → `scripts/make_image_jobs.py` → `scripts/run_custom_video.py`. No new runner code per title.
+- Prop economy: ONE signature prop in ≤ 6 scenes (setup / turns / climax / button). The linter enforces it — fix errors before generating any image.
+- Voice: Kokoro `am_michael` at speed 0.90 (wise, still moving). Chatterbox-Turbo in `.venv-tts` when cloning works. Never Edge, never ElevenLabs. Sync is forced-aligned; check `sync.max_cut_error_ms` < 20 after render.
+- Spoken English, third person. Silent black chapter cards. Fill-frame 16:9; thumbs 1280×720 JPEG.
+- Look is per title (this Stalin cut: Simple History-like flat 2D vector). Matching an explainer channel's pictures is not permission to copy a Wikipedia biography.
 - When a video ships, update `docs/videos/<slug>.md` and `docs/videos/README.md`.

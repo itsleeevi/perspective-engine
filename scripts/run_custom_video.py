@@ -1,85 +1,127 @@
-"""Hitler-Americans v3: numbered fakes, third-person narrator, Kokoro TTS.
+"""
+Generic runner for fixture-driven custom YouTube cuts.
 
-Stills are cover-cropped to 16:9 on ingest so the assemble fill-frame path
-does not inherit Grok's occasional 3:2 outputs as black side bars.
+One command per video, everything else is data:
+
+    .venv/bin/python scripts/run_custom_video.py fixtures/video_specs/<slug>.json
+
+A video spec is a small JSON file:
+
+    {
+      "topic":         "What X Really Thought About Y",
+      "fixture":       "fixtures/x_y.json",
+      "stills_module": "fixtures/x_y_stills.py",
+      "still_prefix":  "x_y_v1_",
+      "stills_dir":    "assets/grok_x_y_v1",
+      "thread_id":     "x-y-v1",
+      "voice":         "chatterbox",        // or "kokoro"
+      "narration_wpm": 175,
+      "voice_ref":     "assets/voice_refs/narrator.wav"   // optional
+    }
+
+The stills module must export ``STILLS`` (list of (shot_type, who, scene))
+and ``prompt_for(who, scene)``; run ``scripts/lint_storyboard.py <spec>``
+before generating images. Stills land in Cursor's asset folder as
+``<still_prefix><NNN>.png`` and are cover-cropped to 16:9 on ingest.
+
+This replaces the per-video ``run_*_americans.py`` scripts so a new title
+needs three data files (fixture, stills module, spec) and zero new code.
 """
 
 from __future__ import annotations
 
 import asyncio
 import importlib.util
+import json
 import os
 import re
 import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
-from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env", override=True)
 os.environ.setdefault("ADAPTER_CACHE", "1")
-# Kokoro am_liam long-form ~205 wpm. Must be set before importing
-# graph.script_fixture so chunking matches the voice.
-os.environ.setdefault("NARRATION_WPM", "205")
 
-from langgraph.checkpoint.memory import MemorySaver
-from langgraph.types import Command
+# The spec must be read and NARRATION_WPM exported before graph.script_fixture
+# is imported anywhere (the constant is bound at import time).
+if len(sys.argv) < 2:
+    print("usage: run_custom_video.py <spec.json>", file=sys.stderr)
+    sys.exit(2)
+SPEC = json.loads((ROOT / sys.argv[1]).read_text(encoding="utf-8"))
+os.environ.setdefault("NARRATION_WPM", str(SPEC.get("narration_wpm", 175)))
+if SPEC.get("voice_ref"):
+    os.environ.setdefault("CHATTERBOX_VOICE_REF", str(ROOT / SPEC["voice_ref"]))
+if SPEC.get("chatterbox_breath") is not None:
+    os.environ.setdefault("CHATTERBOX_BREATH", str(SPEC["chatterbox_breath"]))
+if SPEC.get("chatterbox_temperature") is not None:
+    os.environ.setdefault("CHATTERBOX_TEMPERATURE", str(SPEC["chatterbox_temperature"]))
+if SPEC.get("kokoro_voice"):
+    os.environ["KOKORO_VOICE"] = str(SPEC["kokoro_voice"])
+if SPEC.get("kokoro_speed") is not None:
+    os.environ["KOKORO_SPEED"] = str(SPEC["kokoro_speed"])
+if SPEC.get("kokoro_sentence_pause") is not None:
+    os.environ["KOKORO_SENTENCE_PAUSE"] = str(SPEC["kokoro_sentence_pause"])
+if SPEC.get("kokoro_clause_pause") is not None:
+    os.environ["KOKORO_CLAUSE_PAUSE"] = str(SPEC["kokoro_clause_pause"])
 
-from adapters.image_gen.base import (
+from langgraph.checkpoint.memory import MemorySaver  # noqa: E402
+from langgraph.types import Command  # noqa: E402
+
+from adapters.image_gen.base import (  # noqa: E402
     DerivedStillResult,
     ImageGenAdapter,
     ReferenceSheetResult,
 )
-from adapters.llm.base import (
+from adapters.llm.base import (  # noqa: E402
     LLMAdapter,
     QualityCheckResult,
     ScriptResult,
     VisualBeatsResult,
 )
-from adapters.llm.mock import MockLLMAdapter
-from adapters.video_gen.fal import FalVideoGenAdapter
-from adapters.voice.kokoro import KokoroVoiceAdapter
-from graph.assets import save_asset
-from graph.graph import build_graph
-from graph.script_fixture import (
+from adapters.llm.mock import MockLLMAdapter  # noqa: E402
+from adapters.video_gen.fal import FalVideoGenAdapter  # noqa: E402
+from graph.assets import save_asset  # noqa: E402
+from graph.graph import build_graph  # noqa: E402
+from graph.script_fixture import (  # noqa: E402
     fixture_to_beats,
     is_title_beat,
     load_fixture,
     split_beat_into_chunks,
     title_card_narration,
 )
-from graph.style import STYLE_DESCRIPTOR
+from graph.style import STYLE_DESCRIPTOR  # noqa: E402
 
-TOPIC = "What Hitler Really Thought About Americans"
-FIXTURE = ROOT / "fixtures" / "hitler_americans.json"
-STILLS_DIR = ROOT / "assets" / "grok_hitler_v3"
-CURSOR_ASSETS = Path(
-    "/home/levente/.cursor/projects/home-levente-perspective-engine/assets"
-)
+TOPIC = SPEC["topic"]
+FIXTURE = ROOT / SPEC["fixture"]
+STILLS_DIR = ROOT / SPEC["stills_dir"]
+STILL_PREFIX = SPEC["still_prefix"]
+CURSOR_ASSETS = Path.home() / ".cursor" / "projects" / (
+    str(ROOT).strip("/").replace("/", "-")
+) / "assets"
 _STILL_TAG = re.compile(r"GROKSTILL:(\d{3})")
-STILL_PREFIX = "hitler_v3_"
 
 
-def cover_crop_16x9(src: Path, dest: Path) -> None:
-    """Crop to 16:9 covering the frame, then save. No black bars."""
-    im = Image.open(src).convert("RGB")
-    w, h = im.size
-    target = 16 / 9
-    if w / h > target:
-        nw = int(h * target)
-        left = (w - nw) // 2
-        im = im.crop((left, 0, left + nw, h))
-    else:
-        nh = int(w / target)
-        top = (h - nh) // 2
-        im = im.crop((0, top, w, top + nh))
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    im.save(dest, "PNG")
+def make_voice_adapter():
+    kind = SPEC.get("voice", "chatterbox")
+    if kind == "chatterbox":
+        from adapters.voice.chatterbox import ChatterboxVoiceAdapter
+
+        return ChatterboxVoiceAdapter()
+    if kind == "kokoro":
+        from adapters.voice.kokoro import KokoroVoiceAdapter
+
+        return KokoroVoiceAdapter()
+    raise ValueError(f"Unknown voice in spec: {kind!r}")
+
+
+from scripts._media import cover_crop  # noqa: E402
 
 
 class PrebuiltGrokStillAdapter(ImageGenAdapter):
-    """Copy tagged Grok frames into the asset store. No image-model call."""
+    """Copy tagged pre-generated frames into the asset store. No model call."""
 
     def __init__(self, directory: Path) -> None:
         self._dir = directory
@@ -88,7 +130,7 @@ class PrebuiltGrokStillAdapter(ImageGenAdapter):
         self, character_description: str
     ) -> ReferenceSheetResult:
         hero = self._dir / f"{STILL_PREFIX}000.png"
-        url = save_asset("refs/grok_hitler_v3_hero.png", hero.read_bytes())
+        url = save_asset(f"refs/{STILL_PREFIX}hero.png", hero.read_bytes())
         return ReferenceSheetResult(
             image_urls=[url], style_descriptor=STYLE_DESCRIPTOR, cost_usd=0.0
         )
@@ -106,8 +148,8 @@ class PrebuiltGrokStillAdapter(ImageGenAdapter):
         still_id = match.group(1)
         src = self._dir / f"{STILL_PREFIX}{still_id}.png"
         if not src.is_file():
-            raise RuntimeError(f"Missing Grok still: {src}")
-        url = save_asset(f"stills/grok_hitler_v3_{still_id}.png", src.read_bytes())
+            raise RuntimeError(f"Missing still: {src}")
+        url = save_asset(f"stills/{STILL_PREFIX}{still_id}.png", src.read_bytes())
         return DerivedStillResult(still_url=url, cost_usd=0.0)
 
 
@@ -156,7 +198,7 @@ class TaggedStoryboardLLM(LLMAdapter):
 
 def _stills_module():
     spec = importlib.util.spec_from_file_location(
-        "hitler_stills", ROOT / "fixtures" / "hitler_americans_stills.py"
+        "video_stills", ROOT / SPEC["stills_module"]
     )
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
@@ -164,7 +206,7 @@ def _stills_module():
     return module
 
 
-def _chunk_tags_and_copy() -> tuple[list[str], list[str], list[str], str]:
+def _chunk_tags() -> tuple[list[str], list[str], list[str], str]:
     stills = list(_stills_module().STILLS)
     scenes = [s[2] for s in stills]
     shot_types = [s[0] for s in stills]
@@ -181,23 +223,24 @@ def _chunk_tags_and_copy() -> tuple[list[str], list[str], list[str], str]:
             spoken.append(chunk.strip())
     if len(chunks) != len(scenes):
         raise ValueError(
-            f"Storyboard has {len(scenes)} scenes, script has {len(chunks)} chunks."
+            f"Storyboard has {len(scenes)} scenes, script has {len(chunks)} chunks. "
+            "Run scripts/lint_storyboard.py first."
         )
     tags = [f"{i:03d}" for i in range(len(chunks))]
-    return tags, scenes, shot_types, " ".join(spoken)
+    return tags, scenes, shot_types, " ".join(s for s in spoken if s)
 
 
 def gather_stills() -> list[Path]:
     """Cover-crop generated frames to 16:9 into STILLS_DIR."""
-    stills = list(_stills_module().STILLS)
+    n = len(_stills_module().STILLS)
     STILLS_DIR.mkdir(parents=True, exist_ok=True)
     missing: list[Path] = []
-    for i in range(len(stills)):
+    for i in range(n):
         name = f"{STILL_PREFIX}{i:03d}.png"
         dest = STILLS_DIR / name
         src = CURSOR_ASSETS / name
         if src.is_file() and src.stat().st_size > 0:
-            cover_crop_16x9(src, dest)
+            cover_crop(src, dest, 16, 9)
             continue
         if dest.is_file() and dest.stat().st_size > 0:
             continue
@@ -211,18 +254,13 @@ def _gate(result: dict) -> dict:
 
 
 async def main() -> None:
-    tags, copy, shot_types, spoken = _chunk_tags_and_copy()
-    n_chars = len(spoken)
+    tags, scenes, shot_types, spoken = _chunk_tags()
     print(f"Topic: {TOPIC}", flush=True)
     print(f"Fixture: {FIXTURE}", flush=True)
-    print(f"Spoken characters: {n_chars}", flush=True)
-    print(f"Narration WPM: {os.environ.get('NARRATION_WPM', '166')}", flush=True)
-    print(f"Voice: Kokoro {os.environ.get('KOKORO_VOICE', 'am_liam')} (local, $0)", flush=True)
-    print(f"Unique Grok stills: {len(tags)} (one per chunk)", flush=True)
-    print(
-        f"Character-free inserts: {sum(1 for s in _stills_module().STILLS if s[1] == 'empty')}",
-        flush=True,
-    )
+    print(f"Spoken characters: {len(spoken)}", flush=True)
+    print(f"Narration WPM: {os.environ.get('NARRATION_WPM')}", flush=True)
+    print(f"Voice: {SPEC.get('voice', 'chatterbox')} (local, $0)", flush=True)
+    print(f"Unique stills: {len(tags)} (one per chunk)", flush=True)
 
     missing = gather_stills()
     if missing:
@@ -230,13 +268,13 @@ async def main() -> None:
         sys.exit(2)
 
     graph = build_graph(
-        llm=TaggedStoryboardLLM(tags, copy, shot_types),
+        llm=TaggedStoryboardLLM(tags, scenes, shot_types),
         image_gen=PrebuiltGrokStillAdapter(STILLS_DIR),
         video_gen=FalVideoGenAdapter(),
-        voice=KokoroVoiceAdapter(),
+        voice=make_voice_adapter(),
         checkpointer=MemorySaver(),
     )
-    config = {"configurable": {"thread_id": "hitler-americans-v3"}}
+    config = {"configurable": {"thread_id": SPEC["thread_id"]}}
     initial = {
         "topic": TOPIC,
         "static_only": True,
@@ -251,8 +289,7 @@ async def main() -> None:
         gate = iv.get("gate")
         print(f"\n=== interrupt: {gate} — approving ===", flush=True)
         if gate == "human_review_script":
-            shots = iv.get("shot_list") or []
-            print(f"  shots queued: {len(shots)}", flush=True)
+            print(f"  shots queued: {len(iv.get('shot_list') or [])}", flush=True)
             payload: dict = {"approved": True, "edits": []}
         elif gate == "human_review_images":
             stills = [
@@ -278,5 +315,4 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    sys.path.insert(0, str(ROOT))
     asyncio.run(main())
