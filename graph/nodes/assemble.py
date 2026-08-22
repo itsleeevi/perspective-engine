@@ -16,6 +16,10 @@ The reference format cuts on the picture, not on camera movement, and with
 shots now averaging 2-3 seconds any zoom would be too subtle to register
 before the next cut anyway — it would only cost render time.
 
+*No black bars.* Stills are scaled with ``force_original_aspect_ratio=increase``
+and then cropped to the output frame, so a 3:2 Grok still still fills 16:9
+instead of sitting in pillarbox.
+
 *No truncation.* Segment durations come from the measured length of each
 narration beat; the audio is then padded rather than cut. The old
 ``-shortest`` mux silently clipped the end of the narration.
@@ -288,10 +292,10 @@ def _run(cmd: list[str]) -> None:
 
 
 def _fit(width: int, height: int) -> str:
-    """Scale to fill the frame, letterboxing only if the source is off-aspect."""
+    """Scale to FILL the frame. Crop overflow instead of black bars."""
     return (
-        f"scale={width}:{height}:flags=lanczos:force_original_aspect_ratio=decrease,"
-        f"pad={width}:{height}:(ow-iw)/2:(oh-ih)/2"
+        f"scale={width}:{height}:flags=lanczos:force_original_aspect_ratio=increase,"
+        f"crop={width}:{height}"
     )
 
 
