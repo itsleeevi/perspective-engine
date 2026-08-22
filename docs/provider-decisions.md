@@ -20,9 +20,9 @@ Adapter-based (`adapters/llm/`), so swapping providers is a new adapter, not an 
 
 fal.ai acts as a model router: one API surface over multiple current video models, so per-shot model selection is a parameter rather than a separate integration per vendor. Seedance 2.0 Fast was selected because it supports image-to-video with lower latency than the standard tier, and image-to-video support is a hard requirement for any model wired here. Text-to-video is never used for character shots (see [Character consistency](../README.md#character-consistency)). Motion is off by default (`static_only=True`, `--allow-motion` to opt in) since the current format is a still slideshow.
 
-## Voice: Edge TTS (free, default), ElevenLabs (opt-in)
+## Voice: Kokoro `am_liam` (custom YouTube cuts), Edge TTS (CLI default), ElevenLabs (opt-in)
 
-`EdgeTTSVoiceAdapter` is the default narrator (`--voice NAME` to pick a voice, default `en-US-ChristopherNeural`) — free and good enough for narration-only slideshow videos, so it's the sane default rather than an opt-out. `ElevenLabsVoiceAdapter` (`eleven_multilingual_v2`) remains available via `--elevenlabs` for higher narration quality with a configurable voice ID (`ELEVENLABS_VOICE_ID`) when the cost (~$0.10/1,000 characters) is justified.
+Custom narrative cuts (`scripts/run_*_americans.py`) use local **Kokoro-82M** (`adapters/voice/kokoro.py`, voice `am_liam`, speed 1.0). It is free, punchier than Edge, and does not hit ElevenLabs caps. Long-form measures ~205 wpm — set `NARRATION_WPM=205` so shot chunking matches. CLI default remains `EdgeTTSVoiceAdapter`; ElevenLabs Liam stays available via `--elevenlabs` at 166 wpm.
 
 ## Assembly: FFmpeg today, Remotion planned
 

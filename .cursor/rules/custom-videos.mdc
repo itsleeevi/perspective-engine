@@ -1,0 +1,13 @@
+---
+description: Rules for fixture-driven YouTube cuts (new title = new story, Kokoro, fill-frame, update video logs)
+alwaysApply: true
+---
+
+# Custom narrative videos
+
+Before generating or rewriting a YouTube cut, read `docs/custom-videos.md` and the matching page under `docs/videos/`.
+
+- New title → completely new storyline. Never clone the last video’s beat sheet.
+- Third-person narrator. Kokoro `am_liam`, not ElevenLabs, not Edge. `NARRATION_WPM=205` for Kokoro.
+- Scenes follow each other: locked hero, locked props, match cuts. Fill-frame 16:9. Thumbs are 1280×720 JPEG.
+- When a video ships, update `docs/videos/<slug>.md` and `docs/videos/README.md`.

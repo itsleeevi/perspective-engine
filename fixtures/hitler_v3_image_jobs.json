@@ -1,0 +1,624 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "hitler_v3_000.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "They expected maps.",
+      "scene": "1945 ruined office, war maps unrolled on a steel desk, rain light, chairs kicked over. They expected maps. No people. No book yet.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: 1945 ruined office, war maps unrolled on a steel desk, rain light, chairs kicked over. They expected maps. No people. No book yet."
+    },
+    {
+      "id": "001",
+      "filename": "hitler_v3_001.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "They found a cowboy novel. Soft cover. German. A boy's book, sitting on a war desk.",
+      "scene": "MATCH CUT: the SAME maps, now with THE BOOK lying on top, soft cover, painted horse. A boy's book on a war desk. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: MATCH CUT: the SAME maps, now with THE BOOK lying on top, soft cover, painted horse. A boy's book on a war desk. No people."
+    },
+    {
+      "id": "002",
+      "filename": "hitler_v3_002.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Stay. I am going to count the fakes. There are five.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO looks into camera, five fingers raised, THE BOOK in his other hand. Stay. I am going to count the fakes.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO looks into camera, five fingers raised, THE BOOK in his other hand. Stay. I am going to count the fakes."
+    },
+    {
+      "id": "003",
+      "filename": "hitler_v3_003.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Then the real country walks in, and the book has no ending for that.",
+      "scene": "End-of-movie energy: SOLDIER and GIs stepping through a cinema screen into rain, THE BOOK lying forgotten in the aisle. The real country walks in.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: End-of-movie energy: SOLDIER and GIs stepping through a cinema screen into rain, THE BOOK lying forgotten in the aisle. The real country walks in."
+    },
+    {
+      "id": "004",
+      "filename": "hitler_v3_004.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "First, the hole everything sits on. He never went. No New York sidewalk. No diner.",
+      "scene": "Empty New York sidewalk at dawn, closed diner window, no people. The hole. He never went.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Empty New York sidewalk at dawn, closed diner window, no people. The hole. He never went."
+    },
+    {
+      "id": "005",
+      "filename": "hitler_v3_005.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "No factory floor. He never smelled America. He never heard it without a speaker.",
+      "scene": "Silent factory floor, then a dead radio speaker. He never smelled America. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Silent factory floor, then a dead radio speaker. He never smelled America. No people."
+    },
+    {
+      "id": "006",
+      "filename": "hitler_v3_006.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Every opinion in this story is built on that hole. Say it again. He never went.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO over a globe turned to the Atlantic, THE BOOK closed. Say it again. He never went.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO over a globe turned to the Atlantic, THE BOOK closed. Say it again. He never went."
+    },
+    {
+      "id": "007",
+      "filename": "hitler_v3_007.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "over-the-shoulder",
+      "chunk": "Fake number one. The book. As a boy he did not read America.",
+      "scene": "FAKE ONE. German boy from behind, blanket, flashlight, THE BOOK open to a painted West. He did not read America. NO HERO face.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: FAKE ONE. German boy from behind, blanket, flashlight, THE BOOK open to a painted West. He did not read America. NO HERO face."
+    },
+    {
+      "id": "008",
+      "filename": "hitler_v3_008.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "He read a German writer who invented a West that never existed. Horses. Honor.",
+      "scene": "THE BOOK's painted West: horses, honor, empty land that never existed. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: THE BOOK's painted West: horses, honor, empty land that never existed. No people."
+    },
+    {
+      "id": "009",
+      "filename": "hitler_v3_009.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "Empty land. A hero who always kept his word.",
+      "scene": "Empty painted prairie, a hero-shaped shadow that keeps its word. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Empty painted prairie, a hero-shaped shadow that keeps its word. No people."
+    },
+    {
+      "id": "010",
+      "filename": "hitler_v3_010.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He kept that paperback in his head like a religion. Forty years later the boy is gone. The book is not.",
+      "scene": "MATCH CUT time jump: the boy is gone. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Adult HERO, same charcoal suit, THE BOOK still open. Forty years later.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: MATCH CUT time jump: the boy is gone. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Adult HERO, same charcoal suit, THE BOOK still open. Forty years later."
+    },
+    {
+      "id": "011",
+      "filename": "hitler_v3_011.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Watch him in the office. Same man. Same suit. Same rain on the window.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Watch him. Same man. Same suit. Same rain on the window. THE BOOK on the desk.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Watch him. Same man. Same suit. Same rain on the window. THE BOOK on the desk."
+    },
+    {
+      "id": "012",
+      "filename": "hitler_v3_012.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "He still talks about the United States as if it is a campfire story with a flag on it.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO telling a campfire story, tiny flag pin, United States as folklore. THE BOOK in his hand.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO telling a campfire story, tiny flag pin, United States as folklore. THE BOOK in his hand."
+    },
+    {
+      "id": "013",
+      "filename": "hitler_v3_013.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "That is not a quirk. That is fake number one, still open on the desk.",
+      "scene": "FAKE ONE still open: THE BOOK on the steel desk, lamp, rain on the blotter. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: FAKE ONE still open: THE BOOK on the steel desk, lamp, rain on the blotter. No people."
+    },
+    {
+      "id": "014",
+      "filename": "hitler_v3_014.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Fake number two. Hollywood. Newsreels. Skyscrapers like movie sets. Chorus lines. A giant ape on a building.",
+      "scene": "FAKE TWO. Dark newsreel booth off the SAME office: HERO watching skyscrapers and a generic ape-on-a-tower. THE BOOK on the seat beside him.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: FAKE TWO. Dark newsreel booth off the SAME office: HERO watching skyscrapers and a generic ape-on-a-tower. THE BOOK on the seat beside him."
+    },
+    {
+      "id": "015",
+      "filename": "hitler_v3_015.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He watched America the way a man watches a zoo. From the safe side of the glass.",
+      "scene": "HERO watching a tiny American city diorama through thick zoo glass, sure he is safe. THE BOOK in his pocket.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: HERO watching a tiny American city diorama through thick zoo glass, sure he is safe. THE BOOK in his pocket."
+    },
+    {
+      "id": "016",
+      "filename": "hitler_v3_016.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "Sure the animals cannot get out. Jazz was not music to him.",
+      "scene": "Zoo glass, city lights smeared, fingerprints. Animals cannot get out. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Zoo glass, city lights smeared, fingerprints. Animals cannot get out. No people."
+    },
+    {
+      "id": "017",
+      "filename": "hitler_v3_017.png",
+      "who": "american",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "It was proof the country could not sit still. Gum. Football. A movie kiss.",
+      "scene": "AMERICAN in a jazz-and-football night: gum, a movie kiss in the background. The country cannot sit still. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. AMERICAN is the lead. HERO is absent unless the scene names him. SCENE: AMERICAN in a jazz-and-football night: gum, a movie kiss in the background. The country cannot sit still. NO HERO."
+    },
+    {
+      "id": "018",
+      "filename": "hitler_v3_018.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "He wrote it all down as intelligence. It was entertainment. He never learned the difference.",
+      "scene": "Spy folder beside a movie ticket and THE BOOK. Intelligence vs entertainment. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Spy folder beside a movie ticket and THE BOOK. Intelligence vs entertainment. No people."
+    },
+    {
+      "id": "019",
+      "filename": "hitler_v3_019.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Here is the trick that made fake two dangerous. He thought a movie was a scouting report.",
+      "scene": "HERO in the cinema with binoculars, movie as a scouting report. THE BOOK on the next seat.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: HERO in the cinema with binoculars, movie as a scouting report. THE BOOK on the next seat."
+    },
+    {
+      "id": "020",
+      "filename": "hitler_v3_020.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "If the hero showed up late, America was late. If the crowd clapped, America was soft.",
+      "scene": "Movie cowboy arriving late, audience clapping, AMERICAN clapping too. America was late. America was soft. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: Movie cowboy arriving late, audience clapping, AMERICAN clapping too. America was late. America was soft. NO HERO."
+    },
+    {
+      "id": "021",
+      "filename": "hitler_v3_021.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "He ran a war on film logic. Remember the glass. Remember the book.",
+      "scene": "MATCH CUT: zoo glass over THE BOOK's cover. Film logic and the paperback are the same lie. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: MATCH CUT: zoo glass over THE BOOK's cover. Film logic and the paperback are the same lie. No people."
+    },
+    {
+      "id": "022",
+      "filename": "hitler_v3_022.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "They are the same lie in two costumes.",
+      "scene": "Two costumes of one lie: a film strip and THE BOOK, same horse painted on both. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Two costumes of one lie: a film strip and THE BOOK, same horse painted on both. No people."
+    },
+    {
+      "id": "023",
+      "filename": "hitler_v3_023.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Fake number three. Detroit. Not a cowboy. A factory. Cars pouring out like a river.",
+      "scene": "FAKE THREE. Detroit assembly line, cars like a river, anonymous workers from behind. Not a cowboy. A factory.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: FAKE THREE. Detroit assembly line, cars like a river, anonymous workers from behind. Not a cowboy. A factory."
+    },
+    {
+      "id": "024",
+      "filename": "hitler_v3_024.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "He had never smelled the plant. He had the brochure. He collected it like other men collect saints.",
+      "scene": "Factory brochure arranged like a saint's shrine beside THE BOOK. He had the brochure. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Factory brochure arranged like a saint's shrine beside THE BOOK. He had the brochure. No people."
+    },
+    {
+      "id": "025",
+      "filename": "hitler_v3_025.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "He told himself America was not a people. It was a method. Methods can be copied.",
+      "scene": "America drawn as a method diagram, people erased into arrows. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: America drawn as a method diagram, people erased into arrows. No people."
+    },
+    {
+      "id": "026",
+      "filename": "hitler_v3_026.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "People cannot. He liked that math. The math was a lie.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO doing the math on factory photos, THE BOOK pushed aside, the lie in the pencil.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO doing the math on factory photos, THE BOOK pushed aside, the lie in the pencil."
+    },
+    {
+      "id": "027",
+      "filename": "hitler_v3_027.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Fake number four. The radio. A flyer.",
+      "scene": "FAKE FOUR. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO at the glowing radio, leather flight helmet on the table, THE BOOK still there. No flyer face.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: FAKE FOUR. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO at the glowing radio, leather flight helmet on the table, THE BOOK still there. No flyer face."
+    },
+    {
+      "id": "028",
+      "filename": "hitler_v3_028.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "A hero voice saying stay out, stay home, this is not your war.",
+      "scene": "Radio grille, closed door, ocean in the window. Stay out. Stay home. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Radio grille, closed door, ocean in the window. Stay out. Stay home. No people."
+    },
+    {
+      "id": "029",
+      "filename": "hitler_v3_029.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He filed that voice as the real United States.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO filing a radio transcript as if it is the real United States. THE BOOK under the paper.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO filing a radio transcript as if it is the real United States. THE BOOK under the paper."
+    },
+    {
+      "id": "030",
+      "filename": "hitler_v3_030.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "The other voice, the fireside talks, he filed as a glitch.",
+      "scene": "Fireside armchair, radio glow, empty room, no portrait. Filed as a glitch. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Fireside armchair, radio glow, empty room, no portrait. Filed as a glitch. No people."
+    },
+    {
+      "id": "031",
+      "filename": "hitler_v3_031.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "You do not beat a country by declaring half of it fake. Four fakes so far.",
+      "scene": "Four objects in a row: THE BOOK, a film reel, a car brochure, a radio. Four fakes so far. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Four objects in a row: THE BOOK, a film reel, a car brochure, a radio. Four fakes so far. No people."
+    },
+    {
+      "id": "032",
+      "filename": "hitler_v3_032.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "Book. Movie. Factory. Radio. One more.",
+      "scene": "The same four objects plus an empty space for one more. Book. Movie. Factory. Radio. One more. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: The same four objects plus an empty space for one more. Book. Movie. Factory. Radio. One more. No people."
+    },
+    {
+      "id": "033",
+      "filename": "hitler_v3_033.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "Fake number five. The ocean. He drew the Atlantic like a castle moat. Wide.",
+      "scene": "FAKE FIVE. The Atlantic painted as a castle moat, Europe a chessboard, THE BOOK tiny on the European shore. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: FAKE FIVE. The Atlantic painted as a castle moat, Europe a chessboard, THE BOOK tiny on the European shore. No people."
+    },
+    {
+      "id": "034",
+      "filename": "hitler_v3_034.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "Final. Europe was the board. America was the audience. Audiences do not climb onto the stage.",
+      "scene": "A theater: Europe on the stage, America as the darkened audience. Audiences do not climb on. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: A theater: Europe on the stage, America as the darkened audience. Audiences do not climb on. No people."
+    },
+    {
+      "id": "035",
+      "filename": "hitler_v3_035.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "That was the whole foreign policy. A lock on a door. A navy he underestimated on purpose.",
+      "scene": "A giant padlock on a door made of ocean. The whole foreign policy. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: A giant padlock on a door made of ocean. The whole foreign policy. No people."
+    },
+    {
+      "id": "036",
+      "filename": "hitler_v3_036.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "Five fakes. None of them were the country.",
+      "scene": "Five objects: THE BOOK, film, brochure, radio, a black ribbon of ocean. None of them were the country. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Five objects: THE BOOK, film, brochure, radio, a black ribbon of ocean. None of them were the country. No people."
+    },
+    {
+      "id": "037",
+      "filename": "hitler_v3_037.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "aerial",
+      "chunk": "Now the crack. 1936. The country he had never visited walked into his stadium.",
+      "scene": "THE CRACK. 1936 stadium from above, two teams walking in. He had never visited. No people visible.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: THE CRACK. 1936 stadium from above, two teams walking in. He had never visited. No people visible."
+    },
+    {
+      "id": "038",
+      "filename": "hitler_v3_038.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Not as a cowboy. As a team. A Black sprinter took the gold.",
+      "scene": "A track team in a tunnel, not cowboys. Anonymous Black sprinter from behind, gold light, NOT a celebrity portrait.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: A track team in a tunnel, not cowboys. Anonymous Black sprinter from behind, gold light, NOT a celebrity portrait."
+    },
+    {
+      "id": "039",
+      "filename": "hitler_v3_039.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "The crowd made a sound he could not put in the novel. He smiled for cameras.",
+      "scene": "HERO in the stadium box, camera-smile that does not reach his eyes, THE BOOK on his knee. The crowd made a sound.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: HERO in the stadium box, camera-smile that does not reach his eyes, THE BOOK on his knee. The crowd made a sound."
+    },
+    {
+      "id": "040",
+      "filename": "hitler_v3_040.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "In the box, the western broke. He refused to hear it. He chose the book. Every time.",
+      "scene": "Back in THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO clutching THE BOOK with both hands, refusing the crack. He chose the book. Every time.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: Back in THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO clutching THE BOOK with both hands, refusing the crack. He chose the book. Every time."
+    },
+    {
+      "id": "041",
+      "filename": "hitler_v3_041.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "Then December. A Sunday in the Pacific that was not in the paperback. Smoke.",
+      "scene": "December calendar, Pacific water, THE BOOK closed beside it. A Sunday not in the paperback. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: December calendar, Pacific water, THE BOOK closed beside it. A Sunday not in the paperback. No people."
+    },
+    {
+      "id": "042",
+      "filename": "hitler_v3_042.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "A flag.",
+      "scene": "Smoke and a generic flag edge, no symbols. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Smoke and a generic flag edge, no symbols. No people."
+    },
+    {
+      "id": "043",
+      "filename": "hitler_v3_043.png",
+      "who": "american",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "A country that had been chewing gum on a sofa stood up so fast the newsreel could not keep up.",
+      "scene": "AMERICAN launching off the sofa, gum, newsreel blur. The country standing up. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. AMERICAN is the lead. HERO is absent unless the scene names him. SCENE: AMERICAN launching off the sofa, gum, newsreel blur. The country standing up. NO HERO."
+    },
+    {
+      "id": "044",
+      "filename": "hitler_v3_044.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "He did not go to America. America came into the story without asking him.",
+      "scene": "Troop ships, SOLDIER on a wet dock. America entering the story. THE BOOK is not here. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: Troop ships, SOLDIER on a wet dock. America entering the story. THE BOOK is not here. NO HERO."
+    },
+    {
+      "id": "045",
+      "filename": "hitler_v3_045.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Four days later he declared war on the United States as if he were cancelling a subscription.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO stamping a form as if cancelling a subscription, THE BOOK under his elbow. Four days later.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO stamping a form as if cancelling a subscription, THE BOOK under his elbow. Four days later."
+    },
+    {
+      "id": "046",
+      "filename": "hitler_v3_046.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "Listen to the madness of that. He had never seen the street. He had seen the ape.",
+      "scene": "An American street he had never seen, then a flash of the ape-still. He had seen the ape. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: An American street he had never seen, then a flash of the ape-still. He had seen the ape. No people."
+    },
+    {
+      "id": "047",
+      "filename": "hitler_v3_047.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "He had seen the brochure. He had heard the flyer. And he said yes.",
+      "scene": "Ape still, car brochure, radio, THE BOOK. That is all he had seen. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Ape still, car brochure, radio, THE BOOK. That is all he had seen. No people."
+    },
+    {
+      "id": "048",
+      "filename": "hitler_v3_048.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "tracking",
+      "chunk": "Them too. Plot is a drug. He took it until the ships were already moving.",
+      "scene": "Film reel unwinding beside a convoy already moving. Plot is a drug. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Film reel unwinding beside a convoy already moving. Plot is a drug. No people."
+    },
+    {
+      "id": "049",
+      "filename": "hitler_v3_049.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Then fake five died. The audience climbed onto the stage. Not as a cowboy.",
+      "scene": "FAKE FIVE DIES. SOLDIER and GIs climbing onto a theater stage from the audience. Not as a cowboy. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: FAKE FIVE DIES. SOLDIER and GIs climbing onto a theater stage from the audience. Not as a cowboy. NO HERO."
+    },
+    {
+      "id": "050",
+      "filename": "hitler_v3_050.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "As a million ordinary men with gum in their pockets and a factory behind them.",
+      "scene": "A million ordinary men, SOLDIER in front, gum, factory skyline behind them.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: A million ordinary men, SOLDIER in front, gum, factory skyline behind them."
+    },
+    {
+      "id": "051",
+      "filename": "hitler_v3_051.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "He had written Americans as extras. They arrived as the ending. The paperback had no chapter for that.",
+      "scene": "SOLDIER filling the movie-ending frame; THE BOOK lies in the aisle like a dead extra. They arrived as the ending.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: SOLDIER filling the movie-ending frame; THE BOOK lies in the aisle like a dead extra. They arrived as the ending."
+    },
+    {
+      "id": "052",
+      "filename": "hitler_v3_052.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "So what did he really think about Americans. Not a speech. Five substitutes. A boy's western.",
+      "scene": "Five substitutes in a stack: western, zoo glass, car saint, radio, moat. Not a speech. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Five substitutes in a stack: western, zoo glass, car saint, radio, moat. Not a speech. No people."
+    },
+    {
+      "id": "053",
+      "filename": "hitler_v3_053.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "A zoo glass. A car saint. A radio hero. A moat.",
+      "scene": "The same five objects, closer. A boy's western. A zoo glass. A car saint. A radio hero. A moat. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: The same five objects, closer. A boy's western. A zoo glass. A car saint. A radio hero. A moat. No people."
+    },
+    {
+      "id": "054",
+      "filename": "hitler_v3_054.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "He thought they were a movie that would not leave the theater. He bet the world on that.",
+      "scene": "A movie theater whose aisle is an ocean, the film still playing, nobody leaving. He bet the world. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: A movie theater whose aisle is an ocean, the film still playing, nobody leaving. He bet the world. No people."
+    },
+    {
+      "id": "055",
+      "filename": "hitler_v3_055.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "Last shot. Same drawer. Same cowboy book. Pages soft. Spine broken from being believed too long.",
+      "scene": "CALLBACK: the SAME drawer as the first maps, THE BOOK returned, pages soft, spine broken. Last shot. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: CALLBACK: the SAME drawer as the first maps, THE BOOK returned, pages soft, spine broken. Last shot. No people."
+    },
+    {
+      "id": "056",
+      "filename": "hitler_v3_056.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "He died having never seen the country he thought he had already conquered in his head.",
+      "scene": "Unused passport, ocean window, empty chair. He died having never seen it. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: Unused passport, ocean window, empty chair. He died having never seen it. No people."
+    },
+    {
+      "id": "057",
+      "filename": "hitler_v3_057.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "That is not a small error. That is the whole war, hiding in a paperback.",
+      "scene": "THE BOOK on the war desk. The whole war hiding in a paperback. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: THE BOOK on the war desk. The whole war hiding in a paperback. No people."
+    },
+    {
+      "id": "058",
+      "filename": "hitler_v3_058.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "If you want a monster, you already have one. If you want the mechanism, here it is.",
+      "scene": "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO in unglamorous shadow, THE BOOK on the desk. If you want a monster, you already have one.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. HERO in unglamorous shadow, THE BOOK on the desk. If you want a monster, you already have one."
+    },
+    {
+      "id": "059",
+      "filename": "hitler_v3_059.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He fell in love with a fake America.",
+      "scene": "HERO looking at a fake movie-America on a screen with the wrong kind of love. THE BOOK in his hands.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols. SCENE: HERO looking at a fake movie-America on a screen with the wrong kind of love. THE BOOK in his hands."
+    },
+    {
+      "id": "060",
+      "filename": "hitler_v3_060.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Then he attacked the real one for refusing to stay fake.",
+      "scene": "Real SOLDIER and AMERICAN walking toward camera as a painted cowboy dissolves. The real one would not stay fake.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1930s European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph. AMERICAN (same man every time, do not redesign): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears. THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, the cowboy paperback on the desk. Return to this room whenever HERO is working. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: Real SOLDIER and AMERICAN walking toward camera as a painted cowboy dissolves. The real one would not stay fake."
+    },
+    {
+      "id": "061",
+      "filename": "hitler_v3_061.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "aerial",
+      "chunk": "Send this to someone who still thinks history is a western. The book always ends. The country does not.",
+      "scene": "A living country from above, lights, rivers, not a last page. The book always ends. The country does not. No people visible.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears.  SCENE: A living country from above, lights, rivers, not a last page. The book always ends. The country does not. No people visible."
+    }
+  ]
+}

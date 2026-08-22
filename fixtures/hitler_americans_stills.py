@@ -1,31 +1,41 @@
-"""Stills for hitler_americans.json v2 — one per chunk.
+"""Stills for hitler_americans.json v3 — one per chunk.
 
-Story spine: a cowboy paperback, not a roast folder. Third-person narrator.
+Visual continuity is the job: SAME cowboy paperback, SAME rain-window office,
+SAME hero, SAME American everyman. Hollywood match-cuts, not a random slideshow.
+
 No Nazi flags, no swastikas, no armbands, no camps, no war-gore.
-HERO is a stylized 1930s German official (graphic-novel, not a photo, NO mustache —
-image models block the historical mustache).
-Movie coverage: hero is NOT in every frame. No celebrity likenesses (no Ford face,
-no flyer face, no sprinter portrait, no White House portrait).
+HERO is a stylized 1930s German official (graphic-novel, CLEAN-SHAVEN — image
+models block the historical mustache).
 """
 
 from __future__ import annotations
 
 HERO = (
-    "HERO (same man every time): stylized graphic-novel 1930s European official, "
-    "dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale "
-    "eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, "
-    "NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal."
+    "HERO (same man every time, do not redesign): stylized graphic-novel 1930s "
+    "European official, dark side-parted hair combed flat, CLEAN-SHAVEN, NO mustache, "
+    "pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and "
+    "plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph."
 )
 
 AMERICAN = (
-    "AMERICAN (same man every time): late-thirties everyman, short brown hair, weary "
-    "small dark eyes, slightly oversized round cartoon head that still sits on his neck, "
-    "average build, clothes change with the scene, not a celebrity."
+    "AMERICAN (same man every time, do not redesign): late-thirties everyman, short "
+    "brown hair, weary small dark eyes, slightly oversized round cartoon head that "
+    "still sits on his neck, average build, clothes change with the scene, not a celebrity."
 )
 
 SOLDIER = (
     "SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, "
-    "khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO."
+    "khaki kit, gum, not a celebrity, not HERO, not the cartoon everyman."
+)
+
+BOOK = (
+    "THE BOOK (same prop every time): a cheap German cowboy paperback, soft brown cover, "
+    "painted rearing horse, worn spine. It must look like the SAME physical object whenever it appears."
+)
+
+OFFICE = (
+    "THE OFFICE (same set): 1940s rain-window night office, steel desk, brass lamp, "
+    "the cowboy paperback on the desk. Return to this room whenever HERO is working."
 )
 
 NO_NAZI = (
@@ -38,7 +48,7 @@ STYLE_PEOPLE = (
     "no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, "
     "warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. "
     "No readable text, letters, numbers, logos, watermarks, captions. "
-    + NO_NAZI + HERO + " " + AMERICAN + " " + SOLDIER
+    + NO_NAZI + HERO + " " + AMERICAN + " " + SOLDIER + " " + BOOK + " " + OFFICE
 )
 
 STYLE_EMPTY = (
@@ -46,100 +56,73 @@ STYLE_EMPTY = (
     "no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, "
     "warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, "
     "NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. "
-    + NO_NAZI
+    + NO_NAZI + BOOK + " "
 )
 
-# (shot_type, who, scene) — must stay 1:1 with split_beat_into_chunks of the fixture.
+# (shot_type, who, scene) — 1:1 with split_beat_into_chunks at NARRATION_WPM=205
 STILLS: list[tuple[str, str, str]] = [
-    ("wide shot", "empty", "Ruined 1945 office, maps unrolled across a steel desk, rain light, chairs kicked over. They expected maps. No people."),
-    ("top-down flatlay", "empty", "A cheap German cowboy paperback lying on top of the war maps, soft cover, painted horse, no readable title. No people."),
-    ("medium shot", "crowd", "A German boy seen strictly from behind, dark hair, hiding under a wool blanket with a flashlight and that cowboy book. Not identifiable. NO HERO face."),
-    ("wide shot", "hero", "HERO at a rain window, a globe turned to the Atlantic, never packing a suitcase. He never set foot there."),
-    ("medium shot", "hero", "HERO looks into camera, the cowboy book in his hands. Stay. The ending is worse than the joke."),
-    ("extreme close-up", "empty", "An unused steamer trunk, empty hangers, a blank destination tag. He never went. No people."),
-    ("symbolic graphic", "empty", "A hole punched clean through a painted map of the United States, light pouring through. Every opinion built on that hole. No people."),
-    ("wide shot", "empty", "Triptych of empty places: a wet New York sidewalk at dawn, a closed diner, a silent factory floor. No people."),
-    ("top-down flatlay", "empty", "A mail sack spilled: magazines, a cowboy paperback, a film reel, stamps. America arrived by mail. No people."),
-    ("over-the-shoulder", "crowd", "Over the boy's shoulder: the cowboy book open, a painted West, a German attic lamp. He did not read America. NO HERO."),
-    ("extreme close-up", "empty", "An illustrated West that never existed: fake mesas, a painted sunset on cheap paper. No people."),
-    ("wide shot", "empty", "Empty painted prairie, horses without riders, honor as a vast vacant land. No people."),
-    ("symbolic graphic", "empty", "Two illustrated figures on a book page keeping their word: a cowboy and a warrior, painterly, not celebrities, no faces large. No people."),
-    ("medium shot", "hero", "HERO clutching the same paperback at his adult desk like a religion, lamp, rain."),
-    ("medium shot", "hero", "HERO older, forty years later, the boy gone, the same book still open. Watch him."),
-    ("wide shot", "hero", "HERO telling a campfire story, a tiny flag pin on the table, the United States as folklore."),
-    ("extreme close-up", "empty", "The cowboy book's spine against his temple, as if that is how a brain is wired. No faces. No people."),
-    ("wide shot", "hero", "HERO in a dark newsreel booth, skyscrapers like movie sets blasting the screen. Hollywood sent the sequel free."),
-    ("wide shot", "crowd", "Movie-palace screen: chorus line and a generic giant ape silhouette on an art-deco tower, AMERICAN in the front row. NO HERO. Not a branded character."),
-    ("medium shot", "hero", "HERO watching a tiny American city diorama through zoo glass, sure he is safe."),
-    ("extreme close-up", "empty", "Thick zoo glass, city lights smeared on the far side, fingerprints. Animals cannot get out. No people."),
-    ("wide shot", "american", "A jazz club that will not sit still, AMERICAN dancing in the aisle, brass, smoke. NO HERO."),
-    ("dutch angle", "american", "Ballpark bleachers, AMERICAN chewing gum like a species, football pads stacked like a religion. Daylight. NO HERO."),
-    ("top-down flatlay", "empty", "A spy folder beside a movie ticket and a gum wrapper. Intelligence vs entertainment. No people."),
-    ("medium shot", "hero", "HERO leaning into camera, the dangerous trick in his eyes."),
-    ("wide shot", "hero", "HERO in a cinema with binoculars, treating the movie as a scouting report."),
-    ("wide shot", "empty", "Movie screen: a cowboy arriving late under a huge clock. America was late. No people."),
-    ("wide shot", "crowd", "Audience clapping, AMERICAN clapping too, the clapping read as softness. NO HERO."),
-    ("wide shot", "american", "Ballroom, a girl kissing a stranger because the band is playing, AMERICAN in the doorway. NO HERO."),
-    ("symbolic graphic", "empty", "A film strip laid over a war map, sprocket holes as strategy. War on film logic. No people."),
-    ("wide shot", "empty", "A torn western poster with a Detroit factory photograph showing underneath. Not in a western. No people."),
-    ("wide shot", "crowd", "Detroit assembly line as a miracle, sparks, a factory saint of machines, no celebrity faces, workers anonymous from behind."),
-    ("aerial", "empty", "Cars pouring off a line like a river of steel, God's-eye, no people visible."),
-    ("extreme close-up", "empty", "A hollow car chassis, beautiful and empty, a machine with no soul. No people."),
-    ("symbolic graphic", "empty", "A precision gear beside a single candle. Machines are easy. Souls are not. No people."),
-    ("top-down flatlay", "empty", "Factory brochures and quotes arranged like a saint's shrine. Collected like relics. No people."),
-    ("wide shot", "empty", "A factory he had never smelled: glossy brochure in the foreground, real steam and rust far away. No people."),
-    ("symbolic graphic", "empty", "The United States drawn as a method diagram, people erased into arrows and boxes. No people."),
-    ("medium shot", "hero", "HERO doing the math on factory photos, liking the numbers, the lie already in the pencil."),
-    ("medium shot", "hero", "HERO at a glowing radio, a leather flight helmet on the table, preferring this American. No flyer face."),
-    ("extreme close-up", "empty", "Radio grille, a closed door, the ocean in the window. Stay out. Stay home. No people."),
-    ("medium shot", "hero", "HERO filing a radio transcript as if it is the real United States."),
-    ("wide shot", "empty", "Fireside armchair, radio glow, empty White House-like room, no portrait, no famous face. Filed as a glitch. No people."),
-    ("symbolic graphic", "empty", "A painted map of the country ripped in half, one half stamped real, one half discarded. No people."),
-    ("aerial", "empty", "1936 stadium from above, two teams walking in, flags too distant to read. He had never visited. No people visible."),
-    ("wide shot", "crowd", "A track team in a tunnel, not cowboys, a nation as a team. Generic athletes, no celebrity likeness."),
-    ("wide shot", "crowd", "Anonymous Black sprinter from behind, gold light, stadium roar, NOT a celebrity portrait, crowd as a sound."),
-    ("medium shot", "hero", "HERO in the box, a camera-smile that does not reach his eyes, the western cracking."),
-    ("extreme close-up", "empty", "A cowboy illustration cracked down the middle like glass. He refused to hear it. No people."),
-    ("wide shot", "empty", "Not a battlefield: an office chair, a lamp, a book, no trenches. No people."),
-    ("medium shot", "hero", "HERO protecting the paperback with both hands, a man protecting a story."),
-    ("medium shot", "hero", "HERO small in a huge chair, reading the cowboy book, he is only the reader."),
-    ("wide shot", "crowd", "A living crowd that does not care about his ending, AMERICAN among them, HERO a speck in a box."),
-    ("medium shot", "hero", "HERO choosing the book on his lap over the window full of crowd. Every time."),
-    ("symbolic graphic", "empty", "The Atlantic painted as a castle moat, Europe a chessboard, water black and final. No people."),
+    ("wide shot", "empty", "1945 ruined office, war maps unrolled on a steel desk, rain light, chairs kicked over. They expected maps. No people. No book yet."),
+    ("top-down flatlay", "empty", "MATCH CUT: the SAME maps, now with THE BOOK lying on top, soft cover, painted horse. A boy's book on a war desk. No people."),
+    ("medium shot", "hero", f"{OFFICE} HERO looks into camera, five fingers raised, THE BOOK in his other hand. Stay. I am going to count the fakes."),
+    ("wide shot", "soldier", "End-of-movie energy: SOLDIER and GIs stepping through a cinema screen into rain, THE BOOK lying forgotten in the aisle. The real country walks in."),
+    ("wide shot", "empty", "Empty New York sidewalk at dawn, closed diner window, no people. The hole. He never went."),
+    ("wide shot", "empty", "Silent factory floor, then a dead radio speaker. He never smelled America. No people."),
+    ("medium shot", "hero", f"{OFFICE} HERO over a globe turned to the Atlantic, THE BOOK closed. Say it again. He never went."),
+    ("over-the-shoulder", "crowd", "FAKE ONE. German boy from behind, blanket, flashlight, THE BOOK open to a painted West. He did not read America. NO HERO face."),
+    ("extreme close-up", "empty", "THE BOOK's painted West: horses, honor, empty land that never existed. No people."),
+    ("wide shot", "empty", "Empty painted prairie, a hero-shaped shadow that keeps its word. No people."),
+    ("medium shot", "hero", f"MATCH CUT time jump: the boy is gone. {OFFICE} Adult HERO, same charcoal suit, THE BOOK still open. Forty years later."),
+    ("medium shot", "hero", f"{OFFICE} Watch him. Same man. Same suit. Same rain on the window. THE BOOK on the desk."),
+    ("wide shot", "hero", f"{OFFICE} HERO telling a campfire story, tiny flag pin, United States as folklore. THE BOOK in his hand."),
+    ("top-down flatlay", "empty", "FAKE ONE still open: THE BOOK on the steel desk, lamp, rain on the blotter. No people."),
+    ("wide shot", "hero", f"FAKE TWO. Dark newsreel booth off the SAME office: HERO watching skyscrapers and a generic ape-on-a-tower. THE BOOK on the seat beside him."),
+    ("medium shot", "hero", "HERO watching a tiny American city diorama through thick zoo glass, sure he is safe. THE BOOK in his pocket."),
+    ("extreme close-up", "empty", "Zoo glass, city lights smeared, fingerprints. Animals cannot get out. No people."),
+    ("wide shot", "american", "AMERICAN in a jazz-and-football night: gum, a movie kiss in the background. The country cannot sit still. NO HERO."),
+    ("top-down flatlay", "empty", "Spy folder beside a movie ticket and THE BOOK. Intelligence vs entertainment. No people."),
+    ("wide shot", "hero", "HERO in the cinema with binoculars, movie as a scouting report. THE BOOK on the next seat."),
+    ("wide shot", "crowd", "Movie cowboy arriving late, audience clapping, AMERICAN clapping too. America was late. America was soft. NO HERO."),
+    ("symbolic graphic", "empty", "MATCH CUT: zoo glass over THE BOOK's cover. Film logic and the paperback are the same lie. No people."),
+    ("symbolic graphic", "empty", "Two costumes of one lie: a film strip and THE BOOK, same horse painted on both. No people."),
+    ("wide shot", "crowd", "FAKE THREE. Detroit assembly line, cars like a river, anonymous workers from behind. Not a cowboy. A factory."),
+    ("top-down flatlay", "empty", "Factory brochure arranged like a saint's shrine beside THE BOOK. He had the brochure. No people."),
+    ("symbolic graphic", "empty", "America drawn as a method diagram, people erased into arrows. No people."),
+    ("medium shot", "hero", f"{OFFICE} HERO doing the math on factory photos, THE BOOK pushed aside, the lie in the pencil."),
+    ("medium shot", "hero", f"FAKE FOUR. {OFFICE} HERO at the glowing radio, leather flight helmet on the table, THE BOOK still there. No flyer face."),
+    ("extreme close-up", "empty", "Radio grille, closed door, ocean in the window. Stay out. Stay home. No people."),
+    ("medium shot", "hero", f"{OFFICE} HERO filing a radio transcript as if it is the real United States. THE BOOK under the paper."),
+    ("wide shot", "empty", "Fireside armchair, radio glow, empty room, no portrait. Filed as a glitch. No people."),
+    ("top-down flatlay", "empty", "Four objects in a row: THE BOOK, a film reel, a car brochure, a radio. Four fakes so far. No people."),
+    ("top-down flatlay", "empty", "The same four objects plus an empty space for one more. Book. Movie. Factory. Radio. One more. No people."),
+    ("symbolic graphic", "empty", "FAKE FIVE. The Atlantic painted as a castle moat, Europe a chessboard, THE BOOK tiny on the European shore. No people."),
     ("wide shot", "empty", "A theater: Europe on the stage, America as the darkened audience. Audiences do not climb on. No people."),
     ("extreme close-up", "empty", "A giant padlock on a door made of ocean. The whole foreign policy. No people."),
-    ("wide shot", "empty", "Toy-small ships on a vast sea, a navy underestimated on purpose. No people."),
-    ("top-down flatlay", "empty", "A December calendar, Pacific water in a dish, the cowboy paperback closed beside it. No people."),
-    ("extreme close-up", "empty", "Smoke and a generic flag edge, no symbols, no people."),
-    ("wide shot", "american", "AMERICAN launching off a sofa, gum, a newsreel blur, the country standing up too fast. NO HERO."),
-    ("medium shot", "hero", "HERO still in the European office. He did not go to America."),
-    ("wide shot", "soldier", "Troop ships and SOLDIER on a wet dock, America entering the story without asking. NO HERO."),
-    ("medium shot", "hero", "HERO stamping a form as if cancelling a subscription, four days later, war as paperwork."),
-    ("wide shot", "empty", "An American street he had never seen: brick, fire escape, morning. No people."),
-    ("top-down flatlay", "empty", "The ape-on-a-building still beside a car brochure. That is what he had seen. No people."),
-    ("medium shot", "hero", "HERO at the radio, saying yes, them too."),
-    ("two-person shot", "hero", "Generals with steel ship models; HERO holding a movie script instead. He understood plot."),
-    ("wide shot", "crowd", "A mixed, noisy, rich street parade, AMERICAN in it, jazz and gold, the plot where they lose. NO HERO."),
-    ("tracking", "empty", "A film reel unwinding beside a convoy of ships already moving. Plot is a drug. No people."),
-    ("extreme close-up", "empty", "The novel's last page, blank, no more pages. No people."),
-    ("wide shot", "soldier", "SOLDIER and other GIs climbing onto a theater stage from the audience. Not as a cowboy. NO HERO."),
-    ("wide shot", "soldier", "A million ordinary men, SOLDIER in front, gum, a factory skyline behind them."),
-    ("top-down flatlay", "empty", "A call sheet of extras versus a blank last chapter. He had written them as extras. No people."),
-    ("wide shot", "soldier", "SOLDIER filling the movie-ending frame, the extras arriving as the ending. NO HERO."),
-    ("top-down flatlay", "empty", "A stack of substitutes: western, zoo glass, car brochure, radio. Not a speech. No people."),
-    ("top-down flatlay", "empty", "Boy's western, zoo glass, factory-saint brochure, radio hero helmet. The whole stack. No people."),
-    ("wide shot", "empty", "A movie theater whose aisle is an ocean moat, the film still playing, nobody leaving. No people."),
-    ("symbolic graphic", "empty", "A globe on a poker table, the bet of a world. No people."),
-    ("top-down flatlay", "empty", "The last object in the drawer: the same cowboy book, pages soft. No people."),
-    ("extreme close-up", "empty", "Spine broken from being believed too long, paper fibers. No people."),
+    ("top-down flatlay", "empty", "Five objects: THE BOOK, film, brochure, radio, a black ribbon of ocean. None of them were the country. No people."),
+    ("aerial", "empty", "THE CRACK. 1936 stadium from above, two teams walking in. He had never visited. No people visible."),
+    ("wide shot", "crowd", "A track team in a tunnel, not cowboys. Anonymous Black sprinter from behind, gold light, NOT a celebrity portrait."),
+    ("medium shot", "hero", "HERO in the stadium box, camera-smile that does not reach his eyes, THE BOOK on his knee. The crowd made a sound."),
+    ("medium shot", "hero", f"Back in {OFFICE} HERO clutching THE BOOK with both hands, refusing the crack. He chose the book. Every time."),
+    ("top-down flatlay", "empty", "December calendar, Pacific water, THE BOOK closed beside it. A Sunday not in the paperback. No people."),
+    ("extreme close-up", "empty", "Smoke and a generic flag edge, no symbols. No people."),
+    ("wide shot", "american", "AMERICAN launching off the sofa, gum, newsreel blur. The country standing up. NO HERO."),
+    ("wide shot", "soldier", "Troop ships, SOLDIER on a wet dock. America entering the story. THE BOOK is not here. NO HERO."),
+    ("medium shot", "hero", f"{OFFICE} HERO stamping a form as if cancelling a subscription, THE BOOK under his elbow. Four days later."),
+    ("wide shot", "empty", "An American street he had never seen, then a flash of the ape-still. He had seen the ape. No people."),
+    ("top-down flatlay", "empty", "Ape still, car brochure, radio, THE BOOK. That is all he had seen. No people."),
+    ("tracking", "empty", "Film reel unwinding beside a convoy already moving. Plot is a drug. No people."),
+    ("wide shot", "soldier", "FAKE FIVE DIES. SOLDIER and GIs climbing onto a theater stage from the audience. Not as a cowboy. NO HERO."),
+    ("wide shot", "soldier", "A million ordinary men, SOLDIER in front, gum, factory skyline behind them."),
+    ("wide shot", "soldier", "SOLDIER filling the movie-ending frame; THE BOOK lies in the aisle like a dead extra. They arrived as the ending."),
+    ("top-down flatlay", "empty", "Five substitutes in a stack: western, zoo glass, car saint, radio, moat. Not a speech. No people."),
+    ("top-down flatlay", "empty", "The same five objects, closer. A boy's western. A zoo glass. A car saint. A radio hero. A moat. No people."),
+    ("wide shot", "empty", "A movie theater whose aisle is an ocean, the film still playing, nobody leaving. He bet the world. No people."),
+    ("top-down flatlay", "empty", "CALLBACK: the SAME drawer as the first maps, THE BOOK returned, pages soft, spine broken. Last shot. No people."),
     ("wide shot", "empty", "Unused passport, ocean window, empty chair. He died having never seen it. No people."),
-    ("top-down flatlay", "empty", "The paperback sitting on the war desk, the whole war hiding in it. No people."),
-    ("medium shot", "hero", "HERO in unglamorous shadow. If you want a monster, you already have one."),
-    ("symbolic graphic", "empty", "The mechanism laid out: book, movie reel, radio, a stamped yes. No people."),
-    ("medium shot", "hero", "HERO looking at a fake movie-America on a screen with the wrong kind of love."),
+    ("top-down flatlay", "empty", "THE BOOK on the war desk. The whole war hiding in a paperback. No people."),
+    ("medium shot", "hero", f"{OFFICE} HERO in unglamorous shadow, THE BOOK on the desk. If you want a monster, you already have one."),
+    ("medium shot", "hero", "HERO looking at a fake movie-America on a screen with the wrong kind of love. THE BOOK in his hands."),
     ("wide shot", "soldier", "Real SOLDIER and AMERICAN walking toward camera as a painted cowboy dissolves. The real one would not stay fake."),
-    ("medium shot", "american", "AMERICAN holding the cowboy book out to the viewer. Send this. The book always ends."),
-    ("aerial", "empty", "A living country from above, lights, rivers, not a last page. The country does not. No people visible."),
+    ("aerial", "empty", "A living country from above, lights, rivers, not a last page. The book always ends. The country does not. No people visible."),
 ]
 
 
@@ -147,9 +130,8 @@ def prompt_for(who: str, scene: str) -> str:
     if who == "empty":
         return f"{STYLE_EMPTY} SCENE: {scene}"
     extras = {
-        "hero": "Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols.",
+        "hero": "Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. THE BOOK visible if the scene names it. NO symbols.",
         "american": "AMERICAN is the lead. HERO is absent unless the scene names him.",
-        "both": "HERO and AMERICAN both visible, locked faces. CLEAN-SHAVEN HERO, NO mustache.",
         "soldier": "SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named.",
         "crowd": "Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named.",
     }

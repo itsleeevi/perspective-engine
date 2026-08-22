@@ -1,18 +1,15 @@
 """
 Free local Kokoro-82M TTS (ONNX, Apache 2.0) — Liam-class punch without a paid API.
 
-Consecutive narrated shots are synthesised as ONE utterance (Kokoro splits
-internally on its 510-phoneme window). Empty beats get real silence, same as
-the ElevenLabs / Edge adapters. Phoneme timings (when the export reports
-durations) are grouped on spaces into word starts and fed to
-``split_run_durations``; if the counts disagree the split falls back to
-word-count proportions. Either way the shot durations sum to the run
-length, so picture cannot drift from audio.
+Consecutive narrated shots are synthesised in ~80-word packs so phoneme
+timings stay aligned. Empty beats get real silence. Phoneme-word starts are
+fit onto ``str.split()`` (interpolated if the counts differ by a few);
+durations still sum to the pack length, so picture cannot drift from audio.
 
 Requires ``pip install kokoro-onnx soundfile espeakng-loader`` and the two
 model files under ``assets/models/kokoro/`` (gitignored with the rest of
-``assets/``). Override voice with ``KOKORO_VOICE`` (default ``am_liam`` —
-punchy American male, closest to ElevenLabs Liam on this hardware).
+``assets/``). Override voice with ``KOKORO_VOICE`` (default ``am_liam``,
+speed 1.0, ~205 wpm long-form — set ``NARRATION_WPM=205`` when chunking).
 """
 
 from __future__ import annotations
@@ -32,9 +29,13 @@ from graph.assets import save_asset
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _DEFAULT_MODEL_DIR = _REPO_ROOT / "assets" / "models" / "kokoro"
 _DEFAULT_VOICE = "am_liam"
-_SPEED = 1.08
+_SPEED = 1.0
 _LANG = "en-us"
 _SAMPLE_RATE = 24000
+# Long-form packs keep phoneme-word alignment stable. One giant utterance
+# drifted (~210–250 wpm, offset counts off by a few words) and the picture
+# cut in the middle of the breath.
+_PACK_WORDS = 80
 
 _engine = None
 
@@ -92,6 +93,48 @@ def _wav_to_mp3(wav: Path, mp3: Path) -> None:
     )
 
 
+def _resize_offsets(
+    offsets: list[float], n_words: int, run_total: float
+) -> list[float] | None:
+    """Fit phoneme-word starts onto the naive word count.
+
+    Kokoro sometimes emits a few more or fewer space-delimited phoneme
+    words than ``str.split()`` (hyphens, years, initials). Interpolating
+    keeps pause structure instead of throwing the whole run onto a flat
+    word-count proportion, which is what made cuts land mid-breath.
+    """
+    if n_words <= 0:
+        return None
+    if len(offsets) == n_words:
+        return offsets
+    if len(offsets) < 2:
+        return None
+    import numpy as np
+
+    src_x = np.linspace(0.0, 1.0, len(offsets))
+    dst_x = np.linspace(0.0, 1.0, n_words)
+    fitted = np.interp(dst_x, src_x, np.asarray(offsets, dtype=float))
+    return [float(max(0.0, min(run_total, x))) for x in fitted]
+
+
+def _pack_indices(indices: list[int], script_beats: list[str]) -> list[list[int]]:
+    """Split a speech run into ~_PACK_WORDS windows, breaking on chunk ends."""
+    packs: list[list[int]] = []
+    current: list[int] = []
+    words = 0
+    for i in indices:
+        n = len(script_beats[i].strip().split())
+        if current and words + n > _PACK_WORDS:
+            packs.append(current)
+            current = []
+            words = 0
+        current.append(i)
+        words += n
+    if current:
+        packs.append(current)
+    return packs
+
+
 def _word_offsets_from_timings(spoken) -> list[float] | None:
     """Start time of each whitespace-delimited phoneme-word, if timings exist."""
     if not spoken:
@@ -118,8 +161,8 @@ def _synthesize_text(text: str, voice: str) -> tuple[bytes, list[float] | None]:
         speed=_SPEED,
         lang=_LANG,
         trim=True,
-        sentence_pause=0.18,
-        clause_pause=0.08,
+        sentence_pause=0.22,
+        clause_pause=0.10,
     )
     offsets = _word_offsets_from_timings(spoken)
     with tempfile.TemporaryDirectory(prefix="pe_kokoro_") as tmp:
@@ -151,6 +194,7 @@ class KokoroVoiceAdapter(VoiceAdapter):
                 "provider": "kokoro-onnx",
                 "voice": resolved_voice,
                 "speed": _SPEED,
+                "pack_words": _PACK_WORDS,
                 "lang": _LANG,
                 "beats": list(script_beats),
                 "silences": [
@@ -198,23 +242,38 @@ class KokoroVoiceAdapter(VoiceAdapter):
                     )
                     beat_durations[i] = round(gap, 3)
                 else:
-                    text = " ".join(script_beats[i].strip() for i in indices)
-                    audio_bytes, phoneme_offsets = await asyncio.to_thread(
-                        _synthesize_text, text, resolved_voice
-                    )
-                    part.write_bytes(audio_bytes)
-                    run_total = await asyncio.to_thread(_audio.duration_seconds, part)
-                    beat_words = [script_beats[i].strip().split() for i in indices]
-                    word_counts = [len(w) for w in beat_words]
-                    naive_n = sum(word_counts)
-                    word_offsets = (
-                        phoneme_offsets
-                        if phoneme_offsets is not None and len(phoneme_offsets) == naive_n
-                        else None
-                    )
-                    durations = split_run_durations(word_counts, word_offsets, run_total)
-                    for i, d in zip(indices, durations, strict=True):
-                        beat_durations[i] = d
+                    packs = _pack_indices(indices, script_beats)
+                    pack_files: list[Path] = []
+                    for pack_i, pack in enumerate(packs):
+                        pack_path = tmp_path / f"seg_{seg_idx:03d}_{pack_i:02d}.mp3"
+                        text = " ".join(script_beats[i].strip() for i in pack)
+                        audio_bytes, phoneme_offsets = await asyncio.to_thread(
+                            _synthesize_text, text, resolved_voice
+                        )
+                        pack_path.write_bytes(audio_bytes)
+                        run_total = await asyncio.to_thread(
+                            _audio.duration_seconds, pack_path
+                        )
+                        beat_words = [script_beats[i].strip().split() for i in pack]
+                        word_counts = [len(w) for w in beat_words]
+                        naive_n = sum(word_counts)
+                        word_offsets = (
+                            _resize_offsets(phoneme_offsets, naive_n, run_total)
+                            if phoneme_offsets
+                            else None
+                        )
+                        durations = split_run_durations(
+                            word_counts, word_offsets, run_total
+                        )
+                        for i, d in zip(pack, durations, strict=True):
+                            beat_durations[i] = d
+                        pack_files.append(pack_path)
+                    if len(pack_files) == 1:
+                        pack_files[0].replace(part)
+                    else:
+                        await asyncio.to_thread(
+                            _audio.concat_mp3, pack_files, part, _SAMPLE_RATE
+                        )
                 parts.append(part)
 
             out = tmp_path / "full.mp3"

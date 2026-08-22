@@ -9,6 +9,7 @@ rest of the pipeline.
 from __future__ import annotations
 
 import json
+import os
 import re
 from pathlib import Path
 
@@ -98,7 +99,17 @@ def narration_duration_seconds(text: str, words_per_minute: float = 150.0) -> fl
 # the *real* per-word timing of the synthesised audio and use that (not this
 # estimate) to set each shot's exact on-screen duration, so an off wpm here
 # only shifts which words land on which image, never the audio/video sync.
-NARRATION_WPM = 166.0
+# Override with NARRATION_WPM in the environment when the production voice
+# is not ElevenLabs Liam. Kokoro ``am_liam`` at speed 1.0 measures ~205 wpm
+# on long-form prose (short samples look slower because pauses dominate).
+def _narration_wpm() -> float:
+    raw = os.environ.get("NARRATION_WPM")
+    if raw:
+        return float(raw)
+    return 166.0
+
+
+NARRATION_WPM = _narration_wpm()
 
 # Target on-screen time per image: a cut every ~3-4 seconds.
 #

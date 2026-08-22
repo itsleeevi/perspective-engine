@@ -97,7 +97,7 @@ For the full node list, state schema, and the reasoning behind the fan-out/fan-i
 | LLM           | OpenAI (script + storyboard authoring) and Anthropic Claude Haiku (per-shot vision quality check), plus mock adapters |
 | Image         | OpenAI `gpt-image-*` (default stills, chosen for reliable in-scene text), fal.ai FLUX.1 [dev]/[schnell], free Pollinations, and mock adapters |
 | Video         | fal.ai Seedance 2.0 Fast, image-to-video only, and mock adapters                             |
-| Voice         | Free Edge TTS (default) and ElevenLabs (multilingual v2, opt-in), plus mock adapters         |
+| Voice         | Kokoro `am_liam` (custom YouTube cuts), free Edge TTS (CLI default), ElevenLabs (opt-in), plus mock adapters |
 | Review        | CLI prompts (`cli/run.py`) and a browser UI (`webui/`); same graph, same adapters            |
 | Assembly      | Local FFmpeg composition: downloads assets, freezes stills, concatenates, mixes narration    |
 | Testing       | Pytest, 148 tests, run on Python 3.13 via GitHub Actions on every push                        |
@@ -186,4 +186,6 @@ perspective-engine/
 - [`docs/provider-decisions.md`](docs/provider-decisions.md): why each provider was chosen, with alternatives considered
 - [`docs/roadmap.md`](docs/roadmap.md): the phased build plan from local prototype to durable infrastructure
 - [`docs/decisions/0001-core-architecture.md`](docs/decisions/0001-core-architecture.md): ADR covering LangGraph vs. alternatives, the still-first rule, and structural identity consistency
+- [`docs/custom-videos.md`](docs/custom-videos.md): playbook for fixture-driven YouTube cuts (new title = new story)
+- [`docs/videos/`](docs/videos/README.md): log of shipped cuts so the next title does not clone the last spine
 - [`AGENTS.md`](AGENTS.md): the operational contract this repo is built against, read by AI coding agents at the start of every session

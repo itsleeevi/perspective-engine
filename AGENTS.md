@@ -38,6 +38,12 @@ Principle: best tool for the role. If a better-fit option for a role exists, pro
 - Per-shot retries are capped, then escalate to human review. No indefinite retries, no silent drops.
 - Publish cadence is rate-limited in code once the publish step exists.
 
+## Custom YouTube cuts (Putin / Hitler / next title)
+
+These are fixture-driven slideshows, not the default graph topic flow. **Read `docs/custom-videos.md` before generating a new one.** After a cut ships, update `docs/videos/` so the next agent does not copy the last storyline.
+
+Non-negotiable for that path: unique story per title, third-person narrator, Kokoro `am_liam` (not ElevenLabs, not Edge), fill-frame 16:9 (cover-crop Grok 3:2), YouTube thumbs as 1280×720 JPEG, locked props/sets for scene-to-scene continuity, cuts on narration pauses.
+
 ## Out of scope for the current phase
 
 No real provider APIs, no managed database / object storage / serverless / tracing configuration, no review UI, and no publish or scheduling integration until the local graph skeleton is complete and tested.
