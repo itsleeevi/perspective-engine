@@ -34,4 +34,4 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["graph", "adapters", "cli", "webui"]
+packages = ["graph", "adapters", "cli", "webui", "channel"]

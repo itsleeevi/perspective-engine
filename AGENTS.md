@@ -38,11 +38,17 @@ Principle: best tool for the role. If a better-fit option for a role exists, pro
 - Per-shot retries are capped, then escalate to human review. No indefinite retries, no silent drops.
 - Publish cadence is rate-limited in code once the publish step exists.
 
-## Custom YouTube cuts (Putin / Hitler / next title)
+## Custom YouTube cuts (What They Really Think)
 
-These are fixture-driven short films of still images, not the default graph topic flow. **`docs/custom-videos.md` is the production system — read it and follow its execution checklist.** One video = three data files (fixture, stills module, spec in `fixtures/video_specs/`) run through `scripts/lint_storyboard.py` → `scripts/make_image_jobs.py` → `scripts/run_custom_video.py`. After a cut ships, update `docs/videos/` so the next agent does not copy the last storyline.
+These are fixture-driven illustrated documentaries, not the default graph topic flow. **`docs/custom-videos.md` is the production system.** The reusable engine lives in `channel/`: a new video starts with a title string, not a new Python runner.
 
-Non-negotiable for that path: unique story per title, **perspective first** (inside the hero’s mental model, teach through dramatic irony), **explain the thought as if the watcher were five** (one child-repeatable `the_thought` sentence in the fixture and in the VO — `lint_story.py` checks), third-person narrator, Hollywood story written *before* stills, spoken English (no telegram fragments, no numbered lectures), Kokoro `am_michael` at speed 0.90 (Chatterbox-Turbo when clone works — never Edge or ElevenLabs), whisper-forced-aligned sync, prop economy (signature prop ≤ 6 scenes, enforced by the linter), silent black chapter cards, fill-frame 16:9, YouTube thumbs as 1280×720 JPEG.
+```text
+.venv/bin/python -m channel init "What Einstein Really Thought About Religion"
+```
+
+Cursor Grok fills `channel/projects/<slug>/project.json` (research, story, bibles, scenes) using `channel/agent_prompts.py`. Then `python -m channel compile <slug>` writes fixture + stills + spec + image jobs. Images are Cursor Grok GenerateImage. Voice is Kokoro `am_michael` (never Edge, never ElevenLabs). After a cut ships, update `docs/videos/` so the next agent does not copy the last storyline.
+
+Non-negotiable for that path: unique story per title, **answer the title through a story** (not a Wikipedia biography), one child-repeatable `the_thought` / title payoff in the fixture and in the VO, third-person spoken English, character bibles without historical names in image prompts, global flat-2D style from `channel/config.py`, whisper-forced-aligned sync, silent black chapter cards, fill-frame 16:9, YouTube thumbs as 1280×720 JPEG.
 
 ## Out of scope for the current phase
 

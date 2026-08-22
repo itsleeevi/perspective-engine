@@ -231,6 +231,50 @@ def main() -> None:
         if not level.get("beats"):
             _fail(f"structure: chapter {level.get('name')!r} has no beats")
 
+    # Channel engine (What They Really Think): extra spoken-doc checks.
+    # Older fixtures omit "engine" and must keep passing.
+    words = len(re.findall(r"\S+", narration))
+    if spec.get("engine") == "channel":
+        hook = (fixture.get("hook") or "").strip()
+        hook_words = hook.split()
+        head = " ".join(hook_words[:40]).lower()
+        if re.search(r"\b(was|were)\s+born\b", head):
+            _fail(
+                "cold open: biography dump ('was born') — start with the "
+                "title's mystery, not a birth"
+            )
+        for opener in (
+            "this video will",
+            "in this video",
+            "today we are going to",
+            "let us begin by",
+        ):
+            if opener in head:
+                _fail(f"cold open: lecture opener {opener!r}")
+        if not short:
+            if words < 650:
+                _warn(f"length: {words} words (channel target 650-750)")
+            elif words > 750:
+                _warn(f"length: {words} words (channel target 650-750)")
+            else:
+                _ok(f"length: {words} words")
+        lower_all = narration.lower()
+        for phrase in (
+            "furthermore",
+            "consequently",
+            "nevertheless",
+            "it is important to note",
+            "from a geopolitical perspective",
+            "it can therefore be concluded",
+            "during this particular period",
+        ):
+            if phrase in lower_all:
+                _warn(f"register: written-essay phrase {phrase!r}")
+        if "but that wasn't the whole story" in lower_all:
+            _warn("stock transition 'But that wasn't the whole story' — vary it")
+    elif not short:
+        _ok(f"{words} words")
+
     if _ERRORS:
         print(f"\n{len(_ERRORS)} error(s). Rewrite the story before touching stills.")
         sys.exit(1)

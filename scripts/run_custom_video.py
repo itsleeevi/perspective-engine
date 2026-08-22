@@ -45,13 +45,16 @@ sys.path.insert(0, str(ROOT))
 load_dotenv(ROOT / ".env", override=True)
 os.environ.setdefault("ADAPTER_CACHE", "1")
 
-# The spec must be read and NARRATION_WPM exported before graph.script_fixture
-# is imported anywhere (the constant is bound at import time).
+# The spec must be read and pacing exported before graph.script_fixture
+# is imported (NARRATION_WPM is still bound at import for shot duration math;
+# chunk windows are read at call time from CHUNK_*_SECONDS).
 if len(sys.argv) < 2:
     print("usage: run_custom_video.py <spec.json>", file=sys.stderr)
     sys.exit(2)
 SPEC = json.loads((ROOT / sys.argv[1]).read_text(encoding="utf-8"))
-os.environ.setdefault("NARRATION_WPM", str(SPEC.get("narration_wpm", 175)))
+from channel.pacing import apply_spec_pacing  # noqa: E402
+
+apply_spec_pacing(SPEC)
 if SPEC.get("voice_ref"):
     os.environ.setdefault("CHATTERBOX_VOICE_REF", str(ROOT / SPEC["voice_ref"]))
 if SPEC.get("chatterbox_breath") is not None:

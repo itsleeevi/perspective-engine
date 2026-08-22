@@ -56,7 +56,9 @@ if "short" not in SPEC:
     print("spec has no \"short\" block; nothing to render", file=sys.stderr)
     sys.exit(2)
 SHORT = SPEC["short"]
-os.environ.setdefault("NARRATION_WPM", str(SPEC.get("narration_wpm", 175)))
+from channel.pacing import apply_spec_pacing  # noqa: E402
+
+apply_spec_pacing(SPEC)
 if SPEC.get("voice_ref"):
     os.environ.setdefault("CHATTERBOX_VOICE_REF", str(ROOT / SPEC["voice_ref"]))
 if SPEC.get("chatterbox_breath") is not None:

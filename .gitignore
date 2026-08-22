@@ -28,6 +28,9 @@ assets/
 .env
 *.env.local
 
+# Working video projects (generated per title)
+channel/projects/*/
+
 # Editors
 .idea/
 .vscode/

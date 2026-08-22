@@ -19,6 +19,7 @@ Perspective Engine turns a topic (for example, "a photon's journey from the sun 
 - Mock mode for deterministic, free development and testing
 - Real MP4 assembly with FFmpeg (downloads assets, freezes stills into segments, concatenates, mixes narration)
 - Script fixtures (`graph/script_fixture.py`) that let a reviewed JSON script skip the LLM entirely, plus locally rendered `[TITLE]` cards (`graph/title_cards.py`) for level/rank transitions — no image-model call for title beats
+- **What They Really Think** channel engine (`channel/`): title in, research/story/scenes as data, Kokoro narration, Cursor Grok stills. See `docs/custom-videos.md`.
 - 148 automated tests covering control flow, invariants, and state, run on every push via GitHub Actions
 
 ## Demo

@@ -221,26 +221,31 @@ def _atoms(text: str, wpm: float, max_seconds: float) -> list[str]:
 
 def split_beat_into_chunks(
     beat: str,
-    wpm: float = NARRATION_WPM,
-    min_seconds: float = CHUNK_MIN_SECONDS,
-    max_seconds: float = CHUNK_MAX_SECONDS,
-    target_seconds: float = CHUNK_TARGET_SECONDS,
+    wpm: float | None = None,
+    min_seconds: float | None = None,
+    max_seconds: float | None = None,
+    target_seconds: float | None = None,
 ) -> list[str]:
     """
-    Split one narration paragraph into ~3-4 second speaking chunks that begin
-    and end where the narrator pauses.
+    Split one narration paragraph into speaking chunks that begin and end
+    where the narrator pauses.
 
-    Sentences (and, where a sentence is too long, clauses) are packed greedily
-    up to ``max_seconds``, closing a chunk once it has reached
-    ``target_seconds`` so shots stay near the intended pace instead of always
-    running to the maximum. Because every boundary is a punctuation boundary,
-    every picture cut lands in a real pause in the delivered audio.
-
-    Durations here are only estimates deciding *which words share an image* —
-    the voice adapters measure the real per-word timing of the synthesised
-    audio and set each shot's exact on-screen length from that, so an
-    over- or under-sized group here never causes audio/video drift.
+    Defaults follow ``NARRATION_WPM`` / ``CHUNK_*_SECONDS`` env vars at call
+    time so a video spec can change pacing without reimporting this module.
+    Every boundary is a punctuation boundary so picture cuts land in a pause.
+    Voice adapters still measure real audio timing; these estimates only
+    decide which words share an image.
     """
+    if wpm is None:
+        wpm = _narration_wpm()
+    if min_seconds is None:
+        min_seconds = float(os.environ.get("CHUNK_MIN_SECONDS", str(CHUNK_MIN_SECONDS)))
+    if max_seconds is None:
+        max_seconds = float(os.environ.get("CHUNK_MAX_SECONDS", str(CHUNK_MAX_SECONDS)))
+    if target_seconds is None:
+        target_seconds = float(
+            os.environ.get("CHUNK_TARGET_SECONDS", str(CHUNK_TARGET_SECONDS))
+        )
     text = re.sub(r"\s+", " ", beat).strip()
     if not text:
         return []

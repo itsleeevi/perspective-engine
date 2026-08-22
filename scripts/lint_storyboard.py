@@ -60,9 +60,10 @@ def main() -> None:
             print("spec has no \"short\" block", file=sys.stderr)
             sys.exit(2)
         spec = {**spec, **spec["short"]}
-    os.environ.setdefault("NARRATION_WPM", str(spec.get("narration_wpm", 175)))
-
     sys.path.insert(0, str(ROOT))
+    from channel.pacing import apply_spec_pacing
+
+    apply_spec_pacing(spec)
     from graph.script_fixture import (
         fixture_to_beats,
         is_title_beat,

@@ -1,18 +1,17 @@
 ---
-description: Rules for fixture-driven YouTube cuts (perspective story, explain-like-five, spec runner)
+description: Rules for the What They Really Think documentary engine (title in, Kokoro + Grok stills)
 alwaysApply: true
 ---
 
-# Custom narrative videos
+# What They Really Think videos
 
 `docs/custom-videos.md` is the production system. Read it and the matching page under `docs/videos/` before generating or rewriting a cut, then follow its execution checklist exactly.
 
-- The point is the **hero’s perspective**: inhabit the mental model, teach through dramatic irony. Not a Wikipedia list, not a numbered lecture.
-- **Explain the thought as if the watcher were five.** One sentence a child could repeat (`the_thought` in the fixture, said in the VO). Say it, show it in every chapter, say it again on the button. One simple metaphor. Do not hide the idea behind clever wording. Assume the viewer does not already know the history.
-- New title → completely new storyline. Write the film first (logline → beat sheet → scene list), then chunk / stills / VO.
-- One video = fixture + stills module + `fixtures/video_specs/<slug>.json`, run through `scripts/lint_story.py` → `scripts/lint_storyboard.py` → `scripts/make_image_jobs.py` → `scripts/run_custom_video.py`. No new runner code per title.
-- Prop economy: ONE signature prop in ≤ 6 scenes (setup / turns / climax / button). The linter enforces it — fix errors before generating any image.
-- Voice: Kokoro `am_michael` at speed 0.90 (wise, still moving). Chatterbox-Turbo in `.venv-tts` when cloning works. Never Edge, never ElevenLabs. Sync is forced-aligned; check `sync.max_cut_error_ms` < 20 after render.
+- Start from a **title** (`python -m channel init "What X Really Thought About Y"`). Do not hardcode a person into `channel/config.py` or write a new runner.
+- The point is to **answer the title through a story**. Not a Wikipedia list, not a numbered lecture, not a biography dump.
+- `the_thought` is the title payoff — one sentence a child could repeat, said in the VO. Narration around it is an intelligent friend telling history, not baby talk.
+- Cursor Grok fills research / story / bibles / scenes in `channel/projects/<slug>/project.json`. Compile writes fixtures. Images are **GenerateImage** (Grok). Voice is Kokoro `am_michael`. Never Edge, never ElevenLabs.
+- Character consistency is the bible `visual_lock`. Historical personal names stay out of image prompts. Global style is frozen in `channel/config.py`.
+- Prop economy: ONE signature prop in ≤ 6 scenes. The linter enforces it — fix errors before generating any image.
 - Spoken English, third person. Silent black chapter cards. Fill-frame 16:9; thumbs 1280×720 JPEG.
-- Look is per title (this Stalin cut: Simple History-like flat 2D vector). Matching an explainer channel's pictures is not permission to copy a Wikipedia biography.
 - When a video ships, update `docs/videos/<slug>.md` and `docs/videos/README.md`.
