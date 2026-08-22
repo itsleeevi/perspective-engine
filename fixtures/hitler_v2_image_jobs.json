@@ -1,0 +1,894 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "hitler_v2_000.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "They expected maps.",
+      "scene": "Ruined 1945 office, maps unrolled across a steel desk, rain light, chairs kicked over. They expected maps. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Ruined 1945 office, maps unrolled across a steel desk, rain light, chairs kicked over. They expected maps. No people."
+    },
+    {
+      "id": "001",
+      "filename": "hitler_v2_001.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "They found a cowboy novel. Soft cover. German.",
+      "scene": "A cheap German cowboy paperback lying on top of the war maps, soft cover, painted horse, no readable title. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A cheap German cowboy paperback lying on top of the war maps, soft cover, painted horse, no readable title. No people."
+    },
+    {
+      "id": "002",
+      "filename": "hitler_v2_002.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "The kind a boy hides under a blanket.",
+      "scene": "A German boy seen strictly from behind, dark hair, hiding under a wool blanket with a flashlight and that cowboy book. Not identifiable. NO HERO face.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: A German boy seen strictly from behind, dark hair, hiding under a wool blanket with a flashlight and that cowboy book. Not identifiable. NO HERO face."
+    },
+    {
+      "id": "003",
+      "filename": "hitler_v2_003.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "This is how a man who never set foot in America decided he understood it.",
+      "scene": "HERO at a rain window, a globe turned to the Atlantic, never packing a suitcase. He never set foot there.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO at a rain window, a globe turned to the Atlantic, never packing a suitcase. He never set foot there."
+    },
+    {
+      "id": "004",
+      "filename": "hitler_v2_004.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Stay. The ending is worse than the joke.",
+      "scene": "HERO looks into camera, the cowboy book in his hands. Stay. The ending is worse than the joke.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO looks into camera, the cowboy book in his hands. Stay. The ending is worse than the joke."
+    },
+    {
+      "id": "005",
+      "filename": "hitler_v2_005.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "He never went.",
+      "scene": "An unused steamer trunk, empty hangers, a blank destination tag. He never went. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: An unused steamer trunk, empty hangers, a blank destination tag. He never went. No people."
+    },
+    {
+      "id": "006",
+      "filename": "hitler_v2_006.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "Say that again, because every opinion in this story is built on that hole.",
+      "scene": "A hole punched clean through a painted map of the United States, light pouring through. Every opinion built on that hole. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A hole punched clean through a painted map of the United States, light pouring through. Every opinion built on that hole. No people."
+    },
+    {
+      "id": "007",
+      "filename": "hitler_v2_007.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "No New York sidewalk. No diner. No factory floor.",
+      "scene": "Triptych of empty places: a wet New York sidewalk at dawn, a closed diner, a silent factory floor. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Triptych of empty places: a wet New York sidewalk at dawn, a closed diner, a silent factory floor. No people."
+    },
+    {
+      "id": "008",
+      "filename": "hitler_v2_008.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "America, to him, was a country that arrived by mail.",
+      "scene": "A mail sack spilled: magazines, a cowboy paperback, a film reel, stamps. America arrived by mail. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A mail sack spilled: magazines, a cowboy paperback, a film reel, stamps. America arrived by mail. No people."
+    },
+    {
+      "id": "009",
+      "filename": "hitler_v2_009.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "over-the-shoulder",
+      "chunk": "As a boy he did not read America.",
+      "scene": "Over the boy's shoulder: the cowboy book open, a painted West, a German attic lamp. He did not read America. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: Over the boy's shoulder: the cowboy book open, a painted West, a German attic lamp. He did not read America. NO HERO."
+    },
+    {
+      "id": "010",
+      "filename": "hitler_v2_010.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "He read a German writer who invented a West that never existed.",
+      "scene": "An illustrated West that never existed: fake mesas, a painted sunset on cheap paper. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: An illustrated West that never existed: fake mesas, a painted sunset on cheap paper. No people."
+    },
+    {
+      "id": "011",
+      "filename": "hitler_v2_011.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "Horses. Honor. Empty land.",
+      "scene": "Empty painted prairie, horses without riders, honor as a vast vacant land. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Empty painted prairie, horses without riders, honor as a vast vacant land. No people."
+    },
+    {
+      "id": "012",
+      "filename": "hitler_v2_012.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "A white hero and a noble warrior who always kept their word.",
+      "scene": "Two illustrated figures on a book page keeping their word: a cowboy and a warrior, painterly, not celebrities, no faces large. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Two illustrated figures on a book page keeping their word: a cowboy and a warrior, painterly, not celebrities, no faces large. No people."
+    },
+    {
+      "id": "013",
+      "filename": "hitler_v2_013.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He kept that book in his head like a religion.",
+      "scene": "HERO clutching the same paperback at his adult desk like a religion, lamp, rain.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO clutching the same paperback at his adult desk like a religion, lamp, rain."
+    },
+    {
+      "id": "014",
+      "filename": "hitler_v2_014.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Watch him. Forty years later the boy is gone and the book is not.",
+      "scene": "HERO older, forty years later, the boy gone, the same book still open. Watch him.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO older, forty years later, the boy gone, the same book still open. Watch him."
+    },
+    {
+      "id": "015",
+      "filename": "hitler_v2_015.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "He still talks about the United States as if it is a campfire story with a flag on it.",
+      "scene": "HERO telling a campfire story, a tiny flag pin on the table, the United States as folklore.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO telling a campfire story, a tiny flag pin on the table, the United States as folklore."
+    },
+    {
+      "id": "016",
+      "filename": "hitler_v2_016.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "That is not a quirk. That is how his brain worked.",
+      "scene": "The cowboy book's spine against his temple, as if that is how a brain is wired. No faces. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: The cowboy book's spine against his temple, as if that is how a brain is wired. No faces. No people."
+    },
+    {
+      "id": "017",
+      "filename": "hitler_v2_017.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Then Hollywood sent him the sequel for free. Newsreels. Skyscrapers like movie sets.",
+      "scene": "HERO in a dark newsreel booth, skyscrapers like movie sets blasting the screen. Hollywood sent the sequel free.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO in a dark newsreel booth, skyscrapers like movie sets blasting the screen. Hollywood sent the sequel free."
+    },
+    {
+      "id": "018",
+      "filename": "hitler_v2_018.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Chorus lines. A giant ape on a building.",
+      "scene": "Movie-palace screen: chorus line and a generic giant ape silhouette on an art-deco tower, AMERICAN in the front row. NO HERO. Not a branded character.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: Movie-palace screen: chorus line and a generic giant ape silhouette on an art-deco tower, AMERICAN in the front row. NO HERO. Not a branded character."
+    },
+    {
+      "id": "019",
+      "filename": "hitler_v2_019.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He watched America the way a man watches a zoo.",
+      "scene": "HERO watching a tiny American city diorama through zoo glass, sure he is safe.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO watching a tiny American city diorama through zoo glass, sure he is safe."
+    },
+    {
+      "id": "020",
+      "filename": "hitler_v2_020.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "From the safe side of the glass. Sure the animals cannot get out.",
+      "scene": "Thick zoo glass, city lights smeared on the far side, fingerprints. Animals cannot get out. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Thick zoo glass, city lights smeared on the far side, fingerprints. Animals cannot get out. No people."
+    },
+    {
+      "id": "021",
+      "filename": "hitler_v2_021.png",
+      "who": "american",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Jazz, to him, was not music. It was proof the country could not sit still.",
+      "scene": "A jazz club that will not sit still, AMERICAN dancing in the aisle, brass, smoke. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. AMERICAN is the lead. HERO is absent unless the scene names him. SCENE: A jazz club that will not sit still, AMERICAN dancing in the aisle, brass, smoke. NO HERO."
+    },
+    {
+      "id": "022",
+      "filename": "hitler_v2_022.png",
+      "who": "american",
+      "free": false,
+      "shot_type": "dutch angle",
+      "chunk": "Chewing gum was a species. Football was a religion with padding.",
+      "scene": "Ballpark bleachers, AMERICAN chewing gum like a species, football pads stacked like a religion. Daylight. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. AMERICAN is the lead. HERO is absent unless the scene names him. SCENE: Ballpark bleachers, AMERICAN chewing gum like a species, football pads stacked like a religion. Daylight. NO HERO."
+    },
+    {
+      "id": "023",
+      "filename": "hitler_v2_023.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "He took these as intelligence. They were entertainment. He never learned the difference.",
+      "scene": "A spy folder beside a movie ticket and a gum wrapper. Intelligence vs entertainment. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A spy folder beside a movie ticket and a gum wrapper. Intelligence vs entertainment. No people."
+    },
+    {
+      "id": "024",
+      "filename": "hitler_v2_024.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Here is the trick that made him dangerous.",
+      "scene": "HERO leaning into camera, the dangerous trick in his eyes.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO leaning into camera, the dangerous trick in his eyes."
+    },
+    {
+      "id": "025",
+      "filename": "hitler_v2_025.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "He thought a movie was a scouting report.",
+      "scene": "HERO in a cinema with binoculars, treating the movie as a scouting report.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO in a cinema with binoculars, treating the movie as a scouting report."
+    },
+    {
+      "id": "026",
+      "filename": "hitler_v2_026.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "If the hero showed up late, America was late.",
+      "scene": "Movie screen: a cowboy arriving late under a huge clock. America was late. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Movie screen: a cowboy arriving late under a huge clock. America was late. No people."
+    },
+    {
+      "id": "027",
+      "filename": "hitler_v2_027.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "If the crowd clapped, America was soft.",
+      "scene": "Audience clapping, AMERICAN clapping too, the clapping read as softness. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: Audience clapping, AMERICAN clapping too, the clapping read as softness. NO HERO."
+    },
+    {
+      "id": "028",
+      "filename": "hitler_v2_028.png",
+      "who": "american",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "If a girl kissed a stranger, America had no discipline.",
+      "scene": "Ballroom, a girl kissing a stranger because the band is playing, AMERICAN in the doorway. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. AMERICAN is the lead. HERO is absent unless the scene names him. SCENE: Ballroom, a girl kissing a stranger because the band is playing, AMERICAN in the doorway. NO HERO."
+    },
+    {
+      "id": "029",
+      "filename": "hitler_v2_029.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "He ran a war on film logic.",
+      "scene": "A film strip laid over a war map, sprocket holes as strategy. War on film logic. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A film strip laid over a war map, sprocket holes as strategy. War on film logic. No people."
+    },
+    {
+      "id": "030",
+      "filename": "hitler_v2_030.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "The only American he wanted to believe in did not live in a western.",
+      "scene": "A torn western poster with a Detroit factory photograph showing underneath. Not in a western. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A torn western poster with a Detroit factory photograph showing underneath. Not in a western. No people."
+    },
+    {
+      "id": "031",
+      "filename": "hitler_v2_031.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "He lived in Detroit. A factory saint. The assembly line as a miracle.",
+      "scene": "Detroit assembly line as a miracle, sparks, a factory saint of machines, no celebrity faces, workers anonymous from behind.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: Detroit assembly line as a miracle, sparks, a factory saint of machines, no celebrity faces, workers anonymous from behind."
+    },
+    {
+      "id": "032",
+      "filename": "hitler_v2_032.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "aerial",
+      "chunk": "One idea. Cars pouring out like a river.",
+      "scene": "Cars pouring off a line like a river of steel, God's-eye, no people visible.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Cars pouring off a line like a river of steel, God's-eye, no people visible."
+    },
+    {
+      "id": "033",
+      "filename": "hitler_v2_033.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "He thought: if that is America, then America is a machine with no soul.",
+      "scene": "A hollow car chassis, beautiful and empty, a machine with no soul. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A hollow car chassis, beautiful and empty, a machine with no soul. No people."
+    },
+    {
+      "id": "034",
+      "filename": "hitler_v2_034.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "Machines are easy. Souls are not.",
+      "scene": "A precision gear beside a single candle. Machines are easy. Souls are not. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A precision gear beside a single candle. Machines are easy. Souls are not. No people."
+    },
+    {
+      "id": "035",
+      "filename": "hitler_v2_035.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "He collected that factory like other men collect saints. Brochures. Quotes.",
+      "scene": "Factory brochures and quotes arranged like a saint's shrine. Collected like relics. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Factory brochures and quotes arranged like a saint's shrine. Collected like relics. No people."
+    },
+    {
+      "id": "036",
+      "filename": "hitler_v2_036.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "A plant he had never smelled.",
+      "scene": "A factory he had never smelled: glossy brochure in the foreground, real steam and rust far away. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A factory he had never smelled: glossy brochure in the foreground, real steam and rust far away. No people."
+    },
+    {
+      "id": "037",
+      "filename": "hitler_v2_037.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "He told himself the United States was not a people. It was a method.",
+      "scene": "The United States drawn as a method diagram, people erased into arrows and boxes. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: The United States drawn as a method diagram, people erased into arrows and boxes. No people."
+    },
+    {
+      "id": "038",
+      "filename": "hitler_v2_038.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Methods can be copied. People cannot. He liked that math. The math was a lie.",
+      "scene": "HERO doing the math on factory photos, liking the numbers, the lie already in the pencil.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO doing the math on factory photos, liking the numbers, the lie already in the pencil."
+    },
+    {
+      "id": "039",
+      "filename": "hitler_v2_039.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Then the radio gave him a second American he preferred. A flyer.",
+      "scene": "HERO at a glowing radio, a leather flight helmet on the table, preferring this American. No flyer face.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO at a glowing radio, a leather flight helmet on the table, preferring this American. No flyer face."
+    },
+    {
+      "id": "040",
+      "filename": "hitler_v2_040.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "A hero. A voice saying stay out, stay home, this is not your war.",
+      "scene": "Radio grille, a closed door, the ocean in the window. Stay out. Stay home. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Radio grille, a closed door, the ocean in the window. Stay out. Stay home. No people."
+    },
+    {
+      "id": "041",
+      "filename": "hitler_v2_041.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He filed that voice as the real United States. The other voice,",
+      "scene": "HERO filing a radio transcript as if it is the real United States.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO filing a radio transcript as if it is the real United States."
+    },
+    {
+      "id": "042",
+      "filename": "hitler_v2_042.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "the one in the White House with the fireside talks, he filed as a glitch.",
+      "scene": "Fireside armchair, radio glow, empty White House-like room, no portrait, no famous face. Filed as a glitch. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Fireside armchair, radio glow, empty White House-like room, no portrait, no famous face. Filed as a glitch. No people."
+    },
+    {
+      "id": "043",
+      "filename": "hitler_v2_043.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "You do not beat a country by declaring half of it fake.",
+      "scene": "A painted map of the country ripped in half, one half stamped real, one half discarded. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A painted map of the country ripped in half, one half stamped real, one half discarded. No people."
+    },
+    {
+      "id": "044",
+      "filename": "hitler_v2_044.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "aerial",
+      "chunk": "In 1936 the country he had never visited walked into his stadium.",
+      "scene": "1936 stadium from above, two teams walking in, flags too distant to read. He had never visited. No people visible.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: 1936 stadium from above, two teams walking in, flags too distant to read. He had never visited. No people visible."
+    },
+    {
+      "id": "045",
+      "filename": "hitler_v2_045.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Not as a cowboy. As a team.",
+      "scene": "A track team in a tunnel, not cowboys, a nation as a team. Generic athletes, no celebrity likeness.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: A track team in a tunnel, not cowboys, a nation as a team. Generic athletes, no celebrity likeness."
+    },
+    {
+      "id": "046",
+      "filename": "hitler_v2_046.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "A Black sprinter took the gold and the crowd made a sound he could not put in the novel.",
+      "scene": "Anonymous Black sprinter from behind, gold light, stadium roar, NOT a celebrity portrait, crowd as a sound.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: Anonymous Black sprinter from behind, gold light, stadium roar, NOT a celebrity portrait, crowd as a sound."
+    },
+    {
+      "id": "047",
+      "filename": "hitler_v2_047.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He smiled for cameras. In the box, something in the western broke.",
+      "scene": "HERO in the box, a camera-smile that does not reach his eyes, the western cracking.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO in the box, a camera-smile that does not reach his eyes, the western cracking."
+    },
+    {
+      "id": "048",
+      "filename": "hitler_v2_048.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "And he refused to hear the crack.",
+      "scene": "A cowboy illustration cracked down the middle like glass. He refused to hear it. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A cowboy illustration cracked down the middle like glass. He refused to hear it. No people."
+    },
+    {
+      "id": "049",
+      "filename": "hitler_v2_049.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "This is the part people skip because it is not a battlefield.",
+      "scene": "Not a battlefield: an office chair, a lamp, a book, no trenches. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Not a battlefield: an office chair, a lamp, a book, no trenches. No people."
+    },
+    {
+      "id": "050",
+      "filename": "hitler_v2_050.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "It is a man protecting a story.",
+      "scene": "HERO protecting the paperback with both hands, a man protecting a story.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO protecting the paperback with both hands, a man protecting a story."
+    },
+    {
+      "id": "051",
+      "filename": "hitler_v2_051.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "If America is a cowboy book, he is the reader.",
+      "scene": "HERO small in a huge chair, reading the cowboy book, he is only the reader.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO small in a huge chair, reading the cowboy book, he is only the reader."
+    },
+    {
+      "id": "052",
+      "filename": "hitler_v2_052.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "If America is a living crowd that does not care about his ending,",
+      "scene": "A living crowd that does not care about his ending, AMERICAN among them, HERO a speck in a box.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: A living crowd that does not care about his ending, AMERICAN among them, HERO a speck in a box."
+    },
+    {
+      "id": "053",
+      "filename": "hitler_v2_053.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "he is just a man in a chair. He chose the book. Every time.",
+      "scene": "HERO choosing the book on his lap over the window full of crowd. Every time.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO choosing the book on his lap over the window full of crowd. Every time."
+    },
+    {
+      "id": "054",
+      "filename": "hitler_v2_054.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "He drew the Atlantic like a castle moat. Wide. Final. Europe was the board.",
+      "scene": "The Atlantic painted as a castle moat, Europe a chessboard, water black and final. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: The Atlantic painted as a castle moat, Europe a chessboard, water black and final. No people."
+    },
+    {
+      "id": "055",
+      "filename": "hitler_v2_055.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "America was the audience. Audiences do not climb onto the stage.",
+      "scene": "A theater: Europe on the stage, America as the darkened audience. Audiences do not climb on. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A theater: Europe on the stage, America as the darkened audience. Audiences do not climb on. No people."
+    },
+    {
+      "id": "056",
+      "filename": "hitler_v2_056.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "That was the whole foreign policy. A lock on a door.",
+      "scene": "A giant padlock on a door made of ocean. The whole foreign policy. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A giant padlock on a door made of ocean. The whole foreign policy. No people."
+    },
+    {
+      "id": "057",
+      "filename": "hitler_v2_057.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "A navy he underestimated on purpose.",
+      "scene": "Toy-small ships on a vast sea, a navy underestimated on purpose. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Toy-small ships on a vast sea, a navy underestimated on purpose. No people."
+    },
+    {
+      "id": "058",
+      "filename": "hitler_v2_058.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "December. A Sunday in the Pacific that was not in the paperback.",
+      "scene": "A December calendar, Pacific water in a dish, the cowboy paperback closed beside it. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A December calendar, Pacific water in a dish, the cowboy paperback closed beside it. No people."
+    },
+    {
+      "id": "059",
+      "filename": "hitler_v2_059.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "Smoke. A flag.",
+      "scene": "Smoke and a generic flag edge, no symbols, no people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Smoke and a generic flag edge, no symbols, no people."
+    },
+    {
+      "id": "060",
+      "filename": "hitler_v2_060.png",
+      "who": "american",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "A country that had been chewing gum on a sofa stood up so fast the newsreel could not keep up.",
+      "scene": "AMERICAN launching off a sofa, gum, a newsreel blur, the country standing up too fast. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. AMERICAN is the lead. HERO is absent unless the scene names him. SCENE: AMERICAN launching off a sofa, gum, a newsreel blur, the country standing up too fast. NO HERO."
+    },
+    {
+      "id": "061",
+      "filename": "hitler_v2_061.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He did not go to America.",
+      "scene": "HERO still in the European office. He did not go to America.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO still in the European office. He did not go to America."
+    },
+    {
+      "id": "062",
+      "filename": "hitler_v2_062.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "America, in the only way that mattered, came into the story without asking him.",
+      "scene": "Troop ships and SOLDIER on a wet dock, America entering the story without asking. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: Troop ships and SOLDIER on a wet dock, America entering the story without asking. NO HERO."
+    },
+    {
+      "id": "063",
+      "filename": "hitler_v2_063.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Four days later he declared war on the United States as if he were cancelling a subscription.",
+      "scene": "HERO stamping a form as if cancelling a subscription, four days later, war as paperwork.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO stamping a form as if cancelling a subscription, four days later, war as paperwork."
+    },
+    {
+      "id": "064",
+      "filename": "hitler_v2_064.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "Listen to the madness of that. He had never seen the street.",
+      "scene": "An American street he had never seen: brick, fire escape, morning. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: An American street he had never seen: brick, fire escape, morning. No people."
+    },
+    {
+      "id": "065",
+      "filename": "hitler_v2_065.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "He had seen the ape on the building. He had seen the car brochure.",
+      "scene": "The ape-on-a-building still beside a car brochure. That is what he had seen. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: The ape-on-a-building still beside a car brochure. That is what he had seen. No people."
+    },
+    {
+      "id": "066",
+      "filename": "hitler_v2_066.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He had heard the flyer on the radio. And he said yes. Them too.",
+      "scene": "HERO at the radio, saying yes, them too.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO at the radio, saying yes, them too."
+    },
+    {
+      "id": "067",
+      "filename": "hitler_v2_067.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "two-person shot",
+      "chunk": "His generals understood steel. He understood plot. In his plot, America shows up late,",
+      "scene": "Generals with steel ship models; HERO holding a movie script instead. He understood plot.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: Generals with steel ship models; HERO holding a movie script instead. He understood plot."
+    },
+    {
+      "id": "068",
+      "filename": "hitler_v2_068.png",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "makes a speech, and loses because it is mixed and noisy and rich.",
+      "scene": "A mixed, noisy, rich street parade, AMERICAN in it, jazz and gold, the plot where they lose. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Generic extras, not celebrities. Recurring leads only if named. NO politician faces. NO symbols. NO HERO unless named. SCENE: A mixed, noisy, rich street parade, AMERICAN in it, jazz and gold, the plot where they lose. NO HERO."
+    },
+    {
+      "id": "069",
+      "filename": "hitler_v2_069.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "tracking",
+      "chunk": "Plot is a drug. He took it until the ships were already moving.",
+      "scene": "A film reel unwinding beside a convoy of ships already moving. Plot is a drug. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A film reel unwinding beside a convoy of ships already moving. Plot is a drug. No people."
+    },
+    {
+      "id": "070",
+      "filename": "hitler_v2_070.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "Until the novel had no more pages.",
+      "scene": "The novel's last page, blank, no more pages. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: The novel's last page, blank, no more pages. No people."
+    },
+    {
+      "id": "071",
+      "filename": "hitler_v2_071.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Then the audience climbed onto the stage. Not as a cowboy.",
+      "scene": "SOLDIER and other GIs climbing onto a theater stage from the audience. Not as a cowboy. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: SOLDIER and other GIs climbing onto a theater stage from the audience. Not as a cowboy. NO HERO."
+    },
+    {
+      "id": "072",
+      "filename": "hitler_v2_072.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "As a million ordinary men with gum in their pockets and a factory behind them.",
+      "scene": "A million ordinary men, SOLDIER in front, gum, a factory skyline behind them.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: A million ordinary men, SOLDIER in front, gum, a factory skyline behind them."
+    },
+    {
+      "id": "073",
+      "filename": "hitler_v2_073.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "The paperback had no chapter for that. He had written Americans as extras.",
+      "scene": "A call sheet of extras versus a blank last chapter. He had written them as extras. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A call sheet of extras versus a blank last chapter. He had written them as extras. No people."
+    },
+    {
+      "id": "074",
+      "filename": "hitler_v2_074.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "They arrived as the ending.",
+      "scene": "SOLDIER filling the movie-ending frame, the extras arriving as the ending. NO HERO.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: SOLDIER filling the movie-ending frame, the extras arriving as the ending. NO HERO."
+    },
+    {
+      "id": "075",
+      "filename": "hitler_v2_075.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "What did he really think about Americans. Not a speech. A stack of substitutes.",
+      "scene": "A stack of substitutes: western, zoo glass, car brochure, radio. Not a speech. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A stack of substitutes: western, zoo glass, car brochure, radio. Not a speech. No people."
+    },
+    {
+      "id": "076",
+      "filename": "hitler_v2_076.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "A boy's western. A zoo glass. A car saint. A radio hero.",
+      "scene": "Boy's western, zoo glass, factory-saint brochure, radio hero helmet. The whole stack. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Boy's western, zoo glass, factory-saint brochure, radio hero helmet. The whole stack. No people."
+    },
+    {
+      "id": "077",
+      "filename": "hitler_v2_077.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "A moat. He thought they were a movie that would not leave the theater.",
+      "scene": "A movie theater whose aisle is an ocean moat, the film still playing, nobody leaving. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A movie theater whose aisle is an ocean moat, the film still playing, nobody leaving. No people."
+    },
+    {
+      "id": "078",
+      "filename": "hitler_v2_078.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "He bet the world on that.",
+      "scene": "A globe on a poker table, the bet of a world. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A globe on a poker table, the bet of a world. No people."
+    },
+    {
+      "id": "079",
+      "filename": "hitler_v2_079.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "The last object in the drawer is the same cowboy book. Pages soft.",
+      "scene": "The last object in the drawer: the same cowboy book, pages soft. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: The last object in the drawer: the same cowboy book, pages soft. No people."
+    },
+    {
+      "id": "080",
+      "filename": "hitler_v2_080.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "Spine broken from being believed too long.",
+      "scene": "Spine broken from being believed too long, paper fibers. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Spine broken from being believed too long, paper fibers. No people."
+    },
+    {
+      "id": "081",
+      "filename": "hitler_v2_081.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "He died having never seen the country he thought he had already conquered in his head.",
+      "scene": "Unused passport, ocean window, empty chair. He died having never seen it. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: Unused passport, ocean window, empty chair. He died having never seen it. No people."
+    },
+    {
+      "id": "082",
+      "filename": "hitler_v2_082.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down flatlay",
+      "chunk": "That is not a small error. That is the whole war, hiding in a paperback.",
+      "scene": "The paperback sitting on the war desk, the whole war hiding in it. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: The paperback sitting on the war desk, the whole war hiding in it. No people."
+    },
+    {
+      "id": "083",
+      "filename": "hitler_v2_083.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "If you want a monster, you already have one.",
+      "scene": "HERO in unglamorous shadow. If you want a monster, you already have one.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO in unglamorous shadow. If you want a monster, you already have one."
+    },
+    {
+      "id": "084",
+      "filename": "hitler_v2_084.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic graphic",
+      "chunk": "If you want the mechanism, here it is.",
+      "scene": "The mechanism laid out: book, movie reel, radio, a stamped yes. No people.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: The mechanism laid out: book, movie reel, radio, a stamped yes. No people."
+    },
+    {
+      "id": "085",
+      "filename": "hitler_v2_085.png",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He fell in love with a fake America.",
+      "scene": "HERO looking at a fake movie-America on a screen with the wrong kind of love.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. Only HERO on camera unless the scene names someone else in bokeh. Same charcoal three-piece every time. CLEAN-SHAVEN, NO mustache. NO symbols. SCENE: HERO looking at a fake movie-America on a screen with the wrong kind of love."
+    },
+    {
+      "id": "086",
+      "filename": "hitler_v2_086.png",
+      "who": "soldier",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Then he attacked the real one for refusing to stay fake.",
+      "scene": "Real SOLDIER and AMERICAN walking toward camera as a painted cowboy dissolves. The real one would not stay fake.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. SOLDIER is the lead. HERO only if named as a speck. Cartoon AMERICAN is absent unless named. SCENE: Real SOLDIER and AMERICAN walking toward camera as a painted cowboy dissolves. The real one would not stay fake."
+    },
+    {
+      "id": "087",
+      "filename": "hitler_v2_087.png",
+      "who": "american",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Send this to someone who still thinks history is a western. The book always ends.",
+      "scene": "AMERICAN holding the cowboy book out to the viewer. Send this. The book always ends.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel, drop-dead cinematic composition. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1930s European official, dark side-parted hair, CLEAN-SHAVEN, NO mustache, pale intense face, cold pale eyes, ALWAYS the same charcoal three-piece suit and plain dark tie, NO medals, NO armbands, NO symbols, painterly, NOT a photograph, NOT photoreal. AMERICAN (same man every time): late-thirties everyman, short brown hair, weary small dark eyes, slightly oversized round cartoon head that still sits on his neck, average build, clothes change with the scene, not a celebrity. SOLDIER (same man): 1940s American GI, early 20s, short dark hair, tired honest face, khaki kit, gum in his pocket, not a celebrity, not the cartoon everyman, not HERO. AMERICAN is the lead. HERO is absent unless the scene names him. SCENE: AMERICAN holding the cowboy book out to the viewer. Send this. The book always ends."
+    },
+    {
+      "id": "088",
+      "filename": "hitler_v2_088.png",
+      "who": "empty",
+      "free": true,
+      "shot_type": "aerial",
+      "chunk": "The country does not.",
+      "scene": "A living country from above, lights, rivers, not a last page. The country does not. No people visible.",
+      "prompt": "Award-shot 16:9 anamorphic movie still FILLING THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Rich color, film grain, motivated lighting, warm amber and cold graphite, painterly graphic-novel. STRICTLY NO people, NO faces, NO hands, NO human silhouettes. No readable text, letters, numbers, logos, watermarks, captions. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO Holocaust imagery, NO gore, NO celebrity politician faces, NO photoreal famous people.  SCENE: A living country from above, lights, rivers, not a last page. The country does not. No people visible."
+    }
+  ]
+}

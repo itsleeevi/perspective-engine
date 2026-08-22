@@ -1,4 +1,4 @@
-"""Hitler-Americans: first-person VO, one Grok still per chunk, ElevenLabs Liam.
+"""Hitler-Americans v2: third-person narrator, unique paperback story, Kokoro TTS.
 
 Stills are cover-cropped to 16:9 on ingest so the assemble fill-frame path
 does not inherit Grok's occasional 3:2 outputs as black side bars.
@@ -10,7 +10,6 @@ import asyncio
 import importlib.util
 import os
 import re
-import shutil
 import sys
 from pathlib import Path
 
@@ -37,8 +36,7 @@ from adapters.llm.base import (
 )
 from adapters.llm.mock import MockLLMAdapter
 from adapters.video_gen.fal import FalVideoGenAdapter
-from adapters.voice.base import VoiceAdapter, VoiceoverResult
-from adapters.voice.elevenlabs import ElevenLabsVoiceAdapter
+from adapters.voice.kokoro import KokoroVoiceAdapter
 from graph.assets import save_asset
 from graph.graph import build_graph
 from graph.script_fixture import (
@@ -52,15 +50,12 @@ from graph.style import STYLE_DESCRIPTOR
 
 TOPIC = "What Hitler Really Thought About Americans"
 FIXTURE = ROOT / "fixtures" / "hitler_americans.json"
-STILLS_DIR = ROOT / "assets" / "grok_hitler_v1"
+STILLS_DIR = ROOT / "assets" / "grok_hitler_v2"
 CURSOR_ASSETS = Path(
     "/home/levente/.cursor/projects/home-levente-perspective-engine/assets"
 )
-MAX_ELEVENLABS_CHARS = 10_000
 _STILL_TAG = re.compile(r"GROKSTILL:(\d{3})")
-STILL_PREFIX = "hitler_v1_"
-N_STILLS = 160
-LIAM_VOICE_ID = "TX3LPaxmHKxFdv7VOQHJ"
+STILL_PREFIX = "hitler_v2_"
 
 
 def cover_crop_16x9(src: Path, dest: Path) -> None:
@@ -90,7 +85,7 @@ class PrebuiltGrokStillAdapter(ImageGenAdapter):
         self, character_description: str
     ) -> ReferenceSheetResult:
         hero = self._dir / f"{STILL_PREFIX}000.png"
-        url = save_asset("refs/grok_hitler_v1_hero.png", hero.read_bytes())
+        url = save_asset("refs/grok_hitler_v2_hero.png", hero.read_bytes())
         return ReferenceSheetResult(
             image_urls=[url], style_descriptor=STYLE_DESCRIPTOR, cost_usd=0.0
         )
@@ -109,7 +104,7 @@ class PrebuiltGrokStillAdapter(ImageGenAdapter):
         src = self._dir / f"{STILL_PREFIX}{still_id}.png"
         if not src.is_file():
             raise RuntimeError(f"Missing Grok still: {src}")
-        url = save_asset(f"stills/grok_hitler_v1_{still_id}.png", src.read_bytes())
+        url = save_asset(f"stills/grok_hitler_v2_{still_id}.png", src.read_bytes())
         return DerivedStillResult(still_url=url, cost_usd=0.0)
 
 
@@ -156,24 +151,6 @@ class TaggedStoryboardLLM(LLMAdapter):
         return QualityCheckResult(passed=True, cost_usd=0.0)
 
 
-class LiamVoice(VoiceAdapter):
-    def __init__(self) -> None:
-        os.environ["ELEVENLABS_VOICE_ID"] = LIAM_VOICE_ID
-        self._el = ElevenLabsVoiceAdapter()
-
-    async def synthesize(
-        self,
-        script_beats: list[str],
-        shot_durations: list[float],
-        voice_id: str = "default",
-    ) -> VoiceoverResult:
-        result = await self._el.synthesize(
-            script_beats, shot_durations, LIAM_VOICE_ID
-        )
-        print("Voice: ElevenLabs Liam", flush=True)
-        return result
-
-
 def _stills_module():
     spec = importlib.util.spec_from_file_location(
         "hitler_stills", ROOT / "fixtures" / "hitler_americans_stills.py"
@@ -209,9 +186,10 @@ def _chunk_tags_and_copy() -> tuple[list[str], list[str], list[str], str]:
 
 def gather_stills() -> list[Path]:
     """Cover-crop generated frames to 16:9 into STILLS_DIR."""
+    stills = list(_stills_module().STILLS)
     STILLS_DIR.mkdir(parents=True, exist_ok=True)
     missing: list[Path] = []
-    for i in range(N_STILLS):
+    for i in range(len(stills)):
         name = f"{STILL_PREFIX}{i:03d}.png"
         dest = STILLS_DIR / name
         src = CURSOR_ASSETS / name
@@ -234,15 +212,13 @@ async def main() -> None:
     n_chars = len(spoken)
     print(f"Topic: {TOPIC}", flush=True)
     print(f"Fixture: {FIXTURE}", flush=True)
-    print(f"Spoken characters: {n_chars} / {MAX_ELEVENLABS_CHARS} ElevenLabs cap", flush=True)
+    print(f"Spoken characters: {n_chars}", flush=True)
+    print(f"Voice: Kokoro {os.environ.get('KOKORO_VOICE', 'am_liam')} (local, $0)", flush=True)
     print(f"Unique Grok stills: {len(tags)} (one per chunk)", flush=True)
     print(
         f"Character-free inserts: {sum(1 for s in _stills_module().STILLS if s[1] == 'empty')}",
         flush=True,
     )
-    if n_chars > MAX_ELEVENLABS_CHARS:
-        print("Spoken text exceeds the 10k credit cap. Aborting.", flush=True)
-        sys.exit(2)
 
     missing = gather_stills()
     if missing:
@@ -253,10 +229,10 @@ async def main() -> None:
         llm=TaggedStoryboardLLM(tags, copy, shot_types),
         image_gen=PrebuiltGrokStillAdapter(STILLS_DIR),
         video_gen=FalVideoGenAdapter(),
-        voice=LiamVoice(),
+        voice=KokoroVoiceAdapter(),
         checkpointer=MemorySaver(),
     )
-    config = {"configurable": {"thread_id": "hitler-americans-v1"}}
+    config = {"configurable": {"thread_id": "hitler-americans-v2"}}
     initial = {
         "topic": TOPIC,
         "static_only": True,
