@@ -29,13 +29,17 @@ def fixture_dict(project: VideoProject, *, short: bool = False) -> dict:
     if short:
         if not project.short:
             raise ValueError("project has no short")
+        text = project.short.short_narration.strip()
+        parts = re.split(r"(?<=[.!?])\s+", text, maxsplit=1)
+        hook_s = parts[0]
+        rest = parts[1] if len(parts) > 1 else text
         return {
             "title": project.short.short_title or project.title,
             "hero_career_progression": False,
             "include_level_titles": False,
             "the_thought": project.story.title_payoff,
-            "hook": project.short.short_narration,
-            "levels": [{"name": "The Short", "beats": [project.short.short_narration]}],
+            "hook": hook_s,
+            "levels": [{"name": "The Short", "beats": [rest]}],
         }
     levels = [
         {"name": ch.name, "beats": [ch.narration]}

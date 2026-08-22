@@ -18,17 +18,21 @@ def strip_character_names(text: str, project: VideoProject) -> str:
     """Historical personal names stay out of image prompts (safety)."""
     names: list[str] = []
     for person in project.characters.values():
-        for raw in (person.historical_name, person.display_name):
-            raw = raw.strip()
-            if len(raw) >= 4:
-                names.append(raw)
-            parts = raw.split()
-            if len(parts) >= 2 and len(parts[-1]) >= 4:
-                names.append(parts[-1])
+        raw = (person.historical_name or "").strip()
+        if len(raw) >= 4:
+            names.append(raw)
+        for part in raw.split():
+            if len(part) >= 4:
+                names.append(part)
     names.sort(key=len, reverse=True)
     out = text
+    seen: set[str] = set()
     for name in names:
-        out = re.sub(re.escape(name), "", out, flags=re.I)
+        key = name.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        out = re.sub(rf"\b{re.escape(name)}\b", "", out, flags=re.I)
     return re.sub(r"\s{2,}", " ", out).strip()
 
 
@@ -39,12 +43,13 @@ def assemble_image_prompt(
     aspect: str = "16:9",
 ) -> str:
     chars = []
-    for cid in scene.characters:
-        person = project.characters.get(cid)
-        if person:
-            chars.append(visual_lock(person))
-    if not chars:
-        chars.append(format_all_characters(project))
+    if scene.who != "empty":
+        for cid in scene.characters:
+            person = project.characters.get(cid)
+            if person:
+                chars.append(visual_lock(person))
+        if not chars:
+            chars.append(format_all_characters(project))
     loc = ""
     if scene.location and scene.location in project.locations:
         from channel.bibles import location_lock

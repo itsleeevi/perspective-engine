@@ -1,0 +1,49 @@
+{
+  "engine": "channel",
+  "channel": "What They Really Think",
+  "topic": "What Einstein Really Thought About Religion",
+  "fixture": "fixtures/einstein-religion.json",
+  "stills_module": "fixtures/einstein-religion_stills.py",
+  "still_prefix": "einstein-religion_v1_",
+  "stills_dir": "assets/grok_einstein-religion_v1",
+  "thread_id": "einstein-religion-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_michael",
+  "kokoro_speed": 0.88,
+  "kokoro_sentence_pause": 0.2,
+  "kokoro_clause_pause": 0.08,
+  "narration_wpm": 152,
+  "chunk_min_seconds": 3.0,
+  "chunk_max_seconds": 7.0,
+  "chunk_target_seconds": 4.5,
+  "youtube": {
+    "title": "What Einstein Really Thought About Religion",
+    "description": "What Einstein really thought about religion: Spinoza's God, the 1929 telegram, and the 1954 letter that atheists still frame. Illustrated documentary. Synthetic media: images and voice are generated.",
+    "thumbnail_concept": "Wild-haired cartoon man at a desk, one hand on a letter, the other under a tiny orbit diagram. High contrast. Thumbnail text not the full title.",
+    "thumbnail_text": "NOT THAT GOD",
+    "tags": [
+      "einstein",
+      "religion",
+      "spinoza",
+      "what they really think",
+      "documentary",
+      "history of science"
+    ],
+    "short_title": "Why Einstein's God Letter Still Fools People",
+    "chapters": [
+      "The Telegram",
+      "The Door",
+      "The Nickname",
+      "The Letter",
+      "The Feeling"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/einstein-religion_short.json",
+    "stills_module": "fixtures/einstein-religion_short_stills.py",
+    "still_prefix": "einstein-religion_short_v1_",
+    "stills_dir": "assets/grok_einstein-religion_short_v1",
+    "output": "assets/output/einstein-religion_short.mp4"
+  }
+}

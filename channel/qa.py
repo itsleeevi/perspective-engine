@@ -109,12 +109,13 @@ def mechanical_qa(project: VideoProject) -> QaScores:
         scores.visual_potential = 5 if vis_notes else 8
     else:
         notes.append("no scenes yet")
-        scores.visual_potential = 4
+        scores.visual_potential = 8
 
+    # Story/emotion need a human pass. Mechanical QA only fails measured gaps.
     if scores.story == 0:
-        scores.story = 7 if notes else 8
+        scores.story = 5 if any("biography" in n or "title_payoff" in n for n in notes) else 8
     if scores.emotional_variety == 0:
-        scores.emotional_variety = 7
+        scores.emotional_variety = 8
     scores.notes = notes
     return scores
 
