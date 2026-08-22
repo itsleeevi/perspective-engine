@@ -28,10 +28,10 @@ A rabbi pays for fifty words. Einstein cables Spinoza's God, not a God who meddl
 | Fixture | `fixtures/einstein-religion.json` |
 | Stills | `fixtures/einstein-religion_stills.py`, jobs `fixtures/einstein-religion_v1_image_jobs.json` |
 | Spec | `fixtures/video_specs/einstein-religion.json` |
-| Voice | Kokoro `am_michael`, speed 0.88, ~152 wpm |
-| Output | `assets/output/what_einstein_really_thought_about_relig_final.mp4` (3840×2160, **4:47**, ~118 MB) |
+| Voice | Kokoro `am_liam`, speed 1.15, one utterance per scene + 0.28s hold, burned-in captions |
+| Output | `assets/output/what_einstein_really_thought_about_relig_final.mp4` (3840×2160, **3:29**, ~85 MB) |
 | Sync | cut error 16.67 ms (half a 30 fps frame) |
-| Short | `assets/output/einstein-religion_short.mp4` (1080×1920, **30.8s**, cut error 14.67 ms) |
+| Short | `assets/output/einstein-religion_short.mp4` (1080×1920, **22.0s**, cut error 14.67 ms) |
 | Thumb | `assets/youtube/einstein_religion_thumbnail_1280x720.jpg` |
 
 Signature prop: THE_LETTER in 5 long scenes. No historical names in image prompts.

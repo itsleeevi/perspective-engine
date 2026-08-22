@@ -14,7 +14,9 @@ GLOBAL_VISUAL_STYLE = (
     "shading, softly illustrated simplified background, uncluttered composition, "
     "expressive but restrained poses, consistent recurring character design, "
     "clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, "
-    "no letterbox, no pillarbox, no black bars."
+    "no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, "
+    "or diagram text must sit fully inside a 10 percent margin from every edge. "
+    "Never place text flush with the top, bottom, or sides of the frame."
 )
 
 NEGATIVE_STYLE = (
@@ -36,7 +38,7 @@ class ChannelConfig(BaseModel):
     target_duration_seconds: int = 270
     narration_word_min: int = 650
     narration_word_max: int = 750
-    narration_wpm: int = 152
+    narration_wpm: int = 185
     min_scene_duration: float = 3.0
     max_scene_duration: float = 7.0
     visual_change_target_seconds: float = 4.5
@@ -45,10 +47,13 @@ class ChannelConfig(BaseModel):
     short_word_max: int = 130
     # Free local voice. Never Edge, never ElevenLabs on this path.
     voice: str = "kokoro"
-    kokoro_voice: str = "am_michael"
-    kokoro_speed: float = 0.88
-    kokoro_sentence_pause: float = 0.20
-    kokoro_clause_pause: float = 0.08
+    kokoro_voice: str = "am_liam"
+    kokoro_speed: float = 1.15
+    kokoro_sentence_pause: float = 0.06
+    kokoro_clause_pause: float = 0.02
+    kokoro_pack_words: int = 1
+    kokoro_scene_pause: float = 0.28
+    burn_captions: bool = True
     visual_style: str = GLOBAL_VISUAL_STYLE
     negative_style: str = NEGATIVE_STYLE
     qa_revision_threshold: int = 8

@@ -46,9 +46,9 @@ These are fixture-driven illustrated documentaries, not the default graph topic 
 .venv/bin/python -m channel init "What Einstein Really Thought About Religion"
 ```
 
-Cursor Grok fills `channel/projects/<slug>/project.json` (research, story, bibles, scenes) using `channel/agent_prompts.py`. Then `python -m channel compile <slug>` writes fixture + stills + spec + image jobs. Images are Cursor Grok GenerateImage. Voice is Kokoro `am_michael` (never Edge, never ElevenLabs). After a cut ships, update `docs/videos/` so the next agent does not copy the last storyline.
+Cursor Grok fills `channel/projects/<slug>/project.json` (research, story, bibles, scenes) using `channel/agent_prompts.py`. Then `python -m channel compile <slug>` writes fixture + stills + spec + image jobs. Images are Cursor Grok GenerateImage. Voice is Kokoro `am_liam` (never Edge, never ElevenLabs). After a cut ships, update `docs/videos/` so the next agent does not copy the last storyline.
 
-Non-negotiable for that path: unique story per title, **answer the title through a story** (not a Wikipedia biography), one child-repeatable `the_thought` / title payoff in the fixture and in the VO, third-person spoken English, character bibles without historical names in image prompts, global flat-2D style from `channel/config.py`, whisper-forced-aligned sync, silent black chapter cards, fill-frame 16:9, YouTube thumbs as 1280×720 JPEG.
+Non-negotiable for that path: unique story per title, **answer the title through a story** (not a Wikipedia biography), one child-repeatable `the_thought` / title payoff in the fixture and in the VO, third-person spoken English, character bibles without historical names in image prompts, global flat-2D style from `channel/config.py`, whisper-forced-aligned sync, silent black chapter cards, burned-in scene captions, fill-frame 16:9, YouTube thumbs as 1280×720 JPEG.
 
 ## Out of scope for the current phase
 

@@ -10,8 +10,8 @@ alwaysApply: true
 - Start from a **title** (`python -m channel init "What X Really Thought About Y"`). Do not hardcode a person into `channel/config.py` or write a new runner.
 - The point is to **answer the title through a story**. Not a Wikipedia list, not a numbered lecture, not a biography dump.
 - `the_thought` is the title payoff — one sentence a child could repeat, said in the VO. Narration around it is an intelligent friend telling history, not baby talk.
-- Cursor Grok fills research / story / bibles / scenes in `channel/projects/<slug>/project.json`. Compile writes fixtures. Images are **GenerateImage** (Grok). Voice is Kokoro `am_michael`. Never Edge, never ElevenLabs.
+- Cursor Grok fills research / story / bibles / scenes in `channel/projects/<slug>/project.json`. Compile writes fixtures. Images are **GenerateImage** (Grok). Voice is Kokoro `am_liam`. Never Edge, never ElevenLabs.
 - Character consistency is the bible `visual_lock`. Historical personal names stay out of image prompts. Global style is frozen in `channel/config.py`.
 - Prop economy: ONE signature prop in ≤ 6 scenes. The linter enforces it — fix errors before generating any image.
-- Spoken English, third person. Silent black chapter cards. Fill-frame 16:9; thumbs 1280×720 JPEG.
+- Spoken English, third person. Silent black chapter cards. Stylish burned-in captions on narrated scenes. Fill-frame 16:9; thumbs 1280×720 JPEG.
 - When a video ships, update `docs/videos/<slug>.md` and `docs/videos/README.md`.

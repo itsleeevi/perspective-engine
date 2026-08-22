@@ -190,6 +190,10 @@ class PipelineState(BaseModel):
     # default in graph.style (2160, i.e. 4K).
     output_height: int = 0
 
+    # Burn each shot's narration as a stylish lower-third. Off for the
+    # fictional rank-POV graph; channel specs turn it on.
+    burn_captions: bool = False
+
     # ── Script ────────────────────────────────────────────────────────────────
     # List of scene beats. The first beat is the hook, unless include_hook was
     # False, in which case the first beat is Level One's title card.

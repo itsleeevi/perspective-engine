@@ -45,7 +45,7 @@ Retention contract: **question → answer → new question**, not fact → fact 
 | `channel/compile.py` | Writes fixture, stills module, spec, image jobs. |
 | `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 chunks, prop/set economy. |
 | Cursor **GenerateImage** | Stills. Grok only. Never fal / OpenAI images on this path. |
-| Kokoro `am_michael` | Free narration. Never Edge, never ElevenLabs. |
+| Kokoro `am_liam` | Free narration. Never Edge, never ElevenLabs. |
 | `scripts/run_custom_video.py` / `run_short.py` | Whisper-aligned assemble. |
 
 ```text
@@ -128,7 +128,8 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 
 ## Voice (free, in sync)
 
-- **Engine:** Kokoro `am_michael` at speed **0.88**, ~152 wpm (channel default in `channel/config.py`). Never Edge, never ElevenLabs.
+- **Engine:** Kokoro `am_liam` at speed **1.15**, ~185 wpm, **one utterance per scene** plus a 0.28s hold so the cut lands on a breath. Never Edge, never ElevenLabs.
+- **Captions:** each narrated still burns a stylish lower-third of that scene's line. Silent chapter cards stay type-only. Spec field `burn_captions` (default on for channel).
 - Shipped older cuts may use different speeds (leave those specs alone).
 - **Sync:** faster-whisper word timestamps; `sync.max_cut_error_ms` < 20 after render.
 - Chunk windows for new channel videos: 3–7 seconds (target 4.5). Spec fields `chunk_min_seconds` / `chunk_max_seconds` / `chunk_target_seconds` are applied before chunking so they cannot leak from a previous run.
@@ -139,7 +140,7 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 - **Global style is frozen** in `channel/config.py` (`GLOBAL_VISUAL_STYLE`). Agents fill action and composition only. Compile prepends the prefix.
 - Flat 2D educational animation: simplified faces, flat color, muted historical palette. Not photoreal, not 3D, not anime, not painterly.
 - Historical personal names stay **out** of image prompts. Identity is the character bible `visual_lock`.
-- Fill the frame. Thumbs are **1280×720 JPEG**.
+- Fill the frame. Cover-crop keeps the **top** of 3:2 Grok stills so on-image labels are never sheared. Thumbs are **1280×720 JPEG**.
 - Composition changes every ~3–6 seconds. Style does not.
 
 ## The Short

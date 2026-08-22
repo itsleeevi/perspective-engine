@@ -271,6 +271,9 @@ class TestCompile:
         spec_data = spec.read_text(encoding="utf-8")
         assert CHANNEL.name in spec_data
         assert '"engine": "channel"' in spec_data
+        assert '"burn_captions": true' in spec_data
+        assert '"kokoro_speed": 1.15' in spec_data
+        assert '"kokoro_scene_pause": 0.28' in spec_data
         jobs_data = jobs.read_text(encoding="utf-8")
         assert "Albert Einstein" not in jobs_data
         assert "Einstein" not in jobs_data

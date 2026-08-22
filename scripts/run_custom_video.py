@@ -69,6 +69,10 @@ if SPEC.get("kokoro_sentence_pause") is not None:
     os.environ["KOKORO_SENTENCE_PAUSE"] = str(SPEC["kokoro_sentence_pause"])
 if SPEC.get("kokoro_clause_pause") is not None:
     os.environ["KOKORO_CLAUSE_PAUSE"] = str(SPEC["kokoro_clause_pause"])
+if SPEC.get("kokoro_pack_words") is not None:
+    os.environ["KOKORO_PACK_WORDS"] = str(SPEC["kokoro_pack_words"])
+if SPEC.get("kokoro_scene_pause") is not None:
+    os.environ["KOKORO_SCENE_PAUSE"] = str(SPEC["kokoro_scene_pause"])
 
 from langgraph.checkpoint.memory import MemorySaver  # noqa: E402
 from langgraph.types import Command  # noqa: E402
@@ -278,12 +282,17 @@ async def main() -> None:
         checkpointer=MemorySaver(),
     )
     config = {"configurable": {"thread_id": SPEC["thread_id"]}}
+    burn_captions = SPEC.get("burn_captions")
+    if burn_captions is None:
+        burn_captions = SPEC.get("engine") == "channel"
+    print(f"Captions: {'on' if burn_captions else 'off'}", flush=True)
     initial = {
         "topic": TOPIC,
         "static_only": True,
         "script_fixture_path": str(FIXTURE),
         "include_hook": True,
         "target_minutes": 8.0,
+        "burn_captions": bool(burn_captions),
     }
 
     result = await graph.ainvoke(initial, config)

@@ -49,6 +49,7 @@ import httpx
 
 from graph import style
 from graph.assets import local_asset_url
+from graph.captions import overlay_scene_caption
 from graph.script_fixture import is_title_beat, title_card_lines
 from graph.state import CostEntry, PipelineState, Shot, ShotMode, ShotStatus
 
@@ -199,6 +200,7 @@ async def assemble(state: PipelineState) -> dict:
             "half_frame_ms": round(500.0 / fps, 2),
         },
         "chapters": chapters,
+        "burn_captions": state.burn_captions,
         "shots": [
             {
                 "id": s.id,
@@ -255,6 +257,13 @@ async def assemble(state: PipelineState) -> dict:
                 return
             still = tmp / f"still_{i:03d}.png"
             await _fetch(shot.still_url, still)
+            caption = (shot.narration or "").strip()
+            if state.burn_captions and caption and not shot.is_title_card:
+                captioned = tmp / f"caption_{i:03d}.png"
+                await asyncio.to_thread(
+                    overlay_scene_caption, still, captioned, caption
+                )
+                still = captioned
             async with semaphore:
                 await asyncio.to_thread(
                     _ffmpeg_still_to_video, still, seg_path, frames, width, height, fps,
@@ -292,10 +301,14 @@ def _run(cmd: list[str]) -> None:
 
 
 def _fit(width: int, height: int) -> str:
-    """Scale to FILL the frame. Crop overflow instead of black bars."""
+    """Scale to FILL the frame. Crop overflow from the bottom, never the top.
+
+    On-image labels live in the top band of channel stills. Centered crop
+    shears them; y=0 keeps every badge inside the 4K frame.
+    """
     return (
         f"scale={width}:{height}:flags=lanczos:force_original_aspect_ratio=increase,"
-        f"crop={width}:{height}"
+        f"crop={width}:{height}:(iw-{width})/2:0"
     )
 
 

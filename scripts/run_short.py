@@ -73,7 +73,12 @@ if SPEC.get("kokoro_sentence_pause") is not None:
     os.environ["KOKORO_SENTENCE_PAUSE"] = str(SPEC["kokoro_sentence_pause"])
 if SPEC.get("kokoro_clause_pause") is not None:
     os.environ["KOKORO_CLAUSE_PAUSE"] = str(SPEC["kokoro_clause_pause"])
+if SPEC.get("kokoro_pack_words") is not None:
+    os.environ["KOKORO_PACK_WORDS"] = str(SPEC["kokoro_pack_words"])
+if SPEC.get("kokoro_scene_pause") is not None:
+    os.environ["KOKORO_SCENE_PAUSE"] = str(SPEC["kokoro_scene_pause"])
 
+from graph.captions import overlay_scene_caption  # noqa: E402
 from graph.nodes.assemble import (  # noqa: E402
     _cumulative_frame_counts,
     _ffmpeg_concat,
@@ -175,8 +180,17 @@ async def main() -> None:
         segments: list[Path] = []
         for i, frames in enumerate(frame_counts):
             seg = tmp / f"seg_{i:03d}.mp4"
+            still = stills_dir / f"{prefix}{i:03d}.png"
+            burn = SPEC.get("burn_captions")
+            if burn is None:
+                burn = SPEC.get("engine") == "channel"
+            caption = chunks[i].strip() if burn else ""
+            if caption:
+                captioned = tmp / f"caption_{i:03d}.png"
+                overlay_scene_caption(still, captioned, caption)
+                still = captioned
             _ffmpeg_still_to_video(
-                stills_dir / f"{prefix}{i:03d}.png", seg, frames, WIDTH, HEIGHT, fps
+                still, seg, frames, WIDTH, HEIGHT, fps
             )
             segments.append(seg)
         concat = tmp / "concat.mp4"

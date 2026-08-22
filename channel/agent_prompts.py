@@ -74,7 +74,7 @@ Controlled drama: let events do the work. Never invent quotes.
 Dates only when they matter ("In September 1939", not the 17th of…).
 Open loops: question → answer → new question.
 
-Target 650–750 words at ~152 wpm (~4–5 minutes). Never pad a weak story.
+Target 650–750 words at ~185 wpm (~3.5–4 minutes). Never pad a weak story.
 Write 4–6 chapters with poster-like names (≤4 words).
 Say title_payoff in the cold open or right after, and again near the end.
 """
