@@ -25,6 +25,7 @@ REQUIRED_PHRASES = (
     "Watch the full video:",
     "synthetic-media",
     "1600–1850",
+    "unique story engine",
 )
 
 

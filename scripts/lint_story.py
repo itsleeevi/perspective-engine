@@ -14,6 +14,9 @@ to whichever model wrote the script:
                any quoted phrase from those sections that reappears in the
                new narration is an error. The banned list grows by itself as
                videos ship.
+2b. ENGINE   — new channel cuts may not reuse another fixture's chapter
+               cards, a too-close the_thought, or the "Month Year. Name…"
+               cold-open stamp. Each title needs its own story engine.
 3. NARRATOR  — third person only. Narrator-"I" ("I will count the fakes")
                and lecture numbering ("fake number one", "level two") are
                errors.
@@ -74,6 +77,77 @@ def production_clock_hit(text: str) -> str | None:
     m = _PRODUCTION_CLOCK.search(text or "")
     return m.group(0) if m else None
 
+
+# Shipped channel cuts written before uniqueness-of-engine checks.
+# Do not rewrite them. New titles must invent a new spine.
+_UNIQUENESS_GRANDFATHERED = frozenset(
+    {
+        "elon-musk-ai",
+        "jeff-bezos-elon-musk",
+        "sam-altman-the-future-of-work",
+        "steve-jobs-bill-gates",
+        "einstein-religion",
+        "einstein-zionism",
+        "stalin_hitler",
+        "hitler_americans",
+        "putin_americans",
+        "kremlin_americans",
+    }
+)
+
+_GENERIC_CHAPTERS = frozenset({"the short", "the link", "intro"})
+_THE_ONE_WORD = re.compile(r"^The [A-Z][a-z]+$")
+_MONTH_YEAR_STAMP = re.compile(
+    r"^(january|february|march|april|may|june|july|august|september|"
+    r"october|november|december)\s+\d{4}\.",
+    re.I,
+)
+_THOUGHT_STOP = frozenset(
+    "he she they his her their a an the and or but to of in on for with as "
+    "is was were be been being that this it not really thinks thought about".split()
+)
+
+
+def chapter_names(fixture: dict) -> list[str]:
+    return [
+        str(level.get("name") or "").strip()
+        for level in fixture.get("levels") or []
+        if str(level.get("name") or "").strip()
+    ]
+
+
+def hook_is_month_year_stamp(hook: str) -> bool:
+    """True when the cold open is the recycled 'February 2026. Name…' stamp."""
+    return bool(_MONTH_YEAR_STAMP.match((hook or "").strip()))
+
+
+def thought_content_words(text: str) -> set[str]:
+    return {
+        w
+        for w in re.findall(r"[a-z']+", (text or "").lower())
+        if w not in _THOUGHT_STOP
+    }
+
+
+def thoughts_too_close(left: str, right: str) -> bool:
+    """True when two title-payoffs share most of their content words."""
+    a, b = thought_content_words(left), thought_content_words(right)
+    if len(a) < 3 or len(b) < 3:
+        return False
+    return len(a & b) / min(len(a), len(b)) >= 0.5
+
+
+def colliding_chapter_names(
+    names: list[str], other_names: list[str]
+) -> list[str]:
+    mine = {n.lower() for n in names if n.lower() not in _GENERIC_CHAPTERS}
+    theirs = {n.lower() for n in other_names if n.lower() not in _GENERIC_CHAPTERS}
+    return sorted(mine & theirs)
+
+
+def the_one_word_chapter_count(names: list[str]) -> int:
+    return sum(1 for n in names if _THE_ONE_WORD.match(n))
+
 _ERRORS: list[str] = []
 
 
@@ -104,6 +178,62 @@ def _ngrams(text: str, n: int = 4) -> set[tuple[str, ...]]:
 
 def _sentences(text: str) -> list[str]:
     return [s.strip() for s in re.split(r"[.!?]+", text) if s.strip()]
+
+
+def _other_story_fixtures(self_path: Path) -> list[tuple[Path, dict]]:
+    out: list[tuple[Path, dict]] = []
+    for other in sorted((ROOT / "fixtures").glob("*.json")):
+        if other.resolve() == self_path.resolve():
+            continue
+        if other.name.endswith("image_jobs.json") or other.name.endswith(
+            "_short.json"
+        ):
+            continue
+        try:
+            data = json.loads(other.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+        if not isinstance(data, dict) or "levels" not in data:
+            continue
+        out.append((other, data))
+    return out
+
+
+def _lint_unique_engine(fixture: dict, fixture_path: Path) -> None:
+    """Fail a new title that borrowed another cut's cards, payoff, or open."""
+    names = chapter_names(fixture)
+    thought = (fixture.get("the_thought") or "").strip()
+    hook = (fixture.get("hook") or "").strip()
+    if hook_is_month_year_stamp(hook):
+        _fail(
+            "story engine: cold open starts with 'Month Year.' — that stamp "
+            "is used up. Open on a sourced object, room, line, or reversal "
+            "this title owns"
+        )
+    ones = the_one_word_chapter_count(names)
+    if ones > 3:
+        _fail(
+            f"story engine: {ones} chapters are 'The <Noun>' posters "
+            "(max 3). Invent cards this evidence owns (a place, a paper, "
+            "a date), not a generic The Suit / The Rocket row"
+        )
+    for other_path, other in _other_story_fixtures(fixture_path):
+        hits = colliding_chapter_names(names, chapter_names(other))
+        if hits:
+            _fail(
+                f"story engine: chapter {hits[0]!r} already ships in "
+                f"{other_path.name} — new title, new cards"
+            )
+        other_thought = (other.get("the_thought") or "").strip()
+        if thought and other_thought and thoughts_too_close(thought, other_thought):
+            _fail(
+                f"story engine: the_thought is too close to {other_path.name} "
+                f"({other_thought!r}) — answer this title in this story's words"
+            )
+        if thought and other_thought and thought.lower().rstrip(".") == other_thought.lower().rstrip("."):
+            _fail(
+                f"story engine: the_thought is identical to {other_path.name}"
+            )
 
 
 def main() -> None:
@@ -185,6 +315,13 @@ def main() -> None:
         _fail(f"motif: {phrase!r} is on the do-not-copy list of {src}")
     if not hits:
         _ok(f"no banned motifs ({len(banned)} phrases checked from docs/videos/)")
+
+    # 2b. Unique story engine — new channel titles only.
+    if spec.get("engine") == "channel" and not short:
+        if fixture_path.stem in _UNIQUENESS_GRANDFATHERED:
+            _ok(f"story engine: {fixture_path.stem} is grandfathered")
+        else:
+            _lint_unique_engine(fixture, fixture_path)
 
     # 3. NARRATOR: third person, no lecture numbering.
     for pat, why in [

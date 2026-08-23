@@ -9,6 +9,7 @@ alwaysApply: true
 
 - Start from a **title** (`python -m channel init "What X Really Thought About Y"`). Do not hardcode a person into `channel/config.py` or write a new runner.
 - The point is to **answer the title through a story**. Not a Wikipedia list, not a numbered lecture, not a biography dump.
+- Each title needs a **unique story engine** (one object, one place, one reversal that would not work on any other cut). Read `docs/videos/` first. Do not reuse chapter cards, a too-close `the_thought`, a summoning circle, a tortoise/hare, an inbox/check, or a "Month Year. Name…" cold open. `lint_story.py` fails those.
 - Spine is a **blunt simple cartoon** a five-year-old can retell and an adult still enjoys. Speak real names (OpenAI, Grok, SpaceX). Keep those names out of image prompts.
 - Research through today. **Do not say today's date** in the VO (`as of today`, `today is August 22`, `this morning`). Date events with months and years.
 - `the_thought` is the title payoff — one sentence a child could repeat, said in the VO. Narration around it is an intelligent friend telling history, not baby talk.

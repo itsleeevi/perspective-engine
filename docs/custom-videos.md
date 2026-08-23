@@ -29,6 +29,8 @@ They must not feel like Wikipedia read aloud, a school essay, a quote list, a sl
 
 The storyline is a **blunt simple explanatory cartoon**. A five-year-old should be able to retell the plot. An adult should still enjoy it and learn the real names and dates. One returning picture. Cause, then effect. No riddle-talk. No hiding OpenAI, Grok, SpaceX, Tesla as "the lab" or "the chatbot shop". Those names are spoken. They stay **out of image prompts**.
 
+Each title needs a **unique story engine** — one object, one place, one reversal that would not work on any other shipped cut. Read `docs/videos/` before you write. If you could swap two names and reuse the last spine, throw it out. `lint_story.py` fails reused chapter cards, a too-close `the_thought`, and the recycled "Month Year. Name…" cold open. At most three chapters may be generic `The <Noun>` posters.
+
 Retention contract: **question → answer → new question**, not fact → fact → fact. Every ~20–30 seconds, something new (a date, a letter, a reversal, a place). Biography is supporting material only — include it when it explains the opinion, otherwise cut it.
 
 `the_thought` in the fixture is the **title payoff**: one sentence a child could repeat that answers the title. Say it, show it, say it again. Narration around it is an intelligent person telling a fascinating story to a friend — not baby talk, not a professor.
@@ -86,10 +88,13 @@ TITLE
     Fix rejected claims. Do not write narration until factcheck is honest.
 
     5. STORY ARCHITECT + NARRATION WRITER using channel/agent_prompts.py
-    1600–1850 words (~8 minutes at Kokoro 1.15), 4–6 chapter names, spoken English,
-    title_payoff said in the VO. Cold open is the mystery, never "X was
-    born". Write years as digits (1995); Kokoro pronounces them as years.
-    Blunt simple spine. Speak real org/product names. No "today is DATE".
+    1600–1850 words (~8 minutes at Kokoro 1.15), 4–6 chapter names this
+    evidence owns (not The Suit / The Rocket again), spoken English,
+    title_payoff said in the VO. Unique story engine. Cold open is a
+    sourced moment this title owns — never "X was born", never
+    "February 2026. Name posted…". Write years as digits (1995); Kokoro
+    pronounces them as years. Blunt simple spine. Speak real org/product
+    names. No "today is DATE".
 
     6. BIBLES. Recurring people get ids + visual_lock WITHOUT historical names.
     Locations get ids. Optional signature_prop (≤ 6 scenes). When the prop
@@ -194,7 +199,8 @@ No synthetic-media paragraph on the Short or the long video. Compile writes a 9:
 
 ## Hard invariants
 
-- New title = new story. Never clone a shipped beat sheet.
+- New title = new story. Never clone a shipped beat sheet. Unique story
+  engine per title (new object, new place, new reversal, new chapter cards).
 - Third-person narrator. YouTube descriptions (long and Shorts) have **no** synthetic-media line.
 - No Nazi flags/swastikas/camps/gore; no real-person photoreal faces; no cloning a real person's voice.
 - Do not invent quotes or private thoughts. If the evidence cannot establish what they thought, say so in the story.
