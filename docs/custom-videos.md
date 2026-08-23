@@ -139,7 +139,16 @@ TITLE
     text), then the same command burns 1280×720 and 1080×1920 JPEG type.
     Thumbnail still: tight chest-up, FACE ≥30% of the frame, dramatic light,
     empty right third. YouTube kills loose wide shots.
-    Description: search phrase in the first 200 characters, disclosure line.
+    Description: search phrase in the first 200 characters, then chapters.
+    No synthetic-media line. Shorts description is:
+
+        Watch the full video:
+        https://youtu.be/<long-video-id>
+
+        <short_title>. <one-paragraph hook>
+
+    After the long video is live, set youtube.full_video_url and re-run
+    `python -m channel youtube <slug>`.
 
 16. Update docs/videos/<slug>.md + README.md with a "## Do not copy" list
     of quoted phrases. Commit code+docs only when asked. Never commit
@@ -169,12 +178,21 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 
 ## The Short
 
-One Short per long video. Not a summary. The single most surprising piece, 30–50 seconds, 9:16. First two seconds punch. Then a reason to tap the long video. Last scene is a branded end card: **Watch the full video. The link is in the description.** (spoken + on-screen). Compile writes a 9:16 Shorts thumbnail job; type is burned into a 1080×1920 JPEG. Lint with `lint_story.py <spec> --short`. After assemble, open the Short and check the burned captions sit above the YouTube UI — if they hug the bottom edge, the engine safe-band has regressed.
+One Short per long video. Not a summary. The single most surprising piece, 30–50 seconds, 9:16. First two seconds punch. Then a reason to tap the long video. Last scene is a branded end card: **Watch the full video. The link is in the description.** (spoken + on-screen). The YouTube Shorts **description** is different — link first, then the punch:
+
+```text
+Watch the full video:
+https://youtu.be/<long-video-id>
+
+He Summoned It Anyway. In 2014 he told MIT…
+```
+
+No synthetic-media paragraph on the Short or the long video. Compile writes a 9:16 Shorts thumbnail job; type is burned into a 1080×1920 JPEG. Lint with `lint_story.py <spec> --short`. After assemble, open the Short and check the burned captions sit above the YouTube UI — if they hug the bottom edge, the engine safe-band has regressed.
 
 ## Hard invariants
 
 - New title = new story. Never clone a shipped beat sheet.
-- Third-person narrator. Synthetic-content disclosure always on.
+- Third-person narrator. YouTube descriptions (long and Shorts) have **no** synthetic-media line.
 - No Nazi flags/swastikas/camps/gore; no real-person photoreal faces; no cloning a real person's voice.
 - Do not invent quotes or private thoughts. If the evidence cannot establish what they thought, say so in the story.
 - Do not run two assemble scripts at once (`_ENCODE_CONCURRENCY = 3`).

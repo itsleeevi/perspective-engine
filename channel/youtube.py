@@ -11,13 +11,15 @@ import re
 from pathlib import Path
 from typing import Any
 
-from channel.config import CHANNEL, SYNTHETIC_DISCLOSURE
+from channel.config import CHANNEL
 from channel.paths import ROOT, jobs_path, spec_path
 from channel.prompts import strip_character_names
 from channel.schema import VideoProject
 
-DISCLOSURE = SYNTHETIC_DISCLOSURE
 THUMB_W, THUMB_H = 1280, 720
+# Paste the long-cut URL after upload. Agents replace VIDEO_ID (or set
+# youtube.full_video_url on the spec) and re-run ``python -m channel youtube``.
+DEFAULT_FULL_VIDEO_URL = "https://youtu.be/VIDEO_ID"
 
 
 def youtube_stem(slug: str) -> str:
@@ -53,18 +55,21 @@ def chapter_lines(chapters: list[dict[str, Any]] | None) -> list[str]:
 
 def long_description(youtube: dict[str, Any], chapters: list[str]) -> str:
     body = (youtube.get("description") or "").strip()
-    # Drop stale chapter blocks / disclosure so we can rewrite them.
+    # Drop stale chapter blocks / old disclosure so we can rewrite them.
     body = re.split(r"\n(?=\d+:\d{2}\b)", body, maxsplit=1)[0].strip()
     body = re.sub(r"\n*Synthetic media:.*$", "", body, flags=re.I | re.S).strip()
     parts = [body] if body else [str(youtube.get("title") or CHANNEL.name)]
     if chapters:
         parts.append("\n".join(chapters))
-    parts.append(DISCLOSURE)
-    text = "\n\n".join(parts).strip() + "\n"
-    return text
+    return "\n\n".join(parts).strip() + "\n"
 
 
-def short_description(youtube: dict[str, Any]) -> str:
+def full_video_url(youtube: dict[str, Any]) -> str:
+    raw = (youtube.get("full_video_url") or "").strip()
+    return raw or DEFAULT_FULL_VIDEO_URL
+
+
+def short_summary(youtube: dict[str, Any]) -> str:
     title = (youtube.get("short_title") or youtube.get("title") or "").strip()
     paras = [
         p.strip()
@@ -75,10 +80,18 @@ def short_description(youtube: dict[str, Any]) -> str:
     hook = hook.split("\n")[0].strip()
     if len(hook) > 220:
         hook = hook[:217].rsplit(" ", 1)[0] + "…"
+    if title and hook.lower().startswith(title.lower()):
+        return hook
+    if title and hook:
+        return f"{title}. {hook}"
+    return title or hook
+
+
+def short_description(youtube: dict[str, Any]) -> str:
+    """YouTube Shorts description: long-cut link first, then the punch line."""
     return (
-        f"{title}. {hook}\n\n"
-        "Watch the full video. The link is in the description.\n\n"
-        f"{DISCLOSURE}\n"
+        f"Watch the full video:\n{full_video_url(youtube)}\n\n"
+        f"{short_summary(youtube)}\n"
     )
 
 

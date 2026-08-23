@@ -6,11 +6,12 @@ from pathlib import Path
 
 from PIL import Image
 
-from channel.config import SYNTHETIC_DISCLOSURE
 from channel.thumbnail import render_thumbnail_jpeg
 from channel.youtube import (
+    DEFAULT_FULL_VIDEO_URL,
     chapter_lines,
     long_description,
+    short_description,
     tags_line,
     thumbnail_prompt,
     write_pack,
@@ -18,7 +19,7 @@ from channel.youtube import (
 )
 
 
-def test_long_description_leads_with_search_phrase_and_disclosure():
+def test_long_description_leads_with_search_phrase_and_has_no_disclosure():
     text = long_description(
         {
             "title": "What Einstein Really Thought About Religion",
@@ -33,8 +34,34 @@ def test_long_description_leads_with_search_phrase_and_disclosure():
     assert text[:200].startswith("What Einstein really thought about religion")
     assert "0:00 Intro" in text
     assert "0:13 The Telegram" in text
-    assert SYNTHETIC_DISCLOSURE in text
-    assert text.count("Synthetic media:") == 1
+    assert "Synthetic media" not in text
+
+
+def test_short_description_is_link_then_summary():
+    text = short_description(
+        {
+            "short_title": "He Summoned It Anyway",
+            "description": (
+                "What Elon Musk really thinks about AI: he thinks we die unless "
+                "he builds the machine first.\n\n"
+                "In 2014 he told MIT we were summoning the demon. He helped "
+                "found OpenAI, left, built Grok."
+            ),
+            "full_video_url": "https://youtu.be/Rd-54u2-IRs",
+        }
+    )
+    assert text.startswith("Watch the full video:\nhttps://youtu.be/Rd-54u2-IRs\n\n")
+    assert text.endswith(
+        "He Summoned It Anyway. In 2014 he told MIT we were summoning the "
+        "demon. He helped found OpenAI, left, built Grok.\n"
+    )
+    assert "Synthetic media" not in text
+    assert "link is in the description" not in text
+
+
+def test_short_description_uses_placeholder_url():
+    text = short_description({"short_title": "Hook", "description": "A.\n\nB."})
+    assert DEFAULT_FULL_VIDEO_URL in text
 
 
 def test_chapter_lines_force_zero_intro():
@@ -77,12 +104,13 @@ def test_write_pack_and_thumbnail_jpeg(tmp_path: Path):
     assert "What Einstein really thought about religion" in desc[:200]
     assert "0:00 Intro" in desc
     assert "0:13 The Telegram" in desc
-    assert SYNTHETIC_DISCLOSURE in desc
+    assert "Synthetic media" not in desc
     tags = Path(pack["tags"]).read_text(encoding="utf-8")
     assert "einstein" in tags
     short = Path(pack["short_description"]).read_text(encoding="utf-8")
+    assert short.startswith("Watch the full video:\nhttps://youtu.be/VIDEO_ID\n\n")
     assert "Why Einstein's God Letter Still Fools People" in short
-    assert "Watch the full video. The link is in the description." in short
+    assert "Synthetic media" not in short
 
     src = tmp_path / "still.png"
     Image.new("RGB", (1536, 1024), (30, 40, 80)).save(src)

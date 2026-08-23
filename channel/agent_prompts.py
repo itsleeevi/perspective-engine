@@ -158,8 +158,19 @@ Fill project.metadata before compile:
   tags = 8–15 YouTube tags (subject, target, events, channel name)
   description = search phrase in the FIRST 200 characters, then 2–4 sentences
     of the story, then stop. Compile / `python -m channel youtube <slug>`
-    appends chapter timestamps and the synthetic-media disclosure.
+    appends chapter timestamps. Do NOT add a synthetic-media line.
   short_title = Short title, not a summary of the long video.
+  After the long video is on YouTube, set youtube.full_video_url to
+  https://youtu.be/<id> and re-run `python -m channel youtube <slug>`.
+  Shorts description is exactly:
+
+      Watch the full video:
+      https://youtu.be/<id>
+
+      <short_title>. <one-paragraph hook>
+
+  No synthetic-media line. No "the link is in the description" in the
+  YouTube description field (that line stays spoken on the end card).
 
 After assemble: `python -m channel youtube <slug>` (also runs from
 run_custom_video / run_short). GenerateImage the 16:9 thumbnail job and
