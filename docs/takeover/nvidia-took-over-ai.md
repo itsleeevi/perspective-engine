@@ -33,8 +33,8 @@ The rise is CUDA (2006) kept alive by games, AlexNet on two GTX 580s (2012), a q
 | Stills | `artifacts/nvidia-took-over-ai__20260823_174421__559ffa/fixtures/nvidia-took-over-ai_stills.py`, jobs `nvidia-took-over-ai_v1_image_jobs.json` (185 long) |
 | Spec | `artifacts/nvidia-took-over-ai__20260823_174421__559ffa/fixtures/video_specs/nvidia-took-over-ai.json` |
 | Voice | Kokoro `am_liam`, speed 1.15, one utterance per scene + 0.28s hold, burned-in captions |
-| Output | `artifacts/nvidia-took-over-ai__20260823_174421__559ffa/final/nvidia-took-over-ai.mp4` (3840×2160, **17:26**, sync 16.33 ms) |
-| Short | `artifacts/nvidia-took-over-ai__20260823_174421__559ffa/short/nvidia-took-over-ai_short.mp4` (1080×1920, **28.6s**, 7 shots, sync 15.33 ms) |
+| Output | `artifacts/nvidia-took-over-ai__20260823_174421__559ffa/final/nvidia-took-over-ai.mp4` (3840×2160, **14:57**, sync 16.67 ms) |
+| Short | `artifacts/nvidia-took-over-ai__20260823_174421__559ffa/short/nvidia-took-over-ai_short.mp4` (1080×1920, **24.9s**, 7 shots, sync 13.67 ms) |
 | Thumb | `artifacts/nvidia-took-over-ai__20260823_174421__559ffa/assets/youtube/nvidia_took_over_ai_thumbnail_1280x720.jpg` (overlay **SECOND LANGUAGE**) |
 | Description | job `assets/youtube/nvidia_took_over_ai_description.txt` (honest synthetic-media disclosure; not investment advice) |
 | Short description | job `assets/youtube/nvidia_took_over_ai_short_description.txt` |
