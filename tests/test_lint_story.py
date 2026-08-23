@@ -5,6 +5,7 @@ from pathlib import Path
 from scripts.lint_story import (
     advisor_voice_hit,
     colliding_chapter_names,
+    generic_ai_hit,
     hook_is_month_year_stamp,
     production_clock_hit,
     the_one_word_chapter_count,
@@ -18,6 +19,12 @@ def test_production_clock_rejects_today_is_date():
     assert production_clock_hit("So what does he really think about AI, today, August 22, 2026.")
     assert production_clock_hit("The parents punched in this morning.")
     assert production_clock_hit("and ten days ago that warehouse shipped another version")
+
+
+def test_generic_ai_register_is_rejected():
+    assert generic_ai_hit("It is important to note that the alliance was temporary.")
+    assert generic_ai_hit("Throughout history men have asked this.")
+    assert generic_ai_hit("But Stalin had another problem.") is None
 
 
 def test_advisor_voice_rejects_channel_as_doctor_or_broker():

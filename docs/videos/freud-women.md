@@ -40,14 +40,21 @@ The opinion is the walkout-plus-file, the 1905–1925 little-man ladder, Horney'
 |---|---|
 | Project | `channel/projects/freud-women/project.json` (`_build.py`) |
 | Fixture | `fixtures/freud-women.json` |
-| Stills | `fixtures/freud-women_stills.py`, jobs `fixtures/freud-women_v1_image_jobs.json` (212 long; GenerateImage in progress, first batch on disk) |
+| Stills | `fixtures/freud-women_stills.py`, jobs `fixtures/freud-women_v1_image_jobs.json` (212 long) |
 | Spec | `fixtures/video_specs/freud-women.json` (`still_prefix` **v1**, chunk 4–8s / target 6.5) |
-| Voice | Kokoro `am_michael` (slug hash), speed 1.15, burned-in captions |
-| Short | `fixtures/freud-women_short.json` — **She Walked Out** |
-| Thumb | overlay **SHE WALKED OUT** |
+| Voice | Kokoro `am_michael` (slug hash), speed 1.15, sentence pause **0.06**, clause **0.02**, scene hold **0.28**, burned-in captions |
+| Output | `assets/output/what_freud_really_thought_about_women_final.mp4` (3840×2160, **24:56**, ~671 MB) |
+| Sync | cut error 16.33 ms |
+| Short | `assets/output/freud-women_short.mp4` (1080×1920, **30.1s**, 6 shots, cut error 16.0 ms, branded end card) |
+| Thumb | `assets/youtube/freud_women_thumbnail_1280x720.jpg` (overlay **SHE WALKED OUT**) |
+| Shorts thumb | `assets/youtube/freud_women_short_thumbnail_1080x1920.jpg` (overlay **SHE WALKED OUT**) |
 | Description | `assets/youtube/freud_women_description.txt` (honest synthetic-media disclosure) |
+| Shorts description | `assets/youtube/freud_women_short_description.txt` — `Watch the full video:` / URL / punch paragraph / disclosure |
+| Tags | `assets/youtube/freud_women_tags.txt` |
+| Thumb job | `fixtures/freud-women_thumbnail_image_jobs.json` |
+| Shorts thumb job | `fixtures/freud-women_short_thumbnail_image_jobs.json` |
 
-Chapters: Intro → Walkout → Little Men → Horney's No → Dark Continent → Anna Stays → Unanswered.
+Chapters: Intro → Walkout (1:02) → Little Men (5:15) → Horney's No (10:00) → Dark Continent (13:51) → Anna Stays (17:38) → Unanswered (20:58).
 
 Thumbnail stills use the same recognizable cartoon face as the public figure (balding dome, neat grey-white beard, round wire glasses, brown three-piece suit), not a photograph. No Nazi flags, no camps, no anatomical diagrams, no photoreal faces.
 

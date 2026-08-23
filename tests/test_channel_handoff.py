@@ -26,6 +26,8 @@ REQUIRED_PHRASES = (
     "synthetic-media",
     "4400–5500",
     "unique story engine",
+    "originality_score",
+    "ready_to_publish",
 )
 
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 
 from channel.config import CHANNEL
+from channel.originality_policy import GENERIC_AI_PHRASES, STOCK_ENDINGS, STOCK_TRANSITIONS
 from channel.schema import QaScores, VideoProject
 
 
@@ -96,10 +97,19 @@ def mechanical_qa(project: VideoProject) -> QaScores:
         scores.ending = 8
 
     lower = text.lower()
-    for phrase in CHANNEL.banned_written_register:
+    for phrase in (*CHANNEL.banned_written_register, *GENERIC_AI_PHRASES):
         if phrase in lower:
             notes.append(f"written-register phrase: {phrase!r}")
             scores.clarity = 5
+    for phrase in STOCK_TRANSITIONS:
+        if phrase in lower:
+            notes.append(f"stock transition: {phrase!r} — write one this event owns")
+            scores.clarity = min(scores.clarity or 8, 5)
+    tail = " ".join(text.split()[-80:]).lower()
+    for phrase in STOCK_ENDINGS:
+        if phrase in tail:
+            notes.append(f"stock ending: {phrase!r} — pick a different ending strategy")
+            scores.ending = min(scores.ending or 8, 4)
     if scores.clarity == 0:
         scores.clarity = 8
 
@@ -156,6 +166,24 @@ def thirty_second_blocks(project: VideoProject) -> list[str]:
         if chunk:
             blocks.append(chunk)
     return blocks
+
+
+def run_full_qa(project: VideoProject):
+    """Factcheck + retention + originality + monetization. Persist on the project."""
+    from channel.factcheck import factcheck
+    from channel.monetization_qa import compute_monetization_readiness
+    from channel.originality import originality_report_for_slug
+
+    report = factcheck(project.research)
+    project.factcheck = report
+    project.qa = mechanical_qa(project)
+    try:
+        originality = originality_report_for_slug(project.slug)
+    except Exception:
+        originality = None
+    project.originality = originality
+    project.monetization = compute_monetization_readiness(project, originality)
+    return report, project.qa, originality, project.monetization
 
 
 def title_payoff_ok(project: VideoProject) -> bool:

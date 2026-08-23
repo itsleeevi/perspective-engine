@@ -1,4 +1,8 @@
-"""Permanent channel configuration. Story content does not live here."""
+"""Permanent channel configuration. Story content does not live here.
+
+Originality, anti-repetition, and monetization thresholds live in
+``channel/originality_policy.py``. Agents must not restate those in chat.
+"""
 
 from __future__ import annotations
 
@@ -150,6 +154,10 @@ class ChannelConfig(BaseModel):
             "from a geopolitical perspective",
             "it can therefore be concluded",
             "during this particular period",
+            "this complex relationship demonstrates",
+            "throughout history",
+            "in conclusion",
+            "to summarize",
         )
     )
 

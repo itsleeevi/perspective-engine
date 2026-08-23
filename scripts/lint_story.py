@@ -32,6 +32,10 @@ to whichever model wrote the script:
                DATE", "as of today", "this morning", or "ten days ago".
 4e. ADVISOR  — this channel tells a history story. It does not give
                medical, legal, or investment advice in the VO.
+4f. ORIGINALITY — compare against the last 10 shipped videos
+               (`scripts/lint_originality.py`). Score must be >= 80.
+               Stock AI transitions / hook templates / interchangeable
+               name-swap spines fail. Rewrite the flagged sections.
 5. STRUCTURE — hook present; 4-6 silent chapter cards with poster-like
                names (<= 4 words) when title_style is "chapter".
 
@@ -48,6 +52,7 @@ from pathlib import Path
 
 from adapters.voice.years import SPELLED_YEAR
 from channel.config import CHANNEL
+from channel.originality_policy import GENERIC_AI_PHRASES
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -102,6 +107,15 @@ def advisor_voice_hit(text: str) -> str | None:
     """Return the first narrator-as-advisor phrase, if any."""
     m = _ADVISOR_VOICE.search(text or "")
     return m.group(0) if m else None
+
+
+def generic_ai_hit(text: str) -> str | None:
+    """Return the first generic-AI essay phrase, if any."""
+    lower = (text or "").lower()
+    for phrase in GENERIC_AI_PHRASES:
+        if phrase in lower:
+            return phrase
+    return None
 
 
 # Shipped channel cuts written before uniqueness-of-engine checks.
@@ -524,6 +538,50 @@ def main() -> None:
                 "give medical, legal, or investment advice "
                 f"(found {advice!r})"
             )
+        from channel.originality_policy import (
+            GENERIC_AI_PHRASES,
+            STOCK_ENDINGS,
+            STOCK_HOOK_OPENERS,
+            STOCK_TRANSITIONS,
+        )
+
+        for phrase in GENERIC_AI_PHRASES:
+            if phrase in lower_all:
+                _fail(f"register: generic AI phrase {phrase!r} — write spoken English")
+        hook_head = hook.lower()[:400]
+        for phrase in STOCK_HOOK_OPENERS:
+            if phrase in hook_head:
+                _fail(
+                    f"hook: stock opener {phrase!r} — start from this title's "
+                    "strongest sourced moment"
+                )
+        for phrase in STOCK_TRANSITIONS:
+            if phrase in lower_all:
+                _fail(
+                    f"transition: stock line {phrase!r} — write one this event owns"
+                )
+        tail = narration.lower()[-800:]
+        for phrase in STOCK_ENDINGS:
+            if phrase in tail:
+                _fail(
+                    f"ending: stock closer {phrase!r} — pick a different "
+                    "ending strategy"
+                )
+        if not short:
+            from channel.originality import originality_report_for_slug, regenerate_targets
+
+            orig = originality_report_for_slug(fixture_path.stem)
+            if orig.flags and not orig.ready_for_images:
+                for flag in orig.flags:
+                    _fail(f"originality: {flag}")
+                targets = regenerate_targets(orig)
+                if targets:
+                    _fail("originality: regenerate " + ", ".join(targets))
+            elif orig.originality_score < 80:
+                _fail(
+                    f"originality: score {orig.originality_score} < 80 "
+                    "against recent videos"
+                )
     elif not short:
         _ok(f"{words} words")
 

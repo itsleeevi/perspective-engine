@@ -34,17 +34,25 @@ class EvidenceFlag(str, Enum):
 
 class StoryArchetype(str, Enum):
     rivalry = "RIVALRY"
+    friendship_to_rivalry = "FRIENDSHIP_TO_RIVALRY"
     alliance_to_betrayal = "ALLIANCE_TO_BETRAYAL"
     admiration = "ADMIRATION"
+    admiration_to_disappointment = "ADMIRATION_TO_DISAPPOINTMENT"
+    reluctant_respect = "RELUCTANT_RESPECT"
     hatred = "HATRED"
     complicated_respect = "COMPLICATED_RESPECT"
     ideological_evolution = "IDEOLOGICAL_EVOLUTION"
+    religious_evolution = "RELIGIOUS_EVOLUTION"
     friendship_to_conflict = "FRIENDSHIP_TO_CONFLICT"
     country_worldview = "COUNTRY_WORLDVIEW"
     religious_belief = "RELIGIOUS_BELIEF"
     political_worldview = "POLITICAL_WORLDVIEW"
     competitor_relationship = "COMPETITOR_RELATIONSHIP"
+    mentor_student = "MENTOR_STUDENT"
+    love_hate_relationship = "LOVE_HATE_RELATIONSHIP"
     misunderstood_opinion = "MISUNDERSTOOD_OPINION"
+    fear_and_respect = "FEAR_AND_RESPECT"
+    public_vs_private = "PUBLIC_POSITION_VS_PRIVATE_POSITION"
     unknown = "UNKNOWN"
 
 
@@ -83,6 +91,7 @@ class SourceRef(BaseModel):
     title: str
     url: str = ""
     kind: str = "reference"
+    source_type: str = ""
     year: str = ""
     note: str = ""
 
@@ -135,6 +144,8 @@ class StoryPlan(BaseModel):
     title_payoff: str
     next_video_bridge: str
     archetype: StoryArchetype = StoryArchetype.unknown
+    hook_style: str = ""
+    ending_strategy: str = ""
     signature_prop: str = ""
     chapters: list[Chapter] = Field(default_factory=list)
 
@@ -206,6 +217,58 @@ class QaScores(BaseModel):
         return [name for name in fields if getattr(self, name) < threshold]
 
 
+class SimilarityBreakdown(BaseModel):
+    compared_slug: str
+    hook: float = 0.0
+    phrasing: float = 0.0
+    structure: float = 0.0
+    scene_sequence: float = 0.0
+    visual_composition: float = 0.0
+    transitions: float = 0.0
+    conclusion: float = 0.0
+    thumbnail: float = 0.0
+
+    def weighted(self) -> float:
+        from channel.originality_policy import SIMILARITY_WEIGHTS
+
+        parts = {
+            "hook": self.hook,
+            "phrasing": self.phrasing,
+            "structure": self.structure,
+            "scene_sequence": self.scene_sequence,
+            "visual_composition": self.visual_composition,
+            "transitions": self.transitions,
+            "conclusion": self.conclusion,
+            "thumbnail": self.thumbnail,
+        }
+        return sum(parts[k] * SIMILARITY_WEIGHTS[k] for k in SIMILARITY_WEIGHTS)
+
+
+class OriginalityReport(BaseModel):
+    slug: str
+    originality_score: float = 100.0
+    mass_production_similarity: float = 0.0
+    comparisons: list[SimilarityBreakdown] = Field(default_factory=list)
+    flags: list[str] = Field(default_factory=list)
+    ready_for_images: bool = True
+
+
+class MonetizationReadiness(BaseModel):
+    original_research: int = 0
+    story_originality: int = 0
+    narration_originality: int = 0
+    visual_originality: int = 0
+    educational_value: int = 0
+    source_quality: int = 0
+    character_consistency: int = 0
+    retention_quality: int = 0
+    mass_production_risk: int = 1
+    overall: int = 0
+    ready_to_publish: bool = False
+    originality_score: float = 100.0
+    notes: list[str] = Field(default_factory=list)
+
+
 class ShortPlan(BaseModel):
     short_title: str
     short_narration: str
@@ -238,6 +301,8 @@ class VideoProject(BaseModel):
     locations: dict[str, Location] = Field(default_factory=dict)
     scenes: list[Scene] = Field(default_factory=list)
     qa: QaScores | None = None
+    originality: OriginalityReport | None = None
+    monetization: MonetizationReadiness | None = None
     short: ShortPlan | None = None
     metadata: VideoMetadata | None = None
     special_instructions: str = ""

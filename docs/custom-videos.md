@@ -51,7 +51,13 @@ Research through the day you are writing so the facts are current. **Do not say 
 | `channel/compile.py` | Writes fixture, stills module, spec, image jobs, long + Shorts thumbnail jobs, draft YouTube copy. |
 | `channel/youtube.py` | Description, tags, chapter stamps, honest synthetic-media disclosure, 1280×720 and 1080×1920 overlays after GenerateImage. |
 | `channel/cadence.py` | 24h assemble cap between different titles. Same-slug rebuilds allowed. |
-| `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 chunks, prop/set economy. |
+| `channel/originality_policy.py` | Permanent originality + monetization thresholds (score ≥ 80, last 10 videos). |
+| `channel/originality.py` | Mass-production detector: hook / phrasing / structure / scenes / visuals / transitions / ending / thumb. |
+| `channel/monetization_qa.py` | `ready_to_publish` score. Fail = do not render. |
+| `channel/research_policy.py` | Claim traceability. No invented quotes. |
+| `channel/visual_policy.py` | Style lock + banned photoreal impersonation. |
+| `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 chunks, prop/set economy, stock-AI language. |
+| `scripts/lint_originality.py` | Compare this title to the last 10 shipped videos. |
 | Cursor **GenerateImage** | Stills. Grok only. Never fal / OpenAI images on this path. |
 | Kokoro (default `am_liam`) | Free narration. New titles may rotate `am_michael` / `am_fenrir`. Never Edge, never ElevenLabs. |
 | `scripts/run_custom_video.py` / `run_short.py` | Whisper-aligned assemble. |
@@ -59,17 +65,23 @@ Research through the day you are writing so the facts are current. **Do not say 
 ```text
 TITLE
   → TITLE ANALYZER (code)
-  → RESEARCH (agent + seed)
-  → FACT CHECK (code + agent)
-  → STORY ARCHITECT + NARRATION (agent)
-  → CHARACTER / LOCATION BIBLES (agent)
-  → RETENTION QA (code + agent)
-  → SCENE BREAKDOWN 1:1 with chunks (agent)
-  → VISUAL PROMPTS (code)
-  → VISUAL QA (code + agent)
-  → GenerateImage (Cursor Grok stills + thumbnail)
+  → FRESH RESEARCH (agent + seed; primary sources first)
+  → SOURCE VALIDATION (`python -m channel qa`)
+  → STORY ARCHITECT (archetype from THIS evidence)
+  → ORIGINALITY CHECK vs last 10 videos
+  → NARRATION
+  → FACT CHECK
+  → CHARACTER / LOCATION BIBLES
+  → SCENE GENERATION (events this title owns)
+  → VISUAL VARIETY CHECK
+  → RETENTION QA
+  → MASS-PRODUCTION QA (`lint_originality.py`)
+  → GenerateImage (only if originality_score ≥ 80 and ready_to_publish)
   → Kokoro + FFmpeg
-  → SHORT + `python -m channel youtube <slug>`
+  → FINAL ORIGINALITY QA (assemble re-checks)
+  → SHORT (one mini-story, not a compress)
+  → THUMBNAIL + METADATA
+  → READY TO PUBLISH
 ```
 
 ## Execution checklist (mechanical)
@@ -110,8 +122,12 @@ TITLE
     Last line: "Watch the full video. The link is in the description."
     Compile adds a branded end card for that line.
 
- 9. .venv/bin/python -m channel qa <slug>
+    9. .venv/bin/python -m channel qa <slug>
     If a critical score is below 8, rewrite only the weak section.
+    qa also writes originality_score and monetization.ready_to_publish.
+    If originality_score < 80 or ready_to_publish is false, regenerate
+    the flagged stages (printed as `regenerate: hook, scenes, …`).
+    Do not GenerateImage.
 
 10. .venv/bin/python -m channel compile <slug>
     Writes fixtures/<slug>.json, *_stills.py, video_specs/<slug>.json,
@@ -119,9 +135,11 @@ TITLE
     fixtures/<slug>_short_thumbnail_image_jobs.json, and draft copy under
     assets/youtube/
     (--stubs only for scaffolding; never ship stubs)
+    Compile exits 1 if originality / monetization fails (`--force` to write anyway).
 
 11. .venv/bin/python scripts/lint_story.py fixtures/video_specs/<slug>.json
     Rewrite until it passes. Then --short if a Short exists.
+    Then: .venv/bin/python scripts/lint_originality.py fixtures/video_specs/<slug>.json
 
 12. .venv/bin/python scripts/lint_storyboard.py fixtures/video_specs/<slug>.json
 
@@ -208,10 +226,37 @@ He Summoned It Anyway. In 2014 he told MIT…
 
 Long and Short descriptions end with the honest synthetic-media disclosure. Compile writes a 9:16 Shorts thumbnail job; type is burned into a 1080×1920 JPEG. Lint with `lint_story.py <spec> --short`. After assemble, open the Short and check the burned captions sit above the YouTube UI — if they hug the bottom edge, the engine safe-band has regressed.
 
+## Originality and monetization (automatic)
+
+Every new title is compared to the **last 10** shipped videos in
+`docs/videos/README.md`. Similarity is measured on hook, phrasing (4-gram
+overlap), chapter structure, scene sequence, shot-type composition,
+stock transitions, ending, and thumbnail text. Brand (flat 2D style,
+channel name, Kokoro, title pattern) is ignored. Score =
+`100 − average weighted similarity`. Need **originality_score ≥ 80**.
+
+`python -m channel qa <slug>` writes `originality` and `monetization` onto
+the project. Fail conditions (do not GenerateImage / do not assemble):
+
+- originality_score < 80, or too close to one recent cut
+- stock hook / stock transition / stock ending / generic AI phrasing
+- name-swap spine (swap the people, same video)
+- research/story/narration/education/retention < 8
+- mass_production_risk > 3
+- overall < 80 or `ready_to_publish` false
+
+What gets regenerated: only the stages `regenerate_targets` prints
+(hook, narration, chapters, scenes, ending, thumbnail). Rewrite those,
+re-run qa + lint, then images.
+
+Assemble (`run_custom_video.py`) re-checks originality unless `--force`.
+
 ## Hard invariants
 
 - New title = new story. Never clone a shipped beat sheet. Unique story
   engine per title (new object, new place, new reversal, new chapter cards).
+  **originality_score ≥ 80** vs the last 10 videos. `ready_to_publish`
+  must be true before images.
 - Third-person narrator. YouTube descriptions (long and Shorts) include an honest synthetic-media disclosure.
 - This channel tells a history story. It does not give medical, legal, or investment advice.
 - No Nazi flags/swastikas/camps/gore; no real-person photoreal faces; no cloning a real person's voice.

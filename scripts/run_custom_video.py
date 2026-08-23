@@ -276,6 +276,19 @@ async def main() -> None:
     except CadenceError as exc:
         print(exc, file=sys.stderr)
         sys.exit(2)
+    if SPEC.get("engine") == "channel":
+        from channel.originality import OriginalityError, assert_originality
+
+        try:
+            report = assert_originality(slug, force=_FORCE_ASSEMBLE)
+            print(
+                f"Originality: {report.originality_score} "
+                f"(peak similarity {report.mass_production_similarity})",
+                flush=True,
+            )
+        except OriginalityError as exc:
+            print(exc, file=sys.stderr)
+            sys.exit(2)
 
     tags, scenes, shot_types, spoken = _chunk_tags()
     print(f"Topic: {TOPIC}", flush=True)
