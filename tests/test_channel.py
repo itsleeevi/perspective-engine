@@ -285,6 +285,14 @@ class TestCompile:
         chunks = chunk_list(project)
         assert len(compile_globals["STILLS"]) == len(chunks)
         assert written["jobs"].endswith("image_jobs.json")
+        thumb_jobs = tmp_path / "fixtures" / "einstein-religion_thumbnail_image_jobs.json"
+        assert thumb_jobs.is_file()
+        assert "Einstein" not in thumb_jobs.read_text(encoding="utf-8")
+        yt = tmp_path / "assets" / "youtube" / "einstein_religion_description.txt"
+        assert yt.is_file()
+        copy = yt.read_text(encoding="utf-8")
+        assert "What Einstein Really Thought About Religion" in copy[:200]
+        assert "Synthetic media:" in copy
 
     def test_compile_refuses_mismatched_scenes(self, tmp_path: Path):
         project = _project()

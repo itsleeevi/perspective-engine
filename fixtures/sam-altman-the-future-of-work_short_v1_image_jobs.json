@@ -1,0 +1,64 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "sam-altman-the-future-of-work_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "document close-up",
+      "chunk": "In 2021, Sam Altman wrote that thinking software would do more and more of the work people now do.",
+      "scene": "ESSAY_DESK A spare desk, one monitor, a nearly blank white page, daylight, no logos.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION essay_desk (same set): spare desk, one monitor, paper notes, daylight, no logos. Palette: oak, white, soft grey. STRICTLY NO people, NO faces, NO hands. SHOT: document close-up. ACTION: ESSAY_DESK A spare desk, one monitor, a nearly blank white page, daylight, no logos.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "sam-altman-the-future-of-work_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "object close-up",
+      "chunk": "He said the price of labor would fall toward zero.",
+      "scene": "FACTORY A wage envelope on a bench, the ink fading to blank.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION factory (same set): clean assembly hall, conveyor, simple robot arms, no brand marks. Palette: grey, safety yellow, concrete. STRICTLY NO people, NO faces, NO hands. SHOT: object close-up. ACTION: FACTORY A wage envelope on a bench, the ink fading to blank.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "sam-altman-the-future-of-work_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "object close-up",
+      "chunk": "Then he said people should still get paid, from a fund filled by taxing companies and land.",
+      "scene": "MAILBOX_STREET Coins and a folded paper check dropping into a wooden box, no numbers.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION mailbox_street (same set): suburban street, metal mailbox, late afternoon. Palette: brick, green, paper white. STRICTLY NO people, NO faces, NO hands. SHOT: object close-up. ACTION: MAILBOX_STREET Coins and a folded paper check dropping into a wooden box, no numbers.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "sam-altman-the-future-of-work_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "object close-up",
+      "chunk": "A year later his chatbot was writing the emails. Offices pasted their jobs into the box and waited.",
+      "scene": "INBOX_NIGHT A laptop screen filling itself with grey bars, no letters.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION inbox_night (same set): small 2020s apartment office at night, laptop glow, city window, muted blue. Palette: navy, laptop white, warm lamp. STRICTLY NO people, NO faces, NO hands. SHOT: object close-up. ACTION: INBOX_NIGHT A laptop screen filling itself with grey bars, no letters.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "004",
+      "filename": "sam-altman-the-future-of-work_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He thinks AI will do the work, and people should get paid anyway.",
+      "scene": "MAILBOX_STREET Slim curly-haired man in a grey t-shirt holds a folded paper check, not smiling.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER subject: slim man, 30s to 40s, short curly-wavy brown hair, clean-shaven or light stubble, simple cartoon eyes, plain grey t-shirt or dark hoodie. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. LOCATION mailbox_street (same set): suburban street, metal mailbox, late afternoon. Palette: brick, green, paper white. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: MAILBOX_STREET Slim curly-haired man in a grey t-shirt holds a folded paper check, not smiling.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

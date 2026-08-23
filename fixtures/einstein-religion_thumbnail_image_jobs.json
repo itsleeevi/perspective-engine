@@ -1,0 +1,12 @@
+{
+  "jobs": [
+    {
+      "id": "thumb",
+      "filename": "einstein-religion_thumbnail.png",
+      "aspect": "16:9",
+      "overlay_text": "NOT THAT\nGOD",
+      "output_jpeg": "assets/youtube/einstein_religion_thumbnail_1280x720.jpg",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Horizontal 16:9 YouTube thumbnail. TIGHT crop, chest-up or closer. The subject's FACE fills at least 30 percent of the frame and is the brightest thing in the picture. Dramatic single-source light, bold colour contrast, clean simple backdrop. Subtle natural expression, not a grimace, not a shout. Empty right third of the frame for type added later. No tiny figures, no wide establishing shot, no clutter. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. NO readable text, NO letters, NO captions, NO title card, NO watermark. Type will be added later. CHARACTER subject_adult: older European man, late 40s to 70s, wild grey-white hair standing out in a halo, thick drooping grey moustache, simple round cartoon eyes, simple nose, simple mouth, medium build, rumpled brown-grey wool suit, cream shirt, sometimes a loose dark tie. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. Tight chest-up of the wild-haired cartoon man, FACE filling at least 30 percent of the frame, well-lit from a warm window on the left, subtle thoughtful expression not a grimace. One handwritten letter near his chest. Dark clean wall, empty right third for type. Tiny orbit glow only. High contrast. No on-image text. Signature object: THE_LETTER."
+    }
+  ]
+}

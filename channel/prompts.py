@@ -14,6 +14,29 @@ from channel.config import CHANNEL
 from channel.schema import Scene, VideoProject
 
 
+# Spoken VO should name these. Image models should not — they print logos.
+_IMAGE_BRANDS = (
+    "OpenAI",
+    "ChatGPT",
+    "SpaceX",
+    "Tesla",
+    "xAI",
+    "Grok",
+    "Colossus",
+    "Microsoft",
+    "Google",
+    "DeepMind",
+)
+
+
+def strip_image_brands(text: str) -> str:
+    """Company and product names stay out of image prompts."""
+    out = text
+    for name in sorted(_IMAGE_BRANDS, key=len, reverse=True):
+        out = re.sub(rf"\b{re.escape(name)}\b", "", out, flags=re.I)
+    return re.sub(r"\s{2,}", " ", out).strip()
+
+
 def strip_character_names(text: str, project: VideoProject) -> str:
     """Historical personal names stay out of image prompts (safety)."""
     names: list[str] = []
@@ -92,4 +115,4 @@ def assemble_image_prompt(
         )
         if p
     )
-    return strip_character_names(assembled, project)
+    return strip_image_brands(strip_character_names(assembled, project))

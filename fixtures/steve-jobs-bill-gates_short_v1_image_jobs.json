@@ -1,0 +1,76 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "steve-jobs-bill-gates_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "establishing shot",
+      "chunk": "In nineteen eighty-three,",
+      "scene": "Beige conference room, long table, empty chairs, ugly tiles.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION bandley_room (same set): beige 1980s computer-company conference room, long table, whiteboards, ugly ceiling tiles. Palette: beige, grey, pale wood. STRICTLY NO people, NO faces, NO hands. SHOT: establishing shot. ACTION: Beige conference room, long table, empty chairs, ugly tiles. On-screen label (only these words, large and clean): \"1983\".",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "steve-jobs-bill-gates_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "other",
+      "free": false,
+      "shot_type": "two-person shot",
+      "chunk": "Steve Jobs pulled Bill Gates into a room full of Apple people and said he was being stolen from.",
+      "scene": "Young thin dark-haired man leans in shouting; young glasses man stands still.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER subject_young: thin young man, late 20s, dark brown hair with a slight wave, clean-shaven, simple round cartoon eyes, simple nose, simple mouth, pale mock-turtleneck or white shirt, blue jeans, sometimes a dark jacket. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. CHARACTER rival_young: young man, oversized round glasses, floppy light-brown hair, simple cartoon face, awkward navy sweater or ill-fitting suit, slightly hunched. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. LOCATION bandley_room (same set): beige 1980s computer-company conference room, long table, whiteboards, ugly ceiling tiles. Palette: beige, grey, pale wood. Draw only the named characters. SHOT: two-person shot. ACTION: Young thin dark-haired man leans in shouting; young glasses man stands still.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "steve-jobs-bill-gates_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic image",
+      "chunk": "Gates did not shout back. He said they both robbed a rich neighbor named Xerox.",
+      "scene": "House and television icon, night, no readable address.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION xerox_parc (same set): 1970s research lab, large workstation, mouse, bitmapped screen, carpeted hall. Palette: cream, walnut, soft green. STRICTLY NO people, NO faces, NO hands. SHOT: symbolic image. ACTION: House and television icon, night, no readable address.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "steve-jobs-bill-gates_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Jobs never bought that joke. Years later he said Microsoft had no taste, and that the copy was third-rate.",
+      "scene": "Older turtleneck man at a camera, taste-complaint face.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER subject_adult: thinner older man, 40s to 50s, receding dark hair going grey at the temples, clean-shaven, small round glasses, simple cartoon eyes, black turtleneck, jeans. Same cartoon person as subject_young, older. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. LOCATION next_loft (same set): spare 1990s loft, black cube computer, camera, brick and wood. Palette: black, brick, warm wood. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: Older turtleneck man at a camera, taste-complaint face.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "004",
+      "filename": "steve-jobs-bill-gates_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "other",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Then he put Gates on a giant screen and took a hundred and fifty million dollars.",
+      "scene": "Giant glasses-wearing face on a wall screen over a tiny stage.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER rival_adult: middle-aged man, receding brown hair, larger round glasses, simple cartoon face, pale blue shirt or sweater. Same cartoon person as rival_young, older. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. LOCATION macworld_hall (same set): 1997 trade-show hall, stage, giant projection screen, seated crowd. Palette: black, spot white, deep blue. Draw only the named characters. SHOT: wide shot. ACTION: Giant glasses-wearing face on a wall screen over a tiny stage.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "005",
+      "filename": "steve-jobs-bill-gates_short_v1_005.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "object close-up",
+      "chunk": "He thought Bill copied the Mac and never had any taste.",
+      "scene": "THE_MAC beige compact beside a cheap grey window-grid, no type.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION cupertino_lab (same set): early Mac lab, workbenches, prototype compact computers, corkboards. Palette: beige, foam grey, warm lamp. STRICTLY NO people, NO faces, NO hands. SHOT: object close-up. ACTION: THE_MAC beige compact beside a cheap grey window-grid, no type.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

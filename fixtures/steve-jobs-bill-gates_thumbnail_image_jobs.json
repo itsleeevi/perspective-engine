@@ -1,0 +1,12 @@
+{
+  "jobs": [
+    {
+      "id": "thumb",
+      "filename": "steve-jobs-bill-gates_thumbnail.png",
+      "aspect": "16:9",
+      "overlay_text": "NO TASTE",
+      "output_jpeg": "assets/youtube/steve_jobs_bill_gates_thumbnail_1280x720.jpg",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Horizontal 16:9 thumbnail frame, subject LARGE, high contrast, no tiny figures. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. NO readable text, NO letters, NO captions, NO title card, NO watermark. Type will be added later. CHARACTER subject_young: thin young man, late 20s, dark brown hair with a slight wave, clean-shaven, simple round cartoon eyes, simple nose, simple mouth, pale mock-turtleneck or white shirt, blue jeans, sometimes a dark jacket. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. Thin man in a black turtleneck large on the left, pointing at a cheap grey window-grid; a compact beige all-in-one computer on the desk; empty dark space on the right for type. No on-image text. Signature object: THE_MAC."
+    }
+  ]
+}

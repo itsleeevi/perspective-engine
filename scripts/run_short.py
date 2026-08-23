@@ -78,6 +78,13 @@ if SPEC.get("kokoro_pack_words") is not None:
 if SPEC.get("kokoro_scene_pause") is not None:
     os.environ["KOKORO_SCENE_PAUSE"] = str(SPEC["kokoro_scene_pause"])
 
+from channel.shorts import (  # noqa: E402
+    find_short_thumbnail_still,
+    is_short_cta,
+    render_short_end_card,
+)
+from channel.thumbnail import render_short_thumbnail_jpeg  # noqa: E402
+from channel.youtube import youtube_dir, youtube_stem  # noqa: E402
 from graph.captions import overlay_scene_caption  # noqa: E402
 from graph.nodes.assemble import (  # noqa: E402
     _cumulative_frame_counts,
@@ -121,7 +128,7 @@ def _stills_count() -> int:
     return len(module.STILLS)
 
 
-def gather_stills(n: int) -> list[Path]:
+def gather_stills(n: int, chunks: list[str]) -> list[Path]:
     prefix = SHORT["still_prefix"]
     stills_dir = ROOT / SHORT["stills_dir"]
     stills_dir.mkdir(parents=True, exist_ok=True)
@@ -129,6 +136,9 @@ def gather_stills(n: int) -> list[Path]:
     for i in range(n):
         name = f"{prefix}{i:03d}.png"
         dest = stills_dir / name
+        if i < len(chunks) and is_short_cta(chunks[i]):
+            render_short_end_card(dest)
+            continue
         src = CURSOR_ASSETS / name
         if src.is_file() and src.stat().st_size > 0:
             cover_crop(src, dest, 9, 16)
@@ -148,7 +158,7 @@ async def main() -> None:
             file=sys.stderr,
         )
         sys.exit(1)
-    missing = gather_stills(n_stills)
+    missing = gather_stills(n_stills, chunks)
     if missing:
         print(f"missing {len(missing)} stills, e.g. {missing[0].name}", file=sys.stderr)
         sys.exit(2)
@@ -185,6 +195,8 @@ async def main() -> None:
             if burn is None:
                 burn = SPEC.get("engine") == "channel"
             caption = chunks[i].strip() if burn else ""
+            if is_short_cta(caption):
+                caption = ""
             if caption:
                 captioned = tmp / f"caption_{i:03d}.png"
                 overlay_scene_caption(still, captioned, caption)
@@ -221,6 +233,16 @@ async def main() -> None:
     out_path.with_suffix(".json").write_text(json.dumps(manifest, indent=2))
     print(f"short: {out_path} ({total:.1f}s, {len(chunks)} shots, "
           f"max cut error {manifest['sync']['max_cut_error_ms']}ms)")
+    slug = Path(SHORT.get("fixture") or SPEC.get("fixture") or "").stem
+    if slug.endswith("_short"):
+        slug = slug[: -len("_short")]
+    still = find_short_thumbnail_still(slug)
+    if still:
+        dest = youtube_dir() / f"{youtube_stem(slug)}_short_thumbnail_1080x1920.jpg"
+        text = str((SPEC.get("youtube") or {}).get("thumbnail_text") or "")
+        print(f"Shorts thumbnail: {render_short_thumbnail_jpeg(still, dest, text)}")
+    else:
+        print("Shorts thumbnail: no still yet — GenerateImage the short thumbnail job")
 
 
 if __name__ == "__main__":

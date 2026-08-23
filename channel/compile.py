@@ -19,8 +19,15 @@ from channel.paths import (
     spec_path,
     stills_path,
 )
-from channel.prompts import assemble_image_prompt, strip_character_names
+from channel.prompts import assemble_image_prompt, strip_character_names, strip_image_brands
 from channel.schema import Scene, ScenePurpose, VideoProject
+from channel.shorts import (
+    SHORT_CTA,
+    attach_short_cta_scene,
+    ensure_short_cta,
+    is_short_cta,
+    strip_short_cta,
+)
 
 
 def fixture_dict(project: VideoProject, *, short: bool = False) -> dict:
@@ -29,17 +36,21 @@ def fixture_dict(project: VideoProject, *, short: bool = False) -> dict:
     if short:
         if not project.short:
             raise ValueError("project has no short")
-        text = project.short.short_narration.strip()
-        parts = re.split(r"(?<=[.!?])\s+", text, maxsplit=1)
+        body = strip_short_cta(ensure_short_cta(project.short.short_narration.strip()))
+        parts = re.split(r"(?<=[.!?])\s+", body, maxsplit=1)
         hook_s = parts[0]
-        rest = parts[1] if len(parts) > 1 else text
+        rest = parts[1] if len(parts) > 1 else ""
+        levels = []
+        if rest:
+            levels.append({"name": "The Short", "beats": [rest]})
+        levels.append({"name": "The Link", "beats": [SHORT_CTA]})
         return {
             "title": project.short.short_title or project.title,
             "hero_career_progression": False,
             "include_level_titles": False,
             "the_thought": project.story.title_payoff,
             "hook": hook_s,
-            "levels": [{"name": "The Short", "beats": [rest]}],
+            "levels": levels,
         }
     levels = [
         {"name": ch.name, "beats": [ch.narration]}
@@ -103,15 +114,17 @@ def _prop_token(name: str) -> str:
 
 
 def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
-    style = strip_character_names(
-        " ".join(
-            [
-                CHANNEL.visual_style,
-                CHANNEL.negative_style,
-                *[visual_lock(c) for c in project.characters.values()],
-            ]
-        ),
-        project,
+    style = strip_image_brands(
+        strip_character_names(
+            " ".join(
+                [
+                    CHANNEL.visual_style,
+                    CHANNEL.negative_style,
+                    *[visual_lock(c) for c in project.characters.values()],
+                ]
+            ),
+            project,
+        )
     )
     rows = []
     for scene in scenes:
@@ -219,7 +232,12 @@ def write_jobs(
     prefix = block["still_prefix"]
     aspect = "9:16" if short else "16:9"
     jobs = []
-    for i, (scene, chunk) in enumerate(zip(scenes, chunks, strict=True)):
+    pairs = [
+        (scene, chunk)
+        for scene, chunk in zip(scenes, chunks, strict=True)
+        if not is_short_cta(chunk)
+    ]
+    for i, (scene, chunk) in enumerate(pairs):
         jobs.append(
             {
                 "id": f"{i:03d}",
@@ -305,13 +323,15 @@ def compile_project(
     if CHANNEL.default_short_enabled and project.short:
         sf = fixture_dict(project, short=True)
         short_chunks = _chunks_for(sf)
-        short_scenes = list(project.short.scenes)
+        short_scenes = attach_short_cta_scene(list(project.short.scenes), short_chunks)
         if len(short_scenes) != len(short_chunks):
             if not stubs_ok:
                 raise ValueError(
                     f"short scenes {len(short_scenes)} != short chunks {len(short_chunks)}"
                 )
-            short_scenes = stub_scenes(project, short_chunks)
+            short_scenes = attach_short_cta_scene(
+                stub_scenes(project, short_chunks), short_chunks
+            )
         sfp = short_fixture_path(slug, root)
         sfp.write_text(json.dumps(sf, indent=2) + "\n", encoding="utf-8")
         short_stills_path(slug, root).write_text(
@@ -322,4 +342,14 @@ def compile_project(
 
     jobs = write_jobs(spec, scenes, project, short=False, root=root)
     written["jobs"] = str(jobs)
+    from channel.shorts import write_short_thumbnail_job
+    from channel.youtube import write_pack, write_thumbnail_job
+
+    written["thumbnail_job"] = str(write_thumbnail_job(project, root=root))
+    if CHANNEL.default_short_enabled and project.short:
+        written["short_thumbnail_job"] = str(
+            write_short_thumbnail_job(project, root=root)
+        )
+    pack = write_pack(spec, root=root)
+    written["youtube_description"] = pack["description"]
     return written

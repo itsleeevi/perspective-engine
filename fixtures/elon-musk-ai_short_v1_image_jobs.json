@@ -1,0 +1,76 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "elon-musk-ai_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He said AI would kill us.",
+      "scene": "MIT_STAGE Tall receding-hair black-t-shirt man on a small stage, not smiling.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. tall slim man, 50s, receding brown hair swept back from a high forehead, long oval face, prominent chin, thin mouth, simple cartoon eyes set close, plain black t-shirt, slightly stooped tall walk. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity photograph. LOCATION mit_stage (same set): wood lecture hall, blue chairs, a small stage light. Palette: oak, navy, warm bulb. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: MIT_STAGE Tall receding-hair black-t-shirt man on a small stage, not smiling.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "elon-musk-ai_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic image",
+      "chunk": "Then he built Grok anyway. At MIT in 2014 he told engineers they were summoning a demon.",
+      "scene": "CHALK_FLOOR THE_CIRCLE a huge thick bright white chalk ring, as thick as a rope, glowing on a black floor, filling the middle of the frame, high contrast, no writing, not faint, not brown, not a stain.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION chalk_floor (same set): black stone floor with one huge thick bright white chalk ring, high contrast. Palette: black, bright white, charcoal. STRICTLY NO people, NO faces, NO hands. SHOT: symbolic image. ACTION: CHALK_FLOOR THE_CIRCLE a huge thick bright white chalk ring, as thick as a rope, glowing on a black floor, filling the middle of the frame, high contrast, no writing, not faint, not brown, not a stain.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "elon-musk-ai_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "The man who draws the ring always thinks he is safe. He is not.",
+      "scene": "CHALK_FLOOR Tall receding-hair black-t-shirt man stepping inside THE_CIRCLE a huge thick bright white chalk ring, as thick as a rope, glowing on a black floor, filling the middle of the frame, high contrast, no writing, not faint, not brown, not a stain.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. tall slim man, 50s, receding brown hair swept back from a high forehead, long oval face, prominent chin, thin mouth, simple cartoon eyes set close, plain black t-shirt, slightly stooped tall walk. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity photograph. LOCATION chalk_floor (same set): black stone floor with one huge thick bright white chalk ring, high contrast. Palette: black, bright white, charcoal. Only the subject character unless the action names someone else. SHOT: wide shot. ACTION: CHALK_FLOOR Tall receding-hair black-t-shirt man stepping inside THE_CIRCLE a huge thick bright white chalk ring, as thick as a rope, glowing on a black floor, filling the middle of the frame, high contrast, no writing, not faint, not brown, not a stain.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "elon-musk-ai_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "In 2026 that same man told SpaceX they would be Grok's parents,",
+      "scene": "ROCKET_BAY Engineers in a ring around a dark terminal.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. young adult, hoodie, simple cartoon face. Flat 2D, NOT photoreal. LOCATION rocket_bay (same set): high hangar, white rocket body, orange gantry, no type. Palette: white, rust orange, shadow. Generic extras in the same flat-vector construction. No photoreal faces. SHOT: wide shot. ACTION: ROCKET_BAY Engineers in a ring around a dark terminal.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "004",
+      "filename": "elon-musk-ai_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "and that AI would become almost all of the rocket company's money.",
+      "scene": "MEMPHIS_HALL A warehouse of cabinets lighting one by one, no logos.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION memphis_hall (same set): vast shed of blinking racks, no brand marks. Palette: black, cool blue, concrete. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: MEMPHIS_HALL A warehouse of cabinets lighting one by one, no logos.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "005",
+      "filename": "elon-musk-ai_short_v1_005.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He thinks we die unless he builds the machine first. The circle did not go away. He stepped inside it.",
+      "scene": "MEMPHIS_HALL Tall receding-hair black-t-shirt man among blinking racks.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. tall slim man, 50s, receding brown hair swept back from a high forehead, long oval face, prominent chin, thin mouth, simple cartoon eyes set close, plain black t-shirt, slightly stooped tall walk. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity photograph. LOCATION memphis_hall (same set): vast shed of blinking racks, no brand marks. Palette: black, cool blue, concrete. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: MEMPHIS_HALL Tall receding-hair black-t-shirt man among blinking racks.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

@@ -41,6 +41,7 @@ import edge_tts
 from adapters import _cache
 from adapters.voice import _audio
 from adapters.voice.base import VoiceAdapter, VoiceoverResult
+from adapters.voice.years import speak_years
 from graph.assets import save_asset
 
 # AndrewMultilingual is one of Microsoft's newer "Multilingual" neural
@@ -268,6 +269,7 @@ class EdgeTTSVoiceAdapter(VoiceAdapter):
                 "voice": resolved_voice,
                 "rate": _RATE,
                 "pitch": _PITCH,
+                "year_speak": 1,
                 "beats": list(script_beats),
                 "silences": [
                     shot_durations[i] if i < len(shot_durations) else 0.0
@@ -301,6 +303,11 @@ class EdgeTTSVoiceAdapter(VoiceAdapter):
         if run:
             segments.append(("speech", run))
 
+        spoken_beats = [
+            speak_years(raw.strip()) if (raw or "").strip() else (raw or "")
+            for raw in script_beats
+        ]
+
         beat_durations: list[float] = [0.0] * len(script_beats)
 
         with tempfile.TemporaryDirectory(prefix="pe_edge_") as tmp:
@@ -315,13 +322,13 @@ class EdgeTTSVoiceAdapter(VoiceAdapter):
                     await asyncio.to_thread(_audio.silence_mp3, part, gap, _SAMPLE_RATE)
                     beat_durations[i] = round(gap, 3)
                 else:
-                    text = " ".join(script_beats[i].strip() for i in indices)
+                    text = " ".join(spoken_beats[i].strip() for i in indices)
                     audio_bytes, word_events = await _synthesize_with_word_boundaries(
                         text, resolved_voice
                     )
                     part.write_bytes(audio_bytes)
                     run_total = await asyncio.to_thread(_audio.duration_seconds, part)
-                    beat_words = [script_beats[i].strip().split() for i in indices]
+                    beat_words = [spoken_beats[i].strip().split() for i in indices]
                     word_counts = [len(w) for w in beat_words]
                     naive_words = [w for beat in beat_words for w in beat]
                     word_offsets = _align_word_offsets(naive_words, word_events)

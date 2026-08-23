@@ -7,8 +7,10 @@ Subcommands:
     analyze        parse a title and print JSON (no files)
     research-seed  re-fetch the encyclopedia seed into an existing project
     chunks         print narration chunks (needs a story)
-    compile        write fixtures / stills / spec / image jobs
+    compile        write fixtures / stills / spec / image jobs / youtube pack
     qa             run mechanical retention checks
+    youtube        write description, tags, 1280×720 + 9:16 Shorts thumbs
+    branding       size a profile (800×800) and cover (2560×1440) for YouTube
 """
 
 from __future__ import annotations
@@ -92,14 +94,16 @@ Style, voice, and QA rules live in `channel/config.py` — do not copy a person 
 
 1. Researcher — {agent_prompts.RESEARCHER.strip().splitlines()[0]}
 2. Fact check — `python -m channel qa {slug}` after claims exist
-3. Story architect, bibles, narration (650–750 words)
+3. Story architect, bibles, narration (1600–1850 words, ~8 minutes)
 4. `python -m channel chunks {slug}`
 5. Scene breakdown, 1:1 with chunks
 6. `python -m channel compile {slug}`
 7. GenerateImage each job in `fixtures/{slug}_v1_image_jobs.json` (Cursor Grok)
-8. `.venv/bin/python scripts/run_short.py fixtures/video_specs/{slug}.json`
-9. `.venv/bin/python scripts/run_custom_video.py fixtures/video_specs/{slug}.json`
-10. Update `docs/videos/{slug}.md`
+8. GenerateImage `fixtures/{slug}_thumbnail_image_jobs.json` and
+   `fixtures/{slug}_short_thumbnail_image_jobs.json`, then `python -m channel youtube {slug}`
+9. `.venv/bin/python scripts/run_short.py fixtures/video_specs/{slug}.json`
+10. `.venv/bin/python scripts/run_custom_video.py fixtures/video_specs/{slug}.json`
+11. Update `docs/videos/{slug}.md`
 
 Voice is Kokoro `{CHANNEL.kokoro_voice}` (free). Never Edge. Never ElevenLabs.
 Images are Cursor Grok GenerateImage. Do not invent quotes.
@@ -157,7 +161,70 @@ def _compile(args: argparse.Namespace) -> int:
     spec = spec_path(project.slug)
     print("lint: .venv/bin/python scripts/lint_story.py", spec.relative_to(ROOT))
     print("jobs: GenerateImage using fixtures/*image_jobs.json prompts")
+    print("thumb: GenerateImage the *_thumbnail_image_jobs.json still and")
+    print("       the *_short_thumbnail_image_jobs.json still, then")
+    print(f"       .venv/bin/python -m channel youtube {project.slug}")
     print("voice+assemble: scripts/run_short.py then scripts/run_custom_video.py")
+    return 0
+
+
+def _youtube(args: argparse.Namespace) -> int:
+    from channel.shorts import find_short_thumbnail_still
+    from channel.thumbnail import render_short_thumbnail_jpeg, render_thumbnail_jpeg
+    from channel.youtube import (
+        find_thumbnail_still,
+        write_pack_for_slug,
+        youtube_dir,
+        youtube_stem,
+    )
+
+    pack = write_pack_for_slug(args.slug)
+    for k, v in pack.items():
+        print(f"{k}: {v}")
+    spec = json.loads(spec_path(args.slug).read_text(encoding="utf-8"))
+    text = str((spec.get("youtube") or {}).get("thumbnail_text") or "")
+    still = Path(args.still) if args.still else find_thumbnail_still(args.slug)
+    if still and still.is_file():
+        dest = youtube_dir() / f"{youtube_stem(args.slug)}_thumbnail_1280x720.jpg"
+        print(f"thumbnail: {render_thumbnail_jpeg(still, dest, text)}")
+    else:
+        print("thumbnail: no still yet — GenerateImage the thumbnail job, then rerun with --still")
+    short_still = find_short_thumbnail_still(args.slug)
+    if short_still and short_still.is_file():
+        dest = youtube_dir() / f"{youtube_stem(args.slug)}_short_thumbnail_1080x1920.jpg"
+        print(f"shorts thumbnail: {render_short_thumbnail_jpeg(short_still, dest, text)}")
+    else:
+        print("shorts thumbnail: no still yet — GenerateImage the short thumbnail job")
+    return 0
+
+
+def _branding(args: argparse.Namespace) -> int:
+    from channel.branding import (
+        BANNER_H,
+        BANNER_W,
+        PROFILE_H,
+        PROFILE_W,
+        render_banner_jpeg,
+        render_profile_jpeg,
+        write_banner_safezone_preview,
+    )
+
+    if args.profile:
+        src = Path(args.profile)
+        if not src.is_file():
+            raise SystemExit(f"no profile still at {src}")
+        out = render_profile_jpeg(src)
+        print(f"profile {PROFILE_W}x{PROFILE_H}: {out}")
+    if args.cover:
+        src = Path(args.cover)
+        if not src.is_file():
+            raise SystemExit(f"no cover still at {src}")
+        banner = render_banner_jpeg(src)
+        preview = write_banner_safezone_preview(banner)
+        print(f"cover {BANNER_W}x{BANNER_H}: {banner}")
+        print(f"safe-zone preview (do not upload): {preview}")
+    if not args.profile and not args.cover:
+        raise SystemExit("pass --profile and/or --cover")
     return 0
 
 
@@ -191,10 +258,30 @@ def main(argv: list[str] | None = None) -> int:
     q.add_argument("slug")
     q.set_defaults(func=_qa)
 
-    c = sub.add_parser("compile", help="write fixtures, stills, spec, image jobs")
+    c = sub.add_parser("compile", help="write fixtures, stills, spec, image jobs, youtube pack")
     c.add_argument("slug")
     c.add_argument("--stubs", action="store_true", help="pad missing scenes from narration")
     c.set_defaults(func=_compile)
+
+    yt = sub.add_parser(
+        "youtube",
+        help="write description/tags and overlay long + Shorts thumbnail type",
+    )
+    yt.add_argument("slug")
+    yt.add_argument(
+        "--still",
+        default="",
+        help="PNG to cover-crop into assets/youtube/<slug>_thumbnail_1280x720.jpg",
+    )
+    yt.set_defaults(func=_youtube)
+
+    br = sub.add_parser(
+        "branding",
+        help="size channel profile 800×800 and cover 2560×1440",
+    )
+    br.add_argument("--profile", default="", help="square still for the circular icon")
+    br.add_argument("--cover", default="", help="16:9 still for the channel banner")
+    br.set_defaults(func=_branding)
 
     args = p.parse_args(argv)
     return int(args.func(args))

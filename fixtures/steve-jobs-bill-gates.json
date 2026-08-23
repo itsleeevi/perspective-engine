@@ -1,0 +1,42 @@
+{
+  "title": "What Steve Jobs Really Thought About Bill Gates",
+  "hero_career_progression": false,
+  "include_level_titles": true,
+  "title_style": "chapter",
+  "speak_title_cards": false,
+  "the_thought": "He thought Bill copied the Mac and never had any taste.",
+  "hook": "In nineteen ninety-five, Steve Jobs sat for a camera and said the only problem with Microsoft was they had no taste. Not a little missing. A big missing. He thought Bill copied the Mac and never had any taste. Then why, two years later, did he put Bill Gates on a giant screen, take his money, and tell a roaring hall to drop the war? Was that forgiveness, or was it a man saving a company and keeping the insult?",
+  "levels": [
+    {
+      "name": "The Room",
+      "beats": [
+        "Go back to nineteen eighty-three. Jobs has already asked Gates to write software for a machine that is still a secret. Spreadsheets. Letters. The good stuff, on a Macintosh. Apple even needed those programs. Cut Microsoft off, and the Mac looks empty. Then Microsoft announces Windows. Same kind of windows. Same mouse. Jobs wants Gates in a Cupertino conference room by tomorrow afternoon. Ten Apple people sit and watch, like a jury that already knows the verdict. Jobs raises his voice. He says he trusted him. He says they are being stolen from. Gates does not shout back. He just stands there, glasses catching the light, and waits."
+      ]
+    },
+    {
+      "name": "The Neighbor",
+      "beats": [
+        "Gates looks at him and offers a joke that is not a joke. He says they both had a rich neighbor named Xerox. He broke in to steal a television and found Jobs had already taken it. There is a real picture under that line. In nineteen seventy-nine Jobs walked through Xerox's lab and saw a computer with overlapping windows and a mouse you pointed like a finger. He thought Apple paid, learned, and finished the work until a person could love it. Gates thought the idea was already on the street, waiting for whoever shipped it to millions of grey boxes. Jobs did not treat that as a tie. A copy that didn't care how it felt was still a copy."
+      ]
+    },
+    {
+      "name": "Third Rate",
+      "beats": [
+        "Windows one finally ships in eighty-five. It is clumsy. Tiled windows. No overlap. None of the care that made the Mac feel finished. Jobs is already out of Apple, building another company in a loft, watching the cheap version spread anyway. A decade later the camera is on and the verdict has not moved. No original ideas. No culture in the product. Proportionally spaced type, he says, comes from books. If it weren't for the Mac, they would never have put it in. He says he is not sad that Microsoft won. He is sad they make third-rate things. That is not a business complaint. That is a taste complaint that never cooled."
+      ]
+    },
+    {
+      "name": "The Screen",
+      "beats": [
+        "August, nineteen ninety-seven. Boston. Apple is almost out of money. The Mac faithful pack a hall expecting a comeback speech, not a peace treaty. Jobs walks on stage and tells them Microsoft will put in a hundred and fifty million dollars and keep writing Office for the Mac. Then Gates appears on a screen so big it eats the room. The crowd boos. Some hiss. For a second the giant face looks like the enemy they came to bury. Jobs waits. He says they have to let go of the notion that for Apple to win, Microsoft has to lose. That is a truce speech. It is not a taste speech. He still thinks the copy is ugly. He will take the check."
+      ]
+    },
+    {
+      "name": "The Visit",
+      "beats": [
+        "May, twenty eleven. Gates comes to the house in Palo Alto and stays for hours. They do not relitigate Windows. They talk about their children and what comes next. Jobs later tells his biographer Bill is basically unimaginative, that he never invented anything, that he ripped off other people's ideas. He also says he wanted that visit. So what did he really think about Bill Gates? He thought Bill copied the Mac and never had any taste. He would take the man's money. He would take the man's chair. He would not take the man's idea of beautiful.",
+        "The next argument is not a PC. It is a phone that starts looking like his, from a company he thought was a friend. That story is next."
+      ]
+    }
+  ]
+}

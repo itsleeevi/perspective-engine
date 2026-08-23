@@ -1,0 +1,21 @@
+{
+  "title": "He Already Wrote the Ending",
+  "hero_career_progression": false,
+  "include_level_titles": false,
+  "the_thought": "He thinks AI will do the work, and people should get paid anyway.",
+  "hook": "In 2021, Sam Altman wrote that thinking software would do more and more of the work people now do.",
+  "levels": [
+    {
+      "name": "The Short",
+      "beats": [
+        "He said the price of labor would fall toward zero. Then he said people should still get paid, from a fund filled by taxing companies and land. A year later his chatbot was writing the emails. Offices pasted their jobs into the box and waited. He thinks AI will do the work, and people should get paid anyway."
+      ]
+    },
+    {
+      "name": "The Link",
+      "beats": [
+        "Watch the full video. The link is in the description."
+      ]
+    }
+  ]
+}

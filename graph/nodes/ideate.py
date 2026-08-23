@@ -26,8 +26,10 @@ async def ideate(state: PipelineState) -> dict:
     if not topic:
         raise ValueError("topic must be set in the initial state before running ideate.")
 
-    # Invariant: reject real, named, identifiable people as subjects.
-    assert_no_real_person(topic)
+    # Graph product: no real named people. Channel / fixture-driven cuts
+    # (What They Really Think) already carry a script and skip this gate.
+    if not state.script_fixture_path.strip():
+        assert_no_real_person(topic)
 
     brief = (
         f"A perspective-shift narrative exploring '{topic}' "

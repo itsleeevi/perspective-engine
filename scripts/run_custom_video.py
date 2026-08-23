@@ -324,6 +324,33 @@ async def main() -> None:
     print(f"Final video: {result.get('final_video_path')}", flush=True)
     print(f"Total cost: ${total:.4f} ({len(cost_log)} billed calls)", flush=True)
     print("=" * 64, flush=True)
+    try:
+        from channel.youtube import load_assemble_manifest, write_pack
+
+        assemble = load_assemble_manifest(SPEC)
+        if assemble is None and result.get("final_video_path"):
+            manifest = Path(
+                str(result["final_video_path"]).removeprefix("file://")
+            ).with_suffix(".json")
+            if manifest.is_file():
+                assemble = json.loads(manifest.read_text(encoding="utf-8"))
+        pack = write_pack(SPEC, assemble=assemble)
+        print(f"YouTube description: {pack['description']}", flush=True)
+        print(f"YouTube tags: {pack['tags']}", flush=True)
+        from channel.thumbnail import render_thumbnail_jpeg
+        from channel.youtube import find_thumbnail_still, youtube_dir, youtube_stem
+
+        slug = Path(SPEC.get("fixture") or "").stem
+        still = find_thumbnail_still(slug)
+        if still:
+            dest = youtube_dir() / f"{youtube_stem(slug)}_thumbnail_1280x720.jpg"
+            text = str((SPEC.get("youtube") or {}).get("thumbnail_text") or "")
+            print(
+                f"YouTube thumbnail: {render_thumbnail_jpeg(still, dest, text)}",
+                flush=True,
+            )
+    except Exception as exc:  # noqa: BLE001 — pack is convenience, never fail the cut
+        print(f"YouTube pack skipped: {exc}", flush=True)
 
 
 if __name__ == "__main__":

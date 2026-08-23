@@ -13,7 +13,7 @@ TITLE = "What Einstein Really Thought About Religion"
 Optional:
 
 ```text
-TARGET_DURATION          # seconds, default 270
+TARGET_DURATION          # seconds, default 480 (~8 minutes)
 SPECIAL_INSTRUCTIONS     # tone, emphasis, things to avoid
 ```
 
@@ -27,9 +27,13 @@ Entertaining illustrated documentaries. The viewer clicks a mystery title and le
 
 They must not feel like Wikipedia read aloud, a school essay, a quote list, a slideshow, or a lecture.
 
+The storyline is a **blunt simple explanatory cartoon**. A five-year-old should be able to retell the plot. An adult should still enjoy it and learn the real names and dates. One returning picture. Cause, then effect. No riddle-talk. No hiding OpenAI, Grok, SpaceX, Tesla as "the lab" or "the chatbot shop". Those names are spoken. They stay **out of image prompts**.
+
 Retention contract: **question → answer → new question**, not fact → fact → fact. Every ~20–30 seconds, something new (a date, a letter, a reversal, a place). Biography is supporting material only — include it when it explains the opinion, otherwise cut it.
 
 `the_thought` in the fixture is the **title payoff**: one sentence a child could repeat that answers the title. Say it, show it, say it again. Narration around it is an intelligent person telling a fascinating story to a friend — not baby talk, not a professor.
+
+Research through the day you are writing so the facts are current. **Do not say today's calendar date in the VO.** Do not say "as of today", "today is August 22", "this morning", or "ten days ago". Date events with months and years (`In August 2026`). The linter rejects production-clock phrasing.
 
 ## Architecture
 
@@ -42,7 +46,8 @@ Retention contract: **question → answer → new question**, not fact → fact 
 | `channel/factcheck.py` | Mechanical quote/source checks. |
 | `channel/agent_prompts.py` | Stage prompts for Cursor Grok (research → story → scenes). |
 | `channel/prompts.py` | Image prompt assembler: global style + bible + action. |
-| `channel/compile.py` | Writes fixture, stills module, spec, image jobs. |
+| `channel/compile.py` | Writes fixture, stills module, spec, image jobs, long + Shorts thumbnail jobs, draft YouTube copy. |
+| `channel/youtube.py` | Description, tags, chapter stamps, 1280×720 and 1080×1920 overlays after GenerateImage. |
 | `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 chunks, prop/set economy. |
 | Cursor **GenerateImage** | Stills. Grok only. Never fal / OpenAI images on this path. |
 | Kokoro `am_liam` | Free narration. Never Edge, never ElevenLabs. |
@@ -59,9 +64,9 @@ TITLE
   → SCENE BREAKDOWN 1:1 with chunks (agent)
   → VISUAL PROMPTS (code)
   → VISUAL QA (code + agent)
-  → GenerateImage (Cursor Grok)
+  → GenerateImage (Cursor Grok stills + thumbnail)
   → Kokoro + FFmpeg
-  → SHORT + METADATA
+  → SHORT + `python -m channel youtube <slug>`
 ```
 
 ## Execution checklist (mechanical)
@@ -71,7 +76,7 @@ TITLE
     (do not copy its spine; lint_story will fail you).
 
  2. .venv/bin/python -m channel init "What X Really Thought About Y"
-    Optional: --instructions "..." --duration 270 --skip-seed
+    Optional: --instructions "..." --duration 480 --skip-seed
     Writes channel/projects/<slug>/project.json
 
  3. RESEARCHER (Cursor Grok). Fill research.claims with sourced evidence.
@@ -80,25 +85,33 @@ TITLE
  4. .venv/bin/python -m channel qa <slug>
     Fix rejected claims. Do not write narration until factcheck is honest.
 
- 5. STORY ARCHITECT + NARRATION WRITER using channel/agent_prompts.py
-    650–750 words, 4–6 chapter names, spoken English, title_payoff said
-    in the VO. Cold open is the mystery, never "X was born".
+    5. STORY ARCHITECT + NARRATION WRITER using channel/agent_prompts.py
+    1600–1850 words (~8 minutes at Kokoro 1.15), 4–6 chapter names, spoken English,
+    title_payoff said in the VO. Cold open is the mystery, never "X was
+    born". Write years as digits (1995); Kokoro pronounces them as years.
+    Blunt simple spine. Speak real org/product names. No "today is DATE".
 
- 6. BIBLES. Recurring people get ids + visual_lock WITHOUT historical names.
-    Locations get ids. Optional signature_prop (≤ 6 scenes).
+    6. BIBLES. Recurring people get ids + visual_lock WITHOUT historical names.
+    Locations get ids. Optional signature_prop (≤ 6 scenes). When the prop
+    returns it must be the SAME obvious object — high contrast, large in
+    frame, not a faint mark.
 
  7. .venv/bin/python -m channel chunks <slug>
     Write one Scene per line, rotating shot types, visual verbs.
 
- 8. SHORT (one per long video): surprising hook, not a summary.
-    Last line: "The full story is on this channel."
+    8. SHORT (one per long video): punch in the first two seconds, not a
+    summary. Short sentences (captions must stay inside the 9:16 safe band).
+    Last line: "Watch the full video. The link is in the description."
+    Compile adds a branded end card for that line.
 
  9. .venv/bin/python -m channel qa <slug>
     If a critical score is below 8, rewrite only the weak section.
 
 10. .venv/bin/python -m channel compile <slug>
     Writes fixtures/<slug>.json, *_stills.py, video_specs/<slug>.json,
-    and fixtures/<slug>_v1_image_jobs.json
+    fixtures/<slug>_v1_image_jobs.json, fixtures/<slug>_thumbnail_image_jobs.json,
+    fixtures/<slug>_short_thumbnail_image_jobs.json, and draft copy under
+    assets/youtube/
     (--stubs only for scaffolding; never ship stubs)
 
 11. .venv/bin/python scripts/lint_story.py fixtures/video_specs/<slug>.json
@@ -106,9 +119,13 @@ TITLE
 
 12. .venv/bin/python scripts/lint_storyboard.py fixtures/video_specs/<slug>.json
 
-13. GenerateImage each job in the jobs JSON (batches of ~16). 16:9 long,
-    9:16 Short. Filename = job.filename. On a safety block, retry once
-    with historical names already stripped (compile already strips them).
+13. GenerateImage each job in the jobs JSON (batches of ~16), plus the
+    thumbnail job (`fixtures/<slug>_thumbnail_image_jobs.json`) and the
+    Shorts thumbnail job (`fixtures/<slug>_short_thumbnail_image_jobs.json`).
+    16:9 long, 9:16 Short, 16:9 long thumb, 9:16 Shorts thumb. Filename =
+    job.filename. Thumbnail stills have NO on-image text — type is burned
+    later. On a safety block, retry once with historical names already
+    stripped (compile already strips them).
 
 14. .venv/bin/python scripts/run_short.py fixtures/video_specs/<slug>.json
     then
@@ -116,7 +133,12 @@ TITLE
     Never two assembles at once.
 
 15. Verify: ffprobe duration + resolution; sync.max_cut_error_ms < 20;
-    spot-check frames for letterbox. Thumbnail 1280×720 JPEG.
+    spot-check frames for letterbox.
+    `python -m channel youtube <slug>` writes description + tags (assemble
+    stamps chapter times). GenerateImage both thumbnail jobs (no on-image
+    text), then the same command burns 1280×720 and 1080×1920 JPEG type.
+    Thumbnail still: tight chest-up, FACE ≥30% of the frame, dramatic light,
+    empty right third. YouTube kills loose wide shots.
     Description: search phrase in the first 200 characters, disclosure line.
 
 16. Update docs/videos/<slug>.md + README.md with a "## Do not copy" list
@@ -128,8 +150,9 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 
 ## Voice (free, in sync)
 
-- **Engine:** Kokoro `am_liam` at speed **1.15**, ~185 wpm, **one utterance per scene** plus a 0.28s hold so the cut lands on a breath. Never Edge, never ElevenLabs.
-- **Captions:** each narrated still burns a stylish lower-third of that scene's line. Silent chapter cards stay type-only. Spec field `burn_captions` (default on for channel).
+- **Engine:** Kokoro `am_liam` at speed **1.15**, **one utterance per scene** plus a 0.28s hold so the cut lands on a breath. Never Edge, never ElevenLabs. 1600–1850 words lands near 8 minutes.
+- **Captions:** each narrated still burns a stylish lower-third of that scene's line. Silent chapter cards stay type-only. Spec field `burn_captions` (default on for channel). Lines must wrap inside the frame — never shear a last line off the left or right. On 9:16 Shorts the caption sits in the **YouTube safe band** (above the like / title / music chrome, inside the side rails). Write short spoken sentences so a caption is two readable lines, not one overflowing paragraph.
+- **Years:** write `1995` in the fixture and on-screen caption. Never spell the year. Kokoro expands digits to spoken years (`nineteen ninety-five`) at synthesis.
 - Shipped older cuts may use different speeds (leave those specs alone).
 - **Sync:** faster-whisper word timestamps; `sync.max_cut_error_ms` < 20 after render.
 - Chunk windows for new channel videos: 3–7 seconds (target 4.5). Spec fields `chunk_min_seconds` / `chunk_max_seconds` / `chunk_target_seconds` are applied before chunking so they cannot leak from a previous run.
@@ -141,11 +164,12 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 - Flat 2D educational animation: simplified faces, flat color, muted historical palette. Not photoreal, not 3D, not anime, not painterly.
 - Historical personal names stay **out** of image prompts. Identity is the character bible `visual_lock`.
 - Fill the frame. Cover-crop keeps the **top** of 3:2 Grok stills so on-image labels are never sheared. Thumbs are **1280×720 JPEG**.
+- Channel profile: **800×800** JPEG, circular crop (`python -m channel branding --profile`). Channel cover: **2560×1440** JPEG, ≤6 MB, faces in the center **1546×423** safe band (`--cover`).
 - Composition changes every ~3–6 seconds. Style does not.
 
 ## The Short
 
-One Short per long video. Not a summary. The single most surprising piece, 30–50 seconds, 9:16, open loop to the long video. Lint with `lint_story.py <spec> --short`.
+One Short per long video. Not a summary. The single most surprising piece, 30–50 seconds, 9:16. First two seconds punch. Then a reason to tap the long video. Last scene is a branded end card: **Watch the full video. The link is in the description.** (spoken + on-screen). Compile writes a 9:16 Shorts thumbnail job; type is burned into a 1080×1920 JPEG. Lint with `lint_story.py <spec> --short`. After assemble, open the Short and check the burned captions sit above the YouTube UI — if they hug the bottom edge, the engine safe-band has regressed.
 
 ## Hard invariants
 

@@ -1,0 +1,63 @@
+{
+  "engine": "channel",
+  "channel": "What They Really Think",
+  "topic": "What Elon Musk Really Thinks About AI",
+  "fixture": "fixtures/elon-musk-ai.json",
+  "stills_module": "fixtures/elon-musk-ai_stills.py",
+  "still_prefix": "elon-musk-ai_v2_",
+  "stills_dir": "assets/grok_elon-musk-ai_v2",
+  "thread_id": "elon-musk-ai-v2",
+  "voice": "kokoro",
+  "kokoro_voice": "am_liam",
+  "kokoro_speed": 1.15,
+  "kokoro_sentence_pause": 0.06,
+  "kokoro_clause_pause": 0.02,
+  "kokoro_pack_words": 1,
+  "kokoro_scene_pause": 0.28,
+  "narration_wpm": 185,
+  "burn_captions": true,
+  "chunk_min_seconds": 3.0,
+  "chunk_max_seconds": 7.0,
+  "chunk_target_seconds": 4.5,
+  "youtube": {
+    "title": "What Elon Musk Really Thinks About AI",
+    "description": "What Elon Musk really thinks about AI: he thinks we die unless he builds the machine first.\n\nIn 2014 he told MIT we were summoning the demon. He helped found OpenAI, left, built Grok, lost a 2026 suit on the calendar, said under oath Grok partly learned from OpenAI, and told SpaceX they are Grok's parents.\n\nThis illustrated documentary from What They Really Think tells that story.",
+    "thumbnail_concept": "Tight chest-up of the subject: tall slim 50s man, receding brown hair swept back, long oval face, prominent chin, thin mouth, black t-shirt, FACE at least 30 percent of frame, dramatic side light, empty dark right third for type. Same face as the real public figure, still flat 2D cartoon, not a photograph. No on-image text. No historical personal names.",
+    "thumbnail_text": "THE DEMON",
+    "tags": [
+      "elon musk",
+      "elon musk ai",
+      "what elon musk really thinks about ai",
+      "xai",
+      "grok",
+      "spacexai",
+      "openai musk",
+      "summoning the demon",
+      "colossus",
+      "what they really think",
+      "illustrated documentary",
+      "grok 4.6",
+      "elon musk 2026",
+      "ai",
+      "history documentary",
+      "what they really thought",
+      "the circle"
+    ],
+    "short_title": "He Summoned It Anyway",
+    "chapters": [
+      "The Demon",
+      "The Lab",
+      "The Suit",
+      "The Factory",
+      "The Rocket"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/elon-musk-ai_short.json",
+    "stills_module": "fixtures/elon-musk-ai_short_stills.py",
+    "still_prefix": "elon-musk-ai_short_v2_",
+    "stills_dir": "assets/grok_elon-musk-ai_short_v2",
+    "output": "assets/output/elon-musk-ai_short.mp4"
+  }
+}

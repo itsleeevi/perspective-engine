@@ -29,15 +29,23 @@ NEGATIVE_STYLE = (
     "unless the scene names a short on-screen label."
 )
 
+SYNTHETIC_DISCLOSURE = (
+    "Synthetic media: images and narration are generated. "
+    "Not a photograph of any real person."
+)
+
 
 class ChannelConfig(BaseModel):
     """Hardcoded style, pacing, and voice. Never a person or a plot."""
 
     name: str = "What They Really Think"
     title_pattern: str = "What {subject} Really {verb} About {target}"
-    target_duration_seconds: int = 270
-    narration_word_min: int = 650
-    narration_word_max: int = 750
+    target_duration_seconds: int = 480
+    # Kokoro am_liam at 1.15 lands ~220 spoken wpm. 1600–1850 words plus
+    # scene holds and silent cards is ~8 minutes. The 185 figure below is
+    # only the chunker estimate for picture changes, not runtime.
+    narration_word_min: int = 1600
+    narration_word_max: int = 1850
     narration_wpm: int = 185
     min_scene_duration: float = 3.0
     max_scene_duration: float = 7.0

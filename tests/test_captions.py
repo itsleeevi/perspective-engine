@@ -67,3 +67,57 @@ def test_title_cards_stay_separate_from_captions():
     # Contract: chapter cards are their own graphic; captions are for stills.
     url = render_title_card("[TITLE] (silent) The Telegram", width=320, height=180)
     assert "title_cards" in url
+
+
+def _ink_columns(img: Image.Image) -> list[int]:
+    pix = img.load()
+    width, height = img.size
+    cols: list[int] = []
+    for x in range(width):
+        for y in range(height):
+            r, g, b = pix[x, y]
+            if r > 200 and g > 200 and b > 200:
+                cols.append(x)
+                break
+    return cols
+
+
+def test_long_caption_stays_inside_side_margins(tmp_path: Path):
+    src = tmp_path / "still.png"
+    Image.new("RGB", (1280, 720), (30, 40, 50)).save(src)
+    dest = tmp_path / "out.png"
+    overlay_scene_caption(
+        src,
+        dest,
+        "At MIT in 2014 he told a hall full of engineers that building "
+        "thinking machines was like calling up a demon with a drawn ring "
+        "and a cup of holy water.",
+    )
+    with Image.open(dest) as img:
+        cols = _ink_columns(img)
+        assert cols, "caption must be visible"
+        margin = round(1280 * 0.08)
+        assert min(cols) >= margin
+        assert max(cols) <= 1280 - margin
+
+
+def test_shorts_caption_sits_above_youtube_chrome(tmp_path: Path):
+    src = tmp_path / "still.png"
+    Image.new("RGB", (1080, 1920), (20, 20, 20)).save(src)
+    dest = tmp_path / "out.png"
+    overlay_scene_caption(
+        src, dest, "He said AI would kill us. Then he built Grok anyway."
+    )
+    with Image.open(dest) as img:
+        pix = img.load()
+        ink_rows: list[int] = []
+        for y in range(1920):
+            for x in range(1080):
+                r, g, b = pix[x, y]
+                if r > 200 and g > 200 and b > 200:
+                    ink_rows.append(y)
+                    break
+        assert ink_rows, "caption must be visible"
+        # YouTube Shorts UI covers the bottom ~28% (likes, title, music).
+        assert max(ink_rows) < round(1920 * 0.74)
+        assert min(ink_rows) > round(1920 * 0.45)

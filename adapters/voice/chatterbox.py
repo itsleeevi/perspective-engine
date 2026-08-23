@@ -53,6 +53,7 @@ from adapters import _cache
 from adapters.voice import _audio
 from adapters.voice.base import VoiceAdapter, VoiceoverResult
 from adapters.voice.edge import _align_word_offsets, split_run_durations
+from adapters.voice.years import speak_years
 from graph.assets import save_asset
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -145,6 +146,7 @@ class ChatterboxVoiceAdapter(VoiceAdapter):
                 "breath": self._breath,
                 "loudnorm": True,
                 "pack_words": _PACK_WORDS,
+                "year_speak": 1,
                 "beats": list(script_beats),
                 "silences": [
                     shot_durations[i] if i < len(shot_durations) else 0.0
@@ -176,12 +178,17 @@ class ChatterboxVoiceAdapter(VoiceAdapter):
         if run:
             segments.append(("speech", run))
 
+        spoken_beats = [
+            speak_years(raw.strip()) if (raw or "").strip() else (raw or "")
+            for raw in script_beats
+        ]
+
         # Collect every pack across all speech runs into one worker call.
         pack_specs: list[tuple[int, list[int]]] = []  # (segment idx, beat indices)
         for seg_idx, (kind, indices) in enumerate(segments):
             if kind != "speech":
                 continue
-            for pack in _pack_indices(indices, script_beats):
+            for pack in _pack_indices(indices, spoken_beats):
                 pack_specs.append((seg_idx, pack))
 
         beat_durations: list[float] = [0.0] * len(script_beats)
@@ -191,7 +198,7 @@ class ChatterboxVoiceAdapter(VoiceAdapter):
 
             job = {
                 "packs": [
-                    " ".join(script_beats[i].strip() for i in pack)
+                    " ".join(spoken_beats[i].strip() for i in pack)
                     for _seg, pack in pack_specs
                 ],
                 "out_dir": str(tmp_path / "packs"),
@@ -212,7 +219,7 @@ class ChatterboxVoiceAdapter(VoiceAdapter):
                 await asyncio.to_thread(_wav_to_mp3, wav, mp3)
                 run_total = await asyncio.to_thread(_audio.duration_seconds, mp3)
 
-                beat_words = [_spoken_words(script_beats[i]) for i in pack]
+                beat_words = [_spoken_words(spoken_beats[i]) for i in pack]
                 word_counts = [len(w) for w in beat_words]
                 naive_words = [w for beat in beat_words for w in beat]
                 events = [(w, t, 0.0) for w, t in pres["words"]]

@@ -1,0 +1,58 @@
+{
+  "engine": "channel",
+  "channel": "What They Really Think",
+  "topic": "What Steve Jobs Really Thought About Bill Gates",
+  "fixture": "fixtures/steve-jobs-bill-gates.json",
+  "stills_module": "fixtures/steve-jobs-bill-gates_stills.py",
+  "still_prefix": "steve-jobs-bill-gates_v1_",
+  "stills_dir": "assets/grok_steve-jobs-bill-gates_v1",
+  "thread_id": "steve-jobs-bill-gates-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_liam",
+  "kokoro_speed": 1.15,
+  "kokoro_sentence_pause": 0.12,
+  "kokoro_clause_pause": 0.05,
+  "kokoro_pack_words": 1,
+  "kokoro_scene_pause": 0.42,
+  "narration_wpm": 185,
+  "burn_captions": true,
+  "chunk_min_seconds": 3.0,
+  "chunk_max_seconds": 7.0,
+  "chunk_target_seconds": 4.5,
+  "youtube": {
+    "title": "What Steve Jobs Really Thought About Bill Gates",
+    "description": "What Steve Jobs really thought about Bill Gates: he thought Bill copied the Mac and never had any taste.\n\nIn 1983 he pulled Gates into a room and shouted theft. Gates answered with Xerox. In 1995 Jobs said Microsoft made third-rate products. Then he put that same man on a giant screen and took a hundred and fifty million dollars.\n\nThis illustrated documentary from What They Really Think tells that story.",
+    "thumbnail_concept": "Thin man in a black turtleneck large on the left, pointing at a cheap grey window-grid; a compact beige all-in-one computer on the desk; empty dark space on the right for type. No on-image text.",
+    "thumbnail_text": "NO TASTE",
+    "tags": [
+      "steve jobs",
+      "bill gates",
+      "steve jobs bill gates",
+      "what steve jobs really thought about bill gates",
+      "windows vs macintosh",
+      "xerox parc",
+      "macworld 1997",
+      "illustrated documentary",
+      "what they really think",
+      "apple microsoft",
+      "history documentary",
+      "what they really thought"
+    ],
+    "short_title": "Why Jobs Put Gates on the Giant Screen",
+    "chapters": [
+      "The Room",
+      "The Neighbor",
+      "Third Rate",
+      "The Screen",
+      "The Visit"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/steve-jobs-bill-gates_short.json",
+    "stills_module": "fixtures/steve-jobs-bill-gates_short_stills.py",
+    "still_prefix": "steve-jobs-bill-gates_short_v1_",
+    "stills_dir": "assets/grok_steve-jobs-bill-gates_short_v1",
+    "output": "assets/output/steve-jobs-bill-gates_short.mp4"
+  }
+}

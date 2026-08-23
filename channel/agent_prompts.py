@@ -61,6 +61,9 @@ Next-video bridge: curiosity for a related title, not a subscribe speech.
 
 title_payoff must be one sentence a viewer can repeat that answers the title
 (this becomes fixture the_thought; lint_story requires it in the VO).
+
+The spine a five-year-old can follow: one returning picture, cause then
+effect, no riddle-talk. Adults still get the real names and dates.
 """
 
 NARRATION_WRITER = """
@@ -72,11 +75,23 @@ Write for SPEECH. Short and medium sentences. Occasional punch sentences.
 No Furthermore / Consequently / It is important to note.
 Controlled drama: let events do the work. Never invent quotes.
 Dates only when they matter ("In September 1939", not the 17th of…).
+Calendar years are digits in the written line (1995, 1983, 2011), never
+"nineteen ninety-five". Captions burn the digits. Kokoro says the year.
 Open loops: question → answer → new question.
 
-Target 650–750 words at ~185 wpm (~3.5–4 minutes). Never pad a weak story.
+Target 1600–1850 words (~8 minutes at Kokoro 1.15). Never pad a weak story.
 Write 4–6 chapters with poster-like names (≤4 words).
 Say title_payoff in the cold open or right after, and again near the end.
+
+Blunt simple cartoon, not a riddle. A child should be able to retell the
+plot. An adult should still learn the real names and dates. Say OpenAI,
+Grok, SpaceX, Tesla — do not hide them as "the lab" or "the chatbot shop".
+Those names stay OUT of image prompts.
+
+Research through the day you are writing so facts are current. Do NOT say
+today's calendar date in the VO. Do not say "as of today", "today is
+August 22", "this morning", or "ten days ago". Date events with months
+and years ("In August 2026").
 """
 
 BIBLES = """
@@ -86,6 +101,8 @@ visual_lock that does NOT include the historical personal name (image-model
 safety). Recognition = hair, facial hair, clothing, silhouette, palette.
 Locations get a reusable id + description in the channel's flat 2D style.
 Do not put photoreal / 3D / anime language in visual_lock.
+If there is a signature prop, lock its LOOK: high contrast, large in
+frame, the same object every time it returns. A faint mark is a miss.
 """
 
 SCENE_BREAKDOWN = """
@@ -116,13 +133,36 @@ Rotate shot types. Compile already prepends the global style prefix.
 
 SHORTS = """
 One Short per long video. Not a summary. The single most surprising piece.
-0–2s hook, 2–25s evidence, 25–40s reveal, last line open loop to the long
-video ("The full story is on this channel."). 70–130 words. 9:16 stills.
-Never spoil the long video's final button line.
+0–2s MUST punch (a twist, a dare, a picture). Then evidence. Then a
+reason to tap the long video. Engaging, not a lecture. Last spoken scene
+is exactly: "Watch the full video. The link is in the description."
+Compile adds a branded 9:16 end card for that line — do not illustrate it.
+70–130 words. Short sentences so burned captions stay readable. 9:16
+stills. Never spoil the long video's final button line.
+
+Captions are burned in the YouTube Shorts safe band (above the like /
+title chrome). Do not write one giant sentence that becomes a sheared
+three-line caption.
+
+Also fill a 9:16 Shorts thumbnail concept (face in the upper half, empty
+lower third, no on-image text). Compile writes the short thumbnail job.
 """
 
 METADATA = """
-YouTube description: search phrase in the first 200 characters, chapter
-timestamps after assemble, synthetic-content disclosure.
-Thumbnail text: 2–5 words, NOT the exact title.
+Fill project.metadata before compile:
+  title = the video title
+  thumbnail_text = 2–5 punchy words, NEVER the full title
+  thumbnail_concept = tight chest-up, FACE ≥30% of frame, dramatic light,
+    empty right third, no historical personal names. YouTube kills loose
+    wide shots and tiny faces.
+  tags = 8–15 YouTube tags (subject, target, events, channel name)
+  description = search phrase in the FIRST 200 characters, then 2–4 sentences
+    of the story, then stop. Compile / `python -m channel youtube <slug>`
+    appends chapter timestamps and the synthetic-media disclosure.
+  short_title = Short title, not a summary of the long video.
+
+After assemble: `python -m channel youtube <slug>` (also runs from
+run_custom_video / run_short). GenerateImage the 16:9 thumbnail job and
+the 9:16 Shorts thumbnail job with NO on-image text; the command burns
+thumbnail_text into 1280×720 and 1080×1920 JPEGs.
 """

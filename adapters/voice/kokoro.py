@@ -25,6 +25,7 @@ from pathlib import Path
 from adapters import _cache
 from adapters.voice import _audio
 from adapters.voice.base import VoiceAdapter, VoiceoverResult
+from adapters.voice.years import speak_years
 from graph.assets import save_asset
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -158,6 +159,7 @@ class KokoroVoiceAdapter(VoiceAdapter):
                 "clause_pause": _CLAUSE_PAUSE,
                 "scene_pause": _SCENE_PAUSE,
                 "lang": _LANG,
+                "year_speak": 1,
                 "beats": list(script_beats),
                 "silences": [
                     shot_durations[i] if i < len(shot_durations) else 0.0
@@ -213,7 +215,7 @@ class KokoroVoiceAdapter(VoiceAdapter):
                 for i in indices:
                     speech_path = tmp_path / f"atom_{file_i:04d}.mp3"
                     file_i += 1
-                    text = script_beats[i].strip()
+                    text = speak_years(script_beats[i].strip())
                     audio_bytes, _offsets = await asyncio.to_thread(
                         _synthesize_text, text, resolved_voice
                     )

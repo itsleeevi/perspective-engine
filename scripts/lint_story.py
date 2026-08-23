@@ -22,6 +22,11 @@ to whichever model wrote the script:
                written-not-spoken English.
 4b. EXPLAIN-LIKE-FIVE — fixture must have ``the_thought`` (≤22 words, a
                child could repeat it) and that sentence must appear in the VO.
+4c. YEARS    — channel cuts write calendar years as digits (1995). Captions
+               show digits; Kokoro speaks the year. Spelled-out years fail
+               (shipped Jobs-Gates is grandfathered).
+4d. CLOCK    — research through the day you write. Do not say "today is
+               DATE", "as of today", "this morning", or "ten days ago".
 5. STRUCTURE — hook present; 4-6 silent chapter cards with poster-like
                names (<= 4 words) when title_style is "chapter".
 
@@ -36,7 +41,38 @@ import re
 import sys
 from pathlib import Path
 
+from adapters.voice.years import SPELLED_YEAR
+from channel.config import CHANNEL
+
 ROOT = Path(__file__).resolve().parent.parent
+
+# Shipped channel cuts that still spell years in the fixture. Do not rewrite
+# them — captions and stills already match that VO. New titles must use digits.
+_WORD_YEAR_GRANDFATHERED = frozenset(
+    {
+        "steve-jobs-bill-gates",
+        "steve-jobs-bill-gates_short",
+    }
+)
+
+# Research through the day you write. Do not pin the VO to "today is DATE".
+_PRODUCTION_CLOCK = re.compile(
+    r"\bas of today\b|"
+    r"\btoday is [a-z]+ \d{1,2}\b|"
+    r"\btoday[,]?\s+(?:january|february|march|april|may|june|july|august|"
+    r"september|october|november|december)\b|"
+    r"\byesterday[,]?\s+(?:january|february|march|april|may|june|july|august|"
+    r"september|october|november|december)\b|"
+    r"\bten days ago\b|"
+    r"\bthis morning\b",
+    re.I,
+)
+
+
+def production_clock_hit(text: str) -> str | None:
+    """Return the first 'today is DATE' style phrase, if any."""
+    m = _PRODUCTION_CLOCK.search(text or "")
+    return m.group(0) if m else None
 
 _ERRORS: list[str] = []
 
@@ -123,8 +159,11 @@ def main() -> None:
     def _page_slug(title: str) -> str:
         return re.sub(r"[^a-z0-9]+", "-", (title or "").lower()).strip("-")
 
-    own_pages = {_page_slug(fixture.get("title") or "")}
+    own_pages = {_page_slug(fixture.get("title") or ""), fixture_path.stem}
+    if fixture_path.stem.endswith("_short"):
+        own_pages.add(fixture_path.stem[: -len("_short")])
     if parent_fixture is not None:
+        own_pages.add(parent_fixture.stem)
         try:
             parent_data = json.loads(parent_fixture.read_text(encoding="utf-8"))
             own_pages.add(_page_slug(parent_data.get("title") or ""))
@@ -210,11 +249,21 @@ def main() -> None:
         else:
             _ok(f"short length: {words} words (~{secs:.0f}s)")
         last_beat = (levels[-1].get("beats") or [""])[-1].lower() if levels else ""
-        if not re.search(r"full story|whole story|on (this|the) channel|link below",
-                         last_beat):
+        new_cta = "watch the full video" in last_beat and "description" in last_beat
+        old_cta = bool(
+            re.search(
+                r"full story|whole story|on (this|the) channel|link below",
+                last_beat,
+            )
+        )
+        grandfathered = fixture_path.stem in {
+            "einstein-religion_short",
+            "einstein-zionism_short",
+        }
+        if not new_cta and not (grandfathered and old_cta):
             _fail(
-                "short CTA: the last beat must send viewers to the long video "
-                "('The full story is on this channel.')"
+                "short CTA: the last beat must be "
+                "'Watch the full video. The link is in the description.'"
             )
         if fixture.get("include_level_titles", True):
             _fail("short structure: set include_level_titles: false (no cards)")
@@ -252,10 +301,11 @@ def main() -> None:
             if opener in head:
                 _fail(f"cold open: lecture opener {opener!r}")
         if not short:
-            if words < 650:
-                _warn(f"length: {words} words (channel target 650-750)")
-            elif words > 750:
-                _warn(f"length: {words} words (channel target 650-750)")
+            lo, hi = CHANNEL.narration_word_min, CHANNEL.narration_word_max
+            if words < lo:
+                _warn(f"length: {words} words (channel target {lo}-{hi})")
+            elif words > hi:
+                _warn(f"length: {words} words (channel target {lo}-{hi})")
             else:
                 _ok(f"length: {words} words")
         lower_all = narration.lower()
@@ -272,6 +322,21 @@ def main() -> None:
                 _warn(f"register: written-essay phrase {phrase!r}")
         if "but that wasn't the whole story" in lower_all:
             _warn("stock transition 'But that wasn't the whole story' — vary it")
+        spelled = SPELLED_YEAR.search(narration)
+        if spelled and fixture_path.stem not in _WORD_YEAR_GRANDFATHERED:
+            _fail(
+                "years: write calendar years as digits (1995), not "
+                f"{spelled.group(0)!r}. Captions show the digits; Kokoro "
+                "speaks the year"
+            )
+        clock = production_clock_hit(narration)
+        if clock:
+            _fail(
+                "clock: research through today, but do not say the production "
+                f"date in the VO (found {clock!r}). Date events with months "
+                "and years (August 2026), not 'today is' / 'as of today' / "
+                "'this morning'"
+            )
     elif not short:
         _ok(f"{words} words")
 

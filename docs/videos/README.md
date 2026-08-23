@@ -4,6 +4,9 @@ Index of fixture-driven YouTube cuts. Each page is the memory for the next agent
 
 When you finish a new video, add a page here and link it. Keep each page's **"## Do not copy"** section stocked with *quoted* phrases — `scripts/lint_story.py` reads those quotes and blocks any new script that reuses them.
 
+- [What Elon Musk Really Thinks About AI](elon-musk-ai.md) — channel engine, MIT demon / OpenAI / Grok / SpaceX, Kokoro `am_liam`, ~8 min (facts through August 2026; no “today is DATE” in the VO)
+- [What Sam Altman Really Thinks About the Future of Work](sam-altman-the-future-of-work.md) — channel engine, inbox / 2021 essay / Senate / the check, Kokoro `am_liam`, ~8 min
+- [What Steve Jobs Really Thought About Bill Gates](steve-jobs-bill-gates.md) — channel engine, 1983 room / Xerox / 1997 screen, Kokoro `am_liam`
 - [What Einstein Really Thought About Religion](einstein-religion.md) — channel engine, telegram / letter split, Kokoro `am_liam`
 - [What Stalin Really Thought About Hitler](what-stalin-really-thought-about-hitler.md) — v4 Simple History-like flat vector, faster Michael, explain-like-five (`the_thought`)
 - [What Hitler Really Thought About Americans](what-hitler-really-thought-about-americans.md) — v4 perspective story, silent chapter cards, Kokoro `am_liam`. The v4 storyboard fails the current prop-economy linter (book in 47/77 frames); any rewrite must pass `lint_storyboard.py` and use the Chatterbox voice.

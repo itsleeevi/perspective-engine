@@ -45,6 +45,16 @@ class TestRealPersonGuard:
             await ideate(state)
 
     @pytest.mark.asyncio
+    async def test_ideate_allows_named_person_when_fixture_is_set(self):
+        state = PipelineState(
+            topic="What Elon Musk Really Thinks About AI",
+            script_fixture_path="fixtures/elon-musk-ai.json",
+        )
+        result = await ideate(state)
+        assert result["topic"] == "What Elon Musk Really Thinks About AI"
+        assert "brief" in result
+
+    @pytest.mark.asyncio
     async def test_ideate_accepts_fictional_topic(self):
         state = PipelineState(topic="a bee's morning foraging flight")
         result = await ideate(state)
