@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from channel.config import config_for_project
 from channel.factcheck import factcheck
-from channel.modes import is_business
+from channel.modes import is_business, is_takeover
 from channel.originality_policy import (
     BUSINESS_MONETIZATION_THRESHOLDS,
     GENERIC_AI_PHRASES,
     MONETIZATION_THRESHOLDS,
+    TAKEOVER_MONETIZATION_THRESHOLDS,
 )
 from channel.qa import mechanical_qa, narration_of, word_count
 from channel.schema import MonetizationReadiness, OriginalityReport, VideoProject
@@ -129,6 +130,7 @@ def compute_monetization_readiness(
 
     financial_accuracy = 0
     business_analysis_depth = 0
+    transformation_depth = 0
     if is_business(project.channel_mode):
         sourced_money = sum(
             1
@@ -166,6 +168,50 @@ def compute_monetization_readiness(
             notes.append("financial_accuracy below threshold")
         if business_analysis_depth < extra["business_analysis_depth_min"]:
             notes.append("business_analysis_depth below threshold")
+    elif is_takeover(project.channel_mode):
+        sourced_money = sum(
+            1
+            for c in claims
+            if c.sources and (c.fiscal_period or project.research.fiscal_period or c.date)
+        )
+        moneyish = [
+            c
+            for c in claims
+            if any(
+                tok in c.claim.lower()
+                for tok in ("$", "%", "revenue", "margin", "market share")
+            )
+        ]
+        if not moneyish:
+            financial_accuracy = 8
+        elif sourced_money >= max(1, int(len(moneyish) * 0.8)):
+            financial_accuracy = 9
+        else:
+            financial_accuracy = 5
+            notes.append("financial claims missing sources or fiscal periods")
+        ctx = project.takeover
+        bits = 0
+        unknown = "unknown until researched"
+        if ctx and ctx.starting_position and ctx.starting_position != unknown:
+            bits += 1
+        if ctx and ctx.current_position and ctx.current_position != unknown:
+            bits += 1
+        if ctx and ctx.turning_points:
+            bits += 1
+        if ctx and ctx.competitors:
+            bits += 1
+        if ctx and ctx.flywheels:
+            bits += 1
+        if ctx and ctx.threats:
+            bits += 1
+        transformation_depth = min(10, 4 + bits)
+        extra = TAKEOVER_MONETIZATION_THRESHOLDS
+        ready = ready and transformation_depth >= extra["transformation_depth_min"]
+        if transformation_depth < extra["transformation_depth_min"]:
+            notes.append("transformation_depth below threshold")
+        if financial_accuracy < 8 and moneyish:
+            notes.append("financial_accuracy below threshold")
+            ready = False
 
     return MonetizationReadiness(
         original_research=original_research,
@@ -179,6 +225,7 @@ def compute_monetization_readiness(
         mass_production_risk=mass_production_risk,
         financial_accuracy=financial_accuracy,
         business_analysis_depth=business_analysis_depth,
+        transformation_depth=transformation_depth,
         overall=overall,
         ready_to_publish=ready,
         originality_score=orig_score,

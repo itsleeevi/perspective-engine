@@ -1,0 +1,21 @@
+---
+description: Parallel Cloud Agent generation — isolated jobs, read-only engine
+alwaysApply: true
+---
+
+# Cloud generation
+
+Assume empty chat history. Read `AGENTS.md` and `docs/video-engine/CLOUD_AGENT_START_PROMPT.md`.
+
+```text
+.venv/bin/python -m channel generate --channel <mode> --title "<title>"
+.venv/bin/python -m channel cloud-readiness
+```
+
+Write only under `artifacts/<JOB_ID>/`. Do not clobber repo-root `fixtures/` or another job. Do not commit `.mp4` files.
+
+Normal generation does not edit `channel/config.py`, `*_prompts.py`, or QA thresholds.
+
+Documentary path does not need `FAL_KEY` / `ELEVENLABS_API_KEY`. If Kokoro or GenerateImage is missing, stop — no fallback.
+
+Costco voice lock is 0.92; new titles stay at ≥ 1.0 default 1.15.

@@ -1,0 +1,21 @@
+{
+  "title": "What Happens When You Tap Your Card",
+  "hero_career_progression": false,
+  "include_level_titles": false,
+  "the_thought": "Visa gets paid to carry the yes.",
+  "hook": "You tap a card at a cafe.",
+  "levels": [
+    {
+      "name": "The Short",
+      "beats": [
+        "The clerk doesn't phone a lender. A little pulse leaves the counter, hits the shop's bank, hits a network, hits the bank that gave you the plastic, and races home with a yes. Visa didn't issue that card and didn't take the credit risk. The fat fee on the shop's statement often goes to the issuing bank. Visa gets paid to carry the yes. That's the thin pipe under a tap you have already done a hundred times."
+      ]
+    },
+    {
+      "name": "The Link",
+      "beats": [
+        "Watch the full video. The link is in the description."
+      ]
+    }
+  ]
+}

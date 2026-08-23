@@ -8,12 +8,26 @@ import textwrap
 from pathlib import Path
 
 from channel.bibles import token_for_location, visual_lock
-from channel.config import CHANNEL, config_for_project, kokoro_voice_for, visual_accent_for
+from channel.config import (
+    CHANNEL,
+    config_for_project,
+    kokoro_speed_for,
+    kokoro_voice_for,
+    visual_accent_for,
+)
 from channel.metadata import draft_metadata
+from channel.engine import (
+    PROMPT_VERSION,
+    VIDEO_ENGINE_VERSION,
+    VISUAL_STYLE_VERSION,
+    generate_image_filename,
+    image_token_for,
+)
 from channel.paths import (
     ROOT,
     fixture_path,
     jobs_path,
+    relpath_for_spec,
     short_fixture_path,
     short_stills_path,
     spec_path,
@@ -173,24 +187,42 @@ def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
     )
 
 
-def spec_dict(project: VideoProject, *, root: Path | None = None) -> dict:
+def spec_dict(
+    project: VideoProject,
+    *,
+    root: Path | None = None,
+    image_token: str | None = None,
+) -> dict:
     slug = project.slug
     cfg = config_for_project(project)
     meta = draft_metadata(project)
-    base = root or ROOT
+    token = image_token or image_token_for(slug)
+    isolated = root is not None
+    if isolated:
+        stills_dir = relpath_for_spec(root / "images", root=root)
+        output = relpath_for_spec(root / "final" / f"{slug}.mp4", root=root)
+    else:
+        stills_dir = f"assets/grok_{slug}_v1"
+        output = f"assets/output/{slug}.mp4"
     spec = {
         "engine": "channel",
+        "engine_version": VIDEO_ENGINE_VERSION,
+        "prompt_version": PROMPT_VERSION,
+        "visual_style_version": VISUAL_STYLE_VERSION,
+        "image_token": token,
         "channel": cfg.name,
         "channel_mode": project.channel_mode.value,
         "topic": project.title,
-        "fixture": str(fixture_path(slug, root).relative_to(base)),
-        "stills_module": str(stills_path(slug, root).relative_to(base)),
+        "fixture": relpath_for_spec(fixture_path(slug, root), root=root),
+        "stills_module": relpath_for_spec(stills_path(slug, root), root=root),
+        "image_jobs": relpath_for_spec(jobs_path(f"{slug}_v1_", root), root=root),
         "still_prefix": f"{slug}_v1_",
-        "stills_dir": f"assets/grok_{slug}_v1",
+        "stills_dir": stills_dir,
+        "output": output,
         "thread_id": f"{slug}-v1",
         "voice": cfg.voice,
         "kokoro_voice": kokoro_voice_for(slug),
-        "kokoro_speed": cfg.kokoro_speed,
+        "kokoro_speed": kokoro_speed_for(slug, cfg),
         "kokoro_sentence_pause": cfg.kokoro_sentence_pause,
         "kokoro_clause_pause": cfg.kokoro_clause_pause,
         "kokoro_pack_words": cfg.kokoro_pack_words,
@@ -203,12 +235,23 @@ def spec_dict(project: VideoProject, *, root: Path | None = None) -> dict:
         "youtube": meta.model_dump(),
     }
     if cfg.default_short_enabled and project.short:
+        if isolated:
+            short_dir = relpath_for_spec(root / "images" / "short", root=root)
+            short_out = relpath_for_spec(
+                root / "short" / f"{slug}_short.mp4", root=root
+            )
+        else:
+            short_dir = f"assets/grok_{slug}_short_v1"
+            short_out = f"assets/output/{slug}_short.mp4"
         spec["short"] = {
-            "fixture": str(short_fixture_path(slug, root).relative_to(base)),
-            "stills_module": str(short_stills_path(slug, root).relative_to(base)),
+            "fixture": relpath_for_spec(short_fixture_path(slug, root), root=root),
+            "stills_module": relpath_for_spec(short_stills_path(slug, root), root=root),
+            "image_jobs": relpath_for_spec(
+                jobs_path(f"{slug}_short_v1_", root), root=root
+            ),
             "still_prefix": f"{slug}_short_v1_",
-            "stills_dir": f"assets/grok_{slug}_short_v1",
-            "output": f"assets/output/{slug}_short.mp4",
+            "stills_dir": short_dir,
+            "output": short_out,
         }
     return spec
 
@@ -237,6 +280,8 @@ def write_jobs(
             f"({'short' if short else 'long'})"
         )
     prefix = block["still_prefix"]
+    token = str(spec.get("image_token") or image_token_for(project.slug))
+    kind = "short_scene" if short else "scene"
     aspect = "9:16" if short else "16:9"
     jobs = []
     pairs = [
@@ -245,10 +290,14 @@ def write_jobs(
         if not is_short_cta(chunk)
     ]
     for i, (scene, chunk) in enumerate(pairs):
+        dest_name = f"{prefix}{i:03d}.png"
+        gen_name = generate_image_filename(i, token=token, kind=kind)
         jobs.append(
             {
                 "id": f"{i:03d}",
-                "filename": f"{prefix}{i:03d}.png",
+                "filename": dest_name,
+                "generate_filename": gen_name,
+                "copy_to": dest_name,
                 "aspect": aspect,
                 "who": scene.who,
                 "free": scene.who == "empty",
@@ -294,10 +343,12 @@ def compile_project(
     *,
     stubs_ok: bool = False,
     root: Path | None = None,
+    image_token: str | None = None,
 ) -> dict[str, str]:
     if not project.story:
         raise ValueError("cannot compile without a story")
     slug = project.slug
+    token = image_token or image_token_for(slug)
     project.metadata = draft_metadata(project)
     fixture = fixture_dict(project)
     chunks = _chunks_for(fixture, project)
@@ -316,7 +367,7 @@ def compile_project(
     fx.write_text(json.dumps(fixture, indent=2) + "\n", encoding="utf-8")
     stills_path(slug, root).write_text(stills_module_source(project, scenes), encoding="utf-8")
 
-    spec = spec_dict(project, root=root)
+    spec = spec_dict(project, root=root, image_token=token)
     sp = spec_path(slug, root)
     sp.parent.mkdir(parents=True, exist_ok=True)
     sp.write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
@@ -353,10 +404,12 @@ def compile_project(
     from channel.shorts import write_short_thumbnail_job
     from channel.youtube import write_pack, write_thumbnail_job
 
-    written["thumbnail_job"] = str(write_thumbnail_job(project, root=root))
+    written["thumbnail_job"] = str(
+        write_thumbnail_job(project, root=root, image_token=token)
+    )
     if cfg.default_short_enabled and project.short:
         written["short_thumbnail_job"] = str(
-            write_short_thumbnail_job(project, root=root)
+            write_short_thumbnail_job(project, root=root, image_token=token)
         )
     pack = write_pack(spec, root=root)
     written["youtube_description"] = pack["description"]

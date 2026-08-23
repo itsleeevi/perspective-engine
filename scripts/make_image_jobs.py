@@ -70,12 +70,21 @@ def main() -> None:
         sys.exit(1)
 
     prefix = spec["still_prefix"]
+    from channel.engine import generate_image_filename, image_token_for
+
+    token = str(spec.get("image_token") or image_token_for(Path(sys.argv[1]).stem))
+    kind = "short_scene" if short else "scene"
     jobs = []
     for i, ((shot_type, who, scene), chunk) in enumerate(zip(stills, chunks)):
+        dest_name = f"{prefix}{i:03d}.png"
         jobs.append(
             {
                 "id": f"{i:03d}",
-                "filename": f"{prefix}{i:03d}.png",
+                "filename": dest_name,
+                "generate_filename": generate_image_filename(
+                    i, token=token, kind=kind
+                ),
+                "copy_to": dest_name,
                 "aspect": aspect,
                 "who": who,
                 "free": who == "empty",

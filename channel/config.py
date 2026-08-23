@@ -10,7 +10,7 @@ import hashlib
 
 from pydantic import BaseModel, Field
 
-from channel.locks import SHIPPED_STYLE_LOCK
+from channel.locks import KOKORO_SPEED_LOCK, KOKORO_SPEED_MIN, SHIPPED_STYLE_LOCK
 from channel.modes import ChannelMode, parse_mode
 
 
@@ -89,17 +89,79 @@ BTB_YOUTUBE_DISCLOSURE = (
 )
 
 BTB_HOST_ATTRIBUTION = (
-    "Researched and written for Behind The Business from company filings "
-    "and primary sources."
+    "Researched and written for How They Really Make Money from company "
+    "filings and primary sources."
 )
 
 BTB_CHANNEL_ABOUT = (
-    "Behind The Business explains the hidden systems, economics, and "
-    "decisions behind companies people already use. "
-    "Stills and voice are generated; the research and script are original "
-    "to this channel. A person writes and reviews every cut. "
-    "Not investment advice.\n"
+    "How They Really Make Money is illustrated documentaries about the "
+    "hidden systems behind companies people already use.\n"
+    "\n"
+    "Each video starts from a title, not a template. Fresh research from "
+    "filings. A different story architecture for every company. Original "
+    "narration — not a rewritten article or a YouTube transcript. Unique "
+    "scenes and diagrams built around that business.\n"
+    "\n"
+    "You should finish thinking: I use this company all the time and had "
+    "no idea THAT was how it worked.\n"
+    "\n"
+    "Educational analysis. Not investment advice. Stills and voice are "
+    "generated; the research and script are original to this channel. "
+    "A person writes and reviews every cut.\n"
 )
+
+BTB_CHANNEL_HANDLE = "@HowTheyReallyMakeMoney"
+
+HOW_THEY_TOOK_OVER_VISUAL_STYLE = (
+    "Clean flat 2D strategic business documentary illustration in the "
+    "established How They Took Over channel identity. Modern vector-like "
+    "artwork, simple recognizable people and company environments, crisp "
+    "products and technology, high readability, clear silhouettes, "
+    "controlled shading, clean high-contrast composition, visually "
+    "intuitive strategy diagrams, timelines, maps, market competition, "
+    "business flywheels and growth systems. Energetic but professional. "
+    "FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no "
+    "black bars. Any on-image label, badge, sign, or diagram text must "
+    "sit fully inside a 10 percent margin from every edge. Never place "
+    "text flush with the top, bottom, or sides of the frame. Not "
+    "photorealistic, not 3D, not anime, not painterly, not stock imagery."
+)
+
+HOW_THEY_TOOK_OVER_NEGATIVE_STYLE = (
+    NEGATIVE_STYLE + " Not a 3D corporate animation, not a stock-photo "
+    "slideshow, not a logo-vs-logo poster, not a photoreal product shot."
+)
+
+HTTO_YOUTUBE_DISCLOSURE = (
+    "Illustrated documentary. Stills and narration are generated. "
+    "Research and story are original to this channel. "
+    "Educational analysis, not investment advice. "
+    "Not a photograph of any real person."
+)
+
+HTTO_HOST_ATTRIBUTION = (
+    "Researched and written for How They Took Over from primary sources "
+    "and company filings."
+)
+
+HTTO_CHANNEL_ABOUT = (
+    "How They Took Over is illustrated documentaries about how familiar "
+    "companies, products, and platforms went from ordinary to dominant.\n"
+    "\n"
+    "Each video starts from a title, not a template. Fresh research. A "
+    "different rise story for every subject. Original narration — not a "
+    "rewritten article or a YouTube transcript. Unique scenes, flywheels, "
+    "and competitor maps built around that takeover.\n"
+    "\n"
+    "You should finish thinking: I knew they were huge, but I didn't "
+    "realize THAT was how they won.\n"
+    "\n"
+    "Educational analysis. Not investment advice. Stills and voice are "
+    "generated; the research and script are original to this channel. "
+    "A person writes and reviews every cut.\n"
+)
+
+HTTO_CHANNEL_HANDLE = "@HowTheyTookOver"
 
 # Modern high-contrast accents. No company names. Shipped WTRT slugs stay locked.
 BTB_VISUAL_ACCENTS = (
@@ -114,6 +176,21 @@ BTB_VISUAL_ACCENTS = (
     "Accent this title with a midnight, pale-sand, and coral palette; "
     "keep the same clean flat 2D construction.",
     "Accent this title with a slate, bright-white, and gold-line palette; "
+    "keep the same clean flat 2D construction.",
+)
+
+HTTO_VISUAL_ACCENTS = (
+    "Accent this title with an ember, charcoal, and electric-gold palette; "
+    "keep the same clean flat 2D construction.",
+    "Accent this title with an indigo, ice-white, and signal-red palette; "
+    "keep the same clean flat 2D construction.",
+    "Accent this title with a graphite, bone, and cobalt palette; "
+    "keep the same clean flat 2D construction.",
+    "Accent this title with a midnight, lime-line, and rust palette; "
+    "keep the same clean flat 2D construction.",
+    "Accent this title with a steel, cream, and crimson palette; "
+    "keep the same clean flat 2D construction.",
+    "Accent this title with a deep-ink, pale-sand, and copper palette; "
     "keep the same clean flat 2D construction.",
 )
 
@@ -150,11 +227,13 @@ def visual_accent_for(slug: str, mode: ChannelMode | str | None = None) -> str:
     """Per-title palette note. Empty for shipped stills that must not drift."""
     if not slug or slug in SHIPPED_STYLE_LOCK:
         return ""
-    accents = (
-        BTB_VISUAL_ACCENTS
-        if parse_mode(mode) is ChannelMode.behind_the_business
-        else VISUAL_ACCENTS
-    )
+    mode_parsed = parse_mode(mode)
+    if mode_parsed is ChannelMode.behind_the_business:
+        accents = BTB_VISUAL_ACCENTS
+    elif mode_parsed is ChannelMode.how_they_took_over:
+        accents = HTTO_VISUAL_ACCENTS
+    else:
+        accents = VISUAL_ACCENTS
     return accents[_stable_index(slug, len(accents))]
 
 
@@ -163,6 +242,13 @@ def kokoro_voice_for(slug: str) -> str:
     if not slug or slug in SHIPPED_STYLE_LOCK:
         return "am_liam"
     return KOKORO_ROSTER[_stable_index(f"{slug}:voice", len(KOKORO_ROSTER))]
+
+
+def kokoro_speed_for(slug: str, cfg: ChannelConfig | None = None) -> float:
+    """Channel default (at least 1.0), unless this slug is locked to a recut."""
+    if slug in KOKORO_SPEED_LOCK:
+        return float(KOKORO_SPEED_LOCK[slug])
+    return max(float((cfg or CHANNEL).kokoro_speed), KOKORO_SPEED_MIN)
 
 
 class ChannelConfig(BaseModel):
@@ -207,6 +293,7 @@ class ChannelConfig(BaseModel):
     chapter_count_max: int = 6
     host_attribution: str = HOST_ATTRIBUTION
     channel_about: str = CHANNEL_ABOUT
+    channel_handle: str = ""
     youtube_disclosure: str = YOUTUBE_DISCLOSURE
     videos_index: str = "docs/videos/README.md"
     playbook: str = "docs/custom-videos.md"
@@ -241,16 +328,17 @@ CHANNEL = ChannelConfig()
 
 BEHIND_THE_BUSINESS = ChannelConfig(
     mode=ChannelMode.behind_the_business,
-    name="Behind The Business",
+    name="How They Really Make Money",
     title_pattern="How {company} Really Makes Money",
     target_duration_seconds=1320,
     min_duration_seconds=1200,
     max_duration_seconds=1500,
     spoken_wpm_min=145,
     spoken_wpm_max=155,
-    narration_word_min=3000,
-    narration_word_max=3750,
-    narration_wpm=150,
+    # Same 20–25 minute word budget as WTRT now that Kokoro is 1.15.
+    narration_word_min=4400,
+    narration_word_max=5500,
+    narration_wpm=200,
     min_scene_duration=4.0,
     max_scene_duration=8.0,
     visual_change_target_seconds=6.0,
@@ -259,7 +347,7 @@ BEHIND_THE_BUSINESS = ChannelConfig(
     short_word_max=140,
     voice="kokoro",
     kokoro_voice="am_liam",
-    kokoro_speed=0.92,
+    kokoro_speed=1.15,
     visual_style=BEHIND_THE_BUSINESS_VISUAL_STYLE,
     negative_style=BEHIND_THE_BUSINESS_NEGATIVE_STYLE,
     title_payoff_max_words=28,
@@ -267,6 +355,7 @@ BEHIND_THE_BUSINESS = ChannelConfig(
     chapter_count_max=8,
     host_attribution=BTB_HOST_ATTRIBUTION,
     channel_about=BTB_CHANNEL_ABOUT,
+    channel_handle=BTB_CHANNEL_HANDLE,
     youtube_disclosure=BTB_YOUTUBE_DISCLOSURE,
     videos_index="docs/business/README.md",
     playbook="docs/behind-the-business.md",
@@ -283,9 +372,55 @@ BEHIND_THE_BUSINESS = ChannelConfig(
     ),
 )
 
+HOW_THEY_TOOK_OVER = ChannelConfig(
+    mode=ChannelMode.how_they_took_over,
+    name="How They Took Over",
+    title_pattern="How {subject} Took Over {arena}",
+    target_duration_seconds=1320,
+    min_duration_seconds=1080,
+    max_duration_seconds=1500,
+    spoken_wpm_min=145,
+    spoken_wpm_max=155,
+    narration_word_min=2800,
+    narration_word_max=3600,
+    narration_wpm=150,
+    min_scene_duration=4.0,
+    max_scene_duration=8.0,
+    visual_change_target_seconds=6.0,
+    default_short_enabled=True,
+    short_word_min=75,
+    short_word_max=140,
+    voice="kokoro",
+    kokoro_voice="am_liam",
+    kokoro_speed=1.15,
+    visual_style=HOW_THEY_TOOK_OVER_VISUAL_STYLE,
+    negative_style=HOW_THEY_TOOK_OVER_NEGATIVE_STYLE,
+    title_payoff_max_words=28,
+    chapter_count_min=6,
+    chapter_count_max=10,
+    host_attribution=HTTO_HOST_ATTRIBUTION,
+    channel_about=HTTO_CHANNEL_ABOUT,
+    channel_handle=HTTO_CHANNEL_HANDLE,
+    youtube_disclosure=HTTO_YOUTUBE_DISCLOSURE,
+    videos_index="docs/takeover/README.md",
+    playbook="docs/how-they-took-over.md",
+    banned_lecture_openers=(
+        "was born",
+        "were born",
+        "was founded",
+        "were founded",
+        "this video will",
+        "in this video",
+        "today we are going to",
+        "let us begin by",
+        "the company was founded",
+    ),
+)
+
 CHANNEL_CONFIGS: dict[ChannelMode, ChannelConfig] = {
     ChannelMode.what_they_really_think: CHANNEL,
     ChannelMode.behind_the_business: BEHIND_THE_BUSINESS,
+    ChannelMode.how_they_took_over: HOW_THEY_TOOK_OVER,
 }
 
 
@@ -296,3 +431,21 @@ def config_for(mode: ChannelMode | str | None = None) -> ChannelConfig:
 
 def config_for_project(project: object) -> ChannelConfig:
     return config_for(getattr(project, "channel_mode", None))
+
+
+def default_thumbnail_text(mode: ChannelMode | str | None = None) -> str:
+    parsed = parse_mode(mode)
+    if parsed is ChannelMode.behind_the_business:
+        return "THE REAL ENGINE"
+    if parsed is ChannelMode.how_they_took_over:
+        return "WHY THEY WON"
+    return "THE REAL ANSWER"
+
+
+def about_filename(mode: ChannelMode | str | None = None) -> str:
+    parsed = parse_mode(mode)
+    if parsed is ChannelMode.behind_the_business:
+        return "behind_the_business_about.txt"
+    if parsed is ChannelMode.how_they_took_over:
+        return "how_they_took_over_about.txt"
+    return "channel_about.txt"

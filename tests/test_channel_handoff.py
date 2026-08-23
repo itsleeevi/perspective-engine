@@ -30,7 +30,18 @@ REQUIRED_PHRASES = (
     "ready_to_publish",
     "behind_the_business",
     "docs/behind-the-business.md",
-    "3000–3750",
+    "1.15",
+    "How They Really Make Money",
+    "how_they_took_over",
+    "docs/how-they-took-over.md",
+    "How They Took Over",
+    "python -m channel generate",
+    "artifacts/",
+    "DO NOT MODIFY THE VIDEO ENGINE",
+    "Fresh research for every video",
+    "rewritten articles or YouTube transcripts",
+    "Different story architecture",
+    "Unique scenes and diagrams",
 )
 
 
@@ -62,6 +73,27 @@ def test_business_playbook_exists():
     assert "unknown until researched" in text or "must **not** assume" in text
 
 
+def test_takeover_playbook_exists():
+    playbook = ROOT / "docs" / "how-they-took-over.md"
+    index = ROOT / "docs" / "takeover" / "README.md"
+    assert playbook.is_file()
+    assert index.is_file()
+    text = playbook.read_text(encoding="utf-8")
+    assert "how_they_took_over" in text
+    assert "unknown until researched" in text
+
+
+def test_takeover_readme_lists_every_page():
+    takeover = ROOT / "docs" / "takeover"
+    readme = (takeover / "README.md").read_text(encoding="utf-8")
+    pages = sorted(p.name for p in takeover.glob("*.md") if p.name != "README.md")
+    missing = [name for name in pages if f"({name})" not in readme]
+    assert not missing, (
+        "docs/takeover/README.md must link every shipped page so the next "
+        f"clone sees the Do-not-copy list: {missing}"
+    )
+
+
 def test_videos_readme_lists_every_page():
     videos = ROOT / "docs" / "videos"
     readme = (videos / "README.md").read_text(encoding="utf-8")
@@ -69,5 +101,16 @@ def test_videos_readme_lists_every_page():
     missing = [name for name in pages if f"({name})" not in readme]
     assert not missing, (
         "docs/videos/README.md must link every shipped page so the next "
+        f"clone sees the Do-not-copy list: {missing}"
+    )
+
+
+def test_business_readme_lists_every_page():
+    business = ROOT / "docs" / "business"
+    readme = (business / "README.md").read_text(encoding="utf-8")
+    pages = sorted(p.name for p in business.glob("*.md") if p.name != "README.md")
+    missing = [name for name in pages if f"({name})" not in readme]
+    assert not missing, (
+        "docs/business/README.md must link every shipped page so the next "
         f"clone sees the Do-not-copy list: {missing}"
     )

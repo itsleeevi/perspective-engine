@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 
 from channel.config import CHANNEL, config_for_project
-from channel.modes import is_business
+from channel.modes import is_business, is_company_story, is_takeover
 from channel.originality_policy import GENERIC_AI_PHRASES, STOCK_ENDINGS, STOCK_TRANSITIONS
 from channel.schema import QaScores, VideoProject
 
@@ -61,7 +61,7 @@ def mechanical_qa(project: VideoProject) -> QaScores:
     if _BORN.search(head):
         notes.append("cold open starts with a birth — rewrite; that is a biography")
         scores.hook = 3
-    elif is_business(project.channel_mode) and re.search(
+    elif is_company_story(project.channel_mode) and re.search(
         r"\b(was|were)\s+founded\b", head, re.I
     ):
         notes.append("cold open starts with a founding — start with the contradiction")
@@ -73,7 +73,7 @@ def mechanical_qa(project: VideoProject) -> QaScores:
     if project.analysis.subject.lower() not in first30.lower():
         notes.append("first 30s never names the subject")
         scores.curiosity = 5
-    if not is_business(project.channel_mode):
+    if not is_company_story(project.channel_mode):
         target_word = project.analysis.target.split()[0].lower()
         if target_word not in first30.lower():
             notes.append("first 30s never names the target")
@@ -193,6 +193,11 @@ def run_full_qa(project: VideoProject):
 
         project.business_qa = mechanical_business_qa(project)
         project.qa.notes.extend(project.business_qa.notes)
+    if is_takeover(project.channel_mode):
+        from channel.takeover_qa import mechanical_takeover_qa
+
+        project.takeover_qa = mechanical_takeover_qa(project)
+        project.qa.notes.extend(project.takeover_qa.notes)
     try:
         originality = originality_report_for_slug(project.slug)
     except Exception:

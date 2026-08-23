@@ -14,6 +14,12 @@ BEHIND_THE_BUSINESS_VISUAL_STYLE_LOCK = (
     "High-contrast palette. Crisp diagrams. Not photorealistic, not 3D."
 )
 
+HOW_THEY_TOOK_OVER_VISUAL_STYLE_LOCK = (
+    "Clean flat 2D strategic business documentary illustration. Modern "
+    "vector-like artwork. High-contrast palette. Flywheels, competitor "
+    "maps, timelines. Not photorealistic, not 3D, not logo-vs-logo."
+)
+
 FORBIDDEN_VISUALS = (
     "photorealistic impersonation of real people",
     "realistic fake interviews",
@@ -26,5 +32,6 @@ __all__ = [
     "BEHIND_THE_BUSINESS_VISUAL_STYLE_LOCK",
     "FORBIDDEN_VISUALS",
     "GENERIC_SCENE_PATTERNS",
+    "HOW_THEY_TOOK_OVER_VISUAL_STYLE_LOCK",
     "VISUAL_STYLE_LOCK",
 ]

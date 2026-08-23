@@ -1,0 +1,18 @@
+---
+description: Canonical YouTube documentary engine — read this before generating or changing pipeline code
+alwaysApply: true
+---
+
+# Video engine
+
+This repo's **production videos** are the `channel/` documentary engine, not `graph/` `ideate`. A title naming a real person belongs on `python -m channel generate`, never the LangGraph topic flow.
+
+Canonical command: `python -m channel generate --channel <mode> --title "<title>"`. Jobs live in `artifacts/<JOB_ID>/`. Specs: `docs/video-engine/`.
+
+```text
+DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.
+```
+
+Images: Cursor Grok **GenerateImage** only after `originality_score ≥ 80` and `ready_to_publish`. Voice: Kokoro (`am_liam` / roster). Never Edge, never ElevenLabs. No silent provider fallback.
+
+After a production change, update `docs/custom-videos.md`, `AGENTS.md`, and `.cursor/rules/custom-videos.mdc` together. `tests/test_channel_handoff.py` guards the surfaces.

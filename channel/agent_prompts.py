@@ -12,9 +12,10 @@ RESEARCHER = """
 You are the Researcher for a What They Really Think documentary.
 The title has already been parsed. Do NOT write narration yet.
 
-This is NEW research for THIS title. Do not rewrite Wikipedia alone, do not
-paraphrase one article, do not recycle another episode's claims, do not copy
-another YouTube transcript.
+This is NEW research for THIS title. Fresh research for every video.
+Do not rewrite Wikipedia alone, do not paraphrase one article, do not recycle
+another episode's claims. Original narration, not rewritten articles or
+YouTube transcripts.
 
 Prioritize (in this order): primary sources, speeches, interviews, letters,
 diaries, official documents, memoirs, reputable biographies, academic sources,

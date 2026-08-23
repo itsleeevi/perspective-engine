@@ -199,5 +199,5 @@ def test_btb_write_pack_uses_business_disclosure(tmp_path: Path):
     short = Path(pack["short_description"]).read_text(encoding="utf-8")
     assert BTB_YOUTUBE_DISCLOSURE in short
     about = Path(pack["about"]).read_text(encoding="utf-8")
-    assert "Behind The Business" in about
+    assert "How They Really Make Money" in about
     assert pack["about"].endswith("behind_the_business_about.txt")

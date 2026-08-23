@@ -2,6 +2,7 @@
 
     .venv/bin/python -m channel init "What Einstein Really Thought About Religion"
     .venv/bin/python -m channel init --channel behind_the_business "How Costco Really Makes Money"
+    .venv/bin/python -m channel init --channel how_they_took_over "How Nvidia Took Over AI"
 
 Subcommands:
     init           parse title, seed research, write project skeleton
@@ -10,11 +11,13 @@ Subcommands:
     chunks         print narration chunks (needs a story)
     compile        write fixtures / stills / spec / image jobs / youtube pack
     qa             factcheck + retention + originality + monetization
-    score-title    score a Behind The Business title
-    suggest-titles score How/Why/The patterns for a company
+    score-title    score a title for the selected channel
+    suggest-titles score title patterns for a company / subject
     originality    compare this title to the last 10 shipped videos
     youtube        write description, tags, 1280×720 + 9:16 Shorts thumbs
     branding       size a profile (800×800) and cover (2560×1440) for YouTube
+    generate       isolated job under artifacts/<job_id>/ (canonical Cloud command)
+    cloud-readiness check configs, prompts, rules, writable artifacts
 """
 
 from __future__ import annotations
@@ -27,11 +30,11 @@ from pathlib import Path
 from channel.compile import chunk_list, compile_project
 from channel.config import config_for
 from channel.io import load_project, save_project
-from channel.modes import ChannelMode, parse_mode
+from channel.modes import CHANNEL_FLAG_HELP, ChannelMode, parse_mode
 from channel.paths import ROOT, project_dir, spec_path
 from channel.qa import narration_of, run_full_qa, word_count
 from channel.research import seed_research
-from channel.schema import BusinessContext, ResearchPack, VideoProject
+from channel.schema import BusinessContext, ResearchPack, TakeoverContext, VideoProject
 from channel.slug import slugify
 from channel.title import analyze_title
 
@@ -51,6 +54,7 @@ def _init(args: argparse.Namespace) -> int:
     if not args.skip_seed:
         pack = seed_research(analysis)
     business = None
+    takeover = None
     if mode is ChannelMode.behind_the_business:
         business = BusinessContext(
             company=analysis.company or analysis.subject,
@@ -61,12 +65,20 @@ def _init(args: argparse.Namespace) -> int:
             customer=analysis.customer,
             likely_revenue_streams=list(analysis.likely_revenue_streams),
         )
+    elif mode is ChannelMode.how_they_took_over:
+        takeover = TakeoverContext(
+            subject=analysis.subject,
+            arena=analysis.arena,
+            starting_position=analysis.starting_position,
+            current_position=analysis.dominant_position,
+        )
     project = VideoProject(
         title=analysis.title,
         slug=slug,
         channel_mode=mode,
         analysis=analysis,
         business=business,
+        takeover=takeover,
         research=pack,
         special_instructions=analysis.special_instructions,
     )
@@ -79,6 +91,11 @@ def _init(args: argparse.Namespace) -> int:
     print(f"channel_mode={mode.value}")
     if mode is ChannelMode.behind_the_business:
         print(f"company={analysis.company!r} question={analysis.business_question}")
+    elif mode is ChannelMode.how_they_took_over:
+        print(
+            f"subject={analysis.subject!r} arena={analysis.arena!r} "
+            f"question={analysis.core_question}"
+        )
     else:
         print(f"subject={analysis.subject!r} target={analysis.target!r} verb={analysis.verb}")
     print(f"core_question: {analysis.core_question}")
@@ -99,14 +116,26 @@ def _analyze(args: argparse.Namespace) -> int:
 
 
 def _score_title(args: argparse.Namespace) -> int:
+    mode = parse_mode(args.channel)
+    analysis = analyze_title(args.title, channel_mode=mode)
+    if mode is ChannelMode.how_they_took_over:
+        from channel.takeover_titles import score_takeover_title
+
+        print(json.dumps(score_takeover_title(args.title, analysis=analysis), indent=2))
+        return 0
     from channel.business_titles import score_business_title
 
-    analysis = analyze_title(args.title, channel_mode=ChannelMode.behind_the_business)
     print(json.dumps(score_business_title(args.title, analysis=analysis), indent=2))
     return 0
 
 
 def _suggest_titles(args: argparse.Namespace) -> int:
+    mode = parse_mode(args.channel)
+    if mode is ChannelMode.how_they_took_over:
+        from channel.takeover_titles import suggest_takeover_titles
+
+        print(json.dumps(suggest_takeover_titles(args.company, y=args.y or ""), indent=2))
+        return 0
     from channel.business_titles import suggest_business_titles
 
     print(json.dumps(suggest_business_titles(args.company, y=args.y or ""), indent=2))
@@ -126,11 +155,10 @@ def _agent_readme(slug: str, title: str, mode: ChannelMode | None = None) -> str
 
     prompts = stage_prompts_for(mode)
     cfg = config_for(mode)
-    docs = (
-        f"docs/business/{slug}.md"
-        if mode is ChannelMode.behind_the_business
-        else f"docs/videos/{slug}.md"
-    )
+    docs = {
+        ChannelMode.behind_the_business: f"docs/business/{slug}.md",
+        ChannelMode.how_they_took_over: f"docs/takeover/{slug}.md",
+    }.get(mode, f"docs/videos/{slug}.md")
     return f"""# {title}
 
 Working directory for this video. Story content lives in `project.json`.
@@ -158,10 +186,21 @@ Images are Cursor Grok GenerateImage. Do not invent quotes or numbers.
 
 
 def _load(slug: str) -> tuple[Path, VideoProject]:
-    path = project_dir(slug) / "project.json"
-    if not path.is_file():
-        raise SystemExit(f"no project at {path} — run: python -m channel init \"<title>\"")
+    from channel.job import resolve_project_path
+
+    try:
+        path = resolve_project_path(slug)
+    except FileNotFoundError as exc:
+        raise SystemExit(
+            f"{exc} — run: python -m channel generate --channel <mode> --title \"…\""
+        ) from exc
     return path, load_project(path)
+
+
+def _job_root(project_file: Path) -> Path | None:
+    from channel.job import artifact_job_root
+
+    return artifact_job_root(project_file)
 
 
 def _chunks(args: argparse.Namespace) -> int:
@@ -179,6 +218,9 @@ def _qa(args: argparse.Namespace) -> int:
     _path, project = _load(args.slug)
     report, scores, originality, monetization = run_full_qa(project)
     save_project(project, _path)
+    from channel.job import persist_project_sidecars
+
+    persist_project_sidecars(project, _path.parent)
     print(json.dumps(report.model_dump(), indent=2))
     print(json.dumps(scores.model_dump(), indent=2))
     if originality:
@@ -187,6 +229,8 @@ def _qa(args: argparse.Namespace) -> int:
         print(json.dumps(monetization.model_dump(), indent=2))
     if project.business_qa:
         print(json.dumps(project.business_qa.model_dump(), indent=2))
+    if project.takeover_qa:
+        print(json.dumps(project.takeover_qa.model_dump(), indent=2))
     text = narration_of(project)
     cfg = config_for(project.channel_mode)
     if text:
@@ -229,8 +273,18 @@ def _originality(args: argparse.Namespace) -> int:
 
 
 def _compile(args: argparse.Namespace) -> int:
+    from channel.engine import image_token_for
+
     path, project = _load(args.slug)
-    written = compile_project(project, stubs_ok=args.stubs)
+    job_root = _job_root(path)
+    written = compile_project(
+        project,
+        stubs_ok=args.stubs,
+        root=job_root,
+        image_token=image_token_for(
+            project.slug, path.parent.name if job_root else None
+        ),
+    )
     from channel.originality import originality_report_for_slug, regenerate_targets
     from channel.monetization_qa import compute_monetization_readiness
 
@@ -239,11 +293,18 @@ def _compile(args: argparse.Namespace) -> int:
         project.originality = originality
         project.monetization = compute_monetization_readiness(project, originality)
     save_project(project, path)
+    from channel.job import persist_project_sidecars
+
+    persist_project_sidecars(project, path.parent)
     for k, v in written.items():
         print(f"{k}: {v}")
-    spec = spec_path(project.slug)
-    print("lint: .venv/bin/python scripts/lint_story.py", spec.relative_to(ROOT))
-    print("originality: .venv/bin/python scripts/lint_originality.py", spec.relative_to(ROOT))
+    spec = spec_path(project.slug, _job_root(path))
+    try:
+        spec_rel = spec.relative_to(ROOT)
+    except ValueError:
+        spec_rel = spec
+    print("lint: .venv/bin/python scripts/lint_story.py", spec_rel)
+    print("originality: .venv/bin/python scripts/lint_originality.py", spec_rel)
     print("jobs: GenerateImage using fixtures/*image_jobs.json prompts")
     print("thumb: GenerateImage the *_thumbnail_image_jobs.json still and")
     print("       the *_short_thumbnail_image_jobs.json still, then")
@@ -315,31 +376,52 @@ def _branding(args: argparse.Namespace) -> int:
         render_banner_jpeg,
         render_profile_jpeg,
         write_banner_safezone_preview,
+        write_channel_copy,
     )
 
+    mode = args.channel or None
+    if not args.profile and not args.cover:
+        raise SystemExit("pass --profile and/or --cover")
     if args.profile:
         src = Path(args.profile)
         if not src.is_file():
             raise SystemExit(f"no profile still at {src}")
-        out = render_profile_jpeg(src)
+        out = render_profile_jpeg(src, mode=mode)
         print(f"profile {PROFILE_W}x{PROFILE_H}: {out}")
     if args.cover:
         src = Path(args.cover)
         if not src.is_file():
             raise SystemExit(f"no cover still at {src}")
-        banner = render_banner_jpeg(src)
-        preview = write_banner_safezone_preview(banner)
+        banner = render_banner_jpeg(src, mode=mode)
+        preview = write_banner_safezone_preview(banner, mode=mode)
         print(f"cover {BANNER_W}x{BANNER_H}: {banner}")
         print(f"safe-zone preview (do not upload): {preview}")
-    if not args.profile and not args.cover:
-        raise SystemExit("pass --profile and/or --cover")
+    copy = write_channel_copy(mode=mode)
+    print(f"about: {copy['about']}")
+    if copy["handle"].is_file():
+        print(f"handle: {copy['handle']}")
     return 0
+
+
+def _generate(args: argparse.Namespace) -> int:
+    from channel.generate import run_generate
+
+    return run_generate(args)
+
+
+def _cloud_readiness(args: argparse.Namespace) -> int:
+    from channel.readiness import check_readiness, print_readiness
+
+    return print_readiness(check_readiness(strict=bool(args.strict)))
 
 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(
         prog="channel",
-        description="Shared video engine (What They Really Think / Behind The Business)",
+        description=(
+            "Shared video engine (What They Really Think / "
+            "How They Really Make Money / How They Took Over)"
+        ),
     )
     sub = p.add_subparsers(dest="cmd", required=True)
 
@@ -348,7 +430,7 @@ def main(argv: list[str] | None = None) -> int:
     init.add_argument(
         "--channel",
         default="what_they_really_think",
-        help="what_they_really_think (default) or behind_the_business (aliases: wtrt, btb)",
+        help=CHANNEL_FLAG_HELP,
     )
     init.add_argument("--instructions", default="")
     init.add_argument("--duration", type=int, default=None)
@@ -360,7 +442,7 @@ def main(argv: list[str] | None = None) -> int:
     an.add_argument(
         "--channel",
         default="what_they_really_think",
-        help="what_they_really_think (default) or behind_the_business",
+        help=CHANNEL_FLAG_HELP,
     )
     an.add_argument("--instructions", default="")
     an.add_argument("--duration", type=int, default=None)
@@ -368,17 +450,27 @@ def main(argv: list[str] | None = None) -> int:
 
     st = sub.add_parser(
         "score-title",
-        help="score a Behind The Business title (1–10 dimensions + TITLE_SCORE)",
+        help="score a title (1–10 dimensions + TITLE_SCORE)",
     )
     st.add_argument("title")
+    st.add_argument(
+        "--channel",
+        default="behind_the_business",
+        help=CHANNEL_FLAG_HELP,
+    )
     st.set_defaults(func=_score_title)
 
     sg = sub.add_parser(
         "suggest-titles",
-        help="fill Behind The Business title patterns for a company and score them",
+        help="fill title patterns for a company/subject and score them",
     )
     sg.add_argument("company")
-    sg.add_argument("--y", default="", help="optional second noun (Makes Money From Y)")
+    sg.add_argument("--y", default="", help="optional second noun (arena / From Y)")
+    sg.add_argument(
+        "--channel",
+        default="behind_the_business",
+        help=CHANNEL_FLAG_HELP,
+    )
     sg.set_defaults(func=_suggest_titles)
 
     rs = sub.add_parser("research-seed", help="re-fetch encyclopedia seed")
@@ -432,7 +524,35 @@ def main(argv: list[str] | None = None) -> int:
     )
     br.add_argument("--profile", default="", help="square still for the circular icon")
     br.add_argument("--cover", default="", help="16:9 still for the channel banner")
+    br.add_argument(
+        "--channel",
+        default="",
+        help=CHANNEL_FLAG_HELP,
+    )
     br.set_defaults(func=_branding)
+
+    gen = sub.add_parser(
+        "generate",
+        help="create or resume an isolated artifacts/<job_id> generation job",
+    )
+    gen.add_argument("--channel", default="", help=CHANNEL_FLAG_HELP)
+    gen.add_argument("--title", default="")
+    gen.add_argument("--job", default="", help="JSON job file with channel + title")
+    gen.add_argument("--resume", default="", help="existing job_id")
+    gen.add_argument("--job-id", dest="job_id", default="")
+    gen.add_argument("--instructions", default="")
+    gen.add_argument("--duration", type=int, default=None)
+    gen.add_argument("--duration-minutes", dest="duration_minutes", type=float, default=None)
+    gen.add_argument("--skip-seed", action="store_true")
+    gen.add_argument("--smoke-test", action="store_true")
+    gen.add_argument("--stubs", action="store_true")
+    gen.add_argument("--force", action="store_true")
+    gen.add_argument("--artifacts", default="", help="override artifacts root (tests)")
+    gen.set_defaults(func=_generate)
+
+    ready = sub.add_parser("cloud-readiness", help="verify a fresh clone can generate")
+    ready.add_argument("--strict", action="store_true", help="fail if ffmpeg is missing")
+    ready.set_defaults(func=_cloud_readiness)
 
     args = p.parse_args(argv)
     return int(args.func(args))

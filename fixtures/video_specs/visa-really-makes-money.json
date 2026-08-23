@@ -1,0 +1,62 @@
+{
+  "engine": "channel",
+  "channel": "How They Really Make Money",
+  "channel_mode": "behind_the_business",
+  "topic": "How Visa Really Makes Money",
+  "fixture": "fixtures/visa-really-makes-money.json",
+  "stills_module": "fixtures/visa-really-makes-money_stills.py",
+  "still_prefix": "visa-really-makes-money_v1_",
+  "stills_dir": "assets/grok_visa-really-makes-money_v1",
+  "thread_id": "visa-really-makes-money-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_liam",
+  "kokoro_speed": 1.15,
+  "kokoro_sentence_pause": 0.06,
+  "kokoro_clause_pause": 0.02,
+  "kokoro_pack_words": 1,
+  "kokoro_scene_pause": 0.28,
+  "narration_wpm": 150,
+  "burn_captions": true,
+  "chunk_min_seconds": 4.0,
+  "chunk_max_seconds": 8.0,
+  "chunk_target_seconds": 6.0,
+  "youtube": {
+    "title": "How Visa Really Makes Money",
+    "description": "How Visa really makes money: it gets paid to carry the yes, not to lend the money.\n\nYou tap a card every day. Visa usually did not issue it and did not take the credit risk. Fiscal 2025 filings show $40.0 billion of net revenue on $14.2 trillion of payments volume after huge client incentives. The fat line on many merchant statements is interchange moving to the issuing bank.\n\nSources / further reading:\n- Visa Inc. Form 10-K for the fiscal year ended September 30, 2025\n- Visa Reports Fiscal Fourth Quarter and Full-Year 2025 Results (October 28, 2025)\n- Visa Inc. Annual Report 2025 financial highlights\n- Visa Reports Fiscal Third Quarter 2026 Results (July 28, 2026)\n\nEducational analysis of a business model. Not investment advice.",
+    "thumbnail_concept": "One simplified tap terminal and one plastic card mid-tap, plus a tiny teal pulse leaving the slab. High contrast navy backdrop. Empty right third for type. No logos, no photoreal faces.",
+    "thumbnail_text": "EVERY TIME YOU PAY",
+    "tags": [
+      "visa",
+      "how they really make money",
+      "how visa makes money",
+      "payments network",
+      "interchange",
+      "business documentary",
+      "how the company makes money",
+      "visa how the company makes money",
+      "how visa really makes money",
+      "illustrated documentary",
+      "business model",
+      "the authorization pulse"
+    ],
+    "short_title": "What Happens When You Tap Your Card",
+    "chapters": [
+      "The Tap",
+      "Four Desks",
+      "The Fat Line",
+      "The Thin Pipe",
+      "Why Banks Stay",
+      "The Tiny Cut",
+      "The Paper Stack",
+      "Carry The Yes"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/visa-really-makes-money_short.json",
+    "stills_module": "fixtures/visa-really-makes-money_short_stills.py",
+    "still_prefix": "visa-really-makes-money_short_v1_",
+    "stills_dir": "assets/grok_visa-really-makes-money_short_v1",
+    "output": "assets/output/visa-really-makes-money_short.mp4"
+  }
+}

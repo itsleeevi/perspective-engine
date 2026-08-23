@@ -1,0 +1,76 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "visa-really-makes-money_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "You tap a card at a cafe.",
+      "scene": "Shopper taps a plain white card on a black terminal. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a graphite, paper-white, and signal-orange palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. CHARACTER shopper: adult with short dark side-parted hair, simple oval cartoon face, navy crewneck sweater over a cream collar, flat 2D vector, NOT photoreal LOCATION checkout (same set): simple cafe counter, pale wood, one tap terminal, no logos, ice-white and navy palette. Palette: #0f2744, #f7f4ee, #2ec4b6. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: Shopper taps a plain white card on a black terminal. No logos.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "001",
+      "filename": "visa-really-makes-money_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "The clerk doesn't phone a lender. A little pulse leaves the counter, hits the shop's bank,",
+      "scene": "Four simple desks. A thin teal line hops them. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a graphite, paper-white, and signal-orange palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION four_desks (same set): four clean desks in a row on a navy floor, empty name plates, teal connecting lines, no logos. Palette: #0f2744, #2ec4b6, #f7f4ee. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: Four simple desks. A thin teal line hops them. No logos.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "002",
+      "filename": "visa-really-makes-money_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "hits a network, hits the bank that gave you the plastic, and races home with a yes.",
+      "scene": "THE_AUTHORIZATION_PULSE A coin-sized teal authorization pulse, glowing, large in frame, high contrast, the same simple orb every time travels a dark aisle of teal slabs.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a graphite, paper-white, and signal-orange palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION network_room (same set): abstract server hall of simple teal slabs and dark aisles, no brand marks, no readable racks. Palette: #0b1c31, #2ec4b6. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: THE_AUTHORIZATION_PULSE A coin-sized teal authorization pulse, glowing, large in frame, high contrast, the same simple orb every time travels a dark aisle of teal slabs.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "003",
+      "filename": "visa-really-makes-money_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "close-up",
+      "chunk": "Visa didn't issue that card and didn't take the credit risk.",
+      "scene": "Tiny teal sliver next to a fat orange bar on a blank receipt. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a graphite, paper-white, and signal-orange palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION checkout (same set): simple cafe counter, pale wood, one tap terminal, no logos, ice-white and navy palette. Palette: #0f2744, #f7f4ee, #2ec4b6. STRICTLY NO people, NO faces, NO hands. SHOT: close-up. ACTION: Tiny teal sliver next to a fat orange bar on a blank receipt. No logos.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "004",
+      "filename": "visa-really-makes-money_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "The fat fee on the shop's statement often goes to the issuing bank. Visa gets paid to carry the yes.",
+      "scene": "A gold arc over a navy map. No country names.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a graphite, paper-white, and signal-orange palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION world_map (same set): flat simplified world map on a navy wall, thin gold routes, no country names readable. Palette: #0f2744, #d4b46a. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: A gold arc over a navy map. No country names.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "005",
+      "filename": "visa-really-makes-money_short_v1_005.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "That's the thin pipe under a tap you have already done a hundred times.",
+      "scene": "Banker holds a plain white card. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a graphite, paper-white, and signal-orange palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. CHARACTER banker: older adult, short steel-grey hair, two-circle cartoon glasses, charcoal jacket, pale shirt, no tie, flat 2D vector, NOT photoreal LOCATION bank_office (same set): simple office with one window and a pale desk, graphite and paper-white, no logos. Palette: #3d4451, #f4efe6. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: Banker holds a plain white card. No logos.",
+      "camera_motion": "static"
+    }
+  ]
+}

@@ -126,6 +126,7 @@ def make_voice_adapter():
     raise ValueError(f"Unknown voice in spec: {kind!r}")
 
 
+from channel.engine import generate_name_map  # noqa: E402
 from scripts._media import cover_crop  # noqa: E402
 
 
@@ -243,11 +244,22 @@ def gather_stills() -> list[Path]:
     """Cover-crop generated frames to 16:9 into STILLS_DIR."""
     n = len(_stills_module().STILLS)
     STILLS_DIR.mkdir(parents=True, exist_ok=True)
+    jobs_rel = SPEC.get("image_jobs")
+    jobs_file = (
+        ROOT / jobs_rel
+        if jobs_rel
+        else ROOT / "fixtures" / f"{STILL_PREFIX}image_jobs.json"
+    )
+    aliases = generate_name_map(jobs_file)
     missing: list[Path] = []
     for i in range(n):
         name = f"{STILL_PREFIX}{i:03d}.png"
         dest = STILLS_DIR / name
         src = CURSOR_ASSETS / name
+        if not (src.is_file() and src.stat().st_size > 0):
+            alt = aliases.get(name)
+            if alt:
+                src = CURSOR_ASSETS / alt
         if src.is_file() and src.stat().st_size > 0:
             cover_crop(src, dest, 16, 9)
             continue

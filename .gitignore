@@ -31,6 +31,10 @@ assets/
 # Working video projects (generated per title)
 channel/projects/*/
 
+# Isolated Cloud / generate jobs (media + per-run fixtures)
+artifacts/*
+!artifacts/.gitkeep
+
 # Editors
 .idea/
 .vscode/

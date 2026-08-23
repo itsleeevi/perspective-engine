@@ -1,0 +1,14 @@
+---
+description: Research and sourcing rules for documentary titles
+alwaysApply: true
+---
+
+# Research quality
+
+Research before writing. Wikipedia is a seed only. Never invent numbers, quotes, market share, motives, or meetings.
+
+Keep `claim_id`, source, source_date / fiscal_period. Inferred motive uses “This appears to have…” or “The strategy suggests…”.
+
+Money titles: filings first. Takeover titles: filings plus turning points and a fair competitor map. Think titles: primary sources for the opinion.
+
+Sacred: fresh research; different story architecture; original narration (not rewritten articles or YouTube transcripts); unique scenes and diagrams; unique story engine.

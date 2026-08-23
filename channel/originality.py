@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from channel.config import config_for
-from channel.modes import ChannelMode, is_business, parse_mode
+from channel.modes import ChannelMode, is_business, is_takeover, parse_mode
 from channel.originality_policy import (
     BRAND_IGNORE_PATTERNS,
     GENERIC_SCENE_PATTERNS,
@@ -368,6 +368,13 @@ def originality_report_for_slug(slug: str) -> OriginalityReport:
         for phrase in BUSINESS_STOCK_HOOKS:
             if phrase in head:
                 flags.append(f"stock business hook: {phrase!r} — vary the hook type")
+    if is_takeover(mode):
+        from channel.originality_policy import TAKEOVER_STOCK_HOOKS
+
+        head = narration.lower()[:400]
+        for phrase in TAKEOVER_STOCK_HOOKS:
+            if phrase in head:
+                flags.append(f"stock takeover hook: {phrase!r} — research must pick a different rise")
 
     # Generic scene grammar without historical reason.
     scenes = _scene_tokens(slug)

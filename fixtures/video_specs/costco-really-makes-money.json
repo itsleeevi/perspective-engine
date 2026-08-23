@@ -1,0 +1,61 @@
+{
+  "engine": "channel",
+  "channel": "How They Really Make Money",
+  "channel_mode": "behind_the_business",
+  "topic": "How Costco Really Makes Money",
+  "fixture": "fixtures/costco-really-makes-money.json",
+  "stills_module": "fixtures/costco-really-makes-money_stills.py",
+  "still_prefix": "costco-really-makes-money_v1_",
+  "stills_dir": "assets/grok_costco-really-makes-money_v1",
+  "thread_id": "costco-really-makes-money-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_liam",
+  "kokoro_speed": 0.92,
+  "kokoro_sentence_pause": 0.06,
+  "kokoro_clause_pause": 0.02,
+  "kokoro_pack_words": 1,
+  "kokoro_scene_pause": 0.28,
+  "narration_wpm": 150,
+  "burn_captions": true,
+  "chunk_min_seconds": 4.0,
+  "chunk_max_seconds": 8.0,
+  "chunk_target_seconds": 6.0,
+  "youtube": {
+    "title": "How Costco Really Makes Money",
+    "description": "How Costco really makes money: the card at the door is the real checkout, not the long receipt at the exit.\n\nYou pay for the year before you pay for the food. Fiscal 2025 filings show $5.323 billion of membership fees next to $10.383 billion of operating income, while merchandise gross margin was only 11.12 percent of net sales. Executive members were under half the paid base and about 73.6 percent of sales.\n\nSources / further reading:\n- Costco Wholesale Corporation Form 10-K for the fiscal year ended August 31, 2025\n- Costco Wholesale Corporation Reports Fourth Quarter and Fiscal Year 2025 Operating Results (September 25, 2025)\n- Costco Wholesale Corporation Form 10-Q for the quarter ended May 10, 2026\n- Costco Wholesale Corporation Reports Third Quarter Fiscal 2026 Results (May 28, 2026)\n\nEducational analysis of a business model. Not investment advice.",
+    "thumbnail_concept": "One simplified gold membership card at a warehouse door scanner, plus a blurred pallet aisle behind. High contrast slate backdrop. Empty right third for type. No logos, no photoreal faces.",
+    "thumbnail_text": "PAY AT THE DOOR",
+    "tags": [
+      "costco",
+      "how they really make money",
+      "how costco makes money",
+      "warehouse club",
+      "membership fees",
+      "business documentary",
+      "how the company makes money",
+      "illustrated documentary",
+      "the gold card",
+      "costco how the company makes money",
+      "how costco really makes money",
+      "behind the business",
+      "business model"
+    ],
+    "short_title": "Why You Pay Before You Shop",
+    "chapters": [
+      "Exit Receipt",
+      "Thin Stickers",
+      "Door Money",
+      "Gold Upgrade",
+      "Why Copycats Fail",
+      "Pay For The Door"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/costco-really-makes-money_short.json",
+    "stills_module": "fixtures/costco-really-makes-money_short_stills.py",
+    "still_prefix": "costco-really-makes-money_short_v1_",
+    "stills_dir": "assets/grok_costco-really-makes-money_short_v1",
+    "output": "assets/output/costco-really-makes-money_short.mp4"
+  }
+}

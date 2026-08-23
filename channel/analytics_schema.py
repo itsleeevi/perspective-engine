@@ -21,6 +21,9 @@ class PerformanceRecord(BaseModel):
     traffic_sources: dict[str, float] = Field(default_factory=dict)
     retention_curve: list[float] = Field(default_factory=list)
     rpm: float | None = None
+    suggested_video_traffic: float | None = None
+    browse_traffic: float | None = None
+    cluster: str = ""
     industry: str = ""
     title_pattern: str = ""
     thumbnail_concept: str = ""

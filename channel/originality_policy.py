@@ -9,6 +9,15 @@ from __future__ import annotations
 
 # --- Originality score (0–100, higher = more original) -----------------------
 
+# Sacred for every channel video. Fail the title if any of these is skipped.
+SACRED_VIDEO_RULES = (
+    "Fresh research for every video.",
+    "Different story architecture for each company.",
+    "Original narration, not rewritten articles or YouTube transcripts.",
+    "Unique scenes and diagrams built around that company's actual business.",
+    "unique story engine",
+)
+
 ORIGINALITY_SCORE_MIN = 80
 RECENT_VIDEO_COMPARE_COUNT = 10
 
@@ -34,6 +43,10 @@ BUSINESS_MONETIZATION_THRESHOLDS = {
     "business_analysis_depth_min": 8,
 }
 
+TAKEOVER_MONETIZATION_THRESHOLDS = {
+    "transformation_depth_min": 8,
+}
+
 MONETIZATION_THRESHOLDS = {
     "original_research_min": 8,
     "story_originality_min": 8,
@@ -51,6 +64,31 @@ BUSINESS_STOCK_HOOKS: tuple[str, ...] = (
     "this company is not really",
     "isn't really a",
     "is not really a",
+)
+
+TAKEOVER_STOCK_HOOKS: tuple[str, ...] = (
+    "started as a small company",
+    "then they launched a product",
+    "then a competitor appeared",
+    "and they won the market",
+    "from underdog to giant",
+    "the rest is history",
+)
+
+TAKEOVER_SOURCE_PRIORITY: tuple[str, ...] = (
+    "annual reports",
+    "SEC or equivalent filings",
+    "shareholder letters",
+    "investor presentations",
+    "official company archives",
+    "executive interviews",
+    "founder interviews",
+    "earnings calls",
+    "court or regulatory documents",
+    "reputable business journalism",
+    "respected biographies",
+    "industry reports",
+    "academic or technical papers",
 )
 
 STOCK_HOOK_OPENERS: tuple[str, ...] = (
@@ -175,6 +213,8 @@ RESEARCH_SOURCE_PRIORITY: tuple[str, ...] = (
 BRAND_IGNORE_PATTERNS: tuple[str, ...] = (
     "what they really think",
     "behind the business",
+    "how they really make money",
+    "how they took over",
     "simple flat 2d",
     "kokoro",
     "illustrated documentary",

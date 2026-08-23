@@ -80,6 +80,7 @@ if SPEC.get("kokoro_pack_words") is not None:
 if SPEC.get("kokoro_scene_pause") is not None:
     os.environ["KOKORO_SCENE_PAUSE"] = str(SPEC["kokoro_scene_pause"])
 
+from channel.engine import generate_name_map  # noqa: E402
 from channel.shorts import (  # noqa: E402
     find_short_thumbnail_still,
     is_short_cta,
@@ -134,6 +135,13 @@ def gather_stills(n: int, chunks: list[str]) -> list[Path]:
     prefix = SHORT["still_prefix"]
     stills_dir = ROOT / SHORT["stills_dir"]
     stills_dir.mkdir(parents=True, exist_ok=True)
+    jobs_rel = SHORT.get("image_jobs") or SPEC.get("short_image_jobs")
+    jobs_file = (
+        ROOT / jobs_rel
+        if jobs_rel
+        else ROOT / "fixtures" / f"{prefix}image_jobs.json"
+    )
+    aliases = generate_name_map(jobs_file)
     missing: list[Path] = []
     for i in range(n):
         name = f"{prefix}{i:03d}.png"
@@ -142,6 +150,10 @@ def gather_stills(n: int, chunks: list[str]) -> list[Path]:
             render_short_end_card(dest)
             continue
         src = CURSOR_ASSETS / name
+        if not (src.is_file() and src.stat().st_size > 0):
+            alt = aliases.get(name)
+            if alt:
+                src = CURSOR_ASSETS / alt
         if src.is_file() and src.stat().st_size > 0:
             cover_crop(src, dest, 9, 16)
             continue

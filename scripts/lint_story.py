@@ -52,7 +52,7 @@ from pathlib import Path
 
 from adapters.voice.years import SPELLED_YEAR
 from channel.config import config_for
-from channel.modes import is_business
+from channel.modes import is_business, is_company_story, is_takeover
 from channel.originality import mode_for_slug
 from channel.originality_policy import GENERIC_AI_PHRASES
 
@@ -416,7 +416,12 @@ def main() -> None:
     # 4b. EXPLAIN-LIKE-FIVE — the thought must be sayable by a child.
     thought = (fixture.get("the_thought") or "").strip()
     if not thought:
-        if is_business(spec.get("channel_mode")):
+        if is_takeover(spec.get("channel_mode")):
+            _fail(
+                "explain-like-five: add the_thought — one sentence that answers "
+                "how they took over"
+            )
+        elif is_business(spec.get("channel_mode")):
             _fail(
                 "explain-like-five: add the_thought — one sentence that answers "
                 "the business mystery"
@@ -508,12 +513,16 @@ def main() -> None:
                 "cold open: biography dump ('was born') — start with the "
                 "title's mystery, not a birth"
             )
-        if is_business(spec.get("channel_mode")) and re.search(
+        if is_company_story(spec.get("channel_mode")) and re.search(
             r"\b(was|were)\s+founded\b", head
         ):
+            why = (
+                "the transformation gap"
+                if is_takeover(spec.get("channel_mode"))
+                else "the business contradiction"
+            )
             _fail(
-                "cold open: company-history dump ('was founded') — start with "
-                "the business contradiction"
+                f"cold open: company-history dump ('was founded') — start with {why}"
             )
         for opener in (
             "this video will",

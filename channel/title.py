@@ -12,6 +12,7 @@ from channel.business_title import analyze_business_title, looks_like_business
 from channel.config import CHANNEL, config_for
 from channel.modes import ChannelMode, parse_mode
 from channel.schema import SubjectStatus, TitleAnalysis
+from channel.takeover_title import analyze_takeover_title, looks_like_takeover
 
 _TITLE = re.compile(
     r"^What\s+(.+?)\s+Really\s+(Thought|Thinks)\s+About\s+(.+?)\s*\??$",
@@ -28,6 +29,12 @@ def analyze_title(
 ) -> TitleAnalysis:
     raw = " ".join(title.strip().split())
     mode = parse_mode(channel_mode)
+    if mode is ChannelMode.how_they_took_over:
+        return analyze_takeover_title(
+            raw,
+            special_instructions=special_instructions,
+            target_duration_seconds=target_duration_seconds,
+        )
     if mode is ChannelMode.behind_the_business:
         return analyze_business_title(
             raw,
@@ -37,7 +44,12 @@ def analyze_title(
     m = _TITLE.match(raw)
     if not m:
         hint = ""
-        if looks_like_business(raw):
+        if looks_like_takeover(raw):
+            hint = (
+                " If this is a How They Took Over title, pass "
+                "--channel how_they_took_over."
+            )
+        elif looks_like_business(raw):
             hint = (
                 " If this is a Behind The Business title, pass "
                 "--channel behind_the_business."

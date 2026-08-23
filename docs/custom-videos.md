@@ -2,21 +2,37 @@
 
 This is the reusable engine for the YouTube channel **What They Really Think**. It is written so a Cursor Grok agent can produce a new video from a title, without editing Python. Read this fully before starting. After a cut lands, update `docs/videos/`.
 
-The same `channel/` engine also has a second mode, `behind_the_business` (**Behind The Business**). That channel has its own story, research, length (**3000–3750** words at ~150 wpm), and visual rules in `docs/behind-the-business.md`. Do **not** apply those business rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title.
+The same `channel/` engine also has two other modes: `behind_the_business` (**How They Really Make Money** on YouTube; **4400–5500** words at Kokoro **1.15**) in `docs/behind-the-business.md`, and `how_they_took_over` (**How They Took Over**; **2800–3600** words at Kokoro **1.15**) in `docs/how-they-took-over.md`. Do **not** apply those business or takeover rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title. Cloud / parallel runs use `python -m channel generate` and write `artifacts/<JOB_ID>/`. `DO NOT MODIFY THE VIDEO ENGINE` during a normal generation task.
+
+Sacred for every video on either channel:
+
+- **Fresh research for every video.**
+- **Different story architecture** for each company (and each WTRT title).
+- **Original narration, not rewritten articles or YouTube transcripts.**
+- **Unique scenes and diagrams** built around that company's actual business (or that title's actual evidence).
+- Plus the existing **unique story engine** — if you could swap the names and keep the same video, throw it out.
 
 The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → fixtures → Kokoro → FFmpeg.
 
 ## The only required input
 
+Cloud / parallel (canonical — isolated `artifacts/<JOB_ID>/`):
+
+```text
+.venv/bin/python -m channel generate --channel what_they_really_think --title "What Einstein Really Thought About Religion"
+.venv/bin/python -m channel generate --channel behind_the_business --title "How Costco Really Makes Money"
+.venv/bin/python -m channel generate --channel how_they_took_over --title "How Nvidia Took Over AI"
+```
+
+Sequential local (`channel/projects/<slug>/`):
+
 ```text
 .venv/bin/python -m channel init "What Einstein Really Thought About Religion"
-```
-
-That defaults to `what_they_really_think`. For Behind The Business:
-
-```text
 .venv/bin/python -m channel init --channel behind_the_business "How Costco Really Makes Money"
+.venv/bin/python -m channel init --channel how_they_took_over "How Nvidia Took Over AI"
 ```
+
+`init` defaults to `what_they_really_think`. Pass `--channel` explicitly for the other two.
 
 WTRT title:
 
@@ -55,11 +71,12 @@ Research through the day you are writing so the facts are current. **Do not say 
 
 | Piece | Role |
 |---|---|
-| `channel/modes.py` | Explicit `ChannelMode`: `what_they_really_think` or `behind_the_business`. |
-| `channel/config.py` | Permanent style, voice, pacing per channel mode (`CHANNEL` / `BEHIND_THE_BUSINESS`). No people. |
-| `channel/schema.py` | Shared `VideoProject` (research, story, bibles, scenes). Optional `business` block. |
+| `channel/modes.py` | Explicit `ChannelMode`: `what_they_really_think`, `behind_the_business`, or `how_they_took_over`. |
+| `channel/config.py` | Permanent style, voice, pacing per channel mode (`CHANNEL` / `BEHIND_THE_BUSINESS` / `HOW_THEY_TOOK_OVER`). No people. |
+| `channel/schema.py` | Shared `VideoProject` (research, story, bibles, scenes). Optional `business` or `takeover` block. |
 | `channel/title.py` | Agent 1 — parse the title for the selected channel. |
-| `channel/business_prompts.py` | Behind The Business stage prompts only. |
+| `channel/business_prompts.py` | How They Really Make Money stage prompts only. |
+| `channel/takeover_prompts.py` | How They Took Over stage prompts only. |
 | `channel/research.py` | Encyclopedia **seed** only. Agent adds primary-source claims. |
 | `channel/factcheck.py` | Mechanical quote/source checks. |
 | `channel/agent_prompts.py` | Stage prompts for Cursor Grok (research → story → scenes). |
@@ -107,8 +124,10 @@ TITLE
     (do not copy its spine; lint_story will fail you).
 
  2. .venv/bin/python -m channel init "What X Really Thought About Y"
-    Optional: --instructions "..." --duration 480 --skip-seed
+    Optional: --instructions "..." --duration 1380 --skip-seed
     Writes channel/projects/<slug>/project.json
+    Cloud / parallel: python -m channel generate --channel what_they_really_think --title "…"
+    (artifacts/<JOB_ID>/). Do not put a company name in a GenerateImage filename.
 
  3. RESEARCHER (Cursor Grok). Fill research.claims with sourced evidence.
     Never invent quotes. Flag contradictions. If evidence is thin, say so.

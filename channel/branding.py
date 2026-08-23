@@ -16,6 +16,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
+from channel.modes import is_business, is_takeover
 from channel.youtube import youtube_dir
 from scripts._media import cover_crop
 
@@ -42,9 +43,11 @@ def _save_jpeg(im: Image.Image, dest: Path, max_bytes: int) -> Path:
     return dest
 
 
-def render_profile_jpeg(src: Path, dest: Path | None = None) -> Path:
+def render_profile_jpeg(
+    src: Path, dest: Path | None = None, *, mode: str | None = None
+) -> Path:
     """Cover-crop to a centered 800×800 square for the circular icon."""
-    dest = dest or youtube_dir() / "channel_profile_800x800.jpg"
+    dest = dest or branding_paths(mode=mode)["profile"]
     tmp = dest.with_suffix(".work.png")
     cover_crop(src, tmp, 1, 1, keep_top=False)
     im = Image.open(tmp).convert("RGB")
@@ -53,9 +56,11 @@ def render_profile_jpeg(src: Path, dest: Path | None = None) -> Path:
     return _save_jpeg(im, dest, PROFILE_MAX_BYTES)
 
 
-def render_banner_jpeg(src: Path, dest: Path | None = None) -> Path:
+def render_banner_jpeg(
+    src: Path, dest: Path | None = None, *, mode: str | None = None
+) -> Path:
     """Cover-crop to 16:9 (centered) and scale to 2560×1440."""
-    dest = dest or youtube_dir() / "channel_cover_2560x1440.jpg"
+    dest = dest or branding_paths(mode=mode)["banner"]
     tmp = dest.with_suffix(".work.png")
     cover_crop(src, tmp, 16, 9, keep_top=False)
     im = Image.open(tmp).convert("RGB")
@@ -64,9 +69,11 @@ def render_banner_jpeg(src: Path, dest: Path | None = None) -> Path:
     return _save_jpeg(im, dest, BANNER_MAX_BYTES)
 
 
-def write_banner_safezone_preview(banner: Path, dest: Path | None = None) -> Path:
+def write_banner_safezone_preview(
+    banner: Path, dest: Path | None = None, *, mode: str | None = None
+) -> Path:
     """Preview only — do not upload. Shows the all-device safe rectangle."""
-    dest = dest or youtube_dir() / "channel_cover_safezone_preview.jpg"
+    dest = dest or branding_paths(mode=mode)["preview"]
     im = Image.open(banner).convert("RGB")
     if im.size != (BANNER_W, BANNER_H):
         im = im.resize((BANNER_W, BANNER_H), Image.Resampling.LANCZOS)
@@ -91,10 +98,42 @@ def write_banner_safezone_preview(banner: Path, dest: Path | None = None) -> Pat
     return dest
 
 
-def branding_paths(root: Path | None = None) -> dict[str, Path]:
+def branding_paths(root: Path | None = None, *, mode: str | None = None) -> dict[str, Path]:
     dest = youtube_dir(root)
+    if is_takeover(mode):
+        return {
+            "profile": dest / "how_they_took_over_profile_800x800.jpg",
+            "banner": dest / "how_they_took_over_cover_2560x1440.jpg",
+            "preview": dest / "how_they_took_over_cover_safezone_preview.jpg",
+            "about": dest / "how_they_took_over_about.txt",
+            "handle": dest / "how_they_took_over_handle.txt",
+        }
+    if is_business(mode):
+        return {
+            "profile": dest / "behind_the_business_profile_800x800.jpg",
+            "banner": dest / "behind_the_business_cover_2560x1440.jpg",
+            "preview": dest / "behind_the_business_cover_safezone_preview.jpg",
+            "about": dest / "behind_the_business_about.txt",
+            "handle": dest / "behind_the_business_handle.txt",
+        }
     return {
         "profile": dest / "channel_profile_800x800.jpg",
         "banner": dest / "channel_cover_2560x1440.jpg",
         "preview": dest / "channel_cover_safezone_preview.jpg",
+        "about": dest / "channel_about.txt",
+        "handle": dest / "channel_handle.txt",
     }
+
+
+def write_channel_copy(*, mode: str | None = None, root: Path | None = None) -> dict[str, Path]:
+    """Write About + handle text next to the sized JPEGs."""
+    from channel.config import config_for
+
+    cfg = config_for(mode)
+    paths = branding_paths(root, mode=mode)
+    paths["about"].parent.mkdir(parents=True, exist_ok=True)
+    paths["about"].write_text(cfg.channel_about, encoding="utf-8")
+    handle = getattr(cfg, "channel_handle", "") or ""
+    if handle:
+        paths["handle"].write_text(handle.strip() + "\n", encoding="utf-8")
+    return paths

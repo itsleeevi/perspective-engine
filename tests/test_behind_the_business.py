@@ -19,6 +19,8 @@ from channel.config import (
     CHANNEL,
     GLOBAL_VISUAL_STYLE,
     config_for,
+    kokoro_speed_for,
+    kokoro_voice_for,
 )
 from channel.factcheck import factcheck
 from channel.modes import ChannelMode, parse_mode
@@ -58,16 +60,34 @@ def test_wtrt_defaults_unchanged():
 def test_btb_config_is_a_different_channel():
     cfg = config_for("behind_the_business")
     assert cfg is BEHIND_THE_BUSINESS
-    assert cfg.name == "Behind The Business"
+    assert cfg.name == "How They Really Make Money"
     assert cfg.target_duration_seconds == 1320
-    assert cfg.narration_word_min == 3000
-    assert cfg.narration_word_max == 3750
-    assert cfg.narration_wpm == 150
-    assert cfg.kokoro_speed == 0.92
+    assert cfg.narration_word_min == 4400
+    assert cfg.narration_word_max == 5500
+    assert cfg.narration_wpm == 200
+    assert cfg.kokoro_speed == 1.15
     assert cfg.visual_style == BEHIND_THE_BUSINESS_VISUAL_STYLE
     assert "muted historical" not in cfg.visual_style
     assert "What They Really Think" not in cfg.visual_style
     assert CHANNEL.visual_style != cfg.visual_style
+    assert cfg.channel_handle == "@HowTheyReallyMakeMoney"
+    assert "Not investment advice" in cfg.channel_about
+
+
+def test_visa_recut_locks_liam_at_115():
+    assert kokoro_voice_for("visa-really-makes-money") == "am_liam"
+    assert kokoro_speed_for("visa-really-makes-money", BEHIND_THE_BUSINESS) == 1.15
+    assert kokoro_voice_for("costco-really-makes-money") == "am_liam"
+    assert kokoro_speed_for("costco-really-makes-money", BEHIND_THE_BUSINESS) == 0.92
+
+
+def test_new_titles_use_kokoro_at_least_1():
+    from channel.locks import KOKORO_SPEED_MIN
+
+    assert CHANNEL.kokoro_speed >= KOKORO_SPEED_MIN
+    assert BEHIND_THE_BUSINESS.kokoro_speed >= KOKORO_SPEED_MIN
+    assert kokoro_speed_for("acme-really-makes-money", BEHIND_THE_BUSINESS) == 1.15
+    assert kokoro_speed_for("what-someone-really-thought", CHANNEL) == 1.15
 
 
 def test_parse_mode_aliases():
@@ -261,10 +281,16 @@ def test_wtrt_factcheck_does_not_require_fiscal_period():
 
 
 def test_originality_indexes_are_split():
-    assert recent_slugs(channel_mode="behind_the_business") == []
+    btb = recent_slugs(channel_mode="behind_the_business")
+    assert "costco-really-makes-money" in btb
+    assert "visa-really-makes-money" in btb
     wtrt = recent_slugs(channel_mode="what_they_really_think")
     assert wtrt  # shipped history cuts exist
+    assert "visa-really-makes-money" not in wtrt
+    assert "costco-really-makes-money" not in wtrt
     assert mode_for_slug("einstein-religion") is ChannelMode.what_they_really_think
+    assert mode_for_slug("visa-really-makes-money") is ChannelMode.behind_the_business
+    assert mode_for_slug("costco-really-makes-money") is ChannelMode.behind_the_business
 
 
 def _btb_project() -> VideoProject:
@@ -349,7 +375,7 @@ def _btb_project() -> VideoProject:
 def test_btb_mechanical_qa_uses_business_word_budget():
     project = _btb_project()
     scores = mechanical_qa(project)
-    assert any("3000" in n or "words" in n for n in scores.notes) or scores.pacing <= 8
+    assert any("4400" in n or "words" in n for n in scores.notes) or scores.pacing <= 8
 
 
 def test_btb_draft_metadata_includes_sources_and_disclaimer():
@@ -358,7 +384,7 @@ def test_btb_draft_metadata_includes_sources_and_disclaimer():
     assert "Not investment advice" in meta.description
     assert "FY2025 Annual Report" in meta.description
     assert "Related:" in meta.description
-    assert "behind the business" in " ".join(meta.tags)
+    assert "how they really make money" in " ".join(meta.tags)
 
 
 def test_btb_compile_writes_mode_and_business_style(tmp_path: Path):
@@ -368,9 +394,9 @@ def test_btb_compile_writes_mode_and_business_style(tmp_path: Path):
         encoding="utf-8"
     )
     assert '"channel_mode": "behind_the_business"' in spec
-    assert "Behind The Business" in spec
-    assert '"kokoro_speed": 0.92' in spec
-    assert '"narration_wpm": 150' in spec
+    assert "How They Really Make Money" in spec
+    assert '"kokoro_speed": 0.92' in spec  # shipped Costco lock
+    assert '"narration_wpm": 200' in spec
     stills = Path(written["stills"]).read_text(encoding="utf-8")
     assert "Behind The Business" in stills
     assert "muted historical palette" not in stills
@@ -413,7 +439,7 @@ def test_wtrt_spec_still_omits_business_assumptions():
 
 def test_config_py_has_no_company_examples():
     text = Path("channel/config.py").read_text(encoding="utf-8").lower()
-    for name in ("costco", "visa", "mcdonald", "netflix", "spotify"):
+    for name in ("costco", "visa", "mcdonald", "netflix", "spotify", "nvidia", "rolex"):
         assert name not in text, f"{name} leaked into channel/config.py"
 
 

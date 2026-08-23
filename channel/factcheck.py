@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-from channel.modes import ChannelMode, is_business
+from channel.modes import ChannelMode, is_company_story
 from channel.schema import Claim, EvidenceKind, FactCheckReport, ResearchPack
 
 _FINANCIAL = re.compile(
@@ -26,7 +26,7 @@ def factcheck(
         flags.append("no verified claims yet — agent must add sourced claims")
     for claim in pack.claims:
         issues = _claim_issues(claim)
-        if is_business(channel_mode):
+        if is_company_story(channel_mode):
             issues.extend(_financial_issues(claim, pack))
         if issues:
             rejected.append(claim.claim_id)

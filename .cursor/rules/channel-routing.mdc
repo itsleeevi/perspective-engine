@@ -1,0 +1,18 @@
+---
+description: Route each title to the correct channel mode
+alwaysApply: true
+---
+
+# Channel routing
+
+Pass `--channel` explicitly. Do not infer mode from the title.
+
+| Spoken name | `--channel` |
+|---|---|
+| What They Really Think | `what_they_really_think` |
+| How They Really Make Money | `behind_the_business` (alias `how_they_really_make_money`) |
+| How They Took Over | `how_they_took_over` |
+
+Do not apply money-flow rules to a Think title, takeover flywheels to a money title, or muted historical portraits to a company documentary.
+
+Playbooks: `docs/custom-videos.md`, `docs/behind-the-business.md`, `docs/how-they-took-over.md`.

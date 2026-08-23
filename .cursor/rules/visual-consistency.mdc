@@ -1,0 +1,16 @@
+---
+description: Locked visual styles and image-prompt rules
+alwaysApply: true
+---
+
+# Visual consistency
+
+Use the frozen style in `channel/config.py` for the selected mode. Do not rewrite it per scene.
+
+WTRT = muted historical flat 2D. Money = clean analytical business 2D. Takeover = energetic strategic 2D.
+
+Not photoreal, not 3D, not anime. Historical names and company names stay out of image prompts (`channel/prompts.py`).
+
+Never put a company or person name in a GenerateImage **filename** — the model will paint the word onto the picture. Use the job’s `generate_filename` (hashed token), then copy onto `filename` / `copy_to`.
+
+Stills ~4–8 seconds. Long output 3840×2160. Shorts 1080×1920.

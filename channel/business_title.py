@@ -25,8 +25,21 @@ _MAKES_MONEY = re.compile(
 )
 
 
+_MONEY_MARKERS = (
+    "makes money",
+    "really makes money",
+    "business behind",
+    "hidden economics",
+)
+
+
 def looks_like_wtrt(title: str) -> bool:
     return bool(_WTRT.match(" ".join(title.strip().split())))
+
+
+def looks_like_money_engine(title: str) -> bool:
+    raw = title.lower()
+    return any(m in raw for m in _MONEY_MARKERS)
 
 
 def looks_like_business(title: str) -> bool:

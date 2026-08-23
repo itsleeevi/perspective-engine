@@ -28,6 +28,23 @@ def test_safe_area_scales_from_official_minimum():
     assert SAFE_H < BANNER_H
 
 
+def test_btb_branding_paths_do_not_clobber_wtrt():
+    from channel.branding import branding_paths
+
+    wtrt = branding_paths()
+    btb = branding_paths(mode="behind_the_business")
+    htto = branding_paths(mode="how_they_took_over")
+    assert wtrt["profile"].name == "channel_profile_800x800.jpg"
+    assert btb["profile"].name == "behind_the_business_profile_800x800.jpg"
+    assert btb["banner"].name == "behind_the_business_cover_2560x1440.jpg"
+    assert btb["about"].name == "behind_the_business_about.txt"
+    assert btb["handle"].name == "behind_the_business_handle.txt"
+    assert htto["profile"].name == "how_they_took_over_profile_800x800.jpg"
+    assert htto["about"].name == "how_they_took_over_about.txt"
+    assert htto["handle"].name == "how_they_took_over_handle.txt"
+    assert len({wtrt["profile"], btb["profile"], htto["profile"]}) == 3
+
+
 def test_profile_is_800_square(tmp_path: Path):
     src = tmp_path / "p.png"
     Image.new("RGB", (1200, 900), (20, 30, 60)).save(src)

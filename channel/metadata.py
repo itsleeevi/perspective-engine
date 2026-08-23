@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import re
 
-from channel.config import config_for_project
-from channel.modes import is_business
+from channel.config import config_for_project, default_thumbnail_text
+from channel.modes import is_business, is_company_story, is_takeover
 from channel.schema import VideoMetadata, VideoProject
 
 
@@ -30,20 +30,38 @@ def draft_metadata(project: VideoProject) -> VideoMetadata:
         f"{body}\n\n"
         f"This is an illustrated documentary from {cfg.name}."
     )
-    if is_business(project.channel_mode):
-        body = f"{body}\n\nEducational analysis of a business model. Not investment advice."
+    if is_company_story(project.channel_mode):
+        if is_takeover(project.channel_mode):
+            body = (
+                f"{body}\n\nEducational analysis of a rise to dominance. "
+                "Not investment advice."
+            )
+        else:
+            body = f"{body}\n\nEducational analysis of a business model. Not investment advice."
         sources = _source_lines(project)
         if sources:
             body = f"{body}\n\nSources / further reading:\n" + "\n".join(sources)
+        related = ""
         if project.story and project.story.next_video_bridge.strip():
-            body = f"{body}\n\nRelated: {project.story.next_video_bridge.strip()}"
+            related = project.story.next_video_bridge.strip()
+        elif project.takeover and project.takeover.related_subject.strip():
+            related = project.takeover.related_subject.strip()
+        if related:
+            body = f"{body}\n\nRelated: {related}"
 
     tags = _default_tags(project)
-    thumb = (existing.thumbnail_text if existing else "") or (
-        "THE REAL ENGINE" if is_business(project.channel_mode) else "THE REAL ANSWER"
+    thumb = (existing.thumbnail_text if existing else "") or default_thumbnail_text(
+        project.channel_mode
     )
     if existing and existing.thumbnail_concept:
         concept = existing.thumbnail_concept
+    elif is_takeover(project.channel_mode):
+        concept = (
+            "One simplified product or company environment plus one competitor, "
+            "flywheel, or before/after object. High contrast, clean backdrop. "
+            "Empty right third for 2–5 words of type added later. Not a "
+            "historical portrait. Not a money-flow diagram. Not the full title."
+        )
     elif is_business(project.channel_mode):
         concept = (
             "One simplified company environment or product plus one business "
@@ -116,7 +134,15 @@ def _default_tags(project: VideoProject) -> list[str]:
         project.title.lower(),
         "illustrated documentary",
     ]
-    if is_business(project.channel_mode):
+    if is_takeover(project.channel_mode):
+        tags.extend(
+            [
+                "business documentary",
+                "how they took over",
+                "strategy documentary",
+            ]
+        )
+    elif is_business(project.channel_mode):
         tags.extend(
             [
                 "business documentary",

@@ -1,0 +1,51 @@
+{
+  "engine": "channel",
+  "channel": "What They Really Think",
+  "topic": "What Einstein Really Thought About Zionism",
+  "fixture": "fixtures/einstein-zionism.json",
+  "stills_module": "fixtures/einstein-zionism_stills.py",
+  "still_prefix": "einstein-zionism_v1_",
+  "stills_dir": "assets/grok_einstein-zionism_v1",
+  "thread_id": "einstein-zionism-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_liam",
+  "kokoro_speed": 1.15,
+  "kokoro_sentence_pause": 0.06,
+  "kokoro_clause_pause": 0.02,
+  "kokoro_pack_words": 1,
+  "kokoro_scene_pause": 0.28,
+  "narration_wpm": 185,
+  "burn_captions": true,
+  "chunk_min_seconds": 3.0,
+  "chunk_max_seconds": 7.0,
+  "chunk_target_seconds": 4.5,
+  "youtube": {
+    "title": "What Einstein Really Thought About Zionism",
+    "description": "What Einstein Really Thought About Zionism. What did Einstein really think about Zionism? This is an original documentary-style narration with illustrated stills. Synthetic media: images and voice are generated.",
+    "thumbnail_concept": "Two recognizable flat-vector figures or symbols from the story, high contrast, 2\u20135 words of thumbnail text, not the full title.",
+    "thumbnail_text": "CALLED NATIONALISM DISEASE AND STILL",
+    "tags": [
+      "what they really think",
+      "einstein",
+      "zionism",
+      "documentary",
+      "history"
+    ],
+    "short_title": "Einstein said no to the presidency",
+    "chapters": [
+      "The Chair",
+      "The Ship",
+      "The Measles",
+      "The Paper",
+      "The Answer"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/einstein-zionism_short.json",
+    "stills_module": "fixtures/einstein-zionism_short_stills.py",
+    "still_prefix": "einstein-zionism_short_v1_",
+    "stills_dir": "assets/grok_einstein-zionism_short_v1",
+    "output": "assets/output/einstein-zionism_short.mp4"
+  }
+}

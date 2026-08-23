@@ -45,3 +45,18 @@ def spec_path(slug: str, root: Path | None = None) -> Path:
 
 def jobs_path(prefix: str, root: Path | None = None) -> Path:
     return _root(root) / "fixtures" / f"{prefix}image_jobs.json"
+
+
+def relpath_for_spec(path: Path, *, root: Path | None = None) -> str:
+    """Repo-relative when the file lives in this checkout; else relative to *root*.
+
+    Isolated ``artifacts/<job>/`` compiles must keep fixture/stills/output paths
+    resolvable from the repo root so ``scripts/run_custom_video.py`` still works.
+    Tests that compile into a temp directory fall back to the job root.
+    """
+    resolved = path.resolve()
+    try:
+        return str(resolved.relative_to(ROOT.resolve()))
+    except ValueError:
+        base = _root(root).resolve()
+        return str(resolved.relative_to(base))

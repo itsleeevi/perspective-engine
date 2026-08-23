@@ -1,67 +1,91 @@
 # AGENTS.md
 
-Working context for AI coding agents (and humans) contributing to this repository. Read this before making changes. The full design rationale is in `README.md`; this file is the operational contract.
+Working contract for every agent (local or Cloud) with **empty chat history**.
+Detailed specs: `docs/video-engine/`. Channel playbooks: `docs/custom-videos.md`, `docs/behind-the-business.md`, `docs/how-they-took-over.md`.
 
-## Project
+## What this project is
 
-Perspective Engine: a LangGraph-orchestrated pipeline that produces AI-generated narrative "perspective-shift" videos, with human-in-the-loop review checkpoints and structural character-consistency enforcement.
+A multi-channel automated animated documentary engine (`channel/`), plus a separate LangGraph `graph/` skeleton that is **not** used for these YouTube titles.
 
-## Current phase
+## Current channel modes
 
-**Phase 1: local-only graph skeleton.** State schema, node logic, and control flow (fan-out, retry, interrupts), running with mocked model calls, an in-memory or SQLite checkpointer, and local-filesystem assets. No external services (no managed database, object storage, serverless compute, or tracing) are wired in this phase. See the development phases in `README.md` for current scope before adding anything.
+| Public name | `--channel` |
+|---|---|
+| What They Really Think | `what_they_really_think` |
+| How They Really Make Money | `behind_the_business` (alias `how_they_really_make_money`) |
+| How They Took Over | `how_they_took_over` |
 
-## Tech stack
+Pass `--channel` explicitly. Do not infer it from the title. Do not mix story or visual grammars.
 
-Reasons for each choice are in `README.md`. Summary: LangGraph (orchestration), LangSmith (tracing), FastAPI (backend), Modal (compute), Neon/Postgres (state + checkpointer), Cloudflare R2 (assets), fal.ai (video-model router; image-to-video support is a hard requirement for any model wired), Flux / alternate image model (reference stills, chosen empirically by identity stability), ElevenLabs (voice), Claude or GPT-class behind an adapter (script LLM), Remotion (assembly), YouTube Data API v3 (publish), Next.js (review UI).
+Sacred for every video: **Fresh research for every video.** **Different story architecture** for each company. **Original narration, not rewritten articles or YouTube transcripts.** **Unique scenes and diagrams** built around that company's actual business. Plus **unique story engine**.
 
-Principle: best tool for the role. If a better-fit option for a role exists, propose it rather than defaulting to the incumbent. Verify current model identifiers and pricing before wiring any adapter.
+## How to generate a video
 
-## Code rigor tiers
-
-- `graph/` is **durable code**: the architecture's backbone (state schema, node control flow, retry/fan-out/interrupt logic). Cover it with tests that exercise control flow, not just imports. Plan before changing.
-- `adapters/` is **disposable code**: provider clients behind a common interface, expected to be swapped as models change. Keep them thin; do not over-engineer.
-
-## Conventions
-
-- `graph/state.py` is the single source of truth for pipeline state. Nodes read and write against it; no ad hoc dictionaries passed between nodes.
-- Node signature: takes the current state, returns a partial state update. Keep nodes pure where practical; side effects (API calls) live in `adapters/`, not inlined in node logic.
-- Every shot in `shot_list` is tagged `motion` or `static_pan`, defaulting to `static_pan`. The `motion` path (real video generation) is the expensive one and requires explicit justification.
-- Character consistency is structural, not prompt-based: `generate_character_refs` produces a human-approved reference sheet and a persistent style descriptor; every `motion` shot is generated from a per-shot still derived from that sheet, never directly from a text prompt; `quality_gate` includes an identity check of each clip against the sheet.
-- Tests for `graph/` must cover: retry-cap behavior (repeated failure escalates rather than looping forever), fan-out correctness (one output per shot, order-independent), interrupt pause/resume (state persists across a pause; nothing downstream runs early), and the still-first rule (a `motion` shot without a derived still is rejected before any video-generation call).
-
-## Invariants (enforced in code, not just documented)
-
-- No real, named, identifiable people as video subjects. Validated at `ideate`. A topic implying a real person is fictionalized or made composite, not generated as-is.
-- The synthetic-content disclosure flag is always set at publish on the
-  LangGraph product path. The What They Really Think YouTube path appends
-  an honest synthetic-media disclosure on long and Shorts descriptions
-  (see `channel/youtube.py`).
-- Every `motion` shot is animated from a derived still anchored to the approved reference sheet. Direct text-to-video for character shots is not permitted.
-- The human-review interrupts (script, images, final) are non-bypassable: no code path may auto-approve them, skip them, or run downstream nodes before they resolve.
-- Per-shot retries are capped, then escalate to human review. No indefinite retries, no silent drops.
-- Publish cadence is rate-limited in code once the publish step exists.
-
-## Custom YouTube cuts (What They Really Think)
-
-These are fixture-driven illustrated documentaries, not the default graph topic flow. **`docs/custom-videos.md` is the production system.** The reusable engine lives in `channel/`: a new video starts with a title string, not a new Python runner.
+Canonical (isolated job, parallel-safe):
 
 ```text
-.venv/bin/python -m channel init "What Einstein Really Thought About Religion"
-.venv/bin/python -m channel init --channel behind_the_business "How Costco Really Makes Money"
+.venv/bin/python -m channel generate --channel what_they_really_think --title "What Einstein Really Thought About God"
+.venv/bin/python -m channel generate --channel behind_the_business --title "How Visa Really Makes Money"
+.venv/bin/python -m channel generate --channel how_they_took_over --title "How Nvidia Took Over AI"
 ```
 
-A second channel mode, `behind_the_business`, shares this engine and has its own playbook in `docs/behind-the-business.md`. Do not apply Behind The Business story or visual rules to a What They Really Think title. Channel mode is explicit (`--channel`); do not infer it from the title.
+Or `.venv/bin/python -m channel generate --job jobs/example.json`.
 
-Cursor Grok fills `channel/projects/<slug>/project.json` (research, story, bibles, scenes) using `channel/agent_prompts.py` (or `channel/business_prompts.py` when the mode is Behind The Business). Then `python -m channel qa <slug>` (factcheck + originality_score + ready_to_publish) and `python -m channel compile <slug>` writes fixture + stills + spec + image jobs + long/Shorts thumbnail jobs + draft YouTube copy. Images are Cursor Grok GenerateImage **only after** originality_score ≥ 80 and `ready_to_publish`. Voice is Kokoro (default `am_liam`; new titles may rotate `am_michael` / `am_fenrir`). Never Edge, never ElevenLabs. After assemble, `python -m channel youtube <slug>` stamps chapter times and burns the 1280×720 and 1080×1920 JPEGs. Every Short ends on a branded card: watch the full video, link in the description. After a What They Really Think cut ships, update `docs/videos/`. After a Behind The Business cut ships, update `docs/business/`.
+Then fill `artifacts/<JOB_ID>/project.json` using the prompt module in the manifest. Resume: `python -m channel generate --resume <JOB_ID>`. GenerateImage only after `originality_score` ≥ 80 and `ready_to_publish`. Assemble with `scripts/run_short.py` and `scripts/run_custom_video.py` on the **job** spec. Smoke: `--smoke-test`. Check: `python -m channel cloud-readiness`.
 
-Non-negotiable for that path: unique story per title, **unique story engine** (one object / place / reversal that would not work on any other cut — `lint_story.py` blocks reused chapter cards, a too-close `the_thought`, and the "Month Year. Name…" cold open), **originality_score ≥ 80** vs the last 10 videos on the **same** channel and **`ready_to_publish`** before any still (`lint_originality.py` / `python -m channel qa`), **answer the title through a story** (not a Wikipedia biography or earnings report), one child-repeatable `the_thought` / title payoff in the fixture and in the VO, a blunt simple spine a five-year-old can retell, real org/product names spoken (kept out of image prompts), no "today is DATE" in the VO, third-person spoken English. What They Really Think long cuts are **~20–25 minutes** (4400–5500 words at Kokoro 1.15). Behind The Business long cuts are **~20–25 minutes** at a slower spoken pace (**3000–3750** words at Kokoro 0.92 / ~150 wpm). Calendar years written as digits (`1995`) while Kokoro speaks the year, character bibles without historical names in image prompts, signature prop obvious every time it returns, global flat-2D style from `channel/config.py` plus a per-title palette accent on new titles, whisper-forced-aligned sync, silent black chapter cards, burned-in scene captions (Shorts in the YouTube safe band), fill-frame 16:9, YouTube thumbs as 1280×720 JPEG. YouTube descriptions (long and Shorts) include an honest synthetic-media disclosure. Shorts description is `Watch the full video:` + `https://youtu.be/<id>` + punch paragraph + disclosure. Different titles wait 24 hours between assembles (`--force` to override). Tick YouTube Studio's altered/synthetic content checkbox on upload.
+Sequential local init still exists: `python -m channel init` writes `channel/projects/<slug>/`. Cloud Agents should use `generate` so jobs do not collide.
 
-Shared contract: chat is not how the next clone learns the rules. After any
-production change, update `docs/custom-videos.md`, this file, and
-`.cursor/rules/custom-videos.mdc` in the same commit (plus lints/tests and
-`docs/videos/` when a cut ships), then push. Other environments only see
-git. `tests/test_channel_handoff.py` guards the three surfaces.
+Paste-ready Cloud prompt: `docs/video-engine/CLOUD_AGENT_START_PROMPT.md`.
 
-## Out of scope for the current phase
+```text
+DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.
+```
 
-No real provider APIs, no managed database / object storage / serverless / tracing configuration, no review UI, and no publish or scheduling integration until the local graph skeleton is complete and tested.
+## Where configuration lives
+
+- Channels / voice / style: `channel/config.py` (`CHANNEL`, `BEHIND_THE_BUSINESS`, `HOW_THEY_TOOK_OVER`)
+- Versions / model lock / render lock: `channel/engine.py`
+- Mode aliases: `channel/modes.py`
+- Shipped voice/style locks: `channel/locks.py` (Costco Kokoro **0.92**; new titles ≥ **1.0**, default **1.15**)
+
+## Where prompts live
+
+`channel/agent_prompts.py` (Think), `channel/business_prompts.py` (Money), `channel/takeover_prompts.py` (Takeover). Index: `prompts/README.md`. Dispatch: `channel/stage_prompts.py`.
+
+## Where artifacts are created
+
+`artifacts/<JOB_ID>/` (manifest, project, fixtures, final, report). Do not commit `.mp4` files. Repo-root `fixtures/` is for **shipped** cuts, not parallel Cloud jobs.
+
+## Validation and tests
+
+```text
+.venv/bin/python -m channel qa <job_id-or-slug>
+.venv/bin/python -m channel cloud-readiness
+.venv/bin/pytest tests/test_channel_handoff.py tests/test_portability.py tests/test_how_they_took_over.py tests/test_behind_the_business.py
+```
+
+Need `the_thought`, GenerateImage after QA, YouTube `Watch the full video:` + synthetic-media disclosure. Lengths: Think and Money **4400–5500** words; Takeover **2800–3600**. Voice Kokoro `am_liam` (roster may rotate).
+
+## What must never change without intent
+
+Visual style strings, QA thresholds, Kokoro-only rule, still-first / no real-person `ideate` on the graph path, 24h assemble cadence, channel mode ids.
+
+## Cursor Cloud specific instructions
+
+Install: Python ≥ 3.13, `pip install -e ".[dev]"`, ffmpeg before assemble. `.cursor/environment.json` is the Cloud bootstrap. Documentary path does **not** need `FAL_KEY` or `ELEVENLABS_API_KEY`; if Kokoro or GenerateImage is missing, **stop** — no fallback. Parallel agents each get a unique job ID under `artifacts/`. Missing secrets: fail clearly. After assemble, print job ID, final/thumb/Short paths, and `report.txt` scores.
+
+## Custom YouTube cuts (detail)
+
+`docs/custom-videos.md` is the Think production system. Cursor Grok fills research / story / bibles / scenes. Compile writes fixture + stills + spec + image jobs + thumbs + draft YouTube copy. After a Think cut ships, update `docs/videos/`. After Money, `docs/business/`. After Takeover, `docs/takeover/`.
+
+Non-negotiable: unique story engine (`lint_story.py`), **originality_score ≥ 80** vs the last 10 on the **same** channel, `ready_to_publish`, answer the title through a story, child-repeatable `the_thought`, real names spoken (kept out of image prompts), no “today is DATE”, third-person spoken English. Think and Money long cuts **~20–25 minutes** (**4400–5500** words at Kokoro **1.15**). Takeover **~18–25 minutes** (**2800–3600** words at **1.15**; prefer 16 excellent minutes to 24 padded). Neutral GenerateImage filenames (never put `costco` in the filename). Fill-frame 16:9, 3840×2160, Shorts 1080×1920, thumbs 1280×720 JPEG, synthetic-media disclosure, 24h between different-title assembles.
+
+Shared contract: chat is not how the next clone learns the rules. After any production change, update `docs/custom-videos.md`, this file, and `.cursor/rules/custom-videos.mdc` in the same commit. `tests/test_channel_handoff.py` guards the three surfaces.
+
+## LangGraph product (`graph/`) — different pipeline
+
+Phase 1 local skeleton. No real named people as video subjects (`ideate` blocks them). Durable code in `graph/`, adapters disposable. Out of scope here: wiring managed APIs until that skeleton is complete. Do not route documentary titles through it.
+
+## Tech stack (both products)
+
+Reasons in `README.md`. Documentary path actually used: `channel/` + Cursor GenerateImage + Kokoro + FFmpeg. Graph path planned: LangGraph, FastAPI, Modal, fal.ai, etc. Best tool for the role. Never silently swap a locked documentary provider.

@@ -1,0 +1,11 @@
+{
+  "channel_mode": "what_they_really_think",
+  "title": "What Steve Jobs Really Thought About Bill Gates",
+  "spec": "fixtures/video_specs/steve-jobs-bill-gates.json",
+  "visual_style_must_contain": "Simple flat 2D historical",
+  "visual_style_must_not_contain": "How They Took Over",
+  "voice": "kokoro",
+  "new_title_word_min": 4400,
+  "new_title_word_max": 5500,
+  "note": "Shipped cut may be shorter; new WTRT titles use the current word budget."
+}

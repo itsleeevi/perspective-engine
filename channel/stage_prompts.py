@@ -4,10 +4,14 @@ from __future__ import annotations
 
 from types import ModuleType
 
-from channel.modes import ChannelMode, is_business, parse_mode
+from channel.modes import ChannelMode, is_business, is_takeover
 
 
 def stage_prompts_for(mode: ChannelMode | str | None = None) -> ModuleType:
+    if is_takeover(mode):
+        from channel import takeover_prompts
+
+        return takeover_prompts
     if is_business(mode):
         from channel import business_prompts
 

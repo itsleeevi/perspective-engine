@@ -11,8 +11,8 @@ import re
 from pathlib import Path
 from typing import Any
 
-from channel.config import config_for, config_for_project, visual_accent_for
-from channel.modes import is_business
+from channel.config import about_filename, config_for, config_for_project, default_thumbnail_text, visual_accent_for
+from channel.modes import is_business, is_takeover
 from channel.paths import ROOT, jobs_path, spec_path
 from channel.prompts import strip_character_names
 from channel.schema import VideoProject
@@ -71,6 +71,18 @@ def _strip_stale_footer(body: str) -> str:
         ).strip()
         body = re.sub(
             r"\n+Researched and written for Behind The Business.*$",
+            "",
+            body,
+            flags=re.I | re.S,
+        ).strip()
+        body = re.sub(
+            r"\n+Researched and written for How They Really Make Money.*$",
+            "",
+            body,
+            flags=re.I | re.S,
+        ).strip()
+        body = re.sub(
+            r"\n+Researched and written for How They Took Over.*$",
             "",
             body,
             flags=re.I | re.S,
@@ -172,7 +184,15 @@ def thumbnail_prompt(project: VideoProject) -> str:
     if project.story and project.story.signature_prop:
         prop = f" Signature object: {project.story.signature_prop}."
     cfg = config_for_project(project)
-    if is_business(project.channel_mode):
+    if is_takeover(project.channel_mode):
+        framing = (
+            "Horizontal 16:9 YouTube thumbnail. ONE simplified product or "
+            "company environment plus ONE competitor, flywheel, or "
+            "before/after object. Clean high-contrast backdrop. Empty right "
+            "third of the frame for type added later. No tiny figures, no "
+            "clutter, no photoreal logo lockup, no logo-vs-logo poster."
+        )
+    elif is_business(project.channel_mode):
         framing = (
             "Horizontal 16:9 YouTube thumbnail. ONE simplified company "
             "environment or product plus ONE business symbol. Clean high-contrast "
@@ -207,16 +227,30 @@ def thumbnail_prompt(project: VideoProject) -> str:
     return strip_character_names(assembled, project)
 
 
-def write_thumbnail_job(project: VideoProject, *, root: Path | None = None) -> Path:
+def write_thumbnail_job(
+    project: VideoProject,
+    *,
+    root: Path | None = None,
+    image_token: str | None = None,
+) -> Path:
+    from channel.engine import generate_image_filename, image_token_for
+
     slug = project.slug
     stem = youtube_stem(slug)
     meta = project.metadata
-    text = (meta.thumbnail_text if meta else "") or (
-        "THE REAL ENGINE" if is_business(project.channel_mode) else "THE REAL ANSWER"
+    text = (meta.thumbnail_text if meta else "") or default_thumbnail_text(
+        project.channel_mode
+    )
+    dest_name = f"{slug}_thumbnail.png"
+    gen_name = generate_image_filename(
+        token=image_token or image_token_for(slug),
+        kind="thumb",
     )
     job = {
         "id": "thumb",
-        "filename": f"{slug}_thumbnail.png",
+        "filename": dest_name,
+        "generate_filename": gen_name,
+        "copy_to": dest_name,
         "aspect": "16:9",
         "overlay_text": text,
         "output_jpeg": f"assets/youtube/{stem}_thumbnail_1280x720.jpg",
@@ -253,9 +287,7 @@ def write_pack(
     long_path = dest / f"{stem}_description.txt"
     short_path = dest / f"{stem}_short_description.txt"
     tags_path = dest / f"{stem}_tags.txt"
-    about_name = (
-        "behind_the_business_about.txt" if is_business(mode) else "channel_about.txt"
-    )
+    about_name = about_filename(mode)
     about_path = dest / about_name
     long_path.write_text(long_description(youtube, chapters, mode=mode), encoding="utf-8")
     short_path.write_text(short_description(youtube, mode=mode), encoding="utf-8")

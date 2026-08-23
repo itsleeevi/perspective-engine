@@ -1,0 +1,12 @@
+{
+  "jobs": [
+    {
+      "id": "short_thumb",
+      "filename": "visa-really-makes-money_short_thumbnail.png",
+      "aspect": "9:16",
+      "overlay_text": "EVERY TIME YOU PAY",
+      "output_jpeg": "assets/youtube/visa_really_makes_money_short_thumbnail_1080x1920.jpg",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Vertical 9:16 YouTube Shorts thumbnail. ONE simplified company symbol plus ONE business object. Clean high-contrast backdrop. Empty dark lower third of the frame for type added later. No photoreal logo lockup, no clutter. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. NO readable text, NO letters, NO captions, NO title card, NO watermark. Type will be added later. CHARACTER shopper: adult with short dark side-parted hair, simple oval cartoon face, navy crewneck sweater over a cream collar, flat 2D vector, NOT photoreal One simplified tap terminal and one plastic card mid-tap, plus a tiny teal pulse leaving the slab. High contrast navy backdrop. Empty right third for type. No logos, no photoreal faces. Signature object: the authorization pulse."
+    }
+  ]
+}

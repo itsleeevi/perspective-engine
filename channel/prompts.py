@@ -142,6 +142,8 @@ def strip_project_brands(text: str, project: VideoProject) -> str:
         extras.append(project.analysis.company)
     if project.business and project.business.company:
         extras.append(project.business.company)
+    if project.takeover and project.takeover.subject:
+        extras.append(project.takeover.subject)
     out = text
     for name in sorted({n for n in extras if len(n) >= 4}, key=len, reverse=True):
         out = re.sub(rf"\b{re.escape(name)}\b", "", out, flags=re.I)

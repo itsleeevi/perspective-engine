@@ -1,10 +1,10 @@
-# Behind The Business — production system
+# How They Really Make Money — production system
 
-This is the playbook for the YouTube channel **Behind The Business**. It reuses the shared `channel/` video engine (research tools, stills, Kokoro, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think with different titles.
+This is the playbook for the YouTube channel **How They Really Make Money** (`@HowTheyReallyMakeMoney`). Internal mode stays `behind_the_business`. It reuses the shared `channel/` video engine (research tools, stills, Kokoro, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think with different titles.
 
 Read this fully before starting a business cut. After a cut ships, update `docs/business/<slug>.md` and `docs/business/README.md`.
 
-What They Really Think stays on `docs/custom-videos.md`. Do not mix the two story grammars.
+What They Really Think stays on `docs/custom-videos.md`. How They Took Over stays on `docs/how-they-took-over.md`. Do not mix the three story grammars.
 
 ## Channel mode
 
@@ -15,8 +15,11 @@ CHANNEL_MODE = behind_the_business
 Always pass it. Do not detect the channel from the title alone.
 
 ```text
+.venv/bin/python -m channel generate --channel behind_the_business --title "How Costco Really Makes Money"
 .venv/bin/python -m channel init --channel behind_the_business "How Costco Really Makes Money"
 ```
+
+Cloud / parallel runs must use `generate` (writes `artifacts/<JOB_ID>/`). `init` is sequential local only.
 
 The same engine still starts a history cut the old way:
 
@@ -32,6 +35,18 @@ Explain the hidden systems, economics, decisions, incentives, and business model
 
 The viewer should finish thinking: I use this company all the time and had no idea THAT was how the business actually worked.
 
+## Sacred rules
+
+These are non-negotiable on every Behind The Business title (and the same bar applies on What They Really Think):
+
+1. **Fresh research for every video.**
+2. **Different story architecture** for each company.
+3. **Original narration, not rewritten articles or YouTube transcripts.**
+4. **Unique scenes and diagrams** built around that company's actual business.
+5. **unique story engine** — one object / place / reversal that would not work on any other cut.
+
+If you could swap the company names and keep the same video, throw it out. Other YouTube videos are competitive research, not sources or scripts.
+
 ## The business mystery
 
 Do **not** structure episodes as company history → founder → products → revenue → conclusion.
@@ -41,8 +56,8 @@ Find one central surprising question. Research verifies the answer. The title an
 ## Length and voice
 
 - Target about **22 minutes** (1200–1500 seconds). Prefer 15 excellent minutes to 25 padded minutes.
-- Spoken pace **145–155 wpm**. Kokoro speed on this mode is slower than What They Really Think (`0.92`, not `1.15`).
-- Script **3000–3750 words** (ideal 3200–3600).
+- Kokoro speed **1.15** (never below **1.0** on a new title). Same Liam pacing as What They Really Think.
+- Script **4400–5500 words** (ideal 4600–5200) so a 1.15 cut still lands ~20–25 minutes.
 - Stills still change every **4–8 seconds**.
 - Voice: a smart friend explaining why a company works. Not an MBA lecture, not financial TV, not TikTok hype.
 
@@ -74,7 +89,8 @@ Company names stay out of image prompts. Do not recreate ads shot-for-shot.
 
 - One Short per long video: **30–55 seconds**, one mechanism, not a 22-minute compress.
 - Thumbnail: one company symbol + one business idea, **2–5 words**, no lying.
-- YouTube copy uses the Behind The Business attribution and an educational + synthetic-media disclosure.
+- YouTube copy uses the How They Really Make Money attribution and an educational + synthetic-media disclosure.
+- Channel handle: **@HowTheyReallyMakeMoney**. Profile **800×800** JPEG and cover **2560×1440** JPEG (`python -m channel branding --channel behind_the_business --profile … --cover …`). Paste `assets/youtube/behind_the_business_about.txt` into the channel About box. Cover art must keep the story in the center 1546×423 safe band (do not upload the safe-zone preview).
 - After assemble: `python -m channel youtube <slug>`.
 - Originality compares against `docs/business/README.md` (last 10 business videos), not against Freud or Einstein.
 
@@ -94,7 +110,7 @@ Company names stay out of image prompts. Do not recreate ads shot-for-shot.
  4. .venv/bin/python -m channel qa <slug>
     Fix rejected financial claims. Do not write narration until factcheck is honest.
 
- 5. STORY + NARRATION (3000–3750 words, mystery spine, title_payoff in the VO).
+    5. STORY + NARRATION (4400–5500 words, mystery spine, title_payoff in the VO).
     BIBLES: company visual_identity; names stay out of image prompts.
 
  6. .venv/bin/python -m channel chunks <slug>

@@ -1,0 +1,76 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "costco-really-makes-money_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "You pay Costco before you shop.",
+      "scene": "Shopper in a slate sweater holds a gold-toned card at a warehouse door. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a slate, bright-white, and gold-line palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. CHARACTER shopper: adult with short chestnut crop hair, simple oval cartoon face, slate crewneck sweater over a white collar, flat 2D vector, NOT photoreal LOCATION door (same set): controlled warehouse entrance with a simple podium scanner, gold card visible, no logos. Palette: #2b3344, #d4b46a, #f7f4ee. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: Shopper in a slate sweater holds a gold-toned card at a warehouse door. No logos.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "001",
+      "filename": "costco-really-makes-money_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "close-up",
+      "chunk": "A gold card hits the door scanner. Then the pallets look cheap on purpose. That's the trick.",
+      "scene": "THE_GOLD_CARD A bright gold membership card, large in frame, high contrast, the same simple rounded rectangle every time, no letters on the plastic hits a simple door scanner, large in frame. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a slate, bright-white, and gold-line palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION door (same set): controlled warehouse entrance with a simple podium scanner, gold card visible, no logos. Palette: #2b3344, #d4b46a, #f7f4ee. STRICTLY NO people, NO faces, NO hands. SHOT: close-up. ACTION: THE_GOLD_CARD A bright gold membership card, large in frame, high contrast, the same simple rounded rectangle every time, no letters on the plastic hits a simple door scanner, large in frame. No logos.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "002",
+      "filename": "costco-really-makes-money_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "Fiscal 2025 filings show 5.323 billion dollars of membership fees sitting next to 10.383 billion of operating income,",
+      "scene": "Pallet stacks under metal racks. Prices feel low. No people. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a slate, bright-white, and gold-line palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION aisle (same set): no-frills warehouse aisle of pallet stacks under metal racks, slate and bright-white, no logos. Palette: #4a5568, #f7f4ee. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: Pallet stacks under metal racks. Prices feel low. No people. No logos.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "003",
+      "filename": "costco-really-makes-money_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "while merchandise gross margin was only 11.12 percent. You didn't buy a supermarket.",
+      "scene": "A short gold bar next to a tall ice-white bar. No axis labels. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a slate, bright-white, and gold-line palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION membership_desk (same set): simple membership counter with a gold card and a blank cream form, no logos. Palette: #d4b46a, #f7f4ee, #2b3344. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: A short gold bar next to a tall ice-white bar. No axis labels. No logos.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "004",
+      "filename": "costco-really-makes-money_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "close-up",
+      "chunk": "You bought the year at the door, then a short list of pallets.",
+      "scene": "A long blank cream receipt at an empty exit lane. No readable paragraphs. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a slate, bright-white, and gold-line palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION exit (same set): warehouse exit registers, ice-white lanes, slate floors, one long blank receipt, no logos. Palette: #2b3344, #f7f4ee, #d4b46a. STRICTLY NO people, NO faces, NO hands. SHOT: close-up. ACTION: A long blank cream receipt at an empty exit lane. No readable paragraphs. No logos.",
+      "camera_motion": "static"
+    },
+    {
+      "id": "005",
+      "filename": "costco-really-makes-money_short_v1_005.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "close-up",
+      "chunk": "The long receipt at the exit is just the show. The card at the door is the real checkout.",
+      "scene": "THE_GOLD_CARD A bright gold membership card, large in frame, high contrast, the same simple rounded rectangle every time, no letters on the plastic at the door, large in frame. No logos.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a slate, bright-white, and gold-line palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION door (same set): controlled warehouse entrance with a simple podium scanner, gold card visible, no logos. Palette: #2b3344, #d4b46a, #f7f4ee. STRICTLY NO people, NO faces, NO hands. SHOT: close-up. ACTION: THE_GOLD_CARD A bright gold membership card, large in frame, high contrast, the same simple rounded rectangle every time, no letters on the plastic at the door, large in frame. No logos.",
+      "camera_motion": "static"
+    }
+  ]
+}

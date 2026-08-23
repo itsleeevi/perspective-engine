@@ -72,6 +72,8 @@ def test_shipped_slugs_keep_liam_and_no_accent():
         "darwin-human-nature",
         "einstein-religion",
         "elon-musk-ai",
+        "visa-really-makes-money",
+        "costco-really-makes-money",
     ):
         assert slug in SHIPPED_STYLE_LOCK
         assert kokoro_voice_for(slug) == "am_liam"

@@ -96,6 +96,12 @@ class TitleAnalysis(BaseModel):
     customer: str = ""
     likely_revenue_streams: list[str] = Field(default_factory=list)
     business_model_complexity: str = ""
+    arena: str = ""
+    starting_position: str = ""
+    dominant_position: str = ""
+    likely_turning_points: list[str] = Field(default_factory=list)
+    potential_competitors: list[str] = Field(default_factory=list)
+    possible_hidden_advantage: str = ""
 
 
 class SourceRef(BaseModel):
@@ -284,6 +290,7 @@ class MonetizationReadiness(BaseModel):
     mass_production_risk: int = 1
     financial_accuracy: int = 0
     business_analysis_depth: int = 0
+    transformation_depth: int = 0
     overall: int = 0
     ready_to_publish: bool = False
     originality_score: float = 100.0
@@ -390,6 +397,67 @@ class BusinessQaReport(BaseModel):
     ready: bool = False
 
 
+class TurningPoint(BaseModel):
+    label: str
+    impact: str = ""
+    surprise: str = ""
+    story_value: str = ""
+    visual_value: str = ""
+    relevance: str = ""
+    source_claim_ids: list[str] = Field(default_factory=list)
+
+
+class CompetitorNote(BaseModel):
+    name: str
+    why_subject_won: str = ""
+    why_they_lost_ground: str = ""
+
+
+class Flywheel(BaseModel):
+    name: str = ""
+    steps: list[str] = Field(default_factory=list)
+
+
+class TakeoverContext(BaseModel):
+    subject: str = ""
+    arena: str = ""
+    starting_position: str = ""
+    current_position: str = ""
+    competitors: list[CompetitorNote] = Field(default_factory=list)
+    turning_points: list[TurningPoint] = Field(default_factory=list)
+    strategic_bets: list[str] = Field(default_factory=list)
+    moats: list[str] = Field(default_factory=list)
+    flywheels: list[Flywheel] = Field(default_factory=list)
+    threats: list[str] = Field(default_factory=list)
+    dominance_forces: list[str] = Field(default_factory=list)
+    cluster: str = ""
+    related_subject: str = ""
+    archetype: str = ""
+    visual_identity: CompanyVisualIdentity = Field(default_factory=CompanyVisualIdentity)
+    data_date: str = ""
+    source_date: str = ""
+
+
+class TakeoverQaReport(BaseModel):
+    title_strength: int = 0
+    thumbnail_concept: int = 0
+    hook: int = 0
+    curiosity: int = 0
+    transformation: int = 0
+    turning_points: int = 0
+    competition: int = 0
+    story_depth: int = 0
+    pacing: int = 0
+    visual_variety: int = 0
+    title_payoff: int = 0
+    related_video_potential: int = 0
+    dead_sections: list[str] = Field(default_factory=list)
+    weak_minutes: list[str] = Field(default_factory=list)
+    claim_flags: list[str] = Field(default_factory=list)
+    notes: list[str] = Field(default_factory=list)
+    ready: bool = False
+
+
 class VideoProject(BaseModel):
     """Shared context for every agent on one title."""
 
@@ -398,6 +466,7 @@ class VideoProject(BaseModel):
     channel_mode: ChannelMode = ChannelMode.what_they_really_think
     analysis: TitleAnalysis
     business: BusinessContext | None = None
+    takeover: TakeoverContext | None = None
     research: ResearchPack = Field(default_factory=lambda: ResearchPack(subject="", target=""))
     factcheck: FactCheckReport = Field(default_factory=lambda: FactCheckReport(ok=False))
     story: StoryPlan | None = None
@@ -410,4 +479,5 @@ class VideoProject(BaseModel):
     short: ShortPlan | None = None
     metadata: VideoMetadata | None = None
     business_qa: BusinessQaReport | None = None
+    takeover_qa: TakeoverQaReport | None = None
     special_instructions: str = ""

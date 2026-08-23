@@ -13,8 +13,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-from channel.config import config_for_project
-from channel.modes import is_business
+from channel.config import config_for_project, default_thumbnail_text
+from channel.modes import is_business, is_takeover
 from channel.paths import ROOT, jobs_path
 from channel.prompts import strip_character_names
 from channel.schema import Scene, ScenePurpose, VideoProject
@@ -157,7 +157,14 @@ def short_thumbnail_prompt(project: VideoProject) -> str:
     if project.story and project.story.signature_prop:
         prop = f" Signature object: {project.story.signature_prop}."
     cfg = config_for_project(project)
-    if is_business(project.channel_mode):
+    if is_takeover(project.channel_mode):
+        framing = (
+            "Vertical 9:16 YouTube Shorts thumbnail. ONE simplified product or "
+            "company symbol plus ONE competitor, flywheel, or before/after "
+            "object. Clean high-contrast backdrop. Empty dark lower third of "
+            "the frame for type added later. No photoreal logo lockup, no clutter."
+        )
+    elif is_business(project.channel_mode):
         framing = (
             "Vertical 9:16 YouTube Shorts thumbnail. ONE simplified company "
             "symbol plus ONE business object. Clean high-contrast backdrop. "
@@ -191,18 +198,31 @@ def short_thumbnail_prompt(project: VideoProject) -> str:
     return strip_character_names(assembled, project)
 
 
-def write_short_thumbnail_job(project: VideoProject, *, root: Path | None = None) -> Path:
+def write_short_thumbnail_job(
+    project: VideoProject,
+    *,
+    root: Path | None = None,
+    image_token: str | None = None,
+) -> Path:
     slug = project.slug
+    from channel.engine import generate_image_filename, image_token_for
     from channel.youtube import youtube_stem
 
     stem = youtube_stem(slug)
     meta = project.metadata
-    text = (meta.thumbnail_text if meta else "") or (
-        "THE REAL ENGINE" if is_business(project.channel_mode) else "THE REAL ANSWER"
+    text = (meta.thumbnail_text if meta else "") or default_thumbnail_text(
+        project.channel_mode
+    )
+    dest_name = f"{slug}_short_thumbnail.png"
+    gen_name = generate_image_filename(
+        token=image_token or image_token_for(slug),
+        kind="short_thumb",
     )
     job = {
         "id": "short_thumb",
-        "filename": f"{slug}_short_thumbnail.png",
+        "filename": dest_name,
+        "generate_filename": gen_name,
+        "copy_to": dest_name,
         "aspect": "9:16",
         "overlay_text": text,
         "output_jpeg": f"assets/youtube/{stem}_short_thumbnail_1080x1920.jpg",

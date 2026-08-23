@@ -1,0 +1,124 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "einstein-zionism_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "newspaper",
+      "chunk": "In 1952, Israel asked Einstein to take the presidency of a new country.",
+      "scene": "Vertical 9:16 frame, evening papers on a city stand, huge question-mark headline block, no readable paragraphs.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION newsstand (same set): 1948 city newsstand, stacked papers, muted street, no readable paragraphs. Palette: grey, cream, black. STRICTLY NO people, NO faces, NO hands. SHOT: newspaper. ACTION: Vertical 9:16 frame, evening papers on a city stand, huge question-mark headline block, no readable paragraphs. On-screen label (only these words, large and clean): \"1952\".",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "einstein-zionism_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He said no, and people heard a man walking away from the Jewish state.",
+      "scene": "Vertical 9:16 frame, older wild-haired man shaking his head at a wooden desk, rumpled brown-grey suit.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER subject_adult: older European man, late 40s to 70s, wild grey-white hair standing out in a halo, thick drooping grey moustache, simple round cartoon eyes, simple nose, simple mouth, medium build, rumpled brown-grey wool suit, cream shirt, sometimes a loose dark tie. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. LOCATION princeton_study (same set): 1950s wooden study, window light, cluttered desk, muted brown-green. Palette: brown, cream, olive. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: Vertical 9:16 frame, older wild-haired man shaking his head at a wooden desk, rumpled brown-grey suit.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "einstein-zionism_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "close-up",
+      "chunk": "He thought Zionism should build a home, not a nation like the others.",
+      "scene": "Vertical 9:16 frame, older wild-haired man at the study window, looking out, quiet face.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER subject_adult: older European man, late 40s to 70s, wild grey-white hair standing out in a halo, thick drooping grey moustache, simple round cartoon eyes, simple nose, simple mouth, medium build, rumpled brown-grey wool suit, cream shirt, sometimes a loose dark tie. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. LOCATION princeton_study (same set): 1950s wooden study, window light, cluttered desk, muted brown-green. Palette: brown, cream, olive. Only the subject character unless the action names someone else. SHOT: close-up. ACTION: Vertical 9:16 frame, older wild-haired man at the study window, looking out, quiet face.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "einstein-zionism_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "establishing",
+      "chunk": "For thirty years he had helped build that home across an ocean.",
+      "scene": "Vertical 9:16 frame, 1920s steamship bow and cream funnels, grey sea, no people.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION ocean_liner (same set): 1921 steamship deck, rail, sea, cream funnels, simplified. Palette: navy, cream, rust. STRICTLY NO people, NO faces, NO hands. SHOT: establishing. ACTION: Vertical 9:16 frame, 1920s steamship bow and cream funnels, grey sea, no people.",
+      "camera_motion": "slow pan right"
+    },
+    {
+      "id": "004",
+      "filename": "einstein-zionism_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "crowd",
+      "chunk": "Banquets raised money for a university that did not exist yet.",
+      "scene": "Vertical 9:16 frame, round banquet tables and simplified guests raising glasses, no readable menus.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER subject_adult: older European man, late 40s to 70s, wild grey-white hair standing out in a halo, thick drooping grey moustache, simple round cartoon eyes, simple nose, simple mouth, medium build, rumpled brown-grey wool suit, cream shirt, sometimes a loose dark tie. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. CHARACTER chemist_organizer: middle-aged European man, receding dark hair, small neat goatee, round simple cartoon face, dark 1920s suit, high collar, shorter than the wild-haired man. Flat 2D vector, NOT photoreal. CHARACTER young_diplomat: slim man in his thirties, dark neat hair, simple round glasses, dark diplomatic suit, thin tie, often holding an envelope. Simple cartoon face. Flat 2D vector, NOT photoreal. LOCATION banquet_hall (same set): 1920s banquet hall, round tables, no readable menus, warm lamps. Palette: gold, cream, burgundy. Generic extras in the same flat-vector construction. No photoreal faces. SHOT: crowd. ACTION: Vertical 9:16 frame, round banquet tables and simplified guests raising glasses, no readable menus.",
+      "camera_motion": "slow pan left"
+    },
+    {
+      "id": "005",
+      "filename": "einstein-zionism_short_v1_005.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "establishing",
+      "chunk": "Then they offered him the highest chair in the new country.",
+      "scene": "Vertical 9:16 frame, empty ceremonial wooden chair under a simple arch, no emblems, no people.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION empty_dais (same set): ceremonial indoor dais, one empty wooden chair under a simple arch, no emblems. Palette: stone, wood, gold. STRICTLY NO people, NO faces, NO hands. SHOT: establishing. ACTION: Vertical 9:16 frame, empty ceremonial wooden chair under a simple arch, no emblems, no people.",
+      "camera_motion": "slow pull-back"
+    },
+    {
+      "id": "006",
+      "filename": "einstein-zionism_short_v1_006.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "object close-up",
+      "chunk": "He kept his no and left the sealed envelope on the wooden desk.",
+      "scene": "Vertical 9:16 frame, THE_ENVELOPE lying sealed on a wooden desk, window light, no people.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION princeton_study (same set): 1950s wooden study, window light, cluttered desk, muted brown-green. Palette: brown, cream, olive. STRICTLY NO people, NO faces, NO hands. SHOT: object close-up. ACTION: Vertical 9:16 frame, THE_ENVELOPE lying sealed on a wooden desk, window light, no people.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "007",
+      "filename": "einstein-zionism_short_v1_007.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "establishing",
+      "chunk": "A university on a hill was his kind of yes.",
+      "scene": "Vertical 9:16 frame, pale unfinished university buildings on a hill, wide sky, no people.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION jerusalem_hill (same set): bare hill with a few unfinished university buildings, pale stone, wide sky. Palette: sand, white, blue. STRICTLY NO people, NO faces, NO hands. SHOT: establishing. ACTION: Vertical 9:16 frame, pale unfinished university buildings on a hill, wide sky, no people.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "008",
+      "filename": "einstein-zionism_short_v1_008.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "A throne with borders, an army, and a crown was never the yes he wanted.",
+      "scene": "Vertical 9:16 frame, unused ceremonial chair in shadow, a folded blank cloth, no people.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION empty_dais (same set): ceremonial indoor dais, one empty wooden chair under a simple arch, no emblems. Palette: stone, wood, gold. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: Vertical 9:16 frame, unused ceremonial chair in shadow, a folded blank cloth, no people.",
+      "camera_motion": "slow pull-back"
+    },
+    {
+      "id": "009",
+      "filename": "einstein-zionism_short_v1_009.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "The full story is on this channel.",
+      "scene": "Vertical 9:16 frame, older wild-haired man looking past camera, study window behind him.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER subject_adult: older European man, late 40s to 70s, wild grey-white hair standing out in a halo, thick drooping grey moustache, simple round cartoon eyes, simple nose, simple mouth, medium build, rumpled brown-grey wool suit, cream shirt, sometimes a loose dark tie. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity likeness. LOCATION princeton_study (same set): 1950s wooden study, window light, cluttered desk, muted brown-green. Palette: brown, cream, olive. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: Vertical 9:16 frame, older wild-haired man looking past camera, study window behind him.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

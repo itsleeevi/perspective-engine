@@ -14,6 +14,7 @@ from channel.schema import ResearchPack, SourceRef, TitleAnalysis
 _API = "https://en.wikipedia.org/w/api.php"
 _UA = "WhatTheyReallyThink/0.1 (local documentary research seed)"
 _UA_BTB = "BehindTheBusiness/0.1 (local documentary research seed)"
+_UA_HTTO = "HowTheyTookOver/0.1 (local documentary research seed)"
 
 
 def _search(query: str, client: httpx.Client) -> list[dict]:
@@ -52,8 +53,19 @@ def _extract(title: str, client: httpx.Client) -> str:
 
 def seed_research(analysis: TitleAnalysis, *, timeout: float = 20.0) -> ResearchPack:
     """Encyclopedia seed. Claims list stays empty until the agent verifies."""
+    takeover = analysis.channel_mode is ChannelMode.how_they_took_over
     business = analysis.channel_mode is ChannelMode.behind_the_business
-    if business:
+    if takeover:
+        subject = analysis.company or analysis.subject
+        arena = analysis.arena or analysis.target
+        queries = [
+            f"{subject} {arena}" if arena and arena != "unknown until researched" else subject,
+            f"{subject} competitors",
+            f"{subject} history",
+            subject,
+        ]
+        ua = _UA_HTTO
+    elif business:
         company = analysis.company or analysis.subject
         queries = [
             f"{company} 10-K",
@@ -61,17 +73,19 @@ def seed_research(analysis: TitleAnalysis, *, timeout: float = 20.0) -> Research
             f"{company} business model",
             company,
         ]
+        ua = _UA_BTB
     else:
         queries = [
             f"{analysis.subject} {analysis.target}",
             analysis.subject,
             analysis.target,
         ]
+        ua = _UA
     sources: list[SourceRef] = []
     extracts: list[str] = []
     try:
         with httpx.Client(
-            timeout=timeout, headers={"User-Agent": _UA_BTB if business else _UA}
+            timeout=timeout, headers={"User-Agent": ua}
         ) as client:
             seen: set[str] = set()
             for q in queries:
