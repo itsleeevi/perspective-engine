@@ -2,6 +2,7 @@
 
 Newest first. Originality QA reads this index (not `docs/videos/` and not `docs/business/`). Each page needs a **Do not copy** section so the next title cannot steal its hook, rise structure, turning points, flywheel, or ending.
 
+- [How TikTok Beat the Social Media Giants](tiktok-beat-the-social-media-giants.md) — For You strip / no friends first / interest vs graph, Kokoro `am_liam` 1.15, **23:02** (newsroom + DMA + EO 14352 / USDS 2026; no “today is DATE” in the VO)
 - [How Apple Won the Smartphone War](apple-won-the-smartphone-war.md) — empty phone glass / no keypad / 70/30 rent, Kokoro `am_liam` 1.15, **26:43** (FY2025 10-K; no “today is DATE” in the VO)
 - [How Netflix Destroyed the Old TV Business](netflix-destroyed-the-old-tv-business.md) — red Watch Now button / free internet movie on the DVD plan, Kokoro `am_liam` 1.15, **22:54** (FY2025 10-K; no “today is DATE” in the VO)
 - [How Google Destroyed the Search Competition](google-destroyed-the-search-competition.md) — blank white search box / side column / rented first type, Kokoro `am_liam` 1.15, **24:47** (FY2025 10-K; no “today is DATE” in the VO)
