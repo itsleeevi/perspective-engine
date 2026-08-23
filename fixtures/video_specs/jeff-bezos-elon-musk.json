@@ -1,0 +1,62 @@
+{
+  "engine": "channel",
+  "channel": "What They Really Think",
+  "topic": "What Jeff Bezos Really Thinks About Elon Musk",
+  "fixture": "fixtures/jeff-bezos-elon-musk.json",
+  "stills_module": "fixtures/jeff-bezos-elon-musk_stills.py",
+  "still_prefix": "jeff-bezos-elon-musk_v1_",
+  "stills_dir": "assets/grok_jeff-bezos-elon-musk_v1",
+  "thread_id": "jeff-bezos-elon-musk-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_liam",
+  "kokoro_speed": 1.15,
+  "kokoro_sentence_pause": 0.06,
+  "kokoro_clause_pause": 0.02,
+  "kokoro_pack_words": 1,
+  "kokoro_scene_pause": 0.28,
+  "narration_wpm": 185,
+  "burn_captions": true,
+  "chunk_min_seconds": 3.0,
+  "chunk_max_seconds": 7.0,
+  "chunk_target_seconds": 4.5,
+  "youtube": {
+    "title": "What Jeff Bezos Really Thinks About Elon Musk",
+    "description": "What Jeff Bezos really thinks about Elon Musk: he thinks Elon is the hare, and skipping steps does not make you faster.\n\nBezos almost never says the name. He built Blue Origin as the tortoise against SpaceX, protested Pad 39A, sued NASA after Starship won the 2021 Moon lander, flew New Glenn in 2025, watched a pad explode in May 2026, then posted a tortoise after Musk pivoted to a Moon city.\n\nThis illustrated documentary from What They Really Think tells that story.",
+    "thumbnail_concept": "Tight chest-up of the subject: fit early-60s man, fully shaved bald scalp, pale high forehead, square face, wide mouth, navy flight jacket, light blue open collar, FACE at least 30 percent of frame, dramatic side light, empty dark right third for type. Same face as the real public figure, still flat 2D cartoon, not a photograph. No on-image text. No historical personal names.",
+    "thumbnail_text": "THE HARE",
+    "tags": [
+      "jeff bezos",
+      "elon musk",
+      "what jeff bezos really thinks about elon musk",
+      "blue origin",
+      "spacex",
+      "new glenn",
+      "tortoise and the hare",
+      "gradatim ferociter",
+      "what they really think",
+      "illustrated documentary",
+      "bezos musk 2026",
+      "amazon leo",
+      "jeff bezos elon musk",
+      "history documentary",
+      "what they really thought",
+      "the tortoise"
+    ],
+    "short_title": "He Posted a Tortoise",
+    "chapters": [
+      "The Picture",
+      "The Pad",
+      "The Suit",
+      "The Rocket",
+      "The Moon"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/jeff-bezos-elon-musk_short.json",
+    "stills_module": "fixtures/jeff-bezos-elon-musk_short_stills.py",
+    "still_prefix": "jeff-bezos-elon-musk_short_v1_",
+    "stills_dir": "assets/grok_jeff-bezos-elon-musk_short_v1",
+    "output": "assets/output/jeff-bezos-elon-musk_short.mp4"
+  }
+}

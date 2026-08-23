@@ -151,8 +151,11 @@ TITLE
     `python -m channel youtube <slug>`.
 
 16. Update docs/videos/<slug>.md + README.md with a "## Do not copy" list
-    of quoted phrases. Commit code+docs only when asked. Never commit
-    assets/ or .env.
+    of quoted phrases. In the SAME change, commit the playbook files
+    listed under Shared contract, plus this cut's fixtures, video_spec,
+    stills modules, image jobs, and docs/videos page. Other clones only
+    see what is in git. Push so a new environment can `git pull`.
+    Never commit assets/ or .env.
 ```
 
 Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About Y"` (defaults to `init`).
@@ -197,3 +200,25 @@ No synthetic-media paragraph on the Short or the long video. Compile writes a 9:
 - Do not invent quotes or private thoughts. If the evidence cannot establish what they thought, say so in the story.
 - Do not run two assemble scripts at once (`_ENCODE_CONCURRENCY = 3`).
 - Do not hardcode a person into the engine. Only the title changes.
+
+## Shared contract (other clones)
+
+Chat is not the source of truth. A new agent in a new environment starts from
+**git** (`docs/custom-videos.md`, `AGENTS.md`, `.cursor/rules/custom-videos.mdc`,
+`docs/videos/`, `channel/`, `scripts/lint_*.py`, shipped `fixtures/`).
+
+If you change how these videos are made — captions, YouTube copy, voice,
+length, story rules, image brands, thumbs — update **all** of these in the
+same commit, then push:
+
+- `docs/custom-videos.md` (this playbook)
+- `AGENTS.md` (repo contract)
+- `.cursor/rules/custom-videos.mdc` (always-on Cursor rule)
+- `channel/agent_prompts.py` if a stage prompt changed
+- a linter or test if the rule can be checked by a machine
+- `docs/videos/<slug>.md` + `docs/videos/README.md` if a cut shipped
+
+Do not leave a production rule only in conversation. Do not change one
+surface and leave the others stale. `tests/test_channel_handoff.py` fails
+when the three agent surfaces drift or a video page is missing from the
+index.

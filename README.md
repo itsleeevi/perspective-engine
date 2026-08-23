@@ -187,6 +187,6 @@ perspective-engine/
 - [`docs/provider-decisions.md`](docs/provider-decisions.md): why each provider was chosen, with alternatives considered
 - [`docs/roadmap.md`](docs/roadmap.md): the phased build plan from local prototype to durable infrastructure
 - [`docs/decisions/0001-core-architecture.md`](docs/decisions/0001-core-architecture.md): ADR covering LangGraph vs. alternatives, the still-first rule, and structural identity consistency
-- [`docs/custom-videos.md`](docs/custom-videos.md): playbook for fixture-driven YouTube cuts (new title = new story; explain the hero's thought as if the watcher were five — `the_thought` in the fixture)
+- [`docs/custom-videos.md`](docs/custom-videos.md): playbook for fixture-driven YouTube cuts (new title = new story; explain the hero's thought as if the watcher were five — `the_thought` in the fixture). Production-rule changes belong in that file + `AGENTS.md` + `.cursor/rules/custom-videos.mdc` and must be committed/pushed — other clones only see git.
 - [`docs/videos/`](docs/videos/README.md): log of shipped cuts so the next title does not clone the last spine
 - [`AGENTS.md`](AGENTS.md): the operational contract this repo is built against, read by AI coding agents at the start of every session

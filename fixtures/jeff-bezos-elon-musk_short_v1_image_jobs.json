@@ -1,0 +1,76 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "jeff-bezos-elon-musk_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "object close-up",
+      "chunk": "He posted a tortoise.",
+      "scene": "X_PHONE A dark phone showing one grey tortoise photo, no letters.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION x_phone (same set): dark phone in a hand, one grey photo, no type. Palette: black, silver, warm lamp. STRICTLY NO people, NO faces, NO hands. SHOT: object close-up. ACTION: X_PHONE A dark phone showing one grey tortoise photo, no letters.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "jeff-bezos-elon-musk_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic image",
+      "chunk": "No caption. Elon Musk answered. Jeff Bezos won't say the name.",
+      "scene": "CREST_WALL THE_TORTOISE a huge dark-green tortoise statue with a bright gold shell, as big as a suitcase, sitting dead center in the frame, high contrast, no writing, not a pin, not a stamp, not tiny.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION crest_wall (same set): stone wall with two painted tortoises, no letters. Palette: slate, gold, pine. STRICTLY NO people, NO faces, NO hands. SHOT: symbolic image. ACTION: CREST_WALL THE_TORTOISE a huge dark-green tortoise statue with a bright gold shell, as big as a suitcase, sitting dead center in the frame, high contrast, no writing, not a pin, not a stamp, not tiny.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "jeff-bezos-elon-musk_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He thinks Elon is the hare, and skipping steps does not make you faster.",
+      "scene": "CREST_WALL Bald navy-jacket man looking at THE_TORTOISE a huge dark-green tortoise statue with a bright gold shell, as big as a suitcase, sitting dead center in the frame, high contrast, no writing, not a pin, not a stamp, not tiny.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. fit man, early 60s, fully shaved bald scalp, pale high forehead, square cartoon face, wide mouth, clean-shaven, navy flight jacket over a light blue open-collar shirt. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity photograph. LOCATION crest_wall (same set): stone wall with two painted tortoises, no letters. Palette: slate, gold, pine. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: CREST_WALL Bald navy-jacket man looking at THE_TORTOISE a huge dark-green tortoise statue with a bright gold shell, as big as a suitcase, sitting dead center in the frame, high contrast, no writing, not a pin, not a stamp, not tiny.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "jeff-bezos-elon-musk_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "other",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Blue Origin started first. SpaceX got to orbit first. In 2021 Blue Origin sued NASA when SpaceX won the Moon.",
+      "scene": "HANGAR Tall receding-hair black-t-shirt man beside a white rocket body.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. tall slim man, 50s, receding brown hair swept back from a high forehead, long oval face, prominent chin, thin mouth, simple cartoon eyes set close, plain black t-shirt, slightly stooped tall walk. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity photograph. LOCATION hangar (same set): high hangar, tall white rocket body, orange gantry, no type. Palette: white, rust orange, shadow. Draw only the named characters. SHOT: medium shot. ACTION: HANGAR Tall receding-hair black-t-shirt man beside a white rocket body.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "004",
+      "filename": "jeff-bezos-elon-musk_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "In 2025 New Glenn finally flew. Then a rocket blew up on the pad.",
+      "scene": "COURTROOM Wood dais and a thick folder with a blank red bar.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION courtroom (same set): wood federal courtroom, empty jury box, no names. Palette: walnut, cream, brass. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: COURTROOM Wood dais and a thick folder with a blank red bar.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "005",
+      "filename": "jeff-bezos-elon-musk_short_v1_005.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "The tortoise is still walking.",
+      "scene": "BOOM_PAD Scorched concrete and a bent rail, white smoke.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION boom_pad (same set): scorched concrete, smoke, bent rail, no type. Palette: char, rust, white smoke. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: BOOM_PAD Scorched concrete and a bent rail, white smoke.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

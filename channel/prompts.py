@@ -26,6 +26,17 @@ _IMAGE_BRANDS = (
     "Microsoft",
     "Google",
     "DeepMind",
+    "Amazon",
+    "Blue Origin",
+    "New Glenn",
+    "New Shepard",
+    "Starlink",
+    "Starship",
+    "Project Kuiper",
+    "Amazon Leo",
+    "Kuiper",
+    "NASA",
+    "Falcon",
 )
 
 

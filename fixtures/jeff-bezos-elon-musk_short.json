@@ -1,0 +1,21 @@
+{
+  "title": "He Posted a Tortoise",
+  "hero_career_progression": false,
+  "include_level_titles": false,
+  "the_thought": "He thinks Elon is the hare, and skipping steps does not make you faster.",
+  "hook": "He posted a tortoise.",
+  "levels": [
+    {
+      "name": "The Short",
+      "beats": [
+        "No caption. Elon Musk answered. Jeff Bezos won't say the name. He thinks Elon is the hare, and skipping steps does not make you faster. Blue Origin started first. SpaceX got to orbit first. In 2021 Blue Origin sued NASA when SpaceX won the Moon. In 2025 New Glenn finally flew. Then a rocket blew up on the pad. The tortoise is still walking."
+      ]
+    },
+    {
+      "name": "The Link",
+      "beats": [
+        "Watch the full video. The link is in the description."
+      ]
+    }
+  ]
+}
