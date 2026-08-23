@@ -8,7 +8,7 @@ import textwrap
 from pathlib import Path
 
 from channel.bibles import token_for_location, visual_lock
-from channel.config import CHANNEL
+from channel.config import CHANNEL, kokoro_voice_for, visual_accent_for
 from channel.metadata import draft_metadata
 from channel.paths import (
     ROOT,
@@ -117,11 +117,14 @@ def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
     style = strip_image_brands(
         strip_character_names(
             " ".join(
-                [
+                p
+                for p in (
                     CHANNEL.visual_style,
+                    visual_accent_for(project.slug),
                     CHANNEL.negative_style,
                     *[visual_lock(c) for c in project.characters.values()],
-                ]
+                )
+                if p
             ),
             project,
         )
@@ -182,7 +185,7 @@ def spec_dict(project: VideoProject, *, root: Path | None = None) -> dict:
         "stills_dir": f"assets/grok_{slug}_v1",
         "thread_id": f"{slug}-v1",
         "voice": CHANNEL.voice,
-        "kokoro_voice": CHANNEL.kokoro_voice,
+        "kokoro_voice": kokoro_voice_for(slug),
         "kokoro_speed": CHANNEL.kokoro_speed,
         "kokoro_sentence_pause": CHANNEL.kokoro_sentence_pause,
         "kokoro_clause_pause": CHANNEL.kokoro_clause_pause,

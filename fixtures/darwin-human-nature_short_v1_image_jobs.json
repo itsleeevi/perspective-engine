@@ -1,0 +1,76 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "darwin-human-nature_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "document close-up",
+      "chunk": "Two words in a notebook: I think.",
+      "scene": "NOTEBOOK_DESK Open brown pocket notebook, two short pencil marks, no readable paragraph.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION notebook_desk (same set): oak writing desk, open brown pocket notebook, brass lamp, no readable paragraphs. Palette: oak, lamp amber, ink brown. STRICTLY NO people, NO faces, NO hands. SHOT: document close-up. ACTION: NOTEBOOK_DESK Open brown pocket notebook, two short pencil marks, no readable paragraph.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "darwin-human-nature_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic image",
+      "chunk": "Darwin drew a tree with no names on it. He thought people are animals who learned to be kind.",
+      "scene": "NOTEBOOK_DESK THE_FORK a huge pale Y-shaped birch twig, thick as a wrist, bright cream wood against a dark table, filling the middle of the frame, high contrast, same obvious branching stick every time, no writing, not a faint sketch, not a tiny doodle.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION notebook_desk (same set): oak writing desk, open brown pocket notebook, brass lamp, no readable paragraphs. Palette: oak, lamp amber, ink brown. STRICTLY NO people, NO faces, NO hands. SHOT: symbolic image. ACTION: NOTEBOOK_DESK THE_FORK a huge pale Y-shaped birch twig, thick as a wrist, bright cream wood against a dark table, filling the middle of the frame, high contrast, same obvious branching stick every time, no writing, not a faint sketch, not a tiny doodle.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "darwin-human-nature_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "A boy bought for a pearl button taught him we are one kind of human.",
+      "scene": "DOWN_STUDY Balding grey-beard man in a black coat over a cream shirt, heavy brow, simple cartoon eyes, at a window.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. older man, 50s-60s, high balding forehead, long full grey-white beard, heavy brow, simple cartoon eyes, black Victorian coat over a cream shirt. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity photograph. LOCATION down_study (same set): cluttered Victorian study, specimen drawers, window light. Palette: green baize, walnut, cream wall. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: DOWN_STUDY Balding grey-beard man in a black coat over a cream shirt, heavy brow, simple cartoon eyes, at a window.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "darwin-human-nature_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "other",
+      "free": false,
+      "shot_type": "close-up",
+      "chunk": "Clothes are not a species. Then he said kindness grew from the pack, not from a miracle.",
+      "scene": "BUTTON_TABLE Young man, dark brown skin, short black hair, dignified simple cartoon face, holding a huge pale pearl button.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. young man, late teens, dark brown skin, short black hair, dignified simple cartoon face, dark wool coat over a pale shirt. Not a caricature. Flat 2D, NOT photoreal. LOCATION button_table (same set): bare wood table, one huge pale pearl button, high contrast. Palette: raw wood, pearl white, shadow. Draw only the named characters. SHOT: close-up. ACTION: BUTTON_TABLE Young man, dark brown skin, short black hair, dignified simple cartoon face, holding a huge pale pearl button.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "004",
+      "filename": "darwin-human-nature_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "The difference, he wrote, is degree, not kind. People used him to say let the weak die.",
+      "scene": "DOG_HEARTH A hearth rug and a sleeping hound, fire glow.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION dog_hearth (same set): hearth rug, sleeping hound, fire glow, empty chair. Palette: ember orange, wool brown, shadow. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: DOG_HEARTH A hearth rug and a sleeping hound, fire glow.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "005",
+      "filename": "darwin-human-nature_short_v1_005.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "That's not the book he wrote about conscience. The fork includes us.",
+      "scene": "LECTURE_HALL Empty wood benches, one oil lamp, a chalkboard with a simple Y fork and no letters.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION lecture_hall (same set): wood lecture hall, empty benches, one oil lamp. Palette: walnut, warm lamp, dust. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: LECTURE_HALL Empty wood benches, one oil lamp, a chalkboard with a simple Y fork and no letters.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

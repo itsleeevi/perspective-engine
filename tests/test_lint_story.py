@@ -3,6 +3,7 @@
 from pathlib import Path
 
 from scripts.lint_story import (
+    advisor_voice_hit,
     colliding_chapter_names,
     hook_is_month_year_stamp,
     production_clock_hit,
@@ -17,6 +18,14 @@ def test_production_clock_rejects_today_is_date():
     assert production_clock_hit("So what does he really think about AI, today, August 22, 2026.")
     assert production_clock_hit("The parents punched in this morning.")
     assert production_clock_hit("and ten days ago that warehouse shipped another version")
+
+
+def test_advisor_voice_rejects_channel_as_doctor_or_broker():
+    assert advisor_voice_hit("You should invest in this fund before the crash.")
+    assert advisor_voice_hit("See a doctor if the cough lasts.")
+    assert advisor_voice_hit("As your lawyer I would file tomorrow.")
+    assert advisor_voice_hit("He thought people are animals who learned to be kind.") is None
+    assert advisor_voice_hit("Survival of the fittest was not his phrase for conscience.") is None
 
 
 def test_production_clock_allows_event_dates():

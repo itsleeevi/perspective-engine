@@ -2,6 +2,7 @@
 Render the YouTube Short companion of a long custom video.
 
     .venv/bin/python scripts/run_short.py fixtures/video_specs/<slug>.json
+    .venv/bin/python scripts/run_short.py fixtures/video_specs/<slug>.json --force
 
 The Short exists to drive traffic to the long video: a vertical 1080x1920
 cut of 25-45 seconds that opens on the story's most ironic image, escalates
@@ -49,9 +50,10 @@ load_dotenv(ROOT / ".env", override=True)
 os.environ.setdefault("ADAPTER_CACHE", "1")
 
 if len(sys.argv) < 2:
-    print("usage: run_short.py <spec.json>", file=sys.stderr)
+    print("usage: run_short.py <spec.json> [--force]", file=sys.stderr)
     sys.exit(2)
 SPEC = json.loads((ROOT / sys.argv[1]).read_text(encoding="utf-8"))
+_FORCE_ASSEMBLE = "--force" in sys.argv
 if "short" not in SPEC:
     print("spec has no \"short\" block; nothing to render", file=sys.stderr)
     sys.exit(2)
@@ -149,6 +151,20 @@ def gather_stills(n: int, chunks: list[str]) -> list[Path]:
 
 
 async def main() -> None:
+    from channel.cadence import (
+        CadenceError,
+        assert_cadence,
+        record_assemble,
+        slug_from_spec,
+    )
+
+    slug = slug_from_spec(SPEC, short=True)
+    try:
+        assert_cadence(slug, force=_FORCE_ASSEMBLE)
+    except CadenceError as exc:
+        print(exc, file=sys.stderr)
+        sys.exit(2)
+
     chunks = _chunks()
     n_stills = _stills_count()
     if len(chunks) != n_stills:
@@ -233,9 +249,7 @@ async def main() -> None:
     out_path.with_suffix(".json").write_text(json.dumps(manifest, indent=2))
     print(f"short: {out_path} ({total:.1f}s, {len(chunks)} shots, "
           f"max cut error {manifest['sync']['max_cut_error_ms']}ms)")
-    slug = Path(SHORT.get("fixture") or SPEC.get("fixture") or "").stem
-    if slug.endswith("_short"):
-        slug = slug[: -len("_short")]
+    record_assemble(slug, kind="short")
     still = find_short_thumbnail_still(slug)
     if still:
         dest = youtube_dir() / f"{youtube_stem(slug)}_short_thumbnail_1080x1920.jpg"

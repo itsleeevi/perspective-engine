@@ -1,0 +1,61 @@
+{
+  "engine": "channel",
+  "channel": "What They Really Think",
+  "topic": "What Darwin Really Thought About Human Nature",
+  "fixture": "fixtures/darwin-human-nature.json",
+  "stills_module": "fixtures/darwin-human-nature_stills.py",
+  "still_prefix": "darwin-human-nature_v1_",
+  "stills_dir": "assets/grok_darwin-human-nature_v1",
+  "thread_id": "darwin-human-nature-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_liam",
+  "kokoro_speed": 1.15,
+  "kokoro_sentence_pause": 0.06,
+  "kokoro_clause_pause": 0.02,
+  "kokoro_pack_words": 1,
+  "kokoro_scene_pause": 0.28,
+  "narration_wpm": 185,
+  "burn_captions": true,
+  "chunk_min_seconds": 3.0,
+  "chunk_max_seconds": 7.0,
+  "chunk_target_seconds": 4.5,
+  "youtube": {
+    "title": "What Darwin Really Thought About Human Nature",
+    "description": "What Darwin really thought about human nature: he thought people are animals who learned to be kind.\n\nNotebook B, Jemmy Button, Origin, Descent of Man, and why Social Darwinism is not the book he wrote about conscience.\n\nThis illustrated documentary from What They Really Think tells that story.",
+    "thumbnail_concept": "Tight chest-up of the subject: older man, high balding forehead, long full grey-white beard, heavy brow, black Victorian coat, FACE at least 30 percent of frame, dramatic side light, empty dark right third for type. Same face as the public figure, still flat 2D cartoon, not a photograph. No on-image text. No historical personal names.",
+    "thumbnail_text": "I THINK",
+    "tags": [
+      "charles darwin",
+      "darwin human nature",
+      "what darwin really thought about human nature",
+      "descent of man",
+      "origin of species",
+      "jemmy button",
+      "social darwinism",
+      "moral sense",
+      "what they really think",
+      "illustrated documentary",
+      "darwin",
+      "human nature",
+      "history documentary",
+      "what they really thought",
+      "the fork"
+    ],
+    "short_title": "I Think",
+    "chapters": [
+      "I Think",
+      "Jemmy Button",
+      "Light Thrown",
+      "Moral Sense",
+      "False Fitness"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/darwin-human-nature_short.json",
+    "stills_module": "fixtures/darwin-human-nature_short_stills.py",
+    "still_prefix": "darwin-human-nature_short_v1_",
+    "stills_dir": "assets/grok_darwin-human-nature_short_v1",
+    "output": "assets/output/darwin-human-nature_short.mp4"
+  }
+}

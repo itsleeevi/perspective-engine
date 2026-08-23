@@ -1,0 +1,64 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "freud-women_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "She stands up.",
+      "scene": "EMPTY_CHAIR Wooden consulting chair pulled back, cushion dented, no person.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION empty_chair (same set): wooden consulting chair pulled back, cushion dent, window light. Palette: oak, cream cushion, pale light. STRICTLY NO people, NO faces, NO hands. SHOT: wide shot. ACTION: EMPTY_CHAIR Wooden consulting chair pulled back, cushion dented, no person.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "freud-women_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "object close-up",
+      "chunk": "The hour is not over. Sigmund Freud keeps the folder. Cream board. Red ribbon. He thought a woman was a man who had lost something.",
+      "scene": "FOLDER_DESK THE_FOLDER a huge thick cream case folder tied with a bright red ribbon, big as a serving board, high contrast on a dark desk, filling the middle of the frame, same obvious folder every time, not a faint paper, not a tiny notebook.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION folder_desk (same set): dark wood desk, blotter, brass lamp, one fat cream folder. Palette: charcoal, cream, red ribbon. STRICTLY NO people, NO faces, NO hands. SHOT: object close-up. ACTION: FOLDER_DESK THE_FOLDER a huge thick cream case folder tied with a bright red ribbon, big as a serving board, high contrast on a dark desk, filling the middle of the frame, same obvious folder every time, not a faint paper, not a tiny notebook.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "freud-women_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "other",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "He published the girl who walked out. Then he drew a map that started with the boy. A colleague said the map was backwards.",
+      "scene": "VIENNA_STAIR Young woman, late teens, dark hair in a low knot, cream wool coat leaving a peg, no face.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. young woman, late teens, dark hair in a low knot, high-collar cream 1900 dress and wool coat, simple cartoon face, modest historical clothing. Not a caricature. Flat 2D, NOT photoreal. LOCATION vienna_stair (same set): apartment stair, coat peg, street door, no house number. Palette: stone grey, wool brown, shadow. Draw only the named characters. SHOT: wide shot. ACTION: VIENNA_STAIR Young woman, late teens, dark hair in a low knot, cream wool coat leaving a peg, no face.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "freud-women_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He kept the first picture. He still called women a dark continent. A hole in the paper.",
+      "scene": "CONSULT_ROOM Balding man, neat grey-white beard, round wire glasses, brown three-piece suit, simple cartoon eyes, at the empty couch.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. older man, high balding forehead, dark hair at the sides, neat short grey-white beard, round wire glasses, three-piece brown wool suit, watch chain, simple cartoon eyes. Same cartoon person every time. Flat 2D vector, NOT photoreal, NOT a celebrity photograph. LOCATION consult_room (same set): modest 1900 consulting room, couch, tall window, no readable charts. Palette: walnut, cream wall, lamp amber. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: CONSULT_ROOM Balding man, neat grey-white beard, round wire glasses, brown three-piece suit, simple cartoon eyes, at the empty couch.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "004",
+      "filename": "freud-women_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic image",
+      "chunk": "The full video is the walkout, the map, and the riddle he never answered.",
+      "scene": "MAP_TABLE Cream map with an unlabeled dark oval hole, lamp through the gap, no country names.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION map_table (same set): bare table, cream map with an unlabeled dark oval hole, lamp. Palette: parchment, moss green, lamp. STRICTLY NO people, NO faces, NO hands. SHOT: symbolic image. ACTION: MAP_TABLE Cream map with an unlabeled dark oval hole, lamp through the gap, no country names.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

@@ -34,7 +34,7 @@ Jobs hired Gates to write Macintosh software, then treated Windows as a betrayal
 | Short | `assets/output/steve-jobs-bill-gates_short.mp4` (1080×1920, **27.9s**, 7 shots, cut error 15.67 ms, branded end card) |
 | Thumb | `assets/youtube/steve_jobs_bill_gates_thumbnail_1280x720.jpg` (overlay **NO TASTE**) |
 | Shorts thumb | `assets/youtube/steve_jobs_bill_gates_short_thumbnail_1080x1920.jpg` (overlay **NO TASTE**) |
-| Description | `assets/youtube/steve_jobs_bill_gates_description.txt` |
+| Description | `assets/youtube/steve_jobs_bill_gates_description.txt` (honest synthetic-media disclosure) |
 | Tags | `assets/youtube/steve_jobs_bill_gates_tags.txt` |
 | Thumb job | `fixtures/steve-jobs-bill-gates_thumbnail_image_jobs.json` |
 | Shorts thumb job | `fixtures/steve-jobs-bill-gates_short_thumbnail_image_jobs.json` |

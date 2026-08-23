@@ -4,6 +4,7 @@ Generic runner for fixture-driven custom YouTube cuts.
 One command per video, everything else is data:
 
     .venv/bin/python scripts/run_custom_video.py fixtures/video_specs/<slug>.json
+    .venv/bin/python scripts/run_custom_video.py fixtures/video_specs/<slug>.json --force
 
 A video spec is a small JSON file:
 
@@ -49,9 +50,10 @@ os.environ.setdefault("ADAPTER_CACHE", "1")
 # is imported (NARRATION_WPM is still bound at import for shot duration math;
 # chunk windows are read at call time from CHUNK_*_SECONDS).
 if len(sys.argv) < 2:
-    print("usage: run_custom_video.py <spec.json>", file=sys.stderr)
+    print("usage: run_custom_video.py <spec.json> [--force]", file=sys.stderr)
     sys.exit(2)
 SPEC = json.loads((ROOT / sys.argv[1]).read_text(encoding="utf-8"))
+_FORCE_ASSEMBLE = "--force" in sys.argv
 from channel.pacing import apply_spec_pacing  # noqa: E402
 
 apply_spec_pacing(SPEC)
@@ -261,6 +263,20 @@ def _gate(result: dict) -> dict:
 
 
 async def main() -> None:
+    from channel.cadence import (
+        CadenceError,
+        assert_cadence,
+        record_assemble,
+        slug_from_spec,
+    )
+
+    slug = slug_from_spec(SPEC)
+    try:
+        assert_cadence(slug, force=_FORCE_ASSEMBLE)
+    except CadenceError as exc:
+        print(exc, file=sys.stderr)
+        sys.exit(2)
+
     tags, scenes, shot_types, spoken = _chunk_tags()
     print(f"Topic: {TOPIC}", flush=True)
     print(f"Fixture: {FIXTURE}", flush=True)
@@ -291,7 +307,7 @@ async def main() -> None:
         "static_only": True,
         "script_fixture_path": str(FIXTURE),
         "include_hook": True,
-        "target_minutes": 8.0,
+        "target_minutes": 23.0,
         "burn_captions": bool(burn_captions),
     }
 
@@ -324,6 +340,7 @@ async def main() -> None:
     print(f"Final video: {result.get('final_video_path')}", flush=True)
     print(f"Total cost: ${total:.4f} ({len(cost_log)} billed calls)", flush=True)
     print("=" * 64, flush=True)
+    record_assemble(slug, kind="long")
     try:
         from channel.youtube import load_assemble_manifest, write_pack
 

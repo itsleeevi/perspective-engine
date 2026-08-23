@@ -36,7 +36,7 @@ In 2021 he wrote *Moore's Law for Everything*: labor's price falls toward zero, 
 | Short | `assets/output/sam-altman-the-future-of-work_short.mp4` (1080×1920, **25.1s**, 6 shots, cut error 7.33 ms, branded end card) |
 | Thumb | `assets/youtube/sam_altman_the_future_of_work_thumbnail_1280x720.jpg` (overlay **THE CHECK**) |
 | Shorts thumb | `assets/youtube/sam_altman_the_future_of_work_short_thumbnail_1080x1920.jpg` (overlay **THE CHECK**) |
-| Description | `assets/youtube/sam_altman_the_future_of_work_description.txt` |
+| Description | `assets/youtube/sam_altman_the_future_of_work_description.txt` (honest synthetic-media disclosure) |
 | Tags | `assets/youtube/sam_altman_the_future_of_work_tags.txt` |
 | Thumb job | `fixtures/sam-altman-the-future-of-work_thumbnail_image_jobs.json` |
 | Shorts thumb job | `fixtures/sam-altman-the-future-of-work_short_thumbnail_image_jobs.json` |

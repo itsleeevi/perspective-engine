@@ -33,7 +33,7 @@ A rabbi pays for fifty words. Einstein cables Spinoza's God, not a God who meddl
 | Sync | cut error 16.67 ms (half a 30 fps frame) |
 | Short | `assets/output/einstein-religion_short.mp4` (1080×1920, **22.0s**, cut error 14.67 ms) |
 | Thumb | `assets/youtube/einstein_religion_thumbnail_1280x720.jpg` (1280×720, overlay **NOT THAT / GOD**) |
-| Description | `assets/youtube/einstein_religion_description.txt` |
+| Description | `assets/youtube/einstein_religion_description.txt` (honest synthetic-media disclosure) |
 | Short description | `assets/youtube/einstein_religion_short_description.txt` |
 | Tags | `assets/youtube/einstein_religion_tags.txt` |
 | Thumb job | `fixtures/einstein-religion_thumbnail_image_jobs.json` |

@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
+import hashlib
+
 from pydantic import BaseModel, Field
+
+from channel.locks import SHIPPED_STYLE_LOCK
 
 
 GLOBAL_VISUAL_STYLE = (
@@ -29,10 +33,70 @@ NEGATIVE_STYLE = (
     "unless the scene names a short on-screen label."
 )
 
-SYNTHETIC_DISCLOSURE = (
+# Old footer kept so youtube.py can strip it from stale drafts.
+LEGACY_SYNTHETIC_DISCLOSURE = (
     "Synthetic media: images and narration are generated. "
     "Not a photograph of any real person."
 )
+
+YOUTUBE_DISCLOSURE = (
+    "Illustrated documentary. Stills and narration are generated. "
+    "Research and story are original to this channel. "
+    "Not a photograph of any real person."
+)
+
+HOST_ATTRIBUTION = (
+    "Researched and written for What They Really Think from primary sources."
+)
+
+CHANNEL_ABOUT = (
+    "What They Really Think makes illustrated documentaries. "
+    "Each title is a new story from primary sources. "
+    "Stills and voice are generated; the research and script are original "
+    "to this channel. A person writes and reviews every cut.\n"
+)
+
+# New titles pick one accent so stills are not one interchangeable palette.
+# Shipped slugs get an empty string (see SHIPPED_STYLE_LOCK).
+VISUAL_ACCENTS = (
+    "Accent this title with a cool slate-blue and cream paper palette; "
+    "keep the same flat 2D construction.",
+    "Accent this title with a warm lamp-amber and walnut-brown palette; "
+    "keep the same flat 2D construction.",
+    "Accent this title with a moss-green and parchment palette; "
+    "keep the same flat 2D construction.",
+    "Accent this title with a dusk-violet and pale-gold palette; "
+    "keep the same flat 2D construction.",
+    "Accent this title with a brick-red and ash-grey palette; "
+    "keep the same flat 2D construction.",
+    "Accent this title with a sea-teal and sand palette; "
+    "keep the same flat 2D construction.",
+)
+
+# Kokoro only. Default stays am_liam (pacing + shipped cuts).
+KOKORO_ROSTER = ("am_liam", "am_michael", "am_fenrir")
+
+# Back-compat alias used by older imports / tests.
+SYNTHETIC_DISCLOSURE = YOUTUBE_DISCLOSURE
+
+
+def _stable_index(key: str, n: int) -> int:
+    digest = hashlib.sha256(key.encode("utf-8")).hexdigest()
+    return int(digest, 16) % n
+
+
+def visual_accent_for(slug: str) -> str:
+    """Per-title palette note. Empty for shipped stills that must not drift."""
+    if not slug or slug in SHIPPED_STYLE_LOCK:
+        return ""
+    return VISUAL_ACCENTS[_stable_index(slug, len(VISUAL_ACCENTS))]
+
+
+def kokoro_voice_for(slug: str) -> str:
+    """Kokoro speaker for a new title. Shipped slugs stay on am_liam."""
+    if not slug or slug in SHIPPED_STYLE_LOCK:
+        return "am_liam"
+    return KOKORO_ROSTER[_stable_index(f"{slug}:voice", len(KOKORO_ROSTER))]
 
 
 class ChannelConfig(BaseModel):
@@ -40,16 +104,17 @@ class ChannelConfig(BaseModel):
 
     name: str = "What They Really Think"
     title_pattern: str = "What {subject} Really {verb} About {target}"
-    target_duration_seconds: int = 480
-    # Kokoro am_liam at 1.15 lands ~220 spoken wpm. 1600–1850 words plus
-    # scene holds and silent cards is ~8 minutes. The 185 figure below is
+    target_duration_seconds: int = 1380
+    # Kokoro at 1.15 lands ~220 spoken wpm. 4400–5500 words plus scene
+    # holds and silent cards is ~20–25 minutes. The 200 figure below is
     # only the chunker estimate for picture changes, not runtime.
-    narration_word_min: int = 1600
-    narration_word_max: int = 1850
-    narration_wpm: int = 185
-    min_scene_duration: float = 3.0
-    max_scene_duration: float = 7.0
-    visual_change_target_seconds: float = 4.5
+    # 4–8s windows (target 6.5) keep a 23-minute cut near ~200 stills.
+    narration_word_min: int = 4400
+    narration_word_max: int = 5500
+    narration_wpm: int = 200
+    min_scene_duration: float = 4.0
+    max_scene_duration: float = 8.0
+    visual_change_target_seconds: float = 6.5
     default_short_enabled: bool = True
     short_word_min: int = 70
     short_word_max: int = 130

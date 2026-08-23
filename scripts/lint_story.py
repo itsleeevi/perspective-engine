@@ -30,6 +30,8 @@ to whichever model wrote the script:
                (shipped Jobs-Gates is grandfathered).
 4d. CLOCK    — research through the day you write. Do not say "today is
                DATE", "as of today", "this morning", or "ten days ago".
+4e. ADVISOR  — this channel tells a history story. It does not give
+               medical, legal, or investment advice in the VO.
 5. STRUCTURE — hook present; 4-6 silent chapter cards with poster-like
                names (<= 4 words) when title_style is "chapter".
 
@@ -78,6 +80,30 @@ def production_clock_hit(text: str) -> str | None:
     return m.group(0) if m else None
 
 
+# Illustrated history, not an AI doctor / lawyer / advisor.
+_ADVISOR_VOICE = re.compile(
+    r"\byou should invest\b|"
+    r"\binvest your (?:money|savings|portfolio)\b|"
+    r"\bbuy this (?:stock|coin|token)\b|"
+    r"\bconsult (?:a|your) (?:doctor|lawyer|attorney|physician)\b|"
+    r"\bsee (?:a|your) (?:doctor|lawyer|attorney)\b|"
+    r"\bas your (?:doctor|lawyer|attorney|financial advisor)\b|"
+    r"\byour legal rights\b|"
+    r"\btake this (?:pill|supplement|remedy|medication)\b|"
+    r"\bhere is how to (?:sue|invest|diagnose|treat)\b|"
+    r"\bthis is financial advice\b|"
+    r"\bthis is medical advice\b|"
+    r"\bthis is legal advice\b",
+    re.I,
+)
+
+
+def advisor_voice_hit(text: str) -> str | None:
+    """Return the first narrator-as-advisor phrase, if any."""
+    m = _ADVISOR_VOICE.search(text or "")
+    return m.group(0) if m else None
+
+
 # Shipped channel cuts written before uniqueness-of-engine checks.
 # Do not rewrite them. New titles must invent a new spine.
 _UNIQUENESS_GRANDFATHERED = frozenset(
@@ -88,6 +114,23 @@ _UNIQUENESS_GRANDFATHERED = frozenset(
         "steve-jobs-bill-gates",
         "einstein-religion",
         "einstein-zionism",
+        "stalin_hitler",
+        "hitler_americans",
+        "putin_americans",
+        "kremlin_americans",
+    }
+)
+
+# Shipped ~8-minute channel cuts. New titles must hit 4400–5500 words.
+_LENGTH_GRANDFATHERED = frozenset(
+    {
+        "elon-musk-ai",
+        "jeff-bezos-elon-musk",
+        "sam-altman-the-future-of-work",
+        "steve-jobs-bill-gates",
+        "einstein-religion",
+        "einstein-zionism",
+        "darwin-human-nature",
         "stalin_hitler",
         "hitler_americans",
         "putin_americans",
@@ -437,7 +480,7 @@ def main() -> None:
         ):
             if opener in head:
                 _fail(f"cold open: lecture opener {opener!r}")
-        if not short:
+        if not short and fixture_path.stem not in _LENGTH_GRANDFATHERED:
             lo, hi = CHANNEL.narration_word_min, CHANNEL.narration_word_max
             if words < lo:
                 _warn(f"length: {words} words (channel target {lo}-{hi})")
@@ -473,6 +516,13 @@ def main() -> None:
                 f"date in the VO (found {clock!r}). Date events with months "
                 "and years (August 2026), not 'today is' / 'as of today' / "
                 "'this morning'"
+            )
+        advice = advisor_voice_hit(narration)
+        if advice:
+            _fail(
+                "advisor: this channel tells a history story; it does not "
+                "give medical, legal, or investment advice "
+                f"(found {advice!r})"
             )
     elif not short:
         _ok(f"{words} words")

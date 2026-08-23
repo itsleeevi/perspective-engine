@@ -42,7 +42,7 @@ Bezos almost never names Musk in speeches. The opinion is the crest (Gradatim Fe
 | Short | `assets/output/jeff-bezos-elon-musk_short.mp4` (1080×1920, **25.8s**, 7 shots, cut error 13.33 ms, branded end card) |
 | Thumb | `assets/youtube/jeff_bezos_elon_musk_thumbnail_1280x720.jpg` (overlay **THE HARE**) |
 | Shorts thumb | `assets/youtube/jeff_bezos_elon_musk_short_thumbnail_1080x1920.jpg` (overlay **THE HARE**) |
-| Description | `assets/youtube/jeff_bezos_elon_musk_description.txt` (no synthetic-media line) |
+| Description | `assets/youtube/jeff_bezos_elon_musk_description.txt` (honest synthetic-media disclosure) |
 | Shorts description | `assets/youtube/jeff_bezos_elon_musk_short_description.txt` — `Watch the full video:` / URL / punch paragraph |
 | Tags | `assets/youtube/jeff_bezos_elon_musk_tags.txt` |
 | Thumb job | `fixtures/jeff-bezos-elon-musk_thumbnail_image_jobs.json` |

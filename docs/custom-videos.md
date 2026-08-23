@@ -13,7 +13,7 @@ TITLE = "What Einstein Really Thought About Religion"
 Optional:
 
 ```text
-TARGET_DURATION          # seconds, default 480 (~8 minutes)
+TARGET_DURATION          # seconds, default 1380 (~23 minutes; land 20–25)
 SPECIAL_INSTRUCTIONS     # tone, emphasis, things to avoid
 ```
 
@@ -49,10 +49,11 @@ Research through the day you are writing so the facts are current. **Do not say 
 | `channel/agent_prompts.py` | Stage prompts for Cursor Grok (research → story → scenes). |
 | `channel/prompts.py` | Image prompt assembler: global style + bible + action. |
 | `channel/compile.py` | Writes fixture, stills module, spec, image jobs, long + Shorts thumbnail jobs, draft YouTube copy. |
-| `channel/youtube.py` | Description, tags, chapter stamps, 1280×720 and 1080×1920 overlays after GenerateImage. |
+| `channel/youtube.py` | Description, tags, chapter stamps, honest synthetic-media disclosure, 1280×720 and 1080×1920 overlays after GenerateImage. |
+| `channel/cadence.py` | 24h assemble cap between different titles. Same-slug rebuilds allowed. |
 | `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 chunks, prop/set economy. |
 | Cursor **GenerateImage** | Stills. Grok only. Never fal / OpenAI images on this path. |
-| Kokoro `am_liam` | Free narration. Never Edge, never ElevenLabs. |
+| Kokoro (default `am_liam`) | Free narration. New titles may rotate `am_michael` / `am_fenrir`. Never Edge, never ElevenLabs. |
 | `scripts/run_custom_video.py` / `run_short.py` | Whisper-aligned assemble. |
 
 ```text
@@ -88,8 +89,8 @@ TITLE
     Fix rejected claims. Do not write narration until factcheck is honest.
 
     5. STORY ARCHITECT + NARRATION WRITER using channel/agent_prompts.py
-    1600–1850 words (~8 minutes at Kokoro 1.15), 4–6 chapter names this
-    evidence owns (not The Suit / The Rocket again), spoken English,
+    4400–5500 words (~20–25 minutes at Kokoro 1.15), 4–6 chapter names this
+    evidence owns (not The Suit / The Rocket / Walkout again), spoken English,
     title_payoff said in the VO. Unique story engine. Cold open is a
     sourced moment this title owns — never "X was born", never
     "February 2026. Name posted…". Write years as digits (1995); Kokoro
@@ -135,7 +136,8 @@ TITLE
 14. .venv/bin/python scripts/run_short.py fixtures/video_specs/<slug>.json
     then
     .venv/bin/python scripts/run_custom_video.py fixtures/video_specs/<slug>.json
-    Never two assembles at once.
+    Never two assembles at once. A different title must wait 24 hours
+    (`--force` to override a recut).
 
 15. Verify: ffprobe duration + resolution; sync.max_cut_error_ms < 20;
     spot-check frames for letterbox.
@@ -144,13 +146,21 @@ TITLE
     text), then the same command burns 1280×720 and 1080×1920 JPEG type.
     Thumbnail still: tight chest-up, FACE ≥30% of the frame, dramatic light,
     empty right third. YouTube kills loose wide shots.
-    Description: search phrase in the first 200 characters, then chapters.
-    No synthetic-media line. Shorts description is:
+    Description: search phrase in the first 200 characters, then chapters,
+    then the honest synthetic-media disclosure (packer adds it). Shorts
+    description is:
 
         Watch the full video:
         https://youtu.be/<long-video-id>
 
         <short_title>. <one-paragraph hook>
+
+        Illustrated documentary. Stills and narration are generated. …
+
+    Tick YouTube Studio's altered/synthetic content checkbox on upload.
+    Cartoon work usually labels in the expanded description, not the
+    photoreal player badge. Paste `assets/youtube/channel_about.txt` into
+    the channel About box once.
 
     After the long video is live, set youtube.full_video_url and re-run
     `python -m channel youtube <slug>`.
@@ -167,22 +177,23 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 
 ## Voice (free, in sync)
 
-- **Engine:** Kokoro `am_liam` at speed **1.15**, **one utterance per scene** plus a 0.28s hold so the cut lands on a breath. Never Edge, never ElevenLabs. 1600–1850 words lands near 8 minutes.
+- **Engine:** Kokoro at speed **1.15**, **one utterance per scene** plus a 0.28s hold so the cut lands on a breath. Default speaker is `am_liam`. New titles may rotate `am_michael` / `am_fenrir` from a hash of the slug so the channel does not sound like one TTS farm; shipped cuts stay on the voice they assembled with. Never Edge, never ElevenLabs. **4400–5500 words lands near 20–25 minutes.** Shipped older cuts may stay near 8 minutes — do not rewrite them to the new length.
+- **Length:** new long cuts are **20–25 minutes**. Do not pad a lecture. Add a unique engine, more sourced reversals, and more places. Chunk windows are **4–8 seconds** (target **6.5**) so a 23-minute cut is ~200 stills, not a slideshow. Shipped 8-minute specs keep their old 3–7 / 4.5 windows.
 - **Captions:** each narrated still burns a stylish lower-third of that scene's line. Silent chapter cards stay type-only. Spec field `burn_captions` (default on for channel). Lines must wrap inside the frame — never shear a last line off the left or right. On 9:16 Shorts the caption sits in the **YouTube safe band** (above the like / title / music chrome, inside the side rails). Write short spoken sentences so a caption is two readable lines, not one overflowing paragraph.
 - **Years:** write `1995` in the fixture and on-screen caption. Never spell the year. Kokoro expands digits to spoken years (`nineteen ninety-five`) at synthesis.
 - Shipped older cuts may use different speeds (leave those specs alone).
 - **Sync:** faster-whisper word timestamps; `sync.max_cut_error_ms` < 20 after render.
-- Chunk windows for new channel videos: 3–7 seconds (target 4.5). Spec fields `chunk_min_seconds` / `chunk_max_seconds` / `chunk_target_seconds` are applied before chunking so they cannot leak from a previous run.
+- Chunk windows for new channel videos: 4–8 seconds (target 6.5). Spec fields `chunk_min_seconds` / `chunk_max_seconds` / `chunk_target_seconds` are applied before chunking so they cannot leak from a previous run.
 
 ## Pictures
 
 - One Grok still per narration chunk, from `fixtures/<prefix>image_jobs.json`.
-- **Global style is frozen** in `channel/config.py` (`GLOBAL_VISUAL_STYLE`). Agents fill action and composition only. Compile prepends the prefix.
+- **Global style is frozen** in `channel/config.py` (`GLOBAL_VISUAL_STYLE`). New titles also get a per-slug palette accent so stills are not one interchangeable farm look. Shipped stills stay as generated. Agents fill action and composition only. Compile prepends the prefix.
 - Flat 2D educational animation: simplified faces, flat color, muted historical palette. Not photoreal, not 3D, not anime, not painterly.
 - Historical personal names stay **out** of image prompts. Identity is the character bible `visual_lock`.
 - Fill the frame. Cover-crop keeps the **top** of 3:2 Grok stills so on-image labels are never sheared. Thumbs are **1280×720 JPEG**.
 - Channel profile: **800×800** JPEG, circular crop (`python -m channel branding --profile`). Channel cover: **2560×1440** JPEG, ≤6 MB, faces in the center **1546×423** safe band (`--cover`).
-- Composition changes every ~3–6 seconds. Style does not.
+- Composition changes every ~5–7 seconds on new 20–25 minute cuts. Style does not.
 
 ## The Short
 
@@ -195,16 +206,18 @@ https://youtu.be/<long-video-id>
 He Summoned It Anyway. In 2014 he told MIT…
 ```
 
-No synthetic-media paragraph on the Short or the long video. Compile writes a 9:16 Shorts thumbnail job; type is burned into a 1080×1920 JPEG. Lint with `lint_story.py <spec> --short`. After assemble, open the Short and check the burned captions sit above the YouTube UI — if they hug the bottom edge, the engine safe-band has regressed.
+Long and Short descriptions end with the honest synthetic-media disclosure. Compile writes a 9:16 Shorts thumbnail job; type is burned into a 1080×1920 JPEG. Lint with `lint_story.py <spec> --short`. After assemble, open the Short and check the burned captions sit above the YouTube UI — if they hug the bottom edge, the engine safe-band has regressed.
 
 ## Hard invariants
 
 - New title = new story. Never clone a shipped beat sheet. Unique story
   engine per title (new object, new place, new reversal, new chapter cards).
-- Third-person narrator. YouTube descriptions (long and Shorts) have **no** synthetic-media line.
+- Third-person narrator. YouTube descriptions (long and Shorts) include an honest synthetic-media disclosure.
+- This channel tells a history story. It does not give medical, legal, or investment advice.
 - No Nazi flags/swastikas/camps/gore; no real-person photoreal faces; no cloning a real person's voice.
 - Do not invent quotes or private thoughts. If the evidence cannot establish what they thought, say so in the story.
 - Do not run two assemble scripts at once (`_ENCODE_CONCURRENCY = 3`).
+- Different titles wait **24 hours** between assembles (same-slug rebuilds are allowed; `--force` overrides). Do not ship a new 20–25 minute cut every day from one template.
 - Do not hardcode a person into the engine. Only the title changes.
 
 ## Shared contract (other clones)

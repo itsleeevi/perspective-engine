@@ -49,7 +49,7 @@ Signature prop: **THE_CIRCLE** in exactly 6 long scenes — a huge thick bright 
 | Short | `assets/output/elon-musk-ai_short.mp4` (1080×1920, **27.0s**, 7 shots, cut error 14.33 ms, branded end card) |
 | Thumb | `assets/youtube/elon_musk_ai_thumbnail_1280x720.jpg` (overlay **THE DEMON**) |
 | Shorts thumb | `assets/youtube/elon_musk_ai_short_thumbnail_1080x1920.jpg` (overlay **THE DEMON**) |
-| Description | `assets/youtube/elon_musk_ai_description.txt` (no synthetic-media line) |
+| Description | `assets/youtube/elon_musk_ai_description.txt` (honest synthetic-media disclosure) |
 | Shorts description | `assets/youtube/elon_musk_ai_short_description.txt` — `Watch the full video:` / URL / punch paragraph |
 | Tags | `assets/youtube/elon_musk_ai_tags.txt` |
 | Thumb job | `fixtures/elon-musk-ai_thumbnail_image_jobs.json` |

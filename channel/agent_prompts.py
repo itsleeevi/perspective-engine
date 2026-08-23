@@ -52,7 +52,8 @@ changing two names, throw it out.
 
 Banned recycled engines (already shipped): summoning circle / demon;
 tortoise and hare / Gradatim; inbox / the check; Xerox / no taste;
-telegram / letter / Spinoza; toast / child's deal. Do not write another
+telegram / letter / Spinoza; toast / child's deal; Notebook B fork /
+Jemmy Button; cream Dora folder / dark-continent hole. Do not write another
 Aesop fable, another courtroom-as-the-whole-movie, or another "Month Year.
 Full Name verb…" cold open.
 
@@ -98,9 +99,10 @@ Calendar years are digits in the written line (1995, 1983, 2011), never
 "nineteen ninety-five". Captions burn the digits. Kokoro says the year.
 Open loops: question → answer → new question.
 
-Target 1600–1850 words (~8 minutes at Kokoro 1.15). Never pad a weak story.
-Write 4–6 chapters with poster-like names (≤4 words) that this evidence
-owns. Do not copy another video's cards. At most three "The <Noun>" names.
+Target 4400–5500 words (~20–25 minutes at Kokoro 1.15). Never pad a weak
+story — add evidence, reversals, and places this title owns. Write 4–6
+chapters with poster-like names (≤4 words) that this evidence owns. Do
+not copy another video's cards. At most three "The <Noun>" names.
 Say title_payoff in the cold open or right after, and again near the end.
 
 Blunt simple cartoon, not a riddle. A child should be able to retell the
@@ -181,10 +183,12 @@ Fill project.metadata before compile:
   tags = 8–15 YouTube tags (subject, target, events, channel name)
   description = search phrase in the FIRST 200 characters, then 2–4 sentences
     of the story, then stop. Compile / `python -m channel youtube <slug>`
-    appends chapter timestamps. Do NOT add a synthetic-media line.
+    appends chapter timestamps and an honest synthetic-media disclosure.
+    Do not write the disclosure yourself — the packer adds it so it is
+    not duplicated.
   short_title = Short title, not a summary of the long video.
   After the long video is on YouTube, set youtube.full_video_url to
-  https://youtu.be/<id> and re-run `python -m channel youtube <slug>`.
+    https://youtu.be/<id> and re-run `python -m channel youtube <slug>`.
   Shorts description is exactly:
 
       Watch the full video:
@@ -192,8 +196,11 @@ Fill project.metadata before compile:
 
       <short_title>. <one-paragraph hook>
 
-  No synthetic-media line. No "the link is in the description" in the
-  YouTube description field (that line stays spoken on the end card).
+      Illustrated documentary. Stills and narration are generated. …
+
+  No "the link is in the description" in the YouTube description field
+  (that line stays spoken on the end card). Tick YouTube Studio's
+  altered/synthetic content checkbox on upload.
 
 After assemble: `python -m channel youtube <slug>` (also runs from
 run_custom_video / run_short). GenerateImage the 16:9 thumbnail job and

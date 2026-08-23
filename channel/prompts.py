@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 
 from channel.bibles import format_all_characters, format_all_locations, visual_lock
-from channel.config import CHANNEL
+from channel.config import CHANNEL, visual_accent_for
 from channel.schema import Scene, VideoProject
 
 
@@ -115,6 +115,7 @@ def assemble_image_prompt(
         p
         for p in (
             CHANNEL.visual_style,
+            visual_accent_for(project.slug),
             aspect_line,
             CHANNEL.negative_style,
             " ".join(chars),

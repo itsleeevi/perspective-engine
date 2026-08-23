@@ -1,0 +1,61 @@
+{
+  "engine": "channel",
+  "channel": "What They Really Think",
+  "topic": "What Freud Really Thought About Women",
+  "fixture": "fixtures/freud-women.json",
+  "stills_module": "fixtures/freud-women_stills.py",
+  "still_prefix": "freud-women_v1_",
+  "stills_dir": "assets/grok_freud-women_v1",
+  "thread_id": "freud-women-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_michael",
+  "kokoro_speed": 1.15,
+  "kokoro_sentence_pause": 0.06,
+  "kokoro_clause_pause": 0.02,
+  "kokoro_pack_words": 1,
+  "kokoro_scene_pause": 0.28,
+  "narration_wpm": 200,
+  "burn_captions": true,
+  "chunk_min_seconds": 4.0,
+  "chunk_max_seconds": 8.0,
+  "chunk_target_seconds": 6.5,
+  "youtube": {
+    "title": "What Freud Really Thought About Women",
+    "description": "What Freud really thought about women: he thought a woman was a man who had lost something.\n\nThe Dora folder, penis envy, Karen Horney's no, the dark continent, Anna who stayed, and the riddle he never answered.\n\nThis illustrated documentary from What They Really Think tells that story.",
+    "thumbnail_concept": "Tight chest-up of the subject: older man, high balding forehead, neat short grey-white beard, round wire glasses, brown three-piece suit, FACE at least 30 percent of frame, dramatic side light, empty dark right third for type. Same face as the public figure, still flat 2D cartoon, not a photograph. No on-image text. No historical personal names.",
+    "thumbnail_text": "SHE WALKED OUT",
+    "tags": [
+      "sigmund freud",
+      "freud women",
+      "what freud really thought about women",
+      "dora ida bauer",
+      "penis envy",
+      "karen horney",
+      "femininity lecture",
+      "what they really think",
+      "illustrated documentary",
+      "freud",
+      "women",
+      "history documentary",
+      "what they really thought",
+      "the folder"
+    ],
+    "short_title": "She Walked Out",
+    "chapters": [
+      "Walkout",
+      "Little Men",
+      "Horney's No",
+      "Dark Continent",
+      "Anna Stays",
+      "Unanswered"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/freud-women_short.json",
+    "stills_module": "fixtures/freud-women_short_stills.py",
+    "still_prefix": "freud-women_short_v1_",
+    "stills_dir": "assets/grok_freud-women_short_v1",
+    "output": "assets/output/freud-women_short.mp4"
+  }
+}

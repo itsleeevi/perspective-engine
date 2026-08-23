@@ -11,7 +11,13 @@ import re
 from pathlib import Path
 from typing import Any
 
-from channel.config import CHANNEL
+from channel.config import (
+    CHANNEL,
+    CHANNEL_ABOUT,
+    HOST_ATTRIBUTION,
+    YOUTUBE_DISCLOSURE,
+    visual_accent_for,
+)
 from channel.paths import ROOT, jobs_path, spec_path
 from channel.prompts import strip_character_names
 from channel.schema import VideoProject
@@ -53,14 +59,40 @@ def chapter_lines(chapters: list[dict[str, Any]] | None) -> list[str]:
     return lines
 
 
-def long_description(youtube: dict[str, Any], chapters: list[str]) -> str:
-    body = (youtube.get("description") or "").strip()
-    # Drop stale chapter blocks / old disclosure so we can rewrite them.
+def _strip_stale_footer(body: str) -> str:
+    """Drop chapter stamps and old disclosure so we can rewrite them."""
     body = re.split(r"\n(?=\d+:\d{2}\b)", body, maxsplit=1)[0].strip()
-    body = re.sub(r"\n*Synthetic media:.*$", "", body, flags=re.I | re.S).strip()
+    previous = None
+    while previous != body:
+        previous = body
+        body = re.sub(
+            r"\n+Synthetic media:.*$", "", body, flags=re.I | re.S
+        ).strip()
+        body = re.sub(
+            r"\n+Researched and written for What They Really Think.*$",
+            "",
+            body,
+            flags=re.I | re.S,
+        ).strip()
+        body = re.sub(
+            r"\n+Illustrated documentary\..*$",
+            "",
+            body,
+            flags=re.I | re.S,
+        ).strip()
+    return body
+
+
+def description_footer() -> str:
+    return f"{HOST_ATTRIBUTION}\n\n{YOUTUBE_DISCLOSURE}"
+
+
+def long_description(youtube: dict[str, Any], chapters: list[str]) -> str:
+    body = _strip_stale_footer((youtube.get("description") or "").strip())
     parts = [body] if body else [str(youtube.get("title") or CHANNEL.name)]
     if chapters:
         parts.append("\n".join(chapters))
+    parts.append(description_footer())
     return "\n\n".join(parts).strip() + "\n"
 
 
@@ -88,10 +120,11 @@ def short_summary(youtube: dict[str, Any]) -> str:
 
 
 def short_description(youtube: dict[str, Any]) -> str:
-    """YouTube Shorts description: long-cut link first, then the punch line."""
+    """YouTube Shorts description: long-cut link first, then punch + disclosure."""
     return (
         f"Watch the full video:\n{full_video_url(youtube)}\n\n"
-        f"{short_summary(youtube)}\n"
+        f"{short_summary(youtube)}\n\n"
+        f"{YOUTUBE_DISCLOSURE}\n"
     )
 
 
@@ -133,6 +166,7 @@ def thumbnail_prompt(project: VideoProject) -> str:
         p
         for p in (
             CHANNEL.visual_style,
+            visual_accent_for(project.slug),
             "Horizontal 16:9 YouTube thumbnail. TIGHT crop, chest-up or closer. "
             "The subject's FACE fills at least 30 percent of the frame and is "
             "the brightest thing in the picture. Dramatic single-source light, "
@@ -194,14 +228,17 @@ def write_pack(
     long_path = dest / f"{stem}_description.txt"
     short_path = dest / f"{stem}_short_description.txt"
     tags_path = dest / f"{stem}_tags.txt"
+    about_path = dest / "channel_about.txt"
     long_path.write_text(long_description(youtube, chapters), encoding="utf-8")
     short_path.write_text(short_description(youtube), encoding="utf-8")
     tags_path.write_text(tags_line(tags), encoding="utf-8")
+    about_path.write_text(CHANNEL_ABOUT, encoding="utf-8")
 
     written = {
         "description": str(long_path),
         "short_description": str(short_path),
         "tags": str(tags_path),
+        "about": str(about_path),
         "title": str(youtube.get("title") or topic),
         "short_title": str(youtube.get("short_title") or ""),
         "thumbnail_text": str(youtube.get("thumbnail_text") or ""),

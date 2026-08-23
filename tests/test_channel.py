@@ -75,6 +75,14 @@ class TestSlug:
         assert slugify("What Xi Jinping Really Thinks About America") == "xi-jinping-america"
 
 
+class TestNewTitlesAreTwentyToTwentyFiveMinutes:
+    def test_word_budget_and_duration(self):
+        assert CHANNEL.target_duration_seconds == 1380
+        assert CHANNEL.narration_word_min == 4400
+        assert CHANNEL.narration_word_max == 5500
+        assert CHANNEL.visual_change_target_seconds == 6.5
+
+
 class TestConfigHasNoPeople:
     def test_channel_config_has_no_example_people(self):
         text = Path("channel/config.py").read_text(encoding="utf-8").lower()
@@ -292,7 +300,8 @@ class TestCompile:
         assert yt.is_file()
         copy = yt.read_text(encoding="utf-8")
         assert "What Einstein Really Thought About Religion" in copy[:200]
-        assert "Synthetic media:" in copy
+        assert "Illustrated documentary." in copy
+        assert '"kokoro_voice": "am_liam"' in spec_data
 
     def test_compile_refuses_mismatched_scenes(self, tmp_path: Path):
         project = _project()

@@ -24,7 +24,7 @@ REQUIRED_PHRASES = (
     "GenerateImage",
     "Watch the full video:",
     "synthetic-media",
-    "1600–1850",
+    "4400–5500",
     "unique story engine",
 )
 

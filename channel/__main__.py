@@ -94,7 +94,7 @@ Style, voice, and QA rules live in `channel/config.py` — do not copy a person 
 
 1. Researcher — {agent_prompts.RESEARCHER.strip().splitlines()[0]}
 2. Fact check — `python -m channel qa {slug}` after claims exist
-3. Story architect, bibles, narration (1600–1850 words, ~8 minutes)
+3. Story architect, bibles, narration (4400–5500 words, ~20–25 minutes)
 4. `python -m channel chunks {slug}`
 5. Scene breakdown, 1:1 with chunks
 6. `python -m channel compile {slug}`
@@ -105,7 +105,7 @@ Style, voice, and QA rules live in `channel/config.py` — do not copy a person 
 10. `.venv/bin/python scripts/run_custom_video.py fixtures/video_specs/{slug}.json`
 11. Update `docs/videos/{slug}.md`
 
-Voice is Kokoro `{CHANNEL.kokoro_voice}` (free). Never Edge. Never ElevenLabs.
+Voice is Kokoro (default `{CHANNEL.kokoro_voice}`; new titles may rotate). Never Edge. Never ElevenLabs.
 Images are Cursor Grok GenerateImage. Do not invent quotes.
 """
 

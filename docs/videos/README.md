@@ -4,6 +4,8 @@ Index of fixture-driven YouTube cuts. Each page is the memory for the next agent
 
 When you finish a new video, add a page here and link it. Keep each page's **"## Do not copy"** section stocked with *quoted* phrases — `scripts/lint_story.py` reads those quotes and blocks any new script that reuses them.
 
+- [What Freud Really Thought About Women](freud-women.md) — channel engine, Dora folder / little-man map / Horney's no / dark continent, Kokoro `am_michael`, **~20–25 min** (facts through August 2026; no “today is DATE” in the VO)
+- [What Darwin Really Thought About Human Nature](darwin-human-nature.md) — channel engine, Notebook B fork / Jemmy Button / Descent of Man, Kokoro `am_liam`, ~8 min (facts through August 2026; no “today is DATE” in the VO)
 - [What Jeff Bezos Really Thinks About Elon Musk](jeff-bezos-elon-musk.md) — channel engine, tortoise / hare / Blue Origin / SpaceX / New Glenn, Kokoro `am_liam`, ~8 min (facts through August 2026; no “today is DATE” in the VO)
 - [What Elon Musk Really Thinks About AI](elon-musk-ai.md) — channel engine, MIT demon / OpenAI / Grok / SpaceX, Kokoro `am_liam`, ~8 min (facts through August 2026; no “today is DATE” in the VO)
 - [What Sam Altman Really Thinks About the Future of Work](sam-altman-the-future-of-work.md) — channel engine, inbox / 2021 essay / Senate / the check, Kokoro `am_liam`, ~8 min
@@ -13,4 +15,4 @@ When you finish a new video, add a page here and link it. Keep each page's **"##
 - [What Hitler Really Thought About Americans](what-hitler-really-thought-about-americans.md) — v4 perspective story, silent chapter cards, Kokoro `am_liam`. The v4 storyboard fails the current prop-economy linter (book in 47/77 frames); any rewrite must pass `lint_storyboard.py` and use the Chatterbox voice.
 - Putin-Americans lives in git history (`fixtures/putin_americans.json`); do not reuse that clap/coupon/machine spine.
 
-Playbook: [`docs/custom-videos.md`](../custom-videos.md) — new titles start with `python -m channel init "What X Really Thought About Y"`. Do not copy a shipped spine. YouTube descriptions have no synthetic-media line. Shorts description is `Watch the full video:` / `https://youtu.be/<id>` / punch paragraph.
+Playbook: [`docs/custom-videos.md`](../custom-videos.md) — new titles start with `python -m channel init "What X Really Thought About Y"`. New long cuts are **20–25 minutes** (4400–5500 words). Do not copy a shipped spine. YouTube descriptions include an honest synthetic-media disclosure. Shorts description is `Watch the full video:` / `https://youtu.be/<id>` / punch paragraph / disclosure.
