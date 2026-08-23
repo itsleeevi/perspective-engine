@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from channel.originality_policy import RESEARCH_SOURCE_PRIORITY
+from channel.originality_policy import (
+    BUSINESS_SOURCE_PRIORITY,
+    RESEARCH_SOURCE_PRIORITY,
+)
 
 # Internal claim fields agents must fill on every important fact.
 CLAIM_TRACE_FIELDS = (
@@ -14,6 +17,11 @@ CLAIM_TRACE_FIELDS = (
     "confidence",
     "quote",
     "is_direct_quote",
+    "fiscal_period",
+    "source_date",
+    "data_date",
+    "calculation",
+    "inputs",
 )
 
 FORBIDDEN_INVENTIONS = (
@@ -23,6 +31,9 @@ FORBIDDEN_INVENTIONS = (
     "letters that cannot be sourced",
     "motives presented as facts without evidence",
     "meetings or events with no record",
+    "fabricated revenue, profit, margin, subscriber, valuation, or price figures",
+    "unit economics invented when they are not public",
+    "investment advice (buy or sell this stock)",
 )
 
 INSUFFICIENT_EVIDENCE_PHRASE = (
@@ -34,5 +45,6 @@ __all__ = [
     "CLAIM_TRACE_FIELDS",
     "FORBIDDEN_INVENTIONS",
     "INSUFFICIENT_EVIDENCE_PHRASE",
+    "BUSINESS_SOURCE_PRIORITY",
     "RESEARCH_SOURCE_PRIORITY",
 ]

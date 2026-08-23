@@ -11,13 +11,8 @@ import re
 from pathlib import Path
 from typing import Any
 
-from channel.config import (
-    CHANNEL,
-    CHANNEL_ABOUT,
-    HOST_ATTRIBUTION,
-    YOUTUBE_DISCLOSURE,
-    visual_accent_for,
-)
+from channel.config import config_for, config_for_project, visual_accent_for
+from channel.modes import is_business
 from channel.paths import ROOT, jobs_path, spec_path
 from channel.prompts import strip_character_names
 from channel.schema import VideoProject
@@ -75,6 +70,12 @@ def _strip_stale_footer(body: str) -> str:
             flags=re.I | re.S,
         ).strip()
         body = re.sub(
+            r"\n+Researched and written for Behind The Business.*$",
+            "",
+            body,
+            flags=re.I | re.S,
+        ).strip()
+        body = re.sub(
             r"\n+Illustrated documentary\..*$",
             "",
             body,
@@ -83,16 +84,23 @@ def _strip_stale_footer(body: str) -> str:
     return body
 
 
-def description_footer() -> str:
-    return f"{HOST_ATTRIBUTION}\n\n{YOUTUBE_DISCLOSURE}"
+def description_footer(mode: str | None = None) -> str:
+    cfg = config_for(mode)
+    return f"{cfg.host_attribution}\n\n{cfg.youtube_disclosure}"
 
 
-def long_description(youtube: dict[str, Any], chapters: list[str]) -> str:
+def long_description(
+    youtube: dict[str, Any],
+    chapters: list[str],
+    *,
+    mode: str | None = None,
+) -> str:
     body = _strip_stale_footer((youtube.get("description") or "").strip())
-    parts = [body] if body else [str(youtube.get("title") or CHANNEL.name)]
+    cfg = config_for(mode)
+    parts = [body] if body else [str(youtube.get("title") or cfg.name)]
     if chapters:
         parts.append("\n".join(chapters))
-    parts.append(description_footer())
+    parts.append(description_footer(mode))
     return "\n\n".join(parts).strip() + "\n"
 
 
@@ -119,12 +127,13 @@ def short_summary(youtube: dict[str, Any]) -> str:
     return title or hook
 
 
-def short_description(youtube: dict[str, Any]) -> str:
+def short_description(youtube: dict[str, Any], *, mode: str | None = None) -> str:
     """YouTube Shorts description: long-cut link first, then punch + disclosure."""
+    cfg = config_for(mode)
     return (
         f"Watch the full video:\n{full_video_url(youtube)}\n\n"
         f"{short_summary(youtube)}\n\n"
-        f"{YOUTUBE_DISCLOSURE}\n"
+        f"{cfg.youtube_disclosure}\n"
     )
 
 
@@ -162,19 +171,31 @@ def thumbnail_prompt(project: VideoProject) -> str:
     prop = ""
     if project.story and project.story.signature_prop:
         prop = f" Signature object: {project.story.signature_prop}."
-    assembled = " ".join(
-        p
-        for p in (
-            CHANNEL.visual_style,
-            visual_accent_for(project.slug),
+    cfg = config_for_project(project)
+    if is_business(project.channel_mode):
+        framing = (
+            "Horizontal 16:9 YouTube thumbnail. ONE simplified company "
+            "environment or product plus ONE business symbol. Clean high-contrast "
+            "backdrop. Empty right third of the frame for type added later. "
+            "No tiny figures, no clutter, no photoreal logo lockup."
+        )
+    else:
+        framing = (
             "Horizontal 16:9 YouTube thumbnail. TIGHT crop, chest-up or closer. "
             "The subject's FACE fills at least 30 percent of the frame and is "
             "the brightest thing in the picture. Dramatic single-source light, "
             "bold colour contrast, clean simple backdrop. Subtle natural "
             "expression, not a grimace, not a shout. Empty right third of the "
             "frame for type added later. No tiny figures, no wide establishing "
-            "shot, no clutter.",
-            CHANNEL.negative_style,
+            "shot, no clutter."
+        )
+    assembled = " ".join(
+        p
+        for p in (
+            cfg.visual_style,
+            visual_accent_for(project.slug, project.channel_mode),
+            framing,
+            cfg.negative_style,
             "NO readable text, NO letters, NO captions, NO title card, "
             "NO watermark. Type will be added later.",
             lock,
@@ -190,7 +211,9 @@ def write_thumbnail_job(project: VideoProject, *, root: Path | None = None) -> P
     slug = project.slug
     stem = youtube_stem(slug)
     meta = project.metadata
-    text = (meta.thumbnail_text if meta else "") or "THE REAL ANSWER"
+    text = (meta.thumbnail_text if meta else "") or (
+        "THE REAL ENGINE" if is_business(project.channel_mode) else "THE REAL ANSWER"
+    )
     job = {
         "id": "thumb",
         "filename": f"{slug}_thumbnail.png",
@@ -215,6 +238,8 @@ def write_pack(
     base = root or ROOT
     youtube = dict(spec.get("youtube") or {})
     topic = spec.get("topic") or youtube.get("title") or ""
+    mode = spec.get("channel_mode")
+    cfg = config_for(mode)
     slug = Path(spec.get("fixture") or "video.json").stem
     stem = youtube_stem(slug)
     chapters = chapter_lines((assemble or {}).get("chapters"))
@@ -223,16 +248,19 @@ def write_pack(
 
     tags = list(youtube.get("tags") or [])
     if not tags:
-        tags = [CHANNEL.name.lower()]
+        tags = [cfg.name.lower()]
 
     long_path = dest / f"{stem}_description.txt"
     short_path = dest / f"{stem}_short_description.txt"
     tags_path = dest / f"{stem}_tags.txt"
-    about_path = dest / "channel_about.txt"
-    long_path.write_text(long_description(youtube, chapters), encoding="utf-8")
-    short_path.write_text(short_description(youtube), encoding="utf-8")
+    about_name = (
+        "behind_the_business_about.txt" if is_business(mode) else "channel_about.txt"
+    )
+    about_path = dest / about_name
+    long_path.write_text(long_description(youtube, chapters, mode=mode), encoding="utf-8")
+    short_path.write_text(short_description(youtube, mode=mode), encoding="utf-8")
     tags_path.write_text(tags_line(tags), encoding="utf-8")
-    about_path.write_text(CHANNEL_ABOUT, encoding="utf-8")
+    about_path.write_text(cfg.channel_about, encoding="utf-8")
 
     written = {
         "description": str(long_path),

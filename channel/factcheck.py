@@ -2,10 +2,22 @@
 
 from __future__ import annotations
 
+import re
+
+from channel.modes import ChannelMode, is_business
 from channel.schema import Claim, EvidenceKind, FactCheckReport, ResearchPack
 
+_FINANCIAL = re.compile(
+    r"\$[\d,.]+|\b\d{1,3}(?:\.\d+)?\s*%|\b(?:billion|million|trillion)\b",
+    re.I,
+)
 
-def factcheck(pack: ResearchPack) -> FactCheckReport:
+
+def factcheck(
+    pack: ResearchPack,
+    *,
+    channel_mode: ChannelMode | str | None = None,
+) -> FactCheckReport:
     flags: list[str] = []
     rejected: list[str] = []
     if pack.insufficient_evidence:
@@ -14,6 +26,8 @@ def factcheck(pack: ResearchPack) -> FactCheckReport:
         flags.append("no verified claims yet — agent must add sourced claims")
     for claim in pack.claims:
         issues = _claim_issues(claim)
+        if is_business(channel_mode):
+            issues.extend(_financial_issues(claim, pack))
         if issues:
             rejected.append(claim.claim_id)
             flags.extend(f"{claim.claim_id}: {i}" for i in issues)
@@ -36,4 +50,17 @@ def _claim_issues(claim: Claim) -> list[str]:
         issues.append("disputed claim must be qualified in the claim text")
     if not claim.sources and claim.confidence == "high":
         issues.append("high confidence requires at least one source")
+    return issues
+
+
+def _financial_issues(claim: Claim, pack: ResearchPack) -> list[str]:
+    issues: list[str] = []
+    if not _FINANCIAL.search(claim.claim):
+        return issues
+    if not claim.sources:
+        issues.append("financial figure has no source — do not invent numbers")
+    if not (claim.fiscal_period or pack.fiscal_period or claim.date):
+        issues.append("financial figure needs fiscal_period or a dated source")
+    if claim.calculation and not claim.inputs and not claim.sources:
+        issues.append("derived number needs calculation inputs or sources")
     return issues

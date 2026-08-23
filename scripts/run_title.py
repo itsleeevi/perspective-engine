@@ -13,6 +13,18 @@ from channel.__main__ import main  # noqa: E402
 if __name__ == "__main__":
     # Default to init when the first arg looks like a title.
     argv = sys.argv[1:]
-    if argv and argv[0] not in {"init", "analyze", "research-seed", "chunks", "qa", "compile"}:
+    if argv and argv[0] not in {
+        "init",
+        "analyze",
+        "research-seed",
+        "chunks",
+        "qa",
+        "compile",
+        "score-title",
+        "suggest-titles",
+        "originality",
+        "youtube",
+        "branding",
+    }:
         argv = ["init", *argv]
     raise SystemExit(main(argv))

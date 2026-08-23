@@ -9,7 +9,8 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any
 
-from channel.config import CHANNEL
+from channel.config import config_for
+from channel.modes import ChannelMode, is_business, parse_mode
 from channel.originality_policy import (
     BRAND_IGNORE_PATTERNS,
     GENERIC_SCENE_PATTERNS,
@@ -25,19 +26,24 @@ from channel.paths import ROOT
 from channel.schema import OriginalityReport, SimilarityBreakdown
 
 _FIXTURES = ROOT / "fixtures"
-_VIDEOS_INDEX = ROOT / "docs" / "videos" / "README.md"
 
 
 class OriginalityError(RuntimeError):
     """Candidate cut is too similar to recent channel videos."""
 
 
-def recent_slugs(*, limit: int | None = None, exclude: str | None = None) -> list[str]:
-    """Most recently indexed slugs from docs/videos/README.md (newest first)."""
+def recent_slugs(
+    *,
+    limit: int | None = None,
+    exclude: str | None = None,
+    channel_mode: ChannelMode | str | None = None,
+) -> list[str]:
+    """Most recently indexed slugs for this channel (newest first)."""
     cap = limit or RECENT_VIDEO_COMPARE_COUNT
-    if not _VIDEOS_INDEX.is_file():
+    index = ROOT / config_for(channel_mode).videos_index
+    if not index.is_file():
         return []
-    text = _VIDEOS_INDEX.read_text(encoding="utf-8")
+    text = index.read_text(encoding="utf-8")
     slugs = re.findall(r"\]\(([a-z0-9-]+)\.md\)", text)
     out: list[str] = []
     for slug in slugs:
@@ -209,9 +215,11 @@ def _thumbnail_text(slug: str) -> str:
     return str((data.get("youtube") or {}).get("thumbnail_text") or "")
 
 
-def _recent_narration_corpus(limit: int = 5) -> list[str]:
+def _recent_narration_corpus(
+    limit: int = 5, *, channel_mode: ChannelMode | str | None = None
+) -> list[str]:
     out: list[str] = []
-    for slug in recent_slugs(limit=limit):
+    for slug in recent_slugs(limit=limit, channel_mode=channel_mode):
         fixture = _load_fixture(slug)
         if fixture:
             out.append(_narration_of(fixture))
@@ -234,7 +242,9 @@ def compare_to_slug(candidate_slug: str, other_slug: str) -> SimilarityBreakdown
         structure=_structure_similarity(_chapter_names(cand), _chapter_names(other)),
         scene_sequence=_scene_sequence_similarity(scenes_c, scenes_o),
         visual_composition=_visual_composition_similarity(scenes_c, scenes_o),
-        transitions=_transition_similarity(narr_c, _recent_narration_corpus()),
+        transitions=_transition_similarity(
+            narr_c, _recent_narration_corpus(channel_mode=_mode_for_slug(candidate_slug))
+        ),
         conclusion=_ratio(_ending(cand), _ending(other)),
         thumbnail=_ratio(_thumbnail_text(candidate_slug), _thumbnail_text(other_slug)),
     )
@@ -258,14 +268,42 @@ def originality_score_from_similarity(avg_similarity: float) -> float:
     return max(0.0, min(100.0, 100.0 - avg_similarity))
 
 
+def mode_for_slug(slug: str) -> ChannelMode:
+    """Public alias: which channel a compiled slug belongs to."""
+    return _mode_for_slug(slug)
+
+
+def _mode_for_slug(slug: str) -> ChannelMode:
+    spec = _spec_path(slug)
+    if spec:
+        try:
+            data = json.loads(spec.read_text(encoding="utf-8"))
+            raw = data.get("channel_mode")
+            if raw:
+                return parse_mode(raw)
+        except (json.JSONDecodeError, OSError, ValueError):
+            pass
+    project = ROOT / "channel" / "projects" / slug / "project.json"
+    if project.is_file():
+        try:
+            data = json.loads(project.read_text(encoding="utf-8"))
+            raw = data.get("channel_mode")
+            if raw:
+                return parse_mode(raw)
+        except (json.JSONDecodeError, OSError, ValueError):
+            pass
+    return ChannelMode.what_they_really_think
+
+
 def originality_report_for_slug(slug: str) -> OriginalityReport:
-    """Compare slug against recent channel videos; return scores and flags."""
+    """Compare slug against recent videos on the same channel."""
     fixture = _load_fixture(slug)
     narration = _narration_of(fixture) if fixture else ""
     flags: list[str] = []
     comparisons: list[SimilarityBreakdown] = []
+    mode = _mode_for_slug(slug)
 
-    for other in recent_slugs(exclude=slug):
+    for other in recent_slugs(exclude=slug, channel_mode=mode):
         br = compare_to_slug(slug, other)
         if br:
             comparisons.append(br)
@@ -306,7 +344,9 @@ def originality_report_for_slug(slug: str) -> OriginalityReport:
 
     thought = str((fixture or {}).get("the_thought") or "")
     if thought:
-        for other in recent_slugs(exclude=slug, limit=RECENT_VIDEO_COMPARE_COUNT):
+        for other in recent_slugs(
+            exclude=slug, limit=RECENT_VIDEO_COMPARE_COUNT, channel_mode=mode
+        ):
             other_fx = _load_fixture(other)
             if not other_fx:
                 continue
@@ -318,8 +358,16 @@ def originality_report_for_slug(slug: str) -> OriginalityReport:
             if other_thought and name_swap_too_close(thought, other_thought, names):
                 flags.append(
                     f"name-swap spine: the_thought too close to {other!r} "
-                    "after swapping the people"
+                    "after swapping the names"
                 )
+
+    if is_business(mode):
+        from channel.originality_policy import BUSINESS_STOCK_HOOKS
+
+        head = narration.lower()[:400]
+        for phrase in BUSINESS_STOCK_HOOKS:
+            if phrase in head:
+                flags.append(f"stock business hook: {phrase!r} — vary the hook type")
 
     # Generic scene grammar without historical reason.
     scenes = _scene_tokens(slug)
@@ -412,13 +460,18 @@ def regenerate_targets(report: OriginalityReport) -> list[str]:
 def _names_from_title(*titles: str) -> list[str]:
     names: list[str] = []
     for title in titles:
+        raw = title.strip()
         m = re.match(
             r"What (.+?) Really (?:Thought|Thinks) About (.+)$",
-            title.strip(),
+            raw,
             re.I,
         )
         if m:
             names.extend(p.strip() for p in m.groups() if p.strip())
+            continue
+        m = re.match(r"^(?:How|Why)\s+(.+?)(?:\s+Really\b|\s+Makes\b|\s+Is\b|\s+Does\b|$)", raw, re.I)
+        if m:
+            names.append(m.group(1).strip())
     return names
 
 

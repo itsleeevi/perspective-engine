@@ -7,8 +7,11 @@ import re
 
 def slugify(text: str, max_len: int = 48) -> str:
     s = text.lower().strip()
-    s = re.sub(r"^what\s+", "", s)
-    s = re.sub(r"\s+really\s+(thought|thinks)\s+about\s+", "-", s)
+    if re.search(r"\s+really\s+(thought|thinks)\s+about\s+", s):
+        s = re.sub(r"^what\s+", "", s)
+        s = re.sub(r"\s+really\s+(thought|thinks)\s+about\s+", "-", s)
+    else:
+        s = re.sub(r"^how\s+", "", s)
     s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
     return s[:max_len].rstrip("-") or "untitled"
 

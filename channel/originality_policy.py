@@ -1,6 +1,6 @@
 """Permanent originality, anti-repetition, and monetization-safety policy.
 
-These thresholds apply to every new What They Really Think title automatically.
+These thresholds apply to every new channel title automatically.
 Do not restate them in chat — agents read channel/config.py, agent_prompts.py,
 and docs/custom-videos.md.
 """
@@ -29,6 +29,11 @@ MAX_SINGLE_DIMENSION_SIMILARITY = 85
 
 # --- Monetization readiness (1–10 positive scores; overall 0–100) ------------
 
+BUSINESS_MONETIZATION_THRESHOLDS = {
+    "financial_accuracy_min": 8,
+    "business_analysis_depth_min": 8,
+}
+
 MONETIZATION_THRESHOLDS = {
     "original_research_min": 8,
     "story_originality_min": 8,
@@ -40,6 +45,13 @@ MONETIZATION_THRESHOLDS = {
 }
 
 # --- Stock patterns (content repetition, not brand) ----------------------------
+
+BUSINESS_STOCK_HOOKS: tuple[str, ...] = (
+    "this company isn't really",
+    "this company is not really",
+    "isn't really a",
+    "is not really a",
+)
 
 STOCK_HOOK_OPENERS: tuple[str, ...] = (
     "is remembered as",
@@ -131,6 +143,21 @@ STORY_ARCHETYPES: tuple[str, ...] = (
 )
 
 # Research source priority (for agent prompts and QA notes).
+BUSINESS_SOURCE_PRIORITY: tuple[str, ...] = (
+    "company annual reports",
+    "SEC or equivalent filings",
+    "investor presentations",
+    "earnings calls",
+    "official company statistics",
+    "shareholder letters",
+    "regulatory documents",
+    "credible financial publications",
+    "reputable business journalism",
+    "respected industry research",
+    "founder or executive interviews",
+    "books that explain a decision",
+)
+
 RESEARCH_SOURCE_PRIORITY: tuple[str, ...] = (
     "primary sources",
     "speeches",
@@ -147,6 +174,7 @@ RESEARCH_SOURCE_PRIORITY: tuple[str, ...] = (
 # Brand elements similarity checks IGNORE (channel format may repeat).
 BRAND_IGNORE_PATTERNS: tuple[str, ...] = (
     "what they really think",
+    "behind the business",
     "simple flat 2d",
     "kokoro",
     "illustrated documentary",

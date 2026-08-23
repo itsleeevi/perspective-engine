@@ -8,10 +8,12 @@ from __future__ import annotations
 
 import httpx
 
+from channel.modes import ChannelMode
 from channel.schema import ResearchPack, SourceRef, TitleAnalysis
 
 _API = "https://en.wikipedia.org/w/api.php"
 _UA = "WhatTheyReallyThink/0.1 (local documentary research seed)"
+_UA_BTB = "BehindTheBusiness/0.1 (local documentary research seed)"
 
 
 def _search(query: str, client: httpx.Client) -> list[dict]:
@@ -50,15 +52,27 @@ def _extract(title: str, client: httpx.Client) -> str:
 
 def seed_research(analysis: TitleAnalysis, *, timeout: float = 20.0) -> ResearchPack:
     """Encyclopedia seed. Claims list stays empty until the agent verifies."""
-    queries = [
-        f"{analysis.subject} {analysis.target}",
-        analysis.subject,
-        analysis.target,
-    ]
+    business = analysis.channel_mode is ChannelMode.behind_the_business
+    if business:
+        company = analysis.company or analysis.subject
+        queries = [
+            f"{company} 10-K",
+            f"{company} annual report",
+            f"{company} business model",
+            company,
+        ]
+    else:
+        queries = [
+            f"{analysis.subject} {analysis.target}",
+            analysis.subject,
+            analysis.target,
+        ]
     sources: list[SourceRef] = []
     extracts: list[str] = []
     try:
-        with httpx.Client(timeout=timeout, headers={"User-Agent": _UA}) as client:
+        with httpx.Client(
+            timeout=timeout, headers={"User-Agent": _UA_BTB if business else _UA}
+        ) as client:
             seen: set[str] = set()
             for q in queries:
                 for hit in _search(q, client):

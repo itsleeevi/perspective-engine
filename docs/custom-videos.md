@@ -2,9 +2,23 @@
 
 This is the reusable engine for the YouTube channel **What They Really Think**. It is written so a Cursor Grok agent can produce a new video from a title, without editing Python. Read this fully before starting. After a cut lands, update `docs/videos/`.
 
+The same `channel/` engine also has a second mode, `behind_the_business` (**Behind The Business**). That channel has its own story, research, length (**3000–3750** words at ~150 wpm), and visual rules in `docs/behind-the-business.md`. Do **not** apply those business rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title.
+
 The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → fixtures → Kokoro → FFmpeg.
 
 ## The only required input
+
+```text
+.venv/bin/python -m channel init "What Einstein Really Thought About Religion"
+```
+
+That defaults to `what_they_really_think`. For Behind The Business:
+
+```text
+.venv/bin/python -m channel init --channel behind_the_business "How Costco Really Makes Money"
+```
+
+WTRT title:
 
 ```text
 TITLE = "What Einstein Really Thought About Religion"
@@ -41,9 +55,11 @@ Research through the day you are writing so the facts are current. **Do not say 
 
 | Piece | Role |
 |---|---|
-| `channel/config.py` | Permanent style, voice, pacing. No people. |
-| `channel/schema.py` | Shared `VideoProject` (research, story, bibles, scenes). |
-| `channel/title.py` | Agent 1 — parse `What X Really Thought/Thinks About Y`. |
+| `channel/modes.py` | Explicit `ChannelMode`: `what_they_really_think` or `behind_the_business`. |
+| `channel/config.py` | Permanent style, voice, pacing per channel mode (`CHANNEL` / `BEHIND_THE_BUSINESS`). No people. |
+| `channel/schema.py` | Shared `VideoProject` (research, story, bibles, scenes). Optional `business` block. |
+| `channel/title.py` | Agent 1 — parse the title for the selected channel. |
+| `channel/business_prompts.py` | Behind The Business stage prompts only. |
 | `channel/research.py` | Encyclopedia **seed** only. Agent adds primary-source claims. |
 | `channel/factcheck.py` | Mechanical quote/source checks. |
 | `channel/agent_prompts.py` | Stage prompts for Cursor Grok (research → story → scenes). |

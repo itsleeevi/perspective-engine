@@ -2,9 +2,14 @@
 
 from __future__ import annotations
 
-from channel.config import CHANNEL
+from channel.config import config_for_project
 from channel.factcheck import factcheck
-from channel.originality_policy import GENERIC_AI_PHRASES, MONETIZATION_THRESHOLDS
+from channel.modes import is_business
+from channel.originality_policy import (
+    BUSINESS_MONETIZATION_THRESHOLDS,
+    GENERIC_AI_PHRASES,
+    MONETIZATION_THRESHOLDS,
+)
 from channel.qa import mechanical_qa, narration_of, word_count
 from channel.schema import MonetizationReadiness, OriginalityReport, VideoProject
 
@@ -19,7 +24,8 @@ def compute_monetization_readiness(
 ) -> MonetizationReadiness:
     """Build the final internal QA object before publish."""
     scores = project.qa or mechanical_qa(project)
-    report = factcheck(project.research)
+    report = factcheck(project.research, channel_mode=project.channel_mode)
+    cfg = config_for_project(project)
     text = narration_of(project)
     lower = text.lower()
     notes: list[str] = []
@@ -118,8 +124,48 @@ def compute_monetization_readiness(
         notes.extend(originality.flags[:3])
 
     words = word_count(text)
-    if words and words < CHANNEL.narration_word_min:
-        notes.append(f"narration {words} words below {CHANNEL.narration_word_min}")
+    if words and words < cfg.narration_word_min:
+        notes.append(f"narration {words} words below {cfg.narration_word_min}")
+
+    financial_accuracy = 0
+    business_analysis_depth = 0
+    if is_business(project.channel_mode):
+        sourced_money = sum(
+            1
+            for c in claims
+            if c.sources and (c.fiscal_period or project.research.fiscal_period or c.date)
+        )
+        moneyish = [
+            c
+            for c in claims
+            if any(tok in c.claim.lower() for tok in ("$", "%", "revenue", "margin", "profit"))
+        ]
+        if not moneyish:
+            financial_accuracy = 6
+            notes.append("no sourced financial metrics yet")
+        elif sourced_money >= max(1, int(len(moneyish) * 0.8)):
+            financial_accuracy = 9
+        else:
+            financial_accuracy = 5
+            notes.append("financial claims missing sources or fiscal periods")
+        biz = project.business
+        depth_bits = 0
+        if biz and biz.business_model.where_profit_comes_from:
+            depth_bits += 1
+        if biz and biz.moats:
+            depth_bits += 1
+        if biz and biz.risks:
+            depth_bits += 1
+        if project.story and project.story.major_contradiction:
+            depth_bits += 1
+        business_analysis_depth = 6 + depth_bits
+        extra = BUSINESS_MONETIZATION_THRESHOLDS
+        ready = ready and financial_accuracy >= extra["financial_accuracy_min"]
+        ready = ready and business_analysis_depth >= extra["business_analysis_depth_min"]
+        if financial_accuracy < extra["financial_accuracy_min"]:
+            notes.append("financial_accuracy below threshold")
+        if business_analysis_depth < extra["business_analysis_depth_min"]:
+            notes.append("business_analysis_depth below threshold")
 
     return MonetizationReadiness(
         original_research=original_research,
@@ -131,6 +177,8 @@ def compute_monetization_readiness(
         character_consistency=character_consistency,
         retention_quality=retention_quality,
         mass_production_risk=mass_production_risk,
+        financial_accuracy=financial_accuracy,
+        business_analysis_depth=business_analysis_depth,
         overall=overall,
         ready_to_publish=ready,
         originality_score=orig_score,

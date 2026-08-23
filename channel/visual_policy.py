@@ -9,6 +9,11 @@ VISUAL_STYLE_LOCK = (
     "Muted colors. Educational animation aesthetic. Not photorealistic."
 )
 
+BEHIND_THE_BUSINESS_VISUAL_STYLE_LOCK = (
+    "Clean flat 2D business documentary illustration. Modern vector-like shapes. "
+    "High-contrast palette. Crisp diagrams. Not photorealistic, not 3D."
+)
+
 FORBIDDEN_VISUALS = (
     "photorealistic impersonation of real people",
     "realistic fake interviews",
@@ -18,6 +23,7 @@ FORBIDDEN_VISUALS = (
 )
 
 __all__ = [
+    "BEHIND_THE_BUSINESS_VISUAL_STYLE_LOCK",
     "FORBIDDEN_VISUALS",
     "GENERIC_SCENE_PATTERNS",
     "VISUAL_STYLE_LOCK",

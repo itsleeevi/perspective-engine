@@ -7,7 +7,12 @@ from pathlib import Path
 from PIL import Image
 
 from channel.thumbnail import render_thumbnail_jpeg
-from channel.config import HOST_ATTRIBUTION, YOUTUBE_DISCLOSURE
+from channel.config import (
+    BTB_HOST_ATTRIBUTION,
+    BTB_YOUTUBE_DISCLOSURE,
+    HOST_ATTRIBUTION,
+    YOUTUBE_DISCLOSURE,
+)
 from channel.youtube import (
     DEFAULT_FULL_VIDEO_URL,
     chapter_lines,
@@ -167,3 +172,32 @@ def test_thumbnail_prompt_strips_historical_names(tmp_path: Path):
     assert "30 percent" in prompt
     assert "TIGHT crop" in prompt
     assert job.is_file()
+
+
+def test_btb_write_pack_uses_business_disclosure(tmp_path: Path):
+    spec = {
+        "channel_mode": "behind_the_business",
+        "topic": "How Costco Really Makes Money",
+        "fixture": "fixtures/costco-really-makes-money.json",
+        "youtube": {
+            "title": "How Costco Really Makes Money",
+            "description": (
+                "How Costco really makes money: the warehouse is the bait.\n\n"
+                "Educational analysis of a business model. Not investment advice."
+            ),
+            "thumbnail_text": "IT'S NOT THE PRODUCTS",
+            "short_title": "Why Costco Barely Marks Up Its Products",
+            "tags": ["costco", "behind the business"],
+        },
+    }
+    pack = write_pack(spec, root=tmp_path)
+    desc = Path(pack["description"]).read_text(encoding="utf-8")
+    assert BTB_HOST_ATTRIBUTION in desc
+    assert BTB_YOUTUBE_DISCLOSURE in desc
+    assert HOST_ATTRIBUTION not in desc
+    assert "not investment advice" in desc.lower()
+    short = Path(pack["short_description"]).read_text(encoding="utf-8")
+    assert BTB_YOUTUBE_DISCLOSURE in short
+    about = Path(pack["about"]).read_text(encoding="utf-8")
+    assert "Behind The Business" in about
+    assert pack["about"].endswith("behind_the_business_about.txt")

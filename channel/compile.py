@@ -8,7 +8,7 @@ import textwrap
 from pathlib import Path
 
 from channel.bibles import token_for_location, visual_lock
-from channel.config import CHANNEL, kokoro_voice_for, visual_accent_for
+from channel.config import CHANNEL, config_for_project, kokoro_voice_for, visual_accent_for
 from channel.metadata import draft_metadata
 from channel.paths import (
     ROOT,
@@ -75,31 +75,32 @@ def fixture_dict(project: VideoProject, *, short: bool = False) -> dict:
     }
 
 
-def _split(beat: str) -> list[str]:
+def _split(beat: str, project: VideoProject | None = None) -> list[str]:
     from graph.script_fixture import split_beat_into_chunks
 
+    cfg = config_for_project(project) if project else CHANNEL
     return split_beat_into_chunks(
         beat,
-        wpm=CHANNEL.narration_wpm,
-        min_seconds=CHANNEL.min_scene_duration,
-        max_seconds=CHANNEL.max_scene_duration,
-        target_seconds=CHANNEL.visual_change_target_seconds,
+        wpm=cfg.narration_wpm,
+        min_seconds=cfg.min_scene_duration,
+        max_seconds=cfg.max_scene_duration,
+        target_seconds=cfg.visual_change_target_seconds,
     )
 
 
-def _chunks_for(fixture: dict) -> list[str]:
+def _chunks_for(fixture: dict, project: VideoProject | None = None) -> list[str]:
     from graph.script_fixture import fixture_to_beats, is_title_beat
 
     return [
         c
         for beat in fixture_to_beats(fixture, include_hook=True)
         if not is_title_beat(beat)
-        for c in _split(beat)
+        for c in _split(beat, project)
     ]
 
 
 def chunk_list(project: VideoProject, *, short: bool = False) -> list[str]:
-    return _chunks_for(fixture_dict(project, short=short))
+    return _chunks_for(fixture_dict(project, short=short), project)
 
 
 def _py_str(s: str) -> str:
@@ -114,14 +115,15 @@ def _prop_token(name: str) -> str:
 
 
 def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
+    cfg = config_for_project(project)
     style = strip_image_brands(
         strip_character_names(
             " ".join(
                 p
                 for p in (
-                    CHANNEL.visual_style,
-                    visual_accent_for(project.slug),
-                    CHANNEL.negative_style,
+                    cfg.visual_style,
+                    visual_accent_for(project.slug, project.channel_mode),
+                    cfg.negative_style,
                     *[visual_lock(c) for c in project.characters.values()],
                 )
                 if p
@@ -173,32 +175,34 @@ def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
 
 def spec_dict(project: VideoProject, *, root: Path | None = None) -> dict:
     slug = project.slug
+    cfg = config_for_project(project)
     meta = draft_metadata(project)
     base = root or ROOT
     spec = {
         "engine": "channel",
-        "channel": CHANNEL.name,
+        "channel": cfg.name,
+        "channel_mode": project.channel_mode.value,
         "topic": project.title,
         "fixture": str(fixture_path(slug, root).relative_to(base)),
         "stills_module": str(stills_path(slug, root).relative_to(base)),
         "still_prefix": f"{slug}_v1_",
         "stills_dir": f"assets/grok_{slug}_v1",
         "thread_id": f"{slug}-v1",
-        "voice": CHANNEL.voice,
+        "voice": cfg.voice,
         "kokoro_voice": kokoro_voice_for(slug),
-        "kokoro_speed": CHANNEL.kokoro_speed,
-        "kokoro_sentence_pause": CHANNEL.kokoro_sentence_pause,
-        "kokoro_clause_pause": CHANNEL.kokoro_clause_pause,
-        "kokoro_pack_words": CHANNEL.kokoro_pack_words,
-        "kokoro_scene_pause": CHANNEL.kokoro_scene_pause,
-        "narration_wpm": CHANNEL.narration_wpm,
-        "burn_captions": CHANNEL.burn_captions,
-        "chunk_min_seconds": CHANNEL.min_scene_duration,
-        "chunk_max_seconds": CHANNEL.max_scene_duration,
-        "chunk_target_seconds": CHANNEL.visual_change_target_seconds,
+        "kokoro_speed": cfg.kokoro_speed,
+        "kokoro_sentence_pause": cfg.kokoro_sentence_pause,
+        "kokoro_clause_pause": cfg.kokoro_clause_pause,
+        "kokoro_pack_words": cfg.kokoro_pack_words,
+        "kokoro_scene_pause": cfg.kokoro_scene_pause,
+        "narration_wpm": cfg.narration_wpm,
+        "burn_captions": cfg.burn_captions,
+        "chunk_min_seconds": cfg.min_scene_duration,
+        "chunk_max_seconds": cfg.max_scene_duration,
+        "chunk_target_seconds": cfg.visual_change_target_seconds,
         "youtube": meta.model_dump(),
     }
-    if CHANNEL.default_short_enabled and project.short:
+    if cfg.default_short_enabled and project.short:
         spec["short"] = {
             "fixture": str(short_fixture_path(slug, root).relative_to(base)),
             "stills_module": str(short_stills_path(slug, root).relative_to(base)),
@@ -225,7 +229,7 @@ def write_jobs(
         c
         for beat in fixture_to_beats(data, include_hook=True)
         if not is_title_beat(beat)
-        for c in _split(beat)
+        for c in _split(beat, project)
     ]
     if len(scenes) != len(chunks):
         raise ValueError(
@@ -296,7 +300,7 @@ def compile_project(
     slug = project.slug
     project.metadata = draft_metadata(project)
     fixture = fixture_dict(project)
-    chunks = _chunks_for(fixture)
+    chunks = _chunks_for(fixture, project)
     scenes = list(project.scenes)
     if len(scenes) != len(chunks):
         if not stubs_ok:
@@ -323,9 +327,10 @@ def compile_project(
         "spec": str(sp),
     }
 
-    if CHANNEL.default_short_enabled and project.short:
+    cfg = config_for_project(project)
+    if cfg.default_short_enabled and project.short:
         sf = fixture_dict(project, short=True)
-        short_chunks = _chunks_for(sf)
+        short_chunks = _chunks_for(sf, project)
         short_scenes = attach_short_cta_scene(list(project.short.scenes), short_chunks)
         if len(short_scenes) != len(short_chunks):
             if not stubs_ok:
@@ -349,7 +354,7 @@ def compile_project(
     from channel.youtube import write_pack, write_thumbnail_job
 
     written["thumbnail_job"] = str(write_thumbnail_job(project, root=root))
-    if CHANNEL.default_short_enabled and project.short:
+    if cfg.default_short_enabled and project.short:
         written["short_thumbnail_job"] = str(
             write_short_thumbnail_job(project, root=root)
         )

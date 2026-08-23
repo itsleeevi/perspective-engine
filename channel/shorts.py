@@ -13,7 +13,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-from channel.config import CHANNEL
+from channel.config import config_for_project
+from channel.modes import is_business
 from channel.paths import ROOT, jobs_path
 from channel.prompts import strip_character_names
 from channel.schema import Scene, ScenePurpose, VideoProject
@@ -155,18 +156,30 @@ def short_thumbnail_prompt(project: VideoProject) -> str:
     prop = ""
     if project.story and project.story.signature_prop:
         prop = f" Signature object: {project.story.signature_prop}."
-    assembled = " ".join(
-        p
-        for p in (
-            CHANNEL.visual_style,
+    cfg = config_for_project(project)
+    if is_business(project.channel_mode):
+        framing = (
+            "Vertical 9:16 YouTube Shorts thumbnail. ONE simplified company "
+            "symbol plus ONE business object. Clean high-contrast backdrop. "
+            "Empty dark lower third of the frame for type added later. "
+            "No photoreal logo lockup, no clutter."
+        )
+    else:
+        framing = (
             "Vertical 9:16 YouTube Shorts thumbnail. TIGHT crop, chest-up or "
             "closer. The subject's FACE fills the upper half of the frame and "
             "is the brightest thing in the picture. Dramatic single-source "
             "light, bold colour contrast, clean simple backdrop. Subtle natural "
             "expression, not a grimace, not a shout. Empty dark lower third of "
             "the frame for type added later. No tiny figures, no wide "
-            "establishing shot, no clutter.",
-            CHANNEL.negative_style,
+            "establishing shot, no clutter."
+        )
+    assembled = " ".join(
+        p
+        for p in (
+            cfg.visual_style,
+            framing,
+            cfg.negative_style,
             "NO readable text, NO letters, NO captions, NO title card, "
             "NO watermark. Type will be added later.",
             lock,
@@ -184,7 +197,9 @@ def write_short_thumbnail_job(project: VideoProject, *, root: Path | None = None
 
     stem = youtube_stem(slug)
     meta = project.metadata
-    text = (meta.thumbnail_text if meta else "") or "THE REAL ANSWER"
+    text = (meta.thumbnail_text if meta else "") or (
+        "THE REAL ENGINE" if is_business(project.channel_mode) else "THE REAL ANSWER"
+    )
     job = {
         "id": "short_thumb",
         "filename": f"{slug}_short_thumbnail.png",

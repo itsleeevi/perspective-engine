@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import re
 
-from channel.config import CHANNEL
+from channel.config import CHANNEL, config_for_project
+from channel.modes import is_business
 from channel.originality_policy import GENERIC_AI_PHRASES, STOCK_ENDINGS, STOCK_TRANSITIONS
 from channel.schema import QaScores, VideoProject
 
@@ -30,8 +31,9 @@ def word_count(text: str) -> int:
     return len(re.findall(r"\S+", text))
 
 
-def first_n_seconds_words(n: float) -> int:
-    return max(8, int(CHANNEL.narration_wpm * (n / 60.0)))
+def first_n_seconds_words(n: float, project: VideoProject | None = None) -> int:
+    wpm = config_for_project(project).narration_wpm if project else CHANNEL.narration_wpm
+    return max(8, int(wpm * (n / 60.0)))
 
 
 def mechanical_qa(project: VideoProject) -> QaScores:
@@ -40,34 +42,42 @@ def mechanical_qa(project: VideoProject) -> QaScores:
     text = narration_of(project)
     words = word_count(text)
     scores = QaScores()
+    cfg = config_for_project(project)
 
     if not project.story:
         notes.append("no story yet")
         return scores.model_copy(update={"notes": notes})
 
-    if words < CHANNEL.narration_word_min:
-        notes.append(f"narration is {words} words (min {CHANNEL.narration_word_min})")
+    if words < cfg.narration_word_min:
+        notes.append(f"narration is {words} words (min {cfg.narration_word_min})")
         scores.pacing = 4
-    elif words > CHANNEL.narration_word_max:
-        notes.append(f"narration is {words} words (max {CHANNEL.narration_word_max})")
+    elif words > cfg.narration_word_max:
+        notes.append(f"narration is {words} words (max {cfg.narration_word_max})")
         scores.pacing = 6
     else:
         scores.pacing = 8
 
-    head = " ".join(text.split()[: first_n_seconds_words(15)])
+    head = " ".join(text.split()[: first_n_seconds_words(15, project)])
     if _BORN.search(head):
         notes.append("cold open starts with a birth — rewrite; that is a biography")
+        scores.hook = 3
+    elif is_business(project.channel_mode) and re.search(
+        r"\b(was|were)\s+founded\b", head, re.I
+    ):
+        notes.append("cold open starts with a founding — start with the contradiction")
         scores.hook = 3
     else:
         scores.hook = 8
 
-    first30 = " ".join(text.split()[: first_n_seconds_words(30)])
+    first30 = " ".join(text.split()[: first_n_seconds_words(30, project)])
     if project.analysis.subject.lower() not in first30.lower():
         notes.append("first 30s never names the subject")
         scores.curiosity = 5
-    if project.analysis.target.split()[0].lower() not in first30.lower():
-        notes.append("first 30s never names the target")
-        scores.curiosity = min(scores.curiosity or 8, 5)
+    if not is_business(project.channel_mode):
+        target_word = project.analysis.target.split()[0].lower()
+        if target_word not in first30.lower():
+            notes.append("first 30s never names the target")
+            scores.curiosity = min(scores.curiosity or 8, 5)
     if "?" not in first30 and not re.search(r"\b(but|except|yet|why)\b", first30, re.I):
         notes.append("first 30s has no question or contradiction")
         scores.curiosity = min(scores.curiosity or 8, 5)
@@ -97,7 +107,7 @@ def mechanical_qa(project: VideoProject) -> QaScores:
         scores.ending = 8
 
     lower = text.lower()
-    for phrase in (*CHANNEL.banned_written_register, *GENERIC_AI_PHRASES):
+    for phrase in (*cfg.banned_written_register, *GENERIC_AI_PHRASES):
         if phrase in lower:
             notes.append(f"written-register phrase: {phrase!r}")
             scores.clarity = 5
@@ -159,7 +169,8 @@ def visual_qa(project: VideoProject) -> list[str]:
 
 def thirty_second_blocks(project: VideoProject) -> list[str]:
     words = narration_of(project).split()
-    n = first_n_seconds_words(CHANNEL.retention_block_seconds)
+    cfg = config_for_project(project)
+    n = first_n_seconds_words(cfg.retention_block_seconds, project)
     blocks = []
     for i in range(0, len(words), n):
         chunk = " ".join(words[i : i + n])
@@ -174,9 +185,14 @@ def run_full_qa(project: VideoProject):
     from channel.monetization_qa import compute_monetization_readiness
     from channel.originality import originality_report_for_slug
 
-    report = factcheck(project.research)
+    report = factcheck(project.research, channel_mode=project.channel_mode)
     project.factcheck = report
     project.qa = mechanical_qa(project)
+    if is_business(project.channel_mode):
+        from channel.business_qa import mechanical_business_qa
+
+        project.business_qa = mechanical_business_qa(project)
+        project.qa.notes.extend(project.business_qa.notes)
     try:
         originality = originality_report_for_slug(project.slug)
     except Exception:

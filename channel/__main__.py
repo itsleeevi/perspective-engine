@@ -1,6 +1,7 @@
 """CLI: title in → project files out.
 
     .venv/bin/python -m channel init "What Einstein Really Thought About Religion"
+    .venv/bin/python -m channel init --channel behind_the_business "How Costco Really Makes Money"
 
 Subcommands:
     init           parse title, seed research, write project skeleton
@@ -9,6 +10,8 @@ Subcommands:
     chunks         print narration chunks (needs a story)
     compile        write fixtures / stills / spec / image jobs / youtube pack
     qa             factcheck + retention + originality + monetization
+    score-title    score a Behind The Business title
+    suggest-titles score How/Why/The patterns for a company
     originality    compare this title to the last 10 shipped videos
     youtube        write description, tags, 1280×720 + 9:16 Shorts thumbs
     branding       size a profile (800×800) and cover (2560×1440) for YouTube
@@ -22,21 +25,24 @@ import sys
 from pathlib import Path
 
 from channel.compile import chunk_list, compile_project
-from channel.config import CHANNEL
+from channel.config import config_for
 from channel.io import load_project, save_project
+from channel.modes import ChannelMode, parse_mode
 from channel.paths import ROOT, project_dir, spec_path
 from channel.qa import narration_of, run_full_qa, word_count
 from channel.research import seed_research
-from channel.schema import ResearchPack, VideoProject
+from channel.schema import BusinessContext, ResearchPack, VideoProject
 from channel.slug import slugify
 from channel.title import analyze_title
 
 
 def _init(args: argparse.Namespace) -> int:
+    mode = parse_mode(args.channel)
     analysis = analyze_title(
         args.title,
         special_instructions=args.instructions or "",
         target_duration_seconds=args.duration,
+        channel_mode=mode,
     )
     slug = slugify(analysis.title)
     d = project_dir(slug)
@@ -44,20 +50,37 @@ def _init(args: argparse.Namespace) -> int:
     pack = ResearchPack(subject=analysis.subject, target=analysis.target)
     if not args.skip_seed:
         pack = seed_research(analysis)
+    business = None
+    if mode is ChannelMode.behind_the_business:
+        business = BusinessContext(
+            company=analysis.company or analysis.subject,
+            industry=analysis.industry,
+            business_question=analysis.business_question or analysis.core_question,
+            apparent_business=analysis.apparent_business,
+            potential_hidden_engine=analysis.potential_hidden_engine,
+            customer=analysis.customer,
+            likely_revenue_streams=list(analysis.likely_revenue_streams),
+        )
     project = VideoProject(
         title=analysis.title,
         slug=slug,
+        channel_mode=mode,
         analysis=analysis,
+        business=business,
         research=pack,
         special_instructions=analysis.special_instructions,
     )
     save_project(project, d / "project.json")
     (d / "README.md").write_text(
-        _agent_readme(slug, analysis.title),
+        _agent_readme(slug, analysis.title, mode),
         encoding="utf-8",
     )
     print(f"project: {d / 'project.json'}")
-    print(f"subject={analysis.subject!r} target={analysis.target!r} verb={analysis.verb}")
+    print(f"channel_mode={mode.value}")
+    if mode is ChannelMode.behind_the_business:
+        print(f"company={analysis.company!r} question={analysis.business_question}")
+    else:
+        print(f"subject={analysis.subject!r} target={analysis.target!r} verb={analysis.verb}")
     print(f"core_question: {analysis.core_question}")
     print(f"research seed sources: {len(pack.seed_sources)}")
     print("Next: fill claims in research, then story/characters/scenes. See the README.")
@@ -69,8 +92,24 @@ def _analyze(args: argparse.Namespace) -> int:
         args.title,
         special_instructions=args.instructions or "",
         target_duration_seconds=args.duration,
+        channel_mode=parse_mode(args.channel),
     )
     print(analysis.model_dump_json(indent=2))
+    return 0
+
+
+def _score_title(args: argparse.Namespace) -> int:
+    from channel.business_titles import score_business_title
+
+    analysis = analyze_title(args.title, channel_mode=ChannelMode.behind_the_business)
+    print(json.dumps(score_business_title(args.title, analysis=analysis), indent=2))
+    return 0
+
+
+def _suggest_titles(args: argparse.Namespace) -> int:
+    from channel.business_titles import suggest_business_titles
+
+    print(json.dumps(suggest_business_titles(args.company, y=args.y or ""), indent=2))
     return 0
 
 
@@ -82,19 +121,27 @@ def _research_seed(args: argparse.Namespace) -> int:
     return 0
 
 
-def _agent_readme(slug: str, title: str) -> str:
-    from channel import agent_prompts
+def _agent_readme(slug: str, title: str, mode: ChannelMode | None = None) -> str:
+    from channel.stage_prompts import stage_prompts_for
 
+    prompts = stage_prompts_for(mode)
+    cfg = config_for(mode)
+    docs = (
+        f"docs/business/{slug}.md"
+        if mode is ChannelMode.behind_the_business
+        else f"docs/videos/{slug}.md"
+    )
     return f"""# {title}
 
 Working directory for this video. Story content lives in `project.json`.
-Style, voice, and QA rules live in `channel/config.py` — do not copy a person into that file.
+Channel mode: `{cfg.mode.value}` (`{cfg.name}`).
+Style, voice, and QA rules live in `channel/config.py` — do not copy a person or company into that file.
 
 ## Pipeline
 
-1. Researcher — {agent_prompts.RESEARCHER.strip().splitlines()[0]}
+1. Researcher — {prompts.RESEARCHER.strip().splitlines()[0]}
 2. Fact check + originality + monetization — `python -m channel qa {slug}`
-3. Story architect, bibles, narration (4400–5500 words, ~20–25 minutes)
+3. Story architect, bibles, narration ({cfg.narration_word_min}–{cfg.narration_word_max} words)
 4. `python -m channel chunks {slug}`
 5. Scene breakdown, 1:1 with chunks
 6. `python -m channel compile {slug}` then `scripts/lint_originality.py`
@@ -103,10 +150,10 @@ Style, voice, and QA rules live in `channel/config.py` — do not copy a person 
    `fixtures/{slug}_short_thumbnail_image_jobs.json`, then `python -m channel youtube {slug}`
 9. `.venv/bin/python scripts/run_short.py fixtures/video_specs/{slug}.json`
 10. `.venv/bin/python scripts/run_custom_video.py fixtures/video_specs/{slug}.json`
-11. Update `docs/videos/{slug}.md`
+11. Update `{docs}`
 
-Voice is Kokoro (default `{CHANNEL.kokoro_voice}`; new titles may rotate). Never Edge. Never ElevenLabs.
-Images are Cursor Grok GenerateImage. Do not invent quotes.
+Voice is Kokoro (default `{cfg.kokoro_voice}`; new titles may rotate). Never Edge. Never ElevenLabs.
+Images are Cursor Grok GenerateImage. Do not invent quotes or numbers.
 """
 
 
@@ -138,13 +185,16 @@ def _qa(args: argparse.Namespace) -> int:
         print(json.dumps(originality.model_dump(exclude={"comparisons"}), indent=2))
     if monetization:
         print(json.dumps(monetization.model_dump(), indent=2))
+    if project.business_qa:
+        print(json.dumps(project.business_qa.model_dump(), indent=2))
     text = narration_of(project)
+    cfg = config_for(project.channel_mode)
     if text:
         print(
             f"words: {word_count(text)} "
-            f"(target {CHANNEL.narration_word_min}-{CHANNEL.narration_word_max})"
+            f"(target {cfg.narration_word_min}-{cfg.narration_word_max})"
         )
-    weak = scores.critical_below(CHANNEL.qa_revision_threshold)
+    weak = scores.critical_below(cfg.qa_revision_threshold)
     if weak:
         print("revise:", ", ".join(weak))
         return 1
@@ -287,11 +337,19 @@ def _branding(args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(prog="channel", description=CHANNEL.name)
+    p = argparse.ArgumentParser(
+        prog="channel",
+        description="Shared video engine (What They Really Think / Behind The Business)",
+    )
     sub = p.add_subparsers(dest="cmd", required=True)
 
     init = sub.add_parser("init", help="parse title and write a project skeleton")
     init.add_argument("title")
+    init.add_argument(
+        "--channel",
+        default="what_they_really_think",
+        help="what_they_really_think (default) or behind_the_business (aliases: wtrt, btb)",
+    )
     init.add_argument("--instructions", default="")
     init.add_argument("--duration", type=int, default=None)
     init.add_argument("--skip-seed", action="store_true")
@@ -299,9 +357,29 @@ def main(argv: list[str] | None = None) -> int:
 
     an = sub.add_parser("analyze", help="parse a title, print JSON, write nothing")
     an.add_argument("title")
+    an.add_argument(
+        "--channel",
+        default="what_they_really_think",
+        help="what_they_really_think (default) or behind_the_business",
+    )
     an.add_argument("--instructions", default="")
     an.add_argument("--duration", type=int, default=None)
     an.set_defaults(func=_analyze)
+
+    st = sub.add_parser(
+        "score-title",
+        help="score a Behind The Business title (1–10 dimensions + TITLE_SCORE)",
+    )
+    st.add_argument("title")
+    st.set_defaults(func=_score_title)
+
+    sg = sub.add_parser(
+        "suggest-titles",
+        help="fill Behind The Business title patterns for a company and score them",
+    )
+    sg.add_argument("company")
+    sg.add_argument("--y", default="", help="optional second noun (Makes Money From Y)")
+    sg.set_defaults(func=_suggest_titles)
 
     rs = sub.add_parser("research-seed", help="re-fetch encyclopedia seed")
     rs.add_argument("slug")

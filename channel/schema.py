@@ -1,4 +1,4 @@
-"""Shared types for one What They Really Think video. No person is hardcoded."""
+"""Shared types for one channel video. No person or company is hardcoded."""
 
 from __future__ import annotations
 
@@ -6,6 +6,8 @@ from enum import Enum
 from typing import Literal
 
 from pydantic import BaseModel, Field
+
+from channel.modes import ChannelMode
 
 
 class SubjectStatus(str, Enum):
@@ -74,7 +76,7 @@ class TitleAnalysis(BaseModel):
     title: str
     subject: str
     target: str
-    verb: Literal["Thought", "Thinks"]
+    verb: Literal["Thought", "Thinks"] | None = None
     subject_status: SubjectStatus = SubjectStatus.unknown
     category: str = "unknown"
     relationship_type: str = "unknown until researched"
@@ -85,6 +87,15 @@ class TitleAnalysis(BaseModel):
     target_kind: str = "unknown"
     special_instructions: str = ""
     target_duration_seconds: int | None = None
+    channel_mode: ChannelMode = ChannelMode.what_they_really_think
+    company: str = ""
+    industry: str = ""
+    business_question: str = ""
+    apparent_business: str = ""
+    potential_hidden_engine: str = ""
+    customer: str = ""
+    likely_revenue_streams: list[str] = Field(default_factory=list)
+    business_model_complexity: str = ""
 
 
 class SourceRef(BaseModel):
@@ -106,6 +117,11 @@ class Claim(BaseModel):
     quote: str = ""
     date: str = ""
     is_direct_quote: bool = False
+    fiscal_period: str = ""
+    source_date: str = ""
+    data_date: str = ""
+    calculation: str = ""
+    inputs: list[str] = Field(default_factory=list)
 
 
 class ResearchPack(BaseModel):
@@ -119,6 +135,9 @@ class ResearchPack(BaseModel):
     insufficient_evidence: bool = False
     insufficient_note: str = ""
     seed_sources: list[SourceRef] = Field(default_factory=list)
+    data_date: str = ""
+    source_date: str = ""
+    fiscal_period: str = ""
 
 
 class FactCheckReport(BaseModel):
@@ -263,6 +282,8 @@ class MonetizationReadiness(BaseModel):
     character_consistency: int = 0
     retention_quality: int = 0
     mass_production_risk: int = 1
+    financial_accuracy: int = 0
+    business_analysis_depth: int = 0
     overall: int = 0
     ready_to_publish: bool = False
     originality_score: float = 100.0
@@ -288,12 +309,95 @@ class VideoMetadata(BaseModel):
     synthetic_content_disclosure: bool = True
 
 
+class CompanyVisualIdentity(BaseModel):
+    primary_environment: str = ""
+    visual_elements: list[str] = Field(default_factory=list)
+    important_objects: list[str] = Field(default_factory=list)
+    important_locations: list[str] = Field(default_factory=list)
+    important_people: list[str] = Field(default_factory=list)
+
+
+class FinancialMetric(BaseModel):
+    metric: str
+    value: str = ""
+    fiscal_period: str = ""
+    source_date: str = ""
+    data_date: str = ""
+    calculation: str = ""
+    inputs: list[str] = Field(default_factory=list)
+    source_claim_ids: list[str] = Field(default_factory=list)
+    note: str = ""
+
+
+class MoneyFlowNode(BaseModel):
+    name: str
+    role: str = ""
+
+
+class BusinessModel(BaseModel):
+    who_pays: str = ""
+    what_they_pay_for: str = ""
+    how_often: str = ""
+    cost_to_serve: str = ""
+    why_customers_stay: str = ""
+    what_makes_it_scale: str = ""
+    where_profit_comes_from: str = ""
+    looks_important_but_isnt: str = ""
+    looks_small_but_is_critical: str = ""
+
+
+class BusinessContext(BaseModel):
+    company: str = ""
+    industry: str = ""
+    cluster: str = ""
+    business_question: str = ""
+    apparent_business: str = ""
+    potential_hidden_engine: str = ""
+    customer: str = ""
+    likely_revenue_streams: list[str] = Field(default_factory=list)
+    revenue_streams: list[str] = Field(default_factory=list)
+    cost_structure: list[str] = Field(default_factory=list)
+    moats: list[str] = Field(default_factory=list)
+    risks: list[str] = Field(default_factory=list)
+    financial_metrics: list[FinancialMetric] = Field(default_factory=list)
+    business_model: BusinessModel = Field(default_factory=BusinessModel)
+    money_flow: list[MoneyFlowNode] = Field(default_factory=list)
+    hundred_dollar_breakdown: list[str] = Field(default_factory=list)
+    archetype: str = ""
+    hook_type: str = ""
+    related_company: str = ""
+    visual_identity: CompanyVisualIdentity = Field(default_factory=CompanyVisualIdentity)
+    data_date: str = ""
+    source_date: str = ""
+    fiscal_period: str = ""
+
+
+class BusinessQaReport(BaseModel):
+    title_strength: int = 0
+    thumbnail_concept: int = 0
+    hook: int = 0
+    curiosity: int = 0
+    story_depth: int = 0
+    business_surprise: int = 0
+    pacing: int = 0
+    visual_variety: int = 0
+    title_payoff: int = 0
+    related_video_potential: int = 0
+    dead_sections: list[str] = Field(default_factory=list)
+    weak_minutes: list[str] = Field(default_factory=list)
+    claim_flags: list[str] = Field(default_factory=list)
+    notes: list[str] = Field(default_factory=list)
+    ready: bool = False
+
+
 class VideoProject(BaseModel):
     """Shared context for every agent on one title."""
 
     title: str
     slug: str
+    channel_mode: ChannelMode = ChannelMode.what_they_really_think
     analysis: TitleAnalysis
+    business: BusinessContext | None = None
     research: ResearchPack = Field(default_factory=lambda: ResearchPack(subject="", target=""))
     factcheck: FactCheckReport = Field(default_factory=lambda: FactCheckReport(ok=False))
     story: StoryPlan | None = None
@@ -305,4 +409,5 @@ class VideoProject(BaseModel):
     monetization: MonetizationReadiness | None = None
     short: ShortPlan | None = None
     metadata: VideoMetadata | None = None
+    business_qa: BusinessQaReport | None = None
     special_instructions: str = ""

@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 
 from channel.bibles import format_all_characters, format_all_locations, visual_lock
-from channel.config import CHANNEL, visual_accent_for
+from channel.config import config_for_project, visual_accent_for
 from channel.schema import Scene, VideoProject
 
 
@@ -111,13 +111,14 @@ def assemble_image_prompt(
         else "Horizontal 16:9 frame."
     )
 
+    cfg = config_for_project(project)
     assembled = " ".join(
         p
         for p in (
-            CHANNEL.visual_style,
-            visual_accent_for(project.slug),
+            cfg.visual_style,
+            visual_accent_for(project.slug, project.channel_mode),
             aspect_line,
-            CHANNEL.negative_style,
+            cfg.negative_style,
             " ".join(chars),
             loc,
             who_rule,
@@ -127,4 +128,21 @@ def assemble_image_prompt(
         )
         if p
     )
-    return strip_image_brands(strip_character_names(assembled, project))
+    return strip_image_brands(
+        strip_character_names(strip_project_brands(assembled, project), project)
+    )
+
+
+def strip_project_brands(text: str, project: VideoProject) -> str:
+    """Spoken company names stay out of image prompts."""
+    extras: list[str] = []
+    if project.analysis.subject:
+        extras.append(project.analysis.subject)
+    if project.analysis.company:
+        extras.append(project.analysis.company)
+    if project.business and project.business.company:
+        extras.append(project.business.company)
+    out = text
+    for name in sorted({n for n in extras if len(n) >= 4}, key=len, reverse=True):
+        out = re.sub(rf"\b{re.escape(name)}\b", "", out, flags=re.I)
+    return re.sub(r"\s{2,}", " ", out).strip()

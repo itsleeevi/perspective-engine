@@ -51,7 +51,9 @@ import sys
 from pathlib import Path
 
 from adapters.voice.years import SPELLED_YEAR
-from channel.config import CHANNEL
+from channel.config import config_for
+from channel.modes import is_business
+from channel.originality import mode_for_slug
 from channel.originality_policy import GENERIC_AI_PHRASES
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -261,6 +263,7 @@ def _lint_unique_engine(fixture: dict, fixture_path: Path) -> None:
     names = chapter_names(fixture)
     thought = (fixture.get("the_thought") or "").strip()
     hook = (fixture.get("hook") or "").strip()
+    mode = mode_for_slug(fixture_path.stem)
     if hook_is_month_year_stamp(hook):
         _fail(
             "story engine: cold open starts with 'Month Year.' — that stamp "
@@ -275,6 +278,8 @@ def _lint_unique_engine(fixture: dict, fixture_path: Path) -> None:
             "a date), not a generic The Suit / The Rocket row"
         )
     for other_path, other in _other_story_fixtures(fixture_path):
+        if mode_for_slug(other_path.stem) != mode:
+            continue
         hits = colliding_chapter_names(names, chapter_names(other))
         if hits:
             _fail(
@@ -358,7 +363,8 @@ def main() -> None:
             pass
     own_pages.discard("")
     banned: list[tuple[str, str]] = []  # (phrase, source page)
-    for page in sorted((ROOT / "docs" / "videos").glob("*.md")):
+    motif_dirs = [ROOT / "docs" / "videos", ROOT / "docs" / "business"]
+    for page in sorted(p for d in motif_dirs if d.is_dir() for p in d.glob("*.md")):
         if page.stem in own_pages:
             continue
         text = page.read_text(encoding="utf-8")
@@ -371,7 +377,10 @@ def main() -> None:
     for phrase, src in hits:
         _fail(f"motif: {phrase!r} is on the do-not-copy list of {src}")
     if not hits:
-        _ok(f"no banned motifs ({len(banned)} phrases checked from docs/videos/)")
+            _ok(
+                f"no banned motifs ({len(banned)} phrases checked from "
+                "docs/videos/ and docs/business/)"
+            )
 
     # 2b. Unique story engine — new channel titles only.
     if spec.get("engine") == "channel" and not short:
@@ -407,10 +416,16 @@ def main() -> None:
     # 4b. EXPLAIN-LIKE-FIVE — the thought must be sayable by a child.
     thought = (fixture.get("the_thought") or "").strip()
     if not thought:
-        _fail(
-            "explain-like-five: add the_thought — one sentence a child could "
-            "repeat, naming what the hero believed"
-        )
+        if is_business(spec.get("channel_mode")):
+            _fail(
+                "explain-like-five: add the_thought — one sentence that answers "
+                "the business mystery"
+            )
+        else:
+            _fail(
+                "explain-like-five: add the_thought — one sentence a child could "
+                "repeat, naming what the hero believed"
+            )
     else:
         needle = re.sub(r"\s+", " ", thought.lower()).rstrip(".")
         hay = re.sub(r"\s+", " ", lowered)
@@ -419,10 +434,11 @@ def main() -> None:
                 f"explain-like-five: the_thought must appear in the narration "
                 f"as written: {thought!r}"
             )
-        elif len(thought.split()) > 22:
+        elif len(thought.split()) > config_for(spec.get("channel_mode")).title_payoff_max_words:
+            limit = config_for(spec.get("channel_mode")).title_payoff_max_words
             _fail(
                 f"explain-like-five: the_thought is {len(thought.split())} words "
-                "(max 22) — a child has to be able to say it"
+                f"(max {limit}) — a viewer has to be able to repeat it"
             )
         else:
             _ok(f"the_thought: {thought!r}")
@@ -434,11 +450,13 @@ def main() -> None:
     if short:
         # A traffic Short: 25-45s of speech, open loop, spoken CTA at the end.
         words = len(re.findall(r"\S+", narration))
-        secs = words / (175 / 60)
-        if not 60 <= words <= 135:
+        short_cfg = config_for(spec.get("channel_mode"))
+        secs = words / (short_cfg.narration_wpm / 60)
+        lo_s, hi_s = short_cfg.short_word_min, short_cfg.short_word_max
+        if not lo_s <= words <= hi_s:
             _fail(
-                f"short length: {words} words (~{secs:.0f}s at 175 wpm) — "
-                "write 60-135 words so the Short lands in 25-45s"
+                f"short length: {words} words (~{secs:.0f}s at "
+                f"{short_cfg.narration_wpm} wpm) — write {lo_s}-{hi_s} words"
             )
         else:
             _ok(f"short length: {words} words (~{secs:.0f}s)")
@@ -462,8 +480,12 @@ def main() -> None:
         if fixture.get("include_level_titles", True):
             _fail("short structure: set include_level_titles: false (no cards)")
     elif fixture.get("title_style") == "chapter":
-        if not 4 <= len(levels) <= 6:
-            _fail(f"structure: {len(levels)} chapters — use 4-6")
+        ch_cfg = config_for(spec.get("channel_mode"))
+        if not ch_cfg.chapter_count_min <= len(levels) <= ch_cfg.chapter_count_max:
+            _fail(
+                f"structure: {len(levels)} chapters — use "
+                f"{ch_cfg.chapter_count_min}-{ch_cfg.chapter_count_max}"
+            )
         if fixture.get("speak_title_cards", True):
             _fail("structure: chapter cards must be silent (speak_title_cards: false)")
         for level in levels:
@@ -486,6 +508,13 @@ def main() -> None:
                 "cold open: biography dump ('was born') — start with the "
                 "title's mystery, not a birth"
             )
+        if is_business(spec.get("channel_mode")) and re.search(
+            r"\b(was|were)\s+founded\b", head
+        ):
+            _fail(
+                "cold open: company-history dump ('was founded') — start with "
+                "the business contradiction"
+            )
         for opener in (
             "this video will",
             "in this video",
@@ -495,7 +524,10 @@ def main() -> None:
             if opener in head:
                 _fail(f"cold open: lecture opener {opener!r}")
         if not short and fixture_path.stem not in _LENGTH_GRANDFATHERED:
-            lo, hi = CHANNEL.narration_word_min, CHANNEL.narration_word_max
+            lo, hi = (
+                config_for(spec.get("channel_mode")).narration_word_min,
+                config_for(spec.get("channel_mode")).narration_word_max,
+            )
             if words < lo:
                 _warn(f"length: {words} words (channel target {lo}-{hi})")
             elif words > hi:
@@ -534,8 +566,8 @@ def main() -> None:
         advice = advisor_voice_hit(narration)
         if advice:
             _fail(
-                "advisor: this channel tells a history story; it does not "
-                "give medical, legal, or investment advice "
+                "advisor: this channel does not give medical, legal, or "
+                "investment advice "
                 f"(found {advice!r})"
             )
         from channel.originality_policy import (

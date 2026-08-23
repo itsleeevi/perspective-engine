@@ -28,6 +28,9 @@ REQUIRED_PHRASES = (
     "unique story engine",
     "originality_score",
     "ready_to_publish",
+    "behind_the_business",
+    "docs/behind-the-business.md",
+    "3000–3750",
 )
 
 
@@ -47,6 +50,16 @@ def test_playbook_names_the_shared_contract():
     playbook = (ROOT / "docs" / "custom-videos.md").read_text(encoding="utf-8")
     assert "Shared contract (other clones)" in playbook
     assert "tests/test_channel_handoff.py" in playbook
+
+
+def test_business_playbook_exists():
+    playbook = ROOT / "docs" / "behind-the-business.md"
+    index = ROOT / "docs" / "business" / "README.md"
+    assert playbook.is_file()
+    assert index.is_file()
+    text = playbook.read_text(encoding="utf-8")
+    assert "behind_the_business" in text
+    assert "unknown until researched" in text or "must **not** assume" in text
 
 
 def test_videos_readme_lists_every_page():
