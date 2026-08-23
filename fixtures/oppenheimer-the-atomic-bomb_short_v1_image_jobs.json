@@ -1,0 +1,124 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic image",
+      "chunk": "In August 1945,",
+      "scene": "A vertical flat graphic of a wall calendar turning to the month of August 1945, muted palette, no people, no readable paragraphs.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION the_frame (same set): a clean symbolic graphic space with a flat muted background for maps, split-screen match cuts and single icons, no realistic room. Palette: slate, sand, off white. STRICTLY NO people, NO faces, NO hands. SHOT: symbolic image. ACTION: A vertical flat graphic of a wall calendar turning to the month of August 1945, muted palette, no people, no readable paragraphs.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "the man who built the atomic bomb clasped his hands over his head like a winning boxer.",
+      "scene": "Vertical frame: the tall thin man in a pale porkpie hat on a low stage clasps both hands over his head like a victorious boxer, a cheering crowd below.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER director (same cartoon person every time, do not redesign): a very tall, gaunt, thin man in his forties, long angular face, sharp cheekbones, pale skin, large pale blue eyes, short cropped dark brown hair, clean-shaven; wears a loose brown three-piece suit and a wide flat-brimmed pale porkpie hat, often holding a thin smoking pipe; calm, intense, slightly haunted expression; flat 2D vector, simple facial features, muted palette, NOT photoreal, NOT a celebrity likeness. LOCATION the_rally (same set): a plain wartime auditorium hall with a low wooden stage and rows of simplified cheering staff, bunting on the walls. Palette: warm brown, dull red, cream. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: Vertical frame: the tall thin man in a pale porkpie hat on a low stage clasps both hands over his head like a victorious boxer, a cheering crowd below.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "His weapon had just destroyed two cities, and the crowd was cheering.",
+      "scene": "Vertical frame: rows of simplified staff cheer with raised arms under bunting, the thin man raised above them on the stage.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER director (same cartoon person every time, do not redesign): a very tall, gaunt, thin man in his forties, long angular face, sharp cheekbones, pale skin, large pale blue eyes, short cropped dark brown hair, clean-shaven; wears a loose brown three-piece suit and a wide flat-brimmed pale porkpie hat, often holding a thin smoking pipe; calm, intense, slightly haunted expression; flat 2D vector, simple facial features, muted palette, NOT photoreal, NOT a celebrity likeness. LOCATION the_rally (same set): a plain wartime auditorium hall with a low wooden stage and rows of simplified cheering staff, bunting on the walls. Palette: warm brown, dull red, cream. Generic extras in the same flat-vector construction. No photoreal faces. SHOT: wide shot. ACTION: Vertical frame: rows of simplified staff cheer with raised arms under bunting, the thin man raised above them on the stage.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "close-up",
+      "chunk": "But something in him had already broken.",
+      "scene": "Vertical close-up of the thin man's face faltering in the middle of the cheer, doubt creeping into his eyes.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER director (same cartoon person every time, do not redesign): a very tall, gaunt, thin man in his forties, long angular face, sharp cheekbones, pale skin, large pale blue eyes, short cropped dark brown hair, clean-shaven; wears a loose brown three-piece suit and a wide flat-brimmed pale porkpie hat, often holding a thin smoking pipe; calm, intense, slightly haunted expression; flat 2D vector, simple facial features, muted palette, NOT photoreal, NOT a celebrity likeness. LOCATION the_rally (same set): a plain wartime auditorium hall with a low wooden stage and rows of simplified cheering staff, bunting on the walls. Palette: warm brown, dull red, cream. Only the subject character unless the action names someone else. SHOT: close-up. ACTION: Vertical close-up of the thin man's face faltering in the middle of the cheer, doubt creeping into his eyes.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "004",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "other",
+      "free": false,
+      "shot_type": "two-person shot",
+      "chunk": "Weeks later he stood before the President of the United States and said,",
+      "scene": "Vertical frame: the thin man stands before a composed bespectacled older man seated at a large desk in a formal office.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER director (same cartoon person every time, do not redesign): a very tall, gaunt, thin man in his forties, long angular face, sharp cheekbones, pale skin, large pale blue eyes, short cropped dark brown hair, clean-shaven; wears a loose brown three-piece suit and a wide flat-brimmed pale porkpie hat, often holding a thin smoking pipe; calm, intense, slightly haunted expression; flat 2D vector, simple facial features, muted palette, NOT photoreal, NOT a celebrity likeness. CHARACTER president (same cartoon person every time): a trim older man, round wire-frame glasses, neat side-parted grey hair, plain dark double-breasted suit and bow tie; composed, cold; flat 2D vector, simple facial features, muted palette, NOT photoreal. LOCATION the_white_house (same set): a formal cream-colored oval office with tall windows, heavy curtains, flags and a large dark desk. Palette: cream, navy, gold. Draw only the named characters. SHOT: two-person shot. ACTION: Vertical frame: the thin man stands before a composed bespectacled older man seated at a large desk in a formal office.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "005",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_005.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "close-up",
+      "chunk": "almost in a whisper, that he felt he had blood on his hands.",
+      "scene": "Vertical close-up of the thin man's downcast face and his open hands, a faint red stain implied on the palms.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER director (same cartoon person every time, do not redesign): a very tall, gaunt, thin man in his forties, long angular face, sharp cheekbones, pale skin, large pale blue eyes, short cropped dark brown hair, clean-shaven; wears a loose brown three-piece suit and a wide flat-brimmed pale porkpie hat, often holding a thin smoking pipe; calm, intense, slightly haunted expression; flat 2D vector, simple facial features, muted palette, NOT photoreal, NOT a celebrity likeness. LOCATION the_white_house (same set): a formal cream-colored oval office with tall windows, heavy curtains, flags and a large dark desk. Palette: cream, navy, gold. Only the subject character unless the action names someone else. SHOT: close-up. ACTION: Vertical close-up of the thin man's downcast face and his open hands, a faint red stain implied on the palms.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "006",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_006.png",
+      "aspect": "9:16",
+      "who": "other",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "The President was so disgusted he called him a cry-baby and had him shown the door.",
+      "scene": "Vertical frame: the bespectacled older man waves a cold, dismissive hand toward a door.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER president (same cartoon person every time): a trim older man, round wire-frame glasses, neat side-parted grey hair, plain dark double-breasted suit and bow tie; composed, cold; flat 2D vector, simple facial features, muted palette, NOT photoreal. LOCATION the_white_house (same set): a formal cream-colored oval office with tall windows, heavy curtains, flags and a large dark desk. Palette: cream, navy, gold. Draw only the named characters. SHOT: medium shot. ACTION: Vertical frame: the bespectacled older man waves a cold, dismissive hand toward a door.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "007",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_007.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic image",
+      "chunk": "He thought he had built a thing so terrible that using it again would end the world.",
+      "scene": "Vertical frame: a small blue globe sealed in a cracked glass dome, fragile in a muted void, no people.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION the_sky (same set): an abstract sky and cloud space, a vast field of air, smoke or light with no realistic room, used for the blast, the rising column and symbolic celestial images. Palette: indigo, ash grey, white gold. STRICTLY NO people, NO faces, NO hands. SHOT: symbolic image. ACTION: Vertical frame: a small blue globe sealed in a cracked glass dome, fragile in a muted void, no people.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "008",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_008.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "close-up",
+      "chunk": "How does the proud father of the bomb become its most haunted enemy?",
+      "scene": "Vertical close-up of the man's haunted face in dusk light, looking to one side, a question in his eyes.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. CHARACTER director (same cartoon person every time, do not redesign): a very tall, gaunt, thin man in his forties, long angular face, sharp cheekbones, pale skin, large pale blue eyes, short cropped dark brown hair, clean-shaven; wears a loose brown three-piece suit and a wide flat-brimmed pale porkpie hat, often holding a thin smoking pipe; calm, intense, slightly haunted expression; flat 2D vector, simple facial features, muted palette, NOT photoreal, NOT a celebrity likeness. LOCATION the_study (same set): a quiet 1950s study at dusk, a desk, a window, bookshelves, one lamp, an unhurried reflective mood. Palette: muted teal, warm grey, amber. Only the subject character unless the action names someone else. SHOT: close-up. ACTION: Vertical close-up of the man's haunted face in dusk light, looking to one side, a question in his eyes.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "009",
+      "filename": "oppenheimer-the-atomic-bomb_short_v1_009.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "symbolic image",
+      "chunk": "The full story is on this channel.",
+      "scene": "Vertical end-card graphic: a small play-icon beside a faint mushroom-cloud silhouette, muted, no readable paragraphs, no people.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION the_frame (same set): a clean symbolic graphic space with a flat muted background for maps, split-screen match cuts and single icons, no realistic room. Palette: slate, sand, off white. STRICTLY NO people, NO faces, NO hands. SHOT: symbolic image. ACTION: Vertical end-card graphic: a small play-icon beside a faint mushroom-cloud silhouette, muted, no readable paragraphs, no people.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "engine": "channel",
+  "channel": "What They Really Think",
+  "topic": "What Oppenheimer Really Thought About the Atomic Bomb",
+  "fixture": "fixtures/oppenheimer-the-atomic-bomb.json",
+  "stills_module": "fixtures/oppenheimer-the-atomic-bomb_stills.py",
+  "still_prefix": "oppenheimer-the-atomic-bomb_v1_",
+  "stills_dir": "assets/grok_oppenheimer-the-atomic-bomb_v1",
+  "thread_id": "oppenheimer-the-atomic-bomb-v1",
+  "voice": "kokoro",
+  "kokoro_voice": "am_michael",
+  "kokoro_speed": 0.88,
+  "kokoro_sentence_pause": 0.2,
+  "kokoro_clause_pause": 0.08,
+  "narration_wpm": 152,
+  "chunk_min_seconds": 3.0,
+  "chunk_max_seconds": 7.0,
+  "chunk_target_seconds": 4.5,
+  "youtube": {
+    "title": "What Oppenheimer Really Thought About the Atomic Bomb",
+    "description": "What Oppenheimer Really Thought About the Atomic Bomb. What did Oppenheimer really think about the Atomic Bomb? This is an original documentary-style narration with illustrated stills. Synthetic media: images and voice are generated.",
+    "thumbnail_concept": "Two recognizable flat-vector figures or symbols from the story, high contrast, 2\u20135 words of thumbnail text, not the full title.",
+    "thumbnail_text": "LED THE BOMB'S CREATION AND",
+    "tags": [
+      "what they really think",
+      "oppenheimer",
+      "the atomic bomb",
+      "documentary",
+      "history"
+    ],
+    "short_title": "The Bomb-Maker Who Said He Had Blood On His Hands",
+    "chapters": [
+      "The Fear",
+      "The Test",
+      "The Cities",
+      "The Reversal",
+      "The Last One"
+    ],
+    "synthetic_content_disclosure": true
+  },
+  "short": {
+    "fixture": "fixtures/oppenheimer-the-atomic-bomb_short.json",
+    "stills_module": "fixtures/oppenheimer-the-atomic-bomb_short_stills.py",
+    "still_prefix": "oppenheimer-the-atomic-bomb_short_v1_",
+    "stills_dir": "assets/grok_oppenheimer-the-atomic-bomb_short_v1",
+    "output": "assets/output/oppenheimer-the-atomic-bomb_short.mp4"
+  }
+}
