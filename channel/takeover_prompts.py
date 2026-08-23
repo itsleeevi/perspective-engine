@@ -120,8 +120,9 @@ Do not end on "Thanks for watching. Please like and subscribe."
 
 title_payoff is the one-sentence answer to HOW DID THEY TAKE OVER
 (fixture the_thought). Say it in the VO.
-Target 2800–3600 words at Kokoro 1.15. Prefer 16 excellent minutes to
-24 padded minutes. Never assemble a new title below Kokoro 1.0.
+Target 4400–5500 words at Kokoro 1.15 so the long cut lands ~20–25
+minutes. Prefer a dense 22 minutes to a padded 25. Never assemble a
+new title below Kokoro 1.0.
 
 Read docs/takeover/ before you write. HUMAN VALUE TEST: if the tools
 were removed, would this still look like a researched documentary?

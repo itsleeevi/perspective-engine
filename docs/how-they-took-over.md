@@ -68,9 +68,9 @@ Titles do **not** have to be "How X Took Over Y". "How Rolex Became the Ultimate
 
 ## Length and voice
 
-- Target **18–25 minutes** (preferred about 21–23; 1080–1500 seconds). Prefer 16 excellent minutes to 24 padded minutes.
-- Kokoro speed **1.15** (never below **1.0** on a new title).
-- Script **2800–3600 words**. Write spoken English at about 145–155 wpm. Do not pad a thin story to hit 25 minutes.
+- Target **20–25 minutes** (preferred about 22–23; 1200–1500 seconds, target 1380). Prefer a dense 22 minutes to a padded 25.
+- Kokoro speed **1.15** (never below **1.0** on a new title). Voice: `am_liam` unless a shipped lock says otherwise.
+- Script **4400–5500 words** (ideal 4600–5200) so a 1.15 cut still lands ~20–25 minutes. Write spoken English at about 145–155 wpm. Do not pad a thin story to hit the max.
 - Stills change every **4–8 seconds**. Complex flywheels may hold longer if they evolve.
 - Voice: a smart friend explaining how an empire was built. Not an MBA lecture, not Wikipedia, not financial TV, not TikTok hype.
 
@@ -117,7 +117,7 @@ Company names stay out of image prompts.
  1. Read this file + docs/takeover/README.md (do not copy a shipped rise).
 
  2. .venv/bin/python -m channel init --channel how_they_took_over "<title>"
-    Optional: --instructions "..." --duration 1320 --skip-seed
+    Optional: --instructions "..." --duration 1380 --skip-seed
     Writes channel/projects/<slug>/project.json with channel_mode set.
 
  3. RESEARCHER using channel/takeover_prompts.py. Fill research.claims from
@@ -127,7 +127,7 @@ Company names stay out of image prompts.
  4. .venv/bin/python -m channel qa <slug>
     Fix rejected claims. Do not write narration until factcheck is honest.
 
- 5. STORY + NARRATION (2800–3600 words, transformation spine, title_payoff in the VO).
+ 5. STORY + NARRATION (4400–5500 words, transformation spine, title_payoff in the VO).
     BIBLES: visual_identity; names stay out of image prompts.
 
  6. .venv/bin/python -m channel chunks <slug>

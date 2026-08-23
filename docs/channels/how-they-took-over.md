@@ -18,11 +18,11 @@ People who already know the name and want the rise, the war, and the moment of s
 
 | | Value |
 |---|---|
-| Runtime | 18–25 minutes (prefer ~21–23; 1080–1500s, target 1320) |
-| Script | **2800–3600** words |
+| Runtime | **20–25 minutes** (prefer ~22–23; 1200–1500s, target 1380) |
+| Script | **4400–5500** words (ideal 4600–5200) |
 | Spoken pace | 145–155 wpm; Kokoro **1.15** (never below **1.0** on a new title) |
 | Voice | Kokoro `am_liam` (roster may rotate) |
-| Padding | Prefer 16 excellent minutes to 24 padded minutes |
+| Padding | Prefer a dense 22 minutes to a padded 25 |
 
 ## Narration personality
 

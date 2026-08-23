@@ -6,8 +6,8 @@ Pinned in `channel/engine.py` (`KOKORO_LOCK`) and `channel/config.py`:
 
 | | WTRT | How They Really Make Money | How They Took Over |
 |---|---|---|---|
-| Words | 4400–5500 | 4400–5500 | 2800–3600 |
-| Runtime | ~20–25 min | ~20–25 min | ~18–25 min (prefer 16 excellent to 24 padded) |
+| Words | 4400–5500 | 4400–5500 | 4400–5500 |
+| Runtime | ~20–25 min | ~20–25 min | ~20–25 min |
 | Default speed | 1.15 | 1.15 | 1.15 |
 | New-title floor | 1.0 | 1.0 | 1.0 |
 

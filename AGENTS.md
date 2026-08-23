@@ -64,7 +64,7 @@ DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATI
 .venv/bin/pytest tests/test_channel_handoff.py tests/test_portability.py tests/test_how_they_took_over.py tests/test_behind_the_business.py
 ```
 
-Need `the_thought`, GenerateImage after QA, YouTube `Watch the full video:` + synthetic-media disclosure. Lengths: Think and Money **4400–5500** words; Takeover **2800–3600**. Voice Kokoro `am_liam` (roster may rotate).
+Need `the_thought`, GenerateImage after QA, YouTube `Watch the full video:` + synthetic-media disclosure. Lengths: Think, Money, and Takeover **4400–5500** words (~20–25 minutes at Kokoro **1.15**). Voice Kokoro `am_liam` (roster may rotate).
 
 ## What must never change without intent
 
@@ -78,7 +78,7 @@ Install: Python ≥ 3.13, `pip install -e ".[dev]"`, ffmpeg before assemble. `.c
 
 `docs/custom-videos.md` is the Think production system. Cursor Grok fills research / story / bibles / scenes. Compile writes fixture + stills + spec + image jobs + thumbs + draft YouTube copy. After a Think cut ships, update `docs/videos/`. After Money, `docs/business/`. After Takeover, `docs/takeover/`.
 
-Non-negotiable: unique story engine (`lint_story.py`), **originality_score ≥ 80** vs the last 10 on the **same** channel, `ready_to_publish`, answer the title through a story, child-repeatable `the_thought`, real names spoken (kept out of image prompts), no “today is DATE”, third-person spoken English. Think and Money long cuts **~20–25 minutes** (**4400–5500** words at Kokoro **1.15**). Takeover **~18–25 minutes** (**2800–3600** words at **1.15**; prefer 16 excellent minutes to 24 padded). Neutral GenerateImage filenames (never put `costco` in the filename). Fill-frame 16:9, 3840×2160, Shorts 1080×1920, thumbs 1280×720 JPEG, synthetic-media disclosure, 24h between different-title assembles.
+Non-negotiable: unique story engine (`lint_story.py`), **originality_score ≥ 80** vs the last 10 on the **same** channel, `ready_to_publish`, answer the title through a story, child-repeatable `the_thought`, real names spoken (kept out of image prompts), no “today is DATE”, third-person spoken English. Think, Money, and Takeover long cuts **~20–25 minutes** (**4400–5500** words at Kokoro **1.15**). Neutral GenerateImage filenames (never put `costco` in the filename). Fill-frame 16:9, 3840×2160, Shorts 1080×1920, thumbs 1280×720 JPEG, synthetic-media disclosure, 24h between different-title assembles.
 
 Shared contract: chat is not how the next clone learns the rules. After any production change, update `docs/custom-videos.md`, this file, and `.cursor/rules/custom-videos.mdc` in the same commit. `tests/test_channel_handoff.py` guards the three surfaces.
 
