@@ -1,0 +1,14 @@
+{
+  "jobs": [
+    {
+      "id": "thumb",
+      "filename": "donald-trump-really-makes-his-money_thumbnail.png",
+      "generate_filename": "t2ce0778e.png",
+      "copy_to": "donald-trump-really-makes-his-money_thumbnail.png",
+      "aspect": "16:9",
+      "overlay_text": "THE NAME FEE",
+      "output_jpeg": "assets/youtube/donald_trump_really_makes_his_money_thumbnail_1280x720.jpg",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a graphite, paper-white, and signal-orange palette; keep the same clean flat 2D construction. Horizontal 16:9 YouTube thumbnail. ONE simplified company environment or product plus ONE business symbol. Clean high-contrast backdrop. Empty right third of the frame for type added later. No tiny figures, no clutter, no photoreal logo lockup. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. NO readable text, NO letters, NO captions, NO title card, NO watermark. Type will be added later. Adult clerk in a gray vest and white shirt. Neat brown hair. Simple flat face. A blank gold hotel nameplate on a lanyard. No logos. No readable type. One oversized blank gold hotel nameplate, no letters, large in the left of frame, a thin invoice beside a fat unlabeled binder, empty right third for type. No logos. No face-fill portrait. No full title. Signature object: blank gold hotel nameplate."
+    }
+  ]
+}
