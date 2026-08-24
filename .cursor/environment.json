@@ -1,3 +1,9 @@
 {
-  "install": "python3 -m pip install --upgrade pip && python3 -m pip install -e '.[dev]' && (sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core || true)"
+  "install": "export PATH=\"$HOME/.local/bin:$PATH\"; if ! command -v ffmpeg >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core || true; fi; if ! command -v uv >/dev/null 2>&1; then curl -LsSf https://astral.sh/uv/install.sh | sh; export PATH=\"$HOME/.local/bin:$PATH\"; fi; uv python install 3.13 && { [ -x .venv/bin/python ] || uv venv --python 3.13 .venv; } && uv pip install --python .venv/bin/python -e \".[dev]\"",
+  "terminals": [
+    {
+      "name": "review-ui",
+      "command": "export PATH=\"$HOME/.local/bin:$PATH\"; .venv/bin/python -m webui.server"
+    }
+  ]
 }
