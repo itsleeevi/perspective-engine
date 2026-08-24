@@ -69,10 +69,10 @@ Titles do **not** have to be "How X Took Over Y". "How Rolex Became the Ultimate
 ## Length and voice
 
 - Target **20–25 minutes** (preferred about 22–23; 1200–1500 seconds, target 1380). Prefer a dense 22 minutes to a padded 25.
-- Kokoro speed **1.15** (never below **1.0** on a new title). Voice: `am_liam` unless a shipped lock says otherwise.
+- Kokoro speed **1.0–1.15** (default **1.15**; never below **1.0** on a new title). Voice: `am_liam` unless a shipped lock says otherwise.
 - Script **4400–5500 words** (ideal 4600–5200) so a 1.15 cut still lands ~20–25 minutes. Write spoken English at about 145–155 wpm. Do not pad a thin story to hit the max.
 - Stills change every **4–8 seconds**. Complex flywheels may hold longer if they evolve.
-- Voice: a smart friend explaining how an empire was built. Not an MBA lecture, not Wikipedia, not financial TV, not TikTok hype.
+- Voice: a smart friend explaining how an empire was built so a five-year-old can follow while watching. One idea at a time. **Do not read long numbers** aloud. Not an MBA lecture, not Wikipedia, not financial TV, not TikTok hype.
 
 ## Research
 

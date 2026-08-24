@@ -10,7 +10,12 @@ import hashlib
 
 from pydantic import BaseModel, Field
 
-from channel.locks import KOKORO_SPEED_LOCK, KOKORO_SPEED_MIN, SHIPPED_STYLE_LOCK
+from channel.locks import (
+    KOKORO_SPEED_LOCK,
+    KOKORO_SPEED_MAX,
+    KOKORO_SPEED_MIN,
+    SHIPPED_STYLE_LOCK,
+)
 from channel.modes import ChannelMode, parse_mode
 
 
@@ -245,10 +250,11 @@ def kokoro_voice_for(slug: str) -> str:
 
 
 def kokoro_speed_for(slug: str, cfg: ChannelConfig | None = None) -> float:
-    """Channel default (at least 1.0), unless this slug is locked to a recut."""
+    """New titles stay in 1.0–1.15. Shipped slugs may keep a locked recut speed."""
     if slug in KOKORO_SPEED_LOCK:
         return float(KOKORO_SPEED_LOCK[slug])
-    return max(float((cfg or CHANNEL).kokoro_speed), KOKORO_SPEED_MIN)
+    speed = float((cfg or CHANNEL).kokoro_speed)
+    return min(KOKORO_SPEED_MAX, max(KOKORO_SPEED_MIN, speed))
 
 
 class ChannelConfig(BaseModel):

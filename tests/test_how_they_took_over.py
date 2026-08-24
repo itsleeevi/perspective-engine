@@ -19,7 +19,7 @@ from channel.config import (
     kokoro_speed_for,
 )
 from channel.factcheck import factcheck
-from channel.locks import KOKORO_SPEED_MIN
+from channel.locks import KOKORO_SPEED_MAX, KOKORO_SPEED_MIN
 from channel.metadata import draft_metadata
 from channel.modes import ChannelMode, parse_mode
 from channel.originality import mode_for_slug, recent_slugs
@@ -57,6 +57,7 @@ def test_htto_config_is_a_third_channel():
     assert cfg.narration_word_max == 5500
     assert cfg.kokoro_speed == 1.15
     assert cfg.kokoro_speed >= KOKORO_SPEED_MIN
+    assert cfg.kokoro_speed <= KOKORO_SPEED_MAX
     assert cfg.visual_style == HOW_THEY_TOOK_OVER_VISUAL_STYLE
     assert "How They Took Over" in cfg.visual_style
     assert "muted historical" not in cfg.visual_style

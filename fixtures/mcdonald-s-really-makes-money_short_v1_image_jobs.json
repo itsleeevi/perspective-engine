@@ -1,0 +1,74 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "mcdonald-s-really-makes-money_short_v1_000.png",
+      "generate_filename": "v13852be6_000.png",
+      "copy_to": "mcdonald-s-really-makes-money_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "You pay at the window and take a paper bag into the car.",
+      "scene": "Night drive-thru window, paper bag passing to a car, till glowing, no logos, no readable type.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a deep ink, silver, and electric-blue palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. Teen in a plain gray hoodie holding a blank paper food bag. Simple flat face. No logos. No readable type. LOCATION drive_thru (same set): Bright flat 2D drive-thru lane, yellow order canopy, blank menu board, night-blue sky. Palette: #FBBF24, #1E3A5F, #F3F4F6. Generic extras in the same flat-vector construction. No photoreal faces. SHOT: wide shot. ACTION: Night drive-thru window, paper bag passing to a car, till glowing, no logos, no readable type.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "001",
+      "filename": "mcdonald-s-really-makes-money_short_v1_001.png",
+      "generate_filename": "v13852be6_001.png",
+      "copy_to": "mcdonald-s-really-makes-money_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "McDonald's Corporation usually does not book that tray as its own sale. Most of those tickets sit on somebody else's register.",
+      "scene": "Night drive-thru window, paper bag passing to a car, till glowing, no logos, no readable type. The same oversized brass key on a blank numbered tag sits large in frame.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a deep ink, silver, and electric-blue palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. Teen in a plain gray hoodie holding a blank paper food bag. Simple flat face. No logos. No readable type. Adult operator in a plain navy polo and khaki pants. Short black hair. Oversized brass key on a blank numbered tag at the belt. Simple flat face. No logos. No readable type. Young crew in a plain charcoal visor and polo. No logos. Simple flat face. No readable type. LOCATION tray_counter (same set): Simple service counter with a paper tray and a till that is not a brand till. Palette: #F59E0B, #111827. Only the subject character unless the action names someone else. SHOT: medium shot. ACTION: Night drive-thru window, paper bag passing to a car, till glowing, no logos, no readable type. The same oversized brass key on a blank numbered tag sits large in frame.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "002",
+      "filename": "mcdonald-s-really-makes-money_short_v1_002.png",
+      "generate_filename": "v13852be6_002.png",
+      "copy_to": "mcdonald-s-really-makes-money_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "close-up",
+      "chunk": "Fiscal 2025 filings split the franchise invoice into two stacks. Rents were 10.442 billion dollars. Royalties were 6.018 billion on the same table.",
+      "scene": "A thick kraft envelope standing taller than a thin rubber stamp, clean desk, no logos, no readable paragraphs.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a deep ink, silver, and electric-blue palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION lease_office (same set): Plain office with a wall of numbered brass keys and a thick envelope stack. Palette: #1E3A5F, #D6C6A8, #B45309. STRICTLY NO people, NO faces, NO hands. SHOT: close-up. ACTION: A thick kraft envelope standing taller than a thin rubber stamp, clean desk, no logos, no readable paragraphs.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "003",
+      "filename": "mcdonald-s-really-makes-money_short_v1_003.png",
+      "generate_filename": "v13852be6_003.png",
+      "copy_to": "mcdonald-s-really-makes-money_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "over-the-shoulder",
+      "chunk": "The thicker check is the rent, not the royalty. The guest paid the restaurant.",
+      "scene": "A thick kraft envelope standing taller than a thin rubber stamp, clean desk, no logos, no readable paragraphs.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a deep ink, silver, and electric-blue palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION lab_kitchen (same set): Small training kitchen with one fry station and a clipboard, not a portrait hall. Palette: #9CA3AF, #F59E0B. STRICTLY NO people, NO faces, NO hands. SHOT: over-the-shoulder. ACTION: A thick kraft envelope standing taller than a thin rubber stamp, clean desk, no logos, no readable paragraphs.",
+      "camera_motion": "slow push-in"
+    },
+    {
+      "id": "004",
+      "filename": "mcdonald-s-really-makes-money_short_v1_004.png",
+      "generate_filename": "v13852be6_004.png",
+      "copy_to": "mcdonald-s-really-makes-money_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "top-down diagram",
+      "chunk": "The operator paid headquarters for a site the Company generally keeps on a 20-year clock.",
+      "scene": "Lease office key rack, rows of blank numbered tags, one hook empty, no logos, no readable contracts.",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Accent this title with a deep ink, silver, and electric-blue palette; keep the same clean flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. LOCATION map_table (same set): Clean table map of restaurant dots: dense conventional cluster vs royalty-only cluster. Palette: #0F172A, #38BDF8, #F59E0B. STRICTLY NO people, NO faces, NO hands. SHOT: top-down diagram. ACTION: Lease office key rack, rows of blank numbered tags, one hook empty, no logos, no readable contracts.",
+      "camera_motion": "slow push-in"
+    }
+  ]
+}

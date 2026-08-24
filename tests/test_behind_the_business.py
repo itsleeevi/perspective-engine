@@ -82,10 +82,12 @@ def test_visa_recut_locks_liam_at_115():
 
 
 def test_new_titles_use_kokoro_at_least_1():
-    from channel.locks import KOKORO_SPEED_MIN
+    from channel.locks import KOKORO_SPEED_MAX, KOKORO_SPEED_MIN
 
     assert CHANNEL.kokoro_speed >= KOKORO_SPEED_MIN
+    assert CHANNEL.kokoro_speed <= KOKORO_SPEED_MAX
     assert BEHIND_THE_BUSINESS.kokoro_speed >= KOKORO_SPEED_MIN
+    assert BEHIND_THE_BUSINESS.kokoro_speed <= KOKORO_SPEED_MAX
     assert kokoro_speed_for("acme-really-makes-money", BEHIND_THE_BUSINESS) == 1.15
     assert kokoro_speed_for("what-someone-really-thought", CHANNEL) == 1.15
 

@@ -152,14 +152,16 @@ The finished VO must teach something the viewer did not know. Entertainment
 comes from storytelling, not fabrication. Synthesize multiple sources into
 an original story — do not list facts.
 
-Target 4400–5500 words (~20–25 minutes at Kokoro 1.15). Never pad a weak
+Target 4400–5500 words (~20–25 minutes at Kokoro 1.0–1.15, default 1.15). Never pad a weak
 story — add evidence, reversals, and places this title owns. Write 4–6
 chapters with poster-like names (≤4 words) that this evidence owns. Do
 not copy another video's cards. At most three "The <Noun>" names.
 Say title_payoff in the cold open or right after, and again near the end.
 
-Blunt simple cartoon, not a riddle. A child should be able to retell the
-plot. An adult should still learn the real names and dates. Say OpenAI,
+Blunt simple cartoon, not a riddle. A five-year-old should be able to
+follow while watching. One idea at a time. Do not read long numbers
+aloud — round to a sayable figure. An adult should still learn the real
+names and dates. Say OpenAI,
 Grok, SpaceX, Tesla — do not hide them as "the lab" or "the chatbot shop".
 Those names stay OUT of image prompts.
 

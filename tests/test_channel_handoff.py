@@ -31,6 +31,8 @@ REQUIRED_PHRASES = (
     "behind_the_business",
     "docs/behind-the-business.md",
     "1.15",
+    "1.0–1.15",
+    "Do not read long numbers",
     "How They Really Make Money",
     "how_they_took_over",
     "docs/how-they-took-over.md",

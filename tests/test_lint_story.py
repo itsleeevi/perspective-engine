@@ -7,6 +7,7 @@ from scripts.lint_story import (
     colliding_chapter_names,
     generic_ai_hit,
     hook_is_month_year_stamp,
+    long_spoken_number_hit,
     production_clock_hit,
     the_one_word_chapter_count,
     thoughts_too_close,
@@ -33,6 +34,13 @@ def test_advisor_voice_rejects_channel_as_doctor_or_broker():
     assert advisor_voice_hit("As your lawyer I would file tomorrow.")
     assert advisor_voice_hit("He thought people are animals who learned to be kind.") is None
     assert advisor_voice_hit("Survival of the fittest was not his phrase for conscience.") is None
+
+
+def test_long_spoken_numbers_are_rejected():
+    assert long_spoken_number_hit("Tesla printed 158,359,009,867 dollars.") == "158,359,009,867"
+    assert long_spoken_number_hit("The option covers 303960630 shares.") == "303960630"
+    assert long_spoken_number_hit("about 158 billion dollars in 2025") is None
+    assert long_spoken_number_hit("a typical worker is about 63 thousand") is None
 
 
 def test_production_clock_allows_event_dates():

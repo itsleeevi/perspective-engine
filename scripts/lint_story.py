@@ -22,7 +22,8 @@ to whichever model wrote the script:
                errors.
 4. SPOKEN    — telegram-fragment share capped (short sentences are punches,
                not the default register); zero contractions is flagged as
-               written-not-spoken English.
+               written-not-spoken English. Do not read long numbers aloud
+               (comma groups like 158,359,009,867 or 7+ bare digits).
 4b. EXPLAIN-LIKE-FIVE — fixture must have ``the_thought`` (≤22 words, a
                child could repeat it) and that sentence must appear in the VO.
 4c. YEARS    — channel cuts write calendar years as digits (1995). Captions
@@ -108,6 +109,16 @@ _ADVISOR_VOICE = re.compile(
 def advisor_voice_hit(text: str) -> str | None:
     """Return the first narrator-as-advisor phrase, if any."""
     m = _ADVISOR_VOICE.search(text or "")
+    return m.group(0) if m else None
+
+
+# Spoken VO may say "about 158 billion". Exact filing digits stay in claims.
+_LONG_SPOKEN_NUMBER = re.compile(r"\b\d{1,3}(?:,\d{3}){2,}\b|\b\d{7,}\b")
+
+
+def long_spoken_number_hit(text: str) -> str | None:
+    """Return the first long number a narrator should not read aloud."""
+    m = _LONG_SPOKEN_NUMBER.search(text or "")
     return m.group(0) if m else None
 
 
@@ -412,6 +423,13 @@ def main() -> None:
         _ok(f"{len(tiny)}/{len(sents)} short-punch sentences")
     if not re.search(r"\w+'(s|t|re|ll|ve|d)\b", narration):
         _warn("no contractions anywhere — this reads as written, not spoken English")
+
+    long_number = long_spoken_number_hit(narration)
+    if long_number:
+        _fail(
+            f"listenability: do not read long numbers aloud (found {long_number!r}). "
+            "Round to a sayable figure in the VO; keep exact digits in claims"
+        )
 
     # 4b. EXPLAIN-LIKE-FIVE — the thought must be sayable by a child.
     thought = (fixture.get("the_thought") or "").strip()

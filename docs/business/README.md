@@ -12,6 +12,8 @@ Cloud jobs live under `artifacts/` (gitignored). These pages exist so the next t
 
 ## Shipped
 
+- [How Elon Musk Really Makes His Money](elon-musk-really-makes-his-money.md) — locked pay stub / costume table vs realized zero, Kokoro `am_michael` 1.15, **29:10** (simple spoken VO, no long numbers; filings through Tesla FY2025 10-K/A, SpaceX Q2 2026 10-Q, and the August 13, 2026 13G; no “today is DATE” in the VO)
+- [How McDonald's Really Makes Money](mcdonald-s-really-makes-money.md) — rent envelope vs royalty stamp / numbered 20-year key, Kokoro `am_liam` 1.15, **26:03** (filings through FY2025 10-K and Q2 2026; no “today is DATE” in the VO)
 - [How Costco Really Makes Money](costco-really-makes-money.md) — exit-receipt decoy / door money / gold card, Kokoro `am_liam` 0.92, **20:30** (filings through Q3 FY2026; no “today is DATE” in the VO)
 - [How Visa Really Makes Money](visa-really-makes-money.md) — four desks / authorization pulse / fat line vs thin pipe, Kokoro `am_liam` 1.15, **16:58** (filings through Q3 FY2026; no “today is DATE” in the VO)
 

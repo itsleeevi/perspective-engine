@@ -26,8 +26,9 @@ SHIPPED_STYLE_LOCK = frozenset(
     }
 )
 
-# New titles never go slower than this. Shipped recuts may be locked below.
+# New titles stay in this band. Shipped recuts may be locked outside it.
 KOKORO_SPEED_MIN = 1.0
+KOKORO_SPEED_MAX = 1.15
 
 # Per-slug Kokoro speed when it must not follow the channel default.
 KOKORO_SPEED_LOCK = {

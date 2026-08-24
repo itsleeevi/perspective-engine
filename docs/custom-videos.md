@@ -2,7 +2,7 @@
 
 This is the reusable engine for the YouTube channel **What They Really Think**. It is written so a Cursor Grok agent can produce a new video from a title, without editing Python. Read this fully before starting. After a cut lands, update `docs/videos/`.
 
-The same `channel/` engine also has two other modes: `behind_the_business` (**How They Really Make Money** on YouTube; **4400–5500** words at Kokoro **1.15**) in `docs/behind-the-business.md`, and `how_they_took_over` (**How They Took Over**; **4400–5500** words at Kokoro **1.15**, ~20–25 minutes) in `docs/how-they-took-over.md`. Do **not** apply those business or takeover rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title. Cloud / parallel runs use `python -m channel generate` and write `artifacts/<JOB_ID>/`. `DO NOT MODIFY THE VIDEO ENGINE` during a normal generation task.
+The same `channel/` engine also has two other modes: `behind_the_business` (**How They Really Make Money** on YouTube; **4400–5500** words at Kokoro **1.0–1.15**) in `docs/behind-the-business.md`, and `how_they_took_over` (**How They Took Over**; **4400–5500** words at Kokoro **1.0–1.15**, ~20–25 minutes) in `docs/how-they-took-over.md`. Do **not** apply those business or takeover rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title. Cloud / parallel runs use `python -m channel generate` and write `artifacts/<JOB_ID>/`. `DO NOT MODIFY THE VIDEO ENGINE` during a normal generation task.
 
 Sacred for every video on either channel:
 
@@ -57,7 +57,7 @@ Entertaining illustrated documentaries. The viewer clicks a mystery title and le
 
 They must not feel like Wikipedia read aloud, a school essay, a quote list, a slideshow, or a lecture.
 
-The storyline is a **blunt simple explanatory cartoon**. A five-year-old should be able to retell the plot. An adult should still enjoy it and learn the real names and dates. One returning picture. Cause, then effect. No riddle-talk. No hiding OpenAI, Grok, SpaceX, Tesla as "the lab" or "the chatbot shop". Those names are spoken. They stay **out of image prompts**.
+The storyline is a **blunt simple explanatory cartoon**. A five-year-old should be able to follow it while watching. An adult should still enjoy it and learn the real names and dates. One idea at a time. One returning picture. Cause, then effect. No riddle-talk. **Do not read long numbers** aloud — say `about 158 billion`, not `158,359,009,867`. Exact digits stay in claims. No hiding OpenAI, Grok, SpaceX, Tesla as "the lab" or "the chatbot shop". Those names are spoken. They stay **out of image prompts**.
 
 Each title needs a **unique story engine** — one object, one place, one reversal that would not work on any other shipped cut. Read `docs/videos/` before you write. If you could swap two names and reuse the last spine, throw it out. `lint_story.py` fails reused chapter cards, a too-close `the_thought`, and the recycled "Month Year. Name…" cold open. At most three chapters may be generic `The <Noun>` posters.
 
@@ -230,7 +230,7 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 
 ## Voice (free, in sync)
 
-- **Engine:** Kokoro at speed **1.15**, **one utterance per scene** plus a 0.28s hold so the cut lands on a breath. Default speaker is `am_liam`. New titles may rotate `am_michael` / `am_fenrir` from a hash of the slug so the channel does not sound like one TTS farm; shipped cuts stay on the voice they assembled with. Never Edge, never ElevenLabs. **4400–5500 words lands near 20–25 minutes.** Shipped older cuts may stay near 8 minutes — do not rewrite them to the new length.
+- **Engine:** Kokoro at speed **1.0–1.15** (default **1.15**), **one utterance per scene** plus a 0.28s hold so the cut lands on a breath. Default speaker is `am_liam`. New titles may rotate `am_michael` / `am_fenrir` from a hash of the slug so the channel does not sound like one TTS farm; shipped cuts stay on the voice they assembled with. Never Edge, never ElevenLabs. **4400–5500 words lands near 20–25 minutes.** Shipped older cuts may stay near 8 minutes — do not rewrite them to the new length.
 - **Length:** new long cuts are **20–25 minutes**. Do not pad a lecture. Add a unique engine, more sourced reversals, and more places. Chunk windows are **4–8 seconds** (target **6.5**) so a 23-minute cut is ~200 stills, not a slideshow. Shipped 8-minute specs keep their old 3–7 / 4.5 windows.
 - **Captions:** each narrated still burns a stylish lower-third of that scene's line. Silent chapter cards stay type-only. Spec field `burn_captions` (default on for channel). Lines must wrap inside the frame — never shear a last line off the left or right. On 9:16 Shorts the caption sits in the **YouTube safe band** (above the like / title / music chrome, inside the side rails). Write short spoken sentences so a caption is two readable lines, not one overflowing paragraph.
 - **Years:** write `1995` in the fixture and on-screen caption. Never spell the year. Kokoro expands digits to spoken years (`nineteen ninety-five`) at synthesis.

@@ -120,9 +120,9 @@ Do not end on "Thanks for watching. Please like and subscribe."
 
 title_payoff is the one-sentence answer to HOW DID THEY TAKE OVER
 (fixture the_thought). Say it in the VO.
-Target 4400–5500 words at Kokoro 1.15 so the long cut lands ~20–25
-minutes. Prefer a dense 22 minutes to a padded 25. Never assemble a
-new title below Kokoro 1.0.
+Target 4400–5500 words at Kokoro 1.0–1.15 (default 1.15) so the long
+cut lands ~20–25 minutes. Prefer a dense 22 minutes to a padded 25.
+Never assemble a new title below 1.0 or above 1.15.
 
 Read docs/takeover/ before you write. HUMAN VALUE TEST: if the tools
 were removed, would this still look like a researched documentary?
@@ -136,9 +136,11 @@ slightly playful. NOT an MBA lecture, Wikipedia, financial-news anchor,
 AI assistant, corporate documentary, or hyperactive YouTuber.
 Original narration, not rewritten articles or YouTube transcripts.
 
-Write for SPEECH. Short and medium sentences. Make strategy physical
+Write for SPEECH. A five-year-old should be able to follow while watching.
+One idea per sentence. Short and medium sentences. Make strategy physical
 ("By then, switching was not buying different hardware. It was rewriting
-the software too."). Numbers must have meaning. Never invent them.
+the software too."). Do not read long numbers aloud. Numbers must have
+meaning. Never invent them.
 Name the fiscal period when you use a filing figure.
 If you infer motive: "This appears to have…" / "The strategy suggests…"
 

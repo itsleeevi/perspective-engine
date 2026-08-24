@@ -56,10 +56,10 @@ Find one central surprising question. Research verifies the answer. The title an
 ## Length and voice
 
 - Target about **22 minutes** (1200–1500 seconds). Prefer 15 excellent minutes to 25 padded minutes.
-- Kokoro speed **1.15** (never below **1.0** on a new title). Same Liam pacing as What They Really Think.
+- Kokoro speed **1.0–1.15** (default **1.15**; never below **1.0** on a new title). Same Liam pacing as What They Really Think.
 - Script **4400–5500 words** (ideal 4600–5200) so a 1.15 cut still lands ~20–25 minutes.
 - Stills still change every **4–8 seconds**.
-- Voice: a smart friend explaining why a company works. Not an MBA lecture, not financial TV, not TikTok hype.
+- Voice: a smart friend explaining why a company works so a five-year-old can follow while watching. One idea at a time. Short spoken sentences. **Do not read long numbers** aloud — round to a sayable figure. Exact digits stay in claims. Not an MBA lecture, not financial TV, not TikTok hype.
 
 ## Research
 

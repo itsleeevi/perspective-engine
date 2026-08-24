@@ -88,8 +88,9 @@ Do not end on "Thanks for watching. Please like and subscribe."
 
 title_payoff is the one-sentence answer to the mystery (fixture the_thought).
 Say it in the VO. Prefer 15 excellent minutes to 25 padded minutes.
-Target 4400–5500 words (ideal 4600–5200) at Kokoro 1.15, about 22
-minutes when the story holds it. Never assemble a new title below 1.0.
+Target 4400–5500 words (ideal 4600–5200) at Kokoro 1.0–1.15 (default 1.15),
+about 22 minutes when the story holds it. Never assemble a new title
+below 1.0 or above 1.15.
 
 Read docs/business/ before you write. Each title needs its own mystery,
 money-flow, and chapter names. Visa must not reuse Costco's spine.
@@ -104,12 +105,15 @@ story-driven. NOT an MBA professor, financial-TV anchor, Wall Street
 analyst, AI assistant, corporate deck, or TikTok hype narrator.
 Original narration, not rewritten articles or YouTube transcripts.
 
-Write for SPEECH. Short and medium sentences. Explain loops in plain
+Write for SPEECH. A five-year-old should be able to follow while watching.
+One idea per sentence. Short and medium sentences. Explain loops in plain
 English ("The bigger it gets, the more buying power it has.").
-Numbers must have meaning. Do not dump revenue / margin / profit.
-Use accurate comparisons ("That's roughly…", "For every $100…") only
-when they help. Never invent numbers. Name the fiscal period
-("In fiscal 2025…"). Do not mix years as if they are one period.
+Do not read long numbers aloud. Say "about 158 billion", not
+"158,359,009,867". Exact digits stay in claims. Numbers must have meaning.
+Do not dump revenue / margin / profit. Use accurate comparisons
+("That's roughly…", "For every $100…") only when they help. Never invent
+numbers. Name the fiscal period ("In fiscal 2025…"). Do not mix years
+as if they are one period.
 
 BANNED: Furthermore; Consequently; It is important to note; leverages
 vertically integrated economies of scale; buy this stock; this stock
