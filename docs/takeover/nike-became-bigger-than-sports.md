@@ -28,6 +28,9 @@ The rise is the FY2025 10-K sentence that files Jordan as sport performance and 
 | Voice | Kokoro `am_liam`, speed 1.15 |
 | Output | job `final/nike-became-bigger-than-sports.mp4` (3840×2160, **26:44**) |
 | Thumb | job `assets/youtube/nike_became_bigger_than_sports_thumbnail_1280x720.jpg` (**OFF THE COURT**) |
+| Short job | `artifacts/nike-became-bigger-than-sports__20260824_060938__7cdce1/` |
+| Short | job `short/nike-became-bigger-than-sports_short.mp4` (1080×1920, **27.7s**, 7 shots, sync 13.0 ms) |
+| Shorts thumb | job `assets/youtube/nike_became_bigger_than_sports_short_thumbnail_1080x1920.jpg` (**OFF THE COURT**) |
 
 Signature prop: `THE_SHOE_ON_THE_STOOP` in 6 long scenes.
 

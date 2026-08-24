@@ -28,6 +28,9 @@ The rise is January 16, 2007 Watch Now / Play beside Add for no extra fee on a W
 | Voice | Kokoro `am_liam`, speed 1.15 |
 | Output | job `final/netflix-destroyed-the-old-tv-business.mp4` (3840×2160, **22:54**) |
 | Thumb | job `assets/youtube/netflix_destroyed_the_old_tv_business_thumbnail_1280x720.jpg` (**FREE BUTTON**) |
+| Short job | `artifacts/netflix-destroyed-the-old-tv-business__20260824_060937__14fa8b/` |
+| Short | job `short/netflix-destroyed-the-old-tv-business_short.mp4` (1080×1920, **29.9s**, 7 shots, sync 13.67 ms) |
+| Shorts thumb | job `assets/youtube/netflix_destroyed_the_old_tv_business_short_thumbnail_1080x1920.jpg` (**FREE BUTTON**) |
 
 Signature prop: `THE_WATCH_NOW_BUTTON` in 6 long scenes.
 

@@ -28,6 +28,9 @@ The rise is a 1999 licensed WebSearch box on other homepages (Yahoo from June 20
 | Voice | Kokoro `am_liam`, speed 1.15 |
 | Output | job `final/google-destroyed-the-search-competition.mp4` (3840×2160, **24:47**) |
 | Thumb | job `assets/youtube/google_destroyed_the_search_competition_thumbnail_1280x720.jpg` (**SIDE COLUMN**) |
+| Short job | `artifacts/google-destroyed-the-search-competition__20260824_060937__532b99/` |
+| Short | job `short/google-destroyed-the-search-competition_short.mp4` (1080×1920, **26.5s**, 7 shots, sync 15.33 ms) |
+| Shorts thumb | job `assets/youtube/google_destroyed_the_search_competition_short_thumbnail_1080x1920.jpg` (**SIDE COLUMN**) |
 
 Signature prop: `THE_BLANK_WHITE_SEARCH_BOX` in 6 long scenes.
 

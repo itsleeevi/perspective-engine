@@ -28,6 +28,9 @@ The rise is the November 10, 2017 musical.ly merger agreement (no purchase price
 | Voice | Kokoro `am_liam`, speed 1.15 |
 | Output | job `final/tiktok-beat-the-social-media-giants.mp4` (3840×2160, **23:02**) |
 | Thumb | job `assets/youtube/tiktok_beat_the_social_media_giants_thumbnail_1280x720.jpg` (**NO FRIENDS**) |
+| Short job | `artifacts/tiktok-beat-the-social-media-giants__20260824_060937__940e8d/` |
+| Short | job `short/tiktok-beat-the-social-media-giants_short.mp4` (1080×1920, **29.3s**, 7 shots, sync 16.33 ms) |
+| Shorts thumb | job `assets/youtube/tiktok_beat_the_social_media_giants_short_thumbnail_1080x1920.jpg` (**NO FRIENDS**) |
 
 Signature prop: `THE_FOR_YOU_STRIP` in 6 long scenes.
 

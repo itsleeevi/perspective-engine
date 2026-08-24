@@ -29,6 +29,9 @@ The rise is January 9, 2007 iPhone (one mechanical button; fingers as the pointi
 | Voice | Kokoro `am_liam`, speed 1.15 |
 | Output | job `final/apple-won-the-smartphone-war.mp4` (3840×2160, **26:43**) |
 | Thumb | job `assets/youtube/apple_won_the_smartphone_war_thumbnail_1280x720.jpg` (**NO KEYS**) |
+| Short job | `artifacts/apple-won-the-smartphone-war__20260824_060937__af76ab/` |
+| Short | job `short/apple-won-the-smartphone-war_short.mp4` (1080×1920, **27.9s**, 7 shots, sync 15.67 ms) |
+| Shorts thumb | job `assets/youtube/apple_won_the_smartphone_war_short_thumbnail_1080x1920.jpg` (**NO KEYS**) |
 
 Signature prop: `THE_EMPTY_PHONE_GLASS` in 6 long scenes.
 

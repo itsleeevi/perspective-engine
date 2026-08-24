@@ -28,6 +28,9 @@ The rise is the FY2025 10-K franchisor map: 45,356 restaurants, about 95 percent
 | Voice | Kokoro `am_liam`, speed 1.15 |
 | Output | job `final/mcdonald-s-took-over-the-world.mp4` (3840×2160, **27:37**) |
 | Thumb | job `assets/youtube/mcdonald_s_took_over_the_world_thumbnail_1280x720.jpg` (**LANDLORD KEYS**) |
+| Short job | `artifacts/mcdonald-s-took-over-the-world__20260824_060938__52ff16/` |
+| Short | job `short/mcdonald-s-took-over-the-world_short.mp4` (1080×1920, **29.7s**, 7 shots, sync 14.33 ms) |
+| Shorts thumb | job `assets/youtube/mcdonald_s_took_over_the_world_short_thumbnail_1080x1920.jpg` (**LANDLORD KEYS**) |
 
 Signature prop: `THE_LEASE_FOLDER` in 6 long scenes.
 
