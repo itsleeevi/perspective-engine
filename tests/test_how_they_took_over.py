@@ -50,11 +50,11 @@ def test_htto_config_is_a_third_channel():
     cfg = config_for("how_they_took_over")
     assert cfg is HOW_THEY_TOOK_OVER
     assert cfg.name == "How They Took Over"
-    assert cfg.target_duration_seconds == 1320
-    assert cfg.min_duration_seconds == 1080
+    assert cfg.target_duration_seconds == 1380
+    assert cfg.min_duration_seconds == 1200
     assert cfg.max_duration_seconds == 1500
-    assert cfg.narration_word_min == 2800
-    assert cfg.narration_word_max == 3600
+    assert cfg.narration_word_min == 4400
+    assert cfg.narration_word_max == 5500
     assert cfg.kokoro_speed == 1.15
     assert cfg.kokoro_speed >= KOKORO_SPEED_MIN
     assert cfg.visual_style == HOW_THEY_TOOK_OVER_VISUAL_STYLE

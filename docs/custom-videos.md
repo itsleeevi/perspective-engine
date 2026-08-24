@@ -2,7 +2,7 @@
 
 This is the reusable engine for the YouTube channel **What They Really Think**. It is written so a Cursor Grok agent can produce a new video from a title, without editing Python. Read this fully before starting. After a cut lands, update `docs/videos/`.
 
-The same `channel/` engine also has two other modes: `behind_the_business` (**How They Really Make Money** on YouTube; **4400–5500** words at Kokoro **1.15**) in `docs/behind-the-business.md`, and `how_they_took_over` (**How They Took Over**; **2800–3600** words at Kokoro **1.15**) in `docs/how-they-took-over.md`. Do **not** apply those business or takeover rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title. Cloud / parallel runs use `python -m channel generate` and write `artifacts/<JOB_ID>/`. `DO NOT MODIFY THE VIDEO ENGINE` during a normal generation task.
+The same `channel/` engine also has two other modes: `behind_the_business` (**How They Really Make Money** on YouTube; **4400–5500** words at Kokoro **1.15**) in `docs/behind-the-business.md`, and `how_they_took_over` (**How They Took Over**; **4400–5500** words at Kokoro **1.15**, ~20–25 minutes) in `docs/how-they-took-over.md`. Do **not** apply those business or takeover rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title. Cloud / parallel runs use `python -m channel generate` and write `artifacts/<JOB_ID>/`. `DO NOT MODIFY THE VIDEO ENGINE` during a normal generation task.
 
 Sacred for every video on either channel:
 
