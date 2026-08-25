@@ -50,7 +50,7 @@ A Think title here is wrong — point to `what_they_really_think`.
 
 ## Scene grammar
 
-Flywheels, competitor comparisons, maps, before/after environments. 6–10 chapters. Unique to that takeover. Not BTB money-flow desks. Not muted WTRT portraits.
+Flywheels, competitor comparisons, maps, before/after environments. 6–10 chapters. Unique to that takeover. Not BTB money-flow desks. Not muted WTRT portraits. Make the rise physical with one oversized object (`docs/video-engine/QUALITY_BAR.md`).
 
 ## Visual identity
 

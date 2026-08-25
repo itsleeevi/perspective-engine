@@ -21,6 +21,10 @@ Implemented in `channel/prompts.py`. Company and personal names are stripped fro
 
 Do not mix palettes. Not photoreal, not 3D, not anime, not painterly.
 
+Every still also gets `STAGING_QUALITY` from `channel/quality_bar.py`: one idea, one oversized focal object, named lighting, unique staging, no filing-table wallpaper. That is cinema grammar, not a new identity. Spec: `docs/video-engine/QUALITY_BAR.md`.
+
+Recurring public figures get a distinctive cartoon `visual_lock` (hair, jaw, eyes, clothes) so the viewer names them. That is a recognizable cartoon of the real person in flat 2D, not a photograph, not a cloned voice. Reuse `channel/character_locks.json` and pass the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references. About 35–42% hero on person-titled cuts, 12+ locations, unique visual verb every still. Signature prop in at most 6 scenes. Company-titled cuts may run empty cinematic sets with costume-locked extras.
+
 ## Filename rule (from production)
 
 Never put a company, product, or person name in a GenerateImage **filename**. The model paints that word onto cards and signs. Use the job’s `generate_filename` (hashed token), then copy onto `filename` / `copy_to`. Stored in `channel/engine.py` as `IMAGE_FILENAME_RULE`.

@@ -13,9 +13,9 @@ from pathlib import Path
 
 from channel.modes import ChannelMode
 
-VIDEO_ENGINE_VERSION = "2026.08.23"
-PROMPT_VERSION = "2026.08.23"
-VISUAL_STYLE_VERSION = "2026.08.23"
+VIDEO_ENGINE_VERSION = "2026.08.25"
+PROMPT_VERSION = "2026.08.25"
+VISUAL_STYLE_VERSION = "2026.08.25"
 
 # Documentary path only. Do not silently swap these.
 MODEL_LOCK = {
@@ -30,7 +30,7 @@ MODEL_LOCK = {
     "tts": "kokoro",
     "thumbnail": "cursor_grok_GenerateImage + channel.youtube overlay",
     "short": "channel.shorts + kokoro + ffmpeg",
-    "qa": "channel.qa + originality + monetization_qa",
+    "qa": "channel.qa + originality + monetization_qa + channel.quality_bar",
 }
 
 # Channel documentary path forbids these. Missing Kokoro/GenerateImage = stop.

@@ -4,7 +4,7 @@ This is the reusable engine for the YouTube channel **What They Really Think**. 
 
 The same `channel/` engine also has two other modes: `behind_the_business` (**How They Really Make Money** on YouTube; **4400–5500** words at Kokoro **1.0–1.15**) in `docs/behind-the-business.md`, and `how_they_took_over` (**How They Took Over**; **4400–5500** words at Kokoro **1.0–1.15**, ~20–25 minutes) in `docs/how-they-took-over.md`. Do **not** apply those business or takeover rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title. Cloud / parallel runs use `python -m channel generate` and write `artifacts/<JOB_ID>/`. `DO NOT MODIFY THE VIDEO ENGINE` during a normal generation task.
 
-Sacred for every video on either channel:
+Sacred for every video on every channel:
 
 - **Fresh research for every video.**
 - **Different story architecture** for each company (and each WTRT title).
@@ -57,13 +57,13 @@ Entertaining illustrated documentaries. The viewer clicks a mystery title and le
 
 They must not feel like Wikipedia read aloud, a school essay, a quote list, a slideshow, or a lecture.
 
-The storyline is a **blunt simple explanatory cartoon**. A five-year-old should be able to follow it while watching. An adult should still enjoy it and learn the real names and dates. One idea at a time. One returning picture. Cause, then effect. No riddle-talk. **Do not read long numbers** aloud — say `about 158 billion`, not `158,359,009,867`. Exact digits stay in claims. No hiding OpenAI, Grok, SpaceX, Tesla as "the lab" or "the chatbot shop". Those names are spoken. They stay **out of image prompts**.
+The storyline is a **blunt simple explanatory cartoon**. Write as if a sharp five-year-old is watching with an adult. Tiny words. Cause, then effect. Funny when the evidence is actually funny — not a roast, not baby talk, not a lecture. An adult should still enjoy it and learn the real names and dates. One idea at a time. One returning picture. **Do not read long numbers** aloud — say `about 158 billion`, not `158,359,009,867`. Exact digits stay in claims. No hiding OpenAI, Grok, SpaceX, Tesla as "the lab" or "the chatbot shop". Those names are spoken. They stay **out of image prompts**.
 
 Each title needs a **unique story engine** — one object, one place, one reversal that would not work on any other shipped cut. Read `docs/videos/` before you write. If you could swap two names and reuse the last spine, throw it out. `lint_story.py` fails reused chapter cards, a too-close `the_thought`, and the recycled "Month Year. Name…" cold open. At most three chapters may be generic `The <Noun>` posters.
 
 Retention contract: **question → answer → new question**, not fact → fact → fact. Every ~20–30 seconds, something new (a date, a letter, a reversal, a place). Biography is supporting material only — include it when it explains the opinion, otherwise cut it.
 
-`the_thought` in the fixture is the **title payoff**: one sentence a child could repeat that answers the title. Say it, show it, say it again. Narration around it is an intelligent person telling a fascinating story to a friend — not baby talk, not a professor.
+`the_thought` in the fixture is the **title payoff**: one sentence a child could repeat that answers the title. Say it, show it, say it again. Hook a **kid map of 5–8 steps** this title owns. Narration around it is an intelligent person telling a fascinating story to a friend — not baby talk, not a professor. Copy the grammar in `docs/video-engine/QUALITY_BAR.md`. Never copy a reference-cut spine.
 
 Research through the day you are writing so the facts are current. **Do not say today's calendar date in the VO.** Do not say "as of today", "today is August 22", "this morning", or "ten days ago". Date events with months and years (`In August 2026`). The linter rejects production-clock phrasing.
 
@@ -81,6 +81,8 @@ Research through the day you are writing so the facts are current. **Do not say 
 | `channel/factcheck.py` | Mechanical quote/source checks. |
 | `channel/agent_prompts.py` | Stage prompts for Cursor Grok (research → story → scenes). |
 | `channel/prompts.py` | Image prompt assembler: global style + bible + action. |
+| `channel/character_locks.json` | Public-figure cartoon faces; hashed photo + sheet in `channel/character_sheets/`. |
+| `channel/quality_bar.py` | Cinema grammar (kid map, oversized focal object, unique stills). Spec: `docs/video-engine/QUALITY_BAR.md`. |
 | `channel/compile.py` | Writes fixture, stills module, spec, image jobs, long + Shorts thumbnail jobs, draft YouTube copy. |
 | `channel/youtube.py` | Description, tags, chapter stamps, honest synthetic-media disclosure, 1280×720 and 1080×1920 overlays after GenerateImage. |
 | `channel/cadence.py` | 24h assemble cap between different titles. Same-slug rebuilds allowed. |
@@ -147,7 +149,12 @@ TITLE
     6. BIBLES. Recurring people get ids + visual_lock WITHOUT historical names.
     Locations get ids. Optional signature_prop (≤ 6 scenes). When the prop
     returns it must be the SAME obvious object — high contrast, large in
-    frame, not a faint mark.
+    frame, not a faint mark. Named public figures must be a **recognizable
+    cartoon of the real person** (face, hair, jaw, eyes, clothes they actually
+    wear). Look up `channel/character_locks.json` first and reuse that lock
+    plus the hashed photo and cartoon sheet in `channel/character_sheets/`
+    as GenerateImage references. Compile writes those paths onto image
+    jobs. Never a generic clerk.
 
  7. .venv/bin/python -m channel chunks <slug>
     Write one Scene per line, rotating shot types, visual verbs.
@@ -182,9 +189,13 @@ TITLE
     thumbnail job (`fixtures/<slug>_thumbnail_image_jobs.json`) and the
     Shorts thumbnail job (`fixtures/<slug>_short_thumbnail_image_jobs.json`).
     16:9 long, 9:16 Short, 16:9 long thumb, 9:16 Shorts thumb. Filename =
-    job.filename. Thumbnail stills have NO on-image text — type is burned
-    later. On a safety block, retry once with historical names already
-    stripped (compile already strips them).
+    job.generate_filename (hashed). Thumbnail stills have NO on-image text —
+    type is burned later. On a safety block, retry once with historical
+    names already stripped (compile already strips them). For any still
+    that shows a locked public figure, pass that person's hashed photo
+    then cartoon sheet from `channel/character_sheets/` as
+    `reference_image_paths` so the face stays a recognizable cartoon of
+    the real person. Compile writes those paths onto the job.
 
 14. .venv/bin/python scripts/run_short.py fixtures/video_specs/<slug>.json
     then
@@ -244,13 +255,15 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 - **Global style is frozen** in `channel/config.py` (`GLOBAL_VISUAL_STYLE`). New titles also get a per-slug palette accent so stills are not one interchangeable farm look. Shipped stills stay as generated. Agents fill action and composition only. Compile prepends the prefix.
 - Flat 2D educational animation: simplified faces, flat color, muted historical palette. Not photoreal, not 3D, not anime, not painterly.
 - Historical personal names stay **out** of image prompts. Identity is the character bible `visual_lock`.
+- Recurring public figures get a **distinctive cartoon lock** (hair, face, jaw, eyes, clothes) so the viewer names them. That is a **recognizable cartoon of the real person** in flat 2D, not a photograph, not a cloned voice, not a generic clerk. Reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` when the same person already shipped. Pass those files as GenerateImage `reference_image_paths`. Compile applies the lock and writes the refs onto image jobs automatically. Match the **grammar** in `docs/video-engine/QUALITY_BAR.md` (kid map, one oversized focal object, unique cinema stills, punchy Short) without cloning a reference-cut spine. Person-titled cuts stay ~35–42% hero; company-titled cuts may run empty cinematic sets with costume-locked extras.
+- **Hero variety:** about 35–42% hero on person titles (lint warns above 45% and below 28%). Mix crowd and empty cinematic sets. 12+ locations. Unique visual verb every still — `{SET} {who} {physical verb} {one oversized object} {named lighting}`. Do not collapse to repeating desk/binder/lobby templates or “clean business illustration of a filing table” wallpaper. Two named people in a title both appear as cartoons when the beat needs them. Signature prop in at most 6 scenes, huge and high contrast when it returns.
 - Fill the frame. Cover-crop keeps the **top** of 3:2 Grok stills so on-image labels are never sheared. Thumbs are **1280×720 JPEG**.
 - Channel profile: **800×800** JPEG, circular crop (`python -m channel branding --profile`). Channel cover: **2560×1440** JPEG, ≤6 MB, faces in the center **1546×423** safe band (`--cover`).
 - Composition changes every ~5–7 seconds on new 20–25 minute cuts. Style does not.
 
 ## The Short
 
-One Short per long video. Not a summary. The single most surprising piece, 30–50 seconds, 9:16. First two seconds punch. Then a reason to tap the long video. Last scene is a branded end card: **Watch the full video. The link is in the description.** (spoken + on-screen). The YouTube Shorts **description** is different — link first, then the punch:
+One Short per long video. Not a summary. The single most surprising piece, 30–50 seconds, 9:16. First spoken sentence is the punch (≤16 words). First still is that picture. Then a reason to tap the long video. Last scene is a branded end card: **Watch the full video. The link is in the description.** (spoken + on-screen). Unique composition every shot. The YouTube Shorts **description** is different — link first, then the punch:
 
 ```text
 Watch the full video:

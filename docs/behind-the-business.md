@@ -59,7 +59,7 @@ Find one central surprising question. Research verifies the answer. The title an
 - Kokoro speed **1.0–1.15** (default **1.15**; never below **1.0** on a new title). Same Liam pacing as What They Really Think.
 - Script **4400–5500 words** (ideal 4600–5200) so a 1.15 cut still lands ~20–25 minutes.
 - Stills still change every **4–8 seconds**.
-- Voice: a smart friend explaining why a company works so a five-year-old can follow while watching. One idea at a time. Short spoken sentences. **Do not read long numbers** aloud — round to a sayable figure. Exact digits stay in claims. Not an MBA lecture, not financial TV, not TikTok hype.
+- Voice: a smart friend explaining why a company works so a five-year-old can follow while watching. Tiny words. Cause, then effect. Funny when the evidence is funny. One idea at a time. Short spoken sentences. **Do not read long numbers** aloud — round to a sayable figure. Exact digits stay in claims. Not an MBA lecture, not financial TV, not TikTok hype.
 
 ## Research
 
@@ -83,11 +83,13 @@ Retention: something new every 20–40 seconds; a major insight every 60–120 s
 
 Rotate scene types (store, money flow, chart, map, customer, flashback). One chart = one idea. `$100` breakdowns only when the filings support them.
 
+If the title is a person, impersonate them as a **recognizable cartoon of the real person** in flat 2D (face, hair, jaw, eyes, clothes they actually wear), not a generic clerk. Reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references. About 35–42% hero, 12+ locations, unique action every still. Not photoreal. Names stay out of image prompts. Match `docs/video-engine/QUALITY_BAR.md`: one oversized focal object, named lighting, costume-locked extras, no filing-table wallpaper.
+
 Company names stay out of image prompts. Do not recreate ads shot-for-shot.
 
 ## Shorts, thumbs, metadata
 
-- One Short per long video: **30–55 seconds**, one mechanism, not a 22-minute compress.
+- One Short per long video: **30–55 seconds**, one mechanism, not a 22-minute compress. First spoken sentence ≤16 words is the punch; first still is that picture.
 - Thumbnail: one company symbol + one business idea, **2–5 words**, no lying.
 - YouTube copy uses the How They Really Make Money attribution and an educational + synthetic-media disclosure.
 - Channel handle: **@HowTheyReallyMakeMoney**. Profile **800×800** JPEG and cover **2560×1440** JPEG (`python -m channel branding --channel behind_the_business --profile … --cover …`). Paste `assets/youtube/behind_the_business_about.txt` into the channel About box. Cover art must keep the story in the center 1546×423 safe band (do not upload the safe-zone preview).

@@ -1,192 +1,156 @@
 # Perspective Engine
 
-[![CI](https://github.com/itsleeevi/perspective-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/itsleeevi/perspective-engine/actions/workflows/ci.yml)
+Two products live in this repo. They do not share a pipeline.
 
-A stateful AI video orchestration pipeline built with LangGraph.
+**Production YouTube documentaries** are the `channel/` engine: still-first 2D animated cuts for three named channels, assembled locally with Cursor GenerateImage, Kokoro, and FFmpeg.
 
-Perspective Engine turns a topic (for example, "a photon's journey from the sun to your eye" or "a day in the life of a bee") into a narrated video through script generation, human approval, character-reference creation, parallel per-shot generation, automated quality checks, bounded retries, voice generation, and final video assembly.
+**LangGraph (`graph/`)** is a separate Phase-1 skeleton for a different, still-local prototype. It is **not** how named-person YouTube titles are made. A title that names a real person belongs on `python -m channel generate`, never `python -m graph run`.
 
-> **Current status: local prototype.** The complete workflow runs end-to-end with mock adapters ($0, no API calls) and also supports real OpenAI, Anthropic, fal.ai, Pollinations, Edge TTS, and ElevenLabs integrations. Video assembly runs on local FFmpeg. Durable cloud infrastructure, a full review dashboard, and Remotion rendering are planned. See [Roadmap](#roadmap).
+Working contract for any agent with empty chat history: [`AGENTS.md`](AGENTS.md). Channel playbooks: [`docs/custom-videos.md`](docs/custom-videos.md), [`docs/behind-the-business.md`](docs/behind-the-business.md), [`docs/how-they-took-over.md`](docs/how-they-took-over.md). Engine specs: [`docs/video-engine/`](docs/video-engine/).
 
-## Highlights
+## Production: documentary channels
 
-- Stateful LangGraph workflow with checkpointed, resumable execution
-- Three non-bypassable human-approval gates (script, generated stills, and final review)
-- Parallel per-shot generation via LangGraph `Send` fan-out with a fixed-edge fan-in barrier
-- Character-reference workflow that derives every shot from a locked identity sheet, never from a text prompt alone
-- Per-shot quality gate with capped retries that escalate to human review instead of looping forever
-- Provider-independent adapters for LLM, image, video, and voice generation
-- Mock mode for deterministic, free development and testing
-- Real MP4 assembly with FFmpeg (downloads assets, freezes stills into segments, concatenates, mixes narration)
-- Script fixtures (`graph/script_fixture.py`) that let a reviewed JSON script skip the LLM entirely, plus locally rendered `[TITLE]` cards (`graph/title_cards.py`) for level/rank transitions — no image-model call for title beats
-- **What They Really Think** channel engine (`channel/`): title in, research/story/scenes as data, Kokoro narration, Cursor Grok stills. See `docs/custom-videos.md`.
-- 148 automated tests covering control flow, invariants, and state, run on every push via GitHub Actions
+| Public name | `--channel` |
+|---|---|
+| What They Really Think | `what_they_really_think` |
+| How They Really Make Money | `behind_the_business` (alias `how_they_really_make_money`) |
+| How They Took Over | `how_they_took_over` |
 
-## Demo
+Pass `--channel` explicitly. Do not infer it from the title. Do not mix story or visual grammars.
 
-Recorded against the browser review UI in mock mode: no API calls, no cost.
+Canonical command:
 
-![Perspective Engine workflow demo](./docs/images/perspective-engine-demo.gif)
+```text
+.venv/bin/python -m channel generate --channel what_they_really_think --title "What Einstein Really Thought About God"
+.venv/bin/python -m channel generate --channel behind_the_business --title "How Visa Really Makes Money"
+.venv/bin/python -m channel generate --channel how_they_took_over --title "How Nvidia Took Over AI"
+```
 
-## Quick Start
+Jobs live under `artifacts/<JOB_ID>/`. Sequential local init (`python -m channel init`) still writes `channel/projects/<slug>/`; Cloud Agents should use `generate` so jobs do not collide.
 
-Requires Python 3.13+ and `ffmpeg` on `PATH`.
+```text
+DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.
+```
 
-```bash
-git clone https://github.com/itsleeevi/perspective-engine.git
-cd perspective-engine
+Sacred for every video: fresh research; a different story architecture; original narration (not rewritten articles or YouTube transcripts); unique scenes and diagrams; a unique story engine. `the_thought` must be spoken. Brand consistency is not a name-swap spine. `originality_score` vs the last 10 videos on the **same** channel must be ≥ 80 and `ready_to_publish` before GenerateImage.
 
-python -m venv .venv
+Long cuts are **~20–25 minutes** (**4400–5500** words at Kokoro **1.0–1.15**, default **1.15**). Voice is Kokoro only (`am_liam` or roster `am_michael` / `am_fenrir`). Never Edge, never ElevenLabs, no silent provider fallback. Images are Cursor Grok **GenerateImage** only after QA. Named public figures are a recognizable cartoon of the real person; reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references. Match the **grammar** in [`docs/video-engine/QUALITY_BAR.md`](docs/video-engine/QUALITY_BAR.md) without cloning a reference-cut spine. Historical names and company names stay out of image prompts and GenerateImage filenames.
+
+After compile, GenerateImage the 16:9 and 9:16 thumbnail jobs (no on-image text) and run `python -m channel youtube <slug>`. YouTube descriptions include an honest synthetic-media disclosure. Different titles wait 24 hours between assembles.
+
+Paste-ready Cloud prompt: [`docs/video-engine/CLOUD_AGENT_START_PROMPT.md`](docs/video-engine/CLOUD_AGENT_START_PROMPT.md). Quality-bar prompt: [`docs/video-engine/QUALITY_BAR_START_PROMPT.md`](docs/video-engine/QUALITY_BAR_START_PROMPT.md).
+
+### Documentary install and smoke
+
+Python ≥ 3.13, `ffmpeg` on `PATH` for assemble. Documentary generation does **not** need `FAL_KEY` or `ELEVENLABS_API_KEY`. If Kokoro or GenerateImage is missing, stop.
+
+```text
+python3.13 -m venv .venv
 source .venv/bin/activate
-
 pip install -e ".[dev]"
-
-python -m cli.run --mock "a photon's journey from the sun to your eye"
+.venv/bin/python -m channel cloud-readiness
+.venv/bin/python -m channel qa <job_id-or-slug>
 ```
 
-Mock mode runs the complete workflow (script, review gates, parallel shot generation, quality gates, assembly) without any API calls or provider cost, approving both gates from the terminal.
+Shipped cuts live in `fixtures/` plus a page under `docs/videos/`, `docs/business/`, or `docs/takeover/`. Do not commit `.mp4` files. Parallel Cloud jobs must not clobber repo-root `fixtures/`.
 
-Prefer a browser? The same graph and adapters are also exposed through a lightweight review UI:
+## LangGraph prototype (not YouTube titles)
 
-```bash
-python -m webui.server
-# open http://localhost:8765
+Local-first skeleton: typed LangGraph, still-first shots, three human-review interrupts, synthetic-content disclosure, and a 24-hour publish-cadence cap. `ideate` **rejects** real named people as video subjects. Adapters are disposable; durable code lives in `graph/`.
+
+```text
+python -m graph mock-run --topic "The History of Paperclips"
+python -m graph run --topic "The History of Paperclips"
+python -m graph resume --thread-id <id>
 ```
 
-Run the test suite:
-
-```bash
-pytest tests/ -v
-```
+Copy `.env.example` to `.env` only if you are exercising the graph adapters (Anthropic, fal.ai, ElevenLabs). That path is independent of documentary production.
 
 ## Workflow
 
+LangGraph prototype only. Documentary jobs follow [`docs/video-engine/PIPELINE.md`](docs/video-engine/PIPELINE.md).
+
 ```mermaid
-flowchart LR
-    A[Topic] --> B[Write Script]
-    B --> C[Shot Breakdown]
-    C --> D{Human Review}
-    D --> E[Character References]
-
-    E --> F1[Process Shot 1]
-    E --> F2[Process Shot 2]
-    E --> F3[Process Shot N]
-
-    F1 --> G[Fan In]
-    F2 --> G
-    F3 --> G
-
-    G --> R{Image Review}
-    R --> H[Voiceover]
-    H --> I[Assemble Video]
-    I --> J[Generate Metadata]
-    J --> K{Final Review}
-    K --> L[Publish]
+flowchart TD
+    ideate[ideate] --> writeScript[write_script]
+    writeScript --> shotBreakdown[shot_breakdown]
+    shotBreakdown --> reviewScript[human_review_script]
+    reviewScript --> genRefs[generate_character_refs]
+    genRefs --> dispatch[dispatch_shots]
+    dispatch --> processShot["process_shot × N"]
+    processShot --> reviewImages[human_review_images]
+    reviewImages --> voiceover[generate_voiceover]
+    voiceover --> assemble[assemble]
+    assemble --> metadata[generate_metadata]
+    metadata --> reviewFinal[human_review_final]
+    reviewFinal --> publish[publish]
 ```
 
-Each shot is processed independently: derive a still anchored to the character reference sheet, generate or animate the shot, check quality and identity, retry failures up to a fixed cap, and escalate repeated failures for human review. `process_shot` is dispatched once per shot via LangGraph's `Send` primitive; a fixed (non-conditional) edge back to `human_review_images` acts as the fan-in barrier, so still review (and then voiceover) only starts once every shot has finished, regardless of completion order.
+## Character consistency
 
-For the full node list, state schema, and the reasoning behind the fan-out/fan-in and still-first design, see [`docs/architecture.md`](docs/architecture.md).
-
-## Implemented Today
-
-| Area          | Current implementation                                                                       |
-| ------------- | -------------------------------------------------------------------------------------------- |
-| Orchestration | LangGraph state graph (fan-out/fan-in, conditional routing, interrupts)                      |
-| State         | Typed Pydantic models (`graph/state.py`), single source of truth threaded through every node |
-| Checkpointing | In-memory (tests) and local SQLite (`graph/checkpointer.py`)                                 |
-| LLM           | OpenAI (script + storyboard authoring) and Anthropic Claude Haiku (per-shot vision quality check), plus mock adapters |
-| Image         | OpenAI `gpt-image-*` (default stills, chosen for reliable in-scene text), fal.ai FLUX.1 [dev]/[schnell], free Pollinations, and mock adapters |
-| Video         | fal.ai Seedance 2.0 Fast, image-to-video only, and mock adapters                             |
-| Voice         | Chatterbox-Turbo (custom YouTube cuts, whisper-aligned), Kokoro `am_liam` (fallback), free Edge TTS (CLI default), ElevenLabs (opt-in), plus mock adapters |
-| Review        | CLI prompts (`cli/run.py`) and a browser UI (`webui/`); same graph, same adapters            |
-| Assembly      | Local FFmpeg composition: downloads assets, freezes stills, concatenates, mixes narration    |
-| Testing       | Pytest, 148 tests, run on Python 3.13 via GitHub Actions on every push                        |
+On `graph/`, identity is a reference sheet plus still-before-video, not a prompt. Details: [`docs/architecture.md`](docs/architecture.md#character-consistency-in-depth). Documentary titles use `channel/character_locks.json` and hashed sheets in `channel/character_sheets/` as GenerateImage references.
 
 ## Roadmap
 
-- Postgres-backed durable checkpoints (Neon)
-- Cloudflare R2 asset storage (state stores URLs, not binaries)
-- LangSmith tracing across nodes, retries, and interrupts
-- Serverless execution per stage (Modal)
-- Remotion rendering (captions, transitions, motion graphics) replacing the current FFmpeg assembly
-- Full Next.js review dashboard replacing the lightweight browser UI
-- Rate-limited YouTube publishing via the Data API v3
+LangGraph phases live in [`docs/roadmap.md`](docs/roadmap.md). Documentary shipping is ongoing on `channel/` and is not gated on those phases.
 
-The current `assemble` node already does the real work; it isn't a stub. It downloads every fal.ai-hosted asset, turns static-pan stills into video segments, concatenates all shots in order, and mixes in the ElevenLabs narration, all via FFmpeg. Remotion is the planned upgrade for captions and motion graphics, not a replacement for missing functionality. Full provider-by-provider rationale for each roadmap item lives in [`docs/provider-decisions.md`](docs/provider-decisions.md).
+## Implemented today
 
-## Character Consistency
+### Documentary engine (`channel/`)
 
-Generating each shot independently causes a character's appearance to drift: video and image models are stateless, so identical prompts still produce different-looking "same" characters across clips.
+Covered by `tests/test_channel_handoff.py`, `tests/test_behind_the_business.py`, `tests/test_how_they_took_over.py`, `tests/test_character_locks.py`, `tests/test_quality_bar.py`, and the rest of the `channel/` suite.
 
-Perspective Engine avoids this structurally rather than by writing better prompts:
+- Isolated jobs under `artifacts/<JOB_ID>/` with resume via `--resume`.
+- Three frozen visual styles in `channel/config.py`; mode aliases in `channel/modes.py`.
+- Prompt modules: `channel/agent_prompts.py`, `channel/business_prompts.py`, `channel/takeover_prompts.py`.
+- Compile writes fixture + stills + spec + hashed image jobs + thumbs + draft YouTube copy.
+- QA: fact check, story lints, originality ≥ 80, `ready_to_publish` before GenerateImage.
+- Public-figure cartoon locks: `channel/character_locks.json` + hashed sheets.
+- Quality-bar grammar (kid map, oversized focal object, unique cinema stills, punchy Short): `channel/quality_bar.py`.
+- Kokoro-only voice; Costco lock 0.92; new titles 1.0–1.15 (default 1.15).
+- Shorts end on “Watch the full video. The link is in the description.”
+- YouTube pack: description, tags, 1280×720 and 1080×1920 JPEGs, synthetic-media disclosure.
 
-1. Generate and human-approve one character reference sheet (`generate_character_refs`), the identity anchor for the whole run.
-2. Derive each shot's starting image from that reference sheet, never from a raw prompt.
-3. Generate video from the derived still (image-to-video only), never directly from text.
-4. Compare each generated shot against the reference sheet during the quality gate.
-5. Retry failures up to a fixed cap, then escalate repeated identity drift for human review.
+### LangGraph skeleton (`graph/`)
 
-The still-first rule is enforced in code at two layers (`graph/validation.py` and the video adapter contract), not just documented. See [`docs/architecture.md`](docs/architecture.md#character-consistency-in-depth) for the full four-layer breakdown and [`docs/decisions/0001-core-architecture.md`](docs/decisions/0001-core-architecture.md) for why prompt-based consistency doesn't work.
+Covered by the `graph/` tests. Full node graph with fan-out, in-node retries, three non-bypassable interrupts, still-before-video, no-real-person at `ideate`, disclosure invariant, 24-hour cadence, cost logging, FastAPI review UI, mock CLI.
 
-## Testing
+`pytest` currently collects **322** tests across both products.
 
-The test suite verifies orchestration logic without requiring paid model calls: everything runs against mock adapters and an in-memory checkpointer.
+## Layout
 
-Coverage includes:
-
-- Full mocked execution from `ideate` to `publish` through all review gates (`test_graph_e2e.py`)
-- Human-review interrupt gates (script, images, final), including pause/resume, rejection, and still regeneration (`test_interrupts.py`, `test_human_review_images.py`)
-- Parallel shot fan-out and fan-in correctness, order-independence (`test_fanout.py`)
-- Retry caps and escalation to human review (`test_retry_cap.py`)
-- The still-first invariant: a motion shot without a derived still is rejected before any video call (`test_still_first.py`)
-- Real-person subject rejection and synthetic-content disclosure enforcement (`test_invariants.py`)
-- Typed state defaults, validation, and the shot-list merge reducer (`test_state.py`)
-
-## What I Built
-
-- A typed Pydantic state model shared across the entire workflow, with a custom reducer for merging parallel shot updates
-- A LangGraph pipeline with `Send`-based parallel fan-out and a deterministic fan-in barrier
-- Three resumable human-in-the-loop interrupts that no code path can bypass, skip, or auto-approve
-- Provider-independent adapter interfaces for LLM, image, video, and voice generation, each with a real and a mock implementation
-- A character-reference and identity-quality workflow designed to structurally prevent drift across independently generated clips
-- Bounded per-shot retry logic that escalates to human review instead of looping indefinitely
-- CLI and browser interfaces for approving interrupted runs against the same graph and adapters
-- Real local video composition with FFmpeg: asset download, still-to-video conversion, concatenation, and audio mixing
-- 84 tests covering control flow, safety invariants, retries, and state behavior, enforced in CI
-
-## Repository Layout
-
-```
-perspective-engine/
-├── graph/               # durable code: state schema, nodes, edges, control flow
-│   ├── state.py         # PipelineState, single source of truth
-│   ├── validation.py    # hard invariants (still-first, real-person guard, disclosure)
-│   ├── config.py        # retry caps, publish cadence
-│   ├── checkpointer.py  # memory / SQLite checkpointer factories
-│   ├── graph.py         # build_graph(): wires nodes, edges, fan-out/fan-in, interrupts
-│   └── nodes/           # one module per graph node
-├── adapters/            # disposable code: provider clients behind common interfaces
-│   ├── llm/             # OpenAI (authoring) + Anthropic (quality check) + mock
-│   ├── image_gen/       # OpenAI gpt-image-* + fal.ai FLUX + Pollinations + mock
-│   ├── video_gen/       # fal.ai Seedance + mock
-│   └── voice/           # Edge TTS + ElevenLabs + mock
-├── cli/                 # terminal entrypoint, handles both review gates via prompts
-├── webui/               # FastAPI + static browser front-end for the same gates
-├── tests/               # control-flow, invariant, and state tests (pytest)
-├── docs/                # architecture, provider rationale, roadmap, decision records
-├── assets/              # local asset store (refs, stills, clips, audio, output)
-├── .github/workflows/   # CI
-├── AGENTS.md            # working contract for AI coding agents on this repo
-└── README.md
+```text
+channel/           documentary engine (production YouTube)
+  config.py        channel styles, voice, length locks
+  engine.py        versions, model lock, render lock
+  generate.py      isolated job entry (`python -m channel generate`)
+  compile.py       fixtures, specs, hashed image jobs, YouTube draft
+  character_locks.json + character_sheets/   public-figure cartoons
+  quality_bar.py   grammar of the best-performing uploads
+docs/video-engine/ pipeline, visual style, originality, Cloud prompts
+docs/videos/       shipped What They Really Think pages
+docs/business/     shipped How They Really Make Money pages
+docs/takeover/     shipped How They Took Over pages
+fixtures/          shipped compile output (not parallel Cloud jobs)
+artifacts/         per-job working trees (gitignored)
+jobs/              optional job JSON for `generate --job`
+graph/             LangGraph prototype (not documentary titles)
+  adapters/        disposable provider wrappers
+  nodes/           one module per pipeline stage
+assets/            local stills, audio, assembled mp4 (gitignored)
+scripts/           assemble, lints, Cloud helpers
+tests/
 ```
 
-## Further Reading
+## Further reading
 
-- [`docs/architecture.md`](docs/architecture.md): full node list, state schema, invariants
-- [`docs/provider-decisions.md`](docs/provider-decisions.md): why each provider was chosen, with alternatives considered
-- [`docs/roadmap.md`](docs/roadmap.md): the phased build plan from local prototype to durable infrastructure
-- [`docs/decisions/0001-core-architecture.md`](docs/decisions/0001-core-architecture.md): ADR covering LangGraph vs. alternatives, the still-first rule, and structural identity consistency
-- [`docs/custom-videos.md`](docs/custom-videos.md): playbook for fixture-driven YouTube cuts (new title = new story; explain the hero's thought as if the watcher were five — `the_thought` in the fixture). Production-rule changes belong in that file + `AGENTS.md` + `.cursor/rules/custom-videos.mdc` and must be committed/pushed — other clones only see git.
-- [`docs/videos/`](docs/videos/README.md): log of shipped cuts so the next title does not clone the last spine
-- [`AGENTS.md`](AGENTS.md): the operational contract this repo is built against, read by AI coding agents at the start of every session
+- [AGENTS.md](AGENTS.md) — working contract for every agent
+- [Custom videos](docs/custom-videos.md) — What They Really Think playbook
+- [Behind the business](docs/behind-the-business.md) — How They Really Make Money
+- [How they took over](docs/how-they-took-over.md)
+- [Video engine](docs/video-engine/README.md)
+- [Quality bar](docs/video-engine/QUALITY_BAR.md)
+- [Architecture](docs/architecture.md) — LangGraph deep dive
+- [Decisions](docs/decisions/)
+- [Roadmap](docs/roadmap.md) — LangGraph phases (documentary shipping is `channel/`)
+- [Prompts index](prompts/README.md)

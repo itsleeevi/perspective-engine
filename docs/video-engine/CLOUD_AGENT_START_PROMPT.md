@@ -1,10 +1,12 @@
-Read AGENTS.md and all applicable Cursor project rules.
+Read AGENTS.md, docs/video-engine/QUALITY_BAR.md, and all applicable Cursor project rules.
 
 This repository contains a complete multi-channel video-generation engine.
 
 Do not invent a new production workflow.
 
 Use the repository's canonical generation pipeline and permanent channel configuration.
+
+Copy the GRAMMAR in docs/video-engine/QUALITY_BAR.md (kid map, recognizable cartoon locks, oversized focal object, unique cinema stills, punchy Short). Never copy the spines of the reference cuts.
 
 Generate:
 

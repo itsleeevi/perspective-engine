@@ -1,0 +1,19 @@
+{
+  "jobs": [
+    {
+      "id": "short_thumb",
+      "filename": "openai-makes-money-while-fighting-apple_short_thumbnail.png",
+      "generate_filename": "u60cb9532.png",
+      "copy_to": "openai-makes-money-while-fighting-apple_short_thumbnail.png",
+      "aspect": "9:16",
+      "overlay_text": "WHO OWNS YOU?",
+      "output_jpeg": "assets/youtube/openai_makes_money_while_fighting_apple_short_thumbnail_1080x1920.jpg",
+      "prompt": "Clean flat 2D business documentary illustration in the established Behind The Business channel identity. Modern vector-like shapes, simple readable characters, simplified products and environments, crisp diagrams, subtle depth, limited shading, clean high-contrast palette, uncluttered compositions, clear information hierarchy, visually intuitive financial flows and business systems, consistent recurring locations and company elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery. Vertical 9:16 YouTube Shorts thumbnail. ONE simplified company symbol plus ONE business object. Clean high-contrast backdrop. Empty dark lower third of the frame for type added later. No photoreal logo lockup, no clutter. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a Bloomberg terminal wall of numbers, not a photoreal product shot. NO readable text, NO letters, NO captions, NO title card, NO watermark. Type will be added later. Same cartoon man every time, do not redesign. Copy this face: oval face. Large prominent light cartoon eyes. Medium-brown short wavy-curly hair, casual and slightly messy on top. Straight nose. Neutral closed mouth. ALWAYS a tan camel crew-neck sweater over a dark undershirt, no logos, no microphone. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. A head shorter and rounder-faced than the tall black-shirt man. Do not make them twins. Keep this exact face in every frame. Tight chest-up recognizable cartoons: camel-sweater man left, black-turtleneck man right, giant glowing rectangular doorway with a tiny human silhouette between them, empty right third for type, dramatic stage tungsten, no on-image text, no logos, not a photograph. Signature object: user doorway.",
+      "reference_image_paths": [
+        "channel/character_sheets/be1e2416.png",
+        "channel/character_sheets/2f577b1a.png",
+        "channel/character_sheets/22acec53.png"
+      ]
+    }
+  ]
+}

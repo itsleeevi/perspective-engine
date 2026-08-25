@@ -2,6 +2,7 @@
 
 Newest first. Originality QA reads this index (not `docs/videos/` and not `docs/business/`). Each page needs a **Do not copy** section so the next title cannot steal its hook, rise structure, turning points, flywheel, or ending.
 
+- [How MrBeast Cracked the YouTube Algorithm](mrbeast-cracked-the-youtube-algorithm.md) — click card / hungry machine / click then stay, Kokoro `am_liam` 1.15, **25:10**, Short **29.4s** (YouTube 2012 watch-time + VidCon 2022 + June 2026 half-billion; no “today is DATE” in the VO)
 - [How McDonald’s Took Over the World](mcdonald-s-took-over-the-world.md) — lease folder / landlord dirt / rent plus a royalty, Kokoro `am_liam` 1.15, **27:37**, Short **29.7s** (FY2025 10-K; no “today is DATE” in the VO)
 - [How Nike Became Bigger Than Sports](nike-became-bigger-than-sports.md) — shoe on a stoop / streetwear in the 10-K / wholesale still wider, Kokoro `am_liam` 1.15, **26:44**, Short **27.7s** (FY2025 10-K; no “today is DATE” in the VO)
 - [How TikTok Beat the Social Media Giants](tiktok-beat-the-social-media-giants.md) — For You strip / no friends first / interest vs graph, Kokoro `am_liam` 1.15, **23:02**, Short **29.3s** (newsroom + DMA + EO 14352 / USDS 2026; no “today is DATE” in the VO)

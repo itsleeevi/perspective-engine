@@ -1,0 +1,92 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "elon-musk-sam-altman_short_v1_000.png",
+      "generate_filename": "v4d0b8f80_000.png",
+      "copy_to": "elon-musk-sam-altman_short_v1_000.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "Two friends put a long table in a lab.",
+      "scene": "rectangular-jaw black-t-shirt cartoon man with tousled dark hair and light stubble, exact same face every frame slams both palms on the long table, leaning toward the tall wooden seat. oval-face curly-hair cartoon man in a tan camel crew-neck sweater, exact same face every frame, shorter than the black-shirt man, different face, not twins keeps a hand on the wooden seat back. Low side light, dust in the air. Beat 000 unique staging.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Same cartoon man every time, do not redesign. Copy this face: rectangular face, strong broad jaw, prominent chin. Dark brown short textured hair styled slightly up and back, tousled on top, receding at the temples. Light grey-blue hooded cartoon eyes. Thin arched eyebrows. Straight nose with a moderately wide bridge. Thin lips in a tight closed line. Light stubble on the jaw and upper lip. ALWAYS a plain black crew-neck t-shirt, no jacket, no logos, no graphics. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. Keep this exact face in every frame. Same cartoon man every time, do not redesign. Copy this face: oval face. Large prominent light cartoon eyes. Medium-brown short wavy-curly hair, casual and slightly messy on top. Straight nose. Neutral closed mouth. ALWAYS a tan camel crew-neck sweater over a dark undershirt, no logos, no microphone. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. A head shorter and rounder-faced than the tall black-shirt man. Do not make them twins. Keep this exact face in every frame. LOCATION long_table (same set): Glass loft, one long pale table, tall wooden seat at the head, no logos.. Palette: #c4b8a4, #5c6b7a, #2b2b2b, #d8c7a4. Only the subject character unless the action names someone else. SHOT: wide shot. ACTION: rectangular-jaw black-t-shirt cartoon man with tousled dark hair and light stubble, exact same face every frame slams both palms on the long table, leaning toward the tall wooden seat. oval-face curly-hair cartoon man in a tan camel crew-neck sweater, exact same face every frame, shorter than the black-shirt man, different face, not twins keeps a hand on the wooden seat back. Low side light, dust in the air. Beat 000 unique staging.",
+      "camera_motion": "slow push-in",
+      "reference_image_paths": [
+        "channel/character_sheets/4a7d89fd.png",
+        "channel/character_sheets/d44eae5a.png",
+        "channel/character_sheets/be1e2416.png",
+        "channel/character_sheets/2f577b1a.png"
+      ]
+    },
+    {
+      "id": "001",
+      "filename": "elon-musk-sam-altman_short_v1_001.png",
+      "generate_filename": "v4d0b8f80_001.png",
+      "copy_to": "elon-musk-sam-altman_short_v1_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "medium shot",
+      "chunk": "One tall wooden seat sits at the head. Elon Musk wants that seat. The other friends say no. He calls it the final straw.",
+      "scene": "A loft hallway with two glass doors, one ajar, one locked. THE_EMPTY_CHAIR a huge empty pale wooden chair at the head of a long table, oversized like a kid throne, high contrast, filling the middle of the frame, no letters on the wood, not faint, not a tiny stool. Warm lamp only. Beat 001 unique staging.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. LOCATION hq_hall (same set): Long glass hallway, two doors, no signs.. Palette: #c4b8a4, #5c6b7a, #2b2b2b, #d8c7a4. STRICTLY NO people, NO faces, NO hands. SHOT: medium shot. ACTION: A loft hallway with two glass doors, one ajar, one locked. THE_EMPTY_CHAIR a huge empty pale wooden chair at the head of a long table, oversized like a kid throne, high contrast, filling the middle of the frame, no letters on the wood, not faint, not a tiny stool. Warm lamp only. Beat 001 unique staging.",
+      "camera_motion": "slow drift"
+    },
+    {
+      "id": "002",
+      "filename": "elon-musk-sam-altman_short_v1_002.png",
+      "generate_filename": "v4d0b8f80_002.png",
+      "copy_to": "elon-musk-sam-altman_short_v1_002.png",
+      "aspect": "9:16",
+      "who": "other",
+      "free": false,
+      "shot_type": "close-up",
+      "chunk": "Discussions are over at that table. He takes his money home. Sam Altman sits down anyway. The talking box comes later.",
+      "scene": "oval-face curly-hair cartoon man in a tan camel crew-neck sweater, exact same face every frame, shorter than the black-shirt man, different face, not twins shakes his head once at a huge painted money pile. THE_EMPTY_CHAIR a huge empty pale wooden chair at the head of a long table, oversized like a kid throne, high contrast, filling the middle of the frame, no letters on the wood, not faint, not a tiny stool. Hard overhead loft light. Beat 002 unique staging.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Same cartoon man every time, do not redesign. Copy this face: oval face. Large prominent light cartoon eyes. Medium-brown short wavy-curly hair, casual and slightly messy on top. Straight nose. Neutral closed mouth. ALWAYS a tan camel crew-neck sweater over a dark undershirt, no logos, no microphone. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. A head shorter and rounder-faced than the tall black-shirt man. Do not make them twins. Keep this exact face in every frame. LOCATION witness_box (same set): Empty witness chair, hard lamp, wood rail, no names.. Palette: #c4b8a4, #5c6b7a, #2b2b2b, #d8c7a4. Draw only the named characters. SHOT: close-up. ACTION: oval-face curly-hair cartoon man in a tan camel crew-neck sweater, exact same face every frame, shorter than the black-shirt man, different face, not twins shakes his head once at a huge painted money pile. THE_EMPTY_CHAIR a huge empty pale wooden chair at the head of a long table, oversized like a kid throne, high contrast, filling the middle of the frame, no letters on the wood, not faint, not a tiny stool. Hard overhead loft light. Beat 002 unique staging.",
+      "camera_motion": "static",
+      "reference_image_paths": [
+        "channel/character_sheets/be1e2416.png",
+        "channel/character_sheets/2f577b1a.png"
+      ]
+    },
+    {
+      "id": "003",
+      "filename": "elon-musk-sam-altman_short_v1_003.png",
+      "generate_filename": "v4d0b8f80_003.png",
+      "copy_to": "elon-musk-sam-altman_short_v1_003.png",
+      "aspect": "9:16",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "over-the-shoulder",
+      "chunk": "The lab gets famous without him. The box talks on phones. The famous man is not in the building. Elon is already outside the glass.",
+      "scene": "Generic office workers, simple cartoon faces, hoodies and shirts, no logos. Flat 2D vector, not photoreal. Workers form a human aisle for a tan-sweater man walking back. Blue hour through glass. Beat 003 unique staging.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Generic office workers, simple cartoon faces, hoodies and shirts, no logos. Flat 2D vector, not photoreal. Same cartoon man every time, do not redesign. Copy this face: oval face. Large prominent light cartoon eyes. Medium-brown short wavy-curly hair, casual and slightly messy on top. Straight nose. Neutral closed mouth. ALWAYS a tan camel crew-neck sweater over a dark undershirt, no logos, no microphone. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. A head shorter and rounder-faced than the tall black-shirt man. Do not make them twins. Keep this exact face in every frame. LOCATION clock_hall (same set): Corridor with a round wall clock, pale plaster, no signs.. Palette: #c4b8a4, #5c6b7a, #2b2b2b, #d8c7a4. Generic extras in the same flat-vector construction. No photoreal faces. SHOT: over-the-shoulder. ACTION: Generic office workers, simple cartoon faces, hoodies and shirts, no logos. Flat 2D vector, not photoreal. Workers form a human aisle for a tan-sweater man walking back. Blue hour through glass. Beat 003 unique staging.",
+      "camera_motion": "slow push-in",
+      "reference_image_paths": [
+        "channel/character_sheets/be1e2416.png",
+        "channel/character_sheets/2f577b1a.png"
+      ]
+    },
+    {
+      "id": "004",
+      "filename": "elon-musk-sam-altman_short_v1_004.png",
+      "generate_filename": "v4d0b8f80_004.png",
+      "copy_to": "elon-musk-sam-altman_short_v1_004.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "establishing shot",
+      "chunk": "He wanted the chair. Sam kept it. That is the chair fight.",
+      "scene": "rectangular-jaw black-t-shirt cartoon man with tousled dark hair and light stubble, exact same face every frame leaves a donation envelope on the first table and steps through glass. Morning pale sun. Beat 004 unique staging.",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Accent this title with a moss-green and parchment palette; keep the same flat 2D construction. Vertical 9:16 frame, subject large in the upper two thirds. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Same cartoon man every time, do not redesign. Copy this face: rectangular face, strong broad jaw, prominent chin. Dark brown short textured hair styled slightly up and back, tousled on top, receding at the temples. Light grey-blue hooded cartoon eyes. Thin arched eyebrows. Straight nose with a moderately wide bridge. Thin lips in a tight closed line. Light stubble on the jaw and upper lip. ALWAYS a plain black crew-neck t-shirt, no jacket, no logos, no graphics. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. Keep this exact face in every frame. LOCATION chat_den (same set): Dim den, one glowing laptop, couch, no logos.. Palette: #c4b8a4, #5c6b7a, #2b2b2b, #d8c7a4. Only the subject character unless the action names someone else. SHOT: establishing shot. ACTION: rectangular-jaw black-t-shirt cartoon man with tousled dark hair and light stubble, exact same face every frame leaves a donation envelope on the first table and steps through glass. Morning pale sun. Beat 004 unique staging.",
+      "camera_motion": "slow drift",
+      "reference_image_paths": [
+        "channel/character_sheets/4a7d89fd.png",
+        "channel/character_sheets/d44eae5a.png"
+      ]
+    }
+  ]
+}

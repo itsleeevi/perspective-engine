@@ -94,6 +94,12 @@ below 1.0 or above 1.15.
 
 Read docs/business/ before you write. Each title needs its own mystery,
 money-flow, and chapter names. Visa must not reuse Costco's spine.
+QUALITY BAR (docs/video-engine/QUALITY_BAR.md): copy the grammar of the
+best-performing cuts, never their spines. title_payoff: 6-18 words, concrete,
+child-repeatable. Prefer two beats over a riddle. Cold open: one sourced
+physical contradiction in a specific place. Hook: say the_thought, then a
+kid map of 5-8 steps this title owns. Chapters ARE those steps (unique names
+from the evidence). End by saying the_thought again plus an honest limit.
 HUMAN VALUE TEST: if the tools were removed, would this still look like
 a real creator researched this company? If no, revise.
 """
@@ -105,7 +111,11 @@ story-driven. NOT an MBA professor, financial-TV anchor, Wall Street
 analyst, AI assistant, corporate deck, or TikTok hype narrator.
 Original narration, not rewritten articles or YouTube transcripts.
 
-Write for SPEECH. A five-year-old should be able to follow while watching.
+Write for SPEECH. Write as if a sharp five-year-old is watching with an
+adult. Tiny words. Cause, then effect. One picture per idea. Funny when
+the evidence is actually funny — not a roast, not baby talk, not an MBA
+lecture. If a sentence needs a second breath, split it.
+A five-year-old should be able to follow while watching.
 One idea per sentence. Short and medium sentences. Explain loops in plain
 English ("The bigger it gets, the more buying power it has.").
 Do not read long numbers aloud. Say "about 158 billion", not
@@ -132,7 +142,24 @@ Fill project.business.visual_identity:
 Do not require copyrighted ads. Do not recreate advertisements
 shot-for-shot. Company names stay OUT of image prompts.
 People get visual_lock without historical personal names.
+Public figures get a distinctive cartoon lock so the viewer names them.
+That is a recognizable cartoon of the real person in flat 2D, not a
+photograph, not a generic clerk. Reuse channel/character_locks.json
+when this person already shipped; pass the hashed photo plus sheet in
+channel/character_sheets/ as GenerateImage reference_image_paths.
 If there is a signature prop, it is the same obvious object every time.
+Named public figures: look up channel/character_locks.json FIRST. If
+present, copy visual_lock exactly and pass the hashed photo then cartoon
+sheet in channel/character_sheets/ as GenerateImage reference_image_paths.
+If new, write a lock that starts "Same cartoon person every time, do not
+redesign. Copy this face:" then face shape, jaw, eyes, hair, stubble or
+beard, and ALWAYS-clothes they actually wear (one outfit, no logos). End
+with "Distinctive recognizable cartoon of the real person. Flat 2D
+vector, two-dot eyes, no skin texture, not a photograph, not photoreal.
+Keep this exact face in every frame." Recurring extras get a costume lock
+(slate sweater shopper, pale blue smock clerk, orange-vest developer) —
+never a generic gray clerk. A new sheet is three chest-up views on a
+solid field, hashed filename, no personal name in the file.
 """
 
 SCENE_BREAKDOWN = """
@@ -148,12 +175,34 @@ Charts: one insight each. No Bloomberg walls.
 Money-flow and $100 breakdowns only when verified data exists.
 Reusable COMPONENTS (customer, merchant, bank, membership card) are fine.
 Reusable CONTENT (the same Costco walk for Visa) is not.
-who: hero / empty / crowd. Diagrams are usually empty.
+who: hero / empty / crowd. Diagrams may still put the cartoon founder in
+frame pointing at the machine when that keeps a five-year-old watching.
 Do not write BEHIND_THE_BUSINESS_VISUAL_STYLE into the action.
+
+CARTOON HEROES: ~35–42% hero (lint warns above 45%). Distinctive flat-2D
+visual_lock for any recurring person (hair, clothes, silhouette), no
+historical name, NOT photoreal. 12+ locations. Unique visual verb every
+still — do not collapse to six repeating object templates. Signature
+prop in at most 6 scenes. When the title is a person, impersonate them
+as a cartoon, not a clerk in a gray vest.
 Target stills ~4–8 seconds. Complex diagrams may hold longer if they
 animate progressively. No static image for 15 seconds.
 Optional on_screen_text for a tasteful source label on important numbers
 ("FY2025 Annual Report") — not on every scene.
+
+QUALITY BAR (docs/video-engine/QUALITY_BAR.md): every still is a cinema
+beat, not a slide: {SET} {who/costume} {physical verb} {one oversized
+focal object} {named lighting}. Accent: {corner light}, {empty margin}.
+Unique staging. No logos. No readable type. ONE idea in the frame. ONE
+oversized focal object large in the middle, high contrast, never faint.
+When the signature prop returns, paste its lock sentence. Ban wallpaper:
+"Clean business illustration of a filing table", identical desk-and-binder
+loops, talking-head portraits. Person-titled money cuts impersonate the
+named person as a recognizable cartoon in about 35-42 percent of stills
+(lint warns below 28 percent). Company-titled cuts may run empty cinematic
+sets with costume-locked extras (Costco warehouse grammar), never a 90
+percent empty-diagram film about a named person. 12+ locations. Copy the
+grammar. Never copy a reference-cut spine.
 """
 
 RETENTION_QA = """
@@ -185,9 +234,14 @@ ONE Short per long video. 30–55 seconds. Not a summary of the 22-minute cut.
 Pick ONE fascinating mechanism.
 Long "How Costco Really Makes Money" → Short "Why Costco Barely Marks Up
 Its Products". Do not write that Costco example into a Visa video.
-Hook, explain one thing, payoff, then:
+First spoken sentence is the punch (16 words or fewer): a contradiction
+or a slam, not a definition. First still is that picture. Hook, explain
+one thing, payoff, then:
 "Watch the full video. The link is in the description."
 Compile adds the branded 9:16 card. 75–140 words. 9:16 stills.
+6–8 shots, a unique composition each. Hero cartoon large in frame when
+the title names a person. Lighting accent plus empty margin every still.
+Read docs/video-engine/QUALITY_BAR.md.
 """
 
 METADATA = """

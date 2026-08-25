@@ -44,6 +44,8 @@ REQUIRED_PHRASES = (
     "rewritten articles or YouTube transcripts",
     "Different story architecture",
     "Unique scenes and diagrams",
+    "recognizable cartoon of the real person",
+    "docs/video-engine/QUALITY_BAR.md",
 )
 
 

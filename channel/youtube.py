@@ -256,6 +256,11 @@ def write_thumbnail_job(
         "output_jpeg": f"assets/youtube/{stem}_thumbnail_1280x720.jpg",
         "prompt": thumbnail_prompt(project),
     }
+    from channel.character_locks import reference_image_paths
+
+    refs = reference_image_paths(project)
+    if refs:
+        job["reference_image_paths"] = refs
     out = jobs_path(f"{slug}_thumbnail_", root)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"jobs": [job]}, indent=2) + "\n", encoding="utf-8")

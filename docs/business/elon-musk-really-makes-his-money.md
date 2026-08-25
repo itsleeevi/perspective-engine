@@ -55,7 +55,17 @@ Refresh with `python -m channel youtube elon-musk-really-makes-his-money` (assem
 **Description** (search phrase in the first 200 characters):
 
 ```
-How Elon Musk really makes his money: the big paycheck is a lock, not a deposit. Tesla's 2025 pay table prints about 158 billion dollars and Tesla's own realized line for that year is zero. The paper that can open is older Tesla options, plus a second public SpaceX pile.
+How Elon Musk really makes his money: the big paycheck is a lock, not a deposit.
+
+Tesla's 2025 pay table prints about 158 billion dollars and Tesla's own realized line for that year is zero. The paper that can open is older Tesla options, plus a second public SpaceX pile.
+
+Educational analysis of a business model. Not investment advice.
+
+Sources / further reading:
+- Tesla, Inc. Form 10-K for the fiscal year ended December 31, 2025 (filed January 29, 2026)
+- Tesla, Inc. Form 10-K/A Amendment No. 1 (Part III) (filed April 30, 2026)
+- Space Exploration Technologies Corp. Form 10-Q for the quarter ended June 30, 2026 (filed August 4, 2026)
+- Elon R. Musk Schedule 13G for Space Exploration Technologies Corp. (filed August 13, 2026)
 
 0:00 Intro
 0:20 The Stub
@@ -72,7 +82,9 @@ Researched and written for How They Really Make Money from company filings and p
 Illustrated documentary. Stills and narration are generated. Research and story are original to this channel. Educational business analysis, not investment advice. Not a photograph of any real person.
 ```
 
-**Tags:** elon musk, how they really make money, tesla compensation, spacex, ceo pay, business documentary, how the company makes money, illustrated documentary, the locked stub, how elon musk really makes his money
+**Tags:** Elon Musk, How Elon Musk Really Makes His Money, Tesla compensation, SpaceX, How They Really Make Money, business model, CEO pay, Tesla, how the company makes money, elon musk really makes his money, illustrated documentary, business documentary, behind the business, the locked stub, padlocked glass pay stub
+
+**Shorts description** (`assets/youtube/elon_musk_really_makes_his_money_short_description.txt`): paste after the long video is live and replace `VIDEO_ID`. Tick YouTube Studio's altered/synthetic content checkbox.
 
 ## Playbook
 

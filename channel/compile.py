@@ -11,6 +11,7 @@ from channel.bibles import token_for_location, visual_lock
 from channel.config import (
     CHANNEL,
     config_for_project,
+    kokoro_pauses_for,
     kokoro_speed_for,
     kokoro_voice_for,
     visual_accent_for,
@@ -34,6 +35,7 @@ from channel.paths import (
     stills_path,
 )
 from channel.prompts import assemble_image_prompt, strip_character_names, strip_image_brands
+from channel.quality_bar import STAGING_QUALITY
 from channel.schema import Scene, ScenePurpose, VideoProject
 from channel.shorts import (
     SHORT_CTA,
@@ -138,6 +140,7 @@ def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
                     cfg.visual_style,
                     visual_accent_for(project.slug, project.channel_mode),
                     cfg.negative_style,
+                    STAGING_QUALITY,
                     *[visual_lock(c) for c in project.characters.values()],
                 )
                 if p
@@ -223,10 +226,10 @@ def spec_dict(
         "voice": cfg.voice,
         "kokoro_voice": kokoro_voice_for(slug),
         "kokoro_speed": kokoro_speed_for(slug, cfg),
-        "kokoro_sentence_pause": cfg.kokoro_sentence_pause,
-        "kokoro_clause_pause": cfg.kokoro_clause_pause,
+        "kokoro_sentence_pause": kokoro_pauses_for(slug, cfg)[0],
+        "kokoro_clause_pause": kokoro_pauses_for(slug, cfg)[1],
         "kokoro_pack_words": cfg.kokoro_pack_words,
-        "kokoro_scene_pause": cfg.kokoro_scene_pause,
+        "kokoro_scene_pause": kokoro_pauses_for(slug, cfg)[2],
         "narration_wpm": cfg.narration_wpm,
         "burn_captions": cfg.burn_captions,
         "chunk_min_seconds": cfg.min_scene_duration,
@@ -264,6 +267,7 @@ def write_jobs(
     short: bool,
     root: Path | None = None,
 ) -> Path:
+    from channel.character_locks import reference_image_paths
     from graph.script_fixture import fixture_to_beats, is_title_beat, load_fixture
 
     block = spec["short"] if short else spec
@@ -292,22 +296,24 @@ def write_jobs(
     for i, (scene, chunk) in enumerate(pairs):
         dest_name = f"{prefix}{i:03d}.png"
         gen_name = generate_image_filename(i, token=token, kind=kind)
-        jobs.append(
-            {
-                "id": f"{i:03d}",
-                "filename": dest_name,
-                "generate_filename": gen_name,
-                "copy_to": dest_name,
-                "aspect": aspect,
-                "who": scene.who,
-                "free": scene.who == "empty",
-                "shot_type": scene.composition,
-                "chunk": chunk,
-                "scene": scene.action,
-                "prompt": assemble_image_prompt(project, scene, aspect=aspect),
-                "camera_motion": scene.camera_motion,
-            }
-        )
+        job = {
+            "id": f"{i:03d}",
+            "filename": dest_name,
+            "generate_filename": gen_name,
+            "copy_to": dest_name,
+            "aspect": aspect,
+            "who": scene.who,
+            "free": scene.who == "empty",
+            "shot_type": scene.composition,
+            "chunk": chunk,
+            "scene": scene.action,
+            "prompt": assemble_image_prompt(project, scene, aspect=aspect),
+            "camera_motion": scene.camera_motion,
+        }
+        refs = reference_image_paths(project, scene, root=root)
+        if refs:
+            job["reference_image_paths"] = refs
+        jobs.append(job)
     out = jobs_path(prefix, root)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"jobs": jobs}, indent=2) + "\n", encoding="utf-8")
@@ -347,6 +353,9 @@ def compile_project(
 ) -> dict[str, str]:
     if not project.story:
         raise ValueError("cannot compile without a story")
+    from channel.character_locks import apply_character_locks
+
+    apply_character_locks(project)
     slug = project.slug
     token = image_token or image_token_for(slug)
     project.metadata = draft_metadata(project)

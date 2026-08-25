@@ -15,6 +15,6 @@ Shipped recuts may be slower. Costco is locked at **0.92**. Do not recut a locke
 
 Default voice `am_liam`. New titles may rotate `am_michael` / `am_fenrir` via `kokoro_voice_for`. Do not pick a random voice.
 
-Spoken English, third person. Calendar years as digits (`1995`). No “today is DATE”. `the_thought` / `title_payoff` must be said in the VO.
+Spoken English, third person. Write as if a sharp five-year-old is watching with an adult: tiny words, cause then effect, funny when the evidence is funny. Calendar years as digits (`1995`). No “today is DATE”. `the_thought` / `title_payoff` must be said in the VO.
 
 WTRT is **not** a 4–6 minute format. Older shipped cuts were shorter; new titles follow the word budgets above.

@@ -11,9 +11,11 @@ import hashlib
 from pydantic import BaseModel, Field
 
 from channel.locks import (
+    KOKORO_PAUSE_LOCK,
     KOKORO_SPEED_LOCK,
     KOKORO_SPEED_MAX,
     KOKORO_SPEED_MIN,
+    KOKORO_VOICE_LOCK,
     SHIPPED_STYLE_LOCK,
 )
 from channel.modes import ChannelMode, parse_mode
@@ -244,6 +246,8 @@ def visual_accent_for(slug: str, mode: ChannelMode | str | None = None) -> str:
 
 def kokoro_voice_for(slug: str) -> str:
     """Kokoro speaker for a new title. Shipped slugs stay on am_liam."""
+    if slug in KOKORO_VOICE_LOCK:
+        return KOKORO_VOICE_LOCK[slug]
     if not slug or slug in SHIPPED_STYLE_LOCK:
         return "am_liam"
     return KOKORO_ROSTER[_stable_index(f"{slug}:voice", len(KOKORO_ROSTER))]
@@ -255,6 +259,19 @@ def kokoro_speed_for(slug: str, cfg: ChannelConfig | None = None) -> float:
         return float(KOKORO_SPEED_LOCK[slug])
     speed = float((cfg or CHANNEL).kokoro_speed)
     return min(KOKORO_SPEED_MAX, max(KOKORO_SPEED_MIN, speed))
+
+
+def kokoro_pauses_for(
+    slug: str, cfg: ChannelConfig | None = None
+) -> tuple[float, float, float]:
+    """Sentence, clause, and scene holds for Kokoro."""
+    cfg = cfg or CHANNEL
+    lock = KOKORO_PAUSE_LOCK.get(slug) or {}
+    return (
+        float(lock.get("sentence", cfg.kokoro_sentence_pause)),
+        float(lock.get("clause", cfg.kokoro_clause_pause)),
+        float(lock.get("scene", cfg.kokoro_scene_pause)),
+    )
 
 
 class ChannelConfig(BaseModel):

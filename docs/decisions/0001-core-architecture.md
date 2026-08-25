@@ -2,7 +2,9 @@
 
 **Date:** 2026-07-02  
 **Status:** Accepted  
-**Context:** Phase 1 design — local graph skeleton, no real providers yet.
+**Context:** Phase 1 design — local `graph/` skeleton, no real providers yet.
+
+This ADR is about the LangGraph prototype. Production YouTube documentaries use `channel/` ([`docs/video-engine/`](../video-engine/), [`AGENTS.md`](../../AGENTS.md)).
 
 ---
 

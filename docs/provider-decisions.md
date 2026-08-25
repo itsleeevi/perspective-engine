@@ -1,43 +1,64 @@
 # Provider decisions
 
-Why each dependency was chosen, what it's replacing (if anything), and where the choice will likely be revisited. Model and provider names move quickly: verify current identifiers and pricing before wiring any adapter; the ones below were verified against the dates noted in the adapter source files.
+Why each dependency was chosen, what it is replacing (if anything), and where the choice will likely be revisited. Model and provider names move quickly: verify current identifiers and pricing before wiring any adapter.
 
-Design principle behind all of these: **best tool for the role**. Each dependency is chosen for fit, with a stated reason. If a better-fit option appears, it should replace the incumbent; none of these are treated as permanent.
+There are two products. **Do not mix their providers.**
 
-## Orchestration: LangGraph (Python)
+Design principle: **best tool for the role**. If a better-fit option appears, it should replace the incumbent on that product only.
+
+## Documentary path (`channel/`) — production YouTube
+
+This is the path that ships What They Really Think, How They Really Make Money, and How They Took Over.
+
+| Role | Locked choice | Why |
+|---|---|---|
+| Stills | Cursor Grok **GenerateImage** | Fill-frame 2D cinema stills with hashed filenames; public-figure cartoons via `channel/character_locks.json` + sheets. |
+| Voice | **Kokoro only** (`am_liam` / roster) | Local, free, locked speeds (new titles 1.0–1.15, Costco 0.92). |
+| Assemble | FFmpeg (`scripts/run_custom_video.py`, `scripts/run_short.py`) | Whisper-aligned still slideshow, 3840×2160 long / 1080×1920 Shorts. |
+| Research seed | Wikipedia + agent primary sources | Seed only; claims keep `claim_id` and source dates. |
+
+Missing Kokoro or GenerateImage is a **hard stop**. Do not fall back to fal.ai images, OpenAI image APIs, Edge TTS, ElevenLabs, or Chatterbox on this path. Documentary generation does not read `FAL_KEY` or `ELEVENLABS_API_KEY`.
+
+Specs: [`docs/video-engine/`](video-engine/), [`docs/video-engine/NARRATION.md`](video-engine/NARRATION.md), [`docs/video-engine/VISUAL_STYLE.md`](video-engine/VISUAL_STYLE.md).
+
+## LangGraph prototype (`graph/`) — not YouTube titles
+
+Durable code lives in `graph/`. Adapters under `adapters/` are disposable. `ideate` rejects real named people. This path is independent of `channel/`.
+
+### Orchestration: LangGraph (Python)
 
 Durable checkpointing, human-in-the-loop interrupts, and conditional retry/branching are first-class primitives here, not bolted on. Role-based frameworks (CrewAI) and conversation-centric frameworks (AutoGen) prototype faster but don't give the execution control this pipeline depends on; single-vendor agent SDKs would lock model choice, which conflicts with per-shot model routing (cheap model for static pans, best available for motion). Full comparison in [`decisions/0001-core-architecture.md`](decisions/0001-core-architecture.md).
 
-## Script / shot-breakdown LLM: OpenAI, with Anthropic Claude Haiku for the per-shot quality check
+### Script / shot-breakdown LLM: OpenAI, with Anthropic Claude Haiku for the per-shot quality check
 
-Adapter-based (`adapters/llm/`), so swapping providers is a new adapter, not an orchestration change. `OpenAILLMAdapter` handles the two authoring calls (script writing, storyboard visualization); the prompt content behind both is shared verbatim with the Anthropic adapter (`adapters/llm/_prompts.py`), so behavioral fixes for this format live in the prompt, not in provider-specific code. The vision-based quality check still delegates to `AnthropicLLMAdapter` — Claude Haiku is the cheap, adequate choice for a call that runs once per shot (tens of times per video), not once per run.
+Adapter-based (`adapters/llm/`), so swapping providers is a new adapter, not an orchestration change. `OpenAILLMAdapter` handles the two authoring calls (script writing, storyboard visualization); the prompt content behind both is shared verbatim with the Anthropic adapter (`adapters/llm/_prompts.py`). The vision-based quality check still delegates to `AnthropicLLMAdapter` — Claude Haiku is the cheap, adequate choice for a call that runs once per shot.
 
-## Image generation: OpenAI `gpt-image-*` (default), fal.ai FLUX (alternate), Pollinations (free)
+### Image generation: OpenAI `gpt-image-*` (default), fal.ai FLUX (alternate), Pollinations (free)
 
-`OpenAIImageGenAdapter` is the default for both the reference sheet and per-shot derived stills: it was the only option measured to render in-scene text (title cards, on-screen labels) reliably. Quality defaults to `low` (~$0.0055/image) — `medium` (7.6x the cost) mostly bought storyboard-prompt fixes, not rendering fidelity, and `high` is not recommended at any budget because it drifts off the locked character design. `FalImageGenAdapter` (FLUX.1 [dev]/[schnell], image-to-image conditioned on the reference sheet) remains available via `--image-provider fal` and cannot reliably render text but is cheaper. `PollinationsImageGenAdapter` is a free fallback with weaker scene control. Swapping the default provider is empirical and expected to be revisited as image models improve at text rendering.
+Graph-only. `OpenAIImageGenAdapter` is the default on that path because it was measured to render in-scene text more reliably. `FalImageGenAdapter` remains available via `--image-provider fal`. Documentary titles do **not** use these adapters.
 
-## Video generation: fal.ai, Seedance 2.0 Fast (image-to-video)
+### Video generation: fal.ai, Seedance 2.0 Fast (image-to-video)
 
-fal.ai acts as a model router: one API surface over multiple current video models, so per-shot model selection is a parameter rather than a separate integration per vendor. Seedance 2.0 Fast was selected because it supports image-to-video with lower latency than the standard tier, and image-to-video support is a hard requirement for any model wired here. Text-to-video is never used for character shots (see [Character consistency](../README.md#character-consistency)). Motion is off by default (`static_only=True`, `--allow-motion` to opt in) since the current format is a still slideshow.
+Graph-only model router. Text-to-video is never used for character shots (see [Character consistency](architecture.md#character-consistency-in-depth)). Motion is off by default (`static_only=True`, `--allow-motion` to opt in).
 
-## Voice: Chatterbox-Turbo (custom YouTube cuts), Kokoro fallback, Edge TTS (CLI default), ElevenLabs (opt-in)
+### Voice: Edge TTS default, ElevenLabs opt-in, Chatterbox isolated venv
 
-Custom narrative cuts (`scripts/run_custom_video.py`) use local **Chatterbox-Turbo** (MIT, Resemble AI; `adapters/voice/chatterbox.py`). It wins blind listening tests against paid APIs, clones a narrator from a 5–10s clip, and costs $0. It is torch-based, so it lives in an isolated `.venv-tts` and is driven through a subprocess worker (`scripts/tts_worker.py`) — CPU-only synthesis is roughly real-time, fine for offline rendering. Word timing comes from **faster-whisper forced alignment** of the rendered audio, which makes picture/narration sync independent of the TTS engine. **Kokoro-82M** (`am_liam`, speed 0.80, ~175 wpm) remains the fallback when the TTS venv is unavailable. CLI default remains `EdgeTTSVoiceAdapter`; ElevenLabs Liam stays available via `--elevenlabs` at 166 wpm.
+Graph CLI default remains `EdgeTTSVoiceAdapter`. ElevenLabs is opt-in via `--elevenlabs`. Chatterbox-Turbo lives in an isolated `.venv-tts` for that prototype. **None of these are allowed on `channel/` documentary assemble.**
 
-## Assembly: FFmpeg today, Remotion planned
+### Assembly: FFmpeg today, Remotion planned
 
-The current `assemble` node does real work: downloads every fal.ai-hosted asset, converts static-pan stills into fixed-duration video segments, concatenates all shots in shot order, and mixes in the ElevenLabs voiceover, all via subprocess `ffmpeg` calls. This is not a stub or placeholder.
+The graph `assemble` node downloads fal.ai-hosted assets, converts static-pan stills into segments, concatenates, and mixes voiceover via ffmpeg. Remotion is the planned replacement on that product once captions and motion graphics are needed. Documentary assemble is a different script path (`scripts/run_custom_video.py`).
 
-Remotion is the planned replacement once captions, transitions, and motion graphics are needed; programmatic composition suits that better than shelling out to FFmpeg for every effect. The output contract (`final_video_path`, a local `file://` MP4 path) is designed to stay the same across that migration.
+## Planned, not yet wired (LangGraph only)
 
-## Planned, not yet wired
+These appear in [`docs/roadmap.md`](roadmap.md) because the local-prototype phase intentionally defers paid/managed infrastructure until the core control flow is proven:
 
-These appear in the [Roadmap](../README.md#roadmap) because the local-prototype phase intentionally defers paid/managed infrastructure until the core control flow is proven (see [`docs/roadmap.md`](roadmap.md)):
-
-- **Observability: LangSmith.** Model- and framework-agnostic tracing of every node call, retry, and interrupt. A multi-node graph with parallel branches is impractical to debug blind once real providers are live continuously.
-- **Backend: FastAPI.** Already used for the review UI (`webui/`); will grow into the full API service once a persistent backend is needed.
-- **Compute: Modal.** Serverless functions per stage, suited to bursty parallel shot generation.
-- **State / persistence: Neon (serverless Postgres).** Replaces the local SQLite/in-memory checkpointer with a durable one so a run backed by a real graph process can pause at a review gate and resume from anywhere.
-- **Object storage: Cloudflare R2.** S3-compatible, no egress fees. State already stores asset URLs rather than binaries, so this is a storage-backend swap, not a schema change.
-- **Review UI: Next.js.** A fuller dashboard than the current lightweight FastAPI + static-HTML review UI, once more than "approve/reject/edit-one-field" is needed.
+- **Observability: LangSmith.** Tracing of every node call, retry, and interrupt.
+- **Backend: FastAPI.** Already used for the review UI (`webui/`); may grow into the full API service.
+- **Compute: Modal.** Serverless functions per stage.
+- **State / persistence: Neon (serverless Postgres).** Replaces local SQLite/in-memory checkpointer.
+- **Object storage: Cloudflare R2.** State already stores asset URLs rather than binaries.
+- **Review UI: Next.js.** Fuller dashboard than the current FastAPI + static-HTML review UI.
 - **Publishing: YouTube Data API v3.** Rate-limited in code once wired; `publish` already enforces the cadence cap against mock output today.
+
+Documentary YouTube copy is already written by `python -m channel youtube` (description, tags, thumbs, synthetic-media disclosure). That is not this roadmap item.

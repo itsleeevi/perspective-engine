@@ -26,7 +26,7 @@ People who click a mystery-opinion title and want a blunt cartoon-clear story an
 
 ## Narration personality
 
-Calm, curious, intelligent friend telling history. Slightly mysterious. Simple spoken English, third person. Not baby talk, not a lecture, not Wikipedia.
+Calm, curious, intelligent friend telling history. Slightly mysterious. Write as if a sharp five-year-old is watching with an adult. Tiny words. Cause, then effect. Funny when the evidence is funny. Not baby talk, not a lecture, not Wikipedia.
 
 Calendar years as digits (`1995`). No “today is DATE”. `the_thought` is said in the VO.
 
@@ -50,7 +50,7 @@ Primary sources first: letters, speeches, interviews, notebooks, official docume
 
 ## Scene grammar
 
-One still per narration chunk. 4–6 chapters. ONE signature prop in ≤ 6 scenes, obvious when it returns. Empty / hero / crowd rotation. Names out of image prompts.
+One still per narration chunk. 4–6 chapters. ONE signature prop in ≤ 6 scenes, obvious when it returns. Empty / hero / crowd rotation (~35–42% hero). Named people are a recognizable cartoon of the real person (reuse `channel/character_locks.json` and `channel/character_sheets/`). 12+ locations. Unique visual verb every still. Names out of image prompts. Grammar: `docs/video-engine/QUALITY_BAR.md`.
 
 ## Visual identity
 

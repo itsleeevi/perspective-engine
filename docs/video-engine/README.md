@@ -49,6 +49,8 @@ Report a bug. Do not silently redesign the system.
 - `PIPELINE.md` — stages, artifacts, resume
 - `NARRATION.md` — voice, length, spoken English
 - `VISUAL_STYLE.md` — locked styles, filenames, composition
+- `QUALITY_BAR.md` — grammar of the best-performing uploads (copy grammar, never spines)
+- `QUALITY_BAR_START_PROMPT.md` — paste-ready prompt that locks that grammar
 - `RESEARCH.md` — sources, claims, no invention
 - `ORIGINALITY.md` — score ≥ 80, monetization
 - `CLOUD_AGENTS.md` — parallel jobs, secrets, environment

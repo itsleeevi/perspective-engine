@@ -7,6 +7,7 @@ import re
 from channel.config import CHANNEL, config_for_project
 from channel.modes import is_business, is_company_story, is_takeover
 from channel.originality_policy import GENERIC_AI_PHRASES, STOCK_ENDINGS, STOCK_TRANSITIONS
+from channel.quality_bar import scene_quality_notes
 from channel.schema import QaScores, VideoProject
 
 
@@ -156,6 +157,7 @@ def visual_qa(project: VideoProject) -> list[str]:
         if scene.who != "empty" and not scene.characters and scene.who == "hero":
             if not any(c.is_subject for c in project.characters.values()):
                 notes.append(f"{scene.scene_id}: hero shot but no subject character")
+    notes.extend(scene_quality_notes(project))
     for person in project.characters.values():
         lock = person.visual_lock or ""
         if person.historical_name and person.historical_name.lower() in lock.lower():

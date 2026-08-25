@@ -34,4 +34,20 @@ KOKORO_SPEED_MAX = 1.15
 KOKORO_SPEED_LOCK = {
     "visa-really-makes-money": 1.15,
     "costco-really-makes-money": 0.92,
+    "mrbeast-took-over-youtube": 1.0,
+}
+
+# Per-slug speaker when roster rotation sounds wrong for the cut.
+KOKORO_VOICE_LOCK = {
+    "mrbeast-took-over-youtube": "am_liam",
+}
+
+# Per-slug breath holds. Channel defaults are tight (0.06 / 0.02 / 0.28)
+# and read as machine-gun TTS on some roster voices.
+KOKORO_PAUSE_LOCK = {
+    "mrbeast-took-over-youtube": {
+        "sentence": 0.22,
+        "clause": 0.10,
+        "scene": 0.36,
+    },
 }

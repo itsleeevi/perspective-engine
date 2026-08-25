@@ -123,6 +123,13 @@ posters. Name cards after evidence this title owns.
 The spine a five-year-old can follow: one returning picture, cause then
 effect, no riddle-talk. Adults still get the real names and dates.
 
+QUALITY BAR (docs/video-engine/QUALITY_BAR.md): copy the grammar of the
+best-performing cuts, never their spines. title_payoff: 6-18 words, concrete,
+child-repeatable. Prefer two beats over a riddle. Cold open: one sourced
+physical contradiction in a specific place. Hook: say the_thought, then a
+kid map of 5-8 steps this title owns. Chapters ARE those steps (unique names
+from the evidence). End by saying the_thought again plus an honest limit.
+
 HUMAN VALUE TEST: if the AI tools were removed, would this still look like
 a real creator researched and structured this documentary? If no, revise.
 """
@@ -158,12 +165,14 @@ chapters with poster-like names (≤4 words) that this evidence owns. Do
 not copy another video's cards. At most three "The <Noun>" names.
 Say title_payoff in the cold open or right after, and again near the end.
 
-Blunt simple cartoon, not a riddle. A five-year-old should be able to
-follow while watching. One idea at a time. Do not read long numbers
-aloud — round to a sayable figure. An adult should still learn the real
-names and dates. Say OpenAI,
-Grok, SpaceX, Tesla — do not hide them as "the lab" or "the chatbot shop".
-Those names stay OUT of image prompts.
+Blunt simple cartoon, not a riddle. Write as if a sharp five-year-old is
+watching with an adult. Tiny words. Cause, then effect. One picture per
+idea. Funny when the evidence is actually funny — not a roast, not baby
+talk, not a lecture. If a sentence needs a second breath, split it.
+A five-year-old should be able to retell the spine. An adult should still
+learn the real names and dates. Do not read long numbers aloud — round
+to a sayable figure. Say OpenAI, Grok, SpaceX, Tesla — do not hide them
+as "the lab" or "the chatbot shop". Those names stay OUT of image prompts.
 
 Each title gets a new story engine. Do not open with "Month Year. Name…"
 and do not retell the last fable with new labels.
@@ -181,8 +190,30 @@ visual_lock that does NOT include the historical personal name (image-model
 safety). Recognition = hair, facial hair, clothing, silhouette, palette.
 Locations get a reusable id + description in the channel's flat 2D style.
 Do not put photoreal / 3D / anime language in visual_lock.
+Public figures get a distinctive cartoon lock (hair, face shape, jaw,
+eyes, clothes) so the viewer names them. That is a recognizable cartoon
+of the real person in flat 2D. NOT a photograph. NOT a generic clerk.
+If channel/character_locks.json already has this person, copy that
+visual_lock and pass the hashed photo plus sheet in
+channel/character_sheets/ as GenerateImage reference_image_paths.
+Compile writes those paths onto the job. Names stay out of prompts and
+filenames.
 If there is a signature prop, lock its LOOK: high contrast, large in
 frame, the same object every time it returns. A faint mark is a miss.
+Named public figures: look up channel/character_locks.json FIRST. If
+present, copy visual_lock exactly and pass the hashed photo then cartoon
+sheet in channel/character_sheets/ as GenerateImage reference_image_paths.
+If new, write a lock that starts "Same cartoon person every time, do not
+redesign. Copy this face:" then face shape, jaw, eyes, hair, stubble or
+beard, and ALWAYS-clothes they actually wear (one outfit, no logos). End
+with "Distinctive recognizable cartoon of the real person. Flat 2D
+vector, two-dot eyes, no skin texture, not a photograph, not photoreal.
+Keep this exact face in every frame." When two people share a frame,
+contrast height and face so they are not twins. Expression CHANGES with
+the action. Recurring extras get a costume lock (slate sweater shopper,
+pale blue smock clerk, orange-vest developer) — never a generic gray clerk.
+A new sheet is three chest-up views (front, three-quarter, profile) on a
+solid field, hashed filename, no personal name in the file.
 """
 
 SCENE_BREAKDOWN = """
@@ -204,6 +235,28 @@ sequences are not.
 
 No photoreal impersonation. No realistic fake interviews or speeches.
 The narrator reads quotations; we do not clone the subject's voice.
+
+CARTOON HEROES (all titles): ~35–42% hero (lint warns above 45%). The rest
+is crowd and empty cinematic sets so the hero disappears for stretches.
+When the title has two people, both appear as recognizable cartoons when
+the beat needs them. 12+ locations. No set in more than a third of scenes.
+No three consecutive scenes in the same set. Every still needs a UNIQUE
+visual verb — do not collapse to six repeating still-life templates
+(desk, binder, empty lobby). Mix slam, walk, catch, sit, leave, fight
+over an object. Signature prop in at most 6 scenes.
+
+QUALITY BAR (docs/video-engine/QUALITY_BAR.md): every still is a cinema
+beat, not a slide: {SET} {who/costume} {physical verb} {one oversized
+focal object} {named lighting}. Accent: {corner light}, {empty margin}.
+Unique staging. No logos. No readable type. ONE idea in the frame. ONE
+oversized focal object large in the middle, high contrast, never faint.
+When the signature prop returns, paste its lock sentence. Ban wallpaper:
+"Clean business illustration of a filing table", identical desk-and-binder
+loops, talking-head portraits. Rotate composition (wide / medium / close-up
+/ OTS / establishing / object / low / high). Person-titled cuts: the named
+person is a recognizable cartoon in about 35-42 percent of stills (lint
+warns below 28 percent). Costume-locked extras, never generic gray clerks.
+Copy the grammar. Never copy a reference-cut spine.
 """
 
 RETENTION_QA = """
@@ -235,12 +288,17 @@ SHORTS = """
 One Short per long video. Not a summary of the whole cut. Pick ONE
 interesting fact, contradiction, quote, or event and tell it as its own
 mini-story. Do not reuse the last Short's template.
-0–2s MUST punch (a twist, a dare, a picture). Then evidence. Then a
-reason to tap the long video. Engaging, not a lecture. Last spoken scene
-is exactly: "Watch the full video. The link is in the description."
+0–2s MUST punch (a twist, a dare, a picture). First spoken sentence is the
+punch (16 words or fewer): a contradiction or a slam, not a definition.
+First still is that picture. Then evidence. Then a reason to tap the long
+video. Engaging, not a lecture. Last spoken scene is exactly: "Watch the
+full video. The link is in the description."
 Compile adds a branded 9:16 end card for that line — do not illustrate it.
 70–130 words. Short sentences so burned captions stay readable. 9:16
 stills. Never spoil the long video's final button line.
+6–8 shots, a unique composition each. Hero cartoon large in frame when
+present. Lighting accent plus empty margin every still. Read
+docs/video-engine/QUALITY_BAR.md.
 
 Captions are burned in the YouTube Shorts safe band (above the like /
 title chrome). Do not write one giant sentence that becomes a sheared

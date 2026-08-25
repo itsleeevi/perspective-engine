@@ -48,7 +48,7 @@ How / Why / The Business Behind… “How Visa Really Makes Money” is this cha
 
 ## Scene grammar
 
-Money-flow diagrams, company environments, products — unique to that business. 5–8 chapters. Not WTRT portraits. Not takeover flywheel grammar.
+Money-flow diagrams, company environments, products — unique to that business. 5–8 chapters. Not WTRT portraits. Not takeover flywheel grammar. One oversized focal object per still; costume-locked extras; no filing-table wallpaper (`docs/video-engine/QUALITY_BAR.md`).
 
 ## Visual identity
 

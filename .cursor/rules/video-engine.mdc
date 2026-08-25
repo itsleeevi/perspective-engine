@@ -7,7 +7,7 @@ alwaysApply: true
 
 This repo's **production videos** are the `channel/` documentary engine, not `graph/` `ideate`. A title naming a real person belongs on `python -m channel generate`, never the LangGraph topic flow.
 
-Canonical command: `python -m channel generate --channel <mode> --title "<title>"`. Jobs live in `artifacts/<JOB_ID>/`. Specs: `docs/video-engine/`.
+Canonical command: `python -m channel generate --channel <mode> --title "<title>"`. Jobs live in `artifacts/<JOB_ID>/`. Specs: `docs/video-engine/`. Copy the grammar in `docs/video-engine/QUALITY_BAR.md`; never clone a reference-cut spine.
 
 ```text
 DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.

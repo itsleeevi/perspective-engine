@@ -72,7 +72,7 @@ Titles do **not** have to be "How X Took Over Y". "How Rolex Became the Ultimate
 - Kokoro speed **1.0–1.15** (default **1.15**; never below **1.0** on a new title). Voice: `am_liam` unless a shipped lock says otherwise.
 - Script **4400–5500 words** (ideal 4600–5200) so a 1.15 cut still lands ~20–25 minutes. Write spoken English at about 145–155 wpm. Do not pad a thin story to hit the max.
 - Stills change every **4–8 seconds**. Complex flywheels may hold longer if they evolve.
-- Voice: a smart friend explaining how an empire was built so a five-year-old can follow while watching. One idea at a time. **Do not read long numbers** aloud. Not an MBA lecture, not Wikipedia, not financial TV, not TikTok hype.
+- Voice: a smart friend explaining how an empire was built so a five-year-old can follow while watching. Tiny words. Cause, then effect. Funny when the evidence is funny. One idea at a time. **Do not read long numbers** aloud. Not an MBA lecture, not Wikipedia, not financial TV, not TikTok hype.
 
 ## Research
 
@@ -99,6 +99,8 @@ Retention: something new every 20–40 seconds; a major reveal every 60–120 se
 `HOW_THEY_TOOK_OVER_VISUAL_STYLE` is frozen in `channel/config.py`: clean modern flat 2D, energetic, strategic, flywheels, competitor maps, timelines. Not the muted historical What They Really Think palette. Not the money-flow How They Really Make Money grammar. Not photoreal. Not 3D corporate. Not logo vs logo.
 
 Rotate `TAKEOVER_VISUAL_TYPES`. Reveal flywheels progressively. Animate timelines date → event → date. Competitor scenes show the strategic difference. One chart = one idea.
+
+Recurring people get a distinctive cartoon `visual_lock`: a recognizable cartoon of the real person (not photoreal, not a generic clerk). Reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references. About 35–42% hero, 12+ locations, unique action every still. Match `docs/video-engine/QUALITY_BAR.md`: make the rise physical with one oversized object, unique cinema stills, no logo-vs-logo posters.
 
 Company names stay out of image prompts.
 

@@ -13,4 +13,8 @@ Not photoreal, not 3D, not anime. Historical names and company names stay out of
 
 Never put a company or person name in a GenerateImage **filename** — the model will paint the word onto the picture. Use the job’s `generate_filename` (hashed token), then copy onto `filename` / `copy_to`.
 
+Named public figures must be a recognizable cartoon of the real person. Reuse `channel/character_locks.json` and pass the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references.
+
+Every still: one idea, one oversized focal object, named lighting, unique staging (`docs/video-engine/QUALITY_BAR.md` / `channel/quality_bar.py`). No filing-table wallpaper.
+
 Stills ~4–8 seconds. Long output 3840×2160. Shorts 1080×1920.

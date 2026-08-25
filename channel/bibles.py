@@ -16,7 +16,7 @@ def visual_lock(character: Character) -> str:
         character.body,
         character.default_clothing,
         ", ".join(character.recognition_features),
-        "flat 2D vector, simple facial features, NOT photoreal, NOT a celebrity likeness",
+        "flat 2D vector, simple facial features, NOT photoreal, NOT a photograph. Distinctive recognizable cartoon of the real person. Same cartoon person every time, do not redesign.",
     ]
     return ". ".join(b for b in bits if b)
 

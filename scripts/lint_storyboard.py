@@ -19,6 +19,10 @@ Checks (all measured on the stills module's ``STILLS`` scenes):
                capped at 25%: they read as slides, not cinema.
 5. HERO REST — the hero should disappear for stretches (other characters and
                places carry scenes); flag if hero appears in >45% of scenes.
+               Person-titled cuts also warn below 28%.
+6. QUALITY BAR — unique cinema beats; ban filing-table wallpaper; signature
+               prop must be huge / high contrast / large in frame
+               (docs/video-engine/QUALITY_BAR.md).
 
 Exit code 1 on any ERROR; warnings print but pass. A cheap execution model
 runs this after writing the storyboard and fixes what it flags.
@@ -152,6 +156,26 @@ def main() -> None:
         )
     else:
         print(f"ok      hero in {hero_n}/{len(stills)} scenes")
+
+    # 5b. QUALITY BAR — unique cinema beats, oversized props, person-title hero floor.
+    from channel.quality_bar import stills_quality_notes
+
+    q_errors, q_warnings = stills_quality_notes(
+        scenes,
+        whos,
+        title=str(
+            spec.get("title")
+            or spec.get("topic")
+            or (spec.get("youtube") or {}).get("title")
+            or ""
+        ),
+        prop_tokens=list(budget),
+        short=short,
+    )
+    for msg in q_errors:
+        _fail(msg)
+    for msg in q_warnings:
+        _warn(msg)
 
     # 6. SHORT LENGTH — a traffic Short is 8-14 shots.
     if short and not 6 <= len(stills) <= 14:

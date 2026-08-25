@@ -1,0 +1,18 @@
+{
+  "jobs": [
+    {
+      "id": "short_thumb",
+      "filename": "mrbeast-cracked-the-youtube-algorithm_short_thumbnail.png",
+      "generate_filename": "ude587207.png",
+      "copy_to": "mrbeast-cracked-the-youtube-algorithm_short_thumbnail.png",
+      "aspect": "9:16",
+      "overlay_text": "CLICK THEN STAY",
+      "output_jpeg": "assets/youtube/mrbeast_cracked_the_youtube_algorithm_short_thumbnail_1080x1920.jpg",
+      "prompt": "Clean flat 2D strategic business documentary illustration in the established How They Took Over channel identity. Modern vector-like artwork, simple recognizable people and company environments, crisp products and technology, high readability, clear silhouettes, controlled shading, clean high-contrast composition, visually intuitive strategy diagrams, timelines, maps, market competition, business flywheels and growth systems. Energetic but professional. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Not photorealistic, not 3D, not anime, not painterly, not stock imagery. Vertical 9:16 YouTube Shorts thumbnail. ONE simplified product or company symbol plus ONE competitor, flywheel, or before/after object. Clean high-contrast backdrop. Empty dark lower third of the frame for type added later. No photoreal logo lockup, no clutter. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. Not a 3D corporate animation, not a stock-photo slideshow, not a logo-vs-logo poster, not a photoreal product shot. NO readable text, NO letters, NO captions, NO title card, NO watermark. Type will be added later. Same cartoon man every time, do not redesign the skull. Copy this REAL face from the reference photos: rectangular young-adult face, short textured light-brown hair swept forward and slightly to the right with volume on top. Neat light-brown beard and mustache. Warm brown cartoon eyes, straight nose, defined jaw. Lean build. ALWAYS a navy blue zip-up hoodie unzipped halfway over a plain white crew-neck t-shirt, no logos, no crocodile, no panther, no writing. Distinctive recognizable cartoon of the real person. Flat 2D vector, not a photograph, not photoreal. Expression CHANGES with the action: wide toothy smile, tired wrecked sit, focused closed mouth, determined set jaw, excited wave, quiet thinking. Never freeze one grin on every frame. Keep this exact skull, hair, beard, and hoodie in every frame. Navy-hoodie man beside a huge blank bright poster on an easel, hungry machine silhouette behind, no letters on the still. Signature object: the click card.",
+      "reference_image_paths": [
+        "channel/character_sheets/86695442.png",
+        "channel/character_sheets/a8f31c90.png"
+      ]
+    }
+  ]
+}

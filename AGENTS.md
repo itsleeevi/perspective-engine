@@ -36,6 +36,7 @@ Then fill `artifacts/<JOB_ID>/project.json` using the prompt module in the manif
 Sequential local init still exists: `python -m channel init` writes `channel/projects/<slug>/`. Cloud Agents should use `generate` so jobs do not collide.
 
 Paste-ready Cloud prompt: `docs/video-engine/CLOUD_AGENT_START_PROMPT.md`.
+Quality-bar prompt (kid map, cartoon locks, oversized stills, punchy Shorts): `docs/video-engine/QUALITY_BAR_START_PROMPT.md`.
 
 ```text
 DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.
@@ -47,6 +48,8 @@ DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATI
 - Versions / model lock / render lock: `channel/engine.py`
 - Mode aliases: `channel/modes.py`
 - Shipped voice/style locks: `channel/locks.py` (Costco Kokoro **0.92**; new titles **1.0–1.15**, default **1.15**)
+- Public-figure cartoon faces: `channel/character_locks.json` + hashed photo/sheet files in `channel/character_sheets/`
+- Quality bar (grammar of the best-performing uploads): `docs/video-engine/QUALITY_BAR.md` and `channel/quality_bar.py`
 
 ## Where prompts live
 
@@ -61,7 +64,7 @@ DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATI
 ```text
 .venv/bin/python -m channel qa <job_id-or-slug>
 .venv/bin/python -m channel cloud-readiness
-.venv/bin/pytest tests/test_channel_handoff.py tests/test_portability.py tests/test_how_they_took_over.py tests/test_behind_the_business.py
+.venv/bin/pytest tests/test_channel_handoff.py tests/test_portability.py tests/test_how_they_took_over.py tests/test_behind_the_business.py tests/test_character_locks.py tests/test_quality_bar.py
 ```
 
 Need `the_thought`, GenerateImage after QA, YouTube `Watch the full video:` + synthetic-media disclosure. Lengths: Think, Money, and Takeover **4400–5500** words (~20–25 minutes). Voice Kokoro `am_liam` (roster may rotate). New titles stay at Kokoro **1.0–1.15** (default **1.15**). Write the whole VO so a five-year-old can follow while an adult still learns. **Do not read long numbers** aloud — round to a sayable figure (`about 158 billion`, not `158,359,009,867`). Exact digits stay in claims.
@@ -78,7 +81,7 @@ Install: Python ≥ 3.13, `pip install -e ".[dev]"`, ffmpeg before assemble. `.c
 
 `docs/custom-videos.md` is the Think production system. Cursor Grok fills research / story / bibles / scenes. Compile writes fixture + stills + spec + image jobs + thumbs + draft YouTube copy. After a Think cut ships, update `docs/videos/`. After Money, `docs/business/`. After Takeover, `docs/takeover/`.
 
-Non-negotiable: unique story engine (`lint_story.py`), **originality_score ≥ 80** vs the last 10 on the **same** channel, `ready_to_publish`, answer the title through a story, child-repeatable `the_thought`, real names spoken (kept out of image prompts), no “today is DATE”, third-person spoken English. Think, Money, and Takeover long cuts **~20–25 minutes** (**4400–5500** words at Kokoro **1.0–1.15**). Neutral GenerateImage filenames (never put `costco` in the filename). Fill-frame 16:9, 3840×2160, Shorts 1080×1920, thumbs 1280×720 JPEG, synthetic-media disclosure, 24h between different-title assembles.
+Non-negotiable: unique story engine (`lint_story.py`), **originality_score ≥ 80** vs the last 10 on the **same** channel, `ready_to_publish`, answer the title through a story, child-repeatable `the_thought`, real names spoken (kept out of image prompts), no “today is DATE”, third-person spoken English. Think, Money, and Takeover long cuts **~20–25 minutes** (**4400–5500** words at Kokoro **1.0–1.15**). Neutral GenerateImage filenames (never put `costco` in the filename). Fill-frame 16:9, 3840×2160, Shorts 1080×1920, thumbs 1280×720 JPEG, synthetic-media disclosure, 24h between different-title assembles. Named public figures are a **recognizable cartoon of the real person**; reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references. Match the **grammar** in `docs/video-engine/QUALITY_BAR.md` (kid map, oversized focal object, unique cinema stills, punchy Short) without cloning a reference-cut spine.
 
 Shared contract: chat is not how the next clone learns the rules. After any production change, update `docs/custom-videos.md`, this file, and `.cursor/rules/custom-videos.mdc` in the same commit. `tests/test_channel_handoff.py` guards the three surfaces.
 

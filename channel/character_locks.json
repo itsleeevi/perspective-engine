@@ -1,0 +1,59 @@
+{
+  "people": [
+    {
+      "id": "elon-musk",
+      "names": [
+        "Elon Musk"
+      ],
+      "sheet": "channel/character_sheets/d44eae5a.png",
+      "photo": "channel/character_sheets/4a7d89fd.png",
+      "visual_lock": "Same cartoon man every time, do not redesign. Copy this face: rectangular face, strong broad jaw, prominent chin. Dark brown short textured hair styled slightly up and back, tousled on top, receding at the temples. Light grey-blue hooded cartoon eyes. Thin arched eyebrows. Straight nose with a moderately wide bridge. Thin lips in a tight closed line. Light stubble on the jaw and upper lip. ALWAYS a plain black crew-neck t-shirt, no jacket, no logos, no graphics. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. Keep this exact face in every frame."
+    },
+    {
+      "id": "sam-altman",
+      "names": [
+        "Sam Altman"
+      ],
+      "sheet": "channel/character_sheets/2f577b1a.png",
+      "photo": "channel/character_sheets/be1e2416.png",
+      "visual_lock": "Same cartoon man every time, do not redesign. Copy this face: oval face. Large prominent light cartoon eyes. Medium-brown short wavy-curly hair, casual and slightly messy on top. Straight nose. Neutral closed mouth. ALWAYS a tan camel crew-neck sweater over a dark undershirt, no logos, no microphone. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. A head shorter and rounder-faced than the tall black-shirt man. Do not make them twins. Keep this exact face in every frame."
+    },
+    {
+      "id": "jimmy-donaldson",
+      "names": [
+        "Jimmy Donaldson",
+        "MrBeast",
+        "James Stephen Donaldson"
+      ],
+      "sheet": "channel/character_sheets/a8f31c90.png",
+      "photo": "channel/character_sheets/86695442.png",
+      "visual_lock": "Same cartoon man every time, do not redesign the skull. Copy this REAL face from the reference photos: rectangular young-adult face, short textured light-brown hair swept forward and slightly to the right with volume on top. Neat light-brown beard and mustache. Warm brown cartoon eyes, straight nose, defined jaw. Lean build. ALWAYS a navy blue zip-up hoodie unzipped halfway over a plain white crew-neck t-shirt, no logos, no crocodile, no panther, no writing. Distinctive recognizable cartoon of the real person. Flat 2D vector, not a photograph, not photoreal. Expression CHANGES with the action: wide toothy smile, tired wrecked sit, focused closed mouth, determined set jaw, excited wave, quiet thinking. Never freeze one grin on every frame. Keep this exact skull, hair, beard, and hoodie in every frame."
+    },
+    {
+      "id": "felix-kjellberg",
+      "names": [
+        "Felix Kjellberg",
+        "PewDiePie"
+      ],
+      "sheet": "channel/character_sheets/2ecbc15a.png",
+      "visual_lock": "Same cartoon person every time, do not redesign. Copy this face: pale round-oval face, soft jaw, small cartoon eyes, light brown hair swept to the side with volume on top, neat light beard. ALWAYS a simple dark charcoal long-sleeve shirt, no logos, no headset mic. Shorter sit than the navy-hoodie man. Different face, not twins. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. Keep this exact face in every frame."
+    },
+    {
+      "id": "donald-trump",
+      "names": [
+        "Donald Trump",
+        "Donald J. Trump"
+      ],
+      "sheet": "channel/character_sheets/73501a76.png",
+      "visual_lock": "Same cartoon tycoon every time, do not redesign. Copy this face: orange-tan oval face. Swept gold-blond hair piled high in a distinctive comb-over mound. Small squinting cartoon eyes. Tiny mouth. ALWAYS an oversized boxy navy-blue suit with huge shoulders and an extra-long bright red necktie hanging far below the belt, no logos, no flags. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. Expression CHANGES with the action: slam, squint, walk, refuse. Keep this exact skull, comb-over, suit, and necktie in every frame."
+    },
+    {
+      "id": "tim-cook",
+      "names": [
+        "Tim Cook"
+      ],
+      "visual_lock": "Same cartoon person every time, do not redesign. Copy this face: roundish older adult face, soft jaw, short silver-gray hair neatly parted, clear thin glasses, calm closed mouth. ALWAYS a plain black turtleneck, no logos, no watch face text. Shorter and older sit than the camel-sweater man. Different face, not twins. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. Keep this exact face in every frame.",
+      "sheet": "channel/character_sheets/22acec53.png"
+    }
+  ]
+}

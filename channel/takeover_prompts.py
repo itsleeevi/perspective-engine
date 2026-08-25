@@ -127,6 +127,12 @@ Never assemble a new title below 1.0 or above 1.15.
 Read docs/takeover/ before you write. HUMAN VALUE TEST: if the tools
 were removed, would this still look like a researched documentary?
 If no, revise.
+QUALITY BAR (docs/video-engine/QUALITY_BAR.md): copy the grammar of the
+best-performing cuts, never their spines. title_payoff: 6-18 words, concrete,
+child-repeatable. Prefer two beats over a riddle. Cold open: one sourced
+physical contradiction in a specific place. Hook: say the_thought, then a
+kid map of 5-8 steps this title owns. Chapters ARE those steps (unique names
+from the evidence). End by saying the_thought again plus an honest limit.
 """
 
 NARRATION_WRITER = """
@@ -136,7 +142,11 @@ slightly playful. NOT an MBA lecture, Wikipedia, financial-news anchor,
 AI assistant, corporate documentary, or hyperactive YouTuber.
 Original narration, not rewritten articles or YouTube transcripts.
 
-Write for SPEECH. A five-year-old should be able to follow while watching.
+Write for SPEECH. Write as if a sharp five-year-old is watching with an
+adult. Tiny words. Cause, then effect. One picture per idea. Funny when
+the evidence is actually funny — not a roast, not baby talk, not an MBA
+lecture. If a sentence needs a second breath, split it.
+A five-year-old should be able to follow while watching.
 One idea per sentence. Short and medium sentences. Make strategy physical
 ("By then, switching was not buying different hardware. It was rewriting
 the software too."). Do not read long numbers aloud. Numbers must have
@@ -165,7 +175,23 @@ Fill project.takeover.visual_identity:
 Do not require copyrighted ads. Do not recreate advertisements
 shot-for-shot. Company names stay OUT of image prompts.
 People get visual_lock without historical personal names.
+Public figures get a distinctive cartoon lock so the viewer names them.
+That is a recognizable cartoon of the real person in flat 2D, not a
+photograph, not a generic clerk. Reuse channel/character_locks.json
+when this person already shipped; pass the hashed photo plus sheet in
+channel/character_sheets/ as GenerateImage reference_image_paths.
 If there is a signature prop, it is the same obvious object every time.
+Named public figures: look up channel/character_locks.json FIRST. If
+present, copy visual_lock exactly and pass the hashed photo then cartoon
+sheet in channel/character_sheets/ as GenerateImage reference_image_paths.
+If new, write a lock that starts "Same cartoon person every time, do not
+redesign. Copy this face:" then face shape, jaw, eyes, hair, stubble or
+beard, and ALWAYS-clothes they actually wear (one outfit, no logos). End
+with "Distinctive recognizable cartoon of the real person. Flat 2D
+vector, two-dot eyes, no skin texture, not a photograph, not photoreal.
+Keep this exact face in every frame." Recurring extras get a costume lock
+— never a generic gray clerk. A new sheet is three chest-up views on a
+solid field, hashed filename, no personal name in the file.
 """
 
 SCENE_BREAKDOWN = """
@@ -184,9 +210,27 @@ New composition every ~4–8 seconds. Complex diagrams may hold longer
 if they evolve. No static image for 15 seconds.
 Visual verbs: builds, launches, ships, expands, competes, switches,
 adopts, acquires — make strategy physical.
-who: hero / empty / crowd. Diagrams are usually empty.
+who: hero / empty / crowd. Flywheels may still put the cartoon founder in
+frame when that keeps a five-year-old watching.
 Do not write HOW_THEY_TOOK_OVER_VISUAL_STYLE into the action.
+
+CARTOON HEROES: ~35–42% hero (lint warns above 45%). Distinctive flat-2D
+visual_lock for any recurring person (hair, clothes, silhouette), no
+historical name, NOT photoreal. 12+ locations. Unique visual verb every
+still. Signature prop in at most 6 scenes. Impersonate the subject as a
+cartoon, not a generic clerk.
 Optional on_screen_text for a tasteful source label — not on every scene.
+
+QUALITY BAR (docs/video-engine/QUALITY_BAR.md): every still is a cinema
+beat, not a slide: {SET} {who/costume} {physical verb} {one oversized
+focal object} {named lighting}. Accent: {corner light}, {empty margin}.
+Unique staging. No logos. No readable type. ONE idea in the frame. ONE
+oversized focal object large in the middle, high contrast, never faint.
+When the signature prop returns, paste its lock sentence. Ban wallpaper:
+"Clean business illustration of a filing table", identical desk-and-binder
+loops, logo-vs-logo posters. Make the rise physical (a stall, a tent, a
+road) like the Tesla charging-road grammar — never clone that stall.
+12+ locations. Copy the grammar. Never copy a reference-cut spine.
 """
 
 RETENTION_QA = """
@@ -227,9 +271,13 @@ ONE Short per long video. 30–55 seconds. Not a summary of the long cut.
 Pick ONE high-curiosity mechanism or turning point.
 Long "How X Took Over Y" → Short "The Decision That Changed Y"
 (write a title-specific Short; do not reuse another subject's beat).
-Hook, one story, payoff, then:
+First spoken sentence is the punch (16 words or fewer): a contradiction
+or a slam, not a definition. First still is that picture. Hook, one story,
+payoff, then:
 "Watch the full video. The link is in the description."
 Compile adds the branded 9:16 card. 75–140 words. 9:16 stills.
+6–8 shots, a unique composition each. Lighting accent plus empty margin
+every still. Read docs/video-engine/QUALITY_BAR.md.
 """
 
 METADATA = """

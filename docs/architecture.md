@@ -1,6 +1,6 @@
 # Architecture
 
-Deep-dive reference for the graph in `graph/`. For the high-level picture, see the [Workflow diagram](../README.md#workflow) in the README.
+YouTube documentaries are the `channel/` engine ([`docs/video-engine/`](video-engine/), [`AGENTS.md`](../AGENTS.md)). This file is the deep-dive for the separate LangGraph skeleton in `graph/`. For that prototype's flowchart, see the [Workflow diagram](../README.md#workflow) in the README.
 
 ## State
 

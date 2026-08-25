@@ -1,6 +1,8 @@
 # Roadmap
 
-The build is sequenced to defer paid and managed infrastructure until the core control flow is proven and covered by tests. See `AGENTS.md` for the current phase and what's explicitly out of scope until it's complete.
+This roadmap is for the **LangGraph** product in `graph/`. Shipped YouTube documentaries use the `channel/` engine and are not gated on these phases. See [`AGENTS.md`](../AGENTS.md) and [`docs/video-engine/`](video-engine/).
+
+The LangGraph build is sequenced to defer paid and managed infrastructure until the core control flow is proven and covered by tests. See `AGENTS.md` for what is explicitly out of scope on that path until Phase 1 is complete.
 
 ## Phase 1: local only (current)
 

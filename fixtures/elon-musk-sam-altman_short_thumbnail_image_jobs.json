@@ -1,0 +1,18 @@
+{
+  "jobs": [
+    {
+      "id": "short_thumb",
+      "filename": "elon-musk-sam-altman_short_thumbnail.png",
+      "generate_filename": "u4d0b8f80.png",
+      "copy_to": "elon-musk-sam-altman_short_thumbnail.png",
+      "aspect": "9:16",
+      "overlay_text": "THE CHAIR",
+      "output_jpeg": "assets/youtube/elon_musk_sam_altman_short_thumbnail_1080x1920.jpg",
+      "prompt": "Simple flat 2D historical educational animation in the established What They Really Think visual identity. Clean vector-like digital illustration, simplified human anatomy, simple facial features (simple eyes, simple nose, simple mouth), clear recognizable silhouettes, flat colors, muted historical palette, minimal gradients, restrained shading, softly illustrated simplified background, uncluttered composition, expressive but restrained poses, consistent recurring character design, clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, or diagram text must sit fully inside a 10 percent margin from every edge. Never place text flush with the top, bottom, or sides of the frame. Vertical 9:16 YouTube Shorts thumbnail. TIGHT crop, chest-up or closer. The subject's FACE fills the upper half of the frame and is the brightest thing in the picture. Dramatic single-source light, bold colour contrast, clean simple backdrop. Subtle natural expression, not a grimace, not a shout. Empty dark lower third of the frame for type added later. No tiny figures, no wide establishing shot, no clutter. Not photorealistic, not a photograph, not cinematic photography, not 3D, not Pixar, not anime, not manga, not watercolor, not oil painting, not hyper-detailed, not a superhero comic, not photomontage, not DSLR, not realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable paragraphs of body copy, no watermarks, no captions overlaid on the frame unless the scene names a short on-screen label. NO readable text, NO letters, NO captions, NO title card, NO watermark. Type will be added later. Same cartoon man every time, do not redesign. Copy this face: rectangular face, strong broad jaw, prominent chin. Dark brown short textured hair styled slightly up and back, tousled on top, receding at the temples. Light grey-blue hooded cartoon eyes. Thin arched eyebrows. Straight nose with a moderately wide bridge. Thin lips in a tight closed line. Light stubble on the jaw and upper lip. ALWAYS a plain black crew-neck t-shirt, no jacket, no logos, no graphics. Distinctive recognizable cartoon of the real person. Flat 2D vector, two-dot eyes, no skin texture, not a photograph, not photoreal. Keep this exact face in every frame. Tight chest-up of the subject. Face fills at least 30 percent of the frame, well-lit from one side, subtle expression. Signature object small. Empty right third for 2\u20135 words of type added later. Not the full title. Signature object: THE_EMPTY_CHAIR.",
+      "reference_image_paths": [
+        "channel/character_sheets/4a7d89fd.png",
+        "channel/character_sheets/d44eae5a.png"
+      ]
+    }
+  ]
+}
