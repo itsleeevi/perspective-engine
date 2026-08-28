@@ -32,9 +32,18 @@ Or a job file:
 .venv/bin/python -m channel generate --job jobs/example.json
 ```
 
-`--smoke-test` validates routing, schemas, compile, and the job tree without GenerateImage or Kokoro.
+`--smoke-test` validates routing, schemas, compile, and the job tree without operator audio or Google Flow.
 
-`--resume <JOB_ID>` continues an existing `artifacts/<JOB_ID>/` job.
+`--resume <JOB_ID>` continues an existing `artifacts/<JOB_ID>/` job. Stops at `WAIT_AUDIO` until `ingest-audio`.
+
+Drop-folder cut (title + timestamped stills + audio):
+
+```text
+.venv/bin/python -m channel drop --channel how_they_took_over --title "How Nvidia Took Over AI"
+.venv/bin/python -m channel assemble <JOB_ID>
+```
+
+Stills in `drop/` use a bracket clock (`[00-00]_….jpg`). Assemble Lanczos-upscales to 3840×2160 and writes a 4K MP4 without burned captions.
 
 ## Do not mutate the engine
 
@@ -46,6 +55,7 @@ Report a bug. Do not silently redesign the system.
 
 ## Further reading
 
+- `channel/master_prompt.py` — staged operator loop (`MASTER`); DNA customized per channel
 - `PIPELINE.md` — stages, artifacts, resume
 - `NARRATION.md` — voice, length, spoken English
 - `VISUAL_STYLE.md` — locked styles, filenames, composition

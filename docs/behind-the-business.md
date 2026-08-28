@@ -1,6 +1,6 @@
 # How They Really Make Money — production system
 
-This is the playbook for the YouTube channel **How They Really Make Money** (`@HowTheyReallyMakeMoney`). Internal mode stays `behind_the_business`. It reuses the shared `channel/` video engine (research tools, stills, Kokoro, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think with different titles.
+This is the playbook for the YouTube channel **How They Really Make Money** (`@HowTheyReallyMakeMoney`). Internal mode stays `behind_the_business`. It reuses the shared `channel/` video engine (research tools, imported audio, Google Flow stills, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think with different titles.
 
 Read this fully before starting a business cut. After a cut ships, update `docs/business/<slug>.md` and `docs/business/README.md`.
 
@@ -27,7 +27,7 @@ The same engine still starts a history cut the old way:
 .venv/bin/python -m channel init "What Einstein Really Thought About God"
 ```
 
-Config lives in `channel/config.py` as `BEHIND_THE_BUSINESS` / `config_for("behind_the_business")`. Stage prompts live in `channel/business_prompts.py`. Title parsing lives in `channel/business_title.py`.
+Config lives in `channel/config.py` as `BEHIND_THE_BUSINESS` / `config_for("behind_the_business")`. Stage prompts live in `channel/business_prompts.py` (`MASTER` is the staged master prompt with money-channel DNA). Title parsing lives in `channel/business_title.py`.
 
 ## Core promise
 
@@ -55,10 +55,10 @@ Find one central surprising question. Research verifies the answer. The title an
 
 ## Length and voice
 
-- Target about **22 minutes** (1200–1500 seconds). Prefer 15 excellent minutes to 25 padded minutes.
-- Kokoro speed **1.0–1.15** (default **1.15**; never below **1.0** on a new title). Same Liam pacing as What They Really Think.
-- Script **4400–5500 words** (ideal 4600–5200) so a 1.15 cut still lands ~20–25 minutes.
-- Stills still change every **4–8 seconds**.
+- Target about **10 minutes** (300–960 seconds). Prefer a dense 8 minutes to a padded 15.
+- Spoken pacing **1.0–1.15** equivalent (imported VO). New jobs use imported audio; shipped recuts may still use Kokoro `am_liam`.
+- Script **800–2500 words** so the cut lands ~5–15 minutes.
+- Still duration follows the pause table from `ingest-audio`, or the `[00-00]` filename clock on a drop-folder cut (`python -m channel drop`). Drop-folder cuts assemble without burned captions.
 - Voice: a smart friend explaining why a company works so a five-year-old can follow while watching. Tiny words. Cause, then effect. Funny when the evidence is funny. One idea at a time. Short spoken sentences. **Do not read long numbers** aloud — round to a sayable figure. Exact digits stay in claims. Not an MBA lecture, not financial TV, not TikTok hype.
 
 ## Research
@@ -75,15 +75,15 @@ Mystery → what people think it is → first surprise → how the machine works
 
 Vary hooks. Do not open every episode with "This company isn't really X. It's actually Y."
 
-Retention: something new every 20–40 seconds; a major insight every 60–120 seconds; a real shift around 5 / 10 / 15 / 20 minutes. `channel/business_qa.py` checks 60-second segments and dead sections.
+Retention: something new every 20–40 seconds; a major insight every 60–120 seconds; a real shift around 2 / 5 / 8 / 12 minutes. `channel/business_qa.py` checks 60-second segments and dead sections.
 
 ## Visuals
 
-`BEHIND_THE_BUSINESS_VISUAL_STYLE` is frozen in `channel/config.py`: clean modern flat 2D, high contrast, diagrams and money flows. Not the muted historical What They Really Think palette. Not photoreal. Not 3D corporate.
+`BEHIND_THE_BUSINESS_VISUAL_STYLE` is frozen in `channel/config.py`: stick-figure doodle, high contrast, diagrams and money flows as chunky objects. Not the muted historical What They Really Think palette. Not photoreal. Not 3D corporate.
 
 Rotate scene types (store, money flow, chart, map, customer, flashback). One chart = one idea. `$100` breakdowns only when the filings support them.
 
-If the title is a person, impersonate them as a **recognizable cartoon of the real person** in flat 2D (face, hair, jaw, eyes, clothes they actually wear), not a generic clerk. Reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references. About 35–42% hero, 12+ locations, unique action every still. Not photoreal. Names stay out of image prompts. Match `docs/video-engine/QUALITY_BAR.md`: one oversized focal object, named lighting, costume-locked extras, no filing-table wallpaper.
+If the title is a person, impersonate them as a **recognizable cartoon of the real person** drawn as a stick-figure doodle (face, hair, jaw, eyes, clothes they actually wear), not a generic clerk. Reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references. About 35–42% hero, 12+ locations, unique action every still. Not photoreal. Names stay out of image prompts. Match `docs/video-engine/QUALITY_BAR.md`: one oversized focal object, named lighting, costume-locked extras, no filing-table wallpaper.
 
 Company names stay out of image prompts. Do not recreate ads shot-for-shot.
 
@@ -102,7 +102,7 @@ Company names stay out of image prompts. Do not recreate ads shot-for-shot.
  1. Read this file + docs/business/README.md (do not copy a shipped mystery).
 
  2. .venv/bin/python -m channel init --channel behind_the_business "<title>"
-    Optional: --instructions "..." --duration 1320 --skip-seed
+    Optional: --instructions "..." --duration 600 --skip-seed
     Writes channel/projects/<slug>/project.json with channel_mode set.
 
  3. RESEARCHER using channel/business_prompts.py. Fill research.claims from
@@ -112,7 +112,7 @@ Company names stay out of image prompts. Do not recreate ads shot-for-shot.
  4. .venv/bin/python -m channel qa <slug>
     Fix rejected financial claims. Do not write narration until factcheck is honest.
 
-    5. STORY + NARRATION (4400–5500 words, mystery spine, title_payoff in the VO).
+    5. STORY + NARRATION (800–2500 words, mystery spine, title_payoff in the VO).
     BIBLES: company visual_identity; names stay out of image prompts.
 
  6. .venv/bin/python -m channel chunks <slug>

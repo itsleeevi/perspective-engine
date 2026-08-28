@@ -47,9 +47,9 @@ from channel.title import analyze_title
 def test_wtrt_defaults_unchanged():
     assert CHANNEL.mode is ChannelMode.what_they_really_think
     assert CHANNEL.name == "What They Really Think"
-    assert CHANNEL.target_duration_seconds == 1380
-    assert CHANNEL.narration_word_min == 4400
-    assert CHANNEL.narration_word_max == 5500
+    assert CHANNEL.target_duration_seconds == 600
+    assert CHANNEL.narration_word_min == 800
+    assert CHANNEL.narration_word_max == 2500
     assert CHANNEL.narration_wpm == 200
     assert CHANNEL.kokoro_speed == 1.15
     assert CHANNEL.visual_style == GLOBAL_VISUAL_STYLE
@@ -61,9 +61,9 @@ def test_btb_config_is_a_different_channel():
     cfg = config_for("behind_the_business")
     assert cfg is BEHIND_THE_BUSINESS
     assert cfg.name == "How They Really Make Money"
-    assert cfg.target_duration_seconds == 1320
-    assert cfg.narration_word_min == 4400
-    assert cfg.narration_word_max == 5500
+    assert cfg.target_duration_seconds == 600
+    assert cfg.narration_word_min == 800
+    assert cfg.narration_word_max == 2500
     assert cfg.narration_wpm == 200
     assert cfg.kokoro_speed == 1.15
     assert cfg.visual_style == BEHIND_THE_BUSINESS_VISUAL_STYLE
@@ -377,7 +377,7 @@ def _btb_project() -> VideoProject:
 def test_btb_mechanical_qa_uses_business_word_budget():
     project = _btb_project()
     scores = mechanical_qa(project)
-    assert any("4400" in n or "words" in n for n in scores.notes) or scores.pacing <= 8
+    assert any("800" in n or "words" in n for n in scores.notes) or scores.pacing <= 8
 
 
 def test_btb_draft_metadata_includes_sources_and_disclaimer():

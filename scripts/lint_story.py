@@ -148,7 +148,7 @@ _UNIQUENESS_GRANDFATHERED = frozenset(
     }
 )
 
-# Shipped ~8-minute channel cuts. New titles must hit 4400–5500 words.
+# Shipped ~8-minute channel cuts. New titles must hit 800–2500 words.
 _LENGTH_GRANDFATHERED = frozenset(
     {
         "elon-musk-ai",

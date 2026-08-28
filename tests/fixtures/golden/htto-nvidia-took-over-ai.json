@@ -5,7 +5,7 @@
   "visual_style_must_contain": "How They Took Over",
   "visual_style_must_not_contain": "muted historical",
   "must_not_assume": ["cuda", "CUDA"],
-  "new_title_word_min": 4400,
-  "new_title_word_max": 5500,
+  "new_title_word_min": 800,
+  "new_title_word_max": 2500,
   "kokoro_speed": 1.15
 }

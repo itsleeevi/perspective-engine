@@ -28,13 +28,15 @@ Canonical command:
 
 Jobs live under `artifacts/<JOB_ID>/`. Sequential local init (`python -m channel init`) still writes `channel/projects/<slug>/`; Cloud Agents should use `generate` so jobs do not collide.
 
+When the operator already has timestamped stills (`[00-00]_….jpg`) and narration audio, `python -m channel drop --channel <mode> --title "…"` writes a drop folder. Assemble Lanczos-upscales to 4K and muxes the VO without burned captions.
+
 ```text
 DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.
 ```
 
 Sacred for every video: fresh research; a different story architecture; original narration (not rewritten articles or YouTube transcripts); unique scenes and diagrams; a unique story engine. `the_thought` must be spoken. Brand consistency is not a name-swap spine. `originality_score` vs the last 10 videos on the **same** channel must be ≥ 80 and `ready_to_publish` before GenerateImage.
 
-Long cuts are **~20–25 minutes** (**4400–5500** words at Kokoro **1.0–1.15**, default **1.15**). Voice is Kokoro only (`am_liam` or roster `am_michael` / `am_fenrir`). Never Edge, never ElevenLabs, no silent provider fallback. Images are Cursor Grok **GenerateImage** only after QA. Named public figures are a recognizable cartoon of the real person; reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references. Match the **grammar** in [`docs/video-engine/QUALITY_BAR.md`](docs/video-engine/QUALITY_BAR.md) without cloning a reference-cut spine. Historical names and company names stay out of image prompts and GenerateImage filenames.
+Long cuts are **~5–15 minutes** (**800–2500** words). Voice is **imported audio** on new jobs (operator ElevenLabs or any TTS; the engine never calls those APIs). Shipped recuts may still use Kokoro (`am_liam` or roster `am_michael` / `am_fenrir`). Images are operator **Google Flow** stills from `flow_prompts.txt` only after QA. Named public figures are a recognizable cartoon of the real person; reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as Flow references. Match the **grammar** in [`docs/video-engine/QUALITY_BAR.md`](docs/video-engine/QUALITY_BAR.md) without cloning a reference-cut spine. Historical names and company names stay out of image prompts and still filenames.
 
 After compile, GenerateImage the 16:9 and 9:16 thumbnail jobs (no on-image text) and run `python -m channel youtube <slug>`. YouTube descriptions include an honest synthetic-media disclosure. Different titles wait 24 hours between assembles.
 

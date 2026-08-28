@@ -24,6 +24,7 @@ from channel.job import (
     prompt_module_for,
     snapshot_sources,
     write_manifest,
+    write_operator_md,
     write_report,
 )
 from channel.modes import parse_mode
@@ -43,12 +44,15 @@ from channel.slug import slugify
 from channel.title import analyze_title
 
 NEXT_STEPS = (
+    "Follow MASTER in the prompt module named in the manifest (channel/master_prompt.py). Same staged loop; DNA is already per-channel.",
     "Fill research.claims from primary sources. Do not invent numbers or quotes.",
-    "python -m channel generate --resume {job_id}   # after research/story/scenes exist",
+    "python -m channel generate --resume {job_id}   # after research/story/narration exist",
     "python -m channel qa is also available on --resume once the project is filled.",
-    "GenerateImage only after originality_score >= 80 and ready_to_publish.",
+    "After SCRIPT_QA_PASSED: copy script.txt into ElevenLabs. Then ingest-audio. Do not write scenes yet.",
+    "Do not emit flow_prompts until originality_score >= 80 and ready_to_publish.",
+    "Paste flow_prompts.txt into Google Flow. Then ingest-images. Then assemble.",
     IMAGE_FILENAME_RULE,
-    "Assemble: scripts/run_short.py then scripts/run_custom_video.py using the job spec.",
+    "Assemble: python -m channel assemble {job_id}  (Shorts are a second HITL pass and do not block long READY)",
     "DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.",
 )
 
@@ -247,13 +251,24 @@ def start_job(
         manifest.paths["short"] = str(dest / "short" / f"{project.slug}_short.mp4")
         manifest.state = JobState.visual_qa_passed
         manifest.notes = [
-            "smoke-test: no images, no TTS, no network spend after the optional seed skip",
+            "smoke-test: no operator audio, no Google Flow, no network spend after the optional seed skip",
             *[step.format(job_id=jid) for step in NEXT_STEPS],
         ]
     _refresh_qa(manifest, project)
     write_manifest(manifest, root=root)
     write_report(manifest, root=root)
+    write_operator_md(manifest, root=root)
     return manifest
+
+
+def _persist(manifest: GenerationManifest, project: VideoProject, dest: Path, *, root: Path) -> None:
+    save_project(project, dest / "project.json")
+    persist_project_sidecars(project, dest)
+    _refresh_qa(manifest, project)
+    write_manifest(manifest, root=root)
+    write_report(manifest, root=root)
+    write_operator_md(manifest, root=root)
+    manifest.paths["operator"] = str(dest / "OPERATOR.md")
 
 
 def resume_job(
@@ -263,6 +278,8 @@ def resume_job(
     force: bool = False,
     stubs: bool = False,
 ) -> GenerationManifest:
+    from channel.ingest import find_voiceover, images_complete, ingest_audio
+
     root = artifacts_root or ARTIFACTS
     manifest = load_manifest(job_id, root=root)
     path = project_path(job_id, root=root)
@@ -271,41 +288,121 @@ def resume_job(
     project = load_project(path)
     dest = ensure_job_tree(job_id, root=root)
     persist_project_sidecars(project, dest)
+
+    if manifest.smoke_test:
+        written = compile_project(
+            project,
+            stubs_ok=True,
+            root=dest,
+            image_token=image_token_for(project.slug, job_id),
+        )
+        manifest.paths.update(written)
+        manifest.state = JobState.wait_audio
+        _persist(manifest, project, dest, root=root)
+        return manifest
+
     if project.research.claims:
         report, _scores, originality, monetization = run_full_qa(project)
         save_project(project, path)
-        manifest.state = JobState.fact_checked if report.ok else JobState.blocked
         if originality:
             manifest.qa["originality_score"] = originality.originality_score
         if monetization:
             manifest.qa["ready_to_publish"] = monetization.ready_to_publish
         if not report.ok:
             manifest.warnings.append("factcheck not ok")
-        if monetization and not monetization.ready_to_publish and not force:
-            manifest.warnings.append("not ready_to_publish — do not GenerateImage")
             manifest.state = JobState.blocked
-    if project.story and (force or stubs or project.scenes):
-        if not manifest.smoke_test and project.monetization and not project.monetization.ready_to_publish:
-            if not force:
-                _refresh_qa(manifest, project)
-                write_manifest(manifest, root=root)
-                write_report(manifest, root=root)
-                return manifest
-        written = compile_project(
-            project,
-            stubs_ok=stubs or force,
-            root=dest,
-            image_token=image_token_for(project.slug, job_id),
-        )
-        save_project(project, dest / "project.json")
-        persist_project_sidecars(project, dest)
-        manifest.paths.update(written)
-        manifest.state = JobState.visual_plan_created
-        if project.monetization and project.monetization.ready_to_publish:
-            manifest.state = JobState.visual_qa_passed
-    _refresh_qa(manifest, project)
-    write_manifest(manifest, root=root)
-    write_report(manifest, root=root)
+            _persist(manifest, project, dest, root=root)
+            return manifest
+        if monetization and not monetization.ready_to_publish and not force:
+            manifest.warnings.append("not ready_to_publish — do not emit flow_prompts")
+            manifest.state = JobState.blocked
+            _persist(manifest, project, dest, root=root)
+            return manifest
+
+    if not project.story:
+        manifest.state = JobState.researched if project.research.claims else JobState.title_analyzed
+        _persist(manifest, project, dest, root=root)
+        return manifest
+
+    spoken = narration_of(project)
+    if not spoken.strip():
+        manifest.state = JobState.story_planned
+        _persist(manifest, project, dest, root=root)
+        return manifest
+
+    written = compile_project(
+        project,
+        stubs_ok=stubs,
+        root=dest,
+        image_token=image_token_for(project.slug, job_id),
+        stage="script",
+    )
+    manifest.paths.update(written)
+    manifest.state = JobState.script_qa_passed
+
+    ts_path = dest / "timestamps.json"
+    if not ts_path.is_file() and find_voiceover(dest) is not None:
+        ingest_audio(job_id, artifacts_root=root)
+        manifest = load_manifest(job_id, root=root)
+        project = load_project(path)
+        ts_path = dest / "timestamps.json"
+
+    if not ts_path.is_file():
+        if project.scenes and not stubs:
+            manifest.warnings.append(
+                "scenes before audio — ingest the voiceover first; pause table owns scene cuts"
+            )
+        manifest.state = JobState.wait_audio
+        manifest.notes = [
+            f"Copy {dest / 'script.txt'} into ElevenLabs, then: "
+            f"python -m channel ingest-audio {job_id} /path/to/voiceover.mp3",
+            *[step.format(job_id=job_id) for step in NEXT_STEPS],
+        ]
+        _persist(manifest, project, dest, root=root)
+        return manifest
+
+    from channel.pauses import load_timestamps
+
+    table = load_timestamps(ts_path)
+    n = len(table.get("scenes") or [])
+    manifest.paths["timestamps"] = str(ts_path)
+    manifest.paths["transcript"] = str(dest / "transcript.txt")
+    ready = bool(project.monetization and project.monetization.ready_to_publish) or force or stubs
+
+    if len(project.scenes) != n:
+        manifest.state = JobState.pauses_detected
+        manifest.notes = [
+            f"{n} pause scenes in timestamps.json. Fill project.scenes 1:1, then --resume.",
+        ]
+        _persist(manifest, project, dest, root=root)
+        return manifest
+
+    if not ready:
+        manifest.state = JobState.blocked
+        manifest.warnings.append("not ready_to_publish — do not emit flow_prompts")
+        _persist(manifest, project, dest, root=root)
+        return manifest
+
+    written = compile_project(
+        project,
+        stubs_ok=stubs,
+        root=dest,
+        image_token=image_token_for(project.slug, job_id),
+        timestamps=table,
+    )
+    manifest.paths.update(written)
+    manifest.state = JobState.wait_images
+    if images_complete(dest):
+        manifest.state = JobState.images_ingested
+        manifest.notes = [
+            f"Images ready. Assemble: python -m channel assemble {job_id}",
+        ]
+    else:
+        manifest.notes = [
+            f"Paste {dest / 'flow_prompts.txt'} into Google Flow, then: "
+            f"python -m channel ingest-images {job_id} /path/to/pngs",
+        ]
+    _persist(manifest, project, dest, root=root)
     return manifest
 
 

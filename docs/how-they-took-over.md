@@ -1,6 +1,6 @@
 # How They Took Over — production system
 
-This is the playbook for the YouTube channel **How They Took Over** (`@HowTheyTookOver`). Internal mode is `how_they_took_over`. It reuses the shared `channel/` video engine (research tools, stills, Kokoro, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think and **not** How They Really Make Money with different titles.
+This is the playbook for the YouTube channel **How They Took Over** (`@HowTheyTookOver`). Internal mode is `how_they_took_over`. It reuses the shared `channel/` video engine (research tools, imported audio, Google Flow stills, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think and **not** How They Really Make Money with different titles.
 
 Read this fully before starting a takeover cut. After a cut ships, update `docs/takeover/<slug>.md` and `docs/takeover/README.md`.
 
@@ -30,7 +30,7 @@ The same engine still starts a history cut and a money-model cut the old way:
 .venv/bin/python -m channel init --channel behind_the_business "How Visa Really Makes Money"
 ```
 
-Config lives in `channel/config.py` as `HOW_THEY_TOOK_OVER` / `config_for("how_they_took_over")`. Stage prompts live in `channel/takeover_prompts.py`. Title parsing lives in `channel/takeover_title.py`.
+Config lives in `channel/config.py` as `HOW_THEY_TOOK_OVER` / `config_for("how_they_took_over")`. Stage prompts live in `channel/takeover_prompts.py` (`MASTER` is the staged master prompt with takeover-channel DNA). Title parsing lives in `channel/takeover_title.py`.
 
 ## Core promise
 
@@ -68,10 +68,10 @@ Titles do **not** have to be "How X Took Over Y". "How Rolex Became the Ultimate
 
 ## Length and voice
 
-- Target **20–25 minutes** (preferred about 22–23; 1200–1500 seconds, target 1380). Prefer a dense 22 minutes to a padded 25.
-- Kokoro speed **1.0–1.15** (default **1.15**; never below **1.0** on a new title). Voice: `am_liam` unless a shipped lock says otherwise.
-- Script **4400–5500 words** (ideal 4600–5200) so a 1.15 cut still lands ~20–25 minutes. Write spoken English at about 145–155 wpm. Do not pad a thin story to hit the max.
-- Stills change every **4–8 seconds**. Complex flywheels may hold longer if they evolve.
+- Target **5–15 minutes** (preferred about 8–12; 300–960 seconds, target 600). Prefer a dense 8 minutes to a padded 15.
+- Spoken pacing **1.0–1.15** equivalent (imported VO). New jobs use imported audio. Shipped recuts may stay on Kokoro `am_liam`.
+- Script **800–2500 words** so the long cut lands ~5–15 minutes. Write spoken English at about 145–155 wpm. Do not pad a thin story to hit the max.
+- Still duration follows the pause table from `ingest-audio`, or the `[00-00]` filename clock on a drop-folder cut (`python -m channel drop`). Drop-folder cuts assemble without burned captions. Complex flywheels may hold across consecutive timestamps.
 - Voice: a smart friend explaining how an empire was built so a five-year-old can follow while watching. Tiny words. Cause, then effect. Funny when the evidence is funny. One idea at a time. **Do not read long numbers** aloud. Not an MBA lecture, not Wikipedia, not financial TV, not TikTok hype.
 
 ## Research
@@ -96,7 +96,7 @@ Retention: something new every 20–40 seconds; a major reveal every 60–120 se
 
 ## Visuals
 
-`HOW_THEY_TOOK_OVER_VISUAL_STYLE` is frozen in `channel/config.py`: clean modern flat 2D, energetic, strategic, flywheels, competitor maps, timelines. Not the muted historical What They Really Think palette. Not the money-flow How They Really Make Money grammar. Not photoreal. Not 3D corporate. Not logo vs logo.
+`HOW_THEY_TOOK_OVER_VISUAL_STYLE` is frozen in `channel/config.py`: stick-figure doodle, energetic, strategic, flywheels, competitor maps, timelines as chunky objects. Not the muted historical What They Really Think palette. Not the money-flow How They Really Make Money grammar. Not photoreal. Not 3D corporate. Not logo vs logo.
 
 Rotate `TAKEOVER_VISUAL_TYPES`. Reveal flywheels progressively. Animate timelines date → event → date. Competitor scenes show the strategic difference. One chart = one idea.
 
@@ -119,7 +119,7 @@ Company names stay out of image prompts.
  1. Read this file + docs/takeover/README.md (do not copy a shipped rise).
 
  2. .venv/bin/python -m channel init --channel how_they_took_over "<title>"
-    Optional: --instructions "..." --duration 1380 --skip-seed
+    Optional: --instructions "..." --duration 600 --skip-seed
     Writes channel/projects/<slug>/project.json with channel_mode set.
 
  3. RESEARCHER using channel/takeover_prompts.py. Fill research.claims from
@@ -129,7 +129,7 @@ Company names stay out of image prompts.
  4. .venv/bin/python -m channel qa <slug>
     Fix rejected claims. Do not write narration until factcheck is honest.
 
- 5. STORY + NARRATION (4400–5500 words, transformation spine, title_payoff in the VO).
+ 5. STORY + NARRATION (800–2500 words, transformation spine, title_payoff in the VO).
     BIBLES: visual_identity; names stay out of image prompts.
 
  6. .venv/bin/python -m channel chunks <slug>

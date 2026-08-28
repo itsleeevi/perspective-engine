@@ -98,7 +98,7 @@ def assemble_image_prompt(
         "hero": "Only the subject character unless the action names someone else.",
         "crowd": (
             "Costume-locked extras from the bibles (same sweater, smock, hard hat "
-            "every time). Same flat-vector construction. No photoreal faces. "
+            "every time). Same stick-figure doodle construction. No photoreal faces. "
             "No generic gray clerks."
         ),
     }.get(scene.who, "Draw only the named characters.")
@@ -137,6 +137,28 @@ def assemble_image_prompt(
     return strip_image_brands(
         strip_character_names(strip_project_brands(assembled, project), project)
     )
+
+
+def format_flow_prompt(
+    project: VideoProject,
+    scene: Scene,
+    *,
+    start_seconds: float | None = None,
+    aspect: str = "16:9",
+) -> str:
+    """One Google Flow line: [mm:ss] + assembled channel prompt."""
+    from channel.pauses import format_mmss
+
+    start = scene.start_seconds if scene.start_seconds is not None else start_seconds
+    if start is None:
+        start = 0.0
+    body = (scene.flow_prompt or "").strip() or assemble_image_prompt(
+        project, scene, aspect=aspect
+    )
+    # If the agent already stored a timestamped line, keep a single prefix.
+    if body.startswith("["):
+        return body
+    return f"[{format_mmss(float(start))}] {body}"
 
 
 def strip_project_brands(text: str, project: VideoProject) -> str:

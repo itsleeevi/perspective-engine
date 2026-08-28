@@ -13,9 +13,9 @@ from pathlib import Path
 
 from channel.modes import ChannelMode
 
-VIDEO_ENGINE_VERSION = "2026.08.25"
-PROMPT_VERSION = "2026.08.25"
-VISUAL_STYLE_VERSION = "2026.08.25"
+VIDEO_ENGINE_VERSION = "2026.08.28"
+PROMPT_VERSION = "2026.08.26.master"
+VISUAL_STYLE_VERSION = "2026.08.26"
 
 # Documentary path only. Do not silently swap these.
 MODEL_LOCK = {
@@ -23,17 +23,17 @@ MODEL_LOCK = {
     "research_seed": "wikipedia_api_extract",
     "research": "cursor_grok_agent + channel.*_prompts.RESEARCHER",
     "fact_check": "channel.factcheck (deterministic code) + agent review",
-    "story": "cursor_grok_agent + channel.*_prompts.STORY_ARCHITECT",
-    "narration": "cursor_grok_agent + channel.*_prompts.NARRATION_WRITER",
-    "scenes": "cursor_grok_agent + channel.*_prompts.SCENE_BREAKDOWN",
-    "image": "cursor_grok_GenerateImage",
-    "tts": "kokoro",
-    "thumbnail": "cursor_grok_GenerateImage + channel.youtube overlay",
-    "short": "channel.shorts + kokoro + ffmpeg",
+    "story": "cursor_grok_agent + channel.*_prompts.MASTER then STORY_ARCHITECT",
+    "narration": "cursor_grok_agent + channel.*_prompts.MASTER Stage 2 + NARRATION_WRITER",
+    "scenes": "cursor_grok_agent + channel.*_prompts.MASTER Stage 3 + SCENE_BREAKDOWN (after pauses)",
+    "image": "operator_google_flow_ingest",
+    "tts": "operator_imported_audio",
+    "thumbnail": "operator_google_flow_ingest + channel.youtube overlay",
+    "short": "optional HITL, does not block long READY",
     "qa": "channel.qa + originality + monetization_qa + channel.quality_bar",
 }
 
-# Channel documentary path forbids these. Missing Kokoro/GenerateImage = stop.
+# Engine must never *call* these APIs. Operator-imported audio/images are allowed.
 FORBIDDEN_FALLBACKS = (
     "edge-tts",
     "elevenlabs",
@@ -47,7 +47,7 @@ FORBIDDEN_FALLBACKS = (
 RENDER_LOCK = {
     "long_aspect": "16:9",
     "long_output": "3840x2160",
-    "still_ingest": "1280x720 cover-crop then upscale",
+    "still_ingest": "3840x2160 lanczos cover-crop on ingest",
     "short_output": "1080x1920",
     "youtube_thumb": "1280x720 jpeg",
     "youtube_short_thumb": "1080x1920 jpeg",
@@ -69,6 +69,12 @@ KOKORO_LOCK = {
     "default_speed": 1.15,
 }
 
+IMPORTED_VOICE_LOCK = {
+    "provider": "imported",
+    "source": "operator_audio_file",
+    "pause_min_ms": 280,
+}
+
 PROMPT_MODULES = {
     ChannelMode.what_they_really_think: "channel.agent_prompts",
     ChannelMode.behind_the_business: "channel.business_prompts",
@@ -76,11 +82,11 @@ PROMPT_MODULES = {
 }
 
 IMAGE_FILENAME_RULE = (
-    "Never put a company, product, or person name in a GenerateImage "
-    "filename. The image model paints that word onto cards, awnings, and "
-    "signs. Call GenerateImage with the job's generate_filename "
-    "(hashed token, not the slug), then copy onto filename / copy_to "
-    "for assemble."
+    "Never put a company, product, or person name in a still filename. "
+    "HITL stills use index + timestamp (000_00-00-04.png). Drop-folder "
+    "stills use a bracket clock ([00-00]_….jpg). Hashed "
+    "generate_filename tokens stay as aliases. The image model paints "
+    "English words onto cards and signs."
 )
 
 
@@ -126,7 +132,6 @@ def generate_name_map(jobs_file: Path) -> dict[str, str]:
 NETWORK_DOMAINS = (
     "en.wikipedia.org",  # research seed only
     "sec.gov",  # filings (agent browser)
-    "cursor.com",  # GenerateImage
 )
 
 NO_PROVIDER_FALLBACK = True

@@ -19,16 +19,27 @@ Run:
 .venv/bin/python -m channel generate --channel <mode> --title "<TITLE>"
 ```
 
-Then fill research, story, bibles, and scenes in `artifacts/<JOB_ID>/project.json` using the prompt module named in the manifest. Resume with `--resume <JOB_ID>`. Run all research, validation, originality, retention, visual, monetization, rendering, and final QA stages required by the repository.
+Or, when the operator already has timestamped stills (`[00-00]_….jpg`) and narration audio:
+
+```text
+.venv/bin/python -m channel drop --channel <mode> --title "<TITLE>"
+```
+
+Print the `drop/` folder. After files land, `.venv/bin/python -m channel assemble <JOB_ID>` writes a 4K MP4 without burned captions.
+
+Then fill research, story, and narration in `artifacts/<JOB_ID>/project.json` using the **master prompt** (`MASTER`) in the prompt module named in the manifest. Same staged loop on every channel; DNA customized per mode. Resume with `--resume <JOB_ID>`. Stop at `WAIT_AUDIO`. Print the `script.txt` path. Do not write scenes before the operator returns with audio. After timestamps, deliver Google Flow prompts in batches of 20 and wait for **Reply "next"**. Do not emit `flow_prompts` until originality_score ≥ 80 and ready_to_publish.
 
 Do not alter permanent channel configuration during a normal generation job.
 
 Use a unique job ID.
 
-When complete, report:
+When complete (or when blocked on the operator), report:
 
 - job ID
-- final video path
+- state (`WAIT_AUDIO` / `WAIT_DROP` / `WAIT_IMAGES` / `READY`)
+- `script.txt` path
+- `OPERATOR.md` path
+- final video path if assembled
 - thumbnail path
 - Short path if generated
 - metadata path

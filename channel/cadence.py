@@ -92,5 +92,5 @@ def assert_cadence(
         raise CadenceError(
             f"Channel assemble cadence: {other!r} was {elapsed / 3600:.1f}h ago; "
             f"wait {remaining / 3600:.1f}h or pass --force (cap=24h). "
-            "Do not ship a new 20–25 minute cut every day from one template."
+            "Do not ship a new 5–15 minute cut every day from one template."
         )

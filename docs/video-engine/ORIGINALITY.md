@@ -4,8 +4,8 @@ Thresholds live in `channel/originality_policy.py`. Do not restate them only in 
 
 - Compare the last **10** videos on **this** channel (`docs/videos/`, `docs/business/`, or `docs/takeover/`).
 - `originality_score >= 80`
-- `ready_to_publish` before GenerateImage
-- Brand (flat 2D, channel name, Kokoro, title pattern) is ignored
+- `ready_to_publish` before `flow_prompts`
+- Brand (flat 2D, channel name, imported audio / Kokoro recuts, title pattern) is ignored
 - Name-swap spines fail
 - Stock hooks / endings / generic AI phrases fail
 

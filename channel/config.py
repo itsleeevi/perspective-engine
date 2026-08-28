@@ -21,28 +21,44 @@ from channel.locks import (
 from channel.modes import ChannelMode, parse_mode
 
 
+# Shared construction for every channel. Mood and palette stay per-mode below.
+_DOODLE_CONSTRUCTION = (
+    "Hand-drawn 2D doodle cartoon animation, flat colors, bold black outlines, "
+    "slightly imperfect sketchy marker lines, simple stick figures with large "
+    "circular heads, dot eyes, expressive thick brow lines. Named public figures "
+    "are a recognizable cartoon of the real person drawn as that stick-figure "
+    "doodle (hair, jaw, clothes from the character lock), not photoreal, not "
+    "identical anonymous twins. Chunky simplified cartoon objects, big bold "
+    "flat single-color fills, thick black outlines. Solid color-block "
+    "backgrounds only — white default; green strip equals ground; blue sky plus "
+    "green ground equals outdoor. ZERO gradients, ZERO shadows, ZERO textures. "
+)
+
+_FRAME_FILL = (
+    "FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black "
+    "bars. Any on-image label, badge, sign, or diagram text must sit fully "
+    "inside a 10 percent margin from every edge. Never place text flush with "
+    "the top, bottom, or sides of the frame. Short ALL CAPS marker labels only "
+    "(RED, BLACK, or YELLOW). Never a person or company name on the image."
+)
+
 GLOBAL_VISUAL_STYLE = (
-    "Simple flat 2D historical educational animation in the established "
-    "What They Really Think visual identity. Clean vector-like digital "
-    "illustration, simplified human anatomy, simple facial features "
-    "(simple eyes, simple nose, simple mouth), clear recognizable silhouettes, "
-    "flat colors, muted historical palette, minimal gradients, restrained "
-    "shading, softly illustrated simplified background, uncluttered composition, "
-    "expressive but restrained poses, consistent recurring character design, "
-    "clean educational animation aesthetic. FILL THE ENTIRE FRAME edge to edge, "
-    "no letterbox, no pillarbox, no black bars. Any on-image label, badge, sign, "
-    "or diagram text must sit fully inside a 10 percent margin from every edge. "
-    "Never place text flush with the top, bottom, or sides of the frame."
+    f"{_DOODLE_CONSTRUCTION}"
+    "Established What They Really Think visual identity: muted historical "
+    "palette (tan, brown, orange, dark blue), uncluttered educational doodle "
+    "history stills, consistent recurring stick-figure design. "
+    f"{_FRAME_FILL}"
 )
 
 NEGATIVE_STYLE = (
     "Not photorealistic, not a photograph, not cinematic photography, not 3D, "
     "not Pixar, not anime, not manga, not watercolor, not oil painting, not "
     "hyper-detailed, not a superhero comic, not photomontage, not DSLR, not "
-    "realistic skin texture. NO swastika, NO Nazi flag, NO SS runes, NO "
-    "armbands, NO camps, NO gore, NO celebrity photoreal faces. No readable "
-    "paragraphs of body copy, no watermarks, no captions overlaid on the frame "
-    "unless the scene names a short on-screen label."
+    "realistic skin texture, no gradients, no drop shadows, no textures. NO "
+    "swastika, NO Nazi flag, NO SS runes, NO armbands, NO camps, NO gore, NO "
+    "celebrity photoreal faces. No readable paragraphs of body copy, no "
+    "watermarks, no captions overlaid on the frame unless the scene names a "
+    "short on-screen label."
 )
 
 # Old footer kept so youtube.py can strip it from stale drafts.
@@ -69,18 +85,13 @@ CHANNEL_ABOUT = (
 )
 
 BEHIND_THE_BUSINESS_VISUAL_STYLE = (
-    "Clean flat 2D business documentary illustration in the established "
-    "Behind The Business channel identity. Modern vector-like shapes, simple "
-    "readable characters, simplified products and environments, crisp diagrams, "
-    "subtle depth, limited shading, clean high-contrast palette, uncluttered "
-    "compositions, clear information hierarchy, visually intuitive financial "
-    "flows and business systems, consistent recurring locations and company "
-    "elements. Educational but cinematic in composition. FILL THE ENTIRE FRAME "
-    "edge to edge, no letterbox, no pillarbox, no black bars. Any on-image "
-    "label, badge, sign, or diagram text must sit fully inside a 10 percent "
-    "margin from every edge. Never place text flush with the top, bottom, or "
-    "sides of the frame. Not photorealistic, not 3D, not anime, not painterly, "
-    "not generic stock imagery."
+    f"{_DOODLE_CONSTRUCTION}"
+    "Established Behind The Business channel identity: clean high-contrast "
+    "business doodle, stores, money-flow diagrams as chunky objects, crisp "
+    "one-insight charts, costume-locked stick-figure extras, uncluttered "
+    "compositions. Educational but cinematic in composition. "
+    f"{_FRAME_FILL} "
+    "Not photorealistic, not 3D, not anime, not painterly, not generic stock imagery."
 )
 
 BEHIND_THE_BUSINESS_NEGATIVE_STYLE = (
@@ -120,18 +131,12 @@ BTB_CHANNEL_ABOUT = (
 BTB_CHANNEL_HANDLE = "@HowTheyReallyMakeMoney"
 
 HOW_THEY_TOOK_OVER_VISUAL_STYLE = (
-    "Clean flat 2D strategic business documentary illustration in the "
-    "established How They Took Over channel identity. Modern vector-like "
-    "artwork, simple recognizable people and company environments, crisp "
-    "products and technology, high readability, clear silhouettes, "
-    "controlled shading, clean high-contrast composition, visually "
-    "intuitive strategy diagrams, timelines, maps, market competition, "
-    "business flywheels and growth systems. Energetic but professional. "
-    "FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no "
-    "black bars. Any on-image label, badge, sign, or diagram text must "
-    "sit fully inside a 10 percent margin from every edge. Never place "
-    "text flush with the top, bottom, or sides of the frame. Not "
-    "photorealistic, not 3D, not anime, not painterly, not stock imagery."
+    f"{_DOODLE_CONSTRUCTION}"
+    "Established How They Took Over channel identity: energetic strategic "
+    "doodle, bets and wars made physical, maps, timelines, flywheels as "
+    "chunky loops, high-contrast composition. Energetic but professional. "
+    f"{_FRAME_FILL} "
+    "Not photorealistic, not 3D, not anime, not painterly, not stock imagery."
 )
 
 HOW_THEY_TOOK_OVER_NEGATIVE_STYLE = (
@@ -173,49 +178,49 @@ HTTO_CHANNEL_HANDLE = "@HowTheyTookOver"
 # Modern high-contrast accents. No company names. Shipped WTRT slugs stay locked.
 BTB_VISUAL_ACCENTS = (
     "Accent this title with a navy, ice-white, and sharp teal palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a graphite, paper-white, and signal-orange palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a deep ink, silver, and electric-blue palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a charcoal, cream, and mint-green palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a midnight, pale-sand, and coral palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a slate, bright-white, and gold-line palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
 )
 
 HTTO_VISUAL_ACCENTS = (
     "Accent this title with an ember, charcoal, and electric-gold palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with an indigo, ice-white, and signal-red palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a graphite, bone, and cobalt palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a midnight, lime-line, and rust palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a steel, cream, and crimson palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a deep-ink, pale-sand, and copper palette; "
-    "keep the same clean flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
 )
 
 # New titles pick one accent so stills are not one interchangeable palette.
 # Shipped slugs get an empty string (see SHIPPED_STYLE_LOCK).
 VISUAL_ACCENTS = (
     "Accent this title with a cool slate-blue and cream paper palette; "
-    "keep the same flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a warm lamp-amber and walnut-brown palette; "
-    "keep the same flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a moss-green and parchment palette; "
-    "keep the same flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a dusk-violet and pale-gold palette; "
-    "keep the same flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a brick-red and ash-grey palette; "
-    "keep the same flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
     "Accent this title with a sea-teal and sand palette; "
-    "keep the same flat 2D construction.",
+    "keep the same stick-figure doodle construction.",
 )
 
 # Kokoro only. Default stays am_liam (pacing + shipped cuts).
@@ -280,17 +285,14 @@ class ChannelConfig(BaseModel):
     mode: ChannelMode = ChannelMode.what_they_really_think
     name: str = "What They Really Think"
     title_pattern: str = "What {subject} Really {verb} About {target}"
-    target_duration_seconds: int = 1380
-    min_duration_seconds: int = 1200
-    max_duration_seconds: int = 1500
+    target_duration_seconds: int = 600
+    min_duration_seconds: int = 300
+    max_duration_seconds: int = 960
     spoken_wpm_min: int = 145
     spoken_wpm_max: int = 155
-    # Kokoro at 1.15 lands ~220 spoken wpm. 4400–5500 words plus scene
-    # holds and silent cards is ~20–25 minutes. The 200 figure below is
-    # only the chunker estimate for picture changes, not runtime.
-    # 4–8s windows (target 6.5) keep a 23-minute cut near ~200 stills.
-    narration_word_min: int = 4400
-    narration_word_max: int = 5500
+    # Imported VO at ~150 wpm: 800–2500 words is ~5–15 minutes.
+    narration_word_min: int = 800
+    narration_word_max: int = 2500
     narration_wpm: int = 200
     min_scene_duration: float = 4.0
     max_scene_duration: float = 8.0
@@ -353,14 +355,14 @@ BEHIND_THE_BUSINESS = ChannelConfig(
     mode=ChannelMode.behind_the_business,
     name="How They Really Make Money",
     title_pattern="How {company} Really Makes Money",
-    target_duration_seconds=1320,
-    min_duration_seconds=1200,
-    max_duration_seconds=1500,
+    target_duration_seconds=600,
+    min_duration_seconds=300,
+    max_duration_seconds=960,
     spoken_wpm_min=145,
     spoken_wpm_max=155,
-    # Same 20–25 minute word budget as WTRT now that Kokoro is 1.15.
-    narration_word_min=4400,
-    narration_word_max=5500,
+    # Same 800–2500 word budget as WTRT (~5–15 minutes).
+    narration_word_min=800,
+    narration_word_max=2500,
     narration_wpm=200,
     min_scene_duration=4.0,
     max_scene_duration=8.0,
@@ -399,15 +401,14 @@ HOW_THEY_TOOK_OVER = ChannelConfig(
     mode=ChannelMode.how_they_took_over,
     name="How They Took Over",
     title_pattern="How {subject} Took Over {arena}",
-    target_duration_seconds=1380,
-    min_duration_seconds=1200,
-    max_duration_seconds=1500,
+    target_duration_seconds=600,
+    min_duration_seconds=300,
+    max_duration_seconds=960,
     spoken_wpm_min=145,
     spoken_wpm_max=155,
-    # Same word budget as Think/Money so Kokoro 1.15 lands ~20–25 minutes
-    # (holds + silent cards included). Do not pad a thin rise to hit the max.
-    narration_word_min=4400,
-    narration_word_max=5500,
+    # Same 800–2500 word budget as Think/Money (~5–15 minutes).
+    narration_word_min=800,
+    narration_word_max=2500,
     narration_wpm=200,
     min_scene_duration=4.0,
     max_scene_duration=8.0,

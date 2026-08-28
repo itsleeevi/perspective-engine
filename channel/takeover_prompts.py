@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from channel.master_prompt import IMAGE_BATCH_RULES, MASTER_TAKEOVER, SCRIPT_RHYTHM
+
+MASTER = MASTER_TAKEOVER
+
 TITLE_ANALYZER = """
 Title parsing is done in code (channel.title.analyze_title with
 channel_mode=how_they_took_over). Do not guess CUDA, a flywheel, a brand
@@ -120,9 +124,8 @@ Do not end on "Thanks for watching. Please like and subscribe."
 
 title_payoff is the one-sentence answer to HOW DID THEY TAKE OVER
 (fixture the_thought). Say it in the VO.
-Target 4400–5500 words at Kokoro 1.0–1.15 (default 1.15) so the long
-cut lands ~20–25 minutes. Prefer a dense 22 minutes to a padded 25.
-Never assemble a new title below 1.0 or above 1.15.
+Target 800–2500 words (~5–15 minutes of imported VO). Prefer a dense
+8 minutes to a padded 15. Never pad a thin rise to hit the max.
 
 Read docs/takeover/ before you write. HUMAN VALUE TEST: if the tools
 were removed, would this still look like a researched documentary?
@@ -135,7 +138,7 @@ kid map of 5-8 steps this title owns. Chapters ARE those steps (unique names
 from the evidence). End by saying the_thought again plus an honest limit.
 """
 
-NARRATION_WRITER = """
+NARRATION_WRITER = SCRIPT_RHYTHM + """
 Voice: a smart friend explaining how an empire was built.
 Smart, curious, energetic, clear, modern, confident, story-driven,
 slightly playful. NOT an MBA lecture, Wikipedia, financial-news anchor,
@@ -160,7 +163,7 @@ integrated; SHOCKING move that DESTROYED everyone; buy this stock.
 
 Controlled drama. Let the actual story create tension.
 Something new every 20–40 seconds. A meaningful reveal every 60–120
-seconds. A real shift around 5 / 10 / 15 / 20 minutes.
+seconds. A real shift around 2 / 5 / 8 / 12 minutes.
 Open loops: question → partial answer → new problem → answer → turning
 point → new question. Not fact-fact-fact.
 Research through the day you write. Do NOT say today's date in the VO.
@@ -176,14 +179,14 @@ Do not require copyrighted ads. Do not recreate advertisements
 shot-for-shot. Company names stay OUT of image prompts.
 People get visual_lock without historical personal names.
 Public figures get a distinctive cartoon lock so the viewer names them.
-That is a recognizable cartoon of the real person in flat 2D, not a
+That is a recognizable cartoon of the real person drawn as a stick-figure doodle, not a
 photograph, not a generic clerk. Reuse channel/character_locks.json
 when this person already shipped; pass the hashed photo plus sheet in
-channel/character_sheets/ as GenerateImage reference_image_paths.
+channel/character_sheets/ as Google Flow references.
 If there is a signature prop, it is the same obvious object every time.
 Named public figures: look up channel/character_locks.json FIRST. If
 present, copy visual_lock exactly and pass the hashed photo then cartoon
-sheet in channel/character_sheets/ as GenerateImage reference_image_paths.
+sheet in channel/character_sheets/ as Google Flow references.
 If new, write a lock that starts "Same cartoon person every time, do not
 redesign. Copy this face:" then face shape, jaw, eyes, hair, stubble or
 beard, and ALWAYS-clothes they actually wear (one outfit, no logos). End
@@ -195,7 +198,10 @@ solid field, hashed filename, no personal name in the file.
 """
 
 SCENE_BREAKDOWN = """
-One Scene per narration chunk (python -m channel chunks <slug>).
+Voice first. Do not write scenes until timestamps.json exists (ingest-audio).
+One Scene per pause timestamp in transcript.txt — not python -m channel chunks.
+Copy start_seconds / end_seconds from the pause table. Hold the same set/prop
+across consecutive lines of the same moment.
 Unique scenes, flywheels, competitor comparisons, and maps built around
 THIS rise. How They Took Over needs strategy visuals, not talking heads
 and not a money-flow walkthrough cloned from How They Really Make Money.
@@ -231,7 +237,7 @@ When the signature prop returns, paste its lock sentence. Ban wallpaper:
 loops, logo-vs-logo posters. Make the rise physical (a stall, a tent, a
 road) like the Tesla charging-road grammar — never clone that stall.
 12+ locations. Copy the grammar. Never copy a reference-cut spine.
-"""
+""" + IMAGE_BATCH_RULES
 
 RETENTION_QA = """
 Divide the script into ~60-second segments. For each:
@@ -243,7 +249,7 @@ Flag dead sections: long founder biography, generic corporate history,
 unnecessary financial numbers, repeated explanation, MBA jargon, slow
 market background, product lists, unnecessary dates, long static charts,
 abstract strategy lecture.
-At ~5 / 10 / 15 / 20 minutes there must be a breakthrough, competitor,
+At ~2 / 5 / 8 / 12 minutes there must be a breakthrough, competitor,
 model change, flywheel, near-failure, or mass adoption.
 Virality targets: TITLE >= 8, HOOK >= 8, CURIOSITY >= 8, STORY_DEPTH >= 8,
 FINAL_PAYOFF >= 9.
@@ -257,11 +263,11 @@ ready_to_publish also needs transformation_depth.
 """
 
 VISUAL_QA = """
-Keep the clean modern flat 2D How They Took Over identity: energetic,
+Keep the stick-figure doodle How They Took Over identity: energetic,
 strategic, competitive. Not muted historical WTRT. Not analytical
 money-flow BTB. Not photoreal, not 3D corporate, not logo-vs-logo
 posters, not stock slideshows.
-Reject a storyboard that is 20 minutes of portraits or a cloned
+Reject a storyboard that is 15 minutes of portraits or a cloned
 small-company → product → competitor → win template.
 Show the rise: world before, bet, war, flywheel, moat, threat.
 """

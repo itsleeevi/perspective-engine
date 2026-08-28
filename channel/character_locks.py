@@ -1,6 +1,6 @@
 """Reusable public-figure cartoon locks.
 
-A named person must look like that person in flat 2D. Historical names stay
+A named person must look like that person as a stick-figure doodle. Historical names stay
 out of image prompts and GenerateImage filenames. The lock text plus the
 hashed sheet PNG (and optional user photo) are the identity. If a title
 names someone already in ``channel/character_locks.json``, reuse that lock

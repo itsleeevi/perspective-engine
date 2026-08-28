@@ -88,19 +88,31 @@ def main() -> None:
 
     # 1. COUNT
     data = load_fixture(str(ROOT / spec["fixture"]))
-    chunks = [
-        c
-        for beat in fixture_to_beats(data, include_hook=True)
-        if not is_title_beat(beat)
-        for c in split_beat_into_chunks(beat)
-    ]
-    if len(chunks) != len(scenes):
-        _fail(
-            f"scene count {len(scenes)} != narration chunk count {len(chunks)} "
-            f"at NARRATION_WPM={os.environ['NARRATION_WPM']}"
-        )
+    ts_rel = spec.get("timestamps")
+    ts_path = (ROOT / ts_rel) if ts_rel else None
+    if ts_path and ts_path.is_file():
+        table = json.loads(ts_path.read_text(encoding="utf-8"))
+        n = len(table.get("scenes") or [])
+        if n != len(scenes):
+            _fail(
+                f"scene count {len(scenes)} != {n} pause timestamps in {ts_rel}"
+            )
+        else:
+            print(f"ok      {len(scenes)} scenes == {n} pause timestamps")
     else:
-        print(f"ok      {len(scenes)} scenes == {len(chunks)} chunks")
+        chunks = [
+            c
+            for beat in fixture_to_beats(data, include_hook=True)
+            if not is_title_beat(beat)
+            for c in split_beat_into_chunks(beat)
+        ]
+        if len(chunks) != len(scenes):
+            _fail(
+                f"scene count {len(scenes)} != narration chunk count {len(chunks)} "
+                f"at NARRATION_WPM={os.environ['NARRATION_WPM']}"
+            )
+        else:
+            print(f"ok      {len(scenes)} scenes == {len(chunks)} chunks")
 
     # 2. PROPS
     budget: dict[str, int] = dict(getattr(module, "PROP_BUDGET", {}))

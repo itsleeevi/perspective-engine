@@ -2,7 +2,7 @@
 
 This is the reusable engine for the YouTube channel **What They Really Think**. It is written so a Cursor Grok agent can produce a new video from a title, without editing Python. Read this fully before starting. After a cut lands, update `docs/videos/`.
 
-The same `channel/` engine also has two other modes: `behind_the_business` (**How They Really Make Money** on YouTube; **4400–5500** words at Kokoro **1.0–1.15**) in `docs/behind-the-business.md`, and `how_they_took_over` (**How They Took Over**; **4400–5500** words at Kokoro **1.0–1.15**, ~20–25 minutes) in `docs/how-they-took-over.md`. Do **not** apply those business or takeover rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title. Cloud / parallel runs use `python -m channel generate` and write `artifacts/<JOB_ID>/`. `DO NOT MODIFY THE VIDEO ENGINE` during a normal generation task.
+The same `channel/` engine also has two other modes: `behind_the_business` (**How They Really Make Money** on YouTube; **800–2500** words) in `docs/behind-the-business.md`, and `how_they_took_over` (**How They Took Over**; **800–2500** words, ~5–15 minutes) in `docs/how-they-took-over.md`. Do **not** apply those business or takeover rules to a What They Really Think title. Pass `--channel` explicitly; do not guess the channel from the title. Cloud / parallel runs use `python -m channel generate` and write `artifacts/<JOB_ID>/`. `DO NOT MODIFY THE VIDEO ENGINE` during a normal generation task.
 
 Sacred for every video on every channel:
 
@@ -12,7 +12,9 @@ Sacred for every video on every channel:
 - **Unique scenes and diagrams** built around that company's actual business (or that title's actual evidence).
 - Plus the existing **unique story engine** — if you could swap the names and keep the same video, throw it out.
 
-The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → fixtures → Kokoro → FFmpeg.
+The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → `script.txt` → imported audio → pause scenes → Google Flow stills → FFmpeg.
+
+The **master prompt** (`channel/master_prompt.py`, exported as `MASTER` on each channel module) is the staged operator loop: title → research → `script.txt` → `WAIT_AUDIO` → timestamps → Flow prompts in batches of 20 (**Reply "next"**) → YouTube metadata. Shared look is **stick-figure doodle**; customize mood and story DNA per channel. Do not import 2nd-person explainer voice.
 
 ## The only required input
 
@@ -34,6 +36,14 @@ Sequential local (`channel/projects/<slug>/`):
 
 `init` defaults to `what_they_really_think`. Pass `--channel` explicitly for the other two.
 
+When you already have the title, the narration audio, and stills with a start clock in the filename (`[00-00]_Hand-drawn_2D_doo.jpg`):
+
+```text
+.venv/bin/python -m channel drop --channel what_they_really_think --title "What Einstein Really Thought About Religion"
+```
+
+Put the files in `artifacts/<JOB_ID>/drop/`. Then `.venv/bin/python -m channel assemble <JOB_ID>`. The engine Lanczos-upscales stills to 3840×2160, cuts on those clocks (each still holds until the next; last still holds to the end of audio), and writes a YouTube-ready 4K MP4. Drop-folder cuts assemble without burned captions.
+
 WTRT title:
 
 ```text
@@ -43,11 +53,11 @@ TITLE = "What Einstein Really Thought About Religion"
 Optional:
 
 ```text
-TARGET_DURATION          # seconds, default 1380 (~23 minutes; land 20–25)
+TARGET_DURATION          # seconds, default 600 (~10 minutes; land 5–15)
 SPECIAL_INSTRUCTIONS     # tone, emphasis, things to avoid
 ```
 
-Everything else is generated: who X and Y are, the relationship, research, story, narration, character/location bibles, scenes, image jobs, voice, and the MP4.
+Everything else is generated: who X and Y are, the relationship, research, story, narration. Scene prompts wait for the imported voice-over. The operator generates stills in Google Flow. The engine renders the MP4.
 
 The same pipeline must work when Y is a person, a country, a religion, an ideology, a company, an idea, an event, or a group. Do not hardcode a person into `channel/config.py`. Story content lives in `channel/projects/<slug>/project.json`.
 
@@ -75,27 +85,29 @@ Research through the day you are writing so the facts are current. **Do not say 
 | `channel/config.py` | Permanent style, voice, pacing per channel mode (`CHANNEL` / `BEHIND_THE_BUSINESS` / `HOW_THEY_TOOK_OVER`). No people. |
 | `channel/schema.py` | Shared `VideoProject` (research, story, bibles, scenes). Optional `business` or `takeover` block. |
 | `channel/title.py` | Agent 1 — parse the title for the selected channel. |
-| `channel/business_prompts.py` | How They Really Make Money stage prompts only. |
-| `channel/takeover_prompts.py` | How They Took Over stage prompts only. |
+| `channel/business_prompts.py` | How They Really Make Money stage prompts (`MASTER` + money DNA). |
+| `channel/takeover_prompts.py` | How They Took Over stage prompts (`MASTER` + takeover DNA). |
 | `channel/research.py` | Encyclopedia **seed** only. Agent adds primary-source claims. |
 | `channel/factcheck.py` | Mechanical quote/source checks. |
-| `channel/agent_prompts.py` | Stage prompts for Cursor Grok (research → story → scenes). |
+| `channel/master_prompt.py` | Staged **master prompt** (`MASTER`) — same operator loop on every channel; DNA customized per mode. |
+| `channel/agent_prompts.py` | What They Really Think stage prompts (`MASTER` + research → story → scenes). |
 | `channel/prompts.py` | Image prompt assembler: global style + bible + action. |
 | `channel/character_locks.json` | Public-figure cartoon faces; hashed photo + sheet in `channel/character_sheets/`. |
 | `channel/quality_bar.py` | Cinema grammar (kid map, oversized focal object, unique stills). Spec: `docs/video-engine/QUALITY_BAR.md`. |
-| `channel/compile.py` | Writes fixture, stills module, spec, image jobs, long + Shorts thumbnail jobs, draft YouTube copy. |
-| `channel/youtube.py` | Description, tags, chapter stamps, honest synthetic-media disclosure, 1280×720 and 1080×1920 overlays after GenerateImage. |
+| `channel/drop.py` | Drop-folder cut: timestamped stills (`[00-00]_….jpg`) + audio → 4K assemble without burned captions. |
+| `channel/compile.py` | Writes fixture, `script.txt`, spec (`voice: imported`), then after pauses `flow_prompts.txt` + ingest jobs. |
+| `channel/youtube.py` | Description, tags, chapter stamps, honest synthetic-media disclosure, 1280×720 and 1080×1920 overlays after Flow stills land. |
 | `channel/cadence.py` | 24h assemble cap between different titles. Same-slug rebuilds allowed. |
 | `channel/originality_policy.py` | Permanent originality + monetization thresholds (score ≥ 80, last 10 videos). |
 | `channel/originality.py` | Mass-production detector: hook / phrasing / structure / scenes / visuals / transitions / ending / thumb. |
-| `channel/monetization_qa.py` | `ready_to_publish` score. Fail = do not render. |
+| `channel/monetization_qa.py` | `ready_to_publish` score. Fail = do not emit `flow_prompts`. |
 | `channel/research_policy.py` | Claim traceability. No invented quotes. |
 | `channel/visual_policy.py` | Style lock + banned photoreal impersonation. |
-| `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 chunks, prop/set economy, stock-AI language. |
+| `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 pause timestamps, prop/set economy, stock-AI language. |
 | `scripts/lint_originality.py` | Compare this title to the last 10 shipped videos. |
-| Cursor **GenerateImage** | Stills. Grok only. Never fal / OpenAI images on this path. |
-| Kokoro (default `am_liam`) | Free narration. New titles may rotate `am_michael` / `am_fenrir`. Never Edge, never ElevenLabs. |
-| `scripts/run_custom_video.py` / `run_short.py` | Whisper-aligned assemble. |
+| Google Flow (operator) | Stills. Paste `flow_prompts.txt`. Engine never calls Flow. |
+| Imported audio (operator) | Narration. Copy `script.txt` into ElevenLabs (or any TTS). Engine never calls ElevenLabs. Shipped recuts may still use Kokoro `am_liam`. |
+| `python -m channel assemble` | Drop-folder filename clocks, or pause-timed still holds, + mux imported VO. Drop-folder cuts assemble without burned captions. |
 
 ```text
 TITLE
@@ -104,19 +116,28 @@ TITLE
   → SOURCE VALIDATION (`python -m channel qa`)
   → STORY ARCHITECT (archetype from THIS evidence)
   → ORIGINALITY CHECK vs last 10 videos
-  → NARRATION
+  → NARRATION (`script.txt`)
   → FACT CHECK
-  → CHARACTER / LOCATION BIBLES
-  → SCENE GENERATION (events this title owns)
-  → VISUAL VARIETY CHECK
-  → RETENTION QA
-  → MASS-PRODUCTION QA (`lint_originality.py`)
-  → GenerateImage (only if originality_score ≥ 80 and ready_to_publish)
-  → Kokoro + FFmpeg
-  → FINAL ORIGINALITY QA (assemble re-checks)
-  → SHORT (one mini-story, not a compress)
+  → WAIT_AUDIO (operator ElevenLabs → ingest-audio)
+  → PAUSE DETECT (whisper / ffmpeg)
+  → CHARACTER / LOCATION BIBLES + SCENE GENERATION (1:1 with pauses)
+  → flow_prompts (only if originality_score ≥ 80 and ready_to_publish)
+  → Google Flow + ingest-images
+  → FFmpeg assemble (`python -m channel assemble`)
+  → SHORT (optional second HITL pass; does not block long READY)
   → THUMBNAIL + METADATA
   → READY TO PUBLISH
+```
+
+Drop-folder cut (title + stills named `[00-00]_….jpg` + narration audio already exist):
+
+```text
+TITLE + DROP FOLDER
+  → python -m channel drop --channel <mode> --title "…"
+  → WAIT_DROP (operator puts audio + timestamped stills in drop/)
+  → ingest (Lanczos 3840×2160; cuts from filename clocks)
+  → FFmpeg assemble without burned captions
+  → READY
 ```
 
 ## Execution checklist (mechanical)
@@ -126,7 +147,7 @@ TITLE
     (do not copy its spine; lint_story will fail you).
 
  2. .venv/bin/python -m channel init "What X Really Thought About Y"
-    Optional: --instructions "..." --duration 1380 --skip-seed
+    Optional: --instructions "..." --duration 600 --skip-seed
     Writes channel/projects/<slug>/project.json
     Cloud / parallel: python -m channel generate --channel what_they_really_think --title "…"
     (artifacts/<JOB_ID>/). Do not put a company name in a GenerateImage filename.
@@ -138,7 +159,7 @@ TITLE
     Fix rejected claims. Do not write narration until factcheck is honest.
 
     5. STORY ARCHITECT + NARRATION WRITER using channel/agent_prompts.py
-    4400–5500 words (~20–25 minutes at Kokoro 1.15), 4–6 chapter names this
+    800–2500 words (~5–15 minutes of imported VO), 4–6 chapter names this
     evidence owns (not The Suit / The Rocket / Walkout again), spoken English,
     title_payoff said in the VO. Unique story engine. Cold open is a
     sourced moment this title owns — never "X was born", never
@@ -153,61 +174,52 @@ TITLE
     cartoon of the real person** (face, hair, jaw, eyes, clothes they actually
     wear). Look up `channel/character_locks.json` first and reuse that lock
     plus the hashed photo and cartoon sheet in `channel/character_sheets/`
-    as GenerateImage references. Compile writes those paths onto image
-    jobs. Never a generic clerk.
+    as Google Flow references. Compile writes those paths onto ingest jobs.
+    Never a generic clerk.
 
- 7. .venv/bin/python -m channel chunks <slug>
-    Write one Scene per line, rotating shot types, visual verbs.
+ 7. .venv/bin/python -m channel generate --resume <JOB_ID>
+    After narration QA the job is WAIT_AUDIO. Copy script.txt into ElevenLabs.
+    python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3
 
-    8. SHORT (one per long video): punch in the first two seconds, not a
-    summary. Short sentences (captions must stay inside the 9:16 safe band).
-    Last line: "Watch the full video. The link is in the description."
-    Compile adds a branded end card for that line.
+    8. Fill scenes 1:1 with timestamps.json / transcript.txt (SCENE_BREAKDOWN).
+    Deliver Google Flow prompts in batches of 20. Wait for **Reply "next"**
+    between batches. Do not dump every prompt in one chat block.
+    Do not use `channel chunks` as the clock.
 
     9. .venv/bin/python -m channel qa <slug>
     If a critical score is below 8, rewrite only the weak section.
     qa also writes originality_score and monetization.ready_to_publish.
     If originality_score < 80 or ready_to_publish is false, regenerate
     the flagged stages (printed as `regenerate: hook, scenes, …`).
-    Do not GenerateImage.
+    Do not emit flow_prompts.
 
-10. .venv/bin/python -m channel compile <slug>
-    Writes fixtures/<slug>.json, *_stills.py, video_specs/<slug>.json,
-    fixtures/<slug>_v1_image_jobs.json, fixtures/<slug>_thumbnail_image_jobs.json,
-    fixtures/<slug>_short_thumbnail_image_jobs.json, and draft copy under
-    assets/youtube/
-    (--stubs only for scaffolding; never ship stubs)
+10. .venv/bin/python -m channel generate --resume <JOB_ID>
+    Writes flow_prompts.txt (one [mm:ss] prompt per pause, blank line between),
+    thumbnail_prompts.txt, ingest jobs, draft copy under assets/youtube/.
     Compile exits 1 if originality / monetization fails (`--force` to write anyway).
 
-11. .venv/bin/python scripts/lint_story.py fixtures/video_specs/<slug>.json
-    Rewrite until it passes. Then --short if a Short exists.
-    Then: .venv/bin/python scripts/lint_originality.py fixtures/video_specs/<slug>.json
+11. .venv/bin/python scripts/lint_story.py <job spec>
+    Rewrite until it passes.
+    Then: .venv/bin/python scripts/lint_originality.py <job spec>
 
-12. .venv/bin/python scripts/lint_storyboard.py fixtures/video_specs/<slug>.json
+12. .venv/bin/python scripts/lint_storyboard.py <job spec>
 
-13. GenerateImage each job in the jobs JSON (batches of ~16), plus the
-    thumbnail job (`fixtures/<slug>_thumbnail_image_jobs.json`) and the
-    Shorts thumbnail job (`fixtures/<slug>_short_thumbnail_image_jobs.json`).
-    16:9 long, 9:16 Short, 16:9 long thumb, 9:16 Shorts thumb. Filename =
-    job.generate_filename (hashed). Thumbnail stills have NO on-image text —
-    type is burned later. On a safety block, retry once with historical
-    names already stripped (compile already strips them). For any still
-    that shows a locked public figure, pass that person's hashed photo
-    then cartoon sheet from `channel/character_sheets/` as
-    `reference_image_paths` so the face stays a recognizable cartoon of
-    the real person. Compile writes those paths onto the job.
+13. Paste flow_prompts.txt into Google Flow (16:9, one image per prompt).
+    ZAPI serial files like `02_red_cabin.jpg` remap on ingest (queue 1 = `000_00-00-00.png`)
+    and Lanczos-upscale to 3840×2160 so assemble renders a 4K long cut.
+    Upload `flow_batches.txt` (one prompt per line, all stills in one file).
+    python -m channel ingest-images <JOB_ID> /path/to/pngs --partial
+    Thumbnail prompts: thumbnail_prompts.txt. No on-image text — type is burned later.
 
-14. .venv/bin/python scripts/run_short.py fixtures/video_specs/<slug>.json
-    then
-    .venv/bin/python scripts/run_custom_video.py fixtures/video_specs/<slug>.json
+14. python -m channel assemble <JOB_ID>
+    Long cut only. A Short is a second HITL pass and does not block long READY.
     Never two assembles at once. A different title must wait 24 hours
     (`--force` to override a recut).
 
 15. Verify: ffprobe duration + resolution; sync.max_cut_error_ms < 20;
     spot-check frames for letterbox.
     `python -m channel youtube <slug>` writes description + tags (assemble
-    stamps chapter times). GenerateImage both thumbnail jobs (no on-image
-    text), then the same command burns 1280×720 and 1080×1920 JPEG type.
+    stamps chapter times) and burns 1280×720 and 1080×1920 JPEG type.
     Thumbnail still: tight chest-up, FACE ≥30% of the frame, dramatic light,
     empty right third. YouTube kills loose wide shots.
     Description: search phrase in the first 200 characters, then chapters,
@@ -232,34 +244,33 @@ TITLE
 16. Update docs/videos/<slug>.md + README.md with a "## Do not copy" list
     of quoted phrases. In the SAME change, commit the playbook files
     listed under Shared contract, plus this cut's fixtures, video_spec,
-    stills modules, image jobs, and docs/videos page. Other clones only
+    stills modules, and docs/videos page. Other clones only
     see what is in git. Push so a new environment can `git pull`.
     Never commit assets/ or .env.
 ```
 
 Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About Y"` (defaults to `init`).
 
-## Voice (free, in sync)
+## Voice (imported audio, in sync)
 
-- **Engine:** Kokoro at speed **1.0–1.15** (default **1.15**), **one utterance per scene** plus a 0.28s hold so the cut lands on a breath. Default speaker is `am_liam`. New titles may rotate `am_michael` / `am_fenrir` from a hash of the slug so the channel does not sound like one TTS farm; shipped cuts stay on the voice they assembled with. Never Edge, never ElevenLabs. **4400–5500 words lands near 20–25 minutes.** Shipped older cuts may stay near 8 minutes — do not rewrite them to the new length.
-- **Length:** new long cuts are **20–25 minutes**. Do not pad a lecture. Add a unique engine, more sourced reversals, and more places. Chunk windows are **4–8 seconds** (target **6.5**) so a 23-minute cut is ~200 stills, not a slideshow. Shipped 8-minute specs keep their old 3–7 / 4.5 windows.
-- **Captions:** each narrated still burns a stylish lower-third of that scene's line. Silent chapter cards stay type-only. Spec field `burn_captions` (default on for channel). Lines must wrap inside the frame — never shear a last line off the left or right. On 9:16 Shorts the caption sits in the **YouTube safe band** (above the like / title / music chrome, inside the side rails). Write short spoken sentences so a caption is two readable lines, not one overflowing paragraph.
-- **Years:** write `1995` in the fixture and on-screen caption. Never spell the year. Kokoro expands digits to spoken years (`nineteen ninety-five`) at synthesis.
+- **Engine:** operator-imported audio. Copy `script.txt` into ElevenLabs (or any TTS). The engine never calls ElevenLabs, Edge, or Kokoro on new jobs. Scene cuts come from pauses (`ingest-audio`, default 280ms). Shipped recuts may still use Kokoro `am_liam` at **1.0–1.15** (default **1.15**). **800–2500 words lands near 5–15 minutes.** Shipped older cuts may stay near 8 minutes or the old 20–25 minute budget — do not rewrite them to the new length.
+- **Length:** new long cuts are **5–15 minutes**. Do not pad a lecture. Add a unique engine, more sourced reversals, and more places. Still duration is the pause interval, not a guessed 4–8 second WPM chunk.
+- **Captions:** generate-path stills may burn a stylish lower-third of that scene's line. Drop-folder cuts assemble without burned captions. Continuous imported VO has no silent chapter cards. Spec field `burn_captions` (default on for generate / compile; false for `python -m channel drop`). Lines must wrap inside the frame — never shear a last line off the left or right. On 9:16 Shorts the caption sits in the **YouTube safe band** (above the like / title / music chrome, inside the side rails). Write short spoken sentences so a caption is two readable lines, not one overflowing paragraph.
+- **Years:** write `1995` in the fixture and on-screen caption. Never spell the year.
 - Shipped older cuts may use different speeds (leave those specs alone).
-- **Sync:** faster-whisper word timestamps; `sync.max_cut_error_ms` < 20 after render.
-- Chunk windows for new channel videos: 4–8 seconds (target 6.5). Spec fields `chunk_min_seconds` / `chunk_max_seconds` / `chunk_target_seconds` are applied before chunking so they cannot leak from a previous run.
+- **Sync:** pause table + faster-whisper word timestamps; `sync.max_cut_error_ms` < 20 after render.
 
 ## Pictures
 
-- One Grok still per narration chunk, from `fixtures/<prefix>image_jobs.json`.
+- One Google Flow still per pause timestamp, from `flow_prompts.txt`.
 - **Global style is frozen** in `channel/config.py` (`GLOBAL_VISUAL_STYLE`). New titles also get a per-slug palette accent so stills are not one interchangeable farm look. Shipped stills stay as generated. Agents fill action and composition only. Compile prepends the prefix.
-- Flat 2D educational animation: simplified faces, flat color, muted historical palette. Not photoreal, not 3D, not anime, not painterly.
+- Flat **stick-figure doodle** animation: hand-drawn 2D, bold outlines, solid color-block backgrounds, muted historical palette on Think. Named people are a **recognizable cartoon of the real person** on that stick-figure construction. Not photoreal, not 3D, not anime.
 - Historical personal names stay **out** of image prompts. Identity is the character bible `visual_lock`.
-- Recurring public figures get a **distinctive cartoon lock** (hair, face, jaw, eyes, clothes) so the viewer names them. That is a **recognizable cartoon of the real person** in flat 2D, not a photograph, not a cloned voice, not a generic clerk. Reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` when the same person already shipped. Pass those files as GenerateImage `reference_image_paths`. Compile applies the lock and writes the refs onto image jobs automatically. Match the **grammar** in `docs/video-engine/QUALITY_BAR.md` (kid map, one oversized focal object, unique cinema stills, punchy Short) without cloning a reference-cut spine. Person-titled cuts stay ~35–42% hero; company-titled cuts may run empty cinematic sets with costume-locked extras.
+- Recurring public figures get a **distinctive cartoon lock** (hair, face, jaw, eyes, clothes) so the viewer names them. That is a **recognizable cartoon of the real person** drawn as a stick-figure doodle, not a photograph, not a cloned voice, not a generic clerk. Reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` when the same person already shipped. Pass those files as Google Flow references. Compile applies the lock and writes the refs onto ingest jobs automatically. Match the **grammar** in `docs/video-engine/QUALITY_BAR.md` (kid map, one oversized focal object, unique cinema stills, punchy Short) without cloning a reference-cut spine. Person-titled cuts stay ~35–42% hero; company-titled cuts may run empty cinematic sets with costume-locked extras.
 - **Hero variety:** about 35–42% hero on person titles (lint warns above 45% and below 28%). Mix crowd and empty cinematic sets. 12+ locations. Unique visual verb every still — `{SET} {who} {physical verb} {one oversized object} {named lighting}`. Do not collapse to repeating desk/binder/lobby templates or “clean business illustration of a filing table” wallpaper. Two named people in a title both appear as cartoons when the beat needs them. Signature prop in at most 6 scenes, huge and high contrast when it returns.
-- Fill the frame. Cover-crop keeps the **top** of 3:2 Grok stills so on-image labels are never sheared. Thumbs are **1280×720 JPEG**.
+- Fill the frame. Cover-crop keeps the **top** of 3:2 Grok stills so on-image labels are never sheared. `ingest-images` and drop-folder ingest Lanczos-upscale stills to **3840×2160** so assemble renders 4K. Drop stills use a bracket clock (`[00-00]_….jpg`). Thumbs are **1280×720 JPEG**.
 - Channel profile: **800×800** JPEG, circular crop (`python -m channel branding --profile`). Channel cover: **2560×1440** JPEG, ≤6 MB, faces in the center **1546×423** safe band (`--cover`).
-- Composition changes every ~5–7 seconds on new 20–25 minute cuts. Style does not.
+- Composition changes every ~5–7 seconds on new 5–15 minute cuts. Style does not.
 
 ## The Short
 
@@ -279,12 +290,12 @@ Long and Short descriptions end with the honest synthetic-media disclosure. Comp
 Every new title is compared to the **last 10** shipped videos in
 `docs/videos/README.md`. Similarity is measured on hook, phrasing (4-gram
 overlap), chapter structure, scene sequence, shot-type composition,
-stock transitions, ending, and thumbnail text. Brand (flat 2D style,
+stock transitions, ending, and thumbnail text. Brand (stick-figure doodle,
 channel name, Kokoro, title pattern) is ignored. Score =
 `100 − average weighted similarity`. Need **originality_score ≥ 80**.
 
 `python -m channel qa <slug>` writes `originality` and `monetization` onto
-the project. Fail conditions (do not GenerateImage / do not assemble):
+the project. Fail conditions (do not emit `flow_prompts` / do not ingest images):
 
 - originality_score < 80, or too close to one recent cut
 - stock hook / stock transition / stock ending / generic AI phrasing
@@ -310,7 +321,7 @@ Assemble (`run_custom_video.py`) re-checks originality unless `--force`.
 - No Nazi flags/swastikas/camps/gore; no real-person photoreal faces; no cloning a real person's voice.
 - Do not invent quotes or private thoughts. If the evidence cannot establish what they thought, say so in the story.
 - Do not run two assemble scripts at once (`_ENCODE_CONCURRENCY = 3`).
-- Different titles wait **24 hours** between assembles (same-slug rebuilds are allowed; `--force` overrides). Do not ship a new 20–25 minute cut every day from one template.
+- Different titles wait **24 hours** between assembles (same-slug rebuilds are allowed; `--force` overrides). Do not ship a new 5–15 minute cut every day from one template.
 - Do not hardcode a person into the engine. Only the title changes.
 
 ## Shared contract (other clones)

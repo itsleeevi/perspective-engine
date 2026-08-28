@@ -5,10 +5,10 @@ alwaysApply: true
 
 # Originality and monetization
 
-Need `originality_score ≥ 80` vs the last 10 videos **on the same channel** and `ready_to_publish` before GenerateImage (`python -m channel qa`, `scripts/lint_originality.py`).
+Need `originality_score ≥ 80` vs the last 10 videos **on the same channel** and `ready_to_publish` before emitting `flow_prompts` (`python -m channel qa`, `scripts/lint_originality.py`).
 
 Brand consistency is not repetition. A name-swap spine is. Do not clone Visa's four desks onto Costco or Nvidia's CUDA story onto Rolex.
 
 `the_thought` must be spoken. No “was born” / “was founded” cold opens.
 
-Do not GenerateImage if QA fails. Report the flags; do not lower the threshold.
+Do not emit `flow_prompts` or ingest Google Flow stills if QA fails. Report the flags; do not lower the threshold.

@@ -4,7 +4,7 @@ Internal mode: `what_they_really_think` (aliases: `wtrt`, `think`).
 Playbook: `docs/custom-videos.md`. Config: `CHANNEL` in `channel/config.py`.
 Prompts: `channel/agent_prompts.py`. Index after ship: `docs/videos/`.
 
-This is **not** a 4–6 minute format. Older shipped cuts were shorter. **New titles are ~20–25 minutes, 4400–5500 words at Kokoro 1.15.**
+This is **not** a Short. Older shipped cuts may be shorter or longer. **New titles are ~5–15 minutes, 800–2500 words.**
 
 ## Channel promise
 
@@ -18,8 +18,8 @@ People who click a mystery-opinion title and want a blunt cartoon-clear story an
 
 | | Value |
 |---|---|
-| Runtime | ~20–25 minutes (1200–1500s, target 1380) |
-| Script | **4400–5500** words |
+| Runtime | ~5–15 minutes (300–960s, target 600) |
+| Script | **800–2500** words |
 | Spoken pace | write 145–155 wpm; Kokoro **1.15** (never below **1.0** on a new title) |
 | Voice | Kokoro `am_liam` (roster may rotate `am_michael` / `am_fenrir`) |
 | Stills | new composition every 4–8 seconds (target 6.5s) |
@@ -54,7 +54,7 @@ One still per narration chunk. 4–6 chapters. ONE signature prop in ≤ 6 scene
 
 ## Visual identity
 
-`GLOBAL_VISUAL_STYLE`: simple flat 2D historical educational illustration, vector-like, simplified anatomy, simple faces, muted historical palette, limited gradients. Not photoreal, 3D, anime, watercolor, oil, or cinematic photography. Face-fill thumbs, empty right third for type added later.
+`GLOBAL_VISUAL_STYLE`: hand-drawn 2D stick-figure doodle, muted historical palette (tan, brown, orange, dark blue), solid color-block backgrounds, no gradients. Named people are a recognizable cartoon of the real person on that construction. Not photoreal, 3D, anime, watercolor, oil, or cinematic photography. Face-fill thumbs, empty right third for type added later.
 
 ## Thumbnail strategy
 

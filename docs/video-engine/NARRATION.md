@@ -1,20 +1,22 @@
 # Narration
 
-Provider is **Kokoro only**. Never Edge. Never ElevenLabs on this path. Missing Kokoro is a hard stop, not a fallback.
+Provider on **new jobs** is **imported audio**. Copy `script.txt` into ElevenLabs (or any TTS). The engine never calls ElevenLabs, Edge, or Kokoro on this path. Missing operator audio is a wait state (`WAIT_AUDIO`), not a fallback.
 
-Pinned in `channel/engine.py` (`KOKORO_LOCK`) and `channel/config.py`:
+Shipped recuts whose spec still says `voice: kokoro` keep Kokoro (`KOKORO_LOCK` in `channel/engine.py`). Default speaker `am_liam`.
+
+Pinned word budgets in `channel/config.py`:
 
 | | WTRT | How They Really Make Money | How They Took Over |
 |---|---|---|---|
-| Words | 4400–5500 | 4400–5500 | 4400–5500 |
-| Runtime | ~20–25 min | ~20–25 min | ~20–25 min |
-| Default speed | 1.15 | 1.15 | 1.15 |
-| New-title floor | 1.0 | 1.0 | 1.0 |
+| Words | 800–2500 | 800–2500 | 800–2500 |
+| Runtime | ~5–15 min | ~5–15 min | ~5–15 min |
+| Spoken pacing | 1.0–1.15 | 1.0–1.15 | 1.0–1.15 |
+| Default | 1.15 | 1.15 | 1.15 |
 
-Shipped recuts may be slower. Costco is locked at **0.92**. Do not recut a locked slug unless the user asks.
-
-Default voice `am_liam`. New titles may rotate `am_michael` / `am_fenrir` via `kokoro_voice_for`. Do not pick a random voice.
+Shipped recuts may be slower. Costco is locked at **0.92** Kokoro. Do not recut a locked slug unless the user asks.
 
 Spoken English, third person. Write as if a sharp five-year-old is watching with an adult: tiny words, cause then effect, funny when the evidence is funny. Calendar years as digits (`1995`). No “today is DATE”. `the_thought` / `title_payoff` must be said in the VO.
 
-WTRT is **not** a 4–6 minute format. Older shipped cuts were shorter; new titles follow the word budgets above.
+Scene cuts come from pauses in the finished voice-over (`python -m channel ingest-audio`), not from word-count chunks. Drop-folder cuts (`python -m channel drop`) cut on the start clock in the still filename (`[00-13]_….jpg`) instead, and assemble without burned captions.
+
+WTRT is **not** a Short. Older shipped cuts may be shorter or longer; new titles follow the word budgets above.

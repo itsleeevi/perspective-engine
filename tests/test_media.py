@@ -26,6 +26,15 @@ def test_16x9_crop_keeps_the_top_band(tmp_path: Path):
     assert out.getpixel((10, 40)) == (255, 0, 0)
 
 
+def test_cover_crop_upscales_to_4k(tmp_path: Path):
+    src = tmp_path / "still.png"
+    Image.new("RGB", (640, 360), (20, 40, 60)).save(src)
+    dest = tmp_path / "out.png"
+    cover_crop(src, dest, 16, 9, out_size=(3840, 2160))
+    out = Image.open(dest)
+    assert out.size == (3840, 2160)
+
+
 def test_wide_image_keeps_center(tmp_path: Path):
     src = tmp_path / "still.png"
     im = Image.new("RGB", (1920, 800), (10, 10, 10))

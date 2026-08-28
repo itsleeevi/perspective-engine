@@ -14,6 +14,7 @@ def cover_crop(
     ratio_h: int,
     *,
     keep_top: bool = True,
+    out_size: tuple[int, int] | None = None,
 ) -> None:
     """Cover-crop to the target aspect so the image FILLS the frame.
 
@@ -21,6 +22,8 @@ def cover_crop(
     ~80px off the top and shears any on-image label sitting in that band.
     Channel stills put badges top-left, so extra height is taken from the
     bottom. Extra width stays centered (subjects are composed mid-frame).
+    ``out_size`` (e.g. 3840×2160) Lanczos-upscales after the crop so ingest
+    stills and the long cut are 4K.
     """
     im = Image.open(src).convert("RGB")
     w, h = im.size
@@ -35,5 +38,7 @@ def cover_crop(
         if top + nh > h:
             top = h - nh
         im = im.crop((0, top, w, top + nh))
+    if out_size and im.size != out_size:
+        im = im.resize(out_size, Image.Resampling.LANCZOS)
     dest.parent.mkdir(parents=True, exist_ok=True)
     im.save(dest, "PNG")

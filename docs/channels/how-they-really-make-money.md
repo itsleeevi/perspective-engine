@@ -18,8 +18,8 @@ People who already use the company and want the hidden economics, not a founder 
 
 | | Value |
 |---|---|
-| Runtime | ~20–25 minutes (ideal ~22; 1200–1500s, target 1320) |
-| Script | **4400–5500** words (ideal 4600–5200) |
+| Runtime | ~5–15 minutes (ideal ~10; 300–960s, target 600) |
+| Script | **800–2500** words |
 | Spoken pace | 145–155 wpm written; Kokoro **1.15** (never below **1.0** on a new title) |
 | Voice | Kokoro `am_liam` (roster may rotate) |
 | Costco lock | Kokoro **0.92** — do not recut unless asked |
@@ -52,7 +52,7 @@ Money-flow diagrams, company environments, products — unique to that business.
 
 ## Visual identity
 
-`BEHIND_THE_BUSINESS_VISUAL_STYLE`: clean modern flat 2D, high contrast, diagrams and money flows. Not muted historical WTRT. Not photoreal. Not 3D corporate.
+`BEHIND_THE_BUSINESS_VISUAL_STYLE`: stick-figure doodle, high contrast, diagrams and money flows as chunky objects. Not muted historical WTRT. Not photoreal. Not 3D corporate.
 
 ## Thumbnail strategy
 

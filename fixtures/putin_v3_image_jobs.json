@@ -1,0 +1,1354 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "putin_v3_000.png",
+      "line": "Pause the video.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A pause icon burned into a dark TV: two fat vertical bars of light, dust in the beam, living-room dark around it. Smash-cut energy. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "001",
+      "filename": "putin_v3_001.png",
+      "line": "No, really. Pause it. Look at your thumb.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A phone screen filling the frame, a greasy thumb-smudge on the glass, a video frozen on pause, living-room dark around the glow. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "002",
+      "filename": "putin_v3_002.png",
+      "line": "That is the most powerful weapon in my folder. Not a missile.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A closed manila folder under a bare bulb, red wax seal, the folder as a weapon. Macro. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "003",
+      "filename": "putin_v3_003.png",
+      "line": "A thumb that cannot sit still.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A missile model out of focus in the background; razor-sharp foreground: a fidget spinner still spinning on steel. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "004",
+      "filename": "putin_v3_004.png",
+      "line": "I do not hate you. Hate is for people who keep you up at night.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Stylized Russian official in a dark office at night, unbothered, checking a wall clock. Dry. Not photoreal.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "005",
+      "filename": "putin_v3_005.png",
+      "line": "You keep me on a schedule. You are a Tuesday.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A wall calendar with a single Tuesday circled so hard the paper is torn. Empty office. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "006",
+      "filename": "putin_v3_006.png",
+      "line": "You are weather with a credit card.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Rain on a window overlaid with a credit-card hologram shimmer. Weather plus plastic. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "007",
+      "filename": "putin_v3_007.png",
+      "line": "I have been waiting you out since your phones still flipped.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A closed flip phone on a desk, dusty, next to a modern phone face-down. Time passing as objects. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "008",
+      "filename": "putin_v3_008.png",
+      "line": "You know my name because it is easy to say angry.",
+      "free": false,
+      "type": "low angle",
+      "scene": "Crowd of tiny mouths shouting a name into megaphones, shot from below like a rally; the official is a small calm figure on a balcony, unimpressed.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "009",
+      "filename": "putin_v3_009.png",
+      "line": "I know your type because it is easy to predict.",
+      "free": false,
+      "type": "over-the-shoulder",
+      "scene": "Over the official's shoulder at a row of identical American everyman faces in a lineup photo, one circled in red grease pencil.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "010",
+      "filename": "putin_v3_010.png",
+      "line": "The first American I ever met was not a person.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Dark briefing room, the official watching a CRT. On the CRT: a grotesque sandwich the size of a steering wheel, studio lighting, no real brand.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "011",
+      "filename": "putin_v3_011.png",
+      "line": "It was a commercial for a sandwich the size of a steering wheel.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Crash-zoom insert: a sandwich as big as a car steering wheel on enamel, steam, ridiculous scale. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "012",
+      "filename": "putin_v3_012.png",
+      "line": "White teeth. A red cup you could hide a small dog in.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Giant white porcelain teeth in a toothpaste-commercial gleam beside a red soda cup you could hide a terrier in. Ice. Macro. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "013",
+      "filename": "putin_v3_013.png",
+      "line": "A family hugging in a kitchen so bright it had to be fake.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Too-bright fake kitchen, family frozen mid-hug under movie lights, cables on the floor \u2014 the official a silhouette in the doorway, unimpressed.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "014",
+      "filename": "putin_v3_014.png",
+      "line": "It was fake. They paid people to hug.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Studio clapper and a wad of cash on a kitchen counter, hug still in the background bokeh. Paid emotion. No faces in focus. Prefer no people: just clapper, cash, blazing kitchen lights.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "015",
+      "filename": "putin_v3_015.png",
+      "line": "You watched it and felt homesick for a house you do not have.",
+      "free": false,
+      "type": "POV",
+      "scene": "POV from a couch at the blazing commercial, American everyman's empty living room, a house-shaped cookie tin, homesick junk.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "016",
+      "filename": "putin_v3_016.png",
+      "line": "That is not entertainment. That is a confession, with a jingle.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A neon jingle visualized as sound waves over a black confession booth. Empty. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "017",
+      "filename": "putin_v3_017.png",
+      "line": "You talk in restaurants like the fire alarm is a suggestion.",
+      "free": false,
+      "type": "dutch angle",
+      "scene": "Packed diner, neon canted, American everyman shouting, plates jumping, fire-alarm strobe ignored.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "018",
+      "filename": "putin_v3_018.png",
+      "line": "You ask the waiter what he wants to do with his life.",
+      "free": false,
+      "type": "two-person shot",
+      "scene": "Waiter deadpan, ticket pad, American everyman leaning in with a life-advice face. Comedy two-shot.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "019",
+      "filename": "putin_v3_019.png",
+      "line": "He wants you to order.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A ticket pad with a scribbled order, pen thrown down. Insert. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "020",
+      "filename": "putin_v3_020.png",
+      "line": "You wear the logo on purpose. You paid to be a billboard that walks.",
+      "free": false,
+      "type": "tracking",
+      "scene": "American everyman walking a sidewalk as a human billboard, huge unreadable chest mark, other pedestrians as smear.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "021",
+      "filename": "putin_v3_021.png",
+      "line": "You clap when the plane lands. The pilot did the job. You still clap.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Airplane cabin, passengers clapping, one unimpressed flight-attendant silhouette, aisle like a theater.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "022",
+      "filename": "putin_v3_022.png",
+      "line": "In the classroom they draw you with a flag on the sleeve and no idea which ocean Kaliningrad is not in.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "Chalk outline of a stick figure with a sleeve flag, a globe with a blank patch, a user-manual staple. Classroom objects. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "023",
+      "filename": "putin_v3_023.png",
+      "line": "That drawing is not an insult. It is a user manual.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A worn paperback 'USER MANUAL' with no readable title letters \u2014 actually a stamped manila stencil, coffee ring. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "024",
+      "filename": "putin_v3_024.png",
+      "line": "I log the smile.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Index card, photocopied grin circled, paperclip. Logging a smile. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "025",
+      "filename": "putin_v3_025.png",
+      "line": "You smile at cameras, at cashiers, at the man who just overcharged you.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "American grinning at a cashier who does not smile; security camera in the ceiling catching it. Official watching a monitor in a tiny inset of the same frame \u2014 keep it one scene: the overcharge receipt in the American's hand.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "026",
+      "filename": "putin_v3_026.png",
+      "line": "A smile is a tell.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A poker chip stamped with a smile instead of a number. Tell. Macro. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "027",
+      "filename": "putin_v3_027.png",
+      "line": "You want to be liked more than you want to win.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "Two scales: a heart icon outweighing a chess king. Flat infographic-movie title card energy. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "028",
+      "filename": "putin_v3_028.png",
+      "line": "I watch your movies the way a butcher watches a cow.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Butcher-paper X-ray of a film still clipped to a lightbox, cow-hook shadow. Clinical. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "029",
+      "filename": "putin_v3_029.png",
+      "line": "The hero breaks the rules and gets a speech.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Empty cinema, hero on screen breaking a door under fireworks, one watcher in the front row, popcorn.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "030",
+      "filename": "putin_v3_030.png",
+      "line": "The war ends because the music swells. I do not believe the movies.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "An orchestra swell visualized as gold sound rings around an empty podium. War ending as music. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "031",
+      "filename": "putin_v3_031.png",
+      "line": "I believe that you do.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Official in the dark, American in the glow, split by the screen light. Belief vs inventory.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "032",
+      "filename": "putin_v3_032.png",
+      "line": "By the time you walk into a real room,",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Panelled anteroom, American about to enter, cardboard tourist already in the far chair with chips.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "033",
+      "filename": "putin_v3_033.png",
+      "line": "a cartoon of you is already in the other chair, eating chips.",
+      "free": false,
+      "type": "two-person shot",
+      "scene": "American arguing with the cardboard cutout. Chips. Clock. Comedy.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "034",
+      "filename": "putin_v3_034.png",
+      "line": "You argue with the cartoon for twenty minutes.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A cardboard elbow and a real wristwatch side by side on a table, twenty minutes of argument as objects. No faces.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "035",
+      "filename": "putin_v3_035.png",
+      "line": "The cartoon is more consistent than you are.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A consistency meter stuck on 'CARTOON' vs a human needle jumping. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "036",
+      "filename": "putin_v3_036.png",
+      "line": "The second folder is thinner. It cost more. It is not about what you say.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "Thin expensive folder vs fat cheap folder, gold clip vs rusty clip. Cost as objects. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "037",
+      "filename": "putin_v3_037.png",
+      "line": "You say everything.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "An open mouth mid-word, freeze-frame as a cutout \u2014 actually: a tape recorder spools spinning, endless talk. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "038",
+      "filename": "putin_v3_038.png",
+      "line": "It is about what you buy when you think nobody is scoring it.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "Receipts, boarding pass, a hidden sticky note, scoring marks in red. Nobody watching. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "039",
+      "filename": "putin_v3_039.png",
+      "line": "You will sell a principle for a cheaper flight.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Airport kiosk, cheapest fare, crumpled principle in the bin, prayer-hands as a tiny charm on the keys.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "040",
+      "filename": "putin_v3_040.png",
+      "line": "You will sell a friendship for a better rate, then post a sunset about loyalty.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "American posting a sunset on his phone while sliding a rate napkin across a cafe table.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "041",
+      "filename": "putin_v3_041.png",
+      "line": "You will sell a secret to feel like the smartest man at a table of people who already know.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Dinner table of men who already exchanged a look; American leaning in, hungry to be clever.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "042",
+      "filename": "putin_v3_042.png",
+      "line": "Money is the lazy tool. Money shows up on paper. Ego does not.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A bank statement with nothing unusual beside a dusty closed cash box. Ego vs paper. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "043",
+      "filename": "putin_v3_043.png",
+      "line": "I lead with access. A badge on a lanyard.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A conference lanyard and blank badge on marble, shallow depth of field. Access. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "044",
+      "filename": "putin_v3_044.png",
+      "line": "Someone important who remembered your paper, or pretended to.",
+      "free": false,
+      "type": "two-person shot",
+      "scene": "Older host mentioning a paper, American lighting up, official in bokeh taking a mental note.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "045",
+      "filename": "putin_v3_045.png",
+      "line": "You would trade a nuclear secret for a good seat. I am only half joking.",
+      "free": false,
+      "type": "high angle",
+      "scene": "Good theater seat, empty, a tiny toy warhead on the velvet like a joke. High angle God's-eye.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "046",
+      "filename": "putin_v3_046.png",
+      "line": "The half that is joking is still taking notes.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A notebook with a half-smile doodle in the margin, pen still moving \u2014 show the page only. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "047",
+      "filename": "putin_v3_047.png",
+      "line": "You think of yourself as a citizen.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "American in a voting booth curtain, proud citizen posture.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "048",
+      "filename": "putin_v3_048.png",
+      "line": "I think of you as a market with fireworks.",
+      "free": true,
+      "type": "aerial",
+      "scene": "Night aerial of a stadium parking lot exploding with fireworks over empty cars. Market. No people visible.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "049",
+      "filename": "putin_v3_049.png",
+      "line": "Markets crash, then come back and ask for the same product in a new color.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A crashed toy cart with a new paint job, same dented wheel. Product reincarnation. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "050",
+      "filename": "putin_v3_050.png",
+      "line": "That is the useful sentence. You come back. You come back with a coupon.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A coupon on a steel desk, underlined twice, next to a return arrow stamp. You come back. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "051",
+      "filename": "putin_v3_051.png",
+      "line": "I respect the hardware. I will tell you that in private,",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Official at a night window, telling the truth about hardware, no smile.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "052",
+      "filename": "putin_v3_052.png",
+      "line": "and I am not lying, which should worry you more than if I were.",
+      "free": false,
+      "type": "low angle",
+      "scene": "Same official, low angle, the window behind him huge \u2014 the 'I am not lying' beat, slightly threatening comedy.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "053",
+      "filename": "putin_v3_053.png",
+      "line": "Carriers. Satellites.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Scale-model aircraft carrier and a satellite dish on a black table, museum-spotlit. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "054",
+      "filename": "putin_v3_054.png",
+      "line": "A budget that looks, in rubles, like someone fell asleep on the zero key.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "A calculator tape of zeros spilling off the desk beside a ruble note for scale. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "055",
+      "filename": "putin_v3_055.png",
+      "line": "I do not respect the will. Hardware is a receipt. Will is a mood.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A steel I-beam vs a slack frayed rope labelled by lighting not letters: hardware vs will. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "056",
+      "filename": "putin_v3_056.png",
+      "line": "I counted the years in the mountains and the desert.",
+      "free": true,
+      "type": "aerial",
+      "scene": "Aerial of snow mountains, then a desert, years as two color fields. Empty landscape. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "057",
+      "filename": "putin_v3_057.png",
+      "line": "I counted how long you argue with yourselves before the argument becomes the mission.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Parliament chamber arguing under bright lights, mission clock running, empty water glasses.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "058",
+      "filename": "putin_v3_058.png",
+      "line": "I have a number. It is shorter than your attention span.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A stopwatch and a short red line on a chalkboard. Number. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "059",
+      "filename": "putin_v3_059.png",
+      "line": "You will bomb a mountain. You will not occupy a winter. Winter does not trend.",
+      "free": true,
+      "type": "wide shot",
+      "scene": "Snow peak with one smoke puff, no boots, no soldiers. Winter that does not trend. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "060",
+      "filename": "putin_v3_060.png",
+      "line": "You will announce a red line, then hold a hearing about the font.",
+      "free": true,
+      "type": "dutch angle",
+      "scene": "Empty hearing room, gavel, a document with a red line, fluorescent horror. Font hearing. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "061",
+      "filename": "putin_v3_061.png",
+      "line": "I do not need you weak. Weak is messy. I need you busy.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Official at three TVs of crises, calm, tea, football on a fourth screen tiny in the corner.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "062",
+      "filename": "putin_v3_062.png",
+      "line": "A superpower with three crises, a midterm, and a football game is,",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A giant speaker with a mute icon, city lights behind it. Superpower on mute. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "063",
+      "filename": "putin_v3_063.png",
+      "line": "to me, a superpower on mute.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Tired soldier in kit, still, not running, file-photo lighting.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "064",
+      "filename": "putin_v3_064.png",
+      "line": "The soldier in my folder is not a coward.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Transport-plane ramp, duffel, phones in the crowd filming, comments visualized as red dots in the night air.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "065",
+      "filename": "putin_v3_065.png",
+      "line": "He goes home the second the pictures get bad and the comments get loud.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A stack of printed bad-news photos, TV bezel, no faces identifiable. Pictures. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "066",
+      "filename": "putin_v3_066.png",
+      "line": "I plan around the pictures.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Evening-news glow on a red cup of ice, commercial still inside the newscast. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "067",
+      "filename": "putin_v3_067.png",
+      "line": "I plan around the fact that your evening news still sells the red cup.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Paper fibers fuzzy from underlining, broken red pencil tip. The page that gave up. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "068",
+      "filename": "putin_v3_068.png",
+      "line": "This is the page I underline until the paper gives up.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Movers carrying a kettle through a nuclear briefing room as maps come down. Absurdist wide.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "069",
+      "filename": "putin_v3_069.png",
+      "line": "You replace the foreign policy of a nuclear state the way other countries replace a kettle.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Tuesday parade, confetti, a song, a treaty binder on a float. American waving from the curb.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "070",
+      "filename": "putin_v3_070.png",
+      "line": "On a Tuesday. With a parade. With a song you already knew.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A treaty ribbon gone slack, gold seal peeling. Not a treaty. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "071",
+      "filename": "putin_v3_071.png",
+      "line": "A treaty is not a treaty.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "January calendar, gym membership card expired, treaty next to it. Mood expires. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "072",
+      "filename": "putin_v3_072.png",
+      "line": "It is a mood that expires in January, next to the gym membership.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A wall calendar filling the frame, no mouth, no speaker. Calendars do not give speeches. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "073",
+      "filename": "putin_v3_073.png",
+      "line": "I do not take your word. I take your calendar. Calendars do not give speeches.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "Two circus hats on a ringmaster stand, empty ring. Same circus. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "074",
+      "filename": "putin_v3_074.png",
+      "line": "How many months until your election. How many months until the circus with different hats.",
+      "free": false,
+      "type": "high angle",
+      "scene": "Committee table, guilty fluorescent, the handshake man small in the lights, official in the gallery dark.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "075",
+      "filename": "putin_v3_075.png",
+      "line": "How many months until the man who shook my hand is under lights that make everyone look guilty.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A cracked marble bust, virtue as stone. Consistency. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "076",
+      "filename": "putin_v3_076.png",
+      "line": "You think consistency is a virtue.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Official shrugging at a timeline chart, coffee, snow window, unworried.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "077",
+      "filename": "putin_v3_077.png",
+      "line": "I think it is a problem I do not have with you.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "American on a stage saying the opposite of last year, old clip frozen on a side screen.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "078",
+      "filename": "putin_v3_078.png",
+      "line": "I do not convince you. I wait until you convince yourselves of the opposite,",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Same stage, same flag bunting, new slogan bars painted blank. Mandate.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "079",
+      "filename": "putin_v3_079.png",
+      "line": "on the same stage, and call it a mandate.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A movie-ticket stub for the same plot twist twice. Paid twice. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "080",
+      "filename": "putin_v3_080.png",
+      "line": "I call it a plot twist you paid to watch twice.",
+      "free": true,
+      "type": "wide shot",
+      "scene": "Bad-heating office, steam pipes, empty desk, date written on a blotter. Breath in the air. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "081",
+      "filename": "putin_v3_081.png",
+      "line": "In a room with bad heating, a date gets written next to a name.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A cheap novelty ringtone speaker next to an inauguration bunting scrap. New name, old folder. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "082",
+      "filename": "putin_v3_082.png",
+      "line": "Inauguration Day. Whoever you just elected, like a new ringtone. The folder does not change.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "Same fat folder, new title strip, old strip in trash, three identical presidential silhouettes as paper cutouts face-down. No faces.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "083",
+      "filename": "putin_v3_083.png",
+      "line": "Only the heading. I have used the same pencil for three of your presidents.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "An ugly cheap pencil, chewed, three notches in the paint. Not a nice pencil. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "084",
+      "filename": "putin_v3_084.png",
+      "line": "It is not even a nice pencil.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "Printed op-eds in a stack, funded. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "085",
+      "filename": "putin_v3_085.png",
+      "line": "I do not invent your arguments. You publish them, fund them,",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A donate button glow on a laptop, tip-jar silhouette. Funeral tip jar. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "086",
+      "filename": "putin_v3_086.png",
+      "line": "and put a donate button under them like a tip jar for your own funeral.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "University panel, sandwiches, decline banner blank, nearly empty chairs, American nodding.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "087",
+      "filename": "putin_v3_087.png",
+      "line": "A panel about your decline, with sandwiches.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Celebrity extra at a podium, folded map in a bag, cameras, war they cannot find.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "088",
+      "filename": "putin_v3_088.png",
+      "line": "A celebrity reading a war statement they could not find on a map an hour ago.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A beauty-light ring, empty stool, excellent lighting, no speaker. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "089",
+      "filename": "putin_v3_089.png",
+      "line": "The lighting is excellent.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "Tote bag, podcast mic, mailing-list printout as grey bars. Choir merch. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "090",
+      "filename": "putin_v3_090.png",
+      "line": "The choir is not secret. It has a tote bag and a podcast.",
+      "free": true,
+      "type": "match cut",
+      "scene": "Old telegram spike dissolving into a glowing heart-shaped like button. Same muscle. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "091",
+      "filename": "putin_v3_091.png",
+      "line": "We used to plant stories. Now we press a heart.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Angry American given a huge empty hall and a mic, spotlight, acoustics of rage.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "092",
+      "filename": "putin_v3_092.png",
+      "line": "Find the American already screaming at America, hand him a bigger room.",
+      "free": false,
+      "type": "low angle",
+      "scene": "Same man from below, swallowing the room, official a speck in the back.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "093",
+      "filename": "putin_v3_093.png",
+      "line": "He will do the acoustics himself.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Buffet of idea-posters, serving spoons, American filling a plate, marketplace of ideas as food.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "094",
+      "filename": "putin_v3_094.png",
+      "line": "You call this a marketplace of ideas. I call it a buffet.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Chef hat on a hook, empty kitchen, no cook. I do not cook. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "095",
+      "filename": "putin_v3_095.png",
+      "line": "I do not cook.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Two spoons locked together on a table, fight about cutlery, clock at a hungry hour. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "096",
+      "filename": "putin_v3_096.png",
+      "line": "I arrive hungry, at the hour you are fighting about the spoons.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "Empty spy coat on a hanger, a cash bundle ignored. Not a spy. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "097",
+      "filename": "putin_v3_097.png",
+      "line": "The most valuable American is not a spy. Spies want money.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Sincere American at a kitchen webcam, unpaid, righteous, authenticity lighting.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "098",
+      "filename": "putin_v3_098.png",
+      "line": "This one wants to be right on the internet, unpaid, and calls it authenticity.",
+      "free": true,
+      "type": "wide shot",
+      "scene": "Park bench, frost, dark coat, sealed envelope unused. The villain you wanted. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "099",
+      "filename": "putin_v3_099.png",
+      "line": "If you are waiting for a villain in a dark coat and an envelope,",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Envelope opened: a printed quote page, ordinary type too small to read. The quote is yours. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "100",
+      "filename": "putin_v3_100.png",
+      "line": "you have misunderstood the century. The envelope is a quote. The quote is yours.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "The same quote page with no red marks. Unedited. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "101",
+      "filename": "putin_v3_101.png",
+      "line": "I did not even edit it.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Official drinking with quiet dark-coated Americans in Mayfair, not with the cartoon tourist.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "102",
+      "filename": "putin_v3_102.png",
+      "line": "The Americans I drink with are not the cartoon.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "A TV in the corner playing the cartoon tourist; the quiet table ignores it. Television is for you.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "103",
+      "filename": "putin_v3_103.png",
+      "line": "The cartoon is television, and television is for you. These ones are in Mayfair,",
+      "free": true,
+      "type": "aerial",
+      "scene": "Aerial of a white yacht, blank stern, grey harbour, no flag, dawn. No people visible.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "104",
+      "filename": "putin_v3_104.png",
+      "line": "Geneva, a yacht registered nowhere,",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A tiny paper flag in an ashtray, money sitting still as gold bars. Quiet is expensive. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "105",
+      "filename": "putin_v3_105.png",
+      "line": "allergic to flags the way a vampire is allergic to morning. Quiet is expensive.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Quiet American lecturing a camera about democracy at lunch, boom mic, perfect daylight.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "106",
+      "filename": "putin_v3_106.png",
+      "line": "They lecture a camera about democracy at lunch,",
+      "free": false,
+      "type": "two-person shot",
+      "scene": "Same man at dinner, matchbook, loophole question, official listening, candle.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "107",
+      "filename": "putin_v3_107.png",
+      "line": "then ask at dinner if the sanction list has a loophole with a surname.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A matchbook half-open, a surname suggested as a black redaction bar. Never theirs out loud. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "108",
+      "filename": "putin_v3_108.png",
+      "line": "The surname is never theirs, out loud. You are two countries sharing a language.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A street split: ballot box vs invoice stamp, one language as a torn page. Two countries. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "109",
+      "filename": "putin_v3_109.png",
+      "line": "One votes. One invoices. Guess which number I keep.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A ledger with one column circled, the invoice column. The number he keeps. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "110",
+      "filename": "putin_v3_110.png",
+      "line": "I watched a senator's son at a table his father could not be photographed at.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Heavy curtains, young man at a table, waiter blocking the father's sightline, official checking a watch.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "111",
+      "filename": "putin_v3_111.png",
+      "line": "I did not gasp. Gasping is your hobby. I checked the time.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A wristwatch face, no gasp, just time. Insert. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "112",
+      "filename": "putin_v3_112.png",
+      "line": "This American is not a hypocrite. He is a professional. Professionals can be scheduled.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Quiet-suited American at a real desk in rain, professional, schedulable, not performing.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "113",
+      "filename": "putin_v3_113.png",
+      "line": "Like weather. Like you.",
+      "free": true,
+      "type": "aerial",
+      "scene": "Weather radar looping the same storm. Like weather. Like you. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "114",
+      "filename": "putin_v3_114.png",
+      "line": "I have a cleaner word for your politics. Machine. Machines jam.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Gears, oil, a jam light. Machine. Macro. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "115",
+      "filename": "putin_v3_115.png",
+      "line": "They make the same noise before they fail,",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A needle in the red, the same noise visualized as a repeating waveform. Before they fail. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "116",
+      "filename": "putin_v3_116.png",
+      "line": "and you still film the noise and argue about who made it.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Crowd filming a smoking machine with phones, arguing, pointing at each other not the gears.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "117",
+      "filename": "putin_v3_117.png",
+      "line": "Fifty percent plus one. That is the religion. A coin flip with fireworks.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A coin in mid-air over fireworks, 50/50 religion. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "118",
+      "filename": "putin_v3_118.png",
+      "line": "I do not pick your president. Presidents are a costume. I pick your argument.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "President as a costume on a hanger beside an argument written on a chalkboard, official circling the argument.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "119",
+      "filename": "putin_v3_119.png",
+      "line": "August to November is a holiday I did not pay for.",
+      "free": true,
+      "type": "wide shot",
+      "scene": "Empty campaign street August\u2013November, yard signs, a parked van, unpaid holiday. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "120",
+      "filename": "putin_v3_120.png",
+      "line": "You think I want you divided. That is adorable. Division is the exhaust.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "American accusing the official of wanting division, cute, finger out; official almost amused.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "121",
+      "filename": "putin_v3_121.png",
+      "line": "The engine is your attention, pointed at a clip,",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A car engine vs an exhaust pipe, attention vs division as machine parts. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "122",
+      "filename": "putin_v3_122.png",
+      "line": "at a man in a supermarket who said the wrong three words into a phone.",
+      "free": false,
+      "type": "dutch angle",
+      "scene": "Supermarket aisle, cereal, a phone, a man saying the wrong three words, camera already there, horror-comedy dutch.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "123",
+      "filename": "putin_v3_123.png",
+      "line": "A country staring at itself cannot stare at a border. I have measured this.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A giant eye in a bathroom mirror, border fence only in the reflection, out of focus. Country staring at itself. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "124",
+      "filename": "putin_v3_124.png",
+      "line": "Every time your news cycle eats a week, someone else's map gets a new road.",
+      "free": true,
+      "type": "aerial",
+      "scene": "Time-lapse feel: a news-week eating a calendar, a foreign map growing a red road. God's-eye. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "125",
+      "filename": "putin_v3_125.png",
+      "line": "You will find out in a documentary, with a sad piano, in three years,",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Three years later, a sad-piano documentary on a laptop, American watching.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "126",
+      "filename": "putin_v3_126.png",
+      "line": "eating the sandwich from the commercial.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "The commercial sandwich again, now next to the laptop pause bar. Callback insert. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "127",
+      "filename": "putin_v3_127.png",
+      "line": "The machine is not evil. Evil is a movie word. You like movie words.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "Movie-marquee bulbs spelling nothing, unplugged. Evil as a movie word. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "128",
+      "filename": "putin_v3_128.png",
+      "line": "The machine is predictable. That is the highest compliment I give an enemy. Congratulations.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Official stamping PREDICTABLE energy \u2014 show a cold red check on a file, a tiny nod. Congratulations, dry.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "129",
+      "filename": "putin_v3_129.png",
+      "line": "A new American walks onto a stage and talks about reset,",
+      "free": false,
+      "type": "wide shot",
+      "scene": "New American on stage, reset, teleprompter, fresh paint, children's brand-deal merch on a table in the wings.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "130",
+      "filename": "putin_v3_130.png",
+      "line": "and a line that will not be crossed this time, he swears,",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A wet-ink red line on a speech, THIS TIME as a smear not letters. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "131",
+      "filename": "putin_v3_131.png",
+      "line": "on his children's brand deals. I do not cheer. Panic is cardio.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Official does not cheer, opens the folder, kettle steam, cardio joke as a skipping-rope hanging unused.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "132",
+      "filename": "putin_v3_132.png",
+      "line": "I open the same folder. The cartoon is still in it. The coupon.",
+      "free": true,
+      "type": "top-down flatlay",
+      "scene": "Cartoon tab, coupon, soldier photo face-down. Same folder guts. No readable names.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "133",
+      "filename": "putin_v3_133.png",
+      "line": "The soldier who goes home when the comments get mean.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Phone comments as a red storm over a duffel. Mean comments. No faces.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "134",
+      "filename": "putin_v3_134.png",
+      "line": "The headings have not moved in thirty years. Only the photographs. You age.",
+      "free": true,
+      "type": "tracking",
+      "scene": "Dolly along a wall of headings that have not moved, photographs changing in frames, dust. Empty corridor. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "135",
+      "filename": "putin_v3_135.png",
+      "line": "The file does not. That should offend you more than I do.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A file that does not wrinkle next to a mirror that does. You age. The file does not. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "136",
+      "filename": "putin_v3_136.png",
+      "line": "I do not need you worse. I need you you: loud, rich,",
+      "free": false,
+      "type": "medium shot",
+      "scene": "American as he is: loud coat, watch, impatient, the official needing exactly that.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "137",
+      "filename": "putin_v3_137.png",
+      "line": "impatient, convinced history is a sequel and you still have the best explosions.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "First in line for a sequel poster with ridiculous explosions, popcorn, believing the trailer.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "138",
+      "filename": "putin_v3_138.png",
+      "line": "You will ask, at the end of a video like this, whether I am right.",
+      "free": false,
+      "type": "POV",
+      "scene": "POV of the viewer at the end of a video, dark screen, asking if he is right, reflection.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "139",
+      "filename": "putin_v3_139.png",
+      "line": "Of course. You love a verdict. You will argue with the scale.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A bathroom scale, the number argued with, folder uninterested in the background blur. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "140",
+      "filename": "putin_v3_140.png",
+      "line": "The folder does not care. It cares that you watched. That you felt roasted.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "American feeling roasted, still watching, mug cooling, a tick mark appearing on a page.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "141",
+      "filename": "putin_v3_141.png",
+      "line": "That tomorrow you will fight in the comments about whether I am a genius or a cartoon.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "Comment-bright room, Americans fighting each other, genius vs cartoon, nobody at the window.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "142",
+      "filename": "putin_v3_142.png",
+      "line": "I predicted that too.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A checked prediction box on the last page. I predicted that too. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "143",
+      "filename": "putin_v3_143.png",
+      "line": "Someone new is writing a speech about how this time will be different.",
+      "free": false,
+      "type": "medium shot",
+      "scene": "Someone new writing the old sentence, coffee, slogans as stacked paper in the trash.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "144",
+      "filename": "putin_v3_144.png",
+      "line": "The sentence is older than your last three slogans.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Three dead slogan buttons in a drawer, older than the new speech. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "145",
+      "filename": "putin_v3_145.png",
+      "line": "In the room with the bad heating, I sharpen a pencil. It is not dramatic. It is maintenance.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "Pencil sharpened over shavings, steam pipes, maintenance not drama. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "146",
+      "filename": "putin_v3_146.png",
+      "line": "The cycle does not continue because I am brilliant.",
+      "free": true,
+      "type": "symbolic graphic",
+      "scene": "A gold trophy engraved with nothing, left on a hook. Not brilliance. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "147",
+      "filename": "putin_v3_147.png",
+      "line": "Brilliance is a compliment you give so you do not have to change.",
+      "free": true,
+      "type": "extreme close-up",
+      "scene": "A compliment as a sticky note covering a 'CHANGE' switch left off. No people.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "148",
+      "filename": "putin_v3_148.png",
+      "line": "It continues because you are familiar.",
+      "free": false,
+      "type": "wide shot",
+      "scene": "The familiar American walking the same looping wet street, official already seated, waiting.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic practical lighting, olive, gold, cold teal. Graphic-novel painterly, not a photograph. If a Russian official appears: stylized, not photoreal, not a celebrity likeness. If an American appears: late-thirties everyman, weary, slightly oversized cartoon-round head, not a celebrity. No readable text, letters, numbers, logos, watermarks, captions."
+    },
+    {
+      "id": "149",
+      "filename": "putin_v3_149.png",
+      "line": "And familiarity, my American friends, is the most expensive thing you give away for free.",
+      "free": true,
+      "type": "aerial",
+      "scene": "God's-eye of the looping street and the same puddle, the most expensive free thing: a well-worn path. No people visible.",
+      "style": "Cinematic 16:9 movie still, anamorphic widescreen, film grain, dramatic lighting, olive, gold, cold teal. GRAPHIC-NOVEL, not a photo. STRICTLY NO people, NO faces, NO hands, NO figures, NO silhouettes of humans \u2014 objects, rooms, weather, machines, and empty architecture only. No readable text, letters, numbers, logos, watermarks, captions."
+    }
+  ]
+}

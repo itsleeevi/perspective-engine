@@ -7,14 +7,14 @@ alwaysApply: true
 
 Use the frozen style in `channel/config.py` for the selected mode. Do not rewrite it per scene.
 
-WTRT = muted historical flat 2D. Money = clean analytical business 2D. Takeover = energetic strategic 2D.
+WTRT = muted historical stick-figure doodle. Money = high-contrast business stick-figure doodle. Takeover = energetic strategic stick-figure doodle.
 
 Not photoreal, not 3D, not anime. Historical names and company names stay out of image prompts (`channel/prompts.py`).
 
-Never put a company or person name in a GenerateImage **filename** — the model will paint the word onto the picture. Use the job’s `generate_filename` (hashed token), then copy onto `filename` / `copy_to`.
+Never put a company or person name in a still **filename** — the model will paint the word onto the picture. HITL stills use index + timestamp (`000_00-00-04.png`). Drop-folder stills use a bracket clock (`[00-00]_….jpg`). Hashed `generate_filename` tokens stay as aliases.
 
-Named public figures must be a recognizable cartoon of the real person. Reuse `channel/character_locks.json` and pass the hashed photo plus sheet in `channel/character_sheets/` as GenerateImage references.
+Named public figures must be a recognizable cartoon of the real person drawn as that stick-figure doodle. Reuse `channel/character_locks.json` and pass the hashed photo plus sheet in `channel/character_sheets/` as Google Flow references.
 
 Every still: one idea, one oversized focal object, named lighting, unique staging (`docs/video-engine/QUALITY_BAR.md` / `channel/quality_bar.py`). No filing-table wallpaper.
 
-Stills ~4–8 seconds. Long output 3840×2160. Shorts 1080×1920.
+Still duration is the filename timestamp interval on drop-folder cuts (`[00-13]_….jpg`), or the pause interval from imported audio on the generate path. Long output 3840×2160. ingest-images and drop ingest Lanczos-upscale stills to that size. Shorts 1080×1920.

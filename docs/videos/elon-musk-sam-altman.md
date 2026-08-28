@@ -56,4 +56,4 @@ Thumbnail stills use the same recognizable cartoon face as the public figure (re
 
 ## Playbook
 
-`docs/custom-videos.md` — new long cuts are **20–25 minutes** (4400–5500 words).
+`docs/custom-videos.md` — new long cuts are **5–15 minutes** (800–2500 words).

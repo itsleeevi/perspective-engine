@@ -123,6 +123,14 @@ def make_voice_adapter():
         from adapters.voice.kokoro import KokoroVoiceAdapter
 
         return KokoroVoiceAdapter()
+    if kind == "imported":
+        from adapters.voice.imported import ImportedVoiceAdapter
+
+        audio = ROOT / SPEC["imported_audio"] if SPEC.get("imported_audio") else None
+        stamps = ROOT / SPEC["timestamps"] if SPEC.get("timestamps") else None
+        if audio is None or not audio.is_file():
+            raise ValueError("imported voice needs spec.imported_audio on disk")
+        return ImportedVoiceAdapter(audio, stamps)
     raise ValueError(f"Unknown voice in spec: {kind!r}")
 
 

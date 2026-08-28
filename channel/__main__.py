@@ -17,6 +17,7 @@ Subcommands:
     youtube        write description, tags, 1280×720 + 9:16 Shorts thumbs
     branding       size a profile (800×800) and cover (2560×1440) for YouTube
     generate       isolated job under artifacts/<job_id>/ (canonical Cloud command)
+    drop           create a drop folder for timestamped stills + narration audio
     cloud-readiness check configs, prompts, rules, writable artifacts
 """
 
@@ -165,23 +166,20 @@ Working directory for this video. Story content lives in `project.json`.
 Channel mode: `{cfg.mode.value}` (`{cfg.name}`).
 Style, voice, and QA rules live in `channel/config.py` — do not copy a person or company into that file.
 
-## Pipeline
+## Pipeline (voice first)
 
 1. Researcher — {prompts.RESEARCHER.strip().splitlines()[0]}
 2. Fact check + originality + monetization — `python -m channel qa {slug}`
 3. Story architect, bibles, narration ({cfg.narration_word_min}–{cfg.narration_word_max} words)
-4. `python -m channel chunks {slug}`
-5. Scene breakdown, 1:1 with chunks
-6. `python -m channel compile {slug}` then `scripts/lint_originality.py`
-7. GenerateImage each job in `fixtures/{slug}_v1_image_jobs.json` (Cursor Grok)
-8. GenerateImage `fixtures/{slug}_thumbnail_image_jobs.json` and
-   `fixtures/{slug}_short_thumbnail_image_jobs.json`, then `python -m channel youtube {slug}`
-9. `.venv/bin/python scripts/run_short.py fixtures/video_specs/{slug}.json`
-10. `.venv/bin/python scripts/run_custom_video.py fixtures/video_specs/{slug}.json`
-11. Update `{docs}`
+4. Copy `script.txt` into ElevenLabs. `python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3`
+5. Scene breakdown 1:1 with `timestamps.json` (SCENE_BREAKDOWN). Do not use `channel chunks` as the clock.
+6. `python -m channel generate --resume <JOB_ID>` writes `flow_prompts.txt` after originality_score >= 80 and ready_to_publish
+7. Paste `flow_prompts.txt` into Google Flow. `python -m channel ingest-images <JOB_ID> /path/to/pngs --partial`
+8. `python -m channel assemble <JOB_ID>` then `python -m channel youtube {slug}`
+9. Update `{docs}`
 
-Voice is Kokoro (default `{cfg.kokoro_voice}`; new titles may rotate). Never Edge. Never ElevenLabs.
-Images are Cursor Grok GenerateImage. Do not invent quotes or numbers.
+Voice is operator-imported audio. The engine does not call ElevenLabs or Kokoro on new jobs. Shipped recuts may still use Kokoro.
+Images are operator-imported Google Flow stills. Do not invent quotes or numbers.
 """
 
 
@@ -305,11 +303,10 @@ def _compile(args: argparse.Namespace) -> int:
         spec_rel = spec
     print("lint: .venv/bin/python scripts/lint_story.py", spec_rel)
     print("originality: .venv/bin/python scripts/lint_originality.py", spec_rel)
-    print("jobs: GenerateImage using fixtures/*image_jobs.json prompts")
-    print("thumb: GenerateImage the *_thumbnail_image_jobs.json still and")
-    print("       the *_short_thumbnail_image_jobs.json still, then")
+    print("jobs: paste flow_prompts.txt into Google Flow, then ingest-images")
+    print("thumb: paste thumbnail_prompts.txt into Google Flow, then")
     print(f"       .venv/bin/python -m channel youtube {project.slug}")
-    print("voice+assemble: scripts/run_short.py then scripts/run_custom_video.py")
+    print("voice+assemble: python -m channel ingest-audio then python -m channel assemble")
     if (
         not args.stubs
         and not args.force
@@ -317,7 +314,7 @@ def _compile(args: argparse.Namespace) -> int:
         and not project.originality.ready_for_images
     ):
         print(
-            "originality FAILED — do not GenerateImage. Rewrite:",
+            "originality FAILED — do not emit flow_prompts. Rewrite:",
             ", ".join(regenerate_targets(project.originality)),
             file=sys.stderr,
         )
@@ -400,6 +397,99 @@ def _branding(args: argparse.Namespace) -> int:
     print(f"about: {copy['about']}")
     if copy["handle"].is_file():
         print(f"handle: {copy['handle']}")
+    return 0
+
+
+def _ingest_audio(args: argparse.Namespace) -> int:
+    from channel.ingest import ingest_audio
+    from channel.job import ARTIFACTS
+
+    root = Path(args.artifacts) if args.artifacts else ARTIFACTS
+    src = Path(args.audio) if args.audio else None
+    table = ingest_audio(args.job_id, src, artifacts_root=root, pause_ms=args.pause_ms)
+    print(json.dumps({"job_id": args.job_id, "scene_count": table["scene_count"]}, indent=2))
+    print(f"timestamps: {root / args.job_id / 'timestamps.json'}")
+    print(f"transcript: {root / args.job_id / 'transcript.txt'}")
+    print("state: PAUSES_DETECTED")
+    return 0
+
+
+def _ingest_images(args: argparse.Namespace) -> int:
+    from channel.ingest import expected_image_names, ingest_images
+    from channel.job import ARTIFACTS
+    from channel.pauses import load_timestamps
+
+    root = Path(args.artifacts) if args.artifacts else ARTIFACTS
+    src = Path(args.folder) if args.folder else None
+    try:
+        copied = ingest_images(
+            args.job_id,
+            src,
+            artifacts_root=root,
+            require_complete=not args.partial,
+        )
+    except FileNotFoundError as exc:
+        print(str(exc))
+        return 1
+    dest = root / args.job_id
+    need = len(expected_image_names(load_timestamps(dest / "timestamps.json")))
+    print(json.dumps({"job_id": args.job_id, "images": len(copied), "need": need}, indent=2))
+    print("state: IMAGES_INGESTED" if len(copied) >= need else "state: WAIT_IMAGES")
+    return 0
+
+
+def _drop(args: argparse.Namespace) -> int:
+    from channel.drop import assemble_drop, copy_into_drop, drop_dir, drop_has_payload, start_drop_job
+    from channel.job import ARTIFACTS, job_dir
+
+    root = Path(args.artifacts) if args.artifacts else ARTIFACTS
+    manifest = start_drop_job(
+        title=args.title,
+        channel=args.channel,
+        job_id=args.job_id or None,
+        artifacts_root=root,
+    )
+    dest = job_dir(manifest.job_id, root=root)
+    folder = drop_dir(dest)
+    images = Path(args.images) if args.images else None
+    audio = Path(args.audio) if args.audio else None
+    if images is not None or audio is not None:
+        copy_into_drop(folder, images=images, audio=audio)
+    print(f"job_id: {manifest.job_id}")
+    print(f"drop: {folder}")
+    print("Put timestamped stills ([00-00]_….jpg) and the narration audio in that folder.")
+    print(f"Then: .venv/bin/python -m channel assemble {manifest.job_id}")
+    if args.assemble:
+        if not drop_has_payload(dest):
+            print(f"drop folder is missing stills or audio: {folder}", file=sys.stderr)
+            return 1
+        video = assemble_drop(manifest.job_id, artifacts_root=root)
+        print(f"video: {video}")
+    return 0
+
+
+def _assemble(args: argparse.Namespace) -> int:
+    from channel.assemble_hitl import assemble_hitl
+    from channel.drop import assemble_drop, drop_dir, drop_has_payload
+    from channel.job import ARTIFACTS, job_dir
+
+    root = Path(args.artifacts) if args.artifacts else ARTIFACTS
+    dest = job_dir(args.job_id, root=root)
+    burn = False if args.no_captions else None
+    if drop_has_payload(dest):
+        video = assemble_drop(args.job_id, artifacts_root=root)
+        print(f"video: {video}")
+        return 0
+    if not (dest / "timestamps.json").is_file():
+        folder = drop_dir(dest)
+        print(
+            f"no audio+stills to assemble. Put timestamped stills "
+            f"([00-00]_….jpg) and narration audio in {folder}",
+            file=sys.stderr,
+        )
+        return 1
+    video = assemble_hitl(args.job_id, artifacts_root=root, burn_captions=burn)
+    print(f"video: {video}")
     return 0
 
 
@@ -549,6 +639,54 @@ def main(argv: list[str] | None = None) -> int:
     gen.add_argument("--force", action="store_true")
     gen.add_argument("--artifacts", default="", help="override artifacts root (tests)")
     gen.set_defaults(func=_generate)
+
+    inga = sub.add_parser("ingest-audio", help="import operator voiceover and detect pause scenes")
+    inga.add_argument("job_id")
+    inga.add_argument("audio", nargs="?", default="", help="wav/mp3/m4a path")
+    inga.add_argument("--pause-ms", dest="pause_ms", type=int, default=280)
+    inga.add_argument("--artifacts", default="")
+    inga.set_defaults(func=_ingest_audio)
+
+    ingi = sub.add_parser("ingest-images", help="import Google Flow stills into the job")
+    ingi.add_argument("job_id")
+    ingi.add_argument("folder", nargs="?", default="", help="folder of PNGs or ZAPI serial JPEGs")
+    ingi.add_argument(
+        "--partial",
+        action="store_true",
+        help="remap whatever stills exist (01_set.jpg → 000_00-00-00.png), upscale to 4K, without requiring the full set",
+    )
+    ingi.add_argument("--artifacts", default="")
+    ingi.set_defaults(func=_ingest_images)
+
+    drop = sub.add_parser(
+        "drop",
+        help="create a folder for timestamped stills + narration, then assemble a 4K MP4",
+    )
+    drop.add_argument("--channel", required=True, help=CHANNEL_FLAG_HELP)
+    drop.add_argument("--title", required=True)
+    drop.add_argument("--job-id", dest="job_id", default="")
+    drop.add_argument("--images", default="", help="copy stills from this folder into drop/")
+    drop.add_argument("--audio", default="", help="copy narration audio into drop/")
+    drop.add_argument(
+        "--assemble",
+        action="store_true",
+        help="upscale + assemble now if files are already in the drop folder",
+    )
+    drop.add_argument("--artifacts", default="")
+    drop.set_defaults(func=_drop)
+
+    asm = sub.add_parser(
+        "assemble",
+        help="render timestamped stills + imported audio (drop folder) or pause-timed HITL",
+    )
+    asm.add_argument("job_id")
+    asm.add_argument("--artifacts", default="")
+    asm.add_argument(
+        "--no-captions",
+        action="store_true",
+        help="do not burn subtitles (default for drop-folder cuts)",
+    )
+    asm.set_defaults(func=_assemble)
 
     ready = sub.add_parser("cloud-readiness", help="verify a fresh clone can generate")
     ready.add_argument("--strict", action="store_true", help="fail if ffmpeg is missing")

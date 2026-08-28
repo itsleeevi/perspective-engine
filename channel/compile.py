@@ -34,7 +34,7 @@ from channel.paths import (
     spec_path,
     stills_path,
 )
-from channel.prompts import assemble_image_prompt, strip_character_names, strip_image_brands
+from channel.prompts import assemble_image_prompt, format_flow_prompt, strip_character_names, strip_image_brands
 from channel.quality_bar import STAGING_QUALITY
 from channel.schema import Scene, ScenePurpose, VideoProject
 from channel.shorts import (
@@ -82,7 +82,7 @@ def fixture_dict(project: VideoProject, *, short: bool = False) -> dict:
     return {
         "title": project.title,
         "hero_career_progression": False,
-        "include_level_titles": True,
+        "include_level_titles": False,
         "title_style": "chapter",
         "speak_title_cards": False,
         "the_thought": project.story.title_payoff,
@@ -223,7 +223,22 @@ def spec_dict(
         "stills_dir": stills_dir,
         "output": output,
         "thread_id": f"{slug}-v1",
-        "voice": cfg.voice,
+        "voice": "imported",
+        "imported_audio": (
+            relpath_for_spec(root / "audio" / "voiceover.wav", root=root)
+            if isolated
+            else "audio/voiceover.wav"
+        ),
+        "timestamps": (
+            relpath_for_spec(root / "timestamps.json", root=root)
+            if isolated
+            else "timestamps.json"
+        ),
+        "flow_prompts": (
+            relpath_for_spec(root / "flow_prompts.txt", root=root)
+            if isolated
+            else "flow_prompts.txt"
+        ),
         "kokoro_voice": kokoro_voice_for(slug),
         "kokoro_speed": kokoro_speed_for(slug, cfg),
         "kokoro_sentence_pause": kokoro_pauses_for(slug, cfg)[0],
@@ -259,6 +274,46 @@ def spec_dict(
     return spec
 
 
+def _load_job_timestamps(root: Path | None) -> dict | None:
+    if root is None:
+        return None
+    path = root / "timestamps.json"
+    if not path.is_file():
+        return None
+    from channel.pauses import load_timestamps
+
+    return load_timestamps(path)
+
+
+def write_flow_prompts(
+    project: VideoProject,
+    scenes: list[Scene],
+    *,
+    root: Path | None = None,
+) -> Path:
+    dest = (root or ROOT) / "flow_prompts.txt"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        format_flow_prompt(project, scene, start_seconds=scene.start_seconds)
+        for scene in scenes
+    ]
+    dest.write_text("\n\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+    # ZAPI FLOW upload: one prompt per line, no blank lines.
+    batches = (root or ROOT) / "flow_batches.txt"
+    one_line = [re.sub(r"\s+", " ", line).strip() for line in lines if line.strip()]
+    batches.write_text("\n".join(one_line) + ("\n" if one_line else ""), encoding="utf-8")
+    return dest
+
+
+def write_thumbnail_prompts(project: VideoProject, *, root: Path | None = None) -> Path:
+    from channel.youtube import thumbnail_prompt
+
+    dest = (root or ROOT) / "thumbnail_prompts.txt"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(thumbnail_prompt(project).strip() + "\n", encoding="utf-8")
+    return dest
+
+
 def write_jobs(
     spec: dict,
     scenes: list[Scene],
@@ -266,35 +321,53 @@ def write_jobs(
     *,
     short: bool,
     root: Path | None = None,
+    timestamps: dict | None = None,
 ) -> Path:
     from channel.character_locks import reference_image_paths
+    from channel.pauses import expected_image_name
     from graph.script_fixture import fixture_to_beats, is_title_beat, load_fixture
 
     block = spec["short"] if short else spec
-    data = load_fixture(str((root or ROOT) / block["fixture"]))
-    chunks = [
-        c
-        for beat in fixture_to_beats(data, include_hook=True)
-        if not is_title_beat(beat)
-        for c in _split(beat, project)
-    ]
-    if len(scenes) != len(chunks):
-        raise ValueError(
-            f"jobs: {len(scenes)} scenes vs {len(chunks)} chunks "
-            f"({'short' if short else 'long'})"
-        )
-    prefix = block["still_prefix"]
     token = str(spec.get("image_token") or image_token_for(project.slug))
     kind = "short_scene" if short else "scene"
     aspect = "9:16" if short else "16:9"
+    prefix = block["still_prefix"]
+    rows: list[tuple[Scene, str, str]]
+    if timestamps and not short:
+        ts_scenes = list(timestamps.get("scenes") or [])
+        if len(scenes) != len(ts_scenes):
+            raise ValueError(
+                f"jobs: {len(scenes)} scenes vs {len(ts_scenes)} pause timestamps"
+            )
+        rows = []
+        for scene, row in zip(scenes, ts_scenes, strict=True):
+            dest_name = str(row.get("filename") or expected_image_name(int(row["index"]), float(row["start"])))
+            chunk = str(row.get("text") or scene.narration)
+            rows.append((scene, chunk, dest_name))
+    else:
+        data = load_fixture(str((root or ROOT) / block["fixture"]))
+        chunks = [
+            c
+            for beat in fixture_to_beats(data, include_hook=True)
+            if not is_title_beat(beat)
+            for c in _split(beat, project)
+        ]
+        if len(scenes) != len(chunks):
+            raise ValueError(
+                f"jobs: {len(scenes)} scenes vs {len(chunks)} chunks "
+                f"({'short' if short else 'long'})"
+            )
+        pairs = [
+            (scene, chunk)
+            for scene, chunk in zip(scenes, chunks, strict=True)
+            if not is_short_cta(chunk)
+        ]
+        rows = [
+            (scene, chunk, f"{prefix}{i:03d}.png")
+            for i, (scene, chunk) in enumerate(pairs)
+        ]
     jobs = []
-    pairs = [
-        (scene, chunk)
-        for scene, chunk in zip(scenes, chunks, strict=True)
-        if not is_short_cta(chunk)
-    ]
-    for i, (scene, chunk) in enumerate(pairs):
-        dest_name = f"{prefix}{i:03d}.png"
+    for i, (scene, chunk, dest_name) in enumerate(rows):
         gen_name = generate_image_filename(i, token=token, kind=kind)
         job = {
             "id": f"{i:03d}",
@@ -307,8 +380,12 @@ def write_jobs(
             "shot_type": scene.composition,
             "chunk": chunk,
             "scene": scene.action,
-            "prompt": assemble_image_prompt(project, scene, aspect=aspect),
+            "prompt": format_flow_prompt(project, scene, start_seconds=scene.start_seconds, aspect=aspect)
+            if timestamps and not short
+            else assemble_image_prompt(project, scene, aspect=aspect),
             "camera_motion": scene.camera_motion,
+            "start_seconds": scene.start_seconds,
+            "end_seconds": scene.end_seconds,
         }
         refs = reference_image_paths(project, scene, root=root)
         if refs:
@@ -344,12 +421,53 @@ def stub_scenes(project: VideoProject, chunks: list[str]) -> list[Scene]:
     return out
 
 
+def stub_scenes_from_timestamps(project: VideoProject, timestamps: dict) -> list[Scene]:
+    rows = list(timestamps.get("scenes") or [])
+    chunks = [str(row.get("text") or "") for row in rows]
+    scenes = stub_scenes(project, chunks)
+    for scene, row in zip(scenes, rows, strict=True):
+        scene.start_seconds = float(row["start"])
+        scene.end_seconds = float(row["end"])
+        scene.narration = str(row.get("text") or scene.narration)
+    return scenes
+
+
+def _write_script_artifacts(
+    project: VideoProject,
+    *,
+    root: Path | None,
+    token: str,
+) -> tuple[dict, dict[str, str]]:
+    slug = project.slug
+    project.metadata = draft_metadata(project)
+    fixture = fixture_dict(project)
+    fx = fixture_path(slug, root)
+    fx.parent.mkdir(parents=True, exist_ok=True)
+    fx.write_text(json.dumps(fixture, indent=2) + "\n", encoding="utf-8")
+    spec = spec_dict(project, root=root, image_token=token)
+    sp = spec_path(slug, root)
+    sp.parent.mkdir(parents=True, exist_ok=True)
+    sp.write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
+    from channel.youtube import write_pack, write_thumbnail_job
+
+    written = {
+        "fixture": str(fx),
+        "spec": str(sp),
+        "thumbnail_job": str(write_thumbnail_job(project, root=root, image_token=token)),
+        "thumbnail_prompts": str(write_thumbnail_prompts(project, root=root)),
+        "youtube_description": write_pack(spec, root=root)["description"],
+    }
+    return spec, written
+
+
 def compile_project(
     project: VideoProject,
     *,
     stubs_ok: bool = False,
     root: Path | None = None,
     image_token: str | None = None,
+    timestamps: dict | None = None,
+    stage: str = "auto",
 ) -> dict[str, str]:
     if not project.story:
         raise ValueError("cannot compile without a story")
@@ -358,68 +476,70 @@ def compile_project(
     apply_character_locks(project)
     slug = project.slug
     token = image_token or image_token_for(slug)
-    project.metadata = draft_metadata(project)
-    fixture = fixture_dict(project)
-    chunks = _chunks_for(fixture, project)
-    scenes = list(project.scenes)
-    if len(scenes) != len(chunks):
-        if not stubs_ok:
-            raise ValueError(
-                f"scene count {len(scenes)} != narration chunks {len(chunks)}. "
-                "Fill scenes 1:1 with channel.compile.chunk_list() output, or "
-                "pass stubs_ok=True to write placeholders."
-            )
-        scenes = stub_scenes(project, chunks)
+    table = timestamps
+    if stage == "script":
+        table = None
+    elif table is None:
+        table = _load_job_timestamps(root)
+    spec, written = _write_script_artifacts(project, root=root, token=token)
 
-    fx = fixture_path(slug, root)
-    fx.parent.mkdir(parents=True, exist_ok=True)
-    fx.write_text(json.dumps(fixture, indent=2) + "\n", encoding="utf-8")
-    stills_path(slug, root).write_text(stills_module_source(project, scenes), encoding="utf-8")
-
-    spec = spec_dict(project, root=root, image_token=token)
-    sp = spec_path(slug, root)
-    sp.parent.mkdir(parents=True, exist_ok=True)
-    sp.write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
-
-    written = {
-        "fixture": str(fx),
-        "stills": str(stills_path(slug, root)),
-        "spec": str(sp),
-    }
-
-    cfg = config_for_project(project)
-    if cfg.default_short_enabled and project.short:
-        sf = fixture_dict(project, short=True)
-        short_chunks = _chunks_for(sf, project)
-        short_scenes = attach_short_cta_scene(list(project.short.scenes), short_chunks)
-        if len(short_scenes) != len(short_chunks):
+    if table is not None:
+        scenes = list(project.scenes)
+        n = len(table.get("scenes") or [])
+        if len(scenes) != n:
             if not stubs_ok:
                 raise ValueError(
-                    f"short scenes {len(short_scenes)} != short chunks {len(short_chunks)}"
+                    f"scene count {len(scenes)} != {n} pause timestamps. "
+                    "Fill scenes 1:1 with timestamps.json after ingest-audio."
                 )
+            scenes = stub_scenes_from_timestamps(project, table)
+            project.scenes = scenes
+        else:
+            for scene, row in zip(scenes, table["scenes"], strict=True):
+                if scene.start_seconds is None:
+                    scene.start_seconds = float(row["start"])
+                if scene.end_seconds is None:
+                    scene.end_seconds = float(row["end"])
+                if not scene.narration.strip():
+                    scene.narration = str(row.get("text") or "")
+        stills_path(slug, root).write_text(stills_module_source(project, scenes), encoding="utf-8")
+        written["stills"] = str(stills_path(slug, root))
+        written["flow_prompts"] = str(write_flow_prompts(project, scenes, root=root))
+        written["jobs"] = str(
+            write_jobs(spec, scenes, project, short=False, root=root, timestamps=table)
+        )
+        return written
+
+    if project.scenes and not stubs_ok:
+        raise ValueError(
+            "scenes before audio — ingest the voiceover first, then write one scene per pause"
+        )
+
+    if stubs_ok:
+        fixture = fixture_dict(project)
+        chunks = _chunks_for(fixture, project)
+        scenes = stub_scenes(project, chunks)
+        stills_path(slug, root).write_text(stills_module_source(project, scenes), encoding="utf-8")
+        written["stills"] = str(stills_path(slug, root))
+        written["jobs"] = str(write_jobs(spec, scenes, project, short=False, root=root))
+        cfg = config_for_project(project)
+        if cfg.default_short_enabled and project.short:
+            sf = fixture_dict(project, short=True)
+            short_chunks = _chunks_for(sf, project)
             short_scenes = attach_short_cta_scene(
                 stub_scenes(project, short_chunks), short_chunks
             )
-        sfp = short_fixture_path(slug, root)
-        sfp.write_text(json.dumps(sf, indent=2) + "\n", encoding="utf-8")
-        short_stills_path(slug, root).write_text(
-            stills_module_source(project, short_scenes), encoding="utf-8"
-        )
-        write_jobs(spec, short_scenes, project, short=True, root=root)
-        written["short_fixture"] = str(sfp)
+            sfp = short_fixture_path(slug, root)
+            sfp.write_text(json.dumps(sf, indent=2) + "\n", encoding="utf-8")
+            short_stills_path(slug, root).write_text(
+                stills_module_source(project, short_scenes), encoding="utf-8"
+            )
+            write_jobs(spec, short_scenes, project, short=True, root=root)
+            written["short_fixture"] = str(sfp)
+            from channel.shorts import write_short_thumbnail_job
 
-    jobs = write_jobs(spec, scenes, project, short=False, root=root)
-    written["jobs"] = str(jobs)
-    from channel.shorts import write_short_thumbnail_job
-    from channel.youtube import write_pack, write_thumbnail_job
-
-    written["thumbnail_job"] = str(
-        write_thumbnail_job(project, root=root, image_token=token)
-    )
-    if cfg.default_short_enabled and project.short:
-        written["short_thumbnail_job"] = str(
-            write_short_thumbnail_job(project, root=root, image_token=token)
-        )
-    pack = write_pack(spec, root=root)
-    written["youtube_description"] = pack["description"]
+            written["short_thumbnail_job"] = str(
+                write_short_thumbnail_job(project, root=root, image_token=token)
+            )
     return written
+

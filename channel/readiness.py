@@ -40,6 +40,8 @@ REQUIRED_FILES = (
     "channel/agent_prompts.py",
     "channel/business_prompts.py",
     "channel/takeover_prompts.py",
+    "channel/master_prompt.py",
+    "channel/drop.py",
 )
 
 REQUIRED_ENV_NAMES = (
@@ -64,15 +66,21 @@ def check_readiness(*, strict: bool = False) -> dict:
         except Exception as exc:
             errors.append(f"cannot import {module}: {exc}")
             continue
-        for name in ("RESEARCHER", "STORY_ARCHITECT", "NARRATION_WRITER", "SCENE_BREAKDOWN"):
+        for name in (
+            "MASTER",
+            "RESEARCHER",
+            "STORY_ARCHITECT",
+            "NARRATION_WRITER",
+            "SCENE_BREAKDOWN",
+        ):
             if not getattr(mod, name, None):
                 errors.append(f"{module} missing {name}")
     if ChannelMode.how_they_took_over not in PROMPT_MODULES:
         errors.append("how_they_took_over prompt module missing")
-    if "cursor_grok_GenerateImage" not in MODEL_LOCK["image"]:
-        errors.append("image model lock drifted off Cursor GenerateImage")
-    if MODEL_LOCK["tts"] != "kokoro":
-        errors.append("tts model lock drifted off kokoro")
+    if MODEL_LOCK["image"] != "operator_google_flow_ingest":
+        errors.append("image model lock drifted off operator_google_flow_ingest")
+    if MODEL_LOCK["tts"] != "operator_imported_audio":
+        errors.append("tts model lock drifted off operator_imported_audio")
     example = ROOT / ".env.example"
     if example.is_file():
         text = example.read_text(encoding="utf-8")

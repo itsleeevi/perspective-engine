@@ -1,8 +1,8 @@
 """Permanent originality, anti-repetition, and monetization-safety policy.
 
 These thresholds apply to every new channel title automatically.
-Do not restate them in chat — agents read channel/config.py, agent_prompts.py,
-and docs/custom-videos.md.
+Do not restate them in chat — agents read channel/config.py, master_prompt.py,
+the channel prompt module, and docs/custom-videos.md.
 """
 
 from __future__ import annotations

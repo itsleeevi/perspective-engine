@@ -52,7 +52,7 @@ Quality bar (non-negotiable):
 - Company-titled cuts: empty cinematic sets + costume-locked extras OK.
 - Short: first sentence ≤ 16 words is the punch. First still is that picture.
   Unique composition every shot. Branded CTA end card.
-- originality_score ≥ 80 and ready_to_publish before GenerateImage.
+- originality_score ≥ 80 and ready_to_publish before flow_prompts.
 - Do not modify the video engine, channel prompts, or QA thresholds.
 
 Resume with --resume <JOB_ID>. Use a unique job ID.

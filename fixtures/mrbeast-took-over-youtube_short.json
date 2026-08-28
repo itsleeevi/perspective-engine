@@ -1,0 +1,21 @@
+{
+  "title": "He Paid For A Movie",
+  "hero_career_progression": false,
+  "include_level_titles": false,
+  "the_thought": "He paid for a movie. He gave it away.",
+  "hook": "A giant blank prize check is taller than the man in the hoodie.",
+  "levels": [
+    {
+      "name": "The Short",
+      "beats": [
+        "YouTube is free to watch, but this movie-sized bill is standing in a loading bay. He paid for a movie, then he gave it away. In 2021 he posted a Squid Game field trip with a prize of about 456 thousand. Later writeups put that playground near 3.5 million dollars, and he still put it up for free. Then he built a Greenville lot worth about 14 million, and he slept inside it."
+      ]
+    },
+    {
+      "name": "The Link",
+      "beats": [
+        "Watch the full video. The link is in the description."
+      ]
+    }
+  ]
+}

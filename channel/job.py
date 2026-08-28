@@ -12,7 +12,7 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 from channel.engine import (
-    KOKORO_LOCK,
+    IMPORTED_VOICE_LOCK,
     MODEL_LOCK,
     PROMPT_MODULES,
     PROMPT_VERSION,
@@ -34,10 +34,13 @@ JOB_STAGES = (
     "STORY_PLANNED",
     "SCRIPTED",
     "SCRIPT_QA_PASSED",
-    "VISUAL_PLAN_CREATED",
-    "VISUAL_QA_PASSED",
-    "ASSETS_GENERATED",
-    "AUDIO_GENERATED",
+    "WAIT_AUDIO",
+    "WAIT_DROP",
+    "AUDIO_INGESTED",
+    "PAUSES_DETECTED",
+    "SCENES_PROMPTED",
+    "WAIT_IMAGES",
+    "IMAGES_INGESTED",
     "RENDERED",
     "FINAL_QA_PASSED",
     "READY",
@@ -52,14 +55,22 @@ class JobState(str, Enum):
     story_planned = "STORY_PLANNED"
     scripted = "SCRIPTED"
     script_qa_passed = "SCRIPT_QA_PASSED"
-    visual_plan_created = "VISUAL_PLAN_CREATED"
-    visual_qa_passed = "VISUAL_QA_PASSED"
-    assets_generated = "ASSETS_GENERATED"
-    audio_generated = "AUDIO_GENERATED"
+    wait_audio = "WAIT_AUDIO"
+    wait_drop = "WAIT_DROP"
+    audio_ingested = "AUDIO_INGESTED"
+    pauses_detected = "PAUSES_DETECTED"
+    scenes_prompted = "SCENES_PROMPTED"
+    wait_images = "WAIT_IMAGES"
+    images_ingested = "IMAGES_INGESTED"
     rendered = "RENDERED"
     final_qa_passed = "FINAL_QA_PASSED"
     ready = "READY"
     blocked = "BLOCKED"
+    # Kept so older manifests still load.
+    visual_plan_created = "VISUAL_PLAN_CREATED"
+    visual_qa_passed = "VISUAL_QA_PASSED"
+    assets_generated = "ASSETS_GENERATED"
+    audio_generated = "AUDIO_GENERATED"
 
 
 class GenerationManifest(BaseModel):
@@ -75,7 +86,7 @@ class GenerationManifest(BaseModel):
     prompt_module: str = ""
     models: dict[str, str] = Field(default_factory=lambda: dict(MODEL_LOCK))
     render: dict[str, Any] = Field(default_factory=lambda: dict(RENDER_LOCK))
-    voice: dict[str, Any] = Field(default_factory=lambda: dict(KOKORO_LOCK))
+    voice: dict[str, Any] = Field(default_factory=lambda: dict(IMPORTED_VOICE_LOCK))
     generation_parameters: dict[str, Any] = Field(default_factory=dict)
     random_seeds: dict[str, Any] = Field(default_factory=dict)
     research_sources: list[dict[str, str]] = Field(default_factory=list)
@@ -112,6 +123,7 @@ def ensure_job_tree(job_id: str, *, root: Path | None = None) -> Path:
         "fixtures",
         "fixtures/video_specs",
         "images",
+        "drop",
         "audio",
         "thumbnail",
         "short",
@@ -135,6 +147,104 @@ def load_manifest(job_id: str, *, root: Path | None = None) -> GenerationManifes
     if not path.is_file():
         raise FileNotFoundError(f"no manifest at {path}")
     return GenerationManifest.model_validate_json(path.read_text(encoding="utf-8"))
+
+
+def operator_path(job_id: str, *, root: Path | None = None) -> Path:
+    return job_dir(job_id, root=root) / "OPERATOR.md"
+
+
+def write_operator_md(manifest: GenerationManifest, *, root: Path | None = None) -> Path:
+    """What a later chat with empty history should do next."""
+    dest = operator_path(manifest.job_id, root=root)
+    job = manifest.paths.get("job") or str(job_dir(manifest.job_id, root=root))
+    script = f"{job}/script.txt"
+    audio = f"{job}/audio/voiceover.wav"
+    prompts = f"{job}/flow_prompts.txt"
+    images = f"{job}/images"
+    thumbs = f"{job}/thumbnail_prompts.txt"
+    state = manifest.state.value
+    blocks = {
+        JobState.wait_audio.value: (
+            f"# Operator — {manifest.job_id}\n\n"
+            f"State: `{state}`\n\n"
+            f"1. Copy `{script}` into ElevenLabs (or any TTS). The engine does not call ElevenLabs.\n"
+            f"2. Save the file and ingest it:\n\n"
+            f"```text\n"
+            f".venv/bin/python -m channel ingest-audio {manifest.job_id} /path/to/voiceover.mp3\n"
+            f"```\n\n"
+            f"Or drop the file at `{audio}` (mp3/m4a/wav also accepted as `voiceover.mp3`) "
+            f"then `.venv/bin/python -m channel generate --resume {manifest.job_id}`.\n\n"
+            "Do not write scenes yet. Scene cuts come from pauses in this audio.\n"
+        ),
+        JobState.wait_drop.value: (
+            f"# Operator — {manifest.job_id}\n\n"
+            f"State: `{state}`\n\n"
+            f"Drop-folder cut. Put files in `{job}/drop/`:\n\n"
+            f"- narration audio (`.mp3` / `.wav` / `.m4a`)\n"
+            f"- stills named with a start clock, e.g. `[00-00]_Hand-drawn_2D_doo.jpg`\n\n"
+            f"`[00-13]` starts that picture at 13 seconds. Each still holds until the "
+            f"next clock. The last still holds until the audio ends.\n\n"
+            f"Then:\n\n"
+            f"```text\n"
+            f".venv/bin/python -m channel assemble {manifest.job_id}\n"
+            f"```\n\n"
+            "The engine upscales stills to 3840×2160 and writes a 4K MP4 "
+            "without burned captions.\n"
+        ),
+        JobState.pauses_detected.value: (
+            f"# Operator — {manifest.job_id}\n\n"
+            f"State: `{state}`\n\n"
+            f"Pauses are in `{job}/timestamps.json` and `{job}/transcript.txt`.\n\n"
+            "Fill `project.scenes` 1:1 with those timestamps (`MASTER` Stage 3 + "
+            "SCENE_BREAKDOWN in the prompt module named in the manifest). Stick-figure "
+            "doodle style; named people are recognizable doodle cartoons. Deliver Flow "
+            "prompts in batches of 20 and wait for "
+            'Reply "next". Then:\n\n'
+            f"```text\n"
+            f".venv/bin/python -m channel generate --resume {manifest.job_id}\n"
+            f"```\n"
+        ),
+        JobState.wait_images.value: (
+            f"# Operator — {manifest.job_id}\n\n"
+            f"State: `{state}`\n\n"
+            f"Upload `{job}/flow_batches.txt` into ZAPI FLOW (one prompt per line, all stills). "
+            f"Or paste `{prompts}` into Google Flow (16:9, one output per prompt, "
+            "one blank line between prompts). The engine does not call Flow.\n\n"
+            f"Thumbnail prompts: `{thumbs}`.\n\n"
+            f"Drop PNGs into `{images}` (names like `000_00-00-00.png`). "
+            "ZAPI FLOW ``01_set.jpg`` serials remap on ingest (queue 1 = still 000) "
+            "and Lanczos-upscale to 3840×2160 so assemble renders 4K. "
+            "Keep serial numbers on; one still per prompt; Character Consistency off.\n\n"
+            f"```text\n"
+            f".venv/bin/python -m channel ingest-images {manifest.job_id} /path/to/pngs --partial\n"
+            f".venv/bin/python -m channel generate --resume {manifest.job_id}\n"
+            f"```\n"
+        ),
+        JobState.images_ingested.value: (
+            f"# Operator — {manifest.job_id}\n\n"
+            f"State: `{state}`\n\n"
+            f"Images are in `{images}`. Assemble the long cut:\n\n"
+            f"```text\n"
+            f".venv/bin/python -m channel assemble {manifest.job_id}\n"
+            f"```\n\n"
+            "A Short is a second HITL pass and does not block this long READY.\n"
+        ),
+    }
+    default = (
+        f"# Operator — {manifest.job_id}\n\n"
+        f"State: `{state}`\n\n"
+        f"Channel: `{manifest.channel_mode}`\n"
+        f"Title: {manifest.title}\n\n"
+        "Follow the **master prompt** (`MASTER`) in the prompt module named in "
+        "`manifest.json`. Same staged loop on every channel; DNA is already "
+        "customized for this mode. Fill research, story, and narration in "
+        "`project.json`. Do not write scenes before the voiceover exists.\n\n"
+        f"```text\n"
+        f".venv/bin/python -m channel generate --resume {manifest.job_id}\n"
+        f"```\n"
+    )
+    dest.write_text(blocks.get(state, default), encoding="utf-8")
+    return dest
 
 
 def write_report(manifest: GenerationManifest, *, root: Path | None = None) -> Path:

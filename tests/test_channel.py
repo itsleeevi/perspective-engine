@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -75,11 +76,11 @@ class TestSlug:
         assert slugify("What Xi Jinping Really Thinks About America") == "xi-jinping-america"
 
 
-class TestNewTitlesAreTwentyToTwentyFiveMinutes:
+class TestNewTitlesWordBudget:
     def test_word_budget_and_duration(self):
-        assert CHANNEL.target_duration_seconds == 1380
-        assert CHANNEL.narration_word_min == 4400
-        assert CHANNEL.narration_word_max == 5500
+        assert CHANNEL.target_duration_seconds == 600
+        assert CHANNEL.narration_word_min == 800
+        assert CHANNEL.narration_word_max == 2500
         assert CHANNEL.visual_change_target_seconds == 6.5
 
 
@@ -280,6 +281,7 @@ class TestCompile:
         assert CHANNEL.name in spec_data
         assert '"engine": "channel"' in spec_data
         assert '"burn_captions": true' in spec_data
+        assert '"voice": "imported"' in spec_data
         assert '"kokoro_speed": 1.15' in spec_data
         assert '"kokoro_scene_pause": 0.28' in spec_data
         jobs_data = jobs.read_text(encoding="utf-8")
@@ -303,10 +305,28 @@ class TestCompile:
         assert "Illustrated documentary." in copy
         assert '"kokoro_voice": "am_liam"' in spec_data
 
-    def test_compile_refuses_mismatched_scenes(self, tmp_path: Path):
+    def test_compile_refuses_scenes_before_audio(self, tmp_path: Path):
         project = _project()
-        with pytest.raises(ValueError, match="scene count"):
+        project.scenes = [
+            Scene(
+                scene_id="scene_000",
+                narration="x",
+                purpose=ScenePurpose.hook,
+                action="Wide empty study.",
+                composition="wide shot",
+                who="empty",
+            )
+        ]
+        with pytest.raises(ValueError, match="scenes before audio"):
             compile_project(project, stubs_ok=False, root=tmp_path)
+
+    def test_compile_script_only_without_scenes(self, tmp_path: Path):
+        project = _project()
+        written = compile_project(project, stubs_ok=False, root=tmp_path)
+        assert Path(written["spec"]).is_file()
+        assert "jobs" not in written
+        spec = json.loads(Path(written["spec"]).read_text())
+        assert spec["voice"] == "imported"
 
 
 class TestMechanicalQa:

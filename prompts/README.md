@@ -2,6 +2,8 @@
 
 Production stage prompts stay in versioned Python modules so `stage_prompts_for` cannot drift from the code path. Do not copy them here.
 
+The staged **master prompt** is `channel/master_prompt.py` (`MASTER` on each module): same operator loop, channel-specific DNA.
+
 | Channel | Module |
 |---|---|
 | What They Really Think | `channel/agent_prompts.py` |

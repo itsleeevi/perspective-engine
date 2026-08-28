@@ -18,11 +18,11 @@ People who already know the name and want the rise, the war, and the moment of s
 
 | | Value |
 |---|---|
-| Runtime | **20–25 minutes** (prefer ~22–23; 1200–1500s, target 1380) |
-| Script | **4400–5500** words (ideal 4600–5200) |
+| Runtime | **~5–15 minutes** (prefer ~8–12; 300–960s, target 600) |
+| Script | **800–2500** words |
 | Spoken pace | 145–155 wpm; Kokoro **1.15** (never below **1.0** on a new title) |
 | Voice | Kokoro `am_liam` (roster may rotate) |
-| Padding | Prefer a dense 22 minutes to a padded 25 |
+| Padding | Prefer a dense 8 minutes to a padded 15 |
 
 ## Narration personality
 
@@ -54,7 +54,7 @@ Flywheels, competitor comparisons, maps, before/after environments. 6–10 chapt
 
 ## Visual identity
 
-`HOW_THEY_TOOK_OVER_VISUAL_STYLE`: clean energetic strategic flat 2D, high readability, strategy diagrams, timelines, maps, flywheels. Not photoreal, 3D, anime, or stock.
+`HOW_THEY_TOOK_OVER_VISUAL_STYLE`: energetic strategic stick-figure doodle, high-contrast color blocks, strategy diagrams, timelines, maps, flywheels as chunky objects. Not photoreal, 3D, anime, or stock.
 
 ## Thumbnail strategy
 

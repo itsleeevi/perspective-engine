@@ -2,7 +2,7 @@
 
 The production bar is the **grammar** of the best-performing uploads, not their plots. Copy how they are built. Never copy their objects, chapter names, or `the_thought`.
 
-Implemented in `channel/quality_bar.py`. Stage prompts in `channel/agent_prompts.py`, `channel/business_prompts.py`, and `channel/takeover_prompts.py` point here. `lint_storyboard.py` and `channel/qa.py` fail wallpaper and repeated stills.
+Implemented in `channel/quality_bar.py`. The staged **master prompt** is `channel/master_prompt.py` (`MASTER` on each channel module). Stage prompts in `channel/agent_prompts.py`, `channel/business_prompts.py`, and `channel/takeover_prompts.py` point here. `lint_storyboard.py` and `channel/qa.py` fail wallpaper and repeated stills.
 
 ```text
 Copy the GRAMMAR. Never copy the SPINES.
@@ -43,7 +43,7 @@ Tesla fixtures may live under `artifacts/`; the shipped page `docs/takeover/tesl
 
 Named public figures are a **recognizable cartoon of the real person**, not a generic clerk, not a photograph.
 
-1. Look up `channel/character_locks.json`. If the person is there, **copy `visual_lock` exactly** and pass the hashed photo then cartoon sheet in `channel/character_sheets/` as GenerateImage `reference_image_paths`.
+1. Look up `channel/character_locks.json`. If the person is there, **copy `visual_lock` exactly** and pass the hashed photo then cartoon sheet in `channel/character_sheets/` as Google Flow references.
 2. If they are new, write a lock that starts `Same cartoon person every time, do not redesign. Copy this face:` then face shape, jaw, eyes, hair, stubble or beard, and **ALWAYS-clothes they actually wear** (one outfit, no logos). End with the recognizable-cartoon line. Compile overwrites from the registry when a match exists.
 3. A character sheet is three chest-up views (front, three-quarter, profile) on a solid field, hashed filename, no personal name in the file.
 4. Two people in one title must not be twins: contrast height, face, and clothes.
@@ -66,7 +66,7 @@ Accent: {corner light}, {empty margin}. Unique staging. No logos. No readable ty
 - Fill the entire frame. Rotate composition (wide / medium / close-up / OTS / establishing / object / low / high).
 - 12+ locations on a long cut. No set in more than a third of scenes. No three consecutive scenes in the same set.
 - Signature prop in at most 6 scenes. When it returns, paste the **same lock sentence**: huge, oversized, high contrast, filling the middle of the frame, never faint, never a tiny version.
-- Company and personal names stay out of image prompts and GenerateImage filenames.
+- Company and personal names stay out of image prompts and still filenames.
 
 `assemble_image_prompt` appends `STAGING_QUALITY` after the frozen channel style. Do not rewrite `GLOBAL_VISUAL_STYLE` / money / takeover identity strings.
 
@@ -81,6 +81,6 @@ Accent: {corner light}, {empty margin}. Unique staging. No logos. No readable ty
 
 ## Originality stays sacred
 
-Same quality, new story. Fresh research. Different architecture. Original narration. Unique scenes. `originality_score ≥ 80` vs the last 10 on **this** channel. `ready_to_publish` before GenerateImage.
+Same quality, new story. Fresh research. Different architecture. Original narration. Unique scenes. `originality_score ≥ 80` vs the last 10 on **this** channel. `ready_to_publish` before `flow_prompts`.
 
 If you could swap the names and keep the same video, throw it out — including a name-swap of a reference cut.

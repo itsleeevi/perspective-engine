@@ -1,0 +1,114 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "stalin_short_v2_000.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "extreme close-up",
+      "chunk": "Two in the morning, champagne in his hand,",
+      "scene": "Two in the morning: THE GLASS huge, champagne, Kremlin lamp. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: Two in the morning: THE GLASS huge, champagne, Kremlin lamp. No people."
+    },
+    {
+      "id": "001",
+      "filename": "stalin_short_v2_001.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "and he drinks to a man who has already written the ending.",
+      "scene": "HERO drinking the toast, grey-green tunic, the ending already written in his eyes. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: HERO drinking the toast, grey-green tunic, the ending already written in his eyes. NO symbols."
+    },
+    {
+      "id": "002",
+      "filename": "stalin_short_v2_002.png",
+      "aspect": "9:16",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "The room is smiling. Flash powder hangs in the air.",
+      "scene": "THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Room smiling, flash powder, THE GLASS in HERO's hand. Wedding energy. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Room smiling, flash powder, THE GLASS in HERO's hand. Wedding energy. NO symbols."
+    },
+    {
+      "id": "003",
+      "filename": "stalin_short_v2_003.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "He thinks he's put a storm on a leash.",
+      "scene": "A storm front pointed west, lightning on a leash that isn't a leash. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: A storm front pointed west, lightning on a leash that isn't a leash. No people."
+    },
+    {
+      "id": "004",
+      "filename": "stalin_short_v2_004.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He draws a secret line through a living country and files it like a shopkeeper locking up.",
+      "scene": "THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. HERO filing a paper like a shopkeeper locking up, pipe. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. HERO filing a paper like a shopkeeper locking up, pipe. NO symbols."
+    },
+    {
+      "id": "005",
+      "filename": "stalin_short_v2_005.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "aerial",
+      "chunk": "Grain rolling west. A birthday wire that says many happy returns.",
+      "scene": "Grain rolling west at dusk, a birthday telegram on a blotter inset. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: Grain rolling west at dusk, a birthday telegram on a blotter inset. No people."
+    },
+    {
+      "id": "006",
+      "filename": "stalin_short_v2_006.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "Headlights in the birch trees, and he calls them nothing.",
+      "scene": "Birch trees, headlights he calls nothing. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: Birch trees, headlights he calls nothing. No people."
+    },
+    {
+      "id": "007",
+      "filename": "stalin_short_v2_007.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "medium shot",
+      "chunk": "Then a Sunday that is still night, and the telephone rings,",
+      "scene": "THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Black telephone ringing, Sunday that is still night. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Black telephone ringing, Sunday that is still night. No people."
+    },
+    {
+      "id": "008",
+      "filename": "stalin_short_v2_008.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "and the voice on the line is not calling about weather.",
+      "scene": "HERO at the ringing phone, the voice about to arrive, not weather. Grey-green tunic. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: HERO at the ringing phone, the voice about to arrive, not weather. Grey-green tunic. NO symbols."
+    },
+    {
+      "id": "009",
+      "filename": "stalin_short_v2_009.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "The full story is on this channel.",
+      "scene": "THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Through a dark window: HERO small, lamp on an unfinished toast. Story waiting. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still for a phone screen, FILLING THE ENTIRE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber lamp and pine green, film grain. No readable text, logos, captions. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time, do not redesign): stylized graphic-novel 1940s East-European official, heavy build, receding dark hair, thick eyebrows, ALWAYS the same grey-green tunic, plain collar, NO medals, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast, short stem. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Through a dark window: HERO small, lamp on an unfinished toast. Story waiting. NO symbols."
+    }
+  ]
+}

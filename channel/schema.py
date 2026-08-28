@@ -211,6 +211,9 @@ class Scene(BaseModel):
     on_screen_text: str | None = None
     source_claim_ids: list[str] = Field(default_factory=list)
     who: str = "hero"
+    start_seconds: float | None = None
+    end_seconds: float | None = None
+    flow_prompt: str = ""
 
 
 class QaScores(BaseModel):

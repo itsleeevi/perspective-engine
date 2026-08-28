@@ -9,6 +9,7 @@ Assume empty chat history. Read `AGENTS.md` and `docs/video-engine/CLOUD_AGENT_S
 
 ```text
 .venv/bin/python -m channel generate --channel <mode> --title "<title>"
+.venv/bin/python -m channel drop --channel <mode> --title "<title>"
 .venv/bin/python -m channel cloud-readiness
 ```
 
@@ -16,6 +17,6 @@ Write only under `artifacts/<JOB_ID>/`. Do not clobber repo-root `fixtures/` or 
 
 Normal generation does not edit `channel/config.py`, `*_prompts.py`, or QA thresholds.
 
-Documentary path does not need `FAL_KEY` / `ELEVENLABS_API_KEY`. If Kokoro or GenerateImage is missing, stop — no fallback.
+Documentary path does not need `FAL_KEY` / `ELEVENLABS_API_KEY`. The engine never calls those APIs. Fill research + narration using `MASTER` in the prompt module (same staged loop, DNA per channel), then stop at `WAIT_AUDIO` and print `script.txt`. After timestamps, Flow prompts in batches of 20 (**Reply "next"**). Drop-folder cuts skip that loop: operator stills named `[00-00]_….jpg` plus audio in `drop/`, then assemble without burned captions.
 
-Costco voice lock is 0.92; new titles stay at ≥ 1.0 default 1.15.
+Costco shipped recuts stay at Kokoro 0.92; new titles stay at spoken **1.0–1.15** (default 1.15) word budget with imported audio.

@@ -5,6 +5,6 @@
   "visual_style_must_contain": "Behind The Business",
   "visual_style_must_not_contain": "muted historical",
   "kokoro_speed": 0.92,
-  "new_title_word_min": 4400,
-  "new_title_word_max": 5500
+  "new_title_word_min": 800,
+  "new_title_word_max": 2500
 }

@@ -4,7 +4,7 @@ Channel-engine cut (`python -m channel init`). Do not clone this spine for a dif
 
 Facts in the narration run through **August 2026** (Berggasse 19 is a museum; a 2025 *History of Psychology* paper re-reads the Bonaparte/Jones riddle). Do not write “today is [date]” into the VO.
 
-This is a **20–25 minute** title (4412 words). New channel cuts use that length. Do not shrink it back to 8 minutes.
+This is a **20–25 minute** title (4412 words). Do not shrink it back to 8 minutes.
 
 ## Spine
 
@@ -60,4 +60,4 @@ Thumbnail stills use the same recognizable cartoon face as the public figure (ba
 
 ## Playbook
 
-`docs/custom-videos.md` — new long cuts are **20–25 minutes** (4400–5500 words).
+`docs/custom-videos.md` — new long cuts are **5–15 minutes** (800–2500 words).

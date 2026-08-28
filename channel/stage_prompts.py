@@ -23,3 +23,7 @@ def stage_prompts_for(mode: ChannelMode | str | None = None) -> ModuleType:
 
 def researcher_prompt(mode: ChannelMode | str | None = None) -> str:
     return stage_prompts_for(mode).RESEARCHER
+
+
+def master_prompt(mode: ChannelMode | str | None = None) -> str:
+    return stage_prompts_for(mode).MASTER

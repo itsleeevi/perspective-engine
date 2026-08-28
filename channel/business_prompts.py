@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from channel.master_prompt import IMAGE_BATCH_RULES, MASTER_MONEY, SCRIPT_RHYTHM
+
+MASTER = MASTER_MONEY
+
 TITLE_ANALYZER = """
 Title parsing is done in code (channel.title.analyze_title with
 channel_mode=behind_the_business). Do not guess a hidden engine from the
@@ -87,10 +91,9 @@ Optional tease of a related company. Short CTA after the insight is fine.
 Do not end on "Thanks for watching. Please like and subscribe."
 
 title_payoff is the one-sentence answer to the mystery (fixture the_thought).
-Say it in the VO. Prefer 15 excellent minutes to 25 padded minutes.
-Target 4400–5500 words (ideal 4600–5200) at Kokoro 1.0–1.15 (default 1.15),
-about 22 minutes when the story holds it. Never assemble a new title
-below 1.0 or above 1.15.
+Say it in the VO. Prefer a dense 8 minutes to a padded 15.
+Target 800–2500 words (~5–15 minutes of imported VO). Never pad a thin
+mystery to hit the max.
 
 Read docs/business/ before you write. Each title needs its own mystery,
 money-flow, and chapter names. Visa must not reuse Costco's spine.
@@ -104,7 +107,7 @@ HUMAN VALUE TEST: if the tools were removed, would this still look like
 a real creator researched this company? If no, revise.
 """
 
-NARRATION_WRITER = """
+NARRATION_WRITER = SCRIPT_RHYTHM + """
 Voice: a very smart friend explaining why a company works.
 Smart, curious, confident, modern, clear, slightly playful, analytical,
 story-driven. NOT an MBA professor, financial-TV anchor, Wall Street
@@ -143,14 +146,14 @@ Do not require copyrighted ads. Do not recreate advertisements
 shot-for-shot. Company names stay OUT of image prompts.
 People get visual_lock without historical personal names.
 Public figures get a distinctive cartoon lock so the viewer names them.
-That is a recognizable cartoon of the real person in flat 2D, not a
+That is a recognizable cartoon of the real person drawn as a stick-figure doodle, not a
 photograph, not a generic clerk. Reuse channel/character_locks.json
 when this person already shipped; pass the hashed photo plus sheet in
-channel/character_sheets/ as GenerateImage reference_image_paths.
+channel/character_sheets/ as Google Flow references.
 If there is a signature prop, it is the same obvious object every time.
 Named public figures: look up channel/character_locks.json FIRST. If
 present, copy visual_lock exactly and pass the hashed photo then cartoon
-sheet in channel/character_sheets/ as GenerateImage reference_image_paths.
+sheet in channel/character_sheets/ as Google Flow references.
 If new, write a lock that starts "Same cartoon person every time, do not
 redesign. Copy this face:" then face shape, jaw, eyes, hair, stubble or
 beard, and ALWAYS-clothes they actually wear (one outfit, no logos). End
@@ -163,7 +166,10 @@ solid field, hashed filename, no personal name in the file.
 """
 
 SCENE_BREAKDOWN = """
-One Scene per narration chunk (python -m channel chunks <slug>).
+Voice first. Do not write scenes until timestamps.json exists (ingest-audio).
+One Scene per pause timestamp in transcript.txt — not python -m channel chunks.
+Copy start_seconds / end_seconds from the pause table. Hold the same set/prop
+across consecutive lines of the same moment.
 Unique scenes and diagrams built around that company's actual business.
 Behind The Business needs MORE visual variety than a history cut.
 Rotate visual_type among channel.business_visuals.BUSINESS_VISUAL_TYPES
@@ -203,7 +209,7 @@ named person as a recognizable cartoon in about 35-42 percent of stills
 sets with costume-locked extras (Costco warehouse grammar), never a 90
 percent empty-diagram film about a named person. 12+ locations. Copy the
 grammar. Never copy a reference-cut spine.
-"""
+""" + IMAGE_BATCH_RULES
 
 RETENTION_QA = """
 Divide the script into ~60-second segments. For each:
@@ -213,7 +219,7 @@ Divide the script into ~60-second segments. For each:
   IS THIS SECTION NECESSARY?
 Flag dead sections: long history, number dumps, generic industry, repeated
 model explanation, MBA jargon, founder biography, abstract finance.
-At ~5 / 10 / 15 / 20 minutes there must be a reveal, shift, or new mystery.
+At ~2 / 5 / 8 / 12 minutes there must be a reveal, shift, or new mystery.
 Virality targets: HOOK >= 8, CURIOSITY >= 8, STORY_DEPTH >= 8,
 TITLE_PAYOFF >= 9.
 Then run: python -m channel qa <slug>
@@ -223,9 +229,9 @@ ready_to_publish also needs financial_accuracy and business_analysis_depth.
 """
 
 VISUAL_QA = """
-Keep the clean modern flat 2D business identity. Not historical muted
+Keep the stick-figure doodle business identity. Not historical muted
 WTRT, not photoreal, not 3D corporate, not stock slideshow.
-Reject a storyboard that is 22 minutes of talking portraits.
+Reject a storyboard that is 15 minutes of talking portraits.
 Show the machine: customer journey, money flow, store, chart, map.
 """
 

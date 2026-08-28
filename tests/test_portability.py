@@ -38,8 +38,8 @@ def test_cloud_readiness_required_files():
 
 
 def test_model_lock_forbids_silent_fallback():
-    assert MODEL_LOCK["tts"] == "kokoro"
-    assert "GenerateImage" in MODEL_LOCK["image"]
+    assert MODEL_LOCK["tts"] == "operator_imported_audio"
+    assert MODEL_LOCK["image"] == "operator_google_flow_ingest"
     assert NO_PROVIDER_FALLBACK is True
     assert "filename" in IMAGE_FILENAME_RULE.lower()
 
@@ -118,6 +118,8 @@ def test_generate_smoke_and_parallel_jobs(tmp_path: Path):
     spec = json.loads(spec_c.read_text())
     assert spec["engine_version"] == VIDEO_ENGINE_VERSION
     assert spec["stills_dir"] == "images"
+    assert spec["voice"] == "imported"
+    assert (tmp_path / a.job_id / "OPERATOR.md").is_file()
 
 
 def test_generate_does_not_mutate_engine_config(tmp_path: Path):

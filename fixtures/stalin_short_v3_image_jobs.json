@@ -1,0 +1,114 @@
+{
+  "jobs": [
+    {
+      "id": "000",
+      "filename": "stalin_short_v3_000.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He thought if he was nice to a bad man,",
+      "scene": "HERO looking into camera, teaching the simple thought. Grey-green tunic. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: HERO looking into camera, teaching the simple thought. Grey-green tunic. NO symbols."
+    },
+    {
+      "id": "001",
+      "filename": "stalin_short_v3_001.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "the bad man would leave him alone.",
+      "scene": "An empty road, the bad man leaving him alone. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: An empty road, the bad man leaving him alone. No people."
+    },
+    {
+      "id": "002",
+      "filename": "stalin_short_v3_002.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "Two in the morning he lifts a glass and drinks to the other man's health.",
+      "scene": "HERO lifting THE GLASS at two in the morning. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: HERO lifting THE GLASS at two in the morning. NO symbols."
+    },
+    {
+      "id": "003",
+      "filename": "stalin_short_v3_003.png",
+      "aspect": "9:16",
+      "who": "crowd",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "The room smiles. He thinks the paper made the bad man safe.",
+      "scene": "THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. The room smiles, he thinks the paper made the bad man safe. THE GLASS in hand.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. The room smiles, he thinks the paper made the bad man safe. THE GLASS in hand."
+    },
+    {
+      "id": "004",
+      "filename": "stalin_short_v3_004.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "He draws a line on a map. He sends food. He even says happy birthday.",
+      "scene": "THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. HERO drawing a line on a map, sending food, a birthday envelope. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. HERO drawing a line on a map, sending food, a birthday envelope. NO symbols."
+    },
+    {
+      "id": "005",
+      "filename": "stalin_short_v3_005.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "You don't do that if you think someone is coming to burn your house.",
+      "scene": "A wooden house with lights on, the house you don't wish birthday into. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: A wooden house with lights on, the house you don't wish birthday into. No people."
+    },
+    {
+      "id": "006",
+      "filename": "stalin_short_v3_006.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "wide shot",
+      "chunk": "Lights in the trees. He says they are nothing.",
+      "scene": "Lights in the trees he says are nothing. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: Lights in the trees he says are nothing. No people."
+    },
+    {
+      "id": "007",
+      "filename": "stalin_short_v3_007.png",
+      "aspect": "9:16",
+      "who": "empty",
+      "free": true,
+      "shot_type": "medium shot",
+      "chunk": "Then a Sunday that is still night, and the phone rings,",
+      "scene": "THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Phone ringing, Sunday still night. No people.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Phone ringing, Sunday still night. No people."
+    },
+    {
+      "id": "008",
+      "filename": "stalin_short_v3_008.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "medium shot",
+      "chunk": "and it is not a friend.",
+      "scene": "HERO at the phone, it is not a friend. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: HERO at the phone, it is not a friend. NO symbols."
+    },
+    {
+      "id": "009",
+      "filename": "stalin_short_v3_009.png",
+      "aspect": "9:16",
+      "who": "hero",
+      "free": false,
+      "shot_type": "wide shot",
+      "chunk": "The full story is on this channel.",
+      "scene": "THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Through a window: unfinished toast, story waiting. NO symbols.",
+      "prompt": "Vertical 9:16 cinematic movie still FILLING THE FRAME, no letterbox, subject large in the upper two thirds, painterly graphic-novel, amber and pine green. No readable text. NO swastika, NO Nazi flag, NO armbands, NO camps, NO gore, NO photoreal famous people. HERO (same man every time): stylized graphic-novel 1940s East-European official, heavy build, receding hair, grey-green tunic, pipe, painterly, NOT a photograph. THE GLASS (same prop): cut-crystal champagne coupe from a 2am toast. THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. SCENE: THE KREMLIN (same set): 1939 night office, green lamp, heavy wood, no flags. Through a window: unfinished toast, story waiting. NO symbols."
+    }
+  ]
+}

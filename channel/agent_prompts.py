@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from channel.master_prompt import IMAGE_BATCH_RULES, MASTER_THINK, SCRIPT_RHYTHM
+
+MASTER = MASTER_THINK
+
 TITLE_ANALYZER = """
 Title parsing is done in code (channel.title.analyze_title). Do not guess a
 different X/Y than the parser. Relationship type, period, and the answer stay
@@ -134,7 +138,7 @@ HUMAN VALUE TEST: if the AI tools were removed, would this still look like
 a real creator researched and structured this documentary? If no, revise.
 """
 
-NARRATION_WRITER = """
+NARRATION_WRITER = SCRIPT_RHYTHM + """
 Narration: an intelligent person telling a fascinating historical story to a friend.
 Calm, confident, curious, documentary-like, slightly mysterious, emotionally
 controlled. Not Wikipedia, not a professor, not a news anchor, not an AI
@@ -152,14 +156,16 @@ Write transitions this event owns: "But Stalin had another problem."
 Controlled drama: let events do the work. Never invent quotes.
 Dates only when they matter ("In September 1939", not the 17th of…).
 Calendar years are digits in the written line (1995, 1983, 2011), never
-"nineteen ninety-five". Captions burn the digits. Kokoro says the year.
+"nineteen ninety-five". Captions burn the digits. The operator TTS says the year.
+After SCRIPT_QA_PASSED, stop. Copy script.txt into ElevenLabs. Do not write
+scenes until timestamps.json exists.
 Open loops: question → answer → new question.
 
 The finished VO must teach something the viewer did not know. Entertainment
 comes from storytelling, not fabrication. Synthesize multiple sources into
 an original story — do not list facts.
 
-Target 4400–5500 words (~20–25 minutes at Kokoro 1.0–1.15, default 1.15). Never pad a weak
+Target 800–2500 words (~5–15 minutes of imported VO). Never pad a weak
 story — add evidence, reversals, and places this title owns. Write 4–6
 chapters with poster-like names (≤4 words) that this evidence owns. Do
 not copy another video's cards. At most three "The <Noun>" names.
@@ -188,26 +194,26 @@ Build Character and Location bibles from the story.
 Each important person gets an id, era variants if decades pass, and a
 visual_lock that does NOT include the historical personal name (image-model
 safety). Recognition = hair, facial hair, clothing, silhouette, palette.
-Locations get a reusable id + description in the channel's flat 2D style.
+Locations get a reusable id + description in the channel's stick-figure doodle style.
 Do not put photoreal / 3D / anime language in visual_lock.
 Public figures get a distinctive cartoon lock (hair, face shape, jaw,
 eyes, clothes) so the viewer names them. That is a recognizable cartoon
-of the real person in flat 2D. NOT a photograph. NOT a generic clerk.
+of the real person drawn as a stick-figure doodle. NOT a photograph. NOT a generic clerk.
 If channel/character_locks.json already has this person, copy that
 visual_lock and pass the hashed photo plus sheet in
-channel/character_sheets/ as GenerateImage reference_image_paths.
-Compile writes those paths onto the job. Names stay out of prompts and
+channel/character_sheets/ as Google Flow references when the operator generates.
+Compile writes those paths onto the ingest job. Names stay out of prompts and
 filenames.
 If there is a signature prop, lock its LOOK: high contrast, large in
 frame, the same object every time it returns. A faint mark is a miss.
 Named public figures: look up channel/character_locks.json FIRST. If
 present, copy visual_lock exactly and pass the hashed photo then cartoon
-sheet in channel/character_sheets/ as GenerateImage reference_image_paths.
+sheet in channel/character_sheets/ as Google Flow references.
 If new, write a lock that starts "Same cartoon person every time, do not
 redesign. Copy this face:" then face shape, jaw, eyes, hair, stubble or
 beard, and ALWAYS-clothes they actually wear (one outfit, no logos). End
-with "Distinctive recognizable cartoon of the real person. Flat 2D
-vector, two-dot eyes, no skin texture, not a photograph, not photoreal.
+with "Distinctive recognizable cartoon of the real person. Stick-figure
+doodle, two-dot eyes, no skin texture, not a photograph, not photoreal.
 Keep this exact face in every frame." When two people share a frame,
 contrast height and face so they are not twins. Expression CHANGES with
 the action. Recurring extras get a costume lock (slate sweater shopper,
@@ -217,20 +223,25 @@ solid field, hashed filename, no personal name in the file.
 """
 
 SCENE_BREAKDOWN = """
-One Scene per narration chunk (python -m channel chunks <slug>).
+Voice first. Do not write scenes until timestamps.json exists (python -m channel ingest-audio).
+One Scene per pause timestamp in artifacts/<JOB>/transcript.txt — not python -m channel chunks.
 Every scene: purpose, visual verb action (not "he became suspicious"),
 composition rotating (wide / medium / close-up / OTS / map / document /
-object / crowd / establishing), camera_motion, location id, character ids.
-Change composition every 3–6 seconds of speech. No talking-head wallpaper.
+object / crowd / establishing), camera_motion, location id, character ids,
+start_seconds and end_seconds copied from the pause table, narration = that
+timestamp's spoken line. Hold the same set/prop across consecutive lines of
+the same moment (expression or one new object). Do not invent a brand-new
+location every 5 seconds. No talking-head wallpaper.
 who: hero (subject), empty (no people), crowd, or other.
 Abstract claims must become physical (letter, map, handshake, train, door).
-Do not write GLOBAL_VISUAL_STYLE into the action; compile assembles prompts.
+Do not write GLOBAL_VISUAL_STYLE into the action; compile assembles Flow prompts.
+Store flow_prompt only if you must; compile prefixes [mm:ss] and the frozen style.
 
-VISUAL ORIGINALITY: keep the channel's flat 2D style. Do not reuse the
+VISUAL ORIGINALITY: keep the channel's stick-figure doodle style. Do not reuse the
 desk → map → newspaper → close-up loop from the last video. Derive
 locations and objects from THIS title's events (a garage and a keynote
 are not a Kremlin treaty table). Compare planned scenes to recent
-episodes before GenerateImage. Common actions are allowed; identical
+episodes before emitting flow_prompts.txt. Common actions are allowed; identical
 sequences are not.
 
 No photoreal impersonation. No realistic fake interviews or speeches.
@@ -257,7 +268,7 @@ loops, talking-head portraits. Rotate composition (wide / medium / close-up
 person is a recognizable cartoon in about 35-42 percent of stills (lint
 warns below 28 percent). Costume-locked extras, never generic gray clerks.
 Copy the grammar. Never copy a reference-cut spine.
-"""
+""" + IMAGE_BATCH_RULES
 
 RETENTION_QA = """
 Score 1–10: hook, curiosity, pacing, clarity, story, contradiction,
@@ -271,7 +282,7 @@ Then run: python -m channel qa <slug>
 That command also writes originality_score and monetization readiness.
 ORIGINALITY_SCORE must be >= 80 vs the last 10 videos. If it fails,
 regenerate only the flagged stages (hook / narration / chapters / scenes
-/ ending / thumbnail). Do not GenerateImage until ready_for_images.
+/ ending / thumbnail). Do not emit flow_prompts.txt until ready_for_images.
 ready_to_publish requires research/story/narration/education/retention
 >= 8 and mass_production_risk <= 3.
 """
@@ -339,7 +350,8 @@ Fill project.metadata before compile:
   altered/synthetic content checkbox on upload.
 
 After assemble: `python -m channel youtube <slug>` (also runs from
-run_custom_video / run_short). GenerateImage the 16:9 thumbnail job and
-the 9:16 Shorts thumbnail job with NO on-image text; the command burns
-thumbnail_text into 1280×720 and 1080×1920 JPEGs.
+python -m channel assemble). Paste thumbnail_prompts.txt into Google Flow
+with NO on-image text; `python -m channel youtube <slug>` burns
+thumbnail_text into 1280×720 and 1080×1920 JPEGs. A Short is a second HITL
+pass and does not block the long READY.
 """
