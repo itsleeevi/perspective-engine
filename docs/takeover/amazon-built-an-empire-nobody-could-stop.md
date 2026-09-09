@@ -28,6 +28,9 @@ The rise is the 1997 Day 1 book catalog, Auctions and zShops as misses, Marketpl
 | Voice | Kokoro `am_liam`, speed 1.15 |
 | Output | job `final/amazon-built-an-empire-nobody-could-stop.mp4` (3840×2160, **26:17**) |
 | Thumb | job `assets/youtube/amazon_built_an_empire_nobody_could_stop_thumbnail_1280x720.jpg` (**OTHER SHELVES**) |
+| Short job | `artifacts/amazon-built-an-empire-nobody-could-stop__20260824_064731__593a6d/` |
+| Short | job `short/amazon-built-an-empire-nobody-could-stop_short.mp4` (1080×1920, **30.5s**, 7 shots, sync 12.33 ms) |
+| Shorts thumb | job `assets/youtube/amazon_built_an_empire_nobody_could_stop_short_thumbnail_1080x1920.jpg` (**OTHER SHELVES**) |
 
 Signature prop: `THE_BROWN_CARTON_IN_A_YELLOW_TOTE` in 6 long scenes.
 
