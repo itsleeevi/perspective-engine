@@ -35,7 +35,8 @@ from channel.paths import (
     stills_path,
 )
 from channel.prompts import assemble_image_prompt, format_flow_prompt, strip_character_names, strip_image_brands
-from channel.quality_bar import STAGING_QUALITY
+from channel.quality_bar import STAGING_QUALITY, WEALTH_STAGING_QUALITY
+from channel.modes import is_wealth_pov
 from channel.schema import Scene, ScenePurpose, VideoProject
 from channel.shorts import (
     SHORT_CTA,
@@ -132,6 +133,11 @@ def _prop_token(name: str) -> str:
 
 def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
     cfg = config_for_project(project)
+    staging = (
+        WEALTH_STAGING_QUALITY
+        if is_wealth_pov(project.channel_mode)
+        else STAGING_QUALITY
+    )
     style = strip_image_brands(
         strip_character_names(
             " ".join(
@@ -140,7 +146,7 @@ def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
                     cfg.visual_style,
                     visual_accent_for(project.slug, project.channel_mode),
                     cfg.negative_style,
-                    STAGING_QUALITY,
+                    staging,
                     *[visual_lock(c) for c in project.characters.values()],
                 )
                 if p
@@ -160,7 +166,8 @@ def stills_module_source(project: VideoProject, scenes: list[Scene]) -> str:
     set_tokens = [token_for_location(lid) for lid in project.locations]
     prop: dict[str, int] = {}
     if project.story and project.story.signature_prop:
-        prop[_prop_token(project.story.signature_prop)] = 6
+        cap = 250 if is_wealth_pov(project.channel_mode) else 6
+        prop[_prop_token(project.story.signature_prop)] = cap
     return textwrap.dedent(
         f'''\
         """Auto-generated stills for {project.slug}. Do not hardcode a person here;

@@ -11,7 +11,8 @@ import re
 
 from channel.bibles import format_all_characters, format_all_locations, visual_lock
 from channel.config import config_for_project, visual_accent_for
-from channel.quality_bar import STAGING_QUALITY
+from channel.modes import is_wealth_pov
+from channel.quality_bar import STAGING_QUALITY, WEALTH_STAGING_QUALITY
 from channel.schema import Scene, VideoProject
 
 
@@ -93,15 +94,28 @@ def assemble_image_prompt(
     elif format_all_locations(project):
         loc = format_all_locations(project)
 
-    who_rule = {
-        "empty": "STRICTLY NO people, NO faces, NO hands.",
-        "hero": "Only the subject character unless the action names someone else.",
-        "crowd": (
-            "Costume-locked extras from the bibles (same sweater, smock, hard hat "
-            "every time). Same stick-figure doodle construction. No photoreal faces. "
-            "No generic gray clerks."
-        ),
-    }.get(scene.who, "Draw only the named characters.")
+    cfg = config_for_project(project)
+    if is_wealth_pov(project.channel_mode):
+        who_rule = {
+            "empty": "STRICTLY NO people, NO faces, NO hands.",
+            "hero": "Only the protagonist unless the action names someone else.",
+            "crowd": (
+                "Supporting characters from the bibles in the same colored "
+                "illustration style. Complete bodies. No stick limbs. No photoreal faces."
+            ),
+        }.get(scene.who, "Draw only the named characters.")
+        staging = WEALTH_STAGING_QUALITY
+    else:
+        who_rule = {
+            "empty": "STRICTLY NO people, NO faces, NO hands.",
+            "hero": "Only the subject character unless the action names someone else.",
+            "crowd": (
+                "Costume-locked extras from the bibles (same sweater, smock, hard hat "
+                "every time). Same stick-figure doodle construction. No photoreal faces. "
+                "No generic gray clerks."
+            ),
+        }.get(scene.who, "Draw only the named characters.")
+        staging = STAGING_QUALITY
 
     label = ""
     if scene.on_screen_text:
@@ -116,7 +130,6 @@ def assemble_image_prompt(
         else "Horizontal 16:9 frame."
     )
 
-    cfg = config_for_project(project)
     assembled = " ".join(
         p
         for p in (
@@ -124,7 +137,7 @@ def assemble_image_prompt(
             visual_accent_for(project.slug, project.channel_mode),
             aspect_line,
             cfg.negative_style,
-            STAGING_QUALITY,
+            staging,
             " ".join(chars),
             loc,
             who_rule,

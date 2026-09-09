@@ -34,6 +34,7 @@ def test_btb_branding_paths_do_not_clobber_wtrt():
     wtrt = branding_paths()
     btb = branding_paths(mode="behind_the_business")
     htto = branding_paths(mode="how_they_took_over")
+    wealth = branding_paths(mode="wealth_pov")
     assert wtrt["profile"].name == "channel_profile_800x800.jpg"
     assert btb["profile"].name == "behind_the_business_profile_800x800.jpg"
     assert btb["banner"].name == "behind_the_business_cover_2560x1440.jpg"
@@ -42,7 +43,9 @@ def test_btb_branding_paths_do_not_clobber_wtrt():
     assert htto["profile"].name == "how_they_took_over_profile_800x800.jpg"
     assert htto["about"].name == "how_they_took_over_about.txt"
     assert htto["handle"].name == "how_they_took_over_handle.txt"
-    assert len({wtrt["profile"], btb["profile"], htto["profile"]}) == 3
+    assert wealth["profile"].name == "wealth_pov_profile_800x800.jpg"
+    assert wealth["about"].name == "wealth_pov_about.txt"
+    assert len({wtrt["profile"], btb["profile"], htto["profile"], wealth["profile"]}) == 4
 
 
 def test_profile_is_800_square(tmp_path: Path):

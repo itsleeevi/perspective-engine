@@ -9,6 +9,7 @@ class ChannelMode(str, Enum):
     what_they_really_think = "what_they_really_think"
     behind_the_business = "behind_the_business"
     how_they_took_over = "how_they_took_over"
+    wealth_pov = "wealth_pov"
 
 
 _ALIASES = {
@@ -24,13 +25,19 @@ _ALIASES = {
     "htto": ChannelMode.how_they_took_over,
     "took_over": ChannelMode.how_they_took_over,
     "takeover": ChannelMode.how_they_took_over,
+    "wealth_pov": ChannelMode.wealth_pov,
+    "quiet_wealth": ChannelMode.wealth_pov,
+    "wpov": ChannelMode.wealth_pov,
+    "pov_wealth": ChannelMode.wealth_pov,
+    "longform_wealth_pov": ChannelMode.wealth_pov,
 }
 
 
 CHANNEL_FLAG_HELP = (
     "what_they_really_think (default), behind_the_business "
-    "(How They Really Make Money; aliases: wtrt, btb, htrmm), or "
-    "how_they_took_over (aliases: htto, takeover)"
+    "(How They Really Make Money; aliases: wtrt, btb, htrmm), "
+    "how_they_took_over (aliases: htto, takeover), or "
+    "wealth_pov (Quiet Wealth; aliases: quiet_wealth, wpov, longform_wealth_pov)"
 )
 
 
@@ -54,6 +61,10 @@ def is_business(mode: str | ChannelMode | None) -> bool:
 
 def is_takeover(mode: str | ChannelMode | None) -> bool:
     return parse_mode(mode) is ChannelMode.how_they_took_over
+
+
+def is_wealth_pov(mode: str | ChannelMode | None) -> bool:
+    return parse_mode(mode) is ChannelMode.wealth_pov
 
 
 def is_company_story(mode: str | ChannelMode | None) -> bool:

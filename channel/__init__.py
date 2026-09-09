@@ -14,6 +14,8 @@ from channel.config import (
     HOW_THEY_TOOK_OVER,
     HOW_THEY_TOOK_OVER_VISUAL_STYLE,
     NEGATIVE_STYLE,
+    WEALTH_POV,
+    WEALTH_POV_VISUAL_STYLE,
 )
 
 __all__ = [
@@ -24,4 +26,6 @@ __all__ = [
     "HOW_THEY_TOOK_OVER",
     "HOW_THEY_TOOK_OVER_VISUAL_STYLE",
     "NEGATIVE_STYLE",
+    "WEALTH_POV",
+    "WEALTH_POV_VISUAL_STYLE",
 ]

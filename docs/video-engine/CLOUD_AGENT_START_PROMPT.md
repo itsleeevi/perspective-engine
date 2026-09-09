@@ -46,4 +46,4 @@ When complete (or when blocked on the operator), report:
 - QA scores
 - any warnings
 
-Internal modes: `what_they_really_think`, `behind_the_business` (How They Really Make Money), `how_they_took_over`.
+Internal modes: `what_they_really_think`, `behind_the_business` (How They Really Make Money), `how_they_took_over`, `wealth_pov` (Quiet Wealth).

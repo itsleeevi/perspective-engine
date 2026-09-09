@@ -5,7 +5,7 @@ A Cloud Agent with empty chat history starts at `AGENTS.md`, then this folder.
 
 There are two products in this repository:
 
-1. **`channel/` YouTube documentaries** — production. Three channel modes.
+1. **`channel/` YouTube documentaries** — production. Four channel modes.
 2. **`graph/` LangGraph skeleton** — a different product. Do not send a real-person title through `ideate`.
 
 ## Channels
@@ -15,6 +15,7 @@ There are two products in this repository:
 | What They Really Think | `what_they_really_think` | `docs/custom-videos.md` | `docs/channels/what-they-really-think.md` |
 | How They Really Make Money | `behind_the_business` (alias `how_they_really_make_money`) | `docs/behind-the-business.md` | `docs/channels/how-they-really-make-money.md` |
 | How They Took Over | `how_they_took_over` | `docs/how-they-took-over.md` | `docs/channels/how-they-took-over.md` |
+| Quiet Wealth | `wealth_pov` | `docs/wealth-pov.md` | `docs/channels/quiet-wealth.md` |
 
 Pass `--channel` explicitly. Do not infer the mode from the title.
 
@@ -24,6 +25,7 @@ Pass `--channel` explicitly. Do not infer the mode from the title.
 .venv/bin/python -m channel generate --channel what_they_really_think --title "What Einstein Really Thought About God"
 .venv/bin/python -m channel generate --channel behind_the_business --title "How Visa Really Makes Money"
 .venv/bin/python -m channel generate --channel how_they_took_over --title "How Nvidia Took Over AI"
+.venv/bin/python -m channel generate --channel wealth_pov --title "POV: You Stopped Trying to Look Successful"
 ```
 
 Or a job file:

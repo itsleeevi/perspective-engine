@@ -2,15 +2,17 @@
 
 The workflow is the same everywhere (script file → imported audio →
 timestamped stills in batches of 20 → metadata). Stick-figure doodle
-construction is shared. Mood, palette, and story DNA are per channel.
-Do not import 2nd-person explainer voice onto these documentary channels.
+construction is shared on the documentary channels. Quiet Wealth
+(`wealth_pov`) uses detailed colored 2D story illustrations and
+second-person narration instead. Do not import 2nd-person explainer
+voice onto the documentary channels.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-from channel.modes import ChannelMode, is_business, is_takeover
+from channel.modes import ChannelMode, is_business, is_takeover, is_wealth_pov
 
 
 @dataclass(frozen=True)
@@ -351,6 +353,10 @@ MASTER_TAKEOVER = _master(TAKEOVER)
 
 
 def master_for(mode: ChannelMode | str | None) -> str:
+    if is_wealth_pov(mode):
+        from channel.wealth_prompts import MASTER as MASTER_WEALTH
+
+        return MASTER_WEALTH
     if is_takeover(mode):
         return MASTER_TAKEOVER
     if is_business(mode):

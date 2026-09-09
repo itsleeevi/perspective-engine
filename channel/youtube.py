@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from channel.config import about_filename, config_for, config_for_project, default_thumbnail_text, visual_accent_for
-from channel.modes import is_business, is_takeover
+from channel.modes import is_business, is_takeover, is_wealth_pov
 from channel.paths import ROOT, jobs_path, spec_path
 from channel.prompts import strip_character_names
 from channel.schema import VideoProject
@@ -191,6 +191,14 @@ def thumbnail_prompt(project: VideoProject) -> str:
             "before/after object. Clean high-contrast backdrop. Empty right "
             "third of the frame for type added later. No tiny figures, no "
             "clutter, no photoreal logo lockup, no logo-vs-logo poster."
+        )
+    elif is_wealth_pov(project.channel_mode):
+        framing = (
+            "Horizontal 16:9 YouTube thumbnail. Large readable protagonist "
+            "plus ONE contrast (two money uses, a friend's assumption, a quiet "
+            "refusal, or the recurring object). Full-color illustrated world. "
+            "Empty right third for type added later. No stick-figure doodle, "
+            "no photoreal, no player chrome."
         )
     elif is_business(project.channel_mode):
         framing = (

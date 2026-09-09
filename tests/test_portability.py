@@ -10,6 +10,7 @@ from channel.config import (
     BEHIND_THE_BUSINESS,
     CHANNEL,
     HOW_THEY_TOOK_OVER,
+    WEALTH_POV,
     config_for,
 )
 from channel.engine import (
@@ -182,7 +183,9 @@ def test_fresh_agent_can_route_from_repo_only():
     assert "python -m channel generate" in agents
     assert "behind_the_business" in agents
     assert "how_they_took_over" in agents
+    assert "wealth_pov" in agents
     assert config_for("how_they_really_make_money") is BEHIND_THE_BUSINESS
+    assert config_for("quiet_wealth") is WEALTH_POV
     start = (ROOT / "docs" / "video-engine" / "CLOUD_AGENT_START_PROMPT.md").read_text()
     assert "--channel" in start
     assert "unique job ID" in start.lower() or "job ID" in start

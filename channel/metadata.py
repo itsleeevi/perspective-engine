@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 
 from channel.config import config_for_project, default_thumbnail_text
-from channel.modes import is_business, is_company_story, is_takeover
+from channel.modes import is_business, is_company_story, is_takeover, is_wealth_pov
 from channel.schema import VideoMetadata, VideoProject
 
 
@@ -30,7 +30,16 @@ def draft_metadata(project: VideoProject) -> VideoMetadata:
         f"{body}\n\n"
         f"This is an illustrated documentary from {cfg.name}."
     )
-    if is_company_story(project.channel_mode):
+    if is_wealth_pov(project.channel_mode):
+        body = (
+            f"{body.replace('illustrated documentary', 'illustrated story')}\n\n"
+            "Fictional illustrative story unless a sourced real life is named. "
+            "Not personalized financial advice."
+        )
+        sources = _source_lines(project)
+        if sources:
+            body = f"{body}\n\nSources / further reading:\n" + "\n".join(sources)
+    elif is_company_story(project.channel_mode):
         if is_takeover(project.channel_mode):
             body = (
                 f"{body}\n\nEducational analysis of a rise to dominance. "
@@ -61,6 +70,13 @@ def draft_metadata(project: VideoProject) -> VideoMetadata:
             "flywheel, or before/after object. High contrast, clean backdrop. "
             "Empty right third for 2–5 words of type added later. Not a "
             "historical portrait. Not a money-flow diagram. Not the full title."
+        )
+    elif is_wealth_pov(project.channel_mode):
+        concept = (
+            "Large readable protagonist plus one contrast: two uses of money, "
+            "a friend's assumption, a quiet refusal, or the recurring object. "
+            "Full-color illustrated world, not stick-figure doodle. Empty right "
+            "third for 0–4 words of type. Not the full title."
         )
     elif is_business(project.channel_mode):
         concept = (
@@ -134,7 +150,17 @@ def _default_tags(project: VideoProject) -> list[str]:
         project.title.lower(),
         "illustrated documentary",
     ]
-    if is_takeover(project.channel_mode):
+    if is_wealth_pov(project.channel_mode):
+        tags = [
+            cfg.name.lower(),
+            "quiet wealth",
+            "pov story",
+            subject.lower(),
+            project.title.lower(),
+            "illustrated story",
+            "not financial advice",
+        ]
+    elif is_takeover(project.channel_mode):
         tags.extend(
             [
                 "business documentary",

@@ -11,6 +11,7 @@ Never invent numbers, quotes, market share, motives, meetings, or founder statem
 - **WTRT:** primary sources, letters, speeches, interviews, official documents, reputable biographies.
 - **Money:** annual reports, SEC/equivalent, investor decks, earnings calls, shareholder letters, then credible financial journalism.
 - **Takeover:** the money list plus archives, founder/executive interviews, industry reports, technical papers when the bet is technical.
+- **Quiet Wealth:** default is original fiction plus a continuity ledger. Source only real financial, legal, tax, health, or statistical claims the script needs (Investor.gov for index-fund / compound-interest explainers). Never invent a real person's private finances.
 
 Do not rely on SEO blogs, AI summaries, tweets, or other YouTube scripts as sources. Other YouTube videos are competitive research (packaging only).
 

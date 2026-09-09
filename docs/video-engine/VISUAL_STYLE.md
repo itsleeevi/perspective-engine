@@ -18,8 +18,9 @@ Implemented in `channel/prompts.py`. Company and personal names are stripped fro
 - WTRT: `GLOBAL_VISUAL_STYLE` — muted historical stick-figure doodle
 - Money: `BEHIND_THE_BUSINESS_VISUAL_STYLE` — high-contrast business stick-figure doodle
 - Takeover: `HOW_THEY_TOOK_OVER_VISUAL_STYLE` — energetic strategic stick-figure doodle (flywheels, wars, maps)
+- Quiet Wealth: `WEALTH_POV_VISUAL_STYLE` — detailed colored 2D story illustration (lived-in rooms, complete cartoon bodies). Not stick-figure doodle.
 
-Do not mix palettes. Shared construction: hand-drawn 2D doodle, bold outlines, solid color blocks, no gradients/shadows/textures. Not photoreal, not 3D, not anime.
+Do not mix palettes. Documentary shared construction: hand-drawn 2D doodle, bold outlines, solid color blocks, no gradients/shadows/textures. Not photoreal, not 3D, not anime. Quiet Wealth uses the colored story-illustration lock instead.
 
 Every still also gets `STAGING_QUALITY` from `channel/quality_bar.py`: one idea, one oversized focal object, named lighting, unique staging, no filing-table wallpaper. That is cinema grammar, not a new identity. Spec: `docs/video-engine/QUALITY_BAR.md`.
 

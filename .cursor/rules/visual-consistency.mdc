@@ -7,7 +7,7 @@ alwaysApply: true
 
 Use the frozen style in `channel/config.py` for the selected mode. Do not rewrite it per scene.
 
-WTRT = muted historical stick-figure doodle. Money = high-contrast business stick-figure doodle. Takeover = energetic strategic stick-figure doodle.
+WTRT = muted historical stick-figure doodle. Money = high-contrast business stick-figure doodle. Takeover = energetic strategic stick-figure doodle. Quiet Wealth (`wealth_pov`) = detailed colored 2D story illustration (complete cartoon bodies, lived-in rooms) — not stick-figure doodle.
 
 Not photoreal, not 3D, not anime. Historical names and company names stay out of image prompts (`channel/prompts.py`).
 

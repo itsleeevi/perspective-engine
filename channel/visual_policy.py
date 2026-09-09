@@ -20,6 +20,12 @@ HOW_THEY_TOOK_OVER_VISUAL_STYLE_LOCK = (
     "photorealistic, not 3D, not logo-vs-logo."
 )
 
+WEALTH_POV_VISUAL_STYLE_LOCK = (
+    "Detailed colored 2D narrative cartoon. Lived-in rooms, complete cartoon "
+    "bodies, muted natural colors, soft cel shading. Not stick-figure doodle, "
+    "not photoreal, not 3D, not anime, not empty paper silhouettes."
+)
+
 FORBIDDEN_VISUALS = (
     "photorealistic impersonation of real people",
     "realistic fake interviews",
@@ -34,4 +40,5 @@ __all__ = [
     "GENERIC_SCENE_PATTERNS",
     "HOW_THEY_TOOK_OVER_VISUAL_STYLE_LOCK",
     "VISUAL_STYLE_LOCK",
+    "WEALTH_POV_VISUAL_STYLE_LOCK",
 ]

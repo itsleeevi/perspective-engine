@@ -41,6 +41,9 @@ REQUIRED_PHRASES = (
     "how_they_took_over",
     "docs/how-they-took-over.md",
     "How They Took Over",
+    "wealth_pov",
+    "docs/wealth-pov.md",
+    "Quiet Wealth",
     "python -m channel generate",
     "python -m channel drop",
     "[00-00]",
@@ -84,6 +87,27 @@ def test_business_playbook_exists():
     text = playbook.read_text(encoding="utf-8")
     assert "behind_the_business" in text
     assert "unknown until researched" in text or "must **not** assume" in text
+
+
+def test_wealth_playbook_exists():
+    playbook = ROOT / "docs" / "wealth-pov.md"
+    index = ROOT / "docs" / "wealth" / "README.md"
+    assert playbook.is_file()
+    assert index.is_file()
+    text = playbook.read_text(encoding="utf-8")
+    assert "wealth_pov" in text
+    assert "4,500–4,800" in text
+
+
+def test_wealth_readme_lists_every_page():
+    wealth = ROOT / "docs" / "wealth"
+    readme = (wealth / "README.md").read_text(encoding="utf-8")
+    pages = sorted(p.name for p in wealth.glob("*.md") if p.name != "README.md")
+    missing = [name for name in pages if f"({name})" not in readme]
+    assert not missing, (
+        "docs/wealth/README.md must link every shipped page so the next "
+        f"clone sees the Do-not-copy list: {missing}"
+    )
 
 
 def test_takeover_playbook_exists():

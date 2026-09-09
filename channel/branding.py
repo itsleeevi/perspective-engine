@@ -16,7 +16,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from channel.modes import is_business, is_takeover
+from channel.modes import is_business, is_takeover, is_wealth_pov
 from channel.youtube import youtube_dir
 from scripts._media import cover_crop
 
@@ -107,6 +107,14 @@ def branding_paths(root: Path | None = None, *, mode: str | None = None) -> dict
             "preview": dest / "how_they_took_over_cover_safezone_preview.jpg",
             "about": dest / "how_they_took_over_about.txt",
             "handle": dest / "how_they_took_over_handle.txt",
+        }
+    if is_wealth_pov(mode):
+        return {
+            "profile": dest / "wealth_pov_profile_800x800.jpg",
+            "banner": dest / "wealth_pov_cover_2560x1440.jpg",
+            "preview": dest / "wealth_pov_cover_safezone_preview.jpg",
+            "about": dest / "wealth_pov_about.txt",
+            "handle": dest / "wealth_pov_handle.txt",
         }
     if is_business(mode):
         return {

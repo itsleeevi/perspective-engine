@@ -4,12 +4,13 @@ from __future__ import annotations
 
 from channel.config import config_for_project
 from channel.factcheck import factcheck
-from channel.modes import is_business, is_takeover
+from channel.modes import is_business, is_takeover, is_wealth_pov
 from channel.originality_policy import (
     BUSINESS_MONETIZATION_THRESHOLDS,
     GENERIC_AI_PHRASES,
     MONETIZATION_THRESHOLDS,
     TAKEOVER_MONETIZATION_THRESHOLDS,
+    WEALTH_MONETIZATION_THRESHOLDS,
 )
 from channel.qa import mechanical_qa, narration_of, word_count
 from channel.schema import MonetizationReadiness, OriginalityReport, VideoProject
@@ -44,6 +45,14 @@ def compute_monetization_readiness(
     else:
         original_research = 4
         notes.append("most claims lack sources")
+
+    if is_wealth_pov(project.channel_mode):
+        ctx = project.wealth
+        if ctx and ctx.fictional and (ctx.ledger_notes or ctx.core_tension):
+            original_research = max(original_research, 8)
+            notes[:] = [n for n in notes if n != "no research claims yet"]
+        elif not claims:
+            notes.append("Quiet Wealth episode needs a continuity ledger in project.wealth")
 
     if report.ok:
         source_quality = 9
@@ -212,6 +221,25 @@ def compute_monetization_readiness(
         if financial_accuracy < 8 and moneyish:
             notes.append("financial_accuracy below threshold")
             ready = False
+
+    if is_wealth_pov(project.channel_mode):
+        ctx = project.wealth
+        bits = 0
+        if ctx and ctx.core_tension:
+            bits += 1
+        if ctx and ctx.signature_object:
+            bits += 1
+        if ctx and ctx.ledger_notes:
+            bits += 1
+        if ctx and ctx.supporting_characters:
+            bits += 1
+        if project.story and len(project.story.chapters) == 6:
+            bits += 1
+        transformation_depth = min(10, 4 + bits)
+        extra = WEALTH_MONETIZATION_THRESHOLDS
+        ready = ready and transformation_depth >= extra["ledger_depth_min"]
+        if transformation_depth < extra["ledger_depth_min"]:
+            notes.append("wealth ledger / six-level story below threshold")
 
     return MonetizationReadiness(
         original_research=original_research,

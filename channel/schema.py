@@ -461,6 +461,38 @@ class TakeoverQaReport(BaseModel):
     ready: bool = False
 
 
+class WealthContext(BaseModel):
+    """Continuity ledger for a Quiet Wealth episode. Default is fiction."""
+
+    fictional: bool = True
+    protagonist_age_start: str = ""
+    job: str = ""
+    income_situation: str = ""
+    home: str = ""
+    starting_problem: str = ""
+    signature_object: str = ""
+    supporting_characters: list[str] = Field(default_factory=list)
+    places: list[str] = Field(default_factory=list)
+    money_thread: str = ""
+    relationship_thread: str = ""
+    core_tension: str = ""
+    ledger_notes: str = ""
+    assumed_wpm: int = 155
+    real_claims_note: str = ""
+
+
+class WealthQaReport(BaseModel):
+    hook: int = 0
+    curiosity: int = 0
+    pacing: int = 0
+    story_depth: int = 0
+    ledger: int = 0
+    title_payoff: int = 0
+    visual_variety: int = 0
+    notes: list[str] = Field(default_factory=list)
+    ready: bool = False
+
+
 class VideoProject(BaseModel):
     """Shared context for every agent on one title."""
 
@@ -470,6 +502,7 @@ class VideoProject(BaseModel):
     analysis: TitleAnalysis
     business: BusinessContext | None = None
     takeover: TakeoverContext | None = None
+    wealth: WealthContext | None = None
     research: ResearchPack = Field(default_factory=lambda: ResearchPack(subject="", target=""))
     factcheck: FactCheckReport = Field(default_factory=lambda: FactCheckReport(ok=False))
     story: StoryPlan | None = None
@@ -483,4 +516,5 @@ class VideoProject(BaseModel):
     metadata: VideoMetadata | None = None
     business_qa: BusinessQaReport | None = None
     takeover_qa: TakeoverQaReport | None = None
+    wealth_qa: WealthQaReport | None = None
     special_instructions: str = ""

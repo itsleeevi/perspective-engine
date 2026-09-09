@@ -53,7 +53,7 @@ from pathlib import Path
 
 from adapters.voice.years import SPELLED_YEAR
 from channel.config import config_for
-from channel.modes import is_business, is_company_story, is_takeover
+from channel.modes import is_business, is_company_story, is_takeover, is_wealth_pov
 from channel.originality import mode_for_slug
 from channel.originality_policy import GENERIC_AI_PHRASES
 
@@ -374,7 +374,11 @@ def main() -> None:
             pass
     own_pages.discard("")
     banned: list[tuple[str, str]] = []  # (phrase, source page)
-    motif_dirs = [ROOT / "docs" / "videos", ROOT / "docs" / "business"]
+    motif_dirs = [
+        ROOT / "docs" / "videos",
+        ROOT / "docs" / "business",
+        ROOT / "docs" / "wealth",
+    ]
     for page in sorted(p for d in motif_dirs if d.is_dir() for p in d.glob("*.md")):
         if page.stem in own_pages:
             continue
@@ -444,6 +448,11 @@ def main() -> None:
                 "explain-like-five: add the_thought — one sentence that answers "
                 "the business mystery"
             )
+        elif is_wealth_pov(spec.get("channel_mode")):
+            _fail(
+                "explain-like-five: add the_thought — one sentence a child could "
+                "repeat about the choice this story earned"
+            )
         else:
             _fail(
                 "explain-like-five: add the_thought — one sentence a child could "
@@ -509,11 +518,16 @@ def main() -> None:
                 f"structure: {len(levels)} chapters — use "
                 f"{ch_cfg.chapter_count_min}-{ch_cfg.chapter_count_max}"
             )
-        if fixture.get("speak_title_cards", True):
+        if fixture.get("speak_title_cards", True) and not is_wealth_pov(
+            spec.get("channel_mode")
+        ):
             _fail("structure: chapter cards must be silent (speak_title_cards: false)")
         for level in levels:
             name = level.get("name", "")
-            if len(name.split()) > 4:
+            if (
+                not is_wealth_pov(spec.get("channel_mode"))
+                and len(name.split()) > 4
+            ):
                 _fail(f"structure: chapter name {name!r} is not poster-like (<=4 words)")
     for level in levels:
         if not level.get("beats"):

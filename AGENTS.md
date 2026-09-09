@@ -1,7 +1,7 @@
 # AGENTS.md
 
 Working contract for every agent (local or Cloud) with **empty chat history**.
-Detailed specs: `docs/video-engine/`. Channel playbooks: `docs/custom-videos.md`, `docs/behind-the-business.md`, `docs/how-they-took-over.md`.
+Detailed specs: `docs/video-engine/`. Channel playbooks: `docs/custom-videos.md`, `docs/behind-the-business.md`, `docs/how-they-took-over.md`, `docs/wealth-pov.md`.
 
 ## What this project is
 
@@ -14,6 +14,7 @@ A multi-channel automated animated documentary engine (`channel/`), plus a separ
 | What They Really Think | `what_they_really_think` |
 | How They Really Make Money | `behind_the_business` (alias `how_they_really_make_money`) |
 | How They Took Over | `how_they_took_over` |
+| Quiet Wealth | `wealth_pov` |
 
 Pass `--channel` explicitly. Do not infer it from the title. Do not mix story or visual grammars.
 
@@ -27,6 +28,7 @@ Canonical (isolated job, parallel-safe):
 .venv/bin/python -m channel generate --channel what_they_really_think --title "What Einstein Really Thought About God"
 .venv/bin/python -m channel generate --channel behind_the_business --title "How Visa Really Makes Money"
 .venv/bin/python -m channel generate --channel how_they_took_over --title "How Nvidia Took Over AI"
+.venv/bin/python -m channel generate --channel wealth_pov --title "POV: You Stopped Trying to Look Successful"
 ```
 
 Or `.venv/bin/python -m channel generate --job jobs/example.json`.
@@ -52,7 +54,7 @@ DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATI
 
 ## Where configuration lives
 
-- Channels / voice / style: `channel/config.py` (`CHANNEL`, `BEHIND_THE_BUSINESS`, `HOW_THEY_TOOK_OVER`)
+- Channels / voice / style: `channel/config.py` (`CHANNEL`, `BEHIND_THE_BUSINESS`, `HOW_THEY_TOOK_OVER`, `WEALTH_POV`)
 - Versions / model lock / render lock: `channel/engine.py`
 - Mode aliases: `channel/modes.py`
 - Shipped voice/style locks: `channel/locks.py` (Costco Kokoro **0.92**; new titles **1.0–1.15**, default **1.15**)
@@ -61,7 +63,7 @@ DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATI
 
 ## Where prompts live
 
-`channel/agent_prompts.py` (Think), `channel/business_prompts.py` (Money), `channel/takeover_prompts.py` (Takeover). Shared staged **master prompt**: `channel/master_prompt.py` (`MASTER` on each module). Index: `prompts/README.md`. Dispatch: `channel/stage_prompts.py`.
+`channel/agent_prompts.py` (Think), `channel/business_prompts.py` (Money), `channel/takeover_prompts.py` (Takeover), `channel/wealth_prompts.py` (Quiet Wealth; `MASTER` is the v5 long-form wealth POV prompt). Shared staged **master prompt**: `channel/master_prompt.py` (`MASTER` on each module). Index: `prompts/README.md`. Dispatch: `channel/stage_prompts.py`.
 
 ## Where artifacts are created
 
@@ -72,10 +74,10 @@ DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATI
 ```text
 .venv/bin/python -m channel qa <job_id-or-slug>
 .venv/bin/python -m channel cloud-readiness
-.venv/bin/pytest tests/test_channel_handoff.py tests/test_portability.py tests/test_how_they_took_over.py tests/test_behind_the_business.py tests/test_character_locks.py tests/test_quality_bar.py
+.venv/bin/pytest tests/test_channel_handoff.py tests/test_portability.py tests/test_how_they_took_over.py tests/test_behind_the_business.py tests/test_wealth_pov.py tests/test_character_locks.py tests/test_quality_bar.py
 ```
 
-Need `the_thought`, Google Flow stills after QA (`flow_prompts`), YouTube `Watch the full video:` + synthetic-media disclosure. Lengths: Think, Money, and Takeover **800–2500** words (~5–15 minutes). New titles use **imported audio** (operator ElevenLabs or any TTS; the engine never calls those APIs). Shipped recuts may stay on Kokoro `am_liam` (roster may rotate). Write the whole VO so a five-year-old can follow while an adult still learns. **Do not read long numbers** aloud — round to a sayable figure (`about 158 billion`, not `158,359,009,867`). Exact digits stay in claims.
+Need `the_thought`, Google Flow stills after QA (`flow_prompts`), YouTube `Watch the full video:` + synthetic-media disclosure. Lengths: Think, Money, and Takeover **800–2500** words (~5–15 minutes). Quiet Wealth (`wealth_pov`) long cuts are **4,500–4,800** words (~30 minutes, second person). New titles use **imported audio** (operator ElevenLabs or any TTS; the engine never calls those APIs). Shipped recuts may stay on Kokoro `am_liam` (roster may rotate). Write the whole VO so a five-year-old can follow while an adult still learns. **Do not read long numbers** aloud — round to a sayable figure (`about 158 billion`, not `158,359,009,867`). Exact digits stay in claims.
 
 ## What must never change without intent
 
@@ -87,9 +89,9 @@ Install: Python ≥ 3.13, `pip install -e ".[dev]"`, ffmpeg before assemble. `.c
 
 ## Custom YouTube cuts (detail)
 
-`docs/custom-videos.md` is the Think production system. Cursor Grok fills research / story / bibles. Compile writes `script.txt`. After `WAIT_AUDIO`, ingest the operator voiceover, then write scenes 1:1 with pauses, then `flow_prompts.txt` for Google Flow. When the operator already has timestamped stills (`[00-00]_….jpg`) and audio, `python -m channel drop` then assemble without burned captions. After a Think cut ships, update `docs/videos/`. After Money, `docs/business/`. After Takeover, `docs/takeover/`.
+`docs/custom-videos.md` is the Think production system. Cursor Grok fills research / story / bibles. Compile writes `script.txt`. After `WAIT_AUDIO`, ingest the operator voiceover, then write scenes 1:1 with pauses, then `flow_prompts.txt` for Google Flow. When the operator already has timestamped stills (`[00-00]_….jpg`) and audio, `python -m channel drop` then assemble without burned captions. After a Think cut ships, update `docs/videos/`. After Money, `docs/business/`. After Takeover, `docs/takeover/`. After Quiet Wealth, `docs/wealth/`.
 
-Non-negotiable: unique story engine (`lint_story.py`), **originality_score ≥ 80** vs the last 10 on the **same** channel, `ready_to_publish`, answer the title through a story, child-repeatable `the_thought`, real names spoken (kept out of image prompts), no “today is DATE”, third-person spoken English. Think, Money, and Takeover long cuts **~5–15 minutes** (**800–2500** words). Follow the **master prompt** staged loop (`channel/master_prompt.py`): script file → imported audio → Flow prompts in batches of 20 (**Reply "next"**) → YouTube pack. Neutral still filenames (never put `costco` in the filename). Fill-frame 16:9, 3840×2160, Shorts 1080×1920, thumbs 1280×720 JPEG, synthetic-media disclosure, 24h between different-title assembles. Shared look is **stick-figure doodle**. Named public figures are a **recognizable cartoon of the real person** on that construction; reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as Google Flow references. Match the **grammar** in `docs/video-engine/QUALITY_BAR.md` (kid map, oversized focal object, unique cinema stills, punchy Short) without cloning a reference-cut spine.
+Non-negotiable: unique story engine (`lint_story.py`), **originality_score ≥ 80** vs the last 10 on the **same** channel, `ready_to_publish`, answer the title through a story, child-repeatable `the_thought`, real names spoken (kept out of image prompts), no “today is DATE”. Documentary channels use third-person spoken English. Quiet Wealth uses second-person POV. Think, Money, and Takeover long cuts **~5–15 minutes** (**800–2500** words). Quiet Wealth long cuts **~30 minutes** (**4,500–4,800** words). Follow the **master prompt** staged loop (`channel/master_prompt.py`): script file → imported audio → Flow prompts in batches of 20 (**Reply "next"**) → YouTube pack. Neutral still filenames (never put `costco` in the filename). Fill-frame 16:9, 3840×2160, Shorts 1080×1920, thumbs 1280×720 JPEG, synthetic-media disclosure, 24h between different-title assembles. Documentary shared look is **stick-figure doodle**. Quiet Wealth is detailed colored 2D story illustration. Named public figures are a **recognizable cartoon of the real person** on that construction; reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as Google Flow references. Match the **grammar** in `docs/video-engine/QUALITY_BAR.md` (kid map, oversized focal object, unique cinema stills, punchy Short) without cloning a reference-cut spine. Quiet Wealth still grammar is in `docs/wealth-pov.md`.
 
 Shared contract: chat is not how the next clone learns the rules. After any production change, update `docs/custom-videos.md`, this file, and `.cursor/rules/custom-videos.mdc` in the same commit. `tests/test_channel_handoff.py` guards the three surfaces.
 

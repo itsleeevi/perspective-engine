@@ -4,7 +4,7 @@ This is the playbook for the YouTube channel **How They Really Make Money** (`@H
 
 Read this fully before starting a business cut. After a cut ships, update `docs/business/<slug>.md` and `docs/business/README.md`.
 
-What They Really Think stays on `docs/custom-videos.md`. How They Took Over stays on `docs/how-they-took-over.md`. Do not mix the three story grammars.
+What They Really Think stays on `docs/custom-videos.md`. How They Took Over stays on `docs/how-they-took-over.md`. Quiet Wealth stays on `docs/wealth-pov.md`. Do not mix the story grammars.
 
 ## Channel mode
 

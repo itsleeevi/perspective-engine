@@ -22,12 +22,14 @@ REQUIRED_FILES = (
     "docs/custom-videos.md",
     "docs/behind-the-business.md",
     "docs/how-they-took-over.md",
+    "docs/wealth-pov.md",
     "docs/video-engine/README.md",
     "docs/video-engine/CLOUD_AGENT_START_PROMPT.md",
     "docs/video-engine/QUALITY_BAR.md",
     "docs/channels/what-they-really-think.md",
     "docs/channels/how-they-really-make-money.md",
     "docs/channels/how-they-took-over.md",
+    "docs/channels/quiet-wealth.md",
     ".cursor/rules/custom-videos.mdc",
     ".cursor/rules/video-engine.mdc",
     ".cursor/rules/channel-routing.mdc",
@@ -40,6 +42,8 @@ REQUIRED_FILES = (
     "channel/agent_prompts.py",
     "channel/business_prompts.py",
     "channel/takeover_prompts.py",
+    "channel/wealth_prompts.py",
+    "channel/wealth_pov_master_v5.txt",
     "channel/master_prompt.py",
     "channel/drop.py",
 )
@@ -77,6 +81,8 @@ def check_readiness(*, strict: bool = False) -> dict:
                 errors.append(f"{module} missing {name}")
     if ChannelMode.how_they_took_over not in PROMPT_MODULES:
         errors.append("how_they_took_over prompt module missing")
+    if ChannelMode.wealth_pov not in PROMPT_MODULES:
+        errors.append("wealth_pov prompt module missing")
     if MODEL_LOCK["image"] != "operator_google_flow_ingest":
         errors.append("image model lock drifted off operator_google_flow_ingest")
     if MODEL_LOCK["tts"] != "operator_imported_audio":

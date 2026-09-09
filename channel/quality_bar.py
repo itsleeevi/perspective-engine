@@ -8,6 +8,7 @@ from __future__ import annotations
 import re
 from collections import Counter
 from channel.schema import VideoProject
+from channel.modes import is_wealth_pov
 
 QUALITY_BAR_DOC = "docs/video-engine/QUALITY_BAR.md"
 
@@ -34,6 +35,15 @@ STAGING_QUALITY = (
     "action. Costume-locked extras when the beat needs a shopper or clerk. "
     "No cluttered infographic. No generic filing-table wallpaper. No logos. "
     "No readable paragraphs."
+)
+
+WEALTH_STAGING_QUALITY = (
+    "ONE idea in the frame. Show the current choice, object, or reaction. "
+    "Lived-in room or street filling the canvas. Named lighting. Faces, hands, "
+    "and the key object stay clear of the lower subtitle band. Recurring people "
+    "keep the same face, hair, and outfit unless the scene names a change. "
+    "No graphs unless the story truly needs one large simple label added later. "
+    "No stick-figure doodle. No empty paper. No photoreal. No 3D."
 )
 
 CHARACTER_LOCK_RECIPE = (
@@ -182,6 +192,8 @@ def scene_quality_notes(project: VideoProject) -> list[str]:
     notes.extend(f"wallpaper: {hit}" for action in actions for hit in wallpaper_hits(action))
     for head_note in repeated_action_heads(actions):
         notes.append(f"repeated action head: {head_note}")
+    if is_wealth_pov(project.channel_mode):
+        return notes
     prop = ""
     if project.story and project.story.signature_prop:
         token = re.sub(r"[^A-Z0-9]+", "_", project.story.signature_prop.upper()).strip("_")

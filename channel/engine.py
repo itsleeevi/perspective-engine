@@ -14,7 +14,7 @@ from pathlib import Path
 from channel.modes import ChannelMode
 
 VIDEO_ENGINE_VERSION = "2026.08.28"
-PROMPT_VERSION = "2026.08.26.master"
+PROMPT_VERSION = "2026.09.09.wealth_pov"
 VISUAL_STYLE_VERSION = "2026.08.26"
 
 # Documentary path only. Do not silently swap these.
@@ -79,6 +79,7 @@ PROMPT_MODULES = {
     ChannelMode.what_they_really_think: "channel.agent_prompts",
     ChannelMode.behind_the_business: "channel.business_prompts",
     ChannelMode.how_they_took_over: "channel.takeover_prompts",
+    ChannelMode.wealth_pov: "channel.wealth_prompts",
 }
 
 IMAGE_FILENAME_RULE = (

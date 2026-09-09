@@ -55,6 +55,19 @@ def seed_research(analysis: TitleAnalysis, *, timeout: float = 20.0) -> Research
     """Encyclopedia seed. Claims list stays empty until the agent verifies."""
     takeover = analysis.channel_mode is ChannelMode.how_they_took_over
     business = analysis.channel_mode is ChannelMode.behind_the_business
+    wealth = analysis.channel_mode is ChannelMode.wealth_pov
+    if wealth:
+        return ResearchPack(
+            subject=analysis.subject,
+            target=analysis.target,
+            summary=(
+                "Quiet Wealth default is original fiction. Do not seed Wikipedia "
+                "as the viewer's life. Build the continuity ledger in "
+                "project.wealth. Source only real-world claims the script needs."
+            ),
+            seed_sources=[],
+            claims=[],
+        )
     if takeover:
         subject = analysis.company or analysis.subject
         arena = analysis.arena or analysis.target

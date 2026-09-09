@@ -47,6 +47,10 @@ TAKEOVER_MONETIZATION_THRESHOLDS = {
     "transformation_depth_min": 8,
 }
 
+WEALTH_MONETIZATION_THRESHOLDS = {
+    "ledger_depth_min": 8,
+}
+
 MONETIZATION_THRESHOLDS = {
     "original_research_min": 8,
     "story_originality_min": 8,

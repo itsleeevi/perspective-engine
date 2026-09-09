@@ -347,6 +347,8 @@ def persist_project_sidecars(project: Any, dest: Path) -> None:
         company["business"] = project.business.model_dump()
     if getattr(project, "takeover", None) is not None:
         company["takeover"] = project.takeover.model_dump()
+    if getattr(project, "wealth", None) is not None:
+        company["wealth"] = project.wealth.model_dump()
     if company:
         _dump("company.json", company)
     from channel.qa import narration_of

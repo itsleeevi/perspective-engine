@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 
 from channel.config import CHANNEL, config_for_project
-from channel.modes import is_business, is_company_story, is_takeover
+from channel.modes import is_business, is_company_story, is_takeover, is_wealth_pov
 from channel.originality_policy import GENERIC_AI_PHRASES, STOCK_ENDINGS, STOCK_TRANSITIONS
 from channel.quality_bar import scene_quality_notes
 from channel.schema import QaScores, VideoProject
@@ -71,10 +71,16 @@ def mechanical_qa(project: VideoProject) -> QaScores:
         scores.hook = 8
 
     first30 = " ".join(text.split()[: first_n_seconds_words(30, project)])
-    if project.analysis.subject.lower() not in first30.lower():
+    if is_wealth_pov(project.channel_mode):
+        if not re.search(r"\byou\b", first30, re.I):
+            notes.append("first 30s never addresses the viewer as you")
+            scores.curiosity = 5
+    elif project.analysis.subject.lower() not in first30.lower():
         notes.append("first 30s never names the subject")
         scores.curiosity = 5
-    if not is_company_story(project.channel_mode):
+    if not is_company_story(project.channel_mode) and not is_wealth_pov(
+        project.channel_mode
+    ):
         target_word = project.analysis.target.split()[0].lower()
         if target_word not in first30.lower():
             notes.append("first 30s never names the target")
@@ -200,6 +206,11 @@ def run_full_qa(project: VideoProject):
 
         project.takeover_qa = mechanical_takeover_qa(project)
         project.qa.notes.extend(project.takeover_qa.notes)
+    if is_wealth_pov(project.channel_mode):
+        from channel.wealth_qa import mechanical_wealth_qa
+
+        project.wealth_qa = mechanical_wealth_qa(project)
+        project.qa.notes.extend(project.wealth_qa.notes)
     try:
         originality = originality_report_for_slug(project.slug)
     except Exception:

@@ -12,6 +12,7 @@ from channel.business_title import analyze_business_title, looks_like_business
 from channel.config import CHANNEL, config_for
 from channel.modes import ChannelMode, parse_mode
 from channel.schema import SubjectStatus, TitleAnalysis
+from channel.wealth_title import analyze_wealth_title, looks_like_wealth_pov
 from channel.takeover_title import analyze_takeover_title, looks_like_takeover
 
 _TITLE = re.compile(
@@ -29,6 +30,12 @@ def analyze_title(
 ) -> TitleAnalysis:
     raw = " ".join(title.strip().split())
     mode = parse_mode(channel_mode)
+    if mode is ChannelMode.wealth_pov:
+        return analyze_wealth_title(
+            raw,
+            special_instructions=special_instructions,
+            target_duration_seconds=target_duration_seconds,
+        )
     if mode is ChannelMode.how_they_took_over:
         return analyze_takeover_title(
             raw,
@@ -53,6 +60,11 @@ def analyze_title(
             hint = (
                 " If this is a Behind The Business title, pass "
                 "--channel behind_the_business."
+            )
+        elif looks_like_wealth_pov(raw):
+            hint = (
+                " If this is a Quiet Wealth title, pass "
+                "--channel wealth_pov."
             )
         raise ValueError(
             f"Title {title!r} does not match '{CHANNEL.title_pattern}'. "

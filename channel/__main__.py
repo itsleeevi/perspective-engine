@@ -35,7 +35,13 @@ from channel.modes import CHANNEL_FLAG_HELP, ChannelMode, parse_mode
 from channel.paths import ROOT, project_dir, spec_path
 from channel.qa import narration_of, run_full_qa, word_count
 from channel.research import seed_research
-from channel.schema import BusinessContext, ResearchPack, TakeoverContext, VideoProject
+from channel.schema import (
+    BusinessContext,
+    ResearchPack,
+    TakeoverContext,
+    VideoProject,
+    WealthContext,
+)
 from channel.slug import slugify
 from channel.title import analyze_title
 
@@ -56,6 +62,7 @@ def _init(args: argparse.Namespace) -> int:
         pack = seed_research(analysis)
     business = None
     takeover = None
+    wealth = None
     if mode is ChannelMode.behind_the_business:
         business = BusinessContext(
             company=analysis.company or analysis.subject,
@@ -73,6 +80,12 @@ def _init(args: argparse.Namespace) -> int:
             starting_position=analysis.starting_position,
             current_position=analysis.dominant_position,
         )
+    elif mode is ChannelMode.wealth_pov:
+        wealth = WealthContext(
+            fictional=True,
+            core_tension=analysis.core_question,
+            starting_problem=analysis.subject,
+        )
     project = VideoProject(
         title=analysis.title,
         slug=slug,
@@ -80,6 +93,7 @@ def _init(args: argparse.Namespace) -> int:
         analysis=analysis,
         business=business,
         takeover=takeover,
+        wealth=wealth,
         research=pack,
         special_instructions=analysis.special_instructions,
     )
@@ -95,6 +109,11 @@ def _init(args: argparse.Namespace) -> int:
     elif mode is ChannelMode.how_they_took_over:
         print(
             f"subject={analysis.subject!r} arena={analysis.arena!r} "
+            f"question={analysis.core_question}"
+        )
+    elif mode is ChannelMode.wealth_pov:
+        print(
+            f"pov_choice={analysis.subject!r} tension={analysis.target!r} "
             f"question={analysis.core_question}"
         )
     else:
@@ -124,6 +143,20 @@ def _score_title(args: argparse.Namespace) -> int:
 
         print(json.dumps(score_takeover_title(args.title, analysis=analysis), indent=2))
         return 0
+    if mode is ChannelMode.wealth_pov:
+        print(
+            json.dumps(
+                {
+                    "title": analysis.title,
+                    "channel_mode": mode.value,
+                    "core_question": analysis.core_question,
+                    "fictional_default": True,
+                    "note": "Quiet Wealth scores the title by whether the promised choice can sustain ~30 minutes.",
+                },
+                indent=2,
+            )
+        )
+        return 0
     from channel.business_titles import score_business_title
 
     print(json.dumps(score_business_title(args.title, analysis=analysis), indent=2))
@@ -136,6 +169,20 @@ def _suggest_titles(args: argparse.Namespace) -> int:
         from channel.takeover_titles import suggest_takeover_titles
 
         print(json.dumps(suggest_takeover_titles(args.company, y=args.y or ""), indent=2))
+        return 0
+    if mode is ChannelMode.wealth_pov:
+        print(
+            json.dumps(
+                [
+                    "POV: You Stopped Trying to Look Successful",
+                    "POV: You Built Wealth Quietly. Your Friends Read It All Wrong",
+                    "POV: You Could Afford the Upgrade. You Chose Your Time Instead",
+                    "POV: You Finally Had Enough Money. Saying Yes Was Still Hard",
+                    "POV: You Turned Down the Raise Everyone Else Wanted",
+                ],
+                indent=2,
+            )
+        )
         return 0
     from channel.business_titles import suggest_business_titles
 
@@ -159,6 +206,7 @@ def _agent_readme(slug: str, title: str, mode: ChannelMode | None = None) -> str
     docs = {
         ChannelMode.behind_the_business: f"docs/business/{slug}.md",
         ChannelMode.how_they_took_over: f"docs/takeover/{slug}.md",
+        ChannelMode.wealth_pov: f"docs/wealth/{slug}.md",
     }.get(mode, f"docs/videos/{slug}.md")
     return f"""# {title}
 

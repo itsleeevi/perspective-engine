@@ -39,6 +39,7 @@ from channel.schema import (
     StoryPlan,
     TakeoverContext,
     VideoProject,
+    WealthContext,
 )
 from channel.slug import slugify
 from channel.title import analyze_title
@@ -86,6 +87,7 @@ def _new_project(
         pack = seed_research(analysis)
     business = None
     takeover = None
+    wealth = None
     if mode.value == "behind_the_business":
         business = BusinessContext(
             company=analysis.company or analysis.subject,
@@ -103,6 +105,12 @@ def _new_project(
             starting_position=analysis.starting_position,
             current_position=analysis.dominant_position,
         )
+    elif mode.value == "wealth_pov":
+        wealth = WealthContext(
+            fictional=True,
+            core_tension=analysis.core_question,
+            starting_problem=analysis.subject,
+        )
     return VideoProject(
         title=analysis.title,
         slug=slugify(analysis.title),
@@ -110,6 +118,7 @@ def _new_project(
         analysis=analysis,
         business=business,
         takeover=takeover,
+        wealth=wealth,
         research=pack,
         special_instructions=analysis.special_instructions,
     )
@@ -120,6 +129,63 @@ def _smoke_story(project: VideoProject) -> None:
     payoff = (
         project.analysis.core_question.split("?")[0] + " is the title answer."
     )
+    if cfg.mode.value == "wealth_pov":
+        hook = (
+            "The dinner bill reaches you. Your friend waits. You pay your "
+            "share. The strange part is how long a bill this small used to "
+            "stay in your head. "
+            f"{project.analysis.core_question} "
+        )
+        body = (
+            "You keep the same lunch tin. You say no once. A friend reads it "
+            "wrong. You still have a bill you can handle. "
+        )
+        project.story = StoryPlan(
+            hook=hook,
+            central_question=project.analysis.core_question,
+            initial_assumption="looking successful is the same as being safe",
+            first_reveal="the first quiet choice costs something social",
+            major_contradiction="you can afford the upgrade and still refuse it",
+            turning_point="the setback that does not wipe the cushion",
+            final_answer=payoff,
+            title_payoff=payoff,
+            next_video_bridge="A related choice is waiting if this one holds.",
+            signature_prop="the lunch tin",
+            chapters=[
+                Chapter(name="First Quiet Choice", purpose=ScenePurpose.hook, narration=body),
+                Chapter(name="The Habit", purpose=ScenePurpose.question, narration=body),
+                Chapter(name="The Upgrade", purpose=ScenePurpose.escalation, narration=body),
+                Chapter(name="The Setback", purpose=ScenePurpose.contradiction, narration=body),
+                Chapter(name="New Room", purpose=ScenePurpose.reveal, narration=body),
+                Chapter(
+                    name="What Money Missed",
+                    purpose=ScenePurpose.resolution,
+                    narration=body + " " + payoff,
+                ),
+            ],
+        )
+        if project.wealth is not None:
+            project.wealth.signature_object = "lunch tin"
+            project.wealth.ledger_notes = "smoke-test ledger"
+            project.wealth.job = "shift work"
+            project.wealth.supporting_characters = ["friend", "partner"]
+            project.wealth.places = ["kitchen", "work"]
+        project.scenes = [
+            Scene(
+                scene_id="scene_000",
+                narration=hook,
+                purpose=ScenePurpose.hook,
+                visual_type="KITCHEN_TABLE",
+                action="Adult at a kitchen table holds a folded repair estimate beside a metal lunch tin.",
+                composition="medium shot",
+                who="hero",
+            )
+        ]
+        project.special_instructions = (
+            project.special_instructions + f" smoke-test word budget ignored ({cfg.name})"
+        ).strip()
+        return
+
     hook = (
         f"{project.analysis.subject} looks simple from the outside. "
         f"The real question is {project.analysis.core_question} "

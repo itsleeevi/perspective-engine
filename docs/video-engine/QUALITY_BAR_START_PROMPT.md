@@ -9,6 +9,7 @@ docs/video-engine/QUALITY_BAR.md. Then read the playbook for the channel:
 - What They Really Think → docs/custom-videos.md
 - How They Really Make Money → docs/behind-the-business.md
 - How They Took Over → docs/how-they-took-over.md
+- Quiet Wealth → docs/wealth-pov.md
 
 Copy the GRAMMAR of the best-performing uploads. Never copy their spines.
 
@@ -61,4 +62,4 @@ When complete, report job ID, final / thumb / Short paths, QA scores, and
 whether the cut would still look researched if the tools were hidden.
 ```
 
-Internal modes: `what_they_really_think`, `behind_the_business` (How They Really Make Money), `how_they_took_over`.
+Internal modes: `what_they_really_think`, `behind_the_business` (How They Really Make Money), `how_they_took_over`, `wealth_pov` (Quiet Wealth).

@@ -4,7 +4,7 @@ This is the playbook for the YouTube channel **How They Took Over** (`@HowTheyTo
 
 Read this fully before starting a takeover cut. After a cut ships, update `docs/takeover/<slug>.md` and `docs/takeover/README.md`.
 
-What They Really Think stays on `docs/custom-videos.md`. How They Really Make Money stays on `docs/behind-the-business.md`. Do not mix the three story grammars.
+What They Really Think stays on `docs/custom-videos.md`. How They Really Make Money stays on `docs/behind-the-business.md`. Quiet Wealth stays on `docs/wealth-pov.md`. Do not mix the story grammars.
 
 ## Channel mode
 

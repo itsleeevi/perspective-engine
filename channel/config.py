@@ -206,6 +206,67 @@ HTTO_VISUAL_ACCENTS = (
     "keep the same stick-figure doodle construction.",
 )
 
+WEALTH_POV_VISUAL_STYLE = (
+    "Original detailed 2D narrative cartoon illustration, full-bleed landscape "
+    "16:9, clean dark outlines, simplified expressive faces, complete natural "
+    "human proportions, softly shaded muted colors, warm everyday realism, "
+    "believable perspective, gently lit lived-in environment, clear foreground "
+    "and background separation, consistent illustrated storybook look. "
+    "FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black "
+    "bars, no player controls, no rounded-frame corners. Keep the lower "
+    "subtitle area uncluttered but fully illustrated."
+)
+
+WEALTH_POV_NEGATIVE_STYLE = (
+    "Keep the approved character design, location layout, and prop continuity; "
+    "fill the entire canvas edge to edge; keep the lower subtitle area "
+    "uncluttered but fully illustrated; no subtitles, caption text, watermark, "
+    "timestamp, player controls, browser interface, borders, rounded corners, "
+    "black silhouette characters, thin stick limbs, empty paper backgrounds, "
+    "photorealism, 3D rendering, anime, or stick-figure doodle construction."
+)
+
+WEALTH_YOUTUBE_DISCLOSURE = (
+    "Illustrated story. Stills and narration are generated. "
+    "This episode is a fictional illustrative story unless the description "
+    "says otherwise. Not a photograph of any real person. "
+    "Educational storytelling, not personalized financial advice."
+)
+
+WEALTH_HOST_ATTRIBUTION = (
+    "Written for Quiet Wealth as an original illustrated story."
+)
+
+WEALTH_CHANNEL_ABOUT = (
+    "Quiet Wealth makes original illustrated stories that place you inside "
+    "ordinary money decisions and show how those choices change a life "
+    "over time.\n"
+    "\n"
+    "Each video starts from a POV title. Fresh story. Different architecture "
+    "every time. Original narration — not a rewritten article or a YouTube "
+    "transcript. Quiet wealth, social pressure, work, relationships, and "
+    "having more choice over your time.\n"
+    "\n"
+    "Stories are fictional and illustrative unless a description says a "
+    "real life was researched. Not financial advice. Stills and voice are "
+    "generated; a person writes and reviews every cut.\n"
+)
+
+WEALTH_VISUAL_ACCENTS = (
+    "Accent this title with cream, wood-brown, and muted teal; keep the same "
+    "colored story-illustration construction.",
+    "Accent this title with warm kitchen ochre, denim blue, and olive; keep "
+    "the same colored story-illustration construction.",
+    "Accent this title with late-day gold, gray pavement, and soft sky; keep "
+    "the same colored story-illustration construction.",
+    "Accent this title with cool morning blue, beige cupboards, and a teal "
+    "sweater; keep the same colored story-illustration construction.",
+    "Accent this title with lamp-warm interiors and a quieter blue-gray street; "
+    "keep the same colored story-illustration construction.",
+    "Accent this title with paper-cream, muted rust, and deep teal; keep the "
+    "same colored story-illustration construction.",
+)
+
 # New titles pick one accent so stills are not one interchangeable palette.
 # Shipped slugs get an empty string (see SHIPPED_STYLE_LOCK).
 VISUAL_ACCENTS = (
@@ -244,6 +305,8 @@ def visual_accent_for(slug: str, mode: ChannelMode | str | None = None) -> str:
         accents = BTB_VISUAL_ACCENTS
     elif mode_parsed is ChannelMode.how_they_took_over:
         accents = HTTO_VISUAL_ACCENTS
+    elif mode_parsed is ChannelMode.wealth_pov:
+        accents = WEALTH_VISUAL_ACCENTS
     else:
         accents = VISUAL_ACCENTS
     return accents[_stable_index(slug, len(accents))]
@@ -443,10 +506,55 @@ HOW_THEY_TOOK_OVER = ChannelConfig(
     ),
 )
 
+WEALTH_POV = ChannelConfig(
+    mode=ChannelMode.wealth_pov,
+    name="Quiet Wealth",
+    title_pattern="POV: You {choice}",
+    target_duration_seconds=1800,
+    min_duration_seconds=1680,
+    max_duration_seconds=1920,
+    spoken_wpm_min=150,
+    spoken_wpm_max=160,
+    # ~30 minutes at 150–160 wpm. Aim near 4,650 if pace is unknown.
+    narration_word_min=4500,
+    narration_word_max=4800,
+    narration_wpm=155,
+    min_scene_duration=8.0,
+    max_scene_duration=9.0,
+    visual_change_target_seconds=8.5,
+    default_short_enabled=True,
+    short_word_min=75,
+    short_word_max=140,
+    voice="kokoro",
+    kokoro_voice="am_liam",
+    kokoro_speed=1.15,
+    visual_style=WEALTH_POV_VISUAL_STYLE,
+    negative_style=WEALTH_POV_NEGATIVE_STYLE,
+    title_payoff_max_words=28,
+    chapter_count_min=6,
+    chapter_count_max=6,
+    host_attribution=WEALTH_HOST_ATTRIBUTION,
+    channel_about=WEALTH_CHANNEL_ABOUT,
+    channel_handle="",
+    youtube_disclosure=WEALTH_YOUTUBE_DISCLOSURE,
+    videos_index="docs/wealth/README.md",
+    playbook="docs/wealth-pov.md",
+    banned_lecture_openers=(
+        "this video will",
+        "in this video",
+        "today we are going to",
+        "let us begin by",
+        "if you're watching this",
+        "was born",
+        "were born",
+    ),
+)
+
 CHANNEL_CONFIGS: dict[ChannelMode, ChannelConfig] = {
     ChannelMode.what_they_really_think: CHANNEL,
     ChannelMode.behind_the_business: BEHIND_THE_BUSINESS,
     ChannelMode.how_they_took_over: HOW_THEY_TOOK_OVER,
+    ChannelMode.wealth_pov: WEALTH_POV,
 }
 
 
@@ -465,6 +573,8 @@ def default_thumbnail_text(mode: ChannelMode | str | None = None) -> str:
         return "THE REAL ENGINE"
     if parsed is ChannelMode.how_they_took_over:
         return "WHY THEY WON"
+    if parsed is ChannelMode.wealth_pov:
+        return "THE QUIET CHOICE"
     return "THE REAL ANSWER"
 
 
@@ -474,4 +584,6 @@ def about_filename(mode: ChannelMode | str | None = None) -> str:
         return "behind_the_business_about.txt"
     if parsed is ChannelMode.how_they_took_over:
         return "how_they_took_over_about.txt"
+    if parsed is ChannelMode.wealth_pov:
+        return "wealth_pov_about.txt"
     return "channel_about.txt"

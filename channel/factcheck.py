@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-from channel.modes import ChannelMode, is_company_story
+from channel.modes import ChannelMode, is_company_story, is_wealth_pov
 from channel.schema import Claim, EvidenceKind, FactCheckReport, ResearchPack
 
 _FINANCIAL = re.compile(
@@ -23,7 +23,13 @@ def factcheck(
     if pack.insufficient_evidence:
         flags.append("research marked insufficient_evidence — story must say so")
     if not pack.claims:
-        flags.append("no verified claims yet — agent must add sourced claims")
+        if is_wealth_pov(channel_mode):
+            flags.append(
+                "fictional Quiet Wealth episode — no documentary claims; "
+                "keep the ledger consistent and source any real-world figure"
+            )
+        else:
+            flags.append("no verified claims yet — agent must add sourced claims")
     for claim in pack.claims:
         issues = _claim_issues(claim)
         if is_company_story(channel_mode):
@@ -33,7 +39,10 @@ def factcheck(
             flags.extend(f"{claim.claim_id}: {i}" for i in issues)
     if pack.claims and not pack.contradictions:
         flags.append("no contradictions listed — look harder before writing")
-    ok = bool(pack.claims) and not rejected
+    if is_wealth_pov(channel_mode) and not pack.claims:
+        ok = not rejected
+    else:
+        ok = bool(pack.claims) and not rejected
     return FactCheckReport(ok=ok, flags=flags, rejected_claim_ids=rejected)
 
 

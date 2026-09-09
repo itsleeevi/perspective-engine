@@ -14,7 +14,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 from channel.config import config_for_project, default_thumbnail_text
-from channel.modes import is_business, is_takeover
+from channel.modes import is_business, is_takeover, is_wealth_pov
 from channel.paths import ROOT, jobs_path
 from channel.prompts import strip_character_names
 from channel.schema import Scene, ScenePurpose, VideoProject
@@ -163,6 +163,12 @@ def short_thumbnail_prompt(project: VideoProject) -> str:
             "company symbol plus ONE competitor, flywheel, or before/after "
             "object. Clean high-contrast backdrop. Empty dark lower third of "
             "the frame for type added later. No photoreal logo lockup, no clutter."
+        )
+    elif is_wealth_pov(project.channel_mode):
+        framing = (
+            "Vertical 9:16 YouTube Shorts thumbnail. Large protagonist plus "
+            "ONE contrast object or choice. Full-color illustrated world. "
+            "Empty dark lower third for type added later. No stick-figure doodle."
         )
     elif is_business(project.channel_mode):
         framing = (
