@@ -21,9 +21,10 @@ HOW_THEY_TOOK_OVER_VISUAL_STYLE_LOCK = (
 )
 
 WEALTH_POV_VISUAL_STYLE_LOCK = (
-    "Detailed colored 2D narrative cartoon. Lived-in rooms, complete cartoon "
-    "bodies, muted natural colors, soft cel shading. Not stick-figure doodle, "
-    "not photoreal, not 3D, not anime, not empty paper silhouettes."
+    "Original detailed 2D narrative cartoon. Slightly enlarged heads with "
+    "complete natural bodies, muted colors, restrained cel shading, "
+    "pure-white protagonist skin, original stand-ins. Not stick-figure "
+    "doodle, not photoreal, not 3D, not anime, not empty paper silhouettes."
 )
 
 FORBIDDEN_VISUALS = (

@@ -30,6 +30,9 @@ _ALIASES = {
     "wpov": ChannelMode.wealth_pov,
     "pov_wealth": ChannelMode.wealth_pov,
     "longform_wealth_pov": ChannelMode.wealth_pov,
+    "life_pov": ChannelMode.wealth_pov,
+    "celebrity_pov": ChannelMode.wealth_pov,
+    "longform_life_pov": ChannelMode.wealth_pov,
 }
 
 
@@ -37,7 +40,8 @@ CHANNEL_FLAG_HELP = (
     "what_they_really_think (default), behind_the_business "
     "(How They Really Make Money; aliases: wtrt, btb, htrmm), "
     "how_they_took_over (aliases: htto, takeover), or "
-    "wealth_pov (Quiet Wealth; aliases: quiet_wealth, wpov, longform_wealth_pov)"
+    "wealth_pov (Quiet Wealth / life POV; aliases: quiet_wealth, wpov, "
+    "life_pov, celebrity_pov, longform_wealth_pov)"
 )
 
 

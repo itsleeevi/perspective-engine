@@ -25,8 +25,9 @@ def factcheck(
     if not pack.claims:
         if is_wealth_pov(channel_mode):
             flags.append(
-                "fictional Quiet Wealth episode — no documentary claims; "
-                "keep the ledger consistent and source any real-world figure"
+                "Quiet Wealth / life POV — no claims yet; "
+                "fiction needs a consistent ledger, a REAL_PERSON episode "
+                "needs sourced claims.json"
             )
         else:
             flags.append("no verified claims yet — agent must add sourced claims")

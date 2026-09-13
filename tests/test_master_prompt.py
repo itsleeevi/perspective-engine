@@ -40,7 +40,7 @@ def test_wealth_master_is_longform_pov():
     assert "Google Flow" in WEALTH_MASTER
     assert "batches of 20" in WEALTH_MASTER
     assert "not Midjourney" in WEALTH_MASTER
-    assert "4,500" in WEALTH_MASTER or "4500" in WEALTH_MASTER
+    assert "5,600" in WEALTH_MASTER or "5600" in WEALTH_MASTER
     assert "second-person" in WEALTH_MASTER.lower() or "second person" in WEALTH_MASTER.lower()
     assert "stick-figure doodle" in WEALTH_MASTER.lower()
     assert "wealth_pov" in WEALTH_MASTER

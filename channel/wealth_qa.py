@@ -43,8 +43,8 @@ def mechanical_wealth_qa(project: VideoProject) -> WealthQaReport:
     chapters = project.story.chapters
     if not (cfg.chapter_count_min <= len(chapters) <= cfg.chapter_count_max):
         notes.append(
-            f"{len(chapters)} chapters — Quiet Wealth uses "
-            f"{cfg.chapter_count_min} named levels"
+            f"{len(chapters)} eras — Quiet Wealth / life POV uses "
+            f"{cfg.chapter_count_min}–{cfg.chapter_count_max} substantial eras"
         )
         report.story_depth = min(report.story_depth, 5)
     names = [c.name.strip().lower() for c in chapters]
@@ -71,9 +71,12 @@ def mechanical_wealth_qa(project: VideoProject) -> WealthQaReport:
         if ctx.places:
             bits += 1
         report.ledger = min(10, 4 + bits)
-        if ctx.fictional is False and not project.research.claims:
-            notes.append("non-fiction episode has no sourced claims")
-            report.ledger = min(report.ledger, 4)
+        if ctx.life_mode == "REAL_PERSON" or ctx.fictional is False:
+            if not project.research.claims:
+                notes.append("REAL_PERSON episode has no sourced claims")
+                report.ledger = min(report.ledger, 4)
+            else:
+                report.ledger = max(report.ledger, 8)
 
     if project.story.title_payoff.strip() and project.story.title_payoff.lower().rstrip(
         "."

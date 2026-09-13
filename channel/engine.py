@@ -14,8 +14,8 @@ from pathlib import Path
 from channel.modes import ChannelMode
 
 VIDEO_ENGINE_VERSION = "2026.08.28"
-PROMPT_VERSION = "2026.09.09.wealth_pov"
-VISUAL_STYLE_VERSION = "2026.08.26"
+PROMPT_VERSION = "2026.09.13.wealth_pov_v13"
+VISUAL_STYLE_VERSION = "2026.09.13"
 
 # Documentary path only. Do not silently swap these.
 MODEL_LOCK = {

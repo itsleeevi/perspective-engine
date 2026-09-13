@@ -18,6 +18,21 @@ from channel.locks import (
     KOKORO_VOICE_LOCK,
     SHIPPED_STYLE_LOCK,
 )
+from channel.life_pov_blocks import (
+    DEFAULT_SPOKEN_WORD_MAX,
+    DEFAULT_SPOKEN_WORD_MIN,
+    ERA_COUNT_MAX,
+    ERA_COUNT_MIN,
+    FINISHING,
+    MAX_DURATION_SECONDS,
+    MIN_DURATION_SECONDS,
+    ORDINARY_SCENE_MAX_SECONDS,
+    ORDINARY_SCENE_MIN_SECONDS,
+    ORDINARY_SCENE_TARGET_SECONDS,
+    SKIN_LOCK_TEMPLATE,
+    STYLE_PEOPLE,
+    TARGET_DURATION_SECONDS,
+)
 from channel.modes import ChannelMode, parse_mode
 
 
@@ -207,29 +222,23 @@ HTTO_VISUAL_ACCENTS = (
 )
 
 WEALTH_POV_VISUAL_STYLE = (
-    "Original detailed 2D narrative cartoon illustration, full-bleed landscape "
-    "16:9, clean dark outlines, simplified expressive faces, complete natural "
-    "human proportions, softly shaded muted colors, warm everyday realism, "
-    "believable perspective, gently lit lived-in environment, clear foreground "
-    "and background separation, consistent illustrated storybook look. "
-    "FILL THE ENTIRE FRAME edge to edge, no letterbox, no pillarbox, no black "
-    "bars, no player controls, no rounded-frame corners. Keep the lower "
-    "subtitle area uncluttered but fully illustrated."
+    f"{STYLE_PEOPLE} {SKIN_LOCK_TEMPLATE} {FINISHING}"
 )
 
 WEALTH_POV_NEGATIVE_STYLE = (
-    "Keep the approved character design, location layout, and prop continuity; "
-    "fill the entire canvas edge to edge; keep the lower subtitle area "
-    "uncluttered but fully illustrated; no subtitles, caption text, watermark, "
-    "timestamp, player controls, browser interface, borders, rounded corners, "
-    "black silhouette characters, thin stick limbs, empty paper backgrounds, "
-    "photorealism, 3D rendering, anime, or stick-figure doodle construction."
+    "Original non-identifying cartoon stand-ins only; do not reproduce any "
+    "real person's face or likeness; no official club crests, logos, sponsor "
+    "marks, readable text, speech bubbles, subtitles, watermark, timestamp, "
+    "scene ID, player interface, caption bar, border, black silhouettes, "
+    "thin stick limbs, empty paper backgrounds, reserved subtitle space, "
+    "photorealism, 3D, anime, or stick-figure doodle construction."
 )
 
 WEALTH_YOUTUBE_DISCLOSURE = (
     "Illustrated story. Stills and narration are generated. "
-    "This episode is a fictional illustrative story unless the description "
-    "says otherwise. Not a photograph of any real person. "
+    "This episode is either a fictional illustrative story or an illustrated "
+    "second-person retelling that uses original cartoon stand-ins. "
+    "Not a photograph of any real person. Not archival evidence. "
     "Educational storytelling, not personalized financial advice."
 )
 
@@ -238,18 +247,18 @@ WEALTH_HOST_ATTRIBUTION = (
 )
 
 WEALTH_CHANNEL_ABOUT = (
-    "Quiet Wealth makes original illustrated stories that place you inside "
-    "ordinary money decisions and show how those choices change a life "
-    "over time.\n"
+    "Quiet Wealth makes original illustrated life journeys in second person. "
+    "A title may place you inside ordinary money decisions or inside a "
+    "sourced life, told with original cartoon stand-ins.\n"
     "\n"
-    "Each video starts from a POV title. Fresh story. Different architecture "
-    "every time. Original narration — not a rewritten article or a YouTube "
-    "transcript. Quiet wealth, social pressure, work, relationships, and "
-    "having more choice over your time.\n"
+    "Each video starts from a POV title. Fresh research for every real "
+    "claim. Different architecture every time. Original narration, not a "
+    "rewritten article or a YouTube transcript.\n"
     "\n"
     "Stories are fictional and illustrative unless a description says a "
-    "real life was researched. Not financial advice. Stills and voice are "
-    "generated; a person writes and reviews every cut.\n"
+    "real life was researched. Pictures are not archival evidence. Not "
+    "financial advice. Stills and voice are generated; a person writes "
+    "and reviews every cut.\n"
 )
 
 WEALTH_VISUAL_ACCENTS = (
@@ -510,18 +519,18 @@ WEALTH_POV = ChannelConfig(
     mode=ChannelMode.wealth_pov,
     name="Quiet Wealth",
     title_pattern="POV: You {choice}",
-    target_duration_seconds=1800,
-    min_duration_seconds=1680,
-    max_duration_seconds=1920,
-    spoken_wpm_min=150,
-    spoken_wpm_max=160,
-    # ~30 minutes at 150–160 wpm. Aim near 4,650 if pace is unknown.
-    narration_word_min=4500,
-    narration_word_max=4800,
-    narration_wpm=155,
-    min_scene_duration=8.0,
-    max_scene_duration=9.0,
-    visual_change_target_seconds=8.5,
+    target_duration_seconds=TARGET_DURATION_SECONDS,
+    min_duration_seconds=MIN_DURATION_SECONDS,
+    max_duration_seconds=MAX_DURATION_SECONDS,
+    spoken_wpm_min=165,
+    spoken_wpm_max=175,
+    # 32-36 minutes near 34 at a disclosed 165-175 wpm. Plan 5,600-5,800 words.
+    narration_word_min=DEFAULT_SPOKEN_WORD_MIN,
+    narration_word_max=DEFAULT_SPOKEN_WORD_MAX,
+    narration_wpm=170,
+    min_scene_duration=ORDINARY_SCENE_MIN_SECONDS,
+    max_scene_duration=ORDINARY_SCENE_MAX_SECONDS,
+    visual_change_target_seconds=ORDINARY_SCENE_TARGET_SECONDS,
     default_short_enabled=True,
     short_word_min=75,
     short_word_max=140,
@@ -531,8 +540,8 @@ WEALTH_POV = ChannelConfig(
     visual_style=WEALTH_POV_VISUAL_STYLE,
     negative_style=WEALTH_POV_NEGATIVE_STYLE,
     title_payoff_max_words=28,
-    chapter_count_min=6,
-    chapter_count_max=6,
+    chapter_count_min=ERA_COUNT_MIN,
+    chapter_count_max=ERA_COUNT_MAX,
     host_attribution=WEALTH_HOST_ATTRIBUTION,
     channel_about=WEALTH_CHANNEL_ABOUT,
     channel_handle="",

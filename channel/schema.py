@@ -462,9 +462,13 @@ class TakeoverQaReport(BaseModel):
 
 
 class WealthContext(BaseModel):
-    """Continuity ledger for a Quiet Wealth episode. Default is fiction."""
+    """Continuity ledger for a Quiet Wealth / life POV episode."""
 
     fictional: bool = True
+    life_mode: str = "FICTION"
+    start_age: str = ""
+    end_age: str = ""
+    fact_cutoff: str = ""
     protagonist_age_start: str = ""
     job: str = ""
     income_situation: str = ""
@@ -477,7 +481,7 @@ class WealthContext(BaseModel):
     relationship_thread: str = ""
     core_tension: str = ""
     ledger_notes: str = ""
-    assumed_wpm: int = 155
+    assumed_wpm: int = 170
     real_claims_note: str = ""
 
 

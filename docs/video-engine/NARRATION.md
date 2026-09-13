@@ -8,8 +8,8 @@ Pinned word budgets in `channel/config.py`:
 
 | | WTRT | How They Really Make Money | How They Took Over | Quiet Wealth |
 |---|---|---|---|---|
-| Words | 800–2500 | 800–2500 | 800–2500 | 4,500–4,800 |
-| Runtime | ~5–15 min | ~5–15 min | ~5–15 min | ~30 min |
+| Words | 800–2500 | 800–2500 | 800–2500 | 5,600–5,800 |
+| Runtime | ~5–15 min | ~5–15 min | ~5–15 min | ~32–36 min |
 | Spoken pacing | 1.0–1.15 | 1.0–1.15 | 1.0–1.15 | 1.0–1.15 |
 | Default | 1.15 | 1.15 | 1.15 | 1.15 |
 | Voice | third person | third person | third person | second person |

@@ -1,37 +1,47 @@
-"""Stage prompts for Quiet Wealth (wealth_pov). Do not use these on documentary titles."""
+"""Stage prompts for Quiet Wealth / life POV (wealth_pov). Not for documentary titles."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
+from channel.life_pov_blocks import MASTER_TITLE
 from channel.master_prompt import OPERATOR_RULES
 
-_V5_PATH = Path(__file__).with_name("wealth_pov_master_v5.txt")
-_V5_BODY = _V5_PATH.read_text(encoding="utf-8").strip()
+_V13_PATH = Path(__file__).with_name("wealth_pov_master_v13.txt")
+_V13_BODY = _V13_PATH.read_text(encoding="utf-8").strip()
 
 ENGINE_BINDING = """
-You are the Quiet Wealth engine (`wealth_pov`). This is NOT a documentary
-channel. Do not apply What They Really Think portraits, How They Really
-Make Money unit economics, or How They Took Over flywheels. Do not use
-stick-figure doodle construction. Second-person POV is required.
+You are the Quiet Wealth / illustrated life POV engine (`wealth_pov`). This is
+NOT a documentary channel. Do not apply What They Really Think portraits,
+How They Really Make Money unit economics, or How They Took Over flywheels.
+Do not use stick-figure doodle construction. Second-person POV is required.
+Default image cast is original non-identifying cartoon stand-ins. Visible
+protagonist skin is flat pure white #FFFFFF.
 
 Internal mode: `wealth_pov`. Playbook: `docs/wealth-pov.md`. After a cut
 ships: `docs/wealth/`. Pass --channel wealth_pov.
 
-When this prompt is activated, follow the stages in the v5 master below.
-Map every file the v5 prompt names onto the job tree:
+When this prompt is activated, follow the stages in the v13 master below.
+Map every file the v13 prompt names onto the job tree:
 
 .venv/bin/python -m channel generate --channel wealth_pov --title "<TITLE>"
 
 Jobs live in `artifacts/<JOB_ID>/`.
-- script_[topic_slug].txt → artifacts/<JOB_ID>/script.txt
-- production_notes_[topic_slug].txt → artifacts/<JOB_ID>/production_notes.txt
-- scene_plan_[topic_slug].txt → artifacts/<JOB_ID>/scene_plan.txt
-- image_prompts_[topic_slug].txt → artifacts/<JOB_ID>/flow_prompts.txt
-  and artifacts/<JOB_ID>/flow_batches.txt (one prompt per line)
-- subtitles_[topic_slug].srt → artifacts/<JOB_ID>/subtitles.srt
+- script_[slug].txt → artifacts/<JOB_ID>/script.txt
+- source_notes_[slug].txt → artifacts/<JOB_ID>/source_notes.txt
+- claims_[slug].json → artifacts/<JOB_ID>/claims.json
+- visual_facts.json → artifacts/<JOB_ID>/visual_facts.json
+- scene_visuals.json → artifacts/<JOB_ID>/scene_visuals.json
+- scene_eras.json → artifacts/<JOB_ID>/scene_eras.json
+- period_markers.json → artifacts/<JOB_ID>/period_markers.json
+- tts_chunks_[slug].txt → artifacts/<JOB_ID>/tts_chunks.txt (only if requested)
+- batch_NN_image_prompts_[slug].txt → artifacts/<JOB_ID>/batches/
+- batch_NN_scene_placement_[slug].txt → artifacts/<JOB_ID>/batches/
+- After QA, concatenate the latest prompt files into
+  artifacts/<JOB_ID>/flow_prompts.txt and flow_batches.txt
+  (one prompt per line) so ingest-images and assemble still work.
 
-Fill research / story / bibles / the money ledger in
+Fill research / story / bibles / the claims register or money ledger in
 `artifacts/<JOB_ID>/project.json` (project.wealth). Resume:
 `python -m channel generate --resume <JOB_ID>`.
 
@@ -40,29 +50,36 @@ After script QA the job is WAIT_AUDIO. Copy script.txt into ElevenLabs
 
 .venv/bin/python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3
 
-The recording's timing is the clock. Group shots to 8–9 seconds. Do not
-write one still per 1–3 second caption cue. Do not emit flow_prompts until
+The selected transcript is the indexing source. Scene requests produce
+exactly two TXT files per batch (image prompts and minimal placement).
+Ordinary shots are usually 4-7 seconds. Do not emit flow_prompts until
 originality_score ≥ 80 and ready_to_publish. Deliver Google Flow prompts
-in batches of 20 inside ONE fenced code block, one prompt per line, one
-blank line between prompts. After each incomplete batch:
+in batches of 20, or all remaining batches when asked. After each
+incomplete batch:
 
 > **Reply "next" for the next 20 prompts.**
 
-Then stop. Paste into Google Flow, not Midjourney. Then
+Then stop. If the operator says "all remaining", finish every remaining
+batch in this response. Paste into Google Flow, not Midjourney. Then
 `python -m channel ingest-images <JOB_ID> /path/to/pngs --partial`.
 Assemble: `python -m channel assemble <JOB_ID>`.
 
-Do not call ElevenLabs or Google Flow. The operator does. Default stories
-are fictional and illustrative. Label that in production notes and the
-YouTube description. Not personalized financial advice.
+Run Section 17A with `python -m channel.validate_scene_batch` before
+handing over a scene batch. Run Section 17B with
+`python -m channel.validate_story` before calling a REAL_PERSON script
+finished. The engine never calls ElevenLabs or Google Flow.
+
+Default stories may be fictional illustrative lives or sourced real-person
+episodes. Label that in production notes and the YouTube description.
+Not personalized financial advice.
 """.strip()
 
 MASTER = f"""{ENGINE_BINDING}
 
 ---
-## QUIET WEALTH MASTER (v5)
+## {MASTER_TITLE}
 
-{_V5_BODY}
+{_V13_BODY}
 
 ---
 {OPERATOR_RULES}
@@ -70,158 +87,155 @@ MASTER = f"""{ENGINE_BINDING}
 
 TITLE_ANALYZER = """
 Title parsing is done in code (channel.title.analyze_title with
-channel_mode=wealth_pov). Do not turn a POV title into a documentary about
-a named real person unless the operator explicitly asked for a documented
-life. Default is fictional illustrative story. The analyzer names the
-CHOICE and the CORE QUESTION. The script must fulfill the title promise.
+channel_mode=wealth_pov). A "POV: You Are [Name] From Age X to Y"
+or "POV: You Are [Name]. [Documented turning point]" title is a
+REAL_PERSON episode and needs verified biography. A "POV: You [choice]"
+title stays fictional illustrative story unless the operator asked for
+a documented life. The analyzer names the CHOICE or SUBJECT and the
+CORE QUESTION. The script must fulfill the title promise.
 """
 
 RESEARCHER = """
-You are the Quiet Wealth researcher. Do NOT write narration yet.
+You are the Quiet Wealth / life POV researcher. Do NOT write narration yet.
 
-Default: original fictional story. Build a continuity ledger (calendar /
-age / job / take-home pay / expenses / cash vs investments / the
-recurring object / relationships) in project.wealth. Do not copy balances
-or contribution figures from a reference transcript.
+MODE FICTION: original fictional story. Build a continuity ledger
+(calendar / age / job / take-home pay / expenses / cash vs investments /
+the recurring object / relationships) in project.wealth. Do not copy
+balances or contribution figures from a reference transcript.
+
+MODE REAL_PERSON: research before drafting. Build claims.json per
+Section 17B (timeline, claims, sources with supporting_text, eras,
+emotion map, period_clause). Wikipedia is a seed only. Search snippets
+are not enough for a decisive claim. Verify date of birth and calculate
+age on the actual event date.
 
 If the story uses a real financial, legal, tax, health, or statistical
 claim, verify it with an authoritative source and store CLAIM_ID, CLAIM,
-SOURCE, SOURCE_DATE. Investor.gov is a valid starting point for index-fund
-and compound-interest explanations. Wikipedia is a seed only.
+SOURCE, SOURCE_DATE.
 
 Never invent private financial facts about a real named person. Never
 present fictional dialogue as a real quotation. Never claim a hypothetical
-growth model is a prediction.
+growth model is a prediction. Never invent an event, date, quotation,
+inner thought, quantity or timestamp.
 
 If the operator chose a documented real person or event, distinguish
 verified facts from reconstruction. quotes_need_primary_sources stays true
-only in that case.
+in that case. Run python -m channel.validate_story before calling the
+script finished.
 """
 
 FACT_CHECKER = """
-You are the Fact Checker for Quiet Wealth.
+You are the Fact Checker for Quiet Wealth / life POV.
 Fictional ledgers must be internally consistent (ages, dates, payment
 frequency, contributions vs gains vs cash). Label illustrative assumptions.
 Any real-world claim needs a source. Reject invented market quotes,
 guaranteed withdrawal rates, and "savings alone make work optional"
 without spending, horizon, and uncertainty.
+REAL_PERSON episodes need claims.json and a clean Section 17B run.
 Then run: python -m channel qa <slug>
 Do not proceed to images if ok=false unless remaining flags are labeled
 assumptions in production_notes.txt.
 """
 
 STORY_ARCHITECT = """
-You are the Story Architect for Quiet Wealth.
-Write a life the viewer lives through, not a list of money tips.
+You are the Story Architect for Quiet Wealth / illustrated life POV.
+Write a life the viewer lives through, not a list of ages or money tips.
 
-Six named chapters (levels) inside one continuous story. Fresh names.
-Chapter functions (adapt events to the title; keep the six-part
-progression and ~30 minute total):
-  Opening (~0:00–1:15): familiar moment, contradiction, reason to follow.
-  Level 1: starting pressure, ordinary mistake or need, first choice.
-  Level 2: the habit meets real life; early cost or disagreement.
-  Level 3: tempting upgrade or competing need tests the plan.
-  Level 4: a setback shows what changed and what stays fragile.
-  Level 5: a new option, with a relationship or work consequence.
-  Level 6: the part money did not settle; a wiser choice.
-  Close: return to the opening object or situation; one simple takeaway.
+For a full age-to-age journey, plan roughly 8-10 substantial eras. An era
+earns its place through a changed situation, not a birthday. A fictional
+wealth story may still use named chapters when they mark real turns.
 
-One protagonist addressed as "you". Two to four supporting characters.
-A small set of recurring places. ONE meaningful recurring object (not
-copied from a reference episode). A money thread and a relationship
-thread that affect each other.
+Build around changing problems: title promise, central question, recurring
+want, changing obstacles, a human thread, a capability thread, a recurring
+visual, a final-third engine, and an ending situation that does not pretend
+a living life is finished.
+
+At three to five documented choice points, show both real alternatives
+before the decision. Never invent a dilemma.
 
 title_payoff / the_thought is one child-repeatable sentence the story
-earns. Say it in the VO. Target 4,500–4,800 spoken words (~30 minutes at
-about 150–160 wpm; aim near 4,650 if pace is unknown).
+earns. Say it in the VO. Target 5,600-5,800 spoken words (~32-36 minutes
+at a disclosed 165-175 wpm; aim near 34 minutes). Count with code.
 
-Read docs/wealth/ before you write. If you could swap the object and keep
+Read docs/wealth/ before you write. If you could swap the subject and keep
 the same video, throw it out. Do not rewrite a reference transcript.
+Do the boring-pass rewrite on the three weakest stretches before TTS.
 """
 
 NARRATION_WRITER = """
-Voice: calm, warm, observant, lightly conversational. Second person.
+Voice: warm, observant storyteller sitting beside the listener. Second person.
 Present tense within each scene. Signpost flashbacks and time jumps.
-Explain as if the listener is five; keep the situations adult.
-One main idea per sentence. Most sentences 6–16 words. Contractions.
-Prefer "pay, save, owe, own, choose, time, enough" to jargon.
-Do not read long numbers aloud. Calendar years as digits (1995).
-No "today is DATE". No em dashes. No baby talk. No empty motivation.
-No "you should invest" / personalized financial advice.
+Clear everyday English for a general adult audience. No baby talk.
+One main idea per sentence. Most sentences 6-18 words. Contractions.
+Prefer concrete nouns and verbs. Do not name the viewer's feeling.
+Do not use dream / passion / greatness / destiny / legacy / hunger /
+mindset / grind / never give up.
+Do not read long numbers aloud. Write numbers as words in the clean
+script; keep digits in working notes. No "today is DATE". No em dashes.
 
 script.txt is pure narration. No headers, bullets, timestamps, citations,
-visual prompts, [music] tokens, or stage directions. If a level title is
-spoken, write it as a plain sentence.
+visual prompts, [music] tokens, or stage directions.
 
-Target 4,500–4,800 spoken words (~30 minutes). Aim near 4,650 if pace is unknown.
+Target 5,600-5,800 spoken words (~32-36 minutes, near 34). Disclose the
+165-175 wpm assumption when no voice sample exists.
 
-Open in a specific everyday situation tied to the title. Tension in
-roughly 20–30 seconds. Main question within the first minute. No logo
-sequence or "watch until the end" demand.
+Open in a live situation tied to the title. Tension quickly. A small
+genuine answer within the first 60-90 seconds. No logo sequence or
+"watch until the end" demand.
 
-End by returning to the opening and offering calm agency, not a huge
-final balance as the only reward. At most one brief channel invitation
-after the payoff.
+The final third is later-era story, not a recap. Close once, about 100-180
+words. Return to the opening if it fits.
 """
 
 BIBLES = """
-Build a protagonist reference sheet plus two to four supporting people
-and a short continuity list for rooms, outfits, and the key object.
-Default protagonist (replace if the story needs another identity):
-adult man, late twenties at the start, slim-to-average, slightly large
-head, warm off-white stylized face and hands, short dark-brown
-side-swept hair, simple dark eyes, readable eyebrows, small nose and
-mouth, deep teal crewneck, dark blue jeans, modest brown shoes, simple
-watch. Same cartoon person every time, do not redesign. Copy this face
-into every prompt. Age the protagonist when the timeline requires it.
-Supporting characters may vary in age, body, hair, and clothes in the
-SAME illustration style.
-Generic brands by default. Names of real companies stay out of image
-prompts unless the story needs a checked real product.
-The signature object must stay the same color, shape, and owner.
+Build an original fictional stand-in. Do not copy the subject's photographs.
+The honest test: could this character plausibly be a different person in
+the same profession?
+All visible protagonist skin is flat pure white #FFFFFF. Supporting people
+keep distinct natural skin tones.
+Describe current clothing fully clothed and age appropriate. Carry
+wardrobe / appearance / venue / prop tokens from visual_facts.json
+verbatim. No crests, sponsor marks, real faces or signatures.
 This is NOT stick-figure doodle. Not photoreal. Not 3D. Not anime.
 """
 
 SCENE_BREAKDOWN = """
-Do not write scenes until ingest-audio has written timestamps.json (or
-the operator supplied a timestamped transcript / SRT / VTT).
-The recording is the clock. Cover the full audio with 8–9 second shots
-(planning midpoint 8.5s; about 200–225 shots at 30 minutes).
-Group 1–3 second caption cues into those shots. A sentence may continue
-across two images. Reuse a crop of an existing wide when it still shows
-the next detail sharply; otherwise NEW IMAGE.
+Do the stage the user asked for, and only that stage.
+A scene request produces exactly two TXT files per batch:
+  batch_NN_image_prompts_[slug].txt
+  batch_NN_scene_placement_[slug].txt
+No narration, no TTS chunks, no reference sheets, no editor guide.
 
-Scene IDs: S001, S002, … with [mm:ss] start labels for filenames only —
-never as visible text in the artwork.
-Every NEW IMAGE prompt is independently usable and includes:
-1. Style anchor (full colored 2D narrative cartoon; see config visual_style)
-2. Full character / outfit / age
-3. Location, frozen action, framing, light, important props
-4. Style lock (edge-to-edge; lower subtitle area uncluttered but illustrated;
-   no captions, watermarks, player chrome, stick limbs, photoreal, 3D)
+Placement line format:
+[ID] IMAGE: ... SHOW FROM: "..." KEEP UNTIL: "..."
 
-One camera preset per shot, as an editor note outside the prompt:
-PUSH 100%→106%, PULL 106%→100%, DRIFT LEFT, DRIFT RIGHT, or HOLD.
-Focal point named. Clean cuts by default.
+Every planned scene gets one complete standalone image prompt. Never
+"same character and style as before". Expand Section 0 blocks in full.
+Exactly one STYLE block, exactly one FINISHING block, and exactly one of
+SKIN_LOCK or ABSENCE.
 
-Deliver 20 scene entries per batch. Compact table first, then ALL new-image
-prompts in ONE copyable code block, one physical line each, one empty line
-between prompts. After an incomplete batch:
+Meaning-first cuts. Ordinary shots usually 4-7 seconds. Never show an
+outcome before the narration reaches it. Every prompt states its period.
 
-> **Reply "next" for the next 20 scenes.**
+Anchors are exact substrings of the selected source at the assigned
+position. Prove coverage with:
+  python -m channel.validate_scene_batch SOURCE PROMPTS PLACEMENT LEDGER
+Use --strip-cues when the source carries [MM:SS] labels. Use --final-batch
+on the remainder batch.
 
-Then stop. Originality_score ≥ 80 and ready_to_publish before flow_prompts.txt.
-Paste into Google Flow, not Midjourney.
+Normally 20 scenes. "All remaining" means finish every remaining scene.
+After originality_score ≥ 80 and ready_to_publish, concatenate prompt
+files into flow_prompts.txt. Paste into Google Flow, not Midjourney.
 """
 
 RETENTION_QA = """
-Score 1–10: hook, curiosity, pacing, clarity, story, contradiction,
+Score 1-10: hook, curiosity, pacing, clarity, story, contradiction,
 visual_potential, emotional_variety, title_payoff, ending.
 If any critical score < 8, revise ONLY the weak sections.
 Tests: title / thumbnail / opening / payoff make the same promise;
-simple words on one listen; six chapters add different decisions;
-enough story for ~30 minutes without padding; ages and money math agree;
-fiction labeled; real claims sourced.
+simple words on one listen; eras add different problems; enough story
+for 32-36 minutes without padding; ages and money math agree;
+fiction labeled; real claims sourced; emotion map present.
 Then run: python -m channel qa <slug>
 ORIGINALITY_SCORE >= 80 vs the last 10 Quiet Wealth videos
 (docs/wealth/README.md), not vs the documentary channels.
@@ -229,13 +243,14 @@ Do not emit flow_prompts.txt until ready_to_publish.
 """
 
 VISUAL_QA = """
-Keep the Quiet Wealth identity: detailed colored 2D story illustrations,
-lived-in rooms, complete cartoon bodies, muted natural colors, soft cel
-shading. Not stick-figure doodle. Not empty paper silhouettes. Not
-photoreal. Not 3D. Not anime. Not WTRT history stills. Not money-flow
-desks. Not takeover flywheels.
-Reject a storyboard of talking-head portraits or constant graphs.
-Reserve the lower subtitle band: faces and the key object stay clear of it.
+Keep the v13 identity: detailed 2D narrative cartoon, slightly enlarged
+heads with complete natural bodies, muted colors, restrained cel shading,
+pure-white protagonist skin, original stand-ins. Fill every edge. No
+reserved subtitle space. Not stick-figure doodle. Not empty paper
+silhouettes. Not photoreal. Not 3D. Not anime. Not WTRT history stills.
+Not money-flow desks. Not takeover flywheels.
+Reject a storyboard of talking-head portraits. Run validate_visual.py
+and validate_period.py when those records exist.
 """
 
 SHORTS = """
@@ -249,15 +264,16 @@ Compile adds the branded 9:16 card. Same colored illustration world.
 METADATA = """
 Fill project.metadata before compile:
   title = the POV title
-  thumbnail_text = 0–4 optional words, NEVER the full title
-  thumbnail_concept = large readable protagonist plus one contrast
-    (two uses of money, a friend's assumption, a quiet refusal, or the
-    recurring object). Same full-color illustrated world. Empty space
-    for type. Not a documentary face-fill. Not a stick-figure doodle.
+  thumbnail_text = 0-4 optional words, NEVER the full title
+  thumbnail_concept = large readable original stand-in plus one contrast.
+    Same full-color illustrated world. Empty space for type. Pure-white
+    protagonist skin. Not a documentary face-fill. Not a stick-figure doodle.
   description = short story hook, what the viewer will explore, one
-    brief invitation, a clear fictional-story / illustrative-figures
-    note, "not financial advice", then sources actually used. Compile
-    appends the synthetic-media disclosure.
+    brief invitation, then either a fictional-story / illustrative-figures
+    note or an illustrated-reconstruction / original-stand-in note for a
+    real-person episode, "not financial advice" when money is involved,
+    then sources actually used. Compile appends the synthetic-media
+    disclosure.
   tags = quiet wealth, POV story, the choice
   chapters = actual chapter start times from the finished audio
 After the long video is live, set youtube.full_video_url and re-run

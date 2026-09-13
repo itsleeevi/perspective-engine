@@ -38,10 +38,11 @@ STAGING_QUALITY = (
 )
 
 WEALTH_STAGING_QUALITY = (
-    "ONE idea in the frame. Show the current choice, object, or reaction. "
-    "Lived-in room or street filling the canvas. Named lighting. Faces, hands, "
-    "and the key object stay clear of the lower subtitle band. Recurring people "
-    "keep the same face, hair, and outfit unless the scene names a change. "
+    "ONE idea in the frame. One frozen moment. Show the current choice, "
+    "object, or reaction. Fill every edge, including the bottom; no reserved "
+    "subtitle space. Named lighting. Recurring people keep the same original "
+    "stand-in face, hair, and outfit unless the scene names a change. "
+    "Protagonist skin is flat pure white #FFFFFF. Carry the era period clause. "
     "No graphs unless the story truly needs one large simple label added later. "
     "No stick-figure doodle. No empty paper. No photoreal. No 3D."
 )

@@ -1,0 +1,16 @@
+{
+  "notes": "Rough defaults for validate_period.py. Verify and extend per episode. Year is when the object became ordinary in a typical setting, not the invention year.",
+  "markers": {
+    "smartphone": {"ordinary_from": 2008, "obsolete_after": null},
+    "mobile phone": {"ordinary_from": 1998, "obsolete_after": null},
+    "flat screen": {"ordinary_from": 2006, "obsolete_after": null},
+    "led perimeter": {"ordinary_from": 2007, "obsolete_after": null},
+    "tablet": {"ordinary_from": 2011, "obsolete_after": null},
+    "smartwatch": {"ordinary_from": 2015, "obsolete_after": null},
+    "boxy television": {"ordinary_from": 1970, "obsolete_after": 2010},
+    "cassette player": {"ordinary_from": 1979, "obsolete_after": 2005},
+    "chalkboard": {"ordinary_from": 1900, "obsolete_after": 2015},
+    "phone booth": {"ordinary_from": 1950, "obsolete_after": 2012},
+    "crt monitor": {"ordinary_from": 1980, "obsolete_after": 2008}
+  }
+}

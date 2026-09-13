@@ -81,8 +81,17 @@ def _init(args: argparse.Namespace) -> int:
             current_position=analysis.dominant_position,
         )
     elif mode is ChannelMode.wealth_pov:
+        documented = analysis.category == "documented life"
+        ages = (
+            analysis.time_period.replace("age ", "").split(" to ")
+            if analysis.time_period.startswith("age ")
+            else ["", ""]
+        )
         wealth = WealthContext(
-            fictional=True,
+            fictional=not documented,
+            life_mode="REAL_PERSON" if documented else "FICTION",
+            start_age=ages[0] if len(ages) == 2 else "",
+            end_age=ages[1] if len(ages) == 2 else "",
             core_tension=analysis.core_question,
             starting_problem=analysis.subject,
         )
@@ -151,7 +160,7 @@ def _score_title(args: argparse.Namespace) -> int:
                     "channel_mode": mode.value,
                     "core_question": analysis.core_question,
                     "fictional_default": True,
-                    "note": "Quiet Wealth scores the title by whether the promised choice can sustain ~30 minutes.",
+                    "note": "Quiet Wealth / life POV scores the title by whether the promised span can sustain 32-36 minutes.",
                 },
                 indent=2,
             )
@@ -177,7 +186,7 @@ def _suggest_titles(args: argparse.Namespace) -> int:
                     "POV: You Stopped Trying to Look Successful",
                     "POV: You Built Wealth Quietly. Your Friends Read It All Wrong",
                     "POV: You Could Afford the Upgrade. You Chose Your Time Instead",
-                    "POV: You Finally Had Enough Money. Saying Yes Was Still Hard",
+                    "POV: You Are [Name] From Age 13 to 36",
                     "POV: You Turned Down the Raise Everyone Else Wanted",
                 ],
                 indent=2,
@@ -547,6 +556,21 @@ def _generate(args: argparse.Namespace) -> int:
     return run_generate(args)
 
 
+def _validate_scenes(args: argparse.Namespace) -> int:
+    from channel.validate_scene_batch import main as validate_main
+
+    argv = [args.source, args.prompts, args.placement, args.ledger]
+    if args.strip_cues:
+        argv.append("--strip-cues")
+    if args.final_batch:
+        argv.append("--final-batch")
+    if args.banned:
+        argv.extend(["--banned", args.banned])
+    if args.batch_size != 20:
+        argv.extend(["--batch-size", str(args.batch_size)])
+    return validate_main(argv)
+
+
 def _cloud_readiness(args: argparse.Namespace) -> int:
     from channel.readiness import check_readiness, print_readiness
 
@@ -735,6 +759,20 @@ def main(argv: list[str] | None = None) -> int:
         help="do not burn subtitles (default for drop-folder cuts)",
     )
     asm.set_defaults(func=_assemble)
+
+    vs = sub.add_parser(
+        "validate-scenes",
+        help="Section 17A mechanical checks for a life-POV scene batch",
+    )
+    vs.add_argument("source")
+    vs.add_argument("prompts")
+    vs.add_argument("placement")
+    vs.add_argument("ledger")
+    vs.add_argument("--strip-cues", action="store_true")
+    vs.add_argument("--final-batch", action="store_true")
+    vs.add_argument("--banned", default="")
+    vs.add_argument("--batch-size", type=int, default=20)
+    vs.set_defaults(func=_validate_scenes)
 
     ready = sub.add_parser("cloud-readiness", help="verify a fresh clone can generate")
     ready.add_argument("--strict", action="store_true", help="fail if ffmpeg is missing")

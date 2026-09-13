@@ -3,9 +3,10 @@
 The workflow is the same everywhere (script file → imported audio →
 timestamped stills in batches of 20 → metadata). Stick-figure doodle
 construction is shared on the documentary channels. Quiet Wealth
-(`wealth_pov`) uses detailed colored 2D story illustrations and
-second-person narration instead. Do not import 2nd-person explainer
-voice onto the documentary channels.
+(`wealth_pov`) uses the v13 illustrated celebrity and life POV master
+(detailed 2D narrative cartoon, original stand-ins, second-person
+narration) instead. Do not import 2nd-person explainer voice onto the
+documentary channels.
 """
 
 from __future__ import annotations

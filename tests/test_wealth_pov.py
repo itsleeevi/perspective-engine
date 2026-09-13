@@ -25,16 +25,16 @@ def test_wealth_config_is_a_fourth_channel():
     cfg = config_for("wealth_pov")
     assert cfg is WEALTH_POV
     assert cfg.name == "Quiet Wealth"
-    assert cfg.target_duration_seconds == 1800
-    assert cfg.min_duration_seconds == 1680
-    assert cfg.max_duration_seconds == 1920
-    assert cfg.narration_word_min == 4500
-    assert cfg.narration_word_max == 4800
-    assert cfg.min_scene_duration == 8.0
-    assert cfg.max_scene_duration == 9.0
-    assert cfg.visual_change_target_seconds == 8.5
-    assert cfg.chapter_count_min == 6
-    assert cfg.chapter_count_max == 6
+    assert cfg.target_duration_seconds == 2040
+    assert cfg.min_duration_seconds == 1800
+    assert cfg.max_duration_seconds == 2160
+    assert cfg.narration_word_min == 5600
+    assert cfg.narration_word_max == 5800
+    assert cfg.min_scene_duration == 4.0
+    assert cfg.max_scene_duration == 7.0
+    assert cfg.visual_change_target_seconds == 5.5
+    assert cfg.chapter_count_min == 8
+    assert cfg.chapter_count_max == 10
     assert cfg.kokoro_speed == 1.15
     assert cfg.kokoro_speed >= KOKORO_SPEED_MIN
     assert cfg.kokoro_speed <= KOKORO_SPEED_MAX
@@ -54,6 +54,8 @@ def test_parse_mode_includes_wealth():
     assert parse_mode("quiet_wealth") is ChannelMode.wealth_pov
     assert parse_mode("wpov") is ChannelMode.wealth_pov
     assert parse_mode("longform_wealth_pov") is ChannelMode.wealth_pov
+    assert parse_mode("life_pov") is ChannelMode.wealth_pov
+    assert parse_mode("celebrity_pov") is ChannelMode.wealth_pov
     assert parse_mode("htto") is ChannelMode.how_they_took_over
     assert parse_mode("btb") is ChannelMode.behind_the_business
     assert parse_mode("wtrt") is ChannelMode.what_they_really_think
@@ -120,13 +122,23 @@ def test_pov_title_without_mode_hints_wealth():
         analyze_title("POV: You Stopped Trying to Look Successful")
 
 
-def test_prompts_are_the_v5_master():
+def test_prompts_are_the_v13_master():
     prompts = stage_prompts_for("wealth_pov")
-    assert "LONG-FORM ILLUSTRATED WEALTH POV MASTER PROMPT v5" in prompts.MASTER
-    assert prompts.MASTER.startswith("You are the Quiet Wealth engine")
-    assert "4,500" in prompts.NARRATION_WRITER
+    assert "LONG-FORM ILLUSTRATED CELEBRITY & LIFE POV MASTER PROMPT v13" in prompts.MASTER
+    assert prompts.MASTER.startswith("You are the Quiet Wealth / illustrated life POV engine")
+    assert "5,600" in prompts.NARRATION_WRITER
     assert "second person" in prompts.NARRATION_WRITER.lower()
     assert "NOT stick-figure" in prompts.BIBLES
+    assert "#FFFFFF" in prompts.MASTER
+
+
+def test_documented_life_title():
+    a = analyze_wealth_title("POV: You Are Cristiano Ronaldo From Age 13 to 41")
+    assert a.category == "documented life"
+    assert a.subject == "Cristiano Ronaldo"
+    assert a.target == "age 13 to 41"
+    assert a.quotes_need_primary_sources is True
+    assert a.subject_status.value == "living"
 
 
 def test_wealth_smoke_job(tmp_path):

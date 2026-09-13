@@ -7,13 +7,13 @@ alwaysApply: true
 
 Use the frozen style in `channel/config.py` for the selected mode. Do not rewrite it per scene.
 
-WTRT = muted historical stick-figure doodle. Money = high-contrast business stick-figure doodle. Takeover = energetic strategic stick-figure doodle. Quiet Wealth (`wealth_pov`) = detailed colored 2D story illustration (complete cartoon bodies, lived-in rooms) — not stick-figure doodle.
+WTRT = muted historical stick-figure doodle. Money = high-contrast business stick-figure doodle. Takeover = energetic strategic stick-figure doodle. Quiet Wealth (`wealth_pov`) = detailed 2D narrative cartoon (slightly enlarged heads, complete natural bodies, muted colors, restrained cel shading, original stand-ins, protagonist skin flat pure white #FFFFFF) — not stick-figure doodle. Fill every edge; no reserved subtitle space.
 
 Not photoreal, not 3D, not anime. Historical names and company names stay out of image prompts (`channel/prompts.py`).
 
 Never put a company or person name in a still **filename** — the model will paint the word onto the picture. HITL stills use index + timestamp (`000_00-00-04.png`). Drop-folder stills use a bracket clock (`[00-00]_….jpg`). Hashed `generate_filename` tokens stay as aliases.
 
-Named public figures must be a recognizable cartoon of the real person drawn as that stick-figure doodle. Reuse `channel/character_locks.json` and pass the hashed photo plus sheet in `channel/character_sheets/` as Google Flow references.
+On documentary channels, named public figures must be a recognizable cartoon of the real person drawn as that stick-figure doodle. Reuse `channel/character_locks.json` and pass the hashed photo plus sheet in `channel/character_sheets/` as Google Flow references. Quiet Wealth uses original non-identifying stand-ins instead; do not copy a subject's photographs into the design.
 
 Every still: one idea, one oversized focal object, named lighting, unique staging (`docs/video-engine/QUALITY_BAR.md` / `channel/quality_bar.py`). No filing-table wallpaper.
 

@@ -7,7 +7,7 @@ alwaysApply: true
 
 This repo's **production videos** are the `channel/` documentary engine, not `graph/` `ideate`. A title naming a real person belongs on `python -m channel generate`, never the LangGraph topic flow.
 
-Canonical command: `python -m channel generate --channel <mode> --title "<title>"`. Drop-folder cut: `python -m channel drop --channel <mode> --title "<title>"` then assemble. Jobs live in `artifacts/<JOB_ID>/`. Specs: `docs/video-engine/`. Operator loop is the **master prompt** (`channel/master_prompt.py` / `MASTER`): same stages on every channel, DNA customized per mode. Quiet Wealth uses the v5 master in `channel/wealth_prompts.py`. Copy the grammar in `docs/video-engine/QUALITY_BAR.md`; never clone a reference-cut spine. Quiet Wealth still grammar is in `docs/wealth-pov.md`.
+Canonical command: `python -m channel generate --channel <mode> --title "<title>"`. Drop-folder cut: `python -m channel drop --channel <mode> --title "<title>"` then assemble. Jobs live in `artifacts/<JOB_ID>/`. Specs: `docs/video-engine/`. Operator loop is the **master prompt** (`channel/master_prompt.py` / `MASTER`): same stages on every channel, DNA customized per mode. Quiet Wealth uses the v13 celebrity and life POV master in `channel/wealth_prompts.py`. Copy the grammar in `docs/video-engine/QUALITY_BAR.md`; never clone a reference-cut spine. Quiet Wealth still grammar is in `docs/wealth-pov.md`.
 
 ```text
 DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.

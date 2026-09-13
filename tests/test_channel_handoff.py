@@ -96,7 +96,7 @@ def test_wealth_playbook_exists():
     assert index.is_file()
     text = playbook.read_text(encoding="utf-8")
     assert "wealth_pov" in text
-    assert "4,500–4,800" in text
+    assert "5,600–5,800" in text
 
 
 def test_wealth_readme_lists_every_page():

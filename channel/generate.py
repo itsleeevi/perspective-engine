@@ -106,8 +106,13 @@ def _new_project(
             current_position=analysis.dominant_position,
         )
     elif mode.value == "wealth_pov":
+        documented = analysis.category == "documented life"
+        ages = analysis.time_period.replace("age ", "").split(" to ") if analysis.time_period.startswith("age ") else ["", ""]
         wealth = WealthContext(
-            fictional=True,
+            fictional=not documented,
+            life_mode="REAL_PERSON" if documented else "FICTION",
+            start_age=ages[0] if len(ages) == 2 else "",
+            end_age=ages[1] if len(ages) == 2 else "",
             core_tension=analysis.core_question,
             starting_problem=analysis.subject,
         )
@@ -157,6 +162,8 @@ def _smoke_story(project: VideoProject) -> None:
                 Chapter(name="The Upgrade", purpose=ScenePurpose.escalation, narration=body),
                 Chapter(name="The Setback", purpose=ScenePurpose.contradiction, narration=body),
                 Chapter(name="New Room", purpose=ScenePurpose.reveal, narration=body),
+                Chapter(name="The Cost", purpose=ScenePurpose.escalation, narration=body),
+                Chapter(name="Later Years", purpose=ScenePurpose.reveal, narration=body),
                 Chapter(
                     name="What Money Missed",
                     purpose=ScenePurpose.resolution,

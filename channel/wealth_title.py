@@ -12,6 +12,16 @@ from channel.takeover_title import looks_like_takeover
 
 _POV = re.compile(r"^POV:\s*(.+)$", re.IGNORECASE)
 _YOU = re.compile(r"^You\s+(.+)$", re.IGNORECASE)
+_YOU_ARE_AGE = re.compile(
+    r"^You Are\s+(.+?)\s+From Age\s+(\d+)\s+to\s+(\d+)\s*$",
+    re.IGNORECASE,
+)
+_YOU_ARE_TURN = re.compile(
+    r"^You Are\s+([A-Z][\w.'-]+(?:\s+[A-Z][\w.'-]+)+)\.\s+(.+)$",
+)
+_YOU_ARE_NAME = re.compile(
+    r"^You Are\s+([A-Z][\w.'-]+(?:\s+[A-Z][\w.'-]+)+)\s*$",
+)
 _EVERYONE = re.compile(
     r"^Everyone Thinks You(?:'re| are)\s+(.+?)(?:,|\.)?\s*"
     r"but You(?:'re| are)\s+(.+)$",
@@ -73,6 +83,86 @@ def analyze_wealth_title(
 
     everyone = _EVERYONE.match(body)
     you = _YOU.match(body)
+    if _YOU_ARE_AGE.match(body):
+        m = _YOU_ARE_AGE.match(body)
+        assert m is not None
+        subject = m.group(1).strip()
+        start_age, end_age = m.group(2), m.group(3)
+        target = f"age {start_age} to {end_age}"
+        question = (
+            f"What happens when you live {subject}'s documented years "
+            f"from age {start_age} to {end_age}?"
+        )
+        return TitleAnalysis(
+            title=raw,
+            subject=subject,
+            target=target,
+            verb=None,
+            subject_status=SubjectStatus.living,
+            category="documented life",
+            relationship_type="sourced biography with original stand-in pictures",
+            time_period=f"age {start_age} to {end_age}",
+            core_question=question,
+            research_priority="high",
+            quotes_need_primary_sources=True,
+            target_kind="wealth_pov",
+            special_instructions=special_instructions,
+            target_duration_seconds=target_duration_seconds
+            or cfg.target_duration_seconds,
+            channel_mode=ChannelMode.wealth_pov,
+            company="",
+            industry="",
+            business_question="",
+            apparent_business="",
+            potential_hidden_engine="",
+            customer="",
+            likely_revenue_streams=[],
+            business_model_complexity="",
+            arena="",
+            starting_position="",
+            dominant_position="",
+            likely_turning_points=[],
+            potential_competitors=[],
+            possible_hidden_advantage="",
+        )
+    if _YOU_ARE_TURN.match(body) or _YOU_ARE_NAME.match(body):
+        turn = _YOU_ARE_TURN.match(body)
+        named = _YOU_ARE_NAME.match(body)
+        subject = (turn.group(1) if turn else named.group(1) if named else body).strip()
+        target = turn.group(2).strip().rstrip(".") if turn else "the documented turning point"
+        question = f"What happens when you live through {subject}'s documented {target}?"
+        return TitleAnalysis(
+            title=raw,
+            subject=subject,
+            target=target,
+            verb=None,
+            subject_status=SubjectStatus.living,
+            category="documented life",
+            relationship_type="sourced biography with original stand-in pictures",
+            time_period="unknown until researched",
+            core_question=question,
+            research_priority="high",
+            quotes_need_primary_sources=True,
+            target_kind="wealth_pov",
+            special_instructions=special_instructions,
+            target_duration_seconds=target_duration_seconds
+            or cfg.target_duration_seconds,
+            channel_mode=ChannelMode.wealth_pov,
+            company="",
+            industry="",
+            business_question="",
+            apparent_business="",
+            potential_hidden_engine="",
+            customer="",
+            likely_revenue_streams=[],
+            business_model_complexity="",
+            arena="",
+            starting_position="",
+            dominant_position="",
+            likely_turning_points=[],
+            potential_competitors=[],
+            possible_hidden_advantage="",
+        )
     if everyone:
         appearance = everyone.group(1).strip().rstrip(".")
         reality = everyone.group(2).strip().rstrip(".")
