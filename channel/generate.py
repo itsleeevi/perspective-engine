@@ -49,7 +49,7 @@ NEXT_STEPS = (
     "Fill research.claims from primary sources. Do not invent numbers or quotes.",
     "python -m channel generate --resume {job_id}   # after research/story/narration exist",
     "python -m channel qa is also available on --resume once the project is filled.",
-    "After SCRIPT_QA_PASSED: copy script.txt into ElevenLabs. Then ingest-audio. Do not write scenes yet.",
+    "After SCRIPT_QA_PASSED: python -m channel tts {job_id} (Gemini 3.1 Flash TTS) or ingest-audio. Do not write scenes yet.",
     "Do not emit flow_prompts until originality_score >= 80 and ready_to_publish.",
     "Paste flow_prompts.txt into Google Flow. Then ingest-images. Then assemble.",
     IMAGE_FILENAME_RULE,
@@ -350,7 +350,14 @@ def resume_job(
     artifacts_root: Path | None = None,
     force: bool = False,
     stubs: bool = False,
+    auto_tts: bool | None = None,
 ) -> GenerationManifest:
+    from channel.gemini_tts import (
+        GeminiTtsError,
+        auto_tts_enabled,
+        prepare_job_chunks,
+        synthesize_job,
+    )
     from channel.ingest import find_voiceover, images_complete, ingest_audio
 
     root = artifacts_root or ARTIFACTS
@@ -421,13 +428,35 @@ def resume_job(
         ts_path = dest / "timestamps.json"
 
     if not ts_path.is_file():
+        try:
+            prepare_job_chunks(job_id, artifacts_root=root)
+            manifest.paths["tts_chunks"] = str(dest / "tts_chunks.txt")
+        except (GeminiTtsError, FileNotFoundError, OSError) as exc:
+            manifest.warnings.append(f"tts chunks: {exc}")
+        if auto_tts_enabled(
+            auto_tts=auto_tts,
+            smoke_test=bool(manifest.smoke_test),
+            stubs=stubs,
+        ):
+            try:
+                tts = synthesize_job(job_id, artifacts_root=root)
+                ingest_audio(job_id, Path(tts["concat"]), artifacts_root=root)
+                manifest = load_manifest(job_id, root=root)
+                project = load_project(path)
+                ts_path = dest / "timestamps.json"
+            except GeminiTtsError as exc:
+                manifest.warnings.append(str(exc))
+
+    if not ts_path.is_file():
         if project.scenes and not stubs:
             manifest.warnings.append(
                 "scenes before audio — ingest the voiceover first; pause table owns scene cuts"
             )
         manifest.state = JobState.wait_audio
         manifest.notes = [
-            f"Copy {dest / 'script.txt'} into ElevenLabs, then: "
+            f"Gemini TTS: python -m channel tts {job_id}  "
+            f"(needs GEMINI_API_KEY; writes tts_chunks.txt + audio/chunks/)",
+            f"Or copy {dest / 'script.txt'} into ElevenLabs, then: "
             f"python -m channel ingest-audio {job_id} /path/to/voiceover.mp3",
             *[step.format(job_id=job_id) for step in NEXT_STEPS],
         ]
@@ -487,6 +516,7 @@ def run_generate(args: Any) -> int:
             artifacts_root=root,
             force=bool(getattr(args, "force", False)),
             stubs=bool(getattr(args, "stubs", False)),
+            auto_tts=False if getattr(args, "no_tts", False) else None,
         )
     else:
         title = args.title

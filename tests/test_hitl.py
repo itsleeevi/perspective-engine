@@ -101,7 +101,9 @@ def test_resume_stops_at_wait_audio(tmp_path: Path):
     assert second.state is JobState.wait_audio
     assert (dest / "OPERATOR.md").is_file()
     assert "ingest-audio" in (dest / "OPERATOR.md").read_text()
+    assert "python -m channel tts" in (dest / "OPERATOR.md").read_text()
     assert (dest / "script.txt").is_file()
+    assert (dest / "tts_chunks.txt").is_file()
     spec = json.loads(
         (dest / "fixtures" / "video_specs" / "nvidia-took-over-ai.json").read_text()
     )

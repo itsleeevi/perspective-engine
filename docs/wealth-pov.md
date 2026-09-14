@@ -78,7 +78,7 @@ Prove anchors with `python -m channel validate-scenes SOURCE PROMPTS PLACEMENT L
  2. .venv/bin/python -m channel generate --channel wealth_pov --title "<POV title>"
  3. Fill project.wealth (ledger or claims.json) and script.txt (~5,600–5,800 words).
  4. python -m channel qa <JOB_ID>
- 5. WAIT_AUDIO — copy script.txt into ElevenLabs. ingest-audio.
+ 5. WAIT_AUDIO — `python -m channel tts` (Gemini 3.1 Flash TTS) or copy script.txt into ElevenLabs. ingest-audio.
  6. Map the selected transcript with meaning-first 4–7 second shots. Two-file
     batches of 20 (Reply "next", or all remaining). originality_score ≥ 80 first.
  7. ingest-images, then assemble. Drop-folder cuts assemble without burned captions.

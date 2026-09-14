@@ -1,6 +1,6 @@
 # How They Really Make Money — production system
 
-This is the playbook for the YouTube channel **How They Really Make Money** (`@HowTheyReallyMakeMoney`). Internal mode stays `behind_the_business`. It reuses the shared `channel/` video engine (research tools, imported audio, Google Flow stills, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think with different titles.
+This is the playbook for the YouTube channel **How They Really Make Money** (`@HowTheyReallyMakeMoney`). Internal mode stays `behind_the_business`. It reuses the shared `channel/` video engine (research tools, Gemini TTS or imported audio, Google Flow stills, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think with different titles.
 
 Read this fully before starting a business cut. After a cut ships, update `docs/business/<slug>.md` and `docs/business/README.md`.
 
@@ -56,7 +56,7 @@ Find one central surprising question. Research verifies the answer. The title an
 ## Length and voice
 
 - Target about **10 minutes** (300–960 seconds). Prefer a dense 8 minutes to a padded 15.
-- Spoken pacing **1.0–1.15** equivalent (imported VO). New jobs use imported audio; shipped recuts may still use Kokoro `am_liam`.
+- Spoken pacing **1.0–1.15** equivalent (imported VO). New jobs use Gemini 3.1 Flash TTS when `GEMINI_API_KEY` is set, else imported audio; shipped recuts may still use Kokoro `am_liam`.
 - Script **800–2500 words** so the cut lands ~5–15 minutes.
 - Still duration follows the pause table from `ingest-audio`, or the `[00-00]` filename clock on a drop-folder cut (`python -m channel drop`). Drop-folder cuts assemble without burned captions.
 - Voice: a smart friend explaining why a company works so a five-year-old can follow while watching. Tiny words. Cause, then effect. Funny when the evidence is funny. One idea at a time. Short spoken sentences. **Do not read long numbers** aloud — round to a sayable figure. Exact digits stay in claims. Not an MBA lecture, not financial TV, not TikTok hype.

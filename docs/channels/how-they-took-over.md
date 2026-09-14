@@ -21,7 +21,7 @@ People who already know the name and want the rise, the war, and the moment of s
 | Runtime | **~5–15 minutes** (prefer ~8–12; 300–960s, target 600) |
 | Script | **800–2500** words |
 | Spoken pace | 145–155 wpm; Kokoro **1.15** (never below **1.0** on a new title) |
-| Voice | Kokoro `am_liam` (roster may rotate) |
+| Voice | Gemini 3.1 Flash TTS (`python -m channel tts`); imported audio if no key; Kokoro `am_liam` on recuts |
 | Padding | Prefer a dense 8 minutes to a padded 15 |
 
 ## Narration personality

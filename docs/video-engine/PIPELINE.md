@@ -7,7 +7,7 @@ generate
   → FACT_CHECKED (`qa`)
   → STORY_PLANNED / SCRIPTED (agent, channel prompts)
   → SCRIPT_QA_PASSED
-  → WAIT_AUDIO (operator copies script.txt into ElevenLabs)
+  → WAIT_AUDIO (python -m channel tts, or operator ingest-audio)
   → ingest-audio → PAUSES_DETECTED
   → SCENES_PROMPTED (1:1 with pause timestamps)
   → flow_prompts (only if originality_score ≥ 80 and ready_to_publish)
@@ -45,6 +45,8 @@ artifacts/<JOB_ID>/
   story.json
   company.json
   script.txt
+  tts_chunks.txt
+  audio/chunks/          # 000.wav + 000.txt per narration chunk
   timestamps.json
   transcript.txt
   flow_prompts.txt
@@ -69,10 +71,10 @@ Stills use index + timestamp filenames (`000_00-00-00.png`). Drop-folder stills 
 .venv/bin/python -m channel generate --resume <JOB_ID>
 ```
 
-Re-reads `project.json`. Stops at `WAIT_AUDIO` or `WAIT_IMAGES` until operator files exist. Does not invent WPM scene chunks. Prints `OPERATOR.md`.
+Re-reads `project.json`. Stops at `WAIT_AUDIO` or `WAIT_IMAGES` until operator files exist, unless `GEMINI_API_KEY` is set — then `--resume` runs `python -m channel tts` and ingest-audio. Does not invent WPM scene chunks. Prints `OPERATOR.md`.
 
 `--force` compiles even when monetization is not ready (still do not emit `flow_prompts` unless `ready_to_publish`).
 
 ## What the agent still does
 
-Cursor Grok is the researcher, story writer, and scene-prompt writer **after** pauses exist. Code does title parse, factcheck, originality, pause detect, drop-folder ingest, compile, YouTube pack, FFmpeg. The operator generates VO and stills outside the engine. Drop-folder cuts (`python -m channel drop`) assemble filename-clock stills without burned captions. Do not invent a third workflow.
+Cursor Grok is the researcher, story writer, and scene-prompt writer **after** pauses exist. Code does title parse, factcheck, originality, Gemini TTS, pause detect, drop-folder ingest, compile, YouTube pack, FFmpeg. The operator generates stills in Google Flow. Voice is Gemini 3.1 Flash TTS when `GEMINI_API_KEY` is set, otherwise imported audio. Drop-folder cuts (`python -m channel drop`) assemble filename-clock stills without burned captions. Do not invent a third workflow.

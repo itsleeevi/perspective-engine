@@ -12,12 +12,12 @@ This is the path that ships What They Really Think, How They Really Make Money, 
 
 | Role | Locked choice | Why |
 |---|---|---|
-| Stills | Cursor Grok **GenerateImage** | Fill-frame 2D cinema stills with hashed filenames; public-figure cartoons via `channel/character_locks.json` + sheets. |
-| Voice | **Kokoro only** (`am_liam` / roster) | Local, free, locked speeds (new titles 1.0–1.15, Costco 0.92). |
+| Stills | Operator **Google Flow** ingest | Fill-frame 2D cinema stills; public-figure cartoons via `channel/character_locks.json` + sheets. |
+| Voice | **Gemini 3.1 Flash TTS** (`gemini-3.1-flash-tts-preview`, Charon) | Named engine TTS via `python -m channel tts`. Operator imported audio if `GEMINI_API_KEY` is missing. Shipped recuts may still use Kokoro `am_liam`. |
 | Assemble | FFmpeg (`scripts/run_custom_video.py`, `scripts/run_short.py`) | Whisper-aligned still slideshow, 3840×2160 long / 1080×1920 Shorts. |
 | Research seed | Wikipedia + agent primary sources | Seed only; claims keep `claim_id` and source dates. |
 
-Missing Kokoro or GenerateImage is a **hard stop**. Do not fall back to fal.ai images, OpenAI image APIs, Edge TTS, ElevenLabs, or Chatterbox on this path. Documentary generation does not read `FAL_KEY` or `ELEVENLABS_API_KEY`.
+Missing Google Flow stills is a **hard stop**. Missing Gemini TTS is `WAIT_AUDIO`, not a swap to Edge, ElevenLabs, or Kokoro. Do not fall back to fal.ai images, OpenAI image APIs, Edge TTS, ElevenLabs, or Chatterbox on this path. Documentary generation does not read `FAL_KEY` or `ELEVENLABS_API_KEY`. Gemini TTS reads `GEMINI_API_KEY`.
 
 Specs: [`docs/video-engine/`](video-engine/), [`docs/video-engine/NARRATION.md`](video-engine/NARRATION.md), [`docs/video-engine/VISUAL_STYLE.md`](video-engine/VISUAL_STYLE.md).
 

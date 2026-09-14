@@ -17,6 +17,7 @@ Subcommands:
     youtube        write description, tags, 1280×720 + 9:16 Shorts thumbs
     branding       size a profile (800×800) and cover (2560×1440) for YouTube
     generate       isolated job under artifacts/<job_id>/ (canonical Cloud command)
+    tts            Gemini 3.1 Flash TTS → audio/chunks + ingest-audio
     drop           create a drop folder for timestamped stills + narration audio
     cloud-readiness check configs, prompts, rules, writable artifacts
 """
@@ -228,14 +229,14 @@ Style, voice, and QA rules live in `channel/config.py` — do not copy a person 
 1. Researcher — {prompts.RESEARCHER.strip().splitlines()[0]}
 2. Fact check + originality + monetization — `python -m channel qa {slug}`
 3. Story architect, bibles, narration ({cfg.narration_word_min}–{cfg.narration_word_max} words)
-4. Copy `script.txt` into ElevenLabs. `python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3`
+4. `python -m channel tts <JOB_ID>` (Gemini 3.1 Flash TTS) or copy `script.txt` into ElevenLabs then `python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3`
 5. Scene breakdown 1:1 with `timestamps.json` (SCENE_BREAKDOWN). Do not use `channel chunks` as the clock.
 6. `python -m channel generate --resume <JOB_ID>` writes `flow_prompts.txt` after originality_score >= 80 and ready_to_publish
 7. Paste `flow_prompts.txt` into Google Flow. `python -m channel ingest-images <JOB_ID> /path/to/pngs --partial`
 8. `python -m channel assemble <JOB_ID>` then `python -m channel youtube {slug}`
 9. Update `{docs}`
 
-Voice is operator-imported audio. The engine does not call ElevenLabs or Kokoro on new jobs. Shipped recuts may still use Kokoro.
+Voice on new jobs is Gemini 3.1 Flash TTS (`python -m channel tts`) when GEMINI_API_KEY is set, else operator-imported audio. The engine does not call ElevenLabs or Kokoro on new jobs. Shipped recuts may still use Kokoro.
 Images are operator-imported Google Flow stills. Do not invent quotes or numbers.
 """
 
@@ -454,6 +455,39 @@ def _branding(args: argparse.Namespace) -> int:
     print(f"about: {copy['about']}")
     if copy["handle"].is_file():
         print(f"handle: {copy['handle']}")
+    return 0
+
+
+def _tts(args: argparse.Namespace) -> int:
+    from channel.gemini_tts import GEMINI_TTS_MODEL, GEMINI_TTS_VOICE, GeminiTtsError, synthesize_job
+    from channel.ingest import ingest_audio
+    from channel.job import ARTIFACTS
+
+    root = Path(args.artifacts) if args.artifacts else ARTIFACTS
+    try:
+        result = synthesize_job(
+            args.job_id,
+            artifacts_root=root,
+            voice=args.voice or GEMINI_TTS_VOICE,
+            model=args.model or GEMINI_TTS_MODEL,
+            audio_tags=bool(args.audio_tags),
+            force=bool(args.force),
+            only_index=args.chunk,
+            chunks_only=bool(args.chunks_only),
+        )
+    except GeminiTtsError as exc:
+        print(str(exc))
+        return 1
+    print(json.dumps(result, indent=2))
+    print(f"tts_chunks: {root / args.job_id / 'tts_chunks.txt'}")
+    print(f"chunks: {root / args.job_id / 'audio' / 'chunks'}")
+    if result.get("chunks_only") or args.no_ingest:
+        return 0
+    concat = Path(result["concat"])
+    table = ingest_audio(args.job_id, concat, artifacts_root=root, pause_ms=args.pause_ms)
+    print(json.dumps({"job_id": args.job_id, "scene_count": table["scene_count"]}, indent=2))
+    print(f"timestamps: {root / args.job_id / 'timestamps.json'}")
+    print("state: PAUSES_DETECTED")
     return 0
 
 
@@ -709,8 +743,41 @@ def main(argv: list[str] | None = None) -> int:
     gen.add_argument("--smoke-test", action="store_true")
     gen.add_argument("--stubs", action="store_true")
     gen.add_argument("--force", action="store_true")
+    gen.add_argument(
+        "--no-tts",
+        action="store_true",
+        help="do not call Gemini TTS on resume even if GEMINI_API_KEY is set",
+    )
     gen.add_argument("--artifacts", default="", help="override artifacts root (tests)")
     gen.set_defaults(func=_generate)
+
+    tts = sub.add_parser(
+        "tts",
+        help="synthesize script.txt with Gemini 3.1 Flash TTS and save narration chunks",
+    )
+    tts.add_argument("job_id")
+    tts.add_argument("--artifacts", default="")
+    tts.add_argument("--voice", default="", help="prebuilt Gemini voice (default Charon)")
+    tts.add_argument("--model", default="", help="default gemini-3.1-flash-tts-preview")
+    tts.add_argument(
+        "--audio-tags",
+        action="store_true",
+        help="allow inline audio tags (off by default — they can leak into the transcript)",
+    )
+    tts.add_argument("--force", action="store_true", help="regenerate existing chunk wavs")
+    tts.add_argument("--chunk", type=int, default=None, help="regenerate one 0-based chunk index")
+    tts.add_argument(
+        "--chunks-only",
+        action="store_true",
+        help="write tts_chunks.txt and per-chunk transcripts without calling the API",
+    )
+    tts.add_argument(
+        "--no-ingest",
+        action="store_true",
+        help="save chunk wavs without running ingest-audio",
+    )
+    tts.add_argument("--pause-ms", dest="pause_ms", type=int, default=280)
+    tts.set_defaults(func=_tts)
 
     inga = sub.add_parser("ingest-audio", help="import operator voiceover and detect pause scenes")
     inga.add_argument("job_id")

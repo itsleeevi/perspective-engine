@@ -12,9 +12,9 @@ Sacred for every video on every channel:
 - **Unique scenes and diagrams** built around that company's actual business (or that title's actual evidence).
 - Plus the existing **unique story engine** — if you could swap the names and keep the same video, throw it out.
 
-The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → `script.txt` → imported audio → pause scenes → Google Flow stills → FFmpeg.
+The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → `script.txt` → Gemini TTS or imported audio → pause scenes → Google Flow stills → FFmpeg.
 
-The **master prompt** (`channel/master_prompt.py`, exported as `MASTER` on each channel module) is the staged operator loop: title → research → `script.txt` → `WAIT_AUDIO` → timestamps → Flow prompts in batches of 20 (**Reply "next"**) → YouTube metadata. Documentary shared look is **stick-figure doodle**; customize mood and story DNA per channel. Quiet Wealth (`docs/wealth-pov.md`) uses detailed colored 2D illustrations and second person instead. Do not import 2nd-person explainer voice onto the documentary channels.
+The **master prompt** (`channel/master_prompt.py`, exported as `MASTER` on each channel module) is the staged operator loop: title → research → `script.txt` → `WAIT_AUDIO` (`python -m channel tts` or ingest-audio) → timestamps → Flow prompts in batches of 20 (**Reply "next"**) → YouTube metadata. Documentary shared look is **stick-figure doodle**; customize mood and story DNA per channel. Quiet Wealth (`docs/wealth-pov.md`) uses detailed colored 2D illustrations and second person instead. Do not import 2nd-person explainer voice onto the documentary channels.
 
 ## The only required input
 
@@ -108,7 +108,8 @@ Research through the day you are writing so the facts are current. **Do not say 
 | `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 pause timestamps, prop/set economy, stock-AI language. |
 | `scripts/lint_originality.py` | Compare this title to the last 10 shipped videos. |
 | Google Flow (operator) | Stills. Paste `flow_prompts.txt`. Engine never calls Flow. |
-| Imported audio (operator) | Narration. Copy `script.txt` into ElevenLabs (or any TTS). Engine never calls ElevenLabs. Shipped recuts may still use Kokoro `am_liam`. |
+| Gemini 3.1 Flash TTS | Narration on new jobs when `GEMINI_API_KEY` is set. `python -m channel tts` calls `gemini-3.1-flash-tts-preview`, saves `tts_chunks.txt` + `audio/chunks/`, then ingest-audio. |
+| Imported audio (operator) | Fallback narration if the Gemini key is missing. Copy `script.txt` into ElevenLabs (or any TTS). Engine never calls ElevenLabs. Shipped recuts may still use Kokoro `am_liam`. |
 | `python -m channel assemble` | Drop-folder filename clocks, or pause-timed still holds, + mux imported VO. Drop-folder cuts assemble without burned captions. |
 
 ```text
@@ -120,7 +121,7 @@ TITLE
   → ORIGINALITY CHECK vs last 10 videos
   → NARRATION (`script.txt`)
   → FACT CHECK
-  → WAIT_AUDIO (operator ElevenLabs → ingest-audio)
+  → WAIT_AUDIO (python -m channel tts → ingest-audio, or operator import)
   → PAUSE DETECT (whisper / ffmpeg)
   → CHARACTER / LOCATION BIBLES + SCENE GENERATION (1:1 with pauses)
   → flow_prompts (only if originality_score ≥ 80 and ready_to_publish)
@@ -180,8 +181,9 @@ TITLE + DROP FOLDER
     Never a generic clerk.
 
  7. .venv/bin/python -m channel generate --resume <JOB_ID>
-    After narration QA the job is WAIT_AUDIO. Copy script.txt into ElevenLabs.
-    python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3
+    After narration QA the job is WAIT_AUDIO. python -m channel tts <JOB_ID>
+    (gemini-3.1-flash-tts-preview) when GEMINI_API_KEY is set. Otherwise copy
+    script.txt into ElevenLabs. python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3
 
     8. Fill scenes 1:1 with timestamps.json / transcript.txt (SCENE_BREAKDOWN).
     Deliver Google Flow prompts in batches of 20. Wait for **Reply "next"**
@@ -253,9 +255,9 @@ TITLE + DROP FOLDER
 
 Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About Y"` (defaults to `init`).
 
-## Voice (imported audio, in sync)
+## Voice (Gemini TTS + imported audio, in sync)
 
-- **Engine:** operator-imported audio. Copy `script.txt` into ElevenLabs (or any TTS). The engine never calls ElevenLabs, Edge, or Kokoro on new jobs. Scene cuts come from pauses (`ingest-audio`, default 280ms). Shipped recuts may still use Kokoro `am_liam` at **1.0–1.15** (default **1.15**). **800–2500 words lands near 5–15 minutes.** Shipped older cuts may stay near 8 minutes or the old 20–25 minute budget — do not rewrite them to the new length.
+- **Engine:** Gemini 3.1 Flash TTS (`python -m channel tts`, model `gemini-3.1-flash-tts-preview`, voice Charon) when `GEMINI_API_KEY` is set. Chunks are saved under `tts_chunks.txt` and `audio/chunks/`. `--resume` runs that automatically. If the key is missing, operator-imported audio still works — copy `script.txt` into ElevenLabs (or any TTS). The engine never calls ElevenLabs, Edge, or Kokoro on new jobs. Scene cuts come from pauses (`ingest-audio`, default 280ms). Shipped recuts may still use Kokoro `am_liam` at **1.0–1.15** (default **1.15**). **800–2500 words lands near 5–15 minutes.** Shipped older cuts may stay near 8 minutes or the old 20–25 minute budget — do not rewrite them to the new length.
 - **Length:** new long cuts are **5–15 minutes**. Do not pad a lecture. Add a unique engine, more sourced reversals, and more places. Still duration is the pause interval, not a guessed 4–8 second WPM chunk.
 - **Captions:** generate-path stills may burn a stylish lower-third of that scene's line. Drop-folder cuts assemble without burned captions. Continuous imported VO has no silent chapter cards. Spec field `burn_captions` (default on for generate / compile; false for `python -m channel drop`). Lines must wrap inside the frame — never shear a last line off the left or right. On 9:16 Shorts the caption sits in the **YouTube safe band** (above the like / title / music chrome, inside the side rails). Write short spoken sentences so a caption is two readable lines, not one overflowing paragraph.
 - **Years:** write `1995` in the fixture and on-screen caption. Never spell the year.

@@ -21,7 +21,7 @@ People who already use the company and want the hidden economics, not a founder 
 | Runtime | ~5–15 minutes (ideal ~10; 300–960s, target 600) |
 | Script | **800–2500** words |
 | Spoken pace | 145–155 wpm written; Kokoro **1.15** (never below **1.0** on a new title) |
-| Voice | Kokoro `am_liam` (roster may rotate) |
+| Voice | Gemini 3.1 Flash TTS (`python -m channel tts`); imported audio if no key; Kokoro `am_liam` on recuts |
 | Costco lock | Kokoro **0.92** — do not recut unless asked |
 
 ## Narration personality

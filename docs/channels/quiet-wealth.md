@@ -21,7 +21,7 @@ Adults who want a long illustrated journey with specific stakes, not a list of a
 | Runtime | **32–36 minutes** near 34 (1800–2160s, target 2040) |
 | Script | **5,600–5,800** words |
 | Spoken pace | 165–175 wpm when no sample exists |
-| Voice | imported audio; Kokoro `am_liam` 1.15 on recuts |
+| Voice | Gemini 3.1 Flash TTS (`python -m channel tts`); imported audio if no key; Kokoro `am_liam` 1.15 on recuts |
 | Chapters | 8–10 substantial eras |
 | Shots | meaning-first; ordinary stills 4–7 seconds |
 

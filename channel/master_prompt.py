@@ -205,9 +205,21 @@ Then STORY_ARCHITECT + NARRATION_WRITER.
 
 Resume so the job writes script.txt and enters WAIT_AUDIO.
 
-Output the video title as a plain heading. Point at script.txt. Then exactly:
+If GEMINI_API_KEY is set, synthesize with Gemini 3.1 Flash TTS and save
+narration chunks, then ingest-audio:
 
-> **Your script is ready.** Download / copy `artifacts/<JOB_ID>/script.txt`, then paste its text into ElevenLabs (or your voiceover tool) to generate audio.
+`.venv/bin/python -m channel tts <JOB_ID>`
+
+`--resume` does the same automatically when the key is present. Chunks land
+in `artifacts/<JOB_ID>/tts_chunks.txt` and `audio/chunks/`. Audio tags stay
+off unless the operator passes `--audio-tags`.
+
+If the key is missing, imported audio still works. Output the video title as
+a plain heading. Point at script.txt. Then exactly:
+
+> **Your script is ready.** `python -m channel tts <JOB_ID>` when GEMINI_API_KEY
+> is set. Otherwise download / copy `artifacts/<JOB_ID>/script.txt`, then paste
+> its text into ElevenLabs (or your voiceover tool) to generate audio.
 >
 > Drop the file in `artifacts/<JOB_ID>/audio/` as `voiceover.mp3` (wav/m4a also fine), then:
 >

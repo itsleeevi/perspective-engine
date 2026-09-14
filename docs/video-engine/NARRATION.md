@@ -1,6 +1,8 @@
 # Narration
 
-Provider on **new jobs** is **imported audio**. Copy `script.txt` into ElevenLabs (or any TTS). The engine never calls ElevenLabs, Edge, or Kokoro on this path. Missing operator audio is a wait state (`WAIT_AUDIO`), not a fallback.
+Provider on **new jobs** is Gemini 3.1 Flash TTS (`python -m channel tts`, model `gemini-3.1-flash-tts-preview`, voice Charon) when `GEMINI_API_KEY` is set. The engine writes `tts_chunks.txt` and `audio/chunks/*.wav`, concatenates them, then runs ingest-audio. `--resume` does the same automatically. Audio tags stay off unless `--audio-tags`.
+
+If the key is missing, **imported audio** still works: copy `script.txt` into ElevenLabs (or any TTS). The engine never calls ElevenLabs, Edge, or Kokoro on this path. Missing audio is a wait state (`WAIT_AUDIO`), not a fallback to another TTS.
 
 Shipped recuts whose spec still says `voice: kokoro` keep Kokoro (`KOKORO_LOCK` in `channel/engine.py`). Default speaker `am_liam`.
 

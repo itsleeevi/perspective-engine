@@ -26,6 +26,8 @@ REQUIRED_PHRASES = (
     "flow_prompts",
     "Google Flow",
     "imported audio",
+    "gemini-3.1-flash-tts-preview",
+    "python -m channel tts",
     "Watch the full video:",
     "synthetic-media",
     "800–2500",

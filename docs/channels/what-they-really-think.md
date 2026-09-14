@@ -21,7 +21,7 @@ People who click a mystery-opinion title and want a blunt cartoon-clear story an
 | Runtime | ~5–15 minutes (300–960s, target 600) |
 | Script | **800–2500** words |
 | Spoken pace | write 145–155 wpm; Kokoro **1.15** (never below **1.0** on a new title) |
-| Voice | Kokoro `am_liam` (roster may rotate `am_michael` / `am_fenrir`) |
+| Voice | Gemini 3.1 Flash TTS (`python -m channel tts`); imported audio if no key; Kokoro `am_liam` on recuts |
 | Stills | new composition every 4–8 seconds (target 6.5s) |
 
 ## Narration personality

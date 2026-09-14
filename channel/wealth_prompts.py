@@ -34,7 +34,8 @@ Jobs live in `artifacts/<JOB_ID>/`.
 - scene_visuals.json → artifacts/<JOB_ID>/scene_visuals.json
 - scene_eras.json → artifacts/<JOB_ID>/scene_eras.json
 - period_markers.json → artifacts/<JOB_ID>/period_markers.json
-- tts_chunks_[slug].txt → artifacts/<JOB_ID>/tts_chunks.txt (only if requested)
+- tts_chunks_[slug].txt → artifacts/<JOB_ID>/tts_chunks.txt
+  (python -m channel tts writes this plus audio/chunks/)
 - batch_NN_image_prompts_[slug].txt → artifacts/<JOB_ID>/batches/
 - batch_NN_scene_placement_[slug].txt → artifacts/<JOB_ID>/batches/
 - After QA, concatenate the latest prompt files into
@@ -45,8 +46,14 @@ Fill research / story / bibles / the claims register or money ledger in
 `artifacts/<JOB_ID>/project.json` (project.wealth). Resume:
 `python -m channel generate --resume <JOB_ID>`.
 
-After script QA the job is WAIT_AUDIO. Copy script.txt into ElevenLabs
-(or any TTS). Then:
+After script QA the job is WAIT_AUDIO. If GEMINI_API_KEY is set:
+
+.venv/bin/python -m channel tts <JOB_ID>
+
+That calls gemini-3.1-flash-tts-preview, saves narration chunks under
+audio/chunks/, concatenates them, then ingest-audio. `--resume` does the
+same automatically when the key is present. If the key is missing, copy
+script.txt into ElevenLabs (or any TTS). Then:
 
 .venv/bin/python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3
 
@@ -67,7 +74,9 @@ Assemble: `python -m channel assemble <JOB_ID>`.
 Run Section 17A with `python -m channel.validate_scene_batch` before
 handing over a scene batch. Run Section 17B with
 `python -m channel.validate_story` before calling a REAL_PERSON script
-finished. The engine never calls ElevenLabs or Google Flow.
+finished. Voice is Gemini 3.1 Flash TTS (`python -m channel tts`) when
+GEMINI_API_KEY is set; otherwise imported audio. The engine never calls
+ElevenLabs or Google Flow.
 
 Default stories may be fictional illustrative lives or sourced real-person
 episodes. Label that in production notes and the YouTube description.

@@ -157,7 +157,8 @@ Controlled drama: let events do the work. Never invent quotes.
 Dates only when they matter ("In September 1939", not the 17th of…).
 Calendar years are digits in the written line (1995, 1983, 2011), never
 "nineteen ninety-five". Captions burn the digits. The operator TTS says the year.
-After SCRIPT_QA_PASSED, stop. Copy script.txt into ElevenLabs. Do not write
+After SCRIPT_QA_PASSED, stop. python -m channel tts when GEMINI_API_KEY is
+set, or copy script.txt into ElevenLabs then ingest-audio. Do not write
 scenes until timestamps.json exists.
 Open loops: question → answer → new question.
 

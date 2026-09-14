@@ -512,11 +512,11 @@ Preserve the user's active model and voice. The established model is gemini-3.1-
 
 Checked 13 September 2026: that model string is live on the Gemini API, the documented feature set includes steerable natural-language prompts and expressive inline audio tags, and Charon is one of the published voice names. Treat this stamp as perishable. Re-check before repeating any of it as current, and never state a capability, price, limit or voice list from memory alone.
 
-The engine never calls Gemini, ElevenLabs or any TTS API. The operator does.
+The engine calls gemini-3.1-flash-tts-preview through `python -m channel tts` when GEMINI_API_KEY is set, and saves narration chunks under artifacts/<JOB_ID>/tts_chunks.txt plus audio/chunks/. `--resume` does the same automatically when the key is present. It never calls ElevenLabs, Edge, or Kokoro on this path. Operator ingest-audio still works without the key.
 
 Maintain:
 1. script_[slug].txt: approved clean spoken words.
-2. tts_chunks_[slug].txt: only when requested, performance prompts using exactly those words.
+2. tts_chunks_[slug].txt: performance prompts using exactly those words. The engine writes artifacts/<JOB_ID>/tts_chunks.txt and audio/chunks/ via python -m channel tts.
 
 Keep one fixed original narrator name, register, language, accent and close, dry recording character. If a voice has not been chosen, Charon may be used provisionally, with a short audition before locking it. Do not call a voice objectively best.
 

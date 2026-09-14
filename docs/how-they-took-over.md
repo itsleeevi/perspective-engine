@@ -1,6 +1,6 @@
 # How They Took Over — production system
 
-This is the playbook for the YouTube channel **How They Took Over** (`@HowTheyTookOver`). Internal mode is `how_they_took_over`. It reuses the shared `channel/` video engine (research tools, imported audio, Google Flow stills, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think and **not** How They Really Make Money with different titles.
+This is the playbook for the YouTube channel **How They Took Over** (`@HowTheyTookOver`). Internal mode is `how_they_took_over`. It reuses the shared `channel/` video engine (research tools, Gemini TTS or imported audio, Google Flow stills, assemble, originality, Shorts, YouTube pack). It is **not** What They Really Think and **not** How They Really Make Money with different titles.
 
 Read this fully before starting a takeover cut. After a cut ships, update `docs/takeover/<slug>.md` and `docs/takeover/README.md`.
 
@@ -69,7 +69,7 @@ Titles do **not** have to be "How X Took Over Y". "How Rolex Became the Ultimate
 ## Length and voice
 
 - Target **5–15 minutes** (preferred about 8–12; 300–960 seconds, target 600). Prefer a dense 8 minutes to a padded 15.
-- Spoken pacing **1.0–1.15** equivalent (imported VO). New jobs use imported audio. Shipped recuts may stay on Kokoro `am_liam`.
+- Spoken pacing **1.0–1.15** equivalent (imported VO). New jobs use Gemini 3.1 Flash TTS when `GEMINI_API_KEY` is set, else imported audio. Shipped recuts may stay on Kokoro `am_liam`.
 - Script **800–2500 words** so the long cut lands ~5–15 minutes. Write spoken English at about 145–155 wpm. Do not pad a thin story to hit the max.
 - Still duration follows the pause table from `ingest-audio`, or the `[00-00]` filename clock on a drop-folder cut (`python -m channel drop`). Drop-folder cuts assemble without burned captions. Complex flywheels may hold across consecutive timestamps.
 - Voice: a smart friend explaining how an empire was built so a five-year-old can follow while watching. Tiny words. Cause, then effect. Funny when the evidence is funny. One idea at a time. **Do not read long numbers** aloud. Not an MBA lecture, not Wikipedia, not financial TV, not TikTok hype.

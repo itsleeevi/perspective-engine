@@ -125,6 +125,7 @@ def ensure_job_tree(job_id: str, *, root: Path | None = None) -> Path:
         "images",
         "drop",
         "audio",
+        "audio/chunks",
         "thumbnail",
         "short",
         "final",
@@ -167,14 +168,21 @@ def write_operator_md(manifest: GenerationManifest, *, root: Path | None = None)
         JobState.wait_audio.value: (
             f"# Operator — {manifest.job_id}\n\n"
             f"State: `{state}`\n\n"
-            f"1. Copy `{script}` into ElevenLabs (or any TTS). The engine does not call ElevenLabs.\n"
-            f"2. Save the file and ingest it:\n\n"
+            f"Gemini 3.1 Flash TTS (`gemini-3.1-flash-tts-preview`) when "
+            f"`GEMINI_API_KEY` is set. This writes `tts_chunks.txt` and "
+            f"`audio/chunks/` then ingest-audio:\n\n"
+            f"```text\n"
+            f".venv/bin/python -m channel tts {manifest.job_id}\n"
+            f"```\n\n"
+            f"Or import operator audio (ElevenLabs or any TTS). The engine "
+            f"does not call ElevenLabs. Copy `{script}`, then:\n\n"
             f"```text\n"
             f".venv/bin/python -m channel ingest-audio {manifest.job_id} /path/to/voiceover.mp3\n"
             f"```\n\n"
             f"Or drop the file at `{audio}` (mp3/m4a/wav also accepted as `voiceover.mp3`) "
             f"then `.venv/bin/python -m channel generate --resume {manifest.job_id}`.\n\n"
-            "Do not write scenes yet. Scene cuts come from pauses in this audio.\n"
+            "Do not write scenes yet. Scene cuts come from pauses in this audio. "
+            "Imported audio still works if the Gemini key is missing.\n"
         ),
         JobState.wait_drop.value: (
             f"# Operator — {manifest.job_id}\n\n"

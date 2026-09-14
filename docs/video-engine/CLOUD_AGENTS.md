@@ -15,7 +15,7 @@ python3.13 -m venv .venv
 
 ## Secrets
 
-Documentary generation does **not** need `OPENAI_API_KEY`, `FAL_KEY`, or `ELEVENLABS_API_KEY`. Those belong to the unused `graph/` Phase-2 adapters. The engine never calls those APIs. A Cloud agent fills research + narration, then stops at `WAIT_AUDIO`. Drop-folder cuts (`python -m channel drop`) wait for operator stills named `[00-00]_….jpg` plus audio, then assemble without burned captions.
+Documentary generation does **not** need `OPENAI_API_KEY`, `FAL_KEY`, or `ELEVENLABS_API_KEY`. Those belong to the unused `graph/` Phase-2 adapters. The engine never calls those APIs. Gemini TTS uses `GEMINI_API_KEY` (`python -m channel tts`). A Cloud agent fills research + narration, then stops at `WAIT_AUDIO` unless that key is set. Drop-folder cuts (`python -m channel drop`) wait for operator stills named `[00-00]_….jpg` plus audio, then assemble without burned captions.
 
 Names only: `.env.example`. Never commit `.env`.
 
@@ -36,4 +36,4 @@ Do not commit `.mp4` files. Report:
 
 ## Network
 
-Wikipedia (seed), company IR / SEC sites (agent research). No hidden model “latest”. Operator generates stills in Google Flow and VO outside the engine.
+Wikipedia (seed), company IR / SEC sites (agent research), Gemini TTS (`generativelanguage.googleapis.com`) when `GEMINI_API_KEY` is set. No hidden model “latest”. Operator generates stills in Google Flow. Voice is Gemini TTS or imported audio.

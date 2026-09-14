@@ -13,8 +13,8 @@ from pathlib import Path
 
 from channel.modes import ChannelMode
 
-VIDEO_ENGINE_VERSION = "2026.08.28"
-PROMPT_VERSION = "2026.09.13.wealth_pov_v13"
+VIDEO_ENGINE_VERSION = "2026.09.14"
+PROMPT_VERSION = "2026.09.14.gemini_tts"
 VISUAL_STYLE_VERSION = "2026.09.13"
 
 # Documentary path only. Do not silently swap these.
@@ -27,7 +27,7 @@ MODEL_LOCK = {
     "narration": "cursor_grok_agent + channel.*_prompts.MASTER Stage 2 + NARRATION_WRITER",
     "scenes": "cursor_grok_agent + channel.*_prompts.MASTER Stage 3 + SCENE_BREAKDOWN (after pauses)",
     "image": "operator_google_flow_ingest",
-    "tts": "operator_imported_audio",
+    "tts": "gemini-3.1-flash-tts-preview",
     "thumbnail": "operator_google_flow_ingest + channel.youtube overlay",
     "short": "optional HITL, does not block long READY",
     "qa": "channel.qa + originality + monetization_qa + channel.quality_bar",
@@ -72,6 +72,15 @@ KOKORO_LOCK = {
 IMPORTED_VOICE_LOCK = {
     "provider": "imported",
     "source": "operator_audio_file",
+    "pause_min_ms": 280,
+}
+
+GEMINI_TTS_LOCK = {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-tts-preview",
+    "voice": "Charon",
+    "sample_rate": 24000,
+    "audio_tags": False,
     "pause_min_ms": 280,
 }
 
@@ -133,6 +142,7 @@ def generate_name_map(jobs_file: Path) -> dict[str, str]:
 NETWORK_DOMAINS = (
     "en.wikipedia.org",  # research seed only
     "sec.gov",  # filings (agent browser)
+    "generativelanguage.googleapis.com",  # Gemini 3.1 Flash TTS
 )
 
 NO_PROVIDER_FALLBACK = True

@@ -53,6 +53,7 @@ REQUIRED_FILES = (
     "channel/period_markers_defaults.json",
     "channel/master_prompt.py",
     "channel/drop.py",
+    "channel/gemini_tts.py",
 )
 
 REQUIRED_ENV_NAMES = (
@@ -61,6 +62,7 @@ REQUIRED_ENV_NAMES = (
     "ANTHROPIC_API_KEY",
     "FAL_KEY",
     "ELEVENLABS_API_KEY",
+    "GEMINI_API_KEY",
     "LANGCHAIN_API_KEY",
 )
 
@@ -92,8 +94,8 @@ def check_readiness(*, strict: bool = False) -> dict:
         errors.append("wealth_pov prompt module missing")
     if MODEL_LOCK["image"] != "operator_google_flow_ingest":
         errors.append("image model lock drifted off operator_google_flow_ingest")
-    if MODEL_LOCK["tts"] != "operator_imported_audio":
-        errors.append("tts model lock drifted off operator_imported_audio")
+    if MODEL_LOCK["tts"] != "gemini-3.1-flash-tts-preview":
+        errors.append("tts model lock drifted off gemini-3.1-flash-tts-preview")
     example = ROOT / ".env.example"
     if example.is_file():
         text = example.read_text(encoding="utf-8")
