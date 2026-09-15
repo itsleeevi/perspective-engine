@@ -54,6 +54,7 @@ def test_short_flashes_merge():
     assert all(s.duration >= 0.5 - 1e-6 for s in scenes)
 
 
+@pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg required for silence detection")
 def test_synthetic_wav_silence_splits(tmp_path: Path):
     wav = write_tone_silence_wav(
         tmp_path / "vo.wav", tone_seconds=1.0, silence_seconds=0.5, repeats=2
@@ -175,6 +176,7 @@ def test_ingest_images_remaps_zapi_serials(tmp_path: Path):
     assert load_manifest(job.job_id, root=tmp_path).state is JobState.images_ingested
 
 
+@pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg required to split synthetic pauses")
 def test_stage_images_partial_zapi_serials(tmp_path: Path):
     job = start_job(
         title="How Nvidia Took Over AI",

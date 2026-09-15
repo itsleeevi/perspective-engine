@@ -1,5 +1,8 @@
 """Mass-production detector and name-swap test."""
 
+import re
+
+from channel.config import CHANNEL
 from channel.originality import (
     name_swap_too_close,
     originality_score_from_similarity,
@@ -8,15 +11,24 @@ from channel.originality import (
     regenerate_targets,
 )
 from channel.originality_policy import ORIGINALITY_SCORE_MIN, RECENT_VIDEO_COMPARE_COUNT
+from channel.paths import ROOT
 from channel.schema import OriginalityReport, SimilarityBreakdown
 
 
 def test_recent_slugs_reads_index_newest_first():
+    text = (ROOT / CHANNEL.videos_index).read_text(encoding="utf-8")
+    listed: list[str] = []
+    for slug in re.findall(r"\]\(([a-z0-9-]+)\.md\)", text):
+        if slug == "README" or slug in listed:
+            continue
+        listed.append(slug)
     slugs = recent_slugs()
+    assert listed, f"{CHANNEL.videos_index} must list at least one shipped cut"
     assert slugs
-    assert slugs[0] == "freud-women"
+    assert slugs[0] == listed[0]
+    assert slugs == listed[: len(slugs)]
     assert len(slugs) <= RECENT_VIDEO_COMPARE_COUNT
-    assert "freud-women" not in recent_slugs(exclude="freud-women")
+    assert listed[0] not in recent_slugs(exclude=listed[0])
 
 
 def test_originality_score_inverts_similarity():
