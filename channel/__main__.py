@@ -18,6 +18,7 @@ Subcommands:
     branding       size a profile (800×800) and cover (2560×1440) for YouTube
     generate       isolated job under artifacts/<job_id>/ (canonical Cloud command)
     tts            Gemini 3.1 Flash TTS → audio/chunks + ingest-audio
+    images         Nano Banana 2 (gemini-3.1-flash-image) stills from image jobs
     drop           create a drop folder for timestamped stills + narration audio
     cloud-readiness check configs, prompts, rules, writable artifacts
 """
@@ -232,12 +233,12 @@ Style, voice, and QA rules live in `channel/config.py` — do not copy a person 
 4. `python -m channel tts <JOB_ID>` (Gemini 3.1 Flash TTS) or copy `script.txt` into ElevenLabs then `python -m channel ingest-audio <JOB_ID> /path/to/vo.mp3`
 5. Scene breakdown 1:1 with `timestamps.json` (SCENE_BREAKDOWN). Do not use `channel chunks` as the clock.
 6. `python -m channel generate --resume <JOB_ID>` writes `flow_prompts.txt` after originality_score >= 80 and ready_to_publish
-7. Paste `flow_prompts.txt` into Google Flow. `python -m channel ingest-images <JOB_ID> /path/to/pngs --partial`
+7. `python -m channel images <JOB_ID>` (Nano Banana 2 / gemini-3.1-flash-image) or paste `flow_prompts.txt` into Google Flow. `python -m channel ingest-images <JOB_ID> /path/to/pngs --partial`
 8. `python -m channel assemble <JOB_ID>` then `python -m channel youtube {slug}`
 9. Update `{docs}`
 
 Voice on new jobs is Gemini 3.1 Flash TTS (`python -m channel tts`) when GEMINI_API_KEY is set, else operator-imported audio. The engine does not call ElevenLabs or Kokoro on new jobs. Shipped recuts may still use Kokoro.
-Images are operator-imported Google Flow stills. Do not invent quotes or numbers.
+Images: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) when GEMINI_API_KEY is set, else operator Google Flow stills. Do not invent quotes or numbers.
 """
 
 
@@ -361,7 +362,7 @@ def _compile(args: argparse.Namespace) -> int:
         spec_rel = spec
     print("lint: .venv/bin/python scripts/lint_story.py", spec_rel)
     print("originality: .venv/bin/python scripts/lint_originality.py", spec_rel)
-    print("jobs: paste flow_prompts.txt into Google Flow, then ingest-images")
+    print("jobs: python -m channel images <JOB_ID>  (Nano Banana 2) or paste flow_prompts.txt into Google Flow, then ingest-images")
     print("thumb: paste thumbnail_prompts.txt into Google Flow, then")
     print(f"       .venv/bin/python -m channel youtube {project.slug}")
     print("voice+assemble: python -m channel ingest-audio then python -m channel assemble")
@@ -502,6 +503,45 @@ def _ingest_audio(args: argparse.Namespace) -> int:
     print(f"timestamps: {root / args.job_id / 'timestamps.json'}")
     print(f"transcript: {root / args.job_id / 'transcript.txt'}")
     print("state: PAUSES_DETECTED")
+    return 0
+
+
+def _images(args: argparse.Namespace) -> int:
+    from adapters.image_gen.gemini import (
+        GEMINI_IMAGE_MODEL,
+        GEMINI_IMAGE_SIZE,
+        GeminiImageError,
+    )
+    from channel.gemini_images import GeminiImagesError, generate_job_images
+    from channel.job import ARTIFACTS
+
+    root = Path(args.artifacts) if args.artifacts else ARTIFACTS
+    try:
+        result = generate_job_images(
+            args.job_id,
+            artifacts_root=root,
+            model=args.model or GEMINI_IMAGE_MODEL,
+            image_size=args.size or GEMINI_IMAGE_SIZE,
+            force=bool(args.force),
+            only_index=args.index,
+            limit=args.limit,
+            dry_run=bool(args.dry_run),
+            no_ingest=bool(args.no_ingest),
+        )
+    except (GeminiImagesError, GeminiImageError) as exc:
+        print(str(exc))
+        return 1
+    print(json.dumps(result, indent=2))
+    print(f"staging: {result['staging']}")
+    print(f"ledger: {result['ledger']}")
+    if result.get("dry_run"):
+        print("state: WAIT_IMAGES (dry-run)")
+        return 0
+    print(
+        "state: IMAGES_INGESTED"
+        if result.get("ingested")
+        else "state: WAIT_IMAGES"
+    )
     return 0
 
 
@@ -778,6 +818,38 @@ def main(argv: list[str] | None = None) -> int:
     )
     tts.add_argument("--pause-ms", dest="pause_ms", type=int, default=280)
     tts.set_defaults(func=_tts)
+
+    images = sub.add_parser(
+        "images",
+        help="generate stills with Nano Banana 2 (gemini-3.1-flash-image) from image jobs",
+    )
+    images.add_argument("job_id")
+    images.add_argument("--artifacts", default="")
+    images.add_argument(
+        "--model",
+        default="",
+        help="default gemini-3.1-flash-image (Nano Banana 2)",
+    )
+    images.add_argument(
+        "--size",
+        default="2K",
+        choices=["512", "1K", "2K", "4K"],
+        help="output imageSize (default 2K). Uppercase K as required by the API",
+    )
+    images.add_argument("--force", action="store_true", help="regenerate existing stills; skip ready_to_publish gate")
+    images.add_argument("--index", type=int, default=None, help="generate one 0-based still index")
+    images.add_argument("--limit", type=int, default=None, help="generate at most N stills")
+    images.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="list jobs without calling the API",
+    )
+    images.add_argument(
+        "--no-ingest",
+        action="store_true",
+        help="write staging PNGs without running ingest-images",
+    )
+    images.set_defaults(func=_images)
 
     inga = sub.add_parser("ingest-audio", help="import operator voiceover and detect pause scenes")
     inga.add_argument("job_id")

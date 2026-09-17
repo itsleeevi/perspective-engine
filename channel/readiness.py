@@ -54,6 +54,7 @@ REQUIRED_FILES = (
     "channel/master_prompt.py",
     "channel/drop.py",
     "channel/gemini_tts.py",
+    "channel/gemini_images.py",
 )
 
 REQUIRED_ENV_NAMES = (

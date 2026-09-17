@@ -13,7 +13,7 @@ Not photoreal, not 3D, not anime. Historical names and company names stay out of
 
 Never put a company or person name in a still **filename** — the model will paint the word onto the picture. HITL stills use index + timestamp (`000_00-00-04.png`). Drop-folder stills use a bracket clock (`[00-00]_….jpg`). Hashed `generate_filename` tokens stay as aliases.
 
-On documentary channels, named public figures must be a recognizable cartoon of the real person drawn as that stick-figure doodle. Reuse `channel/character_locks.json` and pass the hashed photo plus sheet in `channel/character_sheets/` as Google Flow references. Quiet Wealth uses original non-identifying stand-ins instead; do not copy a subject's photographs into the design.
+On documentary channels, named public figures must be a recognizable cartoon of the real person drawn as that stick-figure doodle. Reuse `channel/character_locks.json` and pass the hashed photo plus sheet in `channel/character_sheets/` as Nano Banana 2 (`python -m channel images`) or Google Flow references. Quiet Wealth uses original non-identifying stand-ins instead; do not copy a subject's photographs into the design.
 
 Every still: one idea, one oversized focal object, named lighting, unique staging (`docs/video-engine/QUALITY_BAR.md` / `channel/quality_bar.py`). No filing-table wallpaper.
 

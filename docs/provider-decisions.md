@@ -12,12 +12,12 @@ This is the path that ships What They Really Think, How They Really Make Money, 
 
 | Role | Locked choice | Why |
 |---|---|---|
-| Stills | Operator **Google Flow** ingest | Fill-frame 2D cinema stills; public-figure cartoons via `channel/character_locks.json` + sheets. |
+| Stills | **Nano Banana 2** (`gemini-3.1-flash-image`) via `python -m channel images`, or operator **Google Flow** ingest | Named engine stills after QA. Character sheets as reference images. Flow remains HITL if the key is missing. Does not run on `--resume`. |
 | Voice | **Gemini 3.1 Flash TTS** (`gemini-3.1-flash-tts-preview`, Charon) | Named engine TTS via `python -m channel tts`. Operator imported audio if `GEMINI_API_KEY` is missing. Shipped recuts may still use Kokoro `am_liam`. |
 | Assemble | FFmpeg (`scripts/run_custom_video.py`, `scripts/run_short.py`) | Whisper-aligned still slideshow, 3840×2160 long / 1080×1920 Shorts. |
 | Research seed | Wikipedia + agent primary sources | Seed only; claims keep `claim_id` and source dates. |
 
-Missing Google Flow stills is a **hard stop**. Missing Gemini TTS is `WAIT_AUDIO`, not a swap to Edge, ElevenLabs, or Kokoro. Do not fall back to fal.ai images, OpenAI image APIs, Edge TTS, ElevenLabs, or Chatterbox on this path. Documentary generation does not read `FAL_KEY` or `ELEVENLABS_API_KEY`. Gemini TTS reads `GEMINI_API_KEY`.
+Missing stills is a **hard stop** (`WAIT_IMAGES`). `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) is opt-in when `GEMINI_API_KEY` is set; operator Google Flow ingest still works. Missing Gemini TTS is `WAIT_AUDIO`, not a swap to Edge, ElevenLabs, or Kokoro. Do not fall back to fal.ai images, OpenAI image APIs, Edge TTS, ElevenLabs, or Chatterbox on this path. Documentary generation does not read `FAL_KEY` or `ELEVENLABS_API_KEY`. Gemini TTS and Nano Banana 2 read `GEMINI_API_KEY`.
 
 Specs: [`docs/video-engine/`](video-engine/), [`docs/video-engine/NARRATION.md`](video-engine/NARRATION.md), [`docs/video-engine/VISUAL_STYLE.md`](video-engine/VISUAL_STYLE.md).
 
@@ -33,9 +33,9 @@ Durable checkpointing, human-in-the-loop interrupts, and conditional retry/branc
 
 Adapter-based (`adapters/llm/`), so swapping providers is a new adapter, not an orchestration change. `OpenAILLMAdapter` handles the two authoring calls (script writing, storyboard visualization); the prompt content behind both is shared verbatim with the Anthropic adapter (`adapters/llm/_prompts.py`). The vision-based quality check still delegates to `AnthropicLLMAdapter` — Claude Haiku is the cheap, adequate choice for a call that runs once per shot.
 
-### Image generation: OpenAI `gpt-image-*` (default), fal.ai FLUX (alternate), Pollinations (free)
+### Image generation: OpenAI `gpt-image-*` (default), Nano Banana 2, fal.ai FLUX, Pollinations (free)
 
-Graph-only. `OpenAIImageGenAdapter` is the default on that path because it was measured to render in-scene text more reliably. `FalImageGenAdapter` remains available via `--image-provider fal`. Documentary titles do **not** use these adapters.
+Graph-only. `OpenAIImageGenAdapter` is the default on that path because it was measured to render in-scene text more reliably. `GeminiImageGenAdapter` (`--image-provider gemini-3.1-flash-image` / `nano-banana-2`) is Nano Banana 2, native 16:9, same `GEMINI_API_KEY` as documentary TTS. `FalImageGenAdapter` remains available via `--image-provider fal`. Documentary titles use `python -m channel images` or Google Flow, **not** these graph adapters as a silent swap.
 
 ### Video generation: fal.ai, Seedance 2.0 Fast (image-to-video)
 

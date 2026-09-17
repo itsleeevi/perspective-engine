@@ -28,6 +28,8 @@ REQUIRED_PHRASES = (
     "imported audio",
     "gemini-3.1-flash-tts-preview",
     "python -m channel tts",
+    "python -m channel images",
+    "gemini-3.1-flash-image",
     "Watch the full video:",
     "synthetic-media",
     "800–2500",

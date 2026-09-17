@@ -11,7 +11,7 @@ generate
   → ingest-audio → PAUSES_DETECTED
   → SCENES_PROMPTED (1:1 with pause timestamps)
   → flow_prompts (only if originality_score ≥ 80 and ready_to_publish)
-  → WAIT_IMAGES (operator Google Flow)
+  → WAIT_IMAGES (`python -m channel images` / operator Google Flow)
   → ingest-images → IMAGES_INGESTED
   → python -m channel assemble (imported audio + pause-timed stills)
   → youtube pack
@@ -71,10 +71,10 @@ Stills use index + timestamp filenames (`000_00-00-00.png`). Drop-folder stills 
 .venv/bin/python -m channel generate --resume <JOB_ID>
 ```
 
-Re-reads `project.json`. Stops at `WAIT_AUDIO` or `WAIT_IMAGES` until operator files exist, unless `GEMINI_API_KEY` is set — then `--resume` runs `python -m channel tts` and ingest-audio. Does not invent WPM scene chunks. Prints `OPERATOR.md`.
+Re-reads `project.json`. Stops at `WAIT_AUDIO` or `WAIT_IMAGES` until operator files exist, unless `GEMINI_API_KEY` is set — then `--resume` runs `python -m channel tts` and ingest-audio. Stills stay opt-in: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) is not called on `--resume`. Does not invent WPM scene chunks. Prints `OPERATOR.md`.
 
 `--force` compiles even when monetization is not ready (still do not emit `flow_prompts` unless `ready_to_publish`).
 
 ## What the agent still does
 
-Cursor Grok is the researcher, story writer, and scene-prompt writer **after** pauses exist. Code does title parse, factcheck, originality, Gemini TTS, pause detect, drop-folder ingest, compile, YouTube pack, FFmpeg. The operator generates stills in Google Flow. Voice is Gemini 3.1 Flash TTS when `GEMINI_API_KEY` is set, otherwise imported audio. Drop-folder cuts (`python -m channel drop`) assemble filename-clock stills without burned captions. Do not invent a third workflow.
+Cursor Grok is the researcher, story writer, and scene-prompt writer **after** pauses exist. Code does title parse, factcheck, originality, Gemini TTS, pause detect, drop-folder ingest, compile, optional Nano Banana 2 stills (`python -m channel images`), YouTube pack, FFmpeg. The operator can still generate stills in Google Flow. Voice is Gemini 3.1 Flash TTS when `GEMINI_API_KEY` is set, otherwise imported audio. Drop-folder cuts (`python -m channel drop`) assemble filename-clock stills without burned captions. Do not invent a third workflow.

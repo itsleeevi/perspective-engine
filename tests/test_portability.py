@@ -14,6 +14,7 @@ from channel.config import (
     config_for,
 )
 from channel.engine import (
+    GEMINI_IMAGE_LOCK,
     IMAGE_FILENAME_RULE,
     MODEL_LOCK,
     NO_PROVIDER_FALLBACK,
@@ -41,6 +42,7 @@ def test_cloud_readiness_required_files():
 def test_model_lock_forbids_silent_fallback():
     assert MODEL_LOCK["tts"] == "gemini-3.1-flash-tts-preview"
     assert MODEL_LOCK["image"] == "operator_google_flow_ingest"
+    assert GEMINI_IMAGE_LOCK["model"] == "gemini-3.1-flash-image"
     assert NO_PROVIDER_FALLBACK is True
     assert "filename" in IMAGE_FILENAME_RULE.lower()
 

@@ -39,6 +39,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
 
 from adapters.image_gen.fal import FalImageGenAdapter
+from adapters.image_gen.gemini import GeminiImageGenAdapter
 from adapters.image_gen.mock import MockImageGenAdapter
 from adapters.image_gen.openai_image import OpenAIImageGenAdapter
 from adapters.llm.openai_llm import OpenAILLMAdapter
@@ -49,6 +50,12 @@ from adapters.voice.edge import EdgeTTSVoiceAdapter
 from adapters.voice.elevenlabs import ElevenLabsVoiceAdapter
 from adapters.voice.mock import MockVoiceAdapter
 from graph.graph import build_graph
+
+GEMINI_IMAGE_PROVIDERS = {
+    "gemini-3.1-flash-image",
+    "nano-banana-2",
+}
+_GEMINI_SIZE_FROM_QUALITY = {"low": "1K", "medium": "2K", "high": "4K"}
 
 
 # ── Interrupt UI helpers ────────────────────────────────────────────────────
@@ -199,20 +206,24 @@ async def main(
         voice: Any = MockVoiceAdapter()
     else:
         voice_label = "ElevenLabs" if paid_voice else "edge-TTS (free)"
-        image_label = (
-            "fal FLUX.1 [schnell]"
-            if image_provider == "fal"
-            else f"OpenAI {image_provider} ({image_quality})"
-        )
+        if image_provider == "fal":
+            image_label = "fal FLUX.1 [schnell]"
+            image_gen = FalImageGenAdapter()
+        elif image_provider in GEMINI_IMAGE_PROVIDERS:
+            image_size = _GEMINI_SIZE_FROM_QUALITY.get(image_quality, "2K")
+            image_label = (
+                f"Nano Banana 2 / gemini-3.1-flash-image ({image_size} 16:9)"
+            )
+            image_gen = GeminiImageGenAdapter(image_size=image_size)
+        else:
+            image_label = f"OpenAI {image_provider} ({image_quality})"
+            image_gen = OpenAIImageGenAdapter(
+                model=image_provider, quality=image_quality
+            )
         print(f"Mode: REAL — {image_label} stills + {voice_label}")
         if not static_only:
             print("Motion enabled: Seedance video calls cost ~$1.20 per shot.")
         llm = OpenAILLMAdapter()
-        image_gen = (
-            OpenAIImageGenAdapter(model=image_provider, quality=image_quality)
-            if image_provider != "fal"
-            else FalImageGenAdapter()
-        )
         video_gen = FalVideoGenAdapter()
         voice = (
             ElevenLabsVoiceAdapter()
@@ -405,13 +416,18 @@ def _parse_args() -> argparse.Namespace:
             "gpt-image-1.5",
             "gpt-image-1",
             "gpt-image-1-mini",
+            "gemini-3.1-flash-image",
+            "nano-banana-2",
         ],
         dest="image_provider",
         help=(
             "Stills provider. Default 'gpt-image-2' (~$0.0055/image at low "
             "quality, requires OPENAI_API_KEY): the only option measured to "
-            "render in-scene text reliably. 'fal' is FLUX.1 [schnell] "
-            "(~$0.003/image) and cannot spell. See --image-quality."
+            "render in-scene text reliably. 'gemini-3.1-flash-image' / "
+            "'nano-banana-2' is Nano Banana 2 (native 16:9, GEMINI_API_KEY; "
+            "--image-quality maps low/medium/high to 1K/2K/4K). 'fal' is "
+            "FLUX.1 [schnell] (~$0.003/image) and cannot spell. See "
+            "--image-quality."
         ),
     )
     parser.add_argument(
@@ -421,11 +437,12 @@ def _parse_args() -> argparse.Namespace:
         dest="image_quality",
         help=(
             "Quality tier for an OpenAI --image-provider (ignored for fal). "
-            "Default 'low' (~$0.0055/image) is the production default: most "
-            "of what medium (~$0.042, 7.6x the cost) used to buy turned out "
-            "to be storyboard-prompt fixes, not rendering fidelity. 'high' "
-            "is not recommended at any budget — it drifts off the locked "
-            "character design."
+            "For Nano Banana 2, low=1K, medium=2K, high=4K. "
+            "Default 'low' (~$0.0055/image on gpt-image-2) is the production "
+            "default: most of what medium (~$0.042, 7.6x the cost) used to buy "
+            "turned out to be storyboard-prompt fixes, not rendering fidelity. "
+            "'high' is not recommended on gpt-image at any budget — it drifts "
+            "off the locked character design."
         ),
     )
     parser.add_argument(

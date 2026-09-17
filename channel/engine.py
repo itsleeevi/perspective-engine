@@ -84,6 +84,16 @@ GEMINI_TTS_LOCK = {
     "pause_min_ms": 280,
 }
 
+# Opt-in stills. MODEL_LOCK["image"] stays operator Google Flow ingest.
+# `python -m channel images` calls this when GEMINI_API_KEY is set.
+GEMINI_IMAGE_LOCK = {
+    "provider": "gemini",
+    "public_name": "Nano Banana 2",
+    "model": "gemini-3.1-flash-image",
+    "aspect": "16:9",
+    "image_size": "2K",
+}
+
 PROMPT_MODULES = {
     ChannelMode.what_they_really_think: "channel.agent_prompts",
     ChannelMode.behind_the_business: "channel.business_prompts",
@@ -142,7 +152,7 @@ def generate_name_map(jobs_file: Path) -> dict[str, str]:
 NETWORK_DOMAINS = (
     "en.wikipedia.org",  # research seed only
     "sec.gov",  # filings (agent browser)
-    "generativelanguage.googleapis.com",  # Gemini 3.1 Flash TTS
+    "generativelanguage.googleapis.com",  # Gemini TTS + Nano Banana 2 stills
 )
 
 NO_PROVIDER_FALLBACK = True

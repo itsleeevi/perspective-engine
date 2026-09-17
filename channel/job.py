@@ -215,7 +215,12 @@ def write_operator_md(manifest: GenerationManifest, *, root: Path | None = None)
         JobState.wait_images.value: (
             f"# Operator — {manifest.job_id}\n\n"
             f"State: `{state}`\n\n"
-            f"Upload `{job}/flow_batches.txt` into ZAPI FLOW (one prompt per line, all stills). "
+            f"Nano Banana 2 (`gemini-3.1-flash-image`) when `GEMINI_API_KEY` is set. "
+            f"This reads compile image jobs and writes stills, then ingest-images:\n\n"
+            f"```text\n"
+            f".venv/bin/python -m channel images {manifest.job_id}\n"
+            f"```\n\n"
+            f"Or upload `{job}/flow_batches.txt` into ZAPI FLOW (one prompt per line, all stills). "
             f"Or paste `{prompts}` into Google Flow (16:9, one output per prompt, "
             "one blank line between prompts). The engine does not call Flow.\n\n"
             f"Thumbnail prompts: `{thumbs}`.\n\n"

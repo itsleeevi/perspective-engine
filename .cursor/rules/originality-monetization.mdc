@@ -11,4 +11,4 @@ Brand consistency is not repetition. A name-swap spine is. Do not clone Visa's f
 
 `the_thought` must be spoken. No “was born” / “was founded” cold opens.
 
-Do not emit `flow_prompts` or ingest Google Flow stills if QA fails. Report the flags; do not lower the threshold.
+Do not emit `flow_prompts`, run `python -m channel images`, or ingest Google Flow stills if QA fails. Report the flags; do not lower the threshold.

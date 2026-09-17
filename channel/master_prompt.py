@@ -246,7 +246,9 @@ Google Flow prompts in batches of 20.
 8. After each incomplete batch: **Reply "next" for the next 20 prompts.** Then stop.
 
 Do not emit flow_prompts.txt until originality_score ≥ 80 and ready_to_publish.
-Paste into Google Flow, not Midjourney. Then `python -m channel ingest-images <JOB_ID> /path/to/pngs`.
+Then `python -m channel images <JOB_ID>` (Nano Banana 2 / gemini-3.1-flash-image)
+when GEMINI_API_KEY is set, or paste into Google Flow, not Midjourney.
+Then `python -m channel ingest-images <JOB_ID> /path/to/pngs`.
 Assemble: `python -m channel assemble <JOB_ID>`.
 
 After the FINAL batch:

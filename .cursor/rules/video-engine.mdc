@@ -13,6 +13,6 @@ Canonical command: `python -m channel generate --channel <mode> --title "<title>
 DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.
 ```
 
-Images: operator **Google Flow** stills from `flow_prompts.txt` only after `originality_score ≥ 80` and `ready_to_publish`, or drop-folder stills named `[00-00]_….jpg`. Voice: Gemini 3.1 Flash TTS (`python -m channel tts`, `gemini-3.1-flash-tts-preview`) when `GEMINI_API_KEY` is set; otherwise **imported audio** (`ingest-audio` or a file in `drop/`). Engine never calls ElevenLabs or Flow. Shipped recuts may still use Kokoro (`am_liam` / roster). No silent provider fallback. Drop-folder cuts assemble without burned captions.
+Images: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) when `GEMINI_API_KEY` is set, after `originality_score ≥ 80` and `ready_to_publish`; or operator **Google Flow** stills from `flow_prompts.txt`; or drop-folder stills named `[00-00]_….jpg`. Voice: Gemini 3.1 Flash TTS (`python -m channel tts`, `gemini-3.1-flash-tts-preview`) when `GEMINI_API_KEY` is set; otherwise **imported audio** (`ingest-audio` or a file in `drop/`). Engine never calls ElevenLabs or Flow. Shipped recuts may still use Kokoro (`am_liam` / roster). No silent provider fallback. Drop-folder cuts assemble without burned captions.
 
 After a production change, update `docs/custom-videos.md`, `AGENTS.md`, and `.cursor/rules/custom-videos.mdc` together. `tests/test_channel_handoff.py` guards the surfaces.

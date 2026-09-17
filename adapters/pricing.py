@@ -108,6 +108,22 @@ _GPT_IMAGE_RATES = {
     "gpt-image-2": (5.00 / 1_000_000, 8.00 / 1_000_000, 30.00 / 1_000_000),
 }
 
+# Gemini 3.1 Flash Image (Nano Banana 2). Paid-tier Gemini API, USD per token.
+# Verified against https://ai.google.dev/gemini-api/docs/pricing (2026-09-17):
+#   input text/image $0.50 / MTok
+#   output text + thinking $3.00 / MTok
+#   output images $60.00 / MTok
+# Image-output token floors by resolution: 512=747, 1K=1120, 2K=1680, 4K=2520.
+_GEMINI_FLASH_IMAGE_INPUT = 0.50 / 1_000_000
+_GEMINI_FLASH_IMAGE_TEXT_OUT = 3.00 / 1_000_000
+_GEMINI_FLASH_IMAGE_IMAGE_OUT = 60.00 / 1_000_000
+GEMINI_FLASH_IMAGE_OUTPUT_TOKENS = {
+    "512": 747,
+    "1K": 1120,
+    "2K": 1680,
+    "4K": 2520,
+}
+
 
 def claude_cost(model: str, input_tokens: int, output_tokens: int) -> float:
     """
@@ -207,3 +223,31 @@ def gpt_image_cost(
         + image_input_tokens * image_in_rate
         + image_output_tokens * image_out_rate
     )
+
+
+def gemini_flash_image_cost(
+    text_input_tokens: int,
+    image_input_tokens: int,
+    text_output_tokens: int,
+    image_output_tokens: int,
+) -> float:
+    """USD cost of one Nano Banana 2 (`gemini-3.1-flash-image`) call.
+
+    Input text and input images share the $0.50 / MTok rate. Thinking and
+    leftover text output bill at $3 / MTok; generated image tokens bill at
+    $60 / MTok. Pass the API's reported counts when present. When usage is
+    missing, callers should fall back to ``GEMINI_FLASH_IMAGE_OUTPUT_TOKENS``
+    for the requested ``imageSize`` so the cost log is not $0.
+    """
+    return (
+        max(0, text_input_tokens) * _GEMINI_FLASH_IMAGE_INPUT
+        + max(0, image_input_tokens) * _GEMINI_FLASH_IMAGE_INPUT
+        + max(0, text_output_tokens) * _GEMINI_FLASH_IMAGE_TEXT_OUT
+        + max(0, image_output_tokens) * _GEMINI_FLASH_IMAGE_IMAGE_OUT
+    )
+
+
+def gemini_flash_image_size_cost(image_size: str, num_images: int = 1) -> float:
+    """Floor cost of ``num_images`` Nano Banana 2 stills at a named resolution."""
+    tokens = GEMINI_FLASH_IMAGE_OUTPUT_TOKENS.get(image_size, GEMINI_FLASH_IMAGE_OUTPUT_TOKENS["2K"])
+    return gemini_flash_image_cost(0, 0, 0, tokens * num_images)

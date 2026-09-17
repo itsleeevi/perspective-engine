@@ -12,7 +12,7 @@ Sacred for every video on every channel:
 - **Unique scenes and diagrams** built around that company's actual business (or that title's actual evidence).
 - Plus the existing **unique story engine** — if you could swap the names and keep the same video, throw it out.
 
-The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → `script.txt` → Gemini TTS or imported audio → pause scenes → Google Flow stills → FFmpeg.
+The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → `script.txt` → Gemini TTS or imported audio → pause scenes → Nano Banana 2 or Google Flow stills → FFmpeg.
 
 The **master prompt** (`channel/master_prompt.py`, exported as `MASTER` on each channel module) is the staged operator loop: title → research → `script.txt` → `WAIT_AUDIO` (`python -m channel tts` or ingest-audio) → timestamps → Flow prompts in batches of 20 (**Reply "next"**) → YouTube metadata. Documentary shared look is **stick-figure doodle**; customize mood and story DNA per channel. Quiet Wealth (`docs/wealth-pov.md`) uses detailed colored 2D illustrations and second person instead. Do not import 2nd-person explainer voice onto the documentary channels.
 
@@ -59,7 +59,7 @@ TARGET_DURATION          # seconds, default 600 (~10 minutes; land 5–15)
 SPECIAL_INSTRUCTIONS     # tone, emphasis, things to avoid
 ```
 
-Everything else is generated: who X and Y are, the relationship, research, story, narration. Scene prompts wait for the imported voice-over. The operator generates stills in Google Flow. The engine renders the MP4.
+Everything else is generated: who X and Y are, the relationship, research, story, narration. Scene prompts wait for the imported voice-over. Stills come from `python -m channel images` (Nano Banana 2) or operator Google Flow. The engine renders the MP4.
 
 The same pipeline must work when Y is a person, a country, a religion, an ideology, a company, an idea, an event, or a group. Do not hardcode a person into `channel/config.py`. Story content lives in `channel/projects/<slug>/project.json`.
 
@@ -107,7 +107,8 @@ Research through the day you are writing so the facts are current. **Do not say 
 | `channel/visual_policy.py` | Style lock + banned photoreal impersonation. |
 | `scripts/lint_story.py` / `lint_storyboard.py` | Novelty, voice, 1:1 pause timestamps, prop/set economy, stock-AI language. |
 | `scripts/lint_originality.py` | Compare this title to the last 10 shipped videos. |
-| Google Flow (operator) | Stills. Paste `flow_prompts.txt`. Engine never calls Flow. |
+| Google Flow (operator) | HITL stills. Paste `flow_prompts.txt`. Engine never calls Flow. |
+| Nano Banana 2 (`gemini-3.1-flash-image`) | Opt-in stills. `python -m channel images` when `GEMINI_API_KEY` is set. Reads compile image jobs, passes character-sheet refs, then ingest-images. Does not run on `--resume`. |
 | Gemini 3.1 Flash TTS | Narration on new jobs when `GEMINI_API_KEY` is set. `python -m channel tts` calls `gemini-3.1-flash-tts-preview`, saves `tts_chunks.txt` + `audio/chunks/`, then ingest-audio. |
 | Imported audio (operator) | Fallback narration if the Gemini key is missing. Copy `script.txt` into ElevenLabs (or any TTS). Engine never calls ElevenLabs. Shipped recuts may still use Kokoro `am_liam`. |
 | `python -m channel assemble` | Drop-folder filename clocks, or pause-timed still holds, + mux imported VO. Drop-folder cuts assemble without burned captions. |
@@ -125,7 +126,7 @@ TITLE
   → PAUSE DETECT (whisper / ffmpeg)
   → CHARACTER / LOCATION BIBLES + SCENE GENERATION (1:1 with pauses)
   → flow_prompts (only if originality_score ≥ 80 and ready_to_publish)
-  → Google Flow + ingest-images
+  → python -m channel images (Nano Banana 2) or Google Flow + ingest-images
   → FFmpeg assemble (`python -m channel assemble`)
   → SHORT (optional second HITL pass; does not block long READY)
   → THUMBNAIL + METADATA
@@ -208,7 +209,8 @@ TITLE + DROP FOLDER
 
 12. .venv/bin/python scripts/lint_storyboard.py <job spec>
 
-13. Paste flow_prompts.txt into Google Flow (16:9, one image per prompt).
+13. `python -m channel images <JOB_ID>` (Nano Banana 2 / `gemini-3.1-flash-image`, needs GEMINI_API_KEY)
+    or paste flow_prompts.txt into Google Flow (16:9, one image per prompt).
     ZAPI serial files like `02_red_cabin.jpg` remap on ingest (queue 1 = `000_00-00-00.png`)
     and Lanczos-upscale to 3840×2160 so assemble renders a 4K long cut.
     Upload `flow_batches.txt` (one prompt per line, all stills in one file).
@@ -266,7 +268,8 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 
 ## Pictures
 
-- One Google Flow still per pause timestamp, from `flow_prompts.txt`.
+- One still per pause timestamp, from `flow_prompts.txt`.
+- **Engine:** `python -m channel images` (Nano Banana 2, model `gemini-3.1-flash-image`, default 2K 16:9) when `GEMINI_API_KEY` is set. Writes `images/nano_banana/` then ingest-images. Does not run on `--resume`. Operator Google Flow still works if the key is missing or you want HITL. The engine never calls Flow, fal.ai, or OpenAI Images on this path.
 - **Global style is frozen** in `channel/config.py` (`GLOBAL_VISUAL_STYLE`). New titles also get a per-slug palette accent so stills are not one interchangeable farm look. Shipped stills stay as generated. Agents fill action and composition only. Compile prepends the prefix.
 - Flat **stick-figure doodle** animation: hand-drawn 2D, bold outlines, solid color-block backgrounds, muted historical palette on Think. Named people are a **recognizable cartoon of the real person** on that stick-figure construction. Not photoreal, not 3D, not anime.
 - Historical personal names stay **out** of image prompts. Identity is the character bible `visual_lock`.
