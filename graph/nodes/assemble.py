@@ -352,9 +352,10 @@ def _ffmpeg_still_to_video(
 def _ffmpeg_reencode(
     src: Path, dest: Path, frames: int, width: int, height: int, fps: int
 ) -> None:
-    """Re-encode a motion clip to the common segment baseline."""
+    """Loop a motion clip to the requested frame count and scale to the cut."""
     _run([
-        "ffmpeg", "-y", "-loglevel", "error", "-i", str(src),
+        "ffmpeg", "-y", "-loglevel", "error",
+        "-stream_loop", "-1", "-i", str(src),
         "-frames:v", str(frames),
         "-vf", f"{_fit(width, height)},fps={fps}",
         *_x264(dest),

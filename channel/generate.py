@@ -51,7 +51,7 @@ NEXT_STEPS = (
     "python -m channel qa is also available on --resume once the project is filled.",
     "After SCRIPT_QA_PASSED: python -m channel tts {job_id} (Gemini 3.1 Flash TTS) or ingest-audio. Do not write scenes yet.",
     "Do not emit flow_prompts until originality_score >= 80 and ready_to_publish.",
-    "Paste flow_prompts.txt into Google Flow, or python -m channel images {job_id} (Nano Banana 2). Then ingest-images. Then assemble.",
+    "Paste flow_prompts.txt into Google Flow, or python -m channel images {job_id} (Nano Banana 2). Then ingest-images. Optional python -m channel videos {job_id} (gemini-omni-1.1-flash). Then assemble.",
     IMAGE_FILENAME_RULE,
     "Assemble: python -m channel assemble {job_id}  (Shorts are a second HITL pass and do not block long READY)",
     "DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATION, OR QA THRESHOLDS DURING A NORMAL VIDEO GENERATION TASK.",
@@ -497,7 +497,8 @@ def resume_job(
     if images_complete(dest):
         manifest.state = JobState.images_ingested
         manifest.notes = [
-            f"Images ready. Assemble: python -m channel assemble {job_id}",
+            f"Images ready. Optional motion: python -m channel videos {job_id} "
+            f"(gemini-omni-1.1-flash). Assemble: python -m channel assemble {job_id}",
         ]
     else:
         manifest.notes = [

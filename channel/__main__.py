@@ -19,6 +19,7 @@ Subcommands:
     generate       isolated job under artifacts/<job_id>/ (canonical Cloud command)
     tts            Gemini 3.1 Flash TTS → audio/chunks + ingest-audio
     images         Nano Banana 2 (gemini-3.1-flash-image) stills from image jobs
+    videos         Omni 1.1 Flash (gemini-omni-1.1-flash) image-to-video from stills
     drop           create a drop folder for timestamped stills + narration audio
     cloud-readiness check configs, prompts, rules, writable artifacts
 """
@@ -234,11 +235,12 @@ Style, voice, and QA rules live in `channel/config.py` — do not copy a person 
 5. Scene breakdown 1:1 with `timestamps.json` (SCENE_BREAKDOWN). Do not use `channel chunks` as the clock.
 6. `python -m channel generate --resume <JOB_ID>` writes `flow_prompts.txt` after originality_score >= 80 and ready_to_publish
 7. `python -m channel images <JOB_ID>` (Nano Banana 2 / gemini-3.1-flash-image) or paste `flow_prompts.txt` into Google Flow. `python -m channel ingest-images <JOB_ID> /path/to/pngs --partial`
-8. `python -m channel assemble <JOB_ID>` then `python -m channel youtube {slug}`
-9. Update `{docs}`
+8. Optional: `python -m channel videos <JOB_ID>` (Omni 1.1 Flash / gemini-omni-1.1-flash image-to-video). Assemble prefers `videos/{{still-stem}}.mp4`.
+9. `python -m channel assemble <JOB_ID>` then `python -m channel youtube {slug}`
+10. Update `{docs}`
 
 Voice on new jobs is Gemini 3.1 Flash TTS (`python -m channel tts`) when GEMINI_API_KEY is set, else operator-imported audio. The engine does not call ElevenLabs or Kokoro on new jobs. Shipped recuts may still use Kokoro.
-Images: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) when GEMINI_API_KEY is set, else operator Google Flow stills. Do not invent quotes or numbers.
+Images: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) when GEMINI_API_KEY is set, else operator Google Flow stills. Optional motion: `python -m channel videos` (`gemini-omni-1.1-flash`). Do not invent quotes or numbers.
 """
 
 
@@ -363,6 +365,7 @@ def _compile(args: argparse.Namespace) -> int:
     print("lint: .venv/bin/python scripts/lint_story.py", spec_rel)
     print("originality: .venv/bin/python scripts/lint_originality.py", spec_rel)
     print("jobs: python -m channel images <JOB_ID>  (Nano Banana 2) or paste flow_prompts.txt into Google Flow, then ingest-images")
+    print("clips: python -m channel videos <JOB_ID>  (optional Omni 1.1 Flash / gemini-omni-1.1-flash)")
     print("thumb: paste thumbnail_prompts.txt into Google Flow, then")
     print(f"       .venv/bin/python -m channel youtube {project.slug}")
     print("voice+assemble: python -m channel ingest-audio then python -m channel assemble")
@@ -542,6 +545,42 @@ def _images(args: argparse.Namespace) -> int:
         if result.get("ingested")
         else "state: WAIT_IMAGES"
     )
+    return 0
+
+
+def _videos(args: argparse.Namespace) -> int:
+    from adapters.video_gen.gemini_omni import (
+        GEMINI_OMNI_DEFAULT_RESOLUTION,
+        GEMINI_OMNI_VIDEO_MODEL,
+        GeminiOmniError,
+    )
+    from channel.gemini_videos import GeminiVideosError, generate_job_videos
+    from channel.job import ARTIFACTS
+
+    root = Path(args.artifacts) if args.artifacts else ARTIFACTS
+    try:
+        result = generate_job_videos(
+            args.job_id,
+            artifacts_root=root,
+            model=args.model or GEMINI_OMNI_VIDEO_MODEL,
+            resolution=args.resolution or GEMINI_OMNI_DEFAULT_RESOLUTION,
+            aspect_ratio=args.aspect,
+            force=bool(args.force),
+            only_index=args.index,
+            limit=args.limit,
+            dry_run=bool(args.dry_run),
+            seconds=args.seconds,
+        )
+    except (GeminiVideosError, GeminiOmniError) as exc:
+        print(str(exc))
+        return 1
+    print(json.dumps(result, indent=2))
+    print(f"videos: {result['videos']}")
+    print(f"ledger: {result['ledger']}")
+    if result.get("dry_run"):
+        print("state: dry-run (no API call)")
+        return 0
+    print(f"generated: {result['generated']} skipped: {result['skipped']} missing_stills: {result['missing_stills']}")
     return 0
 
 
@@ -850,6 +889,44 @@ def main(argv: list[str] | None = None) -> int:
         help="write staging PNGs without running ingest-images",
     )
     images.set_defaults(func=_images)
+
+    videos = sub.add_parser(
+        "videos",
+        help="animate ingested stills with Omni 1.1 Flash (gemini-omni-1.1-flash) image-to-video",
+    )
+    videos.add_argument("job_id")
+    videos.add_argument("--artifacts", default="")
+    videos.add_argument(
+        "--model",
+        default="",
+        help="default gemini-omni-1.1-flash (Omni 1.1 Flash)",
+    )
+    videos.add_argument(
+        "--resolution",
+        default="720p",
+        choices=["360p", "720p", "1080p", "4k"],
+        help="output resolution (default 720p, ~$0.10/s)",
+    )
+    videos.add_argument(
+        "--aspect",
+        default="",
+        help="16:9 (long) or 9:16 (short). Default from the job format.",
+    )
+    videos.add_argument("--force", action="store_true", help="regenerate existing clips; skip ready_to_publish gate")
+    videos.add_argument("--index", type=int, default=None, help="generate one 0-based still index")
+    videos.add_argument("--limit", type=int, default=None, help="generate at most N clips")
+    videos.add_argument(
+        "--seconds",
+        type=float,
+        default=None,
+        help="override pause duration (clamped to 3–10 s)",
+    )
+    videos.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="list jobs without calling the API",
+    )
+    videos.set_defaults(func=_videos)
 
     inga = sub.add_parser("ingest-audio", help="import operator voiceover and detect pause scenes")
     inga.add_argument("job_id")

@@ -123,6 +123,7 @@ def ensure_job_tree(job_id: str, *, root: Path | None = None) -> Path:
         "fixtures",
         "fixtures/video_specs",
         "images",
+        "videos",
         "drop",
         "audio",
         "audio/chunks",
@@ -236,11 +237,16 @@ def write_operator_md(manifest: GenerationManifest, *, root: Path | None = None)
         JobState.images_ingested.value: (
             f"# Operator — {manifest.job_id}\n\n"
             f"State: `{state}`\n\n"
-            f"Images are in `{images}`. Assemble the long cut:\n\n"
+            f"Images are in `{images}`. Optional motion with Omni 1.1 Flash "
+            f"(`gemini-omni-1.1-flash`) image-to-video — paid, still-first, "
+            f"does not run on `--resume`:\n\n"
             f"```text\n"
+            f".venv/bin/python -m channel videos {manifest.job_id}\n"
             f".venv/bin/python -m channel assemble {manifest.job_id}\n"
             f"```\n\n"
-            "A Short is a second HITL pass and does not block this long READY.\n"
+            "Assemble prefers `videos/{still-stem}.mp4` when present and otherwise "
+            "holds the still. A Short is a second HITL pass and does not block "
+            "this long READY.\n"
         ),
     }
     default = (

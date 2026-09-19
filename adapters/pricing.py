@@ -124,6 +124,22 @@ GEMINI_FLASH_IMAGE_OUTPUT_TOKENS = {
     "4K": 2520,
 }
 
+# Gemini Omni 1.1 Flash video (gemini-omni-1.1-flash). Paid-tier Gemini API.
+# Verified against https://ai.google.dev/gemini-api/docs/models/gemini-omni-1.1-flash
+# (2026-09-19): input $1.50 / MTok, text output $9.00 / MTok, video output
+# $17.50 / MTok. Video-output token floors per second: 360p=1931, 720p=5792,
+# 1080p=8688, 4k=17376. 720p ≈ $0.10 / s. Duration is 3–10 s at 24 fps.
+_GEMINI_OMNI_INPUT = 1.50 / 1_000_000
+_GEMINI_OMNI_TEXT_OUT = 9.00 / 1_000_000
+_GEMINI_OMNI_VIDEO_OUT = 17.50 / 1_000_000
+GEMINI_OMNI_VIDEO_TOKENS_PER_SECOND = {
+    "360p": 1931,
+    "720p": 5792,
+    "1080p": 8688,
+    "4k": 17376,
+    "4K": 17376,
+}
+
 
 def claude_cost(model: str, input_tokens: int, output_tokens: int) -> float:
     """
@@ -251,3 +267,40 @@ def gemini_flash_image_size_cost(image_size: str, num_images: int = 1) -> float:
     """Floor cost of ``num_images`` Nano Banana 2 stills at a named resolution."""
     tokens = GEMINI_FLASH_IMAGE_OUTPUT_TOKENS.get(image_size, GEMINI_FLASH_IMAGE_OUTPUT_TOKENS["2K"])
     return gemini_flash_image_cost(0, 0, 0, tokens * num_images)
+
+
+def gemini_omni_video_cost(
+    text_input_tokens: int,
+    image_input_tokens: int,
+    video_input_tokens: int,
+    text_output_tokens: int,
+    video_output_tokens: int,
+) -> float:
+    """USD cost of one Omni 1.1 Flash (`gemini-omni-1.1-flash`) video call.
+
+    Input text, images, and video share the $1.50 / MTok rate. Text output
+    bills at $9 / MTok; generated video tokens bill at $17.50 / MTok. Pass
+    the API's reported counts when present. When usage is missing, callers
+    should fall back to ``gemini_omni_video_floor_cost`` so the cost log is
+    not $0.
+    """
+    inp = _GEMINI_OMNI_INPUT
+    return (
+        max(0, text_input_tokens) * inp
+        + max(0, image_input_tokens) * inp
+        + max(0, video_input_tokens) * inp
+        + max(0, text_output_tokens) * _GEMINI_OMNI_TEXT_OUT
+        + max(0, video_output_tokens) * _GEMINI_OMNI_VIDEO_OUT
+    )
+
+
+def gemini_omni_video_floor_cost(
+    resolution: str,
+    duration_seconds: float,
+) -> float:
+    """Floor cost of one Omni clip from resolution × duration token rates."""
+    tokens_per_s = GEMINI_OMNI_VIDEO_TOKENS_PER_SECOND.get(
+        resolution, GEMINI_OMNI_VIDEO_TOKENS_PER_SECOND["720p"]
+    )
+    tokens = tokens_per_s * max(0.0, float(duration_seconds))
+    return gemini_omni_video_cost(0, 0, 0, 0, int(round(tokens)))

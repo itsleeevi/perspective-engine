@@ -55,6 +55,8 @@ REQUIRED_FILES = (
     "channel/drop.py",
     "channel/gemini_tts.py",
     "channel/gemini_images.py",
+    "channel/gemini_videos.py",
+    "adapters/video_gen/gemini_omni.py",
 )
 
 REQUIRED_ENV_NAMES = (

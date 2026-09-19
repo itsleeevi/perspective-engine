@@ -59,6 +59,9 @@ class StillJob:
     aspect: str
     reference_paths: list[str] = field(default_factory=list)
     who: str = ""
+    camera_motion: str = ""
+    start_seconds: float = 0.0
+    end_seconds: float = 0.0
 
 
 def _resolve_under(base: Path, rel: str) -> Path | None:
@@ -130,6 +133,9 @@ def load_still_jobs(jobs_file: Path) -> list[StillJob]:
                 aspect=str(row.get("aspect") or GEMINI_IMAGE_ASPECT),
                 reference_paths=refs,
                 who=str(row.get("who") or ""),
+                camera_motion=str(row.get("camera_motion") or ""),
+                start_seconds=float(row.get("start_seconds") or 0.0),
+                end_seconds=float(row.get("end_seconds") or 0.0),
             )
         )
     if not out:

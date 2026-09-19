@@ -9,10 +9,12 @@ from pathlib import Path
 from channel.ingest import expected_image_names, match_images
 from channel.job import ARTIFACTS, JobState, job_dir, load_manifest, write_manifest, write_operator_md, write_report
 from channel.pauses import load_timestamps
+from adapters.video_gen.gemini_omni import matching_omni_clip
 from graph.nodes.assemble import (
     _cumulative_frame_counts,
     _ffmpeg_concat,
     _ffmpeg_mix_audio,
+    _ffmpeg_reencode,
     _ffmpeg_still_to_video,
 )
 
@@ -65,7 +67,14 @@ def assemble_hitl(
     with tempfile.TemporaryDirectory(prefix="pe_hitl_") as tmp_dir:
         tmp = Path(tmp_dir)
         segments = []
+        videos_dir = job / "videos"
         for i, (row, src, frames) in enumerate(zip(rows, stills, frame_counts, strict=True)):
+            seg = tmp / f"seg_{i:03d}.mp4"
+            clip = matching_omni_clip(videos_dir, src)
+            if clip is not None:
+                _ffmpeg_reencode(clip, seg, frames, WIDTH, HEIGHT, FPS)
+                segments.append(seg)
+                continue
             fitted = src
             with Image.open(src) as im:
                 already_4k = im.size == (WIDTH, HEIGHT)
@@ -78,7 +87,6 @@ def assemble_hitl(
                     captioned = tmp / f"caption_{i:03d}.png"
                     overlay_scene_caption(fitted, captioned, caption)
                     fitted = captioned
-            seg = tmp / f"seg_{i:03d}.mp4"
             _ffmpeg_still_to_video(fitted, seg, frames, WIDTH, HEIGHT, FPS)
             segments.append(seg)
         concat = tmp / "concat.mp4"

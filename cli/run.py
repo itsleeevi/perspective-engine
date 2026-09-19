@@ -185,6 +185,7 @@ async def main(
     image_provider: str = "gpt-image-2",
     image_quality: str = "low",
     include_hook: bool = False,
+    video_provider: str = "seedance",
 ) -> None:
     # Adapters read ADAPTER_CACHE from the environment at call time, so setting
     # it here (before the graph runs) is enough to toggle the disk cache.
@@ -221,10 +222,23 @@ async def main(
                 model=image_provider, quality=image_quality
             )
         print(f"Mode: REAL — {image_label} stills + {voice_label}")
-        if not static_only:
-            print("Motion enabled: Seedance video calls cost ~$1.20 per shot.")
+        from adapters.video_gen.gemini_omni import (
+            GEMINI_OMNI_ALIASES,
+            GeminiOmniVideoAdapter,
+        )
+
         llm = OpenAILLMAdapter()
-        video_gen = FalVideoGenAdapter()
+        if video_provider in GEMINI_OMNI_ALIASES:
+            video_gen = GeminiOmniVideoAdapter()
+            if not static_only:
+                print(
+                    "Motion enabled: Omni 1.1 Flash (gemini-omni-1.1-flash) "
+                    "image-to-video ~$0.10/s at 720p."
+                )
+        else:
+            video_gen = FalVideoGenAdapter()
+            if not static_only:
+                print("Motion enabled: Seedance video calls cost ~$1.20 per shot.")
         voice = (
             ElevenLabsVoiceAdapter()
             if paid_voice
@@ -431,6 +445,25 @@ def _parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--video-provider",
+        default="seedance",
+        choices=[
+            "seedance",
+            "fal",
+            "gemini-omni-1.1-flash",
+            "omi-1.1-flash",
+            "omni-1.1-flash",
+        ],
+        dest="video_provider",
+        help=(
+            "Motion-clip provider when --allow-motion is set. Default "
+            "'seedance' / 'fal' is Seedance 2.0 Fast (~$0.24/s, FAL_KEY). "
+            "'gemini-omni-1.1-flash' / 'omi-1.1-flash' is Omni 1.1 Flash "
+            "image-to-video (~$0.10/s at 720p, GEMINI_API_KEY). Still-first. "
+            "Does not silently replace Seedance."
+        ),
+    )
+    parser.add_argument(
         "--image-quality",
         default="low",
         choices=["low", "medium", "high"],
@@ -480,5 +513,6 @@ if __name__ == "__main__":
             image_provider=_args.image_provider,
             image_quality=_args.image_quality,
             include_hook=_args.include_hook,
+            video_provider=_args.video_provider,
         )
     )

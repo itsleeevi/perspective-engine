@@ -94,6 +94,20 @@ GEMINI_IMAGE_LOCK = {
     "image_size": "2K",
 }
 
+# Opt-in image-to-video. Assemble stays a still slideshow unless clips exist.
+# `python -m channel videos` calls this when GEMINI_API_KEY is set.
+GEMINI_VIDEO_LOCK = {
+    "provider": "gemini",
+    "public_name": "Omni 1.1 Flash",
+    "model": "gemini-omni-1.1-flash",
+    "endpoint": "interactions",
+    "task": "image_to_video",
+    "resolution": "720p",
+    "min_seconds": 3.0,
+    "max_seconds": 10.0,
+    "opt_in": True,
+}
+
 PROMPT_MODULES = {
     ChannelMode.what_they_really_think: "channel.agent_prompts",
     ChannelMode.behind_the_business: "channel.business_prompts",

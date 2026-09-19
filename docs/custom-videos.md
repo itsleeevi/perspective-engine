@@ -12,7 +12,7 @@ Sacred for every video on every channel:
 - **Unique scenes and diagrams** built around that company's actual business (or that title's actual evidence).
 - Plus the existing **unique story engine** — if you could swap the names and keep the same video, throw it out.
 
-The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → `script.txt` → Gemini TTS or imported audio → pause scenes → Nano Banana 2 or Google Flow stills → FFmpeg.
+The LangGraph HITL pipeline in `graph/` is a different product (fictional rank-POV videos). Do not route these titles through `ideate` — that node blocks real named people. This path is `channel/` → `script.txt` → Gemini TTS or imported audio → pause scenes → Nano Banana 2 or Google Flow stills → optional Omni 1.1 Flash (`gemini-omni-1.1-flash`) clips → FFmpeg.
 
 The **master prompt** (`channel/master_prompt.py`, exported as `MASTER` on each channel module) is the staged operator loop: title → research → `script.txt` → `WAIT_AUDIO` (`python -m channel tts` or ingest-audio) → timestamps → Flow prompts in batches of 20 (**Reply "next"**) → YouTube metadata. Documentary shared look is **stick-figure doodle**; customize mood and story DNA per channel. Quiet Wealth (`docs/wealth-pov.md`) uses detailed colored 2D illustrations and second person instead. Do not import 2nd-person explainer voice onto the documentary channels.
 
@@ -109,9 +109,10 @@ Research through the day you are writing so the facts are current. **Do not say 
 | `scripts/lint_originality.py` | Compare this title to the last 10 shipped videos. |
 | Google Flow (operator) | HITL stills. Paste `flow_prompts.txt`. Engine never calls Flow. |
 | Nano Banana 2 (`gemini-3.1-flash-image`) | Opt-in stills. `python -m channel images` when `GEMINI_API_KEY` is set. Reads compile image jobs, passes character-sheet refs, then ingest-images. Does not run on `--resume`. |
+| Omni 1.1 Flash (`gemini-omni-1.1-flash`) | Opt-in image-to-video. `python -m channel videos` after stills exist. Writes `videos/{still-stem}.mp4`. Assemble prefers those clips; otherwise still holds. Does not run on `--resume`. |
 | Gemini 3.1 Flash TTS | Narration on new jobs when `GEMINI_API_KEY` is set. `python -m channel tts` calls `gemini-3.1-flash-tts-preview`, saves `tts_chunks.txt` + `audio/chunks/`, then ingest-audio. |
 | Imported audio (operator) | Fallback narration if the Gemini key is missing. Copy `script.txt` into ElevenLabs (or any TTS). Engine never calls ElevenLabs. Shipped recuts may still use Kokoro `am_liam`. |
-| `python -m channel assemble` | Drop-folder filename clocks, or pause-timed still holds, + mux imported VO. Drop-folder cuts assemble without burned captions. |
+| `python -m channel assemble` | Drop-folder filename clocks, or pause-timed still holds (or Omni clips in `videos/` when present), + mux imported VO. Drop-folder cuts assemble without burned captions. |
 
 ```text
 TITLE
@@ -127,6 +128,7 @@ TITLE
   → CHARACTER / LOCATION BIBLES + SCENE GENERATION (1:1 with pauses)
   → flow_prompts (only if originality_score ≥ 80 and ready_to_publish)
   → python -m channel images (Nano Banana 2) or Google Flow + ingest-images
+  → python -m channel videos (optional Omni 1.1 Flash / gemini-omni-1.1-flash)
   → FFmpeg assemble (`python -m channel assemble`)
   → SHORT (optional second HITL pass; does not block long READY)
   → THUMBNAIL + METADATA
@@ -217,12 +219,16 @@ TITLE + DROP FOLDER
     python -m channel ingest-images <JOB_ID> /path/to/pngs --partial
     Thumbnail prompts: thumbnail_prompts.txt. No on-image text — type is burned later.
 
-14. python -m channel assemble <JOB_ID>
+14. Optional: `python -m channel videos <JOB_ID>` (Omni 1.1 Flash / `gemini-omni-1.1-flash`, needs GEMINI_API_KEY)
+    Image-to-video from ingested stills. Writes `videos/{still-stem}.mp4`.
+    Does not run on `--resume`. Skip this step to keep a still slideshow.
+
+15. python -m channel assemble <JOB_ID>
     Long cut only. A Short is a second HITL pass and does not block long READY.
     Never two assembles at once. A different title must wait 24 hours
     (`--force` to override a recut).
 
-15. Verify: ffprobe duration + resolution; sync.max_cut_error_ms < 20;
+16. Verify: ffprobe duration + resolution; sync.max_cut_error_ms < 20;
     spot-check frames for letterbox.
     `python -m channel youtube <slug>` writes description + tags (assemble
     stamps chapter times) and burns 1280×720 and 1080×1920 JPEG type.
@@ -270,6 +276,7 @@ Equivalent: `.venv/bin/python scripts/run_title.py "What X Really Thought About 
 
 - One still per pause timestamp, from `flow_prompts.txt`.
 - **Engine:** `python -m channel images` (Nano Banana 2, model `gemini-3.1-flash-image`, default 2K 16:9) when `GEMINI_API_KEY` is set. Writes `images/nano_banana/` then ingest-images. Does not run on `--resume`. Operator Google Flow still works if the key is missing or you want HITL. The engine never calls Flow, fal.ai, or OpenAI Images on this path.
+- **Motion (opt-in):** `python -m channel videos` (Omni 1.1 Flash, model `gemini-omni-1.1-flash`, default 720p image-to-video) after stills exist. Writes `videos/{still-stem}.mp4`. Assemble prefers those clips; otherwise still holds. Same Gemini key. Does not run on `--resume`. Do not fall back to Seedance or fal.ai.
 - **Global style is frozen** in `channel/config.py` (`GLOBAL_VISUAL_STYLE`). New titles also get a per-slug palette accent so stills are not one interchangeable farm look. Shipped stills stay as generated. Agents fill action and composition only. Compile prepends the prefix.
 - Flat **stick-figure doodle** animation: hand-drawn 2D, bold outlines, solid color-block backgrounds, muted historical palette on Think. Named people are a **recognizable cartoon of the real person** on that stick-figure construction. Not photoreal, not 3D, not anime.
 - Historical personal names stay **out** of image prompts. Identity is the character bible `visual_lock`.

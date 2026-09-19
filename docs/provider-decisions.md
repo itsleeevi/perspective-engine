@@ -13,11 +13,12 @@ This is the path that ships What They Really Think, How They Really Make Money, 
 | Role | Locked choice | Why |
 |---|---|---|
 | Stills | **Nano Banana 2** (`gemini-3.1-flash-image`) via `python -m channel images`, or operator **Google Flow** ingest | Named engine stills after QA. Character sheets as reference images. Flow remains HITL if the key is missing. Does not run on `--resume`. |
+| Motion | **Omni 1.1 Flash** (`gemini-omni-1.1-flash`) via `python -m channel videos` | Opt-in image-to-video from ingested stills. Assemble prefers `videos/{still-stem}.mp4`; otherwise still holds. Does not run on `--resume`. Default remains the still slideshow. |
 | Voice | **Gemini 3.1 Flash TTS** (`gemini-3.1-flash-tts-preview`, Charon) | Named engine TTS via `python -m channel tts`. Operator imported audio if `GEMINI_API_KEY` is missing. Shipped recuts may still use Kokoro `am_liam`. |
-| Assemble | FFmpeg (`scripts/run_custom_video.py`, `scripts/run_short.py`) | Whisper-aligned still slideshow, 3840×2160 long / 1080×1920 Shorts. |
+| Assemble | FFmpeg (`scripts/run_custom_video.py`, `scripts/run_short.py`) | Whisper-aligned still slideshow, 3840×2160 long / 1080×1920 Shorts. Omni clips loop/trim to the pause when present. |
 | Research seed | Wikipedia + agent primary sources | Seed only; claims keep `claim_id` and source dates. |
 
-Missing stills is a **hard stop** (`WAIT_IMAGES`). `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) is opt-in when `GEMINI_API_KEY` is set; operator Google Flow ingest still works. Missing Gemini TTS is `WAIT_AUDIO`, not a swap to Edge, ElevenLabs, or Kokoro. Do not fall back to fal.ai images, OpenAI image APIs, Edge TTS, ElevenLabs, or Chatterbox on this path. Documentary generation does not read `FAL_KEY` or `ELEVENLABS_API_KEY`. Gemini TTS and Nano Banana 2 read `GEMINI_API_KEY`.
+Missing stills is a **hard stop** (`WAIT_IMAGES`). `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) is opt-in when `GEMINI_API_KEY` is set; operator Google Flow ingest still works. `python -m channel videos` (`gemini-omni-1.1-flash`) is opt-in after stills exist and is not a silent swap from the still slideshow. Missing Gemini TTS is `WAIT_AUDIO`, not a swap to Edge, ElevenLabs, or Kokoro. Do not fall back to fal.ai images, OpenAI image APIs, Edge TTS, ElevenLabs, Chatterbox, or Seedance on this path. Documentary generation does not read `FAL_KEY` or `ELEVENLABS_API_KEY`. Gemini TTS, Nano Banana 2, and Omni 1.1 Flash read `GEMINI_API_KEY`.
 
 Specs: [`docs/video-engine/`](video-engine/), [`docs/video-engine/NARRATION.md`](video-engine/NARRATION.md), [`docs/video-engine/VISUAL_STYLE.md`](video-engine/VISUAL_STYLE.md).
 
@@ -37,9 +38,9 @@ Adapter-based (`adapters/llm/`), so swapping providers is a new adapter, not an 
 
 Graph-only. `OpenAIImageGenAdapter` is the default on that path because it was measured to render in-scene text more reliably. `GeminiImageGenAdapter` (`--image-provider gemini-3.1-flash-image` / `nano-banana-2`) is Nano Banana 2, native 16:9, same `GEMINI_API_KEY` as documentary TTS. `FalImageGenAdapter` remains available via `--image-provider fal`. Documentary titles use `python -m channel images` or Google Flow, **not** these graph adapters as a silent swap.
 
-### Video generation: fal.ai, Seedance 2.0 Fast (image-to-video)
+### Video generation: fal.ai Seedance 2.0 Fast (default), Omni 1.1 Flash (opt-in)
 
-Graph-only model router. Text-to-video is never used for character shots (see [Character consistency](architecture.md#character-consistency-in-depth)). Motion is off by default (`static_only=True`, `--allow-motion` to opt in).
+Graph-only model router. Default remains Seedance (`--video-provider seedance`). `--video-provider gemini-omni-1.1-flash` / `omi-1.1-flash` is Omni 1.1 Flash image-to-video (same `GEMINI_API_KEY`). Text-to-video is never used for character shots (see [Character consistency](architecture.md#character-consistency-in-depth)). Motion is off by default (`static_only=True`, `--allow-motion` to opt in). Documentary titles use `python -m channel videos`, **not** these graph adapters as a silent swap.
 
 ### Voice: Edge TTS default, ElevenLabs opt-in, Chatterbox isolated venv
 
