@@ -38,7 +38,7 @@ DO NOT MODIFY THE VIDEO ENGINE, CHANNEL PROMPTS, GLOBAL STYLE, MODEL CONFIGURATI
 
 Sacred for every video: fresh research; a different story architecture; original narration (not rewritten articles or YouTube transcripts); unique scenes and diagrams; a unique story engine. `the_thought` must be spoken. Brand consistency is not a name-swap spine. `originality_score` vs the last 10 videos on the **same** channel must be ≥ 80 and `ready_to_publish` before GenerateImage.
 
-Long cuts on the documentary channels are **~5–15 minutes** (**800–2500** words). Quiet Wealth long cuts are **~32–36 minutes** (**5,600–5,800** words, second person). Voice is Gemini 3.1 Flash TTS (`python -m channel tts`) when `GEMINI_API_KEY` is set, else **imported audio**. The engine never calls ElevenLabs. Shipped recuts may still use Kokoro (`am_liam` or roster `am_michael` / `am_fenrir`). Images: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) after QA when the Gemini key is set, or operator **Google Flow** stills from `flow_prompts.txt`. Optional motion: `python -m channel videos` (`gemini-omni-1.1-flash` image-to-video) after stills exist; assemble prefers those clips. Named public figures are a recognizable cartoon of the real person; reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as Flow / Nano Banana 2 references. Match the **grammar** in [`docs/video-engine/QUALITY_BAR.md`](docs/video-engine/QUALITY_BAR.md) without cloning a reference-cut spine. Historical names and company names stay out of image prompts and still filenames.
+Long cuts on the documentary channels are **~5–15 minutes** (**800–2500** words). Quiet Wealth long cuts are **~32–36 minutes** (**5,600–5,800** words, second person). Voice is Gemini 3.1 Flash TTS (`python -m channel tts`) when `GEMINI_API_KEY` is set, else **imported audio**. The engine never calls ElevenLabs. Shipped recuts may still use Kokoro (`am_liam` or roster `am_michael` / `am_fenrir`). Images: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) after QA when the Gemini key is set, or operator **Google Flow** stills from `flow_prompts.txt`. Optional motion: `python -m channel videos` (`gemini-omni-1.1-flash` image-to-video) after stills exist; assemble prefers those clips. Optional music: `python -m channel music` (`lyria-3-clip-preview`) after QA; assemble mixes the bed under the voiceover. Named public figures are a recognizable cartoon of the real person; reuse `channel/character_locks.json` and the hashed photo plus sheet in `channel/character_sheets/` as Flow / Nano Banana 2 references. Match the **grammar** in [`docs/video-engine/QUALITY_BAR.md`](docs/video-engine/QUALITY_BAR.md) without cloning a reference-cut spine. Historical names and company names stay out of image prompts and still filenames.
 
 After compile, GenerateImage the 16:9 and 9:16 thumbnail jobs (no on-image text) and run `python -m channel youtube <slug>`. YouTube descriptions include an honest synthetic-media disclosure. Different titles wait 24 hours between assembles.
 
@@ -46,7 +46,7 @@ Paste-ready Cloud prompt: [`docs/video-engine/CLOUD_AGENT_START_PROMPT.md`](docs
 
 ### Documentary install and smoke
 
-Python ≥ 3.13, `ffmpeg` on `PATH` for assemble. Documentary generation does **not** need `FAL_KEY` or `ELEVENLABS_API_KEY`. Gemini TTS, Nano Banana 2 stills, and Omni 1.1 Flash clips use `GEMINI_API_KEY`. If stills are missing, stop (or run `python -m channel images`). Motion clips are opt-in (`python -m channel videos`) and do not run on `--resume`.
+Python ≥ 3.13, `ffmpeg` on `PATH` for assemble. Documentary generation does **not** need `FAL_KEY` or `ELEVENLABS_API_KEY`. Gemini TTS, Nano Banana 2 stills, Omni 1.1 Flash clips, and Lyria 3 music use `GEMINI_API_KEY`. If stills are missing, stop (or run `python -m channel images`). Motion clips are opt-in (`python -m channel videos`) and do not run on `--resume`. Background music is opt-in (`python -m channel music`) and does not run on `--resume`.
 
 ```text
 python3.13 -m venv .venv
@@ -68,7 +68,7 @@ python -m graph run --topic "The History of Paperclips"
 python -m graph resume --thread-id <id>
 ```
 
-Copy `.env.example` to `.env` for `GEMINI_API_KEY` (channel TTS + Nano Banana 2 stills + Omni 1.1 Flash clips) or if you are exercising the graph adapters (Anthropic, fal.ai, ElevenLabs, `--image-provider nano-banana-2`, `--video-provider gemini-omni-1.1-flash`). The graph path is independent of documentary production.
+Copy `.env.example` to `.env` for `GEMINI_API_KEY` (channel TTS + Nano Banana 2 stills + Omni 1.1 Flash clips + Lyria 3 music) or if you are exercising the graph adapters (Anthropic, fal.ai, ElevenLabs, `--image-provider nano-banana-2`, `--video-provider gemini-omni-1.1-flash`). The graph path is independent of documentary production.
 
 ## Workflow
 

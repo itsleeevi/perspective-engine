@@ -386,6 +386,7 @@ def assemble_drop(
     artifacts_root: Path | None = None,
     images: Path | None = None,
     audio: Path | None = None,
+    no_music: bool = False,
 ) -> Path:
     """Upscale drop-folder stills to 4K and mux narration. No burned captions."""
     from channel.assemble_hitl import assemble_hitl
@@ -397,5 +398,8 @@ def assemble_drop(
         audio=audio,
     )
     return assemble_hitl(
-        job_id, artifacts_root=artifacts_root, burn_captions=False
+        job_id,
+        artifacts_root=artifacts_root,
+        burn_captions=False,
+        no_music=no_music,
     )

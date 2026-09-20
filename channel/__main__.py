@@ -20,6 +20,7 @@ Subcommands:
     tts            Gemini 3.1 Flash TTS → audio/chunks + ingest-audio
     images         Nano Banana 2 (gemini-3.1-flash-image) stills from image jobs
     videos         Omni 1.1 Flash (gemini-omni-1.1-flash) image-to-video from stills
+    music          Lyria 3 (lyria-3-clip-preview) instrumental background bed
     drop           create a drop folder for timestamped stills + narration audio
     cloud-readiness check configs, prompts, rules, writable artifacts
 """
@@ -236,11 +237,12 @@ Style, voice, and QA rules live in `channel/config.py` — do not copy a person 
 6. `python -m channel generate --resume <JOB_ID>` writes `flow_prompts.txt` after originality_score >= 80 and ready_to_publish
 7. `python -m channel images <JOB_ID>` (Nano Banana 2 / gemini-3.1-flash-image) or paste `flow_prompts.txt` into Google Flow. `python -m channel ingest-images <JOB_ID> /path/to/pngs --partial`
 8. Optional: `python -m channel videos <JOB_ID>` (Omni 1.1 Flash / gemini-omni-1.1-flash image-to-video). Assemble prefers `videos/{{still-stem}}.mp4`.
-9. `python -m channel assemble <JOB_ID>` then `python -m channel youtube {slug}`
-10. Update `{docs}`
+9. Optional: `python -m channel music <JOB_ID>` (Lyria 3 / lyria-3-clip-preview instrumental bed). Assemble mixes it under the voiceover.
+10. `python -m channel assemble <JOB_ID>` then `python -m channel youtube {slug}`
+11. Update `{docs}`
 
 Voice on new jobs is Gemini 3.1 Flash TTS (`python -m channel tts`) when GEMINI_API_KEY is set, else operator-imported audio. The engine does not call ElevenLabs or Kokoro on new jobs. Shipped recuts may still use Kokoro.
-Images: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) when GEMINI_API_KEY is set, else operator Google Flow stills. Optional motion: `python -m channel videos` (`gemini-omni-1.1-flash`). Do not invent quotes or numbers.
+Images: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) when GEMINI_API_KEY is set, else operator Google Flow stills. Optional motion: `python -m channel videos` (`gemini-omni-1.1-flash`). Optional music: `python -m channel music` (`lyria-3-clip-preview`). Do not invent quotes or numbers.
 """
 
 
@@ -366,6 +368,7 @@ def _compile(args: argparse.Namespace) -> int:
     print("originality: .venv/bin/python scripts/lint_originality.py", spec_rel)
     print("jobs: python -m channel images <JOB_ID>  (Nano Banana 2) or paste flow_prompts.txt into Google Flow, then ingest-images")
     print("clips: python -m channel videos <JOB_ID>  (optional Omni 1.1 Flash / gemini-omni-1.1-flash)")
+    print("music: python -m channel music <JOB_ID>  (optional Lyria 3 / lyria-3-clip-preview)")
     print("thumb: paste thumbnail_prompts.txt into Google Flow, then")
     print(f"       .venv/bin/python -m channel youtube {project.slug}")
     print("voice+assemble: python -m channel ingest-audio then python -m channel assemble")
@@ -584,6 +587,42 @@ def _videos(args: argparse.Namespace) -> int:
     return 0
 
 
+def _music(args: argparse.Namespace) -> int:
+    from channel.gemini_music import (
+        LYRIA_CLIP_MODEL,
+        GeminiMusicError,
+        generate_job_music,
+    )
+    from channel.job import ARTIFACTS
+
+    root = Path(args.artifacts) if args.artifacts else ARTIFACTS
+    try:
+        result = generate_job_music(
+            args.job_id,
+            artifacts_root=root,
+            model=args.model or LYRIA_CLIP_MODEL,
+            full=bool(args.full),
+            prompt=args.prompt or "",
+            extra=args.extra or "",
+            force=bool(args.force),
+            dry_run=bool(args.dry_run),
+            mix_volume=args.volume,
+        )
+    except GeminiMusicError as exc:
+        print(str(exc))
+        return 1
+    print(json.dumps(result, indent=2))
+    if result.get("path"):
+        print(f"music: {result['path']}")
+    if result.get("ledger"):
+        print(f"ledger: {result['ledger']}")
+    if result.get("dry_run"):
+        print("state: dry-run (no API call)")
+        return 0
+    print(f"generated: {result['generated']} skipped: {result['skipped']}")
+    return 0
+
+
 def _ingest_images(args: argparse.Namespace) -> int:
     from channel.ingest import expected_image_names, ingest_images
     from channel.job import ARTIFACTS
@@ -647,7 +686,9 @@ def _assemble(args: argparse.Namespace) -> int:
     dest = job_dir(args.job_id, root=root)
     burn = False if args.no_captions else None
     if drop_has_payload(dest):
-        video = assemble_drop(args.job_id, artifacts_root=root)
+        video = assemble_drop(
+            args.job_id, artifacts_root=root, no_music=bool(args.no_music)
+        )
         print(f"video: {video}")
         return 0
     if not (dest / "timestamps.json").is_file():
@@ -658,7 +699,12 @@ def _assemble(args: argparse.Namespace) -> int:
             file=sys.stderr,
         )
         return 1
-    video = assemble_hitl(args.job_id, artifacts_root=root, burn_captions=burn)
+    video = assemble_hitl(
+        args.job_id,
+        artifacts_root=root,
+        burn_captions=burn,
+        no_music=bool(args.no_music),
+    )
     print(f"video: {video}")
     return 0
 
@@ -928,6 +974,50 @@ def main(argv: list[str] | None = None) -> int:
     )
     videos.set_defaults(func=_videos)
 
+    music = sub.add_parser(
+        "music",
+        help="generate an instrumental background bed with Lyria 3 (lyria-3-clip-preview)",
+    )
+    music.add_argument("job_id")
+    music.add_argument("--artifacts", default="")
+    music.add_argument(
+        "--model",
+        default="",
+        help="default lyria-3-clip-preview (30s loop). lyria-3.5 is the full-song option",
+    )
+    music.add_argument(
+        "--full",
+        action="store_true",
+        help="use lyria-3.5 for a longer bed instead of a 30-second clip",
+    )
+    music.add_argument(
+        "--prompt",
+        default="",
+        help="replace the channel bed prompt (instrumental rule is still appended)",
+    )
+    music.add_argument(
+        "--extra",
+        default="",
+        help="append mood notes to the channel bed prompt",
+    )
+    music.add_argument(
+        "--volume",
+        type=float,
+        default=None,
+        help="assemble mix volume for the bed (default 0.12)",
+    )
+    music.add_argument(
+        "--force",
+        action="store_true",
+        help="regenerate an existing bed; skip ready_to_publish gate",
+    )
+    music.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="write the prompt without calling the API",
+    )
+    music.set_defaults(func=_music)
+
     inga = sub.add_parser("ingest-audio", help="import operator voiceover and detect pause scenes")
     inga.add_argument("job_id")
     inga.add_argument("audio", nargs="?", default="", help="wav/mp3/m4a path")
@@ -973,6 +1063,11 @@ def main(argv: list[str] | None = None) -> int:
         "--no-captions",
         action="store_true",
         help="do not burn subtitles (default for drop-folder cuts)",
+    )
+    asm.add_argument(
+        "--no-music",
+        action="store_true",
+        help="mux narration only even if audio/music.* exists",
     )
     asm.set_defaults(func=_assemble)
 

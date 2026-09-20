@@ -15,7 +15,7 @@ python3.13 -m venv .venv
 
 ## Secrets
 
-Documentary generation does **not** need `OPENAI_API_KEY`, `FAL_KEY`, or `ELEVENLABS_API_KEY`. Those belong to the unused `graph/` Phase-2 adapters. The engine never calls those APIs. Gemini TTS uses `GEMINI_API_KEY` (`python -m channel tts`). Opt-in stills use the same key (`python -m channel images`, Nano Banana 2 / `gemini-3.1-flash-image`) and do not run on `--resume`. Opt-in clips use the same key (`python -m channel videos`, `gemini-omni-1.1-flash`) and also do not run on `--resume`. A Cloud agent fills research + narration, then stops at `WAIT_AUDIO` unless that key is set. Drop-folder cuts (`python -m channel drop`) wait for operator stills named `[00-00]_….jpg` plus audio, then assemble without burned captions.
+Documentary generation does **not** need `OPENAI_API_KEY`, `FAL_KEY`, or `ELEVENLABS_API_KEY`. Those belong to the unused `graph/` Phase-2 adapters. The engine never calls those APIs. Gemini TTS uses `GEMINI_API_KEY` (`python -m channel tts`). Opt-in stills use the same key (`python -m channel images`, Nano Banana 2 / `gemini-3.1-flash-image`) and do not run on `--resume`. Opt-in clips use the same key (`python -m channel videos`, `gemini-omni-1.1-flash`) and also do not run on `--resume`. Opt-in music uses the same key (`python -m channel music`, `lyria-3-clip-preview`) and also does not run on `--resume`. A Cloud agent fills research + narration, then stops at `WAIT_AUDIO` unless that key is set. Drop-folder cuts (`python -m channel drop`) wait for operator stills named `[00-00]_….jpg` plus audio, then assemble without burned captions.
 
 Names only: `.env.example`. Never commit `.env`.
 

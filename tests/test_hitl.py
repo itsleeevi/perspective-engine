@@ -277,3 +277,34 @@ def test_assemble_uses_pause_durations(tmp_path: Path):
     assert video.is_file()
     assert video.stat().st_size > 1000
     assert load_manifest(job.job_id, root=tmp_path).state is JobState.ready
+
+
+@pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg required to assemble")
+def test_assemble_mixes_background_music(tmp_path: Path):
+    job = start_job(
+        title="How Nvidia Took Over AI",
+        channel="how_they_took_over",
+        smoke_test=True,
+        skip_seed=True,
+        artifacts_root=tmp_path,
+        job_id="hitl-music__test__ddd",
+    )
+    dest = tmp_path / job.job_id
+    wav = write_tone_silence_wav(tmp_path / "vo.wav", tone_seconds=0.6, silence_seconds=0.4, repeats=2)
+    table = ingest_audio(job.job_id, wav, artifacts_root=tmp_path, pause_ms=280)
+    folder = tmp_path / "pngs"
+    folder.mkdir()
+    for row in table["scenes"]:
+        Image.new("RGB", (128, 72), (30, 40, 50)).save(folder / row["filename"])
+    ingest_images(job.job_id, folder, artifacts_root=tmp_path)
+    write_tone_silence_wav(
+        dest / "audio" / "music.wav",
+        tone_seconds=0.4,
+        silence_seconds=0.1,
+        repeats=1,
+    )
+    from channel.assemble_hitl import assemble_hitl
+
+    video = assemble_hitl(job.job_id, artifacts_root=tmp_path)
+    assert video.is_file()
+    assert video.stat().st_size > 1000

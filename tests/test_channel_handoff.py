@@ -32,6 +32,8 @@ REQUIRED_PHRASES = (
     "gemini-3.1-flash-image",
     "python -m channel videos",
     "gemini-omni-1.1-flash",
+    "python -m channel music",
+    "lyria-3-clip-preview",
     "Watch the full video:",
     "synthetic-media",
     "800–2500",

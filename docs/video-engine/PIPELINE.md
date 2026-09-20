@@ -14,7 +14,8 @@ generate
   → WAIT_IMAGES (`python -m channel images` / operator Google Flow)
   → ingest-images → IMAGES_INGESTED
   → optional `python -m channel videos` (`gemini-omni-1.1-flash` image-to-video)
-  → python -m channel assemble (imported audio + pause-timed stills, or Omni clips when present)
+  → optional `python -m channel music` (`lyria-3-clip-preview` instrumental bed)
+  → python -m channel assemble (imported audio + pause-timed stills, or Omni clips when present; mixes music under VO when present)
   → youtube pack
   → READY
 ```
@@ -72,10 +73,10 @@ Stills use index + timestamp filenames (`000_00-00-00.png`). Drop-folder stills 
 .venv/bin/python -m channel generate --resume <JOB_ID>
 ```
 
-Re-reads `project.json`. Stops at `WAIT_AUDIO` or `WAIT_IMAGES` until operator files exist, unless `GEMINI_API_KEY` is set — then `--resume` runs `python -m channel tts` and ingest-audio. Stills stay opt-in: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) is not called on `--resume`. Clips stay opt-in: `python -m channel videos` (`gemini-omni-1.1-flash`) is not called on `--resume`. Does not invent WPM scene chunks. Prints `OPERATOR.md`.
+Re-reads `project.json`. Stops at `WAIT_AUDIO` or `WAIT_IMAGES` until operator files exist, unless `GEMINI_API_KEY` is set — then `--resume` runs `python -m channel tts` and ingest-audio. Stills stay opt-in: `python -m channel images` (Nano Banana 2 / `gemini-3.1-flash-image`) is not called on `--resume`. Clips stay opt-in: `python -m channel videos` (`gemini-omni-1.1-flash`) is not called on `--resume`. Music stays opt-in: `python -m channel music` (`lyria-3-clip-preview`) is not called on `--resume`. Does not invent WPM scene chunks. Prints `OPERATOR.md`.
 
 `--force` compiles even when monetization is not ready (still do not emit `flow_prompts` unless `ready_to_publish`).
 
 ## What the agent still does
 
-Cursor Grok is the researcher, story writer, and scene-prompt writer **after** pauses exist. Code does title parse, factcheck, originality, Gemini TTS, pause detect, drop-folder ingest, compile, optional Nano Banana 2 stills (`python -m channel images`), optional Omni 1.1 Flash clips (`python -m channel videos`), YouTube pack, FFmpeg. The operator can still generate stills in Google Flow. Voice is Gemini 3.1 Flash TTS when `GEMINI_API_KEY` is set, otherwise imported audio. Drop-folder cuts (`python -m channel drop`) assemble filename-clock stills without burned captions. Do not invent a third workflow.
+Cursor Grok is the researcher, story writer, and scene-prompt writer **after** pauses exist. Code does title parse, factcheck, originality, Gemini TTS, pause detect, drop-folder ingest, compile, optional Nano Banana 2 stills (`python -m channel images`), optional Omni 1.1 Flash clips (`python -m channel videos`), optional Lyria 3 music (`python -m channel music`), YouTube pack, FFmpeg. The operator can still generate stills in Google Flow. Voice is Gemini 3.1 Flash TTS when `GEMINI_API_KEY` is set, otherwise imported audio. Drop-folder cuts (`python -m channel drop`) assemble filename-clock stills without burned captions. Do not invent a third workflow.

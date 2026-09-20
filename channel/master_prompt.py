@@ -249,6 +249,8 @@ Do not emit flow_prompts.txt until originality_score ≥ 80 and ready_to_publish
 Then `python -m channel images <JOB_ID>` (Nano Banana 2 / gemini-3.1-flash-image)
 when GEMINI_API_KEY is set, or paste into Google Flow, not Midjourney.
 Then `python -m channel ingest-images <JOB_ID> /path/to/pngs`.
+Optional `python -m channel videos <JOB_ID>` (Omni 1.1 Flash).
+Optional `python -m channel music <JOB_ID>` (Lyria 3 / lyria-3-clip-preview).
 Assemble: `python -m channel assemble <JOB_ID>`.
 
 After the FINAL batch:

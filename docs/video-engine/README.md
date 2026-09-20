@@ -36,7 +36,7 @@ Or a job file:
 
 `--smoke-test` validates routing, schemas, compile, and the job tree without operator audio or Google Flow.
 
-`--resume <JOB_ID>` continues an existing `artifacts/<JOB_ID>/` job. Stops at `WAIT_AUDIO` until `python -m channel tts` or `ingest-audio`. Stills (`python -m channel images`) and clips (`python -m channel videos`, `gemini-omni-1.1-flash`) stay opt-in and do not run on `--resume`.
+`--resume <JOB_ID>` continues an existing `artifacts/<JOB_ID>/` job. Stops at `WAIT_AUDIO` until `python -m channel tts` or `ingest-audio`. Stills (`python -m channel images`), clips (`python -m channel videos`, `gemini-omni-1.1-flash`), and music (`python -m channel music`, `lyria-3-clip-preview`) stay opt-in and do not run on `--resume`.
 
 Drop-folder cut (title + timestamped stills + audio):
 

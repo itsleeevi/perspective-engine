@@ -56,6 +56,7 @@ REQUIRED_FILES = (
     "channel/gemini_tts.py",
     "channel/gemini_images.py",
     "channel/gemini_videos.py",
+    "channel/gemini_music.py",
     "adapters/video_gen/gemini_omni.py",
 )
 

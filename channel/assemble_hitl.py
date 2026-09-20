@@ -6,6 +6,11 @@ import json
 import tempfile
 from pathlib import Path
 
+from channel.gemini_music import (
+    matching_music,
+    mix_narration_and_music,
+    music_mix_volume,
+)
 from channel.ingest import expected_image_names, match_images
 from channel.job import ARTIFACTS, JobState, job_dir, load_manifest, write_manifest, write_operator_md, write_report
 from channel.pauses import load_timestamps
@@ -28,6 +33,7 @@ def assemble_hitl(
     *,
     artifacts_root: Path | None = None,
     burn_captions: bool | None = None,
+    no_music: bool = False,
 ) -> Path:
     from graph.captions import overlay_scene_caption
     from PIL import Image
@@ -91,7 +97,17 @@ def assemble_hitl(
             segments.append(seg)
         concat = tmp / "concat.mp4"
         _ffmpeg_concat(segments, concat)
-        _ffmpeg_mix_audio(concat, audio, output)
+        music = None if no_music else matching_music(job)
+        if music is not None:
+            mix_narration_and_music(
+                concat,
+                audio,
+                music,
+                output,
+                volume=music_mix_volume(job),
+            )
+        else:
+            _ffmpeg_mix_audio(concat, audio, output)
 
     manifest = load_manifest(job_id, root=root)
     manifest.state = JobState.ready

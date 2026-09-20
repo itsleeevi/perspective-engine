@@ -13,7 +13,7 @@ from pathlib import Path
 
 from channel.modes import ChannelMode
 
-VIDEO_ENGINE_VERSION = "2026.09.14"
+VIDEO_ENGINE_VERSION = "2026.09.20"
 PROMPT_VERSION = "2026.09.14.gemini_tts"
 VISUAL_STYLE_VERSION = "2026.09.13"
 
@@ -105,6 +105,21 @@ GEMINI_VIDEO_LOCK = {
     "resolution": "720p",
     "min_seconds": 3.0,
     "max_seconds": 10.0,
+    "opt_in": True,
+}
+
+# Opt-in background music. Assemble muxes VO only unless a bed exists.
+# `python -m channel music` calls this when GEMINI_API_KEY is set.
+GEMINI_MUSIC_LOCK = {
+    "provider": "gemini",
+    "public_name": "Lyria 3 Clip",
+    "model": "lyria-3-clip-preview",
+    "full_model": "lyria-3.5",
+    "endpoint": "generateContent",
+    "task": "background_music",
+    "instrumental": True,
+    "clip_seconds": 30,
+    "mix_volume": 0.12,
     "opt_in": True,
 }
 

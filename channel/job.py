@@ -232,6 +232,11 @@ def write_operator_md(manifest: GenerationManifest, *, root: Path | None = None)
             f"```text\n"
             f".venv/bin/python -m channel ingest-images {manifest.job_id} /path/to/pngs --partial\n"
             f".venv/bin/python -m channel generate --resume {manifest.job_id}\n"
+            f"```\n\n"
+            f"Optional background music with Lyria 3 (`lyria-3-clip-preview`) — "
+            f"instrumental bed under the voiceover, does not run on `--resume`:\n\n"
+            f"```text\n"
+            f".venv/bin/python -m channel music {manifest.job_id}\n"
             f"```\n"
         ),
         JobState.images_ingested.value: (
@@ -239,13 +244,17 @@ def write_operator_md(manifest: GenerationManifest, *, root: Path | None = None)
             f"State: `{state}`\n\n"
             f"Images are in `{images}`. Optional motion with Omni 1.1 Flash "
             f"(`gemini-omni-1.1-flash`) image-to-video — paid, still-first, "
-            f"does not run on `--resume`:\n\n"
+            f"does not run on `--resume`. Optional music with Lyria 3 "
+            f"(`lyria-3-clip-preview`) — instrumental bed mixed under the "
+            f"voiceover, does not run on `--resume`:\n\n"
             f"```text\n"
             f".venv/bin/python -m channel videos {manifest.job_id}\n"
+            f".venv/bin/python -m channel music {manifest.job_id}\n"
             f".venv/bin/python -m channel assemble {manifest.job_id}\n"
             f"```\n\n"
             "Assemble prefers `videos/{still-stem}.mp4` when present and otherwise "
-            "holds the still. A Short is a second HITL pass and does not block "
+            "holds the still. Assemble mixes `audio/music.*` under narration when "
+            "present. A Short is a second HITL pass and does not block "
             "this long READY.\n"
         ),
     }
@@ -279,6 +288,8 @@ def write_report(manifest: GenerationManifest, *, root: Path | None = None) -> P
         f"VISUAL_STYLE_VERSION\t{manifest.visual_style_version}",
         f"TTS\t{manifest.models.get('tts', '')}",
         f"IMAGE\t{manifest.models.get('image', '')}",
+        f"VIDEO\t{manifest.models.get('video', '')}",
+        f"MUSIC\t{manifest.models.get('music', '')}",
         f"SCRIPT_WORD_COUNT\t{qa.get('word_count', '')}",
         f"SCENE_COUNT\t{qa.get('scene_count', '')}",
         f"SOURCE_COUNT\t{qa.get('source_count', '')}",
